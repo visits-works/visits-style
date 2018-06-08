@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ Component Button ] component render without error 1`] = `
+<styled.button>
+  <div />
+</styled.button>
+`;
+
+exports[`[ Component Button ] style test styled component render 1`] = `
+.c0 {
+  outline: none;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 0;
+  font-size: 15px;
+  border-radius: 2px;
+  margin-right: 8px;
+  background-color: #FFF;
+  color: #EEE;
+  width: auto;
+  min-width: 88px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.c0>div {
+  height: auto;
+  width: auto;
+  padding: 0 16px;
+  text-align: center;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4,0,0.2,1) 0ms,box-shadow 250ms cubic-bezier(0.4,0,0.2,1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4,0,0.2,1) 0ms,box-shadow 250ms cubic-bezier(0.4,0,0.2,1) 0ms;
+}
+
+.c0:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.c0:hover:not(:disabled) {
+  color: #EEE;
+}
+
+.c0:hover:not(:disabled) > div {
+  background-color: rgba(255,255,255,0.18);
+}
+
+<button
+  className="c0"
+/>
+`;
