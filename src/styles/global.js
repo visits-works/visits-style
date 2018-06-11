@@ -23,12 +23,14 @@ injectGlobal`
     overflow-x: hidden;
     overflow-y: scroll;
     text-rendering: optimizeLegibility;
+    box-sizing: border-box;
   }
 
   body {
     font-family: "ヒラギノ角ゴシック Pro", SF UI Display, Arial, "Hiragino Kaku Gothic Pro", "游ゴシック体", "Yu Gothic", YuGothic, 'メイリオ' , Meiryo , "ＭＳ Ｐゴシック", "MS PGothic";
     font-size: 1rem;
     font-weight: 400;
+    line-height: 1.5;
   }
 
   button {
@@ -38,10 +40,6 @@ injectGlobal`
   article, aside, figure,
   footer, header, hgroup, section {
     display: block;
-  }
-
-  div, p {
-    white-space: pre-wrap;
   }
 
   input[type="checkbox"], input[type="radio"] {

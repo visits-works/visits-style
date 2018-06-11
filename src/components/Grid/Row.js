@@ -1,6 +1,5 @@
 // @flow
 import styled, { type ReactComponentStyled, css } from 'styled-components';
-import { rem } from 'polished';
 import Col from './Col';
 import { fullhd, widescreen, desktop, tablet, mobile, gutter, smallGutter } from '../../styles/variables';
 
@@ -23,42 +22,32 @@ function renderGutter({ noGutter }: Props) {
       }
     `;
   } else {
-    const value = rem(gutter / 2);
-    const smallValue = rem(smallGutter / 2);
     return css`
       @media (max-width: ${fullhd}px) {
-        margin-left: -${value};
-        margin-right: -${value};
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        margin-top: -0.75rem;
     
         &:last-child {
-          margin-bottom: -${value};
+          margin-bottom: -0.75rem;
         }
     
         &:not(:last-child) {
-          margin-bottom: calc(1.5rem - ${value});
-        }
-
-        > ${Col} {
-          padding-right: ${value};
-          padding-left: ${value};
+          margin-bottom: 0.75rem;
         }
       }
 
       @media (max-width: ${tablet}px) {
-        margin-left: -${smallValue};
-        margin-right: -${smallValue};
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        margin-top: -0.5rem;
     
         &:last-child {
-          margin-bottom: -${smallValue};
+          margin-bottom: -0.5rem;
         }
     
         &:not(:last-child) {
-          margin-bottom: calc(1.5rem - ${smallValue});
-        }
-
-        > ${Col} {
-          padding-right: ${smallValue};
-          padding-left: ${smallValue};
+          margin-bottom: 0.5rem;
         }
       }
     `;

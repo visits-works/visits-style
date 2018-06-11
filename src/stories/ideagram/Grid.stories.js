@@ -2,11 +2,9 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Row from '../../components/Grid/Row';
-import Col from '../../components/Grid/Col';
-import Container from '../../components/Grid/Container';
+import { Row, Col, Container, Break } from '../../components';
 
-const Temp = styled.p`
+const Temp = styled.div`
   background-color: ${({ theme, sub }) => sub ? theme.greyLight : theme.primary};
   color: ${({ theme }) => theme.white};
 
@@ -31,6 +29,7 @@ storiesOf('ideagram|Components/Grid', module)
   .add('Col size', () => (
     <Container>
       <Row>
+        <Col><Temp sub>1</Temp></Col>
         <Col><Temp sub>1</Temp></Col>
         <Col><Temp sub>1</Temp></Col>
         <Col><Temp sub>1</Temp></Col>
@@ -142,7 +141,7 @@ storiesOf('ideagram|Components/Grid', module)
       </Row>
     </Container>
   ))
-  .add('multiline', () => (
+  .add('auto sizing', () => (
     <Container>
       <Row>
         <Col><Temp>Lorem</Temp></Col>
@@ -161,6 +160,17 @@ storiesOf('ideagram|Components/Grid', module)
         <Col><Temp>rutrum</Temp></Col>
         <Col><Temp>lorem</Temp></Col>
         <Col><Temp>.</Temp></Col>
+      </Row>
+    </Container>
+  ))
+  .add('break', () => (
+    <Container>
+      <Row multiline>
+        <Col><Temp>Lorem</Temp></Col>
+        <Col><Temp>ipsum</Temp></Col>
+        <Break />
+        <Col><Temp>dolor</Temp></Col>
+        <Col><Temp>sit</Temp></Col>
       </Row>
     </Container>
   ))

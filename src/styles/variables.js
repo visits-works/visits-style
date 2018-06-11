@@ -3,10 +3,10 @@ export const gutter = 24;
 
 export const smallGutter = 16;
 
-export const mobile = 599;
+export const mobile = 576;
 
-export const tablet = 839;
+export const tablet = 769;
 
-export const desktop = 1023;
+export const desktop = 992;
 
-export const fullhd = 1439;
+export const fullhd = 1344;

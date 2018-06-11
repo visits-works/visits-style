@@ -13,23 +13,27 @@ const Container: ReactComponentStyled<Props> = styled.div`
   width: auto;
 
   @media (max-width: ${fullhd}px) {
-    max-width: ${fullhd - (gutter * 2)}px;
-    width: ${({ fluid }) => fluid ? 'auto' : `${fullhd - (gutter * 2)}px`};
+    max-width: ${({ fluid }) => fluid ? 'none' : `${fullhd}px`};
+    margin-right: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
+    margin-left: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
   }
 
   @media (max-width: ${desktop}px) {
-    max-width: ${({ fluid }) => fluid ? 'none' : `${desktop - (gutter * 2)}px`};
-    width: ${({ fluid }) => fluid ? 'auto' : `${desktop - (gutter * 2)}px`};
+    max-width: ${({ fluid }) => fluid ? 'none' : `${desktop}px`};
+    margin-right: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
+    margin-left: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
   }
 
   @media (max-width: ${tablet}px) {
-    max-width: ${tablet - (smallGutter * 2)}px;
-    width: ${tablet - (smallGutter * 2)}px;
+    max-width: ${({ fluid }) => fluid ? 'none' : `${tablet}px`};
+    margin-right: ${({ fluid }) => fluid ? '0.5rem' : '5%'};
+    margin-left: ${({ fluid }) => fluid ? '0.5rem' : '5%'};
   }
 
   @media (max-width: ${mobile}px) {
-    max-width: ${mobile - smallGutter}px;
-    width: ${mobile - smallGutter}px;
+    max-width: ${({ fluid }) => fluid ? 'none' : `${mobile}px`};
+    margin-right: ${({ fluid }) => fluid ? '0.5rem' : '3%'};
+    margin-left: ${({ fluid }) => fluid ? '0.5rem' : '3%'};
   }
 `;
 Container.displayName = 'Container';
