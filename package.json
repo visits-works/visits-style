@@ -2,6 +2,7 @@
   "name": "visits-style",
   "version": "0.1.0",
   "private": true,
+  "main": "src/index.js",
   "dependencies": {
     "dayjs": "^1.6.5",
     "flatpickr": "^4.1.0",
@@ -10,17 +11,19 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-icons": "^2.2.7",
+    "react-scripts": "1.1.4",
     "styled-components": "^3.3.2"
   },
   "peerDependencies": {
+    "polished": "^1.9.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "polished": "^1.9.2",
     "styled-components": "^3.3.2"
   },
   "scripts": {
     "start": "start-storybook -p 9009 -s public",
-    "build": "build-storybook -s public"
+    "build": "build-storybook -s public",
+    "test": "react-scripts test --env=jsdom"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.0-alpha.8",
@@ -31,10 +34,22 @@
     "@storybook/addon-knobs": "^4.0.0-alpha.8",
     "@storybook/addon-links": "^4.0.0-alpha.8",
     "@storybook/addon-options": "^4.0.0-alpha.8",
+    "@storybook/addon-storyshots": "^3.4.7",
     "@storybook/addon-viewport": "^4.0.0-alpha.8",
     "@storybook/addons": "^4.0.0-alpha.8",
     "@storybook/react": "^4.0.0-alpha.8",
     "babel-core": "^6.26.0",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "jest-styled-components": "^5.0.1"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

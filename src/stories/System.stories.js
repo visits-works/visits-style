@@ -1,10 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import publicTheme from '../../theme/public';
-import { findColorInvert } from '../../utils';
-import { Container } from '../../components';
+import publicTheme from '../theme/public';
+import { findColorInvert } from '../utils';
+import { Container } from '../components';
 
 const Item = styled.div`
   display: inline-block;
@@ -19,7 +19,7 @@ const Item = styled.div`
   text-align: right;
 `;
 
-storiesOf('ideagram|Core', module)
+storiesOf('Components|Core', module)
   .add('public theme palette', () => (
     <Container>
       {Object.keys(publicTheme).map(key => (
@@ -31,4 +31,4 @@ storiesOf('ideagram|Core', module)
         </Item>
       ))}
     </Container>
-  ))
+  ));

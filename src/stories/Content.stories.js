@@ -1,9 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { Content, Container } from '../../components';
+import { Content, Container } from '../components';
 
-storiesOf('ideagram|Components/Contents', module)
+storiesOf('Components|Contents', module)
   .add('default', () => (
     <Container>
       <Content>
@@ -169,4 +169,4 @@ storiesOf('ideagram|Components/Contents', module)
         </table>
       </Content>
     </Container>
-  ))
+  ));

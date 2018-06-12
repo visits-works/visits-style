@@ -1,0 +1,5 @@
+version: 2
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: circleci/node:8.11

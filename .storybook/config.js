@@ -31,5 +31,5 @@ addDecorator(
 addDecorator(withViewport());
 
 configure(() => [
-  require('../src/stories/ideagram'),
+  require('../src/stories'),
 ], module);

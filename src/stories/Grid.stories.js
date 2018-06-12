@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { Row, Col, Container, Break } from '../../components';
+import { Row, Col, Container, Break } from '../components';
 
 const Temp = styled.div`
-  background-color: ${({ theme, sub }) => sub ? theme.greyLight : theme.primary};
+  background-color: ${({ theme, sub }) => (sub ? theme.greyLight : theme.primary)};
   color: ${({ theme }) => theme.white};
 
   padding: 1.25rem 0;
@@ -15,7 +15,7 @@ const Temp = styled.div`
   border-radius: 4px;
 `;
 
-storiesOf('ideagram|Components/Grid', module)
+storiesOf('Components|Grid', module)
   .add('default', () => (
     <Container>
       <Row>
@@ -151,4 +151,4 @@ storiesOf('ideagram|Components/Grid', module)
         <Col><Temp>sit</Temp></Col>
       </Row>
     </Container>
-  ))
+  ));

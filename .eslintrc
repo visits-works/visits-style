@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
+  "rules": {
+    "jsx-a11y/href-no-hash" : "off",
+    "react/no-unused-prop-types": "off",
+    "object-curly-newline": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jsx-a11y/label-has-for": [2, {"required": { "some": ["nesting", "id"] }}],
+    "react/prefer-stateless-function": [2, {"ignorePureComponents": true}],
+    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  }
+}

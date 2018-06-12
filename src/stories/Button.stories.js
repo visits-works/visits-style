@@ -1,14 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text, boolean, number, select } from '@storybook/addon-knobs/react';
-import { Button, Row } from '../../components';
+import { text, boolean, select } from '@storybook/addon-knobs/react';
+import { Button, Row } from '../components';
 
 const colorList = [
   null, 'white', 'light', 'dark', 'black', 'primary', 'link', 'info', 'success', 'warning', 'danger',
-]
+];
 
-storiesOf('ideagram|Components/Button', module)
+storiesOf('Components|Button', module)
   .add('default(デフォルト)', () => (
     <Row center vcenter style={{ height: '100vh' }}>
       <Button
@@ -20,4 +21,4 @@ storiesOf('ideagram|Components/Button', module)
         {text('Children', 'Hello World')}
       </Button>
     </Row>
-  ))
+  ));
