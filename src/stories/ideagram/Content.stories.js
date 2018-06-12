@@ -89,26 +89,27 @@ storiesOf('ideagram|Components/Contents', module)
     </Container>
   ))
   .add('header Title', () => (
-    <Content>
-      <h1>h1 Title Text</h1>
-      <h2>h2 Title Text</h2>
-      <h3>h3 Title Text</h3>
-      <h4>h4 Title Text</h4>
-      <h5>h5 Title Text</h5>
-      <h6>h6 Title Text</h6>
-    </Content>
+    <Container>
+      <Content>
+        <h1>h1 Title Text</h1>
+        <h2>h2 Title Text</h2>
+        <h3>h3 Title Text</h3>
+        <h4>h4 Title Text</h4>
+        <h5>h5 Title Text</h5>
+        <h6>h6 Title Text</h6>
+      </Content>
+    </Container>
   ))
   .add('paragraph', () => (
-    <Content>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </Content>
+    <Container>
+      <Content>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </Content>
+    </Container>
   ))
   .add('list', () => (
-    <Content>
-      <ul>
-        <li>item1</li>
-        <li>item2</li>
-        <li>item3</li>
+    <Container>
+      <Content>
         <ul>
           <li>item1</li>
           <li>item2</li>
@@ -117,48 +118,55 @@ storiesOf('ideagram|Components/Contents', module)
             <li>item1</li>
             <li>item2</li>
             <li>item3</li>
+            <ul>
+              <li>item1</li>
+              <li>item2</li>
+              <li>item3</li>
+            </ul>
           </ul>
         </ul>
-      </ul>
-    </Content>
+      </Content>
+    </Container>
   ))
   .add('table', () => (
-    <Content>
-      <table>
-        <thead>
-          <tr>
-            <th>One</th>
-            <th>Two</th>
-            <th>Three</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-          </tr>
-        </tbody>
-      </table>
-    </Content>
+    <Container>
+      <Content>
+        <table>
+          <thead>
+            <tr>
+              <th>One</th>
+              <th>Two</th>
+              <th>Three</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+      </Content>
+    </Container>
   ))

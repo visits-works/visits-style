@@ -141,28 +141,6 @@ storiesOf('ideagram|Components/Grid', module)
       </Row>
     </Container>
   ))
-  .add('auto sizing', () => (
-    <Container>
-      <Row>
-        <Col><Temp>Lorem</Temp></Col>
-        <Col><Temp>ipsum</Temp></Col>
-        <Col><Temp>dolor</Temp></Col>
-        <Col><Temp>sit</Temp></Col>
-        <Col><Temp>amet</Temp></Col>
-        <Col><Temp>,</Temp></Col>
-        <Col><Temp>consectetur</Temp></Col>
-        <Col><Temp>adipiscing</Temp></Col>
-        <Col><Temp>elit</Temp></Col>
-        <Col><Temp>.</Temp></Col>
-        <Col />
-        <Col><Temp>Nulla</Temp></Col>
-        <Col><Temp>ac</Temp></Col>
-        <Col><Temp>rutrum</Temp></Col>
-        <Col><Temp>lorem</Temp></Col>
-        <Col><Temp>.</Temp></Col>
-      </Row>
-    </Container>
-  ))
   .add('break', () => (
     <Container>
       <Row multiline>
