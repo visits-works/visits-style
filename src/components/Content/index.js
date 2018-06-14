@@ -32,7 +32,7 @@ const Content = styled.div`
     font-size: 2em;
     margin-bottom: 0.5em;
     padding-left: 1rem;
-    
+
     border-left: 1rem solid;
     border-bottom: 1px solid;
     border-color: ${({ theme }) => theme.border};
@@ -131,5 +131,9 @@ const Content = styled.div`
   }
 `;
 Content.displayName = 'Content';
+
+export { default as Pre } from './Pre';
+export { default as Code } from './Code';
+export { default as H1 } from './H1';
 
 export default Content;

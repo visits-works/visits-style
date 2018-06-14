@@ -8,19 +8,19 @@ const modifyBundlerConfig = (config) => {
     '@components': `${SRC}/components`,
     '@styles': `${SRC}/styles`,
     '@utils': `${SRC}/utils`,
-    '@assets': `${ROOT}/docs/assets`,
+    '@theme': `${SRC}/theme`,
+    '@assets': `${ROOT}/website/assets`,
+    '@website': `${ROOT}/website`,
   });
 
   return config;
 };
 
 export default {
-  source: './src',
-  files: './docs/**/*.mdx',
   title: 'visits-style',
   description: 'design compoentns for visits technology',
   port: '5000',
-  wrapper: 'src/wrapper',
-  // theme: 'docs/src/index',
+  indexHtml: 'public/index.html',
+  theme: 'website/src/index',
   modifyBundlerConfig,
 };

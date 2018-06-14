@@ -7,6 +7,7 @@ export { default as Col } from './Grid/Col';
 
 // common
 export { default as Content } from './Content';
+export * from './Content';
 
 export { default as Button } from './Button';
 
