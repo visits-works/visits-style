@@ -1,14 +1,12 @@
 // @flow
 import type { ComponentType } from 'react';
-
-import { string, node } from 'prop-types';
 import styled, { css } from 'styled-components';
 import { darken, rgba } from 'polished';
 import { findColorInvert } from '../../utils';
 
 type Props = {
-  color?: 'white' | 'light' | 'dark' | 'black' | 'primary' | 'link' | 'info' | 'success' | 'warning' | 'danger',
-  size?: 'small' | 'medium' | 'large',
+  color?: Colors,
+  size?: Sizes,
   outline?: boolean,
   onClick: () => void,
   theme: Theme,
@@ -29,50 +27,82 @@ function setColor({ theme, color, outline }: Props) {
         border-color: ${theme.greyDarker};
       }
     `;
-  } else {
-    const target = color === 'light' ? theme.greyLight : theme[color];
-    const invertColor = findColorInvert(target);
-    if (outline) {
-      return css`
-        background-color: transparent;
-        border-color: ${target};
-        color: ${target};
+  } else if (color === 'text') {
+    const target = rgba(theme.greyLighter, 0.5);
+    return css`
+      background-color: transparent;
+      border-color: transparent;
+      color: ${theme.greyDarker};
 
-        &:hover {
-          background-color: ${target};
-          color: ${invertColor};
-        }
-
-        &:focus {
-          box-shadow: 0 0 0 .2rem ${rgba(target, 0.5)};
-        }
-      `;
-    } else {
-      return css`
+      &:hover{
         background-color: ${target};
-        border-color: transparent;
-        color: ${invertColor};
-        box-shadow: none;
-  
-        &:hover {
-          background-color: ${darken(0.025, target)};
-        }
-  
-        &:active {
-          background-color: ${darken(0.05, target)};
-        }
+      }
 
-        &:focus {
-          box-shadow: 0 0 0 .2rem ${rgba(target, 0.5)};
-        }
-      `;
+      &:active{
+        background-color: ${target};
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 .2rem ${target};
+      }
+    `;
+  }
+
+  const target = color === 'light' ? theme.greyLight : theme[color];
+  const invertColor = findColorInvert(target);
+  if (outline) {
+    return css`
+      background-color: transparent;
+      border-color: ${target};
+      color: ${target};
+
+      &:hover {
+        background-color: ${target};
+        color: ${invertColor};
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 .2rem ${rgba(target, 0.5)};
+      }
+    `;
+  }
+
+  return css`
+    background-color: ${target};
+    border-color: transparent;
+    color: ${invertColor};
+    box-shadow: none;
+
+    &:hover {
+      background-color: ${darken(0.025, target)};
     }
+
+    &:active {
+      background-color: ${darken(0.05, target)};
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 .2rem ${rgba(target, 0.5)};
+    }
+  `;
+}
+
+function getSize({ size }: Props) {
+  switch(size) {
+    case 'small':
+      return 'font-size: 0.75rem;';
+    case 'medium':
+      return 'font-size: 1.25rem;';
+    case 'large':
+      return 'font-size: 1.5rem;';
+    default:
+      return '';
   }
 }
 
-const Button: ComponentType<Props>  = styled.button`
+const Button: ComponentType<Props> = styled.button`
   outline: none;
-  appearance: none;
+  -webkit-appearance: none;
   display: inline-flex;
   text-align: center;
   white-space: nowrap;
@@ -81,16 +111,21 @@ const Button: ComponentType<Props>  = styled.button`
   border: 1px solid transparent;
   border-radius: 4px;
   height: 2.25em;
-  padding: ${({ color }) => color ? '0.375em 0.75em' : 'calc(0.375em - 1px) 0.75em'};
+  padding: ${({ color }) => (color ? '0.375em 0.75em' : 'calc(0.375em - 1px) 0.75em')};
 
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
   ${setColor}
+  ${getSize}
 
   &:disabled {
     pointer-events: none;
     box-shadow: none;
     opacity: 0.5;
+  }
+
+  &:not(:last-child) {
+    margin-right: 0.5rem;
   }
 `;
 

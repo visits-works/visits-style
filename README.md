@@ -26,6 +26,11 @@ function SomeComponent() {
 }
 ```
 
+## Docs
+
+[Docs](https://github.com/pedronauck/docz)でガイドのドキュメントを生成します。
+github Pagesのurlは公開されるので、注意してください
+
 ## Development
 
 [React Storybook](https://github.com/storybooks/storybook)で動作確認しながら開発ができます。

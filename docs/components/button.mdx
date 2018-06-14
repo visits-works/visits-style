@@ -1,0 +1,61 @@
+---
+name: Button
+route: /components/button
+parent: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Button } from '@components';
+
+# Button
+
+<PropsTable of={Button} />
+
+## Basic usage
+
+<Playground>
+  <Button onClick={() => { alert('clicked!'); }}>default</Button>
+</Playground>
+
+## Color
+
+### monochrome
+
+<Playground>
+  <Button color="white">white</Button>
+  <Button color="light">light</Button>
+  <Button color="black">black</Button>
+</Playground>
+
+### colors
+
+<Playground>
+  <Button color="primary">primary</Button>
+  <Button color="link">link</Button>
+  <Button color="info">info</Button>
+  <Button color="success">success</Button>
+  <Button color="warning">warning</Button>
+  <Button color="danger">danger</Button>
+</Playground>
+
+
+## Outline
+
+<Playground>
+  <Button color="primary" outline>primary</Button>
+  <Button color="link" outline>link</Button>
+  <Button color="info" outline>info</Button>
+  <Button color="success" outline>success</Button>
+  <Button color="warning" outline>warning</Button>
+  <Button color="danger" outline>danger</Button>
+</Playground>
+
+
+## Sizes
+
+<Playground>
+  <Button size="small">small</Button>
+  <Button>normal</Button>
+  <Button size="medium">medium</Button>
+  <Button size="large">large</Button>
+</Playground>

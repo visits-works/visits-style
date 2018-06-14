@@ -1,0 +1,28 @@
+---
+name: AppBar
+route: /components/app-bar
+parent: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import Logo from '@assets/img/visits.svg';
+import { AppBar, Button } from '@components';
+
+# AppBar
+
+<PropsTable of={AppBar} />
+
+## Basic usage
+
+<Playground>
+  <AppBar color="light" brand={(<img src={Logo} alt="Visits Technology" />)} to="#">
+    <ul>
+      <li><a href="#">link1</a></li>
+      <li><a href="#">link2</a></li>
+      <li><a href="#">link3</a></li>
+    </ul>
+    <div>
+      <Button color="warning" outline>Link</Button>
+    </div>
+  </AppBar>
+</Playground>

@@ -1,5 +1,9 @@
 // @flow
 
+export type Sizes = 'small' | 'medium' | 'large';
+
+export type Colors = 'white' | 'light' | 'dark' | 'black' | 'text' | 'primary' | 'link' | 'info' | 'success' | 'warning' | 'danger';
+
 export type Theme = {
   primary: string,
   link: string,
@@ -41,4 +45,4 @@ export type Theme = {
   blue: string,
   purple: string,
   red: string,
-}
+};

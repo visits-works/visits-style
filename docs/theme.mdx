@@ -1,0 +1,32 @@
+---
+name: Theme
+route: /theme
+---
+
+import styled from 'styled-components';
+import { findColorInvert } from '@utils';
+import { Container } from '@components';
+import publicTheme from '../src/theme/public';
+
+
+## public theme
+
+<Container>
+  {Object.keys(publicTheme).map(key => (
+    <div
+      key={key}
+      style={{
+        display: 'inline-block',
+        backgroundColor: publicTheme[key],
+        width: '150px', height: '150px',
+        textAlign: 'right', fontWeight: 600,
+        padding: '0.5rem',
+        margin: '0.5rem',
+        color: findColorInvert(publicTheme[key]),
+      }}
+    >
+      {key}<br />
+      {publicTheme[key]}
+    </div>
+  ))}
+</Container>

@@ -1,6 +1,5 @@
 // elements
-export { default as Button } from './components/Button';
-
+export * from './components';
 
 // misc
 export { default as colors } from './styles/colors';
