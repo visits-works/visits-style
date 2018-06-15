@@ -15,13 +15,15 @@
   },
   "scripts": {
     "start": "docz dev",
-    "build": "NODE_ENV=production rollup -c",
+    "build": "NODE_ENV=production gulp",
     "build:guide": "docz build",
+    "clean": "rm -rf ./lib",
     "develop": "start-storybook -p 9009 -s public",
     "test": "jest --env=jsdom",
     "flow": "flow check"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
     "@babel/core": "^7.0.0-beta.51",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.51",
     "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.51",
@@ -29,6 +31,7 @@
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-flow": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
+    "babel-plugin-polished": "^1.1.0",
     "babel-plugin-styled-components": "^0.0.3-0",
     "docz": "^0.2.4",
     "docz-core": "^0.2.4",
@@ -39,18 +42,17 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "flow-bin": "^0.74.0",
     "flow-typed": "^2.4.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0-beta.2",
     "jest-styled-components": "^5.0.1",
-    "prismjs": "^1.14.0",
-    "rollup": "^0.60.7",
-    "rollup-plugin-babel": "^4.0.0-beta.5",
-    "rollup-plugin-commonjs": "^9.1.3",
-    "rollup-plugin-eslint": "^4.0.0",
-    "rollup-plugin-flow": "^1.1.1",
-    "rollup-plugin-node-resolve": "^3.3.0"
+    "prismjs": "^1.14.0"
   },
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "./jest.setup.js"
     ]
   }
 }

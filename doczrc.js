@@ -20,7 +20,7 @@ export default {
   title: 'visits-style',
   description: 'design compoentns for visits technology',
   port: '5000',
-  indexHtml: 'public/index.html',
+  indexHtml: 'theme/index.html',
   theme: 'theme/index',
   modifyBundlerConfig,
 };

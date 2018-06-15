@@ -16,16 +16,14 @@ const Theme = () => (
       <ThemeProvider theme={config}>
         <Fragment>
           <Topbar />
-          <Content>
-            <DocPreview
-              components={{
-                render: Renderer,
-                page: components.Page,
-                pre: Highlight,
-                inlineCode: Code,
-              }}
-            />
-          </Content>
+          <DocPreview
+            components={{
+              render: Renderer,
+              page: components.Page,
+              pre: Highlight,
+              inlineCode: Code,
+            }}
+          />
         </Fragment>
       </ThemeProvider>
     )}

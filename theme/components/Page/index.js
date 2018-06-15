@@ -1,6 +1,5 @@
 // @flow
-import React from 'react'
-import { Fragment, SFC } from 'react'
+import React, { Fragment } from 'react';
 import { PageProps } from 'docz'
 import styled from 'react-emotion'
 
@@ -12,15 +11,15 @@ export const Page: SFC<PageProps> = ({ children, doc, ...props }) => {
   const showSidebar = Boolean(parent || sidebar)
 
   return (
-    <Container>
+    <Fragment>
       {showSidebar ? (
         <Row>
           <Sidebar parent={parent || doc.name} active={props.match.url} />
-          <Col>{children}</Col>
+          <Col><Container>{children}</Container></Col>
         </Row>
       ) : (
-        children
+        <Container>{children}</Container>
       )}
-    </Container>
+    </Fragment>
   )
 }

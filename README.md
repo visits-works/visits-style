@@ -19,31 +19,33 @@ yarn add github:visits-works/visits-style#<branch指定>
 
 ```javascript
 import React from 'react';
-import { Button } from 'visits-style/components';
+import { render } from 'react-DOM';
+import { ThemeProvider } from 'styled-components';
+import { Button, Theme } from 'visits-style';
+// import Button from 'visits-style/lib/components/Button';
 
-function SomeComponent() {
-  return <Button>Hello World!</Button>
+function App() {
+  return (
+    <ThemeProvider theme={Theme}>
+      <Button>Hello World!</Button>
+    </ThemeProvider>
+  )
 }
+
+render(App, document.getElementById('root'));
 ```
 
 ## Docs
 
 [Docs](https://github.com/pedronauck/docz)でガイドのドキュメントを生成します。
+
+```
+yarn start
+```
+
+`http://localhost:5000` で確認できます。
+
 github Pagesのurlは公開されるので、注意してください
-
-## Development
-
-[React Storybook](https://github.com/storybooks/storybook)で動作確認しながら開発ができます。
-
-1. storybookの起動
-  ```
-  yarn start
-  ```
-2. ブラウザで `http://localhost:9009` から確認・テストする
-
-3. フォルダ`components/<コンポーネント名>`でコンポーネントを追加してください
-
-4. `stories/*.stories.js`でコンポーネントのストーリーを作る
 
 
 ## 参考のデザインフレームワーク
