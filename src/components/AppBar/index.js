@@ -79,8 +79,9 @@ const NavContent = styled.div`
 
     a {
       ${({ color }) => (color ? `color: ${color};` : '')}
-      &:hover{
-        background-color: rgba(0, 0, 0, .05);
+      transform: color 100ms ease-out;
+      &:hover, &.active {
+        color ${({ theme }) => theme.primary};
       }
     }
   }

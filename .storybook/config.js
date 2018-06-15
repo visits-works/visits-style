@@ -1,6 +1,5 @@
 import { configure, addDecorator } from '@storybook/react';
 import { configureViewport, INITIAL_VIEWPORTS, withViewport } from '@storybook/addon-viewport';
-import { withInfo, setDefaults } from '@storybook/addon-info';
 import { setOptions } from '@storybook/addon-options';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import backgrounds from '@storybook/addon-backgrounds';
@@ -19,8 +18,6 @@ setDefaults({
   maxPropsIntoLine: 1
 });
 
-
-addDecorator((story, context) => withInfo()(story)(context));
 addDecorator(withKnobs);
 addDecorator(
   backgrounds([

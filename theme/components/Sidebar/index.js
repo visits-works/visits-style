@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react'
 import { Fragment, SFC } from 'react'
 import { Docs, Entry, Link as BaseLink } from 'docz'

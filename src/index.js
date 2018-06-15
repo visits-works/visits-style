@@ -1,8 +1,10 @@
+
+
 // elements
 export * from './components';
 
 // misc
-export { default as colors } from './styles/colors';
-export { default as Theme } from './styles/public';
+export * as colors from './styles/colors';
+export { default as Theme } from './theme/public';
 
-export { default as utils } from './utils';
+export * as utils from './utils';

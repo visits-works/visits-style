@@ -1,7 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-node_modules
+**/node_modules
 package-lock.json
 
 # testing
@@ -25,3 +25,4 @@ bundle_report.html
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*

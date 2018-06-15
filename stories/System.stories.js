@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import publicTheme from '../theme/public';
-import { findColorInvert } from '../utils';
-import { Container } from '../components';
+import publicTheme from '../../src/theme/public';
+import { findColorInvert } from '../../src/utils';
+import { Container } from '../../src/components';
 
 const Item = styled.div`
   display: inline-block;

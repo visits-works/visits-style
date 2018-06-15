@@ -1,4 +1,5 @@
-import * as React from 'react'
+// @flow
+import React from 'react'
 import { Fragment, SFC } from 'react'
 import { PageProps } from 'docz'
 import styled from 'react-emotion'

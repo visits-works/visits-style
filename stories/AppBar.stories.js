@@ -3,8 +3,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text, boolean, select } from '@storybook/addon-knobs/react';
-import { AppBar, Container, Button } from '../components';
-import Logo from '../../docs/assets/img/visits.svg';
+import { AppBar, Container, Button } from '../../src/components';
+import Logo from '../theme/assets/visits.svg';
 
 const colorList = [
   null, 'white', 'light', 'dark', 'black', 'primary', 'link', 'info', 'success', 'warning', 'danger',

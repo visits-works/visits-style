@@ -6,13 +6,13 @@ VISITS Technologyのreactデザインコンポーネント
 まずは、開発マシンから会社のgitアクセスをできるようにしてください。
 
 ```
-npm install git+ssh://git@github.com:visits-works/visits-style.git#<branch指定>
+npm install github:visits-works/visits-style#<branch指定>
 ```
 
 [yarn](https://yarnpkg.com/ja/)でもできます
 
 ```
-yarn add git+ssh://git@github.com:visits-works/visits-style.git#<branch指定>
+yarn add github:visits-works/visits-style#<branch指定>
 ```
 
 ## Example

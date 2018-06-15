@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import { Row, Col, Container, Break } from '../components';
+import { Row, Col, Container, Break } from '../../src/components';
 
 const Temp = styled.div`
   background-color: ${({ theme, sub }) => (sub ? theme.greyLight : theme.primary)};

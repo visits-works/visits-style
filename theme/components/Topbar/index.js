@@ -1,7 +1,8 @@
+// @flow
 import React from 'react';
 import { Docs, Link } from 'docz';
-import AppBar from '@components/AppBar';
-import Logo from '@assets/img/visits.svg';
+import { AppBar } from '@components';
+import Logo from '@assets/visits.svg';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||

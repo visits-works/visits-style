@@ -1,7 +1,7 @@
 // @flow
 import styled, { type ReactComponentStyled, css } from 'styled-components';
 import Col from './Col';
-import { fullhd, widescreen, desktop, tablet, mobile, gutter, smallGutter } from '../../styles/variables';
+import { fullhd, desktop, tablet, mobile, gutter, smallGutter } from '../../styles/variables';
 
 type Props = {
   width?: string,
@@ -15,7 +15,7 @@ function renderGutter({ noGutter }: Props) {
     return css`
       margin-right: 0;
       margin-left: 0;
-  
+
       > ${Col} {
         padding-right: 0;
         padding-left: 0;
@@ -27,11 +27,11 @@ function renderGutter({ noGutter }: Props) {
         margin-left: -0.75rem;
         margin-right: -0.75rem;
         margin-top: -0.75rem;
-    
+
         &:last-child {
           margin-bottom: -0.75rem;
         }
-    
+
         &:not(:last-child) {
           margin-bottom: 0.75rem;
         }
@@ -41,11 +41,11 @@ function renderGutter({ noGutter }: Props) {
         margin-left: -0.5rem;
         margin-right: -0.5rem;
         margin-top: -0.5rem;
-    
+
         &:last-child {
           margin-bottom: -0.5rem;
         }
-    
+
         &:not(:last-child) {
           margin-bottom: 0.5rem;
         }

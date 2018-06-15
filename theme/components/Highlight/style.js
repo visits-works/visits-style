@@ -1,17 +1,6 @@
-import React, { PureComponent, createRef } from 'react';
-import styled from 'styled-components';
+import { css } from 'styled-components';
 
-import 'prismjs';
-import 'prismjs/components/prism-json.min';
-import 'prismjs/components/prism-jsx.min';
-import 'prismjs/components/prism-bash.min';
-import 'prismjs/components/prism-markdown.min';
-import 'prismjs/components/prism-typescript.min';
-import prism from 'prismjs';
-
-import { Pre, Button } from '@components';
-
-const PrismCss = `
+export default css`
   code[class*="language-"],
   pre[class*="language-"] {
     direction: ltr;
@@ -19,12 +8,7 @@ const PrismCss = `
     white-space: pre;
     word-spacing: normal;
     word-break: normal;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
     tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
     hyphens: none;
     background: #f5f7ff;
     border-radius: 5px;
@@ -142,78 +126,6 @@ const PrismCss = `
   */
   .line-highlight {
     background: rgba(107, 115, 148, 0.2);
-    background: -webkit-linear-gradient(left, rgba(107, 115, 148, 0.2) 70%, rgba(107, 115, 148, 0));
     background: linear-gradient(to right, rgba(107, 115, 148, 0.2) 70%, rgba(107, 115, 148, 0));
   }
 `;
-
-const Wrapper = styled.figure`
-  position: relative;
-  font-weight: 400;
-  max-width: 100%;
-  overflow: hidden;
-  padding: 0;
-  border-radius: 0 0 5px 5px;
-
-  border: 1px solid ${({ theme }) => theme.border};
-  background-color: ${({ theme }) => theme.background};
-
-  ${PrismCss}
-
-  pre {
-    overflow: auto;
-    max-width: 100%;
-  }
-
-  ${Button} {
-    position: absolute;
-    right: .25rem;
-    top: .25rem;
-    padding-bottom: 0;
-    padding-top: 0;
-    background-color: transparent;
-    border: none;
-
-    &:hover {
-      background-color: ${({ theme }) => theme.warning};
-      color: rgba(0,0,0,.7);
-    }
-  }
-`;
-
-export default class Highlight extends PureComponent {
-
-  componentDidMount() {
-    prism.highlightElement(this.pre.current);
-  }
-
-  componentDidUpdate() {
-    prism.highlightElement(this.pre.current);
-  }
-
-  copyText = () => {
-    if (document.selection) {
-      var range = document.body.createTextRange();
-      range.moveToElementText(this.pre.current);
-      range.select();
-    } else if (window.getSelection) {
-      var range = document.createRange();
-      range.selectNode(this.pre.current);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-    }
-    document.execCommand('copy');
-  }
-
-  pre = createRef();
-
-  render() {
-    const { children } = this.props;
-    return (
-      <Wrapper>
-        <Pre innerRef={this.pre}>{children}</Pre>
-        <Button size="small" onClick={this.copyText}>Copy</Button>
-      </Wrapper>
-    );
-  }
-}

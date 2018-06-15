@@ -2,9 +2,9 @@
 import React from 'react';
 import { addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import theme from '../theme/public';
+import theme from '../../src/theme/public';
 
-import '../styles/global';
+import '../../src/styles/global';
 
 addDecorator(story => (
   <ThemeProvider theme={theme}>
