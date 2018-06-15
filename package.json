@@ -1,5 +1,6 @@
 {
   "name": "visits-style",
+  "version": "0.1.0",
   "private": true,
   "main": "lib/index.js",
   "module": "lib/index.es.js",
