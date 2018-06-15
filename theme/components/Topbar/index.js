@@ -9,7 +9,7 @@ export const isActive = (route: string) => (match: any, location: any) =>
   (location.pathname.startsWith(route) && route !== '/')
 
 export const Topbar = () => (
-  <AppBar brand={<img src={Logo} alt="Visits-style" />} color="dark">
+  <AppBar to="/" brand={<img src={Logo} alt="Visits-style" />} color="dark" sticky>
     <Docs>
       {({ docs: allDocs }) => {
         const docs = allDocs.filter(doc => !doc.parent)

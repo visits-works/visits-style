@@ -5,11 +5,12 @@ import { findColorInvert, hambuger } from '../../utils';
 import Container from '../Grid/Container';
 
 const NavBar = styled.header`
-  position: relative;
+  position: ${({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))};
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: stretch;
+  top: -1px;
 
   min-height: 3.25rem;
   width: 100%;
@@ -120,6 +121,7 @@ export class AppBar extends PureComponent {
     brand: null,
     to: null,
     fixed: false,
+    sticky: false,
     fluid: false,
     style: null,
   }
@@ -131,12 +133,19 @@ export class AppBar extends PureComponent {
   }
 
   render() {
-    const { theme, color, brand, children, to, style } = this.props;
+    const { theme, color, brand, children, to, style, fixed, sticky } = this.props;
     const { show } = this.state;
     const backgroundColor = color === 'light' ? theme.whiteTer : (theme[color] || 'transparent');
     const textColor = backgroundColor === 'transparent' ? null : findColorInvert(backgroundColor);
     return (
-      <NavBar background={backgroundColor} color={textColor} role="navigation" style={style}>
+      <NavBar
+        background={backgroundColor}
+        color={textColor}
+        fixed={fixed}
+        sticky={sticky}
+        role="navigation"
+        style={style}
+      >
         {brand && (<Brand href={to}>{brand}</Brand>)}
         {children && (
           <Fragment>
