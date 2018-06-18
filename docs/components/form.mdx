@@ -1,0 +1,43 @@
+---
+name: Forms
+route: /components/forms
+parent: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Field, TextInput, Textarea, Checkbox, Radio, Select, Button } from '@components';
+
+# Forms
+
+## Basic usage
+
+<Playground>
+  <form>
+    <Field label="Name">
+      <TextInput placeholder="Text input" />
+    </Field>
+    <Field label="Username" help="helper text">
+      <TextInput value="visits" />
+    </Field>
+    <Field label="Email" error="invalid email">
+      <TextInput type="email" value="wrong@email" />
+    </Field>
+    <Field label="Message">
+      <Textarea placeholder="Textarea Text here" />
+    </Field>
+    <Field>
+      <Select value={2} options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+    </Field>
+    <Field>
+      <Checkbox checked>
+        I agree to the <a href="#">terms and conditions</a>
+      </Checkbox>
+    </Field>
+    <Field>
+      <Radio name="agree" value="yes">Yes</Radio>
+      <Radio name="agree" value="no">No</Radio>
+    </Field>
+    <Button>Submit</Button>
+    <Button>Clear</Button>
+  </form>
+</Playground>

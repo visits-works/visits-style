@@ -44,7 +44,7 @@ function setColor({ theme, color, outline }: Props) {
       }
 
       &:focus {
-        ${boxShadow('0.2rem', target)}
+        ${boxShadow('0.2rem', theme.greyLighter)}
       }
     `;
   }

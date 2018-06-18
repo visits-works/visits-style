@@ -135,6 +135,14 @@ const NavContent = styled.div`
   }
 `;
 
+const svgStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  pointerEvent: 'none',
+  zIndex: -1,
+}
+
 export default class AppBar extends PureComponent {
   static defaultProps = {
     color: null,
@@ -156,6 +164,8 @@ export default class AppBar extends PureComponent {
   render() {
     const { theme, color, brand, children, style, fixed, sticky, backdrop } = this.props;
     const { show } = this.state;
+    const ua = navigator.userAgent.toLowerCase();
+    const isSafari = ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1;
     return (
       <NavBar
         color={color}
@@ -177,6 +187,9 @@ export default class AppBar extends PureComponent {
               {children}
             </NavContent>
           </Fragment>
+        )}
+        {!isSafari && backdrop && (
+          <div className="backdrop"></div>
         )}
       </NavBar>
     );
