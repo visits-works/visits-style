@@ -1,4 +1,3 @@
-// @flow
 import React, { PureComponent, createRef } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -20,6 +19,7 @@ const Wrapper = styled.figure`
   overflow: hidden;
   padding: 0;
   border-radius: 0 0 5px 5px;
+  margin-bottom: 1rem;
 
   border: 1px solid ${({ theme }) => theme.border};
   background-color: ${({ theme }) => theme.background};

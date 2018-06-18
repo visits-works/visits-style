@@ -1,8 +1,29 @@
 import React, { PureComponent, Fragment } from 'react';
-import styled, { withTheme } from 'styled-components';
+import styled, { css }from 'styled-components';
+import { transparentize } from 'polished';
 import { fullhd, desktop, tablet, mobile } from '../../styles/variables';
 import { findColorInvert, hambuger } from '../../utils';
 import Container from '../Grid/Container';
+
+function setColor({ color, theme, backdrop }) {
+  const backgroundColor = color === 'light' ? theme.whiteTer : (theme[color] || 'transparent');
+  const textColor = backgroundColor === 'transparent' ? null : findColorInvert(backgroundColor);
+
+  if (backdrop) {
+    const backColor = transparentize(0.2, (backgroundColor === 'transparent' ? '#fff' : backgroundColor));
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
+      return `background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;
+    }
+
+    return css`
+      background-color: ${backColor};
+      color: ${textColor};
+    `;
+  }
+
+  return `background-color: ${backgroundColor}; color: ${textColor};`;
+}
 
 const NavBar = styled.header`
   position: ${({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))};
@@ -16,10 +37,20 @@ const NavBar = styled.header`
   width: 100%;
   z-index: 30;
 
-  ${({ background }) => (background ? `background-color: ${background};` : '')}
-  ${({ color }) => (color ? `color: ${color};` : '')}
+  ${setColor}
 
-  @media (max-width: ${fullhd}px) {
+  &>a {
+    display: inline-block;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: .5rem 1rem;
+
+    &:hover{
+      background-color: rgba(0, 0, 0, .05);
+    }
+  }
+
+  @media (min-width: ${fullhd}px) {
     padding: ${({ fluid }) => fluid ? '0 0.75rem' : '0 5%'};
   }
 
@@ -46,17 +77,6 @@ const Burger = styled.button`
   }
 `;
 
-const Brand = styled.a`
-  display: inline-block;
-  cursor: pointer;
-  white-space: nowrap;
-  padding: .5rem 1rem;
-
-  &:hover{
-    background-color: rgba(0, 0, 0, .05);
-  }
-`;
-
 const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -79,7 +99,7 @@ const NavContent = styled.div`
     }
 
     a {
-      ${({ color }) => (color ? `color: ${color};` : '')}
+      color: inherit;
       transform: color 100ms ease-out;
       &:hover, &.active {
         color ${({ theme }) => theme.primary};
@@ -115,7 +135,7 @@ const NavContent = styled.div`
   }
 `;
 
-export class AppBar extends PureComponent {
+export default class AppBar extends PureComponent {
   static defaultProps = {
     color: null,
     brand: null,
@@ -123,6 +143,7 @@ export class AppBar extends PureComponent {
     fixed: false,
     sticky: false,
     fluid: false,
+    backdrop: false,
     style: null,
   }
 
@@ -133,20 +154,18 @@ export class AppBar extends PureComponent {
   }
 
   render() {
-    const { theme, color, brand, children, to, style, fixed, sticky } = this.props;
+    const { theme, color, brand, children, style, fixed, sticky, backdrop } = this.props;
     const { show } = this.state;
-    const backgroundColor = color === 'light' ? theme.whiteTer : (theme[color] || 'transparent');
-    const textColor = backgroundColor === 'transparent' ? null : findColorInvert(backgroundColor);
     return (
       <NavBar
-        background={backgroundColor}
-        color={textColor}
+        color={color}
         fixed={fixed}
         sticky={sticky}
+        backdrop={backdrop}
         role="navigation"
         style={style}
       >
-        {brand && (<Brand href={to}>{brand}</Brand>)}
+        {brand}
         {children && (
           <Fragment>
             <Burger className={show ? 'active' : ''} onClick={this.toggleMenu}>
@@ -154,7 +173,7 @@ export class AppBar extends PureComponent {
               <span />
               <span />
             </Burger>
-            <NavContent color={textColor} show={show}>
+            <NavContent show={show}>
               {children}
             </NavContent>
           </Fragment>
@@ -163,5 +182,3 @@ export class AppBar extends PureComponent {
     );
   }
 }
-
-export default withTheme(AppBar);

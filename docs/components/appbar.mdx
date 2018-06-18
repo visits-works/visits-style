@@ -5,7 +5,7 @@ parent: Components
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Logo from '@assets/visits.svg';
+import Logo from '@assets/visits';
 import { AppBar, Button } from '@components';
 
 # AppBar
@@ -15,7 +15,7 @@ import { AppBar, Button } from '@components';
 ## Basic usage
 
 <Playground>
-  <AppBar color="light" brand={(<img src={Logo} alt="Visits Technology" />)} to="#">
+  <AppBar color="light" brand={(<Logo />)} to="#">
     <ul>
       <li><a href="#">link1</a></li>
       <li><a href="#">link2</a></li>

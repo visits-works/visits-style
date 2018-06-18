@@ -12,7 +12,7 @@ const Container: ReactComponentStyled<Props> = styled.div`
   margin: 0 auto;
   width: auto;
 
-  @media (max-width: ${fullhd}px) {
+  @media (min-width: ${fullhd}px) {
     max-width: ${({ fluid }) => fluid ? 'none' : `${fullhd}px`};
     margin-right: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
     margin-left: ${({ fluid }) => fluid ? '0.75rem' : '5%'};

@@ -1,8 +1,9 @@
 // @flow
 import type { ComponentType } from 'react';
+import Types from 'prop-types';
 import styled, { css } from 'styled-components';
 import { darken, rgba } from 'polished';
-import { findColorInvert } from '../../utils';
+import { findColorInvert, boxShadow } from '../../utils';
 
 type Props = {
   color?: Colors,
@@ -43,7 +44,7 @@ function setColor({ theme, color, outline }: Props) {
       }
 
       &:focus {
-        box-shadow: 0 0 0 .2rem ${target};
+        ${boxShadow('0.2rem', target)}
       }
     `;
   }
@@ -62,7 +63,7 @@ function setColor({ theme, color, outline }: Props) {
       }
 
       &:focus {
-        box-shadow: 0 0 0 .2rem ${rgba(target, 0.5)};
+        ${boxShadow('0.2rem', target)}
       }
     `;
   }
@@ -82,7 +83,7 @@ function setColor({ theme, color, outline }: Props) {
     }
 
     &:focus {
-      box-shadow: 0 0 0 .2rem ${rgba(target, 0.5)};
+      ${boxShadow('0.2rem', target)}
     }
   `;
 }
@@ -130,5 +131,11 @@ const Button: ComponentType<Props> = styled.button`
 `;
 
 Button.displayName = 'Button';
+Button.propTypes = {
+  color: Types.oneOf(['white', 'light', 'dark', 'black', 'text', 'primary', 'link', 'info', 'success', 'warning', 'danger']),
+  size: Types.oneOf(['small', 'medium', 'large']),
+  outline: Types.bool,
+  onClick: Types.func,
+};
 
 export default Button;

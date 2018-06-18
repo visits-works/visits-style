@@ -1,5 +1,3 @@
-import './styles/global'; // reset css
-
 // elements
 export * from './components';
 

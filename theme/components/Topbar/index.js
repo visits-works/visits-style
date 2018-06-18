@@ -1,15 +1,20 @@
-// @flow
 import React from 'react';
 import { Docs, Link } from 'docz';
 import { AppBar } from '@components';
-import Logo from '@assets/visits.svg';
+import Logo from '@assets/visits';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||
   (location.pathname.startsWith(route) && route !== '/')
 
 export const Topbar = () => (
-  <AppBar to="/" brand={<img src={Logo} alt="Visits-style" />} color="dark" sticky>
+  <AppBar
+    brand={<Link to="/"><Logo /></Link>}
+    color="dark"
+    sticky
+    backdrop
+    style={{ zIndex: 9999 }}
+  >
     <Docs>
       {({ docs: allDocs }) => {
         const docs = allDocs.filter(doc => !doc.parent)

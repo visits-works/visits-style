@@ -24,6 +24,9 @@ import { ThemeProvider } from 'styled-components';
 import { Button, Theme } from 'visits-style';
 // import Button from 'visits-style/lib/components/Button';
 
+// 一番rootの一回のみ必ずこれを追加してください。cssのnormalizeです
+import 'visits-style/lib/styles/global';
+
 function App() {
   return (
     <ThemeProvider theme={Theme}>

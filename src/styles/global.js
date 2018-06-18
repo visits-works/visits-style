@@ -50,7 +50,7 @@ injectGlobal`
     cursor: pointer;
     text-decoration: none;
 
-    & strong {
+    & strong, &:visited, &:link {
       color: currentColor;
     }
   }
@@ -77,5 +77,9 @@ injectGlobal`
   table td,table th {
     text-align: left;
     vertical-align: top;
+  }
+
+  ul {
+    list-style-type: none;
   }
 `;
