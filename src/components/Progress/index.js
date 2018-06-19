@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import { setSize } from '../../utils';
 
 type Props = {
   value: number,
@@ -15,11 +16,12 @@ export const Progress = styled.progress`
   border: none;
   border-radius: 290486px;
   display: block;
-  height: 1rem;
   overflow: hidden;
   padding: 0;
   width: 100%;
   color: ${props => props.theme.grey};
+
+  ${setSize('height')}
 
   &::-webkit-progress-bar {
     background-color: ${props => props.theme.grey};

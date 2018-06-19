@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import styled, { css }from 'styled-components';
 import { transparentize } from 'polished';
 import { fullhd, desktop, tablet, mobile } from '../../styles/variables';
-import { findColorInvert, hambuger } from '../../utils';
+import { findColorInvert, hambuger, mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils';
 import Container from '../Grid/Container';
 
 function setColor({ color, theme, backdrop }) {
@@ -50,13 +50,13 @@ const NavBar = styled.header`
     }
   }
 
-  @media (min-width: ${fullhd}px) {
-    padding: ${({ fluid }) => fluid ? '0 0.75rem' : '0 5%'};
-  }
-
-  @media (max-width: ${tablet}px) {
+  ${mediaTablet`
     padding: ${({ fluid }) => fluid ? '0 0.5rem' : '0 3%'};
-  }
+  `}
+
+  ${mediaUntilFullHD`
+    padding: ${({ fluid }) => fluid ? '0 0.75rem' : '0 5%'};
+  `}
 `;
 
 const Burger = styled.button`
@@ -72,9 +72,7 @@ const Burger = styled.button`
     background-color: rgba(0, 0, 0, .05);
   }
 
-  @media (max-width: ${mobile}px) {
-    display: block;
-  }
+  ${mediaMobile` display: block; `}
 `;
 
 const NavContent = styled.div`
@@ -112,7 +110,7 @@ const NavContent = styled.div`
     ${({ color }) => (color ? `color: ${color};` : '')}
   }
 
-  @media (max-width: ${mobile}px) {
+  ${mediaMobile`
     ${({ show }) => show ? '' : 'display: none;'}
     width: 100%;
     flex-direction: column;
@@ -132,7 +130,7 @@ const NavContent = styled.div`
       padding: .5rem 0;
       width: 100%;
     }
-  }
+  `}
 `;
 
 const svgStyle = {

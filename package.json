@@ -17,7 +17,7 @@
   "scripts": {
     "start": "docz dev",
     "build": "NODE_ENV=production gulp",
-    "build:guide": "docz build",
+    "build:doc": "docz build",
     "clean": "rm -rf ./lib",
     "develop": "start-storybook -p 9009 -s public",
     "test": "jest --env=jsdom",

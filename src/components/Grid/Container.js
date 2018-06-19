@@ -1,40 +1,61 @@
 // @flow
-import styled, { type ReactComponentStyled } from 'styled-components';
-import { fullhd, desktop, tablet, mobile, gutter, smallGutter } from '../../styles/variables';
+import styled, { css } from 'styled-components';
+import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils';
+import { fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 import Row from './Row';
 
-type Props = {
-  width?: number,
+function setResponsive({ fluid }) {
+  if (fluid) {
+    return css`
+      ${mediaMobile`
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+      `}
+      ${mediaDesktop`
+        margin-right: 0.75rem;
+        margin-left: 0.75rem;
+      `}
+      ${mediaFullHD`
+        margin-right: 0.75rem;
+        margin-left: 0.75rem;
+      `}
+    `;
+  }
+
+  return css`
+    ${mediaMobile`
+      margin-right: 3%;
+      margin-left: 3%;
+    `}
+    ${mediaTablet`
+      max-width: ${tablet - (2 * smallGutter)}px;
+      margin-right: 3%;
+      margin-left: 3%;
+    `}
+    ${mediaDesktop`
+      max-width: ${desktop - (2 * gutter)}px;
+      margin-right: 5%;
+      margin-left: 5%;
+    `}
+    ${mediaFullHD`
+      max-width: ${fullhd - (2 * gutter)}px;
+      margin-right: 5%;
+      margin-left: 5%;
+    `}
+  `;
 }
 
-const Container: ReactComponentStyled<Props> = styled.div`
+const Container = styled.div`
   position: relative;
   margin: 0 auto;
   width: auto;
+  max-width: 100%;
 
-  @media (min-width: ${fullhd}px) {
-    max-width: ${({ fluid }) => fluid ? 'none' : `${fullhd}px`};
-    margin-right: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
-    margin-left: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
-  }
-
-  @media (min-width: ${desktop}px) {
-    max-width: ${({ fluid }) => fluid ? 'none' : `${desktop}px`};
-    margin-right: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
-    margin-left: ${({ fluid }) => fluid ? '0.75rem' : '5%'};
-  }
-
-  @media (min-width: ${tablet}px) {
-    max-width: ${({ fluid }) => fluid ? 'none' : `${tablet}px`};
-    margin-right: ${({ fluid }) => fluid ? '0.5rem' : '5%'};
-    margin-left: ${({ fluid }) => fluid ? '0.5rem' : '5%'};
-  }
-
-  @media (max-width: ${mobile}px) {
-    margin-right: ${({ fluid }) => fluid ? '0.5rem' : '3%'};
-    margin-left: ${({ fluid }) => fluid ? '0.5rem' : '3%'};
-  }
+  ${setResponsive}
 `;
 Container.displayName = 'Container';
+Container.defaultProps = {
+  fluid: false,
+};
 
 export default Container;

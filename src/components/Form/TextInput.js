@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { boxShadow } from '../../utils';
+import { boxShadow, setSize } from '../../utils';
 import commonStyle from './style';
 
 const Input = styled.input`
@@ -14,6 +14,7 @@ const Input = styled.input`
   ${({ theme }) => boxShadow('1px', theme.border, 0)}
   will-change: box-shadow, transition;
   transition: box-shadow .15s ease-in-out;
+  ${setSize('font-size')}
 
   &:focus {
     outline: none;

@@ -3,7 +3,7 @@ import type { ComponentType } from 'react';
 import Types from 'prop-types';
 import styled, { css } from 'styled-components';
 import { darken, rgba } from 'polished';
-import { findColorInvert, boxShadow } from '../../utils';
+import { findColorInvert, boxShadow, setSize } from '../../utils';
 
 type Props = {
   color?: Colors,
@@ -88,19 +88,6 @@ function setColor({ theme, color, outline }: Props) {
   `;
 }
 
-function getSize({ size }: Props) {
-  switch(size) {
-    case 'small':
-      return 'font-size: 0.75rem;';
-    case 'medium':
-      return 'font-size: 1.25rem;';
-    case 'large':
-      return 'font-size: 1.5rem;';
-    default:
-      return '';
-  }
-}
-
 const Button: ComponentType<Props> = styled.button`
   outline: none;
   appearance: none;
@@ -118,7 +105,7 @@ const Button: ComponentType<Props> = styled.button`
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
   ${setColor}
-  ${getSize}
+  ${setSize('font-size')}
 
   &:disabled {
     pointer-events: none;

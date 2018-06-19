@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import commonStyle from './style';
-import { boxShadow, arrow } from '../../utils';
+import { boxShadow, arrow, setSize } from '../../utils';
 
 const InputWrapper = styled.div`
   display: inline-block;
@@ -22,6 +22,7 @@ const InputWrapper = styled.div`
     padding: 0.375em 0.625em;
 
     ${({ multiple }) => multiple ? '' : 'padding-right: 2.25em;'}
+    ${setSize('font-size')}
 
     border-radius: 4px;
     border: none;

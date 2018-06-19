@@ -16,6 +16,7 @@ injectGlobal`
 
   /* global styles */
   html {
+    display: block;
     font-size: 16px;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -23,6 +24,7 @@ injectGlobal`
     overflow-x: hidden;
     overflow-y: scroll;
     text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
     box-sizing: border-box;
   }
 

@@ -1,6 +1,6 @@
 // @flow
-import styled, { type ReactComponentStyled } from 'styled-components';
-import { fullhd, tablet } from '../../styles/variables';
+import styled, { css } from 'styled-components';
+import { mediaFullHD, mediaMobile } from '../../utils';
 
 type SizeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
@@ -10,7 +10,7 @@ type Props = {
   offset?: SizeType,
 }
 
-export function parcentage(value?: SizeType, volume?: number = 1) {
+export function parcentage(value?: SizeType) {
   if (!value) return 0;
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
@@ -25,29 +25,32 @@ export function renderSize({ size, narrow }: Props) {
     `;
   } else {
     const value = parcentage(size);
-    return `
+    const mobileSize = value * 3;
+    return css`
       flex: none;
       width: ${value}%;
+
+      ${mediaMobile`
+        width: ${mobileSize}%;
+      `}
     `;
   }
 }
 
-const Col: ReactComponentStyled<Props> = styled.div`
+const Col = styled.div`
   display: block;
   min-height: 1px;
+  max-width: 100%;
 
   ${({ narrow }) => narrow ? 'flex: none;' : ''}
   ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : ''}
 
   ${renderSize}
+  padding: 0.75rem;
 
-  @media (min-width: ${fullhd}px) {
-    padding: 0.75rem;
-  }
-
-  @media (min-width: ${tablet}px) {
+  ${mediaMobile`
     padding: 0.5rem;
-  }
+  `}
 `;
 
 Col.displayName = 'Col';

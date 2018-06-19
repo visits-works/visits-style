@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaTablet } from '../../utils';
 
 export const SideMenu = styled.aside`
   font-size: 1rem;
@@ -11,6 +12,7 @@ export const MenuList = styled.ul`
   a {
     display: block;
     padding: 0.5em 0.75em;
+    border-radius: 4px;
     &:hover {
       background-color: ${({ theme }) => theme.background};
     }

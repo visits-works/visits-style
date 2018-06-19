@@ -3,16 +3,18 @@ import { Fragment, SFC } from 'react'
 import { Docs, Entry, Link } from 'docz'
 import { Col, SideMenu, MenuList, MenuLabel } from '@components'
 import styled from 'styled-components'
+import { mediaTablet } from '../../../src/utils';
 
 const Menu = SideMenu.extend`
-  width: 250px;
+  width: 100%;
   position: sticky;
   top: 3.5rem;
   padding: 1.5rem;
 
-  @media (max-width: 768px) {
-    width: 100vw;
-  }
+  ${mediaTablet`
+    position: relative;
+    top: 0;
+  `}
 `;
 
 const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
@@ -33,7 +35,7 @@ const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
 )
 
 export const Sidebar: SFC<SidebarProps> = ({ parent, active }) => (
-  <Col narrow>
+  <Col size={3}>
     <Docs>
       {({ docs: allDocs }) => {
         const docs = allDocs.filter(doc => doc.parent === parent)
