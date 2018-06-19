@@ -23,7 +23,7 @@ function renderGutter({ noGutter }: Props) {
     `;
   } else {
     return css`
-      @media (max-width: ${fullhd}px) {
+      @media (min-width: ${fullhd}px) {
         margin-left: -0.75rem;
         margin-right: -0.75rem;
         margin-top: -0.75rem;
@@ -37,7 +37,7 @@ function renderGutter({ noGutter }: Props) {
         }
       }
 
-      @media (max-width: ${tablet}px) {
+      @media (min-width: ${tablet}px) {
         margin-left: -0.5rem;
         margin-right: -0.5rem;
         margin-top: -0.5rem;

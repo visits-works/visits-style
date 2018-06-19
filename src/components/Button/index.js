@@ -103,7 +103,8 @@ function getSize({ size }: Props) {
 
 const Button: ComponentType<Props> = styled.button`
   outline: none;
-  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
   display: inline-flex;
   text-align: center;
   white-space: nowrap;

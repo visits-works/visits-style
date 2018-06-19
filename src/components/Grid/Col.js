@@ -15,7 +15,8 @@ export function parcentage(value?: SizeType, volume?: number = 1) {
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
 
-export function renderSize({ size }: Props) {
+export function renderSize({ size, narrow }: Props) {
+  if (narrow) return null;
   if (!size || size < 1 || size > 12) {
     return `
       flex-basis: 0;
@@ -40,11 +41,11 @@ const Col: ReactComponentStyled<Props> = styled.div`
 
   ${renderSize}
 
-  @media (max-width: ${fullhd}px) {
+  @media (min-width: ${fullhd}px) {
     padding: 0.75rem;
   }
 
-  @media (max-width: ${tablet}px) {
+  @media (min-width: ${tablet}px) {
     padding: 0.5rem;
   }
 `;

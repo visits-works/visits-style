@@ -4,7 +4,18 @@ import { Docs, Entry, Link } from 'docz'
 import { Col, SideMenu, MenuList, MenuLabel } from '@components'
 import styled from 'styled-components'
 
-const Menu: SFC<MenuProps> = ({ doc, active }) => (
+const Menu = SideMenu.extend`
+  width: 250px;
+  position: sticky;
+  top: 3.5rem;
+  padding: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
+`;
+
+const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
   <li>
     <Link to={doc.route}>{doc.name}</Link>
     {active === doc.route && (
@@ -22,17 +33,17 @@ const Menu: SFC<MenuProps> = ({ doc, active }) => (
 )
 
 export const Sidebar: SFC<SidebarProps> = ({ parent, active }) => (
-  <Col narrow style={{ maxWidth: '250px' }}>
+  <Col narrow>
     <Docs>
       {({ docs: allDocs }) => {
         const docs = allDocs.filter(doc => doc.parent === parent)
 
         return (
-          <SideMenu style={{ position: 'sticky', top: '3.5rem', padding: '1.5rem' }}>
+          <Menu>
             <MenuList>
-              {docs.map(doc => <Menu key={doc.id} doc={doc} active={active} />)}
+              {docs.map(doc => <MenuItem key={doc.id} doc={doc} active={active} />)}
             </MenuList>
-          </SideMenu>
+          </Menu>
         )
       }}
     </Docs>

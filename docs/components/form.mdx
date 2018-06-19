@@ -12,7 +12,7 @@ import { Field, TextInput, Textarea, Checkbox, Radio, Select, Button } from '@co
 ## Basic usage
 
 <Playground>
-  <form>
+  <form onSubmit={(e) => { e.preventDefault(); }}>
     <Field label="Name">
       <TextInput placeholder="Text input" />
     </Field>

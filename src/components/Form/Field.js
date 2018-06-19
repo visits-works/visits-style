@@ -24,7 +24,7 @@ const InputControl = styled.div`
 
   ${({ error, theme }) => error ? css`
     input {
-      ${boxShadow('1px', theme.danger)}
+      ${boxShadow('1px', theme.danger, 0)}
 
       &:focus {
         ${boxShadow('0.2em', theme.danger)}

@@ -11,6 +11,13 @@ export const MenuList = styled.ul`
   a {
     display: block;
     padding: 0.5em 0.75em;
+    &:hover {
+      background-color: ${({ theme }) => theme.background};
+    }
+    &.active {
+      background-color: ${({ theme }) => theme.primary};
+      color: white;
+    }
   }
 
   li {

@@ -9,10 +9,11 @@ const Input = styled.textarea`
   width: 100%;
   padding: 0.625em;
   resize: vertical;
+  appearance: none;
 
   border-radius: 4px;
   border: none;
-  ${({ theme }) => boxShadow('1px', theme.border)}
+  ${({ theme }) => boxShadow('1px', theme.border, 0)}
   transition: box-shadow .15s ease-in-out;
 
   &:focus {

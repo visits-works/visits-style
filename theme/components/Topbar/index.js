@@ -17,7 +17,7 @@ export const Topbar = () => (
   >
     <Docs>
       {({ docs: allDocs }) => {
-        const docs = allDocs.filter(doc => !doc.parent)
+        const docs = allDocs.filter(doc => !doc.parent).sort((a, b) => a.order > b.order)
 
         return (
           <ul>

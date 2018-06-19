@@ -11,7 +11,7 @@ const Input = styled.input`
   padding: 0.375em 0.625em;
   border-radius: 4px;
   border: none;
-  ${({ theme }) => boxShadow('1px', theme.borderHover)}
+  ${({ theme }) => boxShadow('1px', theme.border, 0)}
   will-change: box-shadow, transition;
   transition: box-shadow .15s ease-in-out;
 
