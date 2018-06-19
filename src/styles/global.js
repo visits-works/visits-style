@@ -51,8 +51,9 @@ injectGlobal`
   a {
     cursor: pointer;
     text-decoration: none;
+    color: #3273dc;
 
-    & strong, &:visited, &:link {
+    &:hover {
       color: currentColor;
     }
   }

@@ -1,7 +1,6 @@
-// @flow
 import React, { Fragment } from 'react';
 import { PageProps } from 'docz'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 
 import { Container, Row, Col } from '@components'
 import { Sidebar } from '../index'
@@ -15,18 +14,43 @@ const Wrapper = Container.extend`
   }
 `;
 
-export const Page: SFC<PageProps> = ({ children, doc, ...props }) => {
-  const { parent, sidebar, fullpage } = doc
-  const showSidebar = Boolean(parent || sidebar)
+const Header = styled.h1`
+  font-size: 2.75rem;
+  margin-bottom: 0.2rem;
+  color: ${({ theme }) => theme.textStrong};
+`;
+
+const Desc = styled.p`
+  font-size: 1.2rem;
+  color: ${({ theme }) => theme.textLight};
+
+  margin-bottom: 2rem;
+`;
+
+function renderChildren({ title, name, description }, children) {
+  return (
+    <Wrapper>
+      <Header>{ title || name }</Header>
+      {description && <Desc>{description}</Desc>}
+      {children}
+    </Wrapper>
+  );
+}
+
+export function Page({ children, doc, ...props }) {
+  const { parent, sidebar, fullpage } = doc;
+  const showSidebar = Boolean(parent || sidebar);
+
+  const render = renderChildren(doc, children);
 
   if (showSidebar) {
     return (
       <Row>
         <Sidebar parent={parent || doc.name} active={props.match.url} />
-        <Col><Wrapper>{children}</Wrapper></Col>
+        <Col>{render}</Col>
       </Row>
     );
   }
 
-  return (<Wrapper>{children}</Wrapper>);
+  return render;
 }

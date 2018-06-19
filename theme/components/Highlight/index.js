@@ -18,16 +18,20 @@ const Wrapper = styled.figure`
   max-width: 100%;
   overflow: hidden;
   padding: 0;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 4px 4px;
   margin-bottom: 1rem;
 
-  border: 1px solid ${({ theme }) => theme.border};
-  background-color: ${({ theme }) => theme.background};
+  &.hover {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.warning};
+  }
+
+  ${PrismStyle}
 
   pre {
     overflow: auto;
     max-width: 100%;
-    ${PrismStyle}
+    max-height: 340px;
+    margin: 0 !important;
   }
 
   ${Button} {
@@ -38,6 +42,7 @@ const Wrapper = styled.figure`
     padding-top: 0;
     background-color: transparent;
     border: none;
+    color: white;
 
     &:hover {
       background-color: ${({ theme }) => theme.warning};
@@ -70,16 +75,34 @@ export default class Highlight extends PureComponent {
     document.execCommand('copy');
   }
 
+  onButtonHover = () => {
+    this.wrapper.current.classList.add('hover');
+  }
+
+  onButtonHoverOut = () => {
+    if (this.wrapper.current.classList.contains('hover')) {
+      this.wrapper.current.classList.remove('hover');
+    }
+  }
+
   pre = createRef();
+  wrapper = createRef();
 
   render() {
     const { children, className } = this.props;
     return (
-      <Wrapper>
+      <Wrapper innerRef={this.wrapper}>
         <Pre className={className} innerRef={this.pre}>
           <code>{children}</code>
         </Pre>
-        <Button size="small" onClick={this.copyText}>Copy</Button>
+        <Button
+          size="small"
+          onClick={this.copyText}
+          onMouseEnter={this.onButtonHover}
+          onMouseLeave={this.onButtonHoverOut}
+        >
+          Copy
+        </Button>
       </Wrapper>
     );
   }

@@ -5,8 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { Button, Code, Content } from '@components';
 import publicTheme from '@theme/public';
 
-import { Topbar, Renderer, Highlight } from './components';
-import * as components from './components';
+import { Topbar, Renderer, Highlight, Page } from './components';
 
 import '@styles/global';
 
@@ -19,7 +18,7 @@ const Theme = () => (
           <DocPreview
             components={{
               render: Renderer,
-              page: components.Page,
+              page: Page,
               pre: Highlight,
               inlineCode: Code,
             }}

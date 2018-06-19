@@ -44,6 +44,7 @@ const NavBar = styled.header`
     cursor: pointer;
     white-space: nowrap;
     padding: .5rem 1rem;
+    color: inherit;
 
     &:hover{
       background-color: rgba(0, 0, 0, .05);

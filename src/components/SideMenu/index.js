@@ -13,6 +13,7 @@ export const MenuList = styled.ul`
     display: block;
     padding: 0.5em 0.75em;
     border-radius: 4px;
+    color: ${({ theme }) => theme.text};
     &:hover {
       background-color: ${({ theme }) => theme.background};
     }

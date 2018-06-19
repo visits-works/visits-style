@@ -7,16 +7,18 @@ const Temp = styled.div`
   margin-top: 0.75rem;
   padding: 0.75rem;
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.border};
-  border-bottom: 0;
-  border-radius: 5px 5px 0 0;
+`;
+
+const Wrapper = styled.div`
+  box-shadow: 0 0 0 2px ${({ theme }) => theme.borderHover};
+  border-radius: 4px;
 `;
 
 export default ({ component, code }) => (
-  <Fragment>
+  <Wrapper>
     <Temp>
       {component}
     </Temp>
     {code}
-  </Fragment>
+  </Wrapper>
 )

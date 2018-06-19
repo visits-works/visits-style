@@ -20,7 +20,7 @@ const Menu = SideMenu.extend`
 const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
   <li>
     <Link to={doc.route}>{doc.name}</Link>
-    {active === doc.route && (
+    {active === doc.route && doc.headings && (
       <ul>
         {doc.headings.map(
           heading =>
@@ -34,20 +34,24 @@ const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
   </li>
 )
 
-export const Sidebar: SFC<SidebarProps> = ({ parent, active }) => (
-  <Col size={3}>
-    <Docs>
-      {({ docs: allDocs }) => {
-        const docs = allDocs.filter(doc => doc.parent === parent)
+export function Sidebar({ parent, active }: SidebarProps): SFC<SidebarProps> {
+  return (
+    <Col size={3}>
+      <Docs>
+        {({ docs: allDocs }) => {
+          const docs = allDocs.filter(doc => doc.parent === parent);
+          const parentDoc = allDocs.filter(doc => doc.name === parent)[0];
 
-        return (
-          <Menu>
-            <MenuList>
-              {docs.map(doc => <MenuItem key={doc.id} doc={doc} active={active} />)}
-            </MenuList>
-          </Menu>
-        )
-      }}
-    </Docs>
-  </Col>
-)
+          return (
+            <Menu>
+              <MenuList>
+                <MenuItem doc={{ name: 'Overview', route: parentDoc.route }} active={active} />
+                {docs.map(doc => <MenuItem key={doc.id} doc={doc} active={active} />)}
+              </MenuList>
+            </Menu>
+          )
+        }}
+      </Docs>
+    </Col>
+  );
+}
