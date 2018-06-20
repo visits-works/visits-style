@@ -12,14 +12,21 @@ const Input = styled.textarea`
   appearance: none;
 
   border-radius: 4px;
-  border: none;
-  ${({ theme }) => boxShadow('1px', theme.border, 0)}
-  transition: box-shadow .15s ease-in-out;
+  border: 1px solid ${({ theme }) => theme.border};
+
+  transition-property: box-shadow;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
 
   ${setSize('font-size')}
 
+  &:hover {
+    border-color: ${({ theme }) => theme.borderHover};
+  }
+
   &:focus {
     outline: none;
+    border-color: ${({ theme }) => theme.primary};
     ${({ theme }) => boxShadow('0.2em', theme.primary)}
   }
 `;

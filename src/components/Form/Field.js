@@ -23,10 +23,15 @@ const InputControl = styled.div`
   }
 
   ${({ error, theme }) => error ? css`
-    input {
-      ${boxShadow('1px', theme.danger, 0)}
+    input, select, textarea {
+      border-color: ${theme.danger};
+
+      &:hover {
+        border-color: ${theme.danger};
+      }
 
       &:focus {
+        border-color: ${theme.danger};
         ${boxShadow('0.2em', theme.danger)}
       }
     }

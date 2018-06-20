@@ -4,25 +4,7 @@ export type Sizes = 'small' | 'medium' | 'large';
 
 export type Colors = 'white' | 'light' | 'dark' | 'black' | 'text' | 'primary' | 'link' | 'info' | 'success' | 'warning' | 'danger';
 
-export type Theme = {
-  primary: string,
-  link: string,
-  info: string,
-  success: string,
-  warning: string,
-  danger: string,
-  dark: string,
-
-  text: string,
-  textDark: string,
-  textLight: string,
-  textStrong: string,
-
-  background: string,
-
-  border: string,
-  borderHover: string,
-
+export type ThemeColors = {
   black: string,
   blackBis: string,
   blackTer: string,
@@ -45,4 +27,30 @@ export type Theme = {
   blue: string,
   purple: string,
   red: string,
+};
+
+export type Theme = {
+  primary: string,
+  link: string,
+  info: string,
+  success: string,
+  warning: string,
+  danger: string,
+  dark: string,
+
+  black: string,
+  white: string,
+
+  text: string,
+  textDark: string,
+  textLight: string,
+  textStrong: string,
+
+  background: string,
+
+  border: string,
+  borderHover: string,
+  borderActive: string,
+
+  color: ThemeColors,
 };

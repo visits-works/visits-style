@@ -19,6 +19,7 @@ const modifyBundlerConfig = (config) => {
 export default {
   title: 'visits-style',
   description: 'design compoentns for visits technology',
+  base: process.env.NODE_ENV === 'production' ? '/visits-style' : '/',
   port: '5000',
   indexHtml: 'theme/index.html',
   theme: 'theme/index',

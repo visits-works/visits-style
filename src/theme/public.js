@@ -16,8 +16,9 @@ const textStrong = color.greyDarker;
 
 const background = color.whiteTer;
 
-const border = color.greyLight;
-const borderHover = color.greyLighter;
+const border = color.greyLighter;
+const borderHover = color.greyLight;
+const borderActive = color.greyDarker;
 
 export default {
   primary,
@@ -27,7 +28,10 @@ export default {
   warning,
   danger,
   dark,
-  
+
+  black: color.black,
+  white: color.white,
+
   text,
   textDark,
   textLight,
@@ -37,7 +41,7 @@ export default {
 
   border,
   borderHover,
+  borderActive,
 
-  ...color,
+  color,
 }
-

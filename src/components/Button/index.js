@@ -16,24 +16,24 @@ type Props = {
 function setColor({ theme, color, outline }: Props) {
   if (!color) {
     return css`
-      background-color: ${theme.white};
-      border-color: ${theme.greyLighter};
-      color: ${theme.greyDarker};
+      background-color: ${theme.color.white};
+      border-color: ${theme.border};
+      color: ${theme.text};
 
       &:hover{
-        border-color: ${theme.greyLight};
+        border-color: ${theme.borderHover};
       }
 
       &:active{
-        border-color: ${theme.greyDarker};
+        border-color: ${theme.borderActive};
       }
     `;
   } else if (color === 'text') {
-    const target = rgba(theme.greyLighter, 0.5);
+    const target = rgba(theme.border, 0.5);
     return css`
       background-color: transparent;
       border-color: transparent;
-      color: ${theme.greyDarker};
+      color: ${theme.text};
 
       &:hover{
         background-color: ${target};
@@ -44,12 +44,12 @@ function setColor({ theme, color, outline }: Props) {
       }
 
       &:focus {
-        ${boxShadow('0.2rem', theme.greyLighter)}
+        ${boxShadow('0.2rem', theme.border)}
       }
     `;
   }
 
-  const target = color === 'light' ? theme.greyLight : theme[color];
+  const target = color === 'light' ? theme.color.greyLight : theme[color];
   const invertColor = findColorInvert(target);
   if (outline) {
     return css`
@@ -89,6 +89,7 @@ function setColor({ theme, color, outline }: Props) {
 }
 
 const Button: ComponentType<Props> = styled.button`
+  position: relative;
   outline: none;
   appearance: none;
   box-sizing: border-box;
@@ -102,7 +103,9 @@ const Button: ComponentType<Props> = styled.button`
   height: 2.25em;
   padding: ${({ color }) => (color ? '0.375em 0.75em' : 'calc(0.375em - 1px) 0.75em')};
 
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
 
   ${setColor}
   ${setSize('font-size')}

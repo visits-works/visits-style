@@ -6,7 +6,7 @@ import { findColorInvert, hambuger, mediaTablet, mediaUntilFullHD, mediaMobile }
 import Container from '../Grid/Container';
 
 function setColor({ color, theme, backdrop }) {
-  const backgroundColor = color === 'light' ? theme.whiteTer : (theme[color] || 'transparent');
+  const backgroundColor = color === 'light' ? theme.color.greyLight : (theme[color] || 'transparent');
   const textColor = backgroundColor === 'transparent' ? null : findColorInvert(backgroundColor);
 
   if (backdrop) {
