@@ -20,8 +20,10 @@ const Wrapper = styled.figure`
   padding: 0;
   border-radius: 0 0 4px 4px;
   margin-bottom: 1rem;
+  border: 2px solid ${({ theme }) => theme.border};
 
   &.hover {
+    border-color: ${({ theme }) => theme.warning};
     box-shadow: 0 0 0 2px ${({ theme }) => theme.warning};
   }
 

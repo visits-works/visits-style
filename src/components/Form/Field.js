@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { boxShadow } from '../../utils';
@@ -41,7 +42,14 @@ const InputControl = styled.div`
   ` : ''}
 `;
 
-export default class Field extends PureComponent {
+type Props = {
+  error?: string,
+  help?: string,
+  label?: string,
+  children: any,
+}
+
+export default class Field extends PureComponent<Props> {
 
   renderMessage() {
     const { error, help } = this.props;

@@ -1,13 +1,12 @@
 // @flow
-import React from 'react';
 import styled from 'styled-components';
 import { setSize } from '../../utils';
 
 type Props = {
   value: number,
   max: number,
-  size?: Sizes,
-  color: Colors,
+  size?: SizeType,
+  color: ColorType,
 }
 
 export const Progress = styled.progress`

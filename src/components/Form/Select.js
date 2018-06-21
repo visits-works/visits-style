@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import commonStyle from './style';
@@ -57,11 +58,17 @@ const InputWrapper = styled.div`
   }
 `;
 
-export default class Select extends PureComponent {
+type Props = {
+  placeholder?: string,
+  options: Array<{ id: string | number, name: string }>,
+}
+
+export default class Select extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     placeholder: null,
     onChange: () => {},
+    options: [],
   }
 
   render() {

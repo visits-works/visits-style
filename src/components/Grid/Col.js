@@ -2,15 +2,15 @@
 import styled, { css } from 'styled-components';
 import { mediaFullHD, mediaMobile } from '../../utils';
 
-type SizeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type ColSizeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 type Props = {
   narrow?: string,
-  size?: SizeType,
-  offset?: SizeType,
+  size?: ColSizeType,
+  offset?: ColSizeType,
 }
 
-export function parcentage(value?: SizeType) {
+export function parcentage(value?: ColSizeType) {
   if (!value) return 0;
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }

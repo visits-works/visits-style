@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent, Fragment } from 'react';
 import styled, { css }from 'styled-components';
 import { transparentize } from 'polished';
@@ -7,7 +8,7 @@ import Container from '../Grid/Container';
 
 function setColor({ color, theme, backdrop }) {
   const backgroundColor = color === 'light' ? theme.color.greyLight : (theme[color] || 'transparent');
-  const textColor = backgroundColor === 'transparent' ? null : findColorInvert(backgroundColor);
+  const textColor = findColorInvert(backgroundColor === 'transparent' ? theme.background : backgroundColor);
 
   if (backdrop) {
     const backColor = transparentize(0.2, (backgroundColor === 'transparent' ? '#fff' : backgroundColor));
@@ -142,7 +143,24 @@ const svgStyle = {
   zIndex: -1,
 }
 
-export default class AppBar extends PureComponent {
+type Props = {
+  color?: ColorType,
+  brand?: any,
+  to?: string,
+  fixed?: boolean,
+  sticky?: boolean,
+  fluid?: boolean,
+  backdrop?: boolean,
+  style?: any,
+  children?: Node,
+  theme: ThemeType,
+}
+
+type State = {
+  show: boolean,
+};
+
+export default class AppBar extends PureComponent<Props, State> {
   static defaultProps = {
     color: null,
     brand: null,

@@ -1,3 +1,4 @@
+// @flow
 import { css } from 'styled-components';
 import { clearFix } from 'polished';
 

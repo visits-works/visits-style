@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { boxShadow, setSize } from '../../utils';
@@ -29,7 +30,13 @@ const Input = styled.input`
   }
 `;
 
-export default class TextInput extends PureComponent {
+type Props = CommonInputType & {
+  placeholder?: string,
+  type: 'text' | 'number' | 'password' | 'email' | 'phone',
+  value?: string,
+}
+
+export default class TextInput extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     type: 'text',

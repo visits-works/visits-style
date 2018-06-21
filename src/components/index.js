@@ -1,20 +1,21 @@
 // grid & layout
-export { default as Break } from './Grid/Break';
-export { default as Container } from './Grid/Container';
-export { default as Row } from './Grid/Row';
-export { default as Col } from './Grid/Col';
+export Break from './Grid/Break';
+export Container from './Grid/Container';
+export Row from './Grid/Row';
+export Col from './Grid/Col';
 
 
 // common
-export { default as Content } from './Content';
+export Content from './Content';
 export * from './Content';
 
-export { default as Button } from './Button';
-
+export Button from './Button';
+export Table from './Table';
 
 // form
 export * from './Form';
 
 // components
-export { default as AppBar } from './AppBar';
+export AppBar from './AppBar';
+export Tag from './Tag';
 export * from './SideMenu';

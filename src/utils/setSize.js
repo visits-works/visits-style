@@ -1,5 +1,6 @@
-export default function setSize(name) {
-  return function size({ size }) {
+// @flow
+export default function setSize(name: string) {
+  return function size({ size }: { size: SizeType }) {
     switch(size) {
       case 'small':
         return `${name}: 0.75rem;`;

@@ -16,7 +16,7 @@ import publicTheme from '@theme/public';
 ## public theme
 
 <Container>
-  {Object.keys(publicTheme).map(key => (
+  {Object.keys(publicTheme).map(key => key !== 'color' && (
     <div
       key={key}
       style={{

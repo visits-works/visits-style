@@ -2,6 +2,8 @@
 import styled from 'styled-components';
 
 const Content = styled.div`
+  color: ${({ theme }) => theme.text};
+
   li + li {
     margin-top: 0.25em;
   }
@@ -29,7 +31,7 @@ const Content = styled.div`
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 2rem;
     margin-bottom: 0.5em;
     padding-left: 1rem;
 

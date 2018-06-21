@@ -1,0 +1,43 @@
+---
+name: Table
+route: /components/table
+parent: Components
+
+description: 普通なHTMLテーブル
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Table } from '@components';
+
+## Props
+
+<PropsTable of={Table} />
+
+## Basic usage
+
+<Playground>
+  <Table>
+    <thead>
+      <tr>
+        <th>NO.</th>
+        <th>SUBJECT</th>
+        <th>CLIENT</th>
+        <th>DATE</th>
+        <th>PRICE</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>001401</td>
+        <td>Design Works</td>
+        <td>Carlson Limited</td>
+        <td>15 Dec 2017</td>
+        <td>88700</td>
+        <td></td>
+      </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </Table>
+</Playground>

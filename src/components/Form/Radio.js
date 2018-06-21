@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
@@ -17,10 +18,13 @@ const Wrapper = styled.label`
   }
 `;
 
-export default class Radio extends PureComponent {
+type Props = CommonInputType & {
+  children?: any,
+}
+
+export default class Radio extends PureComponent<Props> {
   static defaultProps = {
     name: null,
-    placeholder: null,
     children: null,
     onChange: () => {},
   }

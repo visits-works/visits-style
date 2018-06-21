@@ -1,8 +1,8 @@
 // @flow
 
-export type Sizes = 'small' | 'medium' | 'large';
+export type SizeType = 'small' | 'medium' | 'large';
 
-export type Colors = 'white' | 'light' | 'dark' | 'black' | 'text' | 'primary' | 'link' | 'info' | 'success' | 'warning' | 'danger';
+export type ColorType = 'white' | 'light' | 'dark' | 'black' | 'text' | 'primary' | 'link' | 'info' | 'success' | 'warning' | 'danger';
 
 export type ThemeColors = {
   black: string,
@@ -29,7 +29,7 @@ export type ThemeColors = {
   red: string,
 };
 
-export type Theme = {
+export type ThemeType = {
   primary: string,
   link: string,
   info: string,
@@ -53,4 +53,9 @@ export type Theme = {
   borderActive: string,
 
   color: ThemeColors,
+};
+
+export type CommonInputType = {
+  name: string,
+  onChange?: () => {},
 };

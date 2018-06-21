@@ -1,5 +1,6 @@
 // @flow
-import styled, { type ReactComponentStyled, css } from 'styled-components';
+import type { StatelessFunctionalComponent } from 'react'
+import styled, { css } from 'styled-components';
 import Col from './Col';
 import { fullhd, desktop, tablet, mobile, gutter, smallGutter } from '../../styles/variables';
 
@@ -54,7 +55,7 @@ function renderGutter({ noGutter }: Props) {
   }
 }
 
-const Row: ReactComponentStyled<Props> = styled.div`
+const Row: StatelessFunctionalComponent<Props> = styled.div`
   display: flex;
   max-width: 100%;
   flex-wrap: wrap;
@@ -66,9 +67,11 @@ const Row: ReactComponentStyled<Props> = styled.div`
 `;
 
 Row.displayName = 'Row';
-Row.defaultProps = {
-  vcenter: false,
-  noGutter: false,
-}
+// Row.defaultProps = {
+//   width: null,
+//   multiline: false,
+//   vcenter: false,
+//   noGutter: false,
+// };
 
 export default Row;

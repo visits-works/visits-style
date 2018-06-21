@@ -37,7 +37,7 @@ function renderChildren({ title, name, description }, children) {
   );
 }
 
-export function Page({ children, doc, ...props }) {
+export default function Page({ children, doc, ...props }) {
   const { parent, sidebar, fullpage } = doc;
   const showSidebar = Boolean(parent || sidebar);
 

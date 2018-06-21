@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { boxShadow, setSize } from '../../utils';
@@ -31,7 +32,13 @@ const Input = styled.textarea`
   }
 `;
 
-export default class Textarea extends PureComponent {
+type Props = CommonInputType & {
+  placeholder?: string,
+  value?: string,
+  col?: number,
+  row?: number,
+}
+export default class Textarea extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     placeholder: null,

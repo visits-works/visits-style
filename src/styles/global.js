@@ -77,6 +77,11 @@ injectGlobal`
     font-weight: 700;
   }
 
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
   table td,table th {
     text-align: left;
     vertical-align: top;

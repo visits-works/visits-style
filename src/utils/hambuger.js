@@ -1,7 +1,7 @@
 // @flow
 import { css } from 'styled-components';
 
-export default function hamburger(size) {
+export default function hamburger(size: string) {
   return css`
     display: block;
     position: relative;

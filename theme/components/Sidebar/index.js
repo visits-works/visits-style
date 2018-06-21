@@ -34,7 +34,7 @@ const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
   </li>
 )
 
-export function Sidebar({ parent, active }: SidebarProps): SFC<SidebarProps> {
+export default function Sidebar({ parent, active }: SidebarProps): SFC<SidebarProps> {
   return (
     <Col size={3}>
       <Docs>

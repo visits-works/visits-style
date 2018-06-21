@@ -1,0 +1,46 @@
+---
+name: Tag
+route: /components/tag
+parent: Components
+
+description: タグ
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Tag } from '@components';
+
+## Props
+
+<PropsTable of={Tag} />
+
+## Basic usage
+
+<Playground>
+  <Tag>basic</Tag>
+</Playground>
+
+## Colors
+
+<Playground>
+  <Tag color="primary">primary</Tag>
+  <Tag color="link">link</Tag>
+  <Tag color="info">info</Tag>
+  <Tag color="success">success</Tag>
+  <Tag color="warning">warning</Tag>
+  <Tag color="danger">danger</Tag>
+</Playground>
+
+## With Addons
+
+<Playground>
+  <Tag onClose={() => {}}>some tag</Tag>
+  <Tag color="info" onClose={() => {}}>some tag</Tag>
+  <Tag color="dark" addonColor="warning">
+    CSS gzip size
+    <span>20.9 KB</span>
+  </Tag>
+  <Tag color="link">
+    click me
+    <a href="#">🤔</a>
+  </Tag>
+</Playground>

@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
@@ -13,7 +14,13 @@ const Wrapper = styled.label`
   }
 `;
 
-export default class Checkbox extends PureComponent {
+type Props = CommonInputType & {
+  placeholder?: string,
+  children?: string,
+  checked?: boolean,
+}
+
+export default class Checkbox extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     placeholder: null,

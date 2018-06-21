@@ -1,22 +1,20 @@
 // @flow
-import type { ComponentType } from 'react';
-import Types from 'prop-types';
 import styled, { css } from 'styled-components';
 import { darken, rgba } from 'polished';
 import { findColorInvert, boxShadow, setSize } from '../../utils';
 
-type Props = {
-  color?: Colors,
-  size?: Sizes,
+type ButtonProps = {
+  color?: ColorType,
+  size?: SizeType,
   outline?: boolean,
-  onClick: () => void,
-  theme: Theme,
+  onClick?: () => void,
+  theme: ThemeType,
 }
 
-function setColor({ theme, color, outline }: Props) {
+function setColor({ theme, color, outline }: ButtonProps) {
   if (!color) {
     return css`
-      background-color: ${theme.color.white};
+      background-color: ${theme.white};
       border-color: ${theme.border};
       color: ${theme.text};
 
@@ -70,6 +68,7 @@ function setColor({ theme, color, outline }: Props) {
 
   return css`
     background-color: ${target};
+    border-color: ${target};
     border-color: transparent;
     color: ${invertColor};
     box-shadow: none;
@@ -88,7 +87,7 @@ function setColor({ theme, color, outline }: Props) {
   `;
 }
 
-const Button: ComponentType<Props> = styled.button`
+const Button = styled.button`
   position: relative;
   outline: none;
   appearance: none;
@@ -101,7 +100,7 @@ const Button: ComponentType<Props> = styled.button`
   border: 1px solid transparent;
   border-radius: 4px;
   height: 2.25em;
-  padding: ${({ color }) => (color ? '0.375em 0.75em' : 'calc(0.375em - 1px) 0.75em')};
+  padding: 0.375em 0.75em;
 
   transition-property: background-color, color, box-shadow;
   transition-duration: 0.15s;
@@ -120,13 +119,12 @@ const Button: ComponentType<Props> = styled.button`
     margin-right: 0.5rem;
   }
 `;
-
 Button.displayName = 'Button';
-Button.propTypes = {
-  color: Types.oneOf(['white', 'light', 'dark', 'black', 'text', 'primary', 'link', 'info', 'success', 'warning', 'danger']),
-  size: Types.oneOf(['small', 'medium', 'large']),
-  outline: Types.bool,
-  onClick: Types.func,
+Button.defaultProps = {
+  color: null,
+  size: null,
+  outline: false,
+  onClick: null,
 };
 
 export default Button;

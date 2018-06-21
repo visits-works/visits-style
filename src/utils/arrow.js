@@ -1,6 +1,7 @@
+// @flow
 import { css } from 'styled-components';
 
-export default function Arrow(color, direction) {
+export default function Arrow(color: string, direction: string) {
   return css`
     position: absolute;
     border: 3px solid ${color};
