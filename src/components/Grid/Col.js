@@ -10,12 +10,13 @@ type Props = {
   offset?: ColSizeType,
 }
 
-export function parcentage(value?: ColSizeType) {
+function parcentage(value?: ColSizeType) {
   if (!value) return 0;
+  if (value >= 12) return 100;
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
 
-export function renderSize({ size, narrow }: Props) {
+function renderSize({ size, narrow }: Props) {
   if (narrow) return null;
   if (!size || size < 1 || size > 12) {
     return `
@@ -25,14 +26,9 @@ export function renderSize({ size, narrow }: Props) {
     `;
   } else {
     const value = parcentage(size);
-    const mobileSize = value * 3;
     return css`
       flex: none;
       width: ${value}%;
-
-      ${mediaMobile`
-        width: ${mobileSize}%;
-      `}
     `;
   }
 }
