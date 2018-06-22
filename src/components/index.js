@@ -11,6 +11,8 @@ export * from './Content';
 
 export Button from './Button';
 export Table from './Table';
+export Box from './Box';
+export Card from './Card';
 
 // form
 export * from './Form';

@@ -1,0 +1,25 @@
+---
+name: Box
+route: /elements/box
+parent: Elements
+
+description:
+---
+
+import { Playground, PropsTable } from 'docz';
+import Logo from '@assets/visits';
+import { Box, Col } from '@components';
+
+## Props
+
+<PropsTable of={Box} />
+
+## Basic usage
+
+<Playground>
+  <Col size={8} offset={2}>
+    <Box>
+      Hello World
+    </Box>
+  </Col>
+</Playground>

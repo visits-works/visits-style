@@ -1,6 +1,5 @@
 // @flow
 import styled from 'styled-components';
-import { mediaTablet } from '../../utils';
 
 export const SideMenu = styled.aside`
   font-size: 1rem;

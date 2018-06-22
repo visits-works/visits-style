@@ -18,7 +18,6 @@ const Wrapper = styled.figure`
   max-width: 100%;
   overflow: hidden;
   padding: 0;
-  border-radius: 0 0 4px 4px;
   margin-bottom: 1rem;
   border: 2px solid ${({ theme }) => theme.border};
 

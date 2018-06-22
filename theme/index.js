@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { theme, ThemeConfig, DocPreview } from 'docz';
 import { ThemeProvider } from 'styled-components';
 
-import { Button, Code, Content } from '@components';
+import { Button, Code, Content, Table } from '@components';
 import publicTheme from '@theme/public';
 
 import { Topbar, Renderer, Highlight, Page } from './components';
@@ -19,6 +19,7 @@ const Theme = () => (
             components={{
               render: Renderer,
               page: Page,
+              table: (props) => <Table striped {...props} />,
               pre: Highlight,
               inlineCode: Code,
             }}

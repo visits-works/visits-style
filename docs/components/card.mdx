@@ -1,0 +1,27 @@
+---
+name: Card
+route: /components/card
+parent: Components
+
+description:
+---
+
+import { Playground, PropsTable } from 'docz';
+import Logo from '@assets/visits';
+import { Card, Col } from '@components';
+
+## Props
+
+<PropsTable of={Card} />
+
+## Basic usage
+
+<Playground>
+  <Col size={8} offset={2}>
+    <Card title="Card title">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
+      sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+    </Card>
+  </Col>
+</Playground>

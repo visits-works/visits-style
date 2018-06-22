@@ -2932,9 +2932,9 @@ doctrine@^2.0.0:
   dependencies:
     esutils "^2.0.2"
 
-docz-core@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/docz-core/-/docz-core-0.2.9.tgz#44239a5ab5c3dff40519995a0c05ddb55162dda3"
+docz-core@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/docz-core/-/docz-core-0.2.10.tgz#c2cacdb15bd2efcfcdba733aa84f67d23a11a71e"
   dependencies:
     "@babel/core" "7.0.0-beta.51"
     "@babel/preset-typescript" "^7.0.0-beta.51"
@@ -2997,11 +2997,11 @@ docz-core@^0.2.9:
     ws "^5.2.0"
     yargs "^11.0.0"
 
-docz-theme-default@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/docz-theme-default/-/docz-theme-default-0.2.9.tgz#005fb97c71710b36609e9bca81a6b125e1af2b45"
+docz-theme-default@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/docz-theme-default/-/docz-theme-default-0.2.10.tgz#113379fe8a6e0bf60d5c68b5d7b2f53b0fb22e4c"
   dependencies:
-    docz "^0.2.9"
+    docz "^0.2.10"
     emotion "^9.2.3"
     emotion-theming "^9.2.3"
     fast-deep-equal "^2.0.1"
@@ -3015,15 +3015,15 @@ docz-theme-default@^0.2.9:
     react-powerplug "^0.1.6"
     react-spinners "^0.3.2"
 
-docz@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/docz/-/docz-0.2.9.tgz#459a7b1396f6db90a95e9209a4b3775c17418db4"
+docz@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/docz/-/docz-0.2.10.tgz#18fc7bb106e7cfa91b34fabda7eda43e14b35235"
   dependencies:
     "@mdx-js/tag" "^0.11.0"
     "@sindresorhus/slugify" "^0.3.0"
     deepmerge "^2.1.1"
-    docz-core "^0.2.9"
-    docz-theme-default "^0.2.9"
+    docz-core "^0.2.10"
+    docz-theme-default "^0.2.10"
     invariant "^2.2.4"
     loadable-components "^2.2.2"
     pascalcase "^0.1.1"
@@ -3707,10 +3707,6 @@ flagged-respawn@^1.0.0:
 flow-bin@^0.74.0:
   version "0.74.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.74.0.tgz#8017bb00efb37cbe8d81fbb7f464038bde06adc9"
-
-flow-cli@^0.0.0-pre:
-  version "0.0.0-pre"
-  resolved "https://registry.yarnpkg.com/flow-cli/-/flow-cli-0.0.0-pre.tgz#b9f5bc2b1a17ce5486b01fab3830f52ba3062f8a"
 
 flow-typed@^2.4.0:
   version "2.4.0"
