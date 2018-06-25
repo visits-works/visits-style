@@ -8,6 +8,7 @@ description:
 
 import { Playground, PropsTable } from 'docz';
 import Logo from '@assets/visits';
+import ImgUrl from '@assets/img01.png';
 import { Card, Col } from '@components';
 
 ## Props
@@ -17,8 +18,32 @@ import { Card, Col } from '@components';
 ## Basic usage
 
 <Playground>
-  <Col size={8} offset={2}>
+  <Col size={4} offset={4}>
     <Card title="Card title">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
+      sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+    </Card>
+  </Col>
+</Playground>
+
+## With Image
+
+<Playground>
+  <Col size={4} offset={4}>
+    <Card image={ImgUrl}>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
+      sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+    </Card>
+  </Col>
+</Playground>
+
+## Horizontal Image
+
+<Playground>
+  <Col size={8} offset={2}>
+    <Card image={ImgUrl} horizontal>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
       sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!

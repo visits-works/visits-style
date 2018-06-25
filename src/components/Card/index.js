@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Box from '../Box';
 
 export const CardBody = styled.div`
@@ -16,11 +16,36 @@ export const CardHeader = styled.header`
   justify-content: space-between;
 `;
 
+export const CardImage = styled.a`
+  width: 100%;
+
+  img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+`;
+
+export const CardImageHorizontal = styled.a`
+  flex: 0 0 30%;
+  min-width: 5rem;
+  width: 30%;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+
+  background: no-repeat center/cover;
+  ${({ url }) => url ? `background-image: url(${url});` : ''}
+`;
+
 type Props = {
   /** レスポンシブなイメージを追加する */
   image?: string,
-  /** imageが定義されていると、無視される */
+  /** タイトル */
   title?: string,
+  /** ヘッダーの右側に追加する */
+  headerOptions?: Node,
   /** header部分（イメージ）を横並びにする */
   horizontal?: boolean,
 }
@@ -29,18 +54,20 @@ export default class Card extends PureComponent<Props> {
   renderHeader = () => {
     const { image, title, horizontal } = this.props;
 
-    if (image) return null;
-    if (title) return (<CardHeader><h3>{title}</h3></CardHeader>);
+    if (image && !horizontal) return (<CardImage><img src={image} /></CardImage>);
+    if (image && horizontal) return (<CardImageHorizontal url={image} />);
+    if (title && !horizontal) return (<CardHeader><h3>{title}</h3></CardHeader>);
 
     return null;
   }
 
   render() {
-    const { children, image } = this.props;
+    const { children, image, horizontal } = this.props;
 
     const header = this.renderHeader();
+    const wrapperStyle = horizontal ? { flexDirection: 'row' } : null;
     return (
-      <Box>
+      <Box style={wrapperStyle}>
         {header}
         <CardBody>
           {children}
