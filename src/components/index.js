@@ -12,7 +12,7 @@ export * from './Content';
 export Button from './Button';
 export Table from './Table';
 export Box from './Box';
-export Card from './Card';
+export Progress from './Progress';
 
 // form
 export * from './Form';
@@ -21,3 +21,5 @@ export * from './Form';
 export AppBar from './AppBar';
 export Tag from './Tag';
 export * from './SideMenu';
+export Card from './Card';
+export Dropdown from './Dropdown';

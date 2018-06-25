@@ -89,6 +89,15 @@ const NavContent = styled.div`
   transition-property: transform;
   transition-timing-function: ease-out;
 
+
+  a {
+    color: inherit;
+    transform: color 100ms ease-out;
+    &:hover, &.active {
+      color ${({ theme }) => theme.primary};
+    }
+  }
+
   & > ul {
     display: flex;
     flex-direction: row;
@@ -96,14 +105,6 @@ const NavContent = styled.div`
 
     li {
       padding: .5rem 1rem;
-    }
-
-    a {
-      color: inherit;
-      transform: color 100ms ease-out;
-      &:hover, &.active {
-        color ${({ theme }) => theme.primary};
-      }
     }
   }
 
@@ -144,13 +145,21 @@ const svgStyle = {
 }
 
 type Props = {
+  /** background色 */
   color?: ColorType,
+  /** ロゴのイメージ、プロジェクト名など */
   brand?: any,
+  /** brandを押した時の遷移先url */
   to?: string,
+  /** 定義された位置を固定にする */
   fixed?: boolean,
+  /** (IE11不可)画面がスクロールされても上で貼り付けいるようにする */
   sticky?: boolean,
+  /** 中央並びから自動幅で表示します */
   fluid?: boolean,
+  /** 背景がblurされます（safari専用、他は透明度） */
   backdrop?: boolean,
+  /** cssのスタイルを入れてください */
   style?: any,
   children?: Node,
   theme: ThemeType,

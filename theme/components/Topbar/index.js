@@ -1,5 +1,6 @@
 import React from 'react';
 import { Docs, Link } from 'docz';
+import GithubIcon from 'react-icons/lib/go/mark-github';
 import { AppBar } from '@components';
 import Logo from '@assets/visits';
 
@@ -33,6 +34,9 @@ export default function Topbar() {
           )
         }}
       </Docs>
+      <a href="https://github.com/visits-works/visits-style" target="_blank" style={{ fontSize: '1.5rem' }}>
+        <GithubIcon />
+      </a>
     </AppBar>
   );
 }

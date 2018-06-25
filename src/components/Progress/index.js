@@ -18,12 +18,12 @@ export const Progress = styled.progress`
   overflow: hidden;
   padding: 0;
   width: 100%;
-  color: ${props => props.theme.grey};
+  color: ${props => props.theme.background};
 
   ${setSize('height')}
 
   &::-webkit-progress-bar {
-    background-color: ${props => props.theme.grey};
+    background-color: ${props => props.theme.background};
   }
 
   &::-webkit-progress-value {
