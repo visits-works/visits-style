@@ -7,7 +7,7 @@ description: ボタン
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Button } from '@components';
+import { Button, ButtonGroup } from '@components';
 
 ## Props
 
@@ -60,4 +60,17 @@ import { Button } from '@components';
   <Button>normal</Button>
   <Button size="medium">medium</Button>
   <Button size="large">large</Button>
+</Playground>
+
+## Button Group
+
+<Playground>
+  <ButtonGroup>
+    <Button>Click</Button>
+    <Button>Me</Button>
+  </ButtonGroup>
+  <ButtonGroup>
+    <Button color="link">Dropdown</Button>
+    <Button color="link">▼</Button>
+  </ButtonGroup>
 </Playground>

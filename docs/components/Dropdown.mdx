@@ -7,8 +7,12 @@ description:
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Logo from '@assets/visits';
-import { Dropdown, Button } from '@components';
+import { Dropdown, Button, Tag } from '@components';
+
+import PersonIcon from 'react-icons/lib/fa/user';
+import GearIcon from 'react-icons/lib/fa/cog';
+import MailboxIcon from 'react-icons/lib/fa/inbox';
+import SignoutIcon from 'react-icons/lib/fa/sign-out';
 
 ## Props
 
@@ -17,8 +21,20 @@ import { Dropdown, Button } from '@components';
 ## Basic usage
 
 <Playground>
-  <Dropdown button={<Button>Click Me</Button>}>
-    <a onClick={() => { alert('item1'); }}>item1</a>
-    <a onClick={() => { alert('item2'); }}>item2</a>
+  <Dropdown
+    label="Click Me"
+    color="warning"
+  >
+    <a onClick={() => { alert('profile'); }}><PersonIcon />Profile</a>
+    <a onClick={() => { alert('settings'); }}><GearIcon />Settings</a>
+    <a href="#">
+      <MailboxIcon />
+      Inbox
+      <Tag color="link" style={{ marginLeft: '1.5rem' }}>6</Tag>
+    </a>
+    <a><GearIcon />Message</a>
+    <a divider />
+    <a href="#">Text-only</a>
+    <a><SignoutIcon />Sign out</a>
   </Dropdown>
 </Playground>

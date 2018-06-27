@@ -10,6 +10,7 @@ export Content from './Content';
 export * from './Content';
 
 export Button from './Button';
+export ButtonGroup from './Button/ButtonGroup';
 export Table from './Table';
 export Box from './Box';
 export Progress from './Progress';

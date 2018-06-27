@@ -12,12 +12,12 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-spring": "^5.3.15",
-    "styled-components": "^3.3.2"
+    "styled-components": "^3.3.3"
   },
   "scripts": {
     "start": "NODE_ENV=development docz dev",
     "build": "NODE_ENV=production gulp",
-    "build:doc": "NODE_ENV=production docz build",
+    "build:doc": "docz build",
     "clean": "rm -rf ./lib",
     "develop": "start-storybook -p 9009 -s public",
     "test": "jest --env=jsdom",
@@ -36,8 +36,8 @@
     "babel-plugin-polished": "^1.1.0",
     "babel-plugin-react-docgen": "^2.0.0-rc.1",
     "babel-plugin-styled-components": "^1.5.1",
-    "docz": "^0.2.10",
-    "docz-core": "^0.2.10",
+    "docz": "^0.3.4",
+    "docz-core": "^0.3.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.4",

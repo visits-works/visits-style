@@ -45,7 +45,7 @@ export default function Page({ children, doc, ...props }) {
 
   if (showSidebar) {
     return (
-      <Row>
+      <Row style={{ marginTop: '2.5rem' }}>
         <Sidebar parent={parent || doc.name} active={props.match.url} />
         <Col>{render}</Col>
       </Row>

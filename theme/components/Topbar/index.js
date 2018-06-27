@@ -13,7 +13,7 @@ export default function Topbar() {
     <AppBar
       brand={<Link to="/"><Logo /></Link>}
       color="dark"
-      sticky
+      fixed
       backdrop
       style={{ zIndex: 9999 }}
     >
