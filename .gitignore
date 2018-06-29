@@ -11,8 +11,12 @@ bundle_report.html
 
 # production
 /build
-/storybook-static
 /lib
+/index.js
+/components
+/utils
+/styles
+/theme
 
 # misc
 .DS_Store

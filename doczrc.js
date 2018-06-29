@@ -22,7 +22,7 @@ export default {
   source: 'docs',
   base: process.env.NODE_ENV === 'production' ? '/visits-style' : '/',
   port: '5000',
-  indexHtml: 'theme/index.html',
-  theme: 'theme/index',
+  indexHtml: 'doc_theme/index.html',
+  theme: 'doc_theme/index',
   modifyBundlerConfig,
 };
