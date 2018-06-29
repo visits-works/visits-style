@@ -24,3 +24,4 @@ export Tag from './Tag';
 export * from './SideMenu';
 export Card from './Card';
 export Dropdown from './Dropdown';
+export Modal from './Modal';

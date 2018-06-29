@@ -1,10 +1,6 @@
 // @flow
-import styled, { type ReactComponentStyled } from 'styled-components';
+import React from 'react';
 
-const Break = styled.div`
-  width: 100%;
-  height: 0;
-`;
-Break.displayName = 'Break';
-
-export default Break;
+export default function Break() {
+  return <div style={{ width: '100%', height: 0 }}></div>;
+};

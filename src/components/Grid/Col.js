@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { mediaFullHD, mediaMobile } from '../../utils';
+import { mediaFullHD, mediaMobile } from '../../utils/media';
 
 type ColSizeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 

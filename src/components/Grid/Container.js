@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils';
+import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
 import { fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 import Row from './Row';
 

@@ -1,0 +1,34 @@
+---
+name: Modal
+route: /components/modal
+parent: Components
+
+description:
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Modal, Button } from '@components';
+
+## Basic usage
+
+<Playground>
+  {() => {
+    return (
+      <div>
+        <Button>Show Modal</Button>
+        <Modal
+          title="Modal title"
+          show
+          footer={(
+            <div style={{ width: '100%', textAlign: 'right' }}>
+              <Button>close</Button>
+              <Button color="link">Save changes</Button>
+            </div>
+          )}
+        >
+          Modal body text goes here.
+        </Modal>
+      </div>
+    );
+  }}
+</Playground>

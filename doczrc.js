@@ -9,8 +9,8 @@ const modifyBundlerConfig = (config) => {
     '@styles': `${SRC}/styles`,
     '@utils': `${SRC}/utils`,
     '@theme': `${SRC}/theme`,
-    '@assets': `${ROOT}/theme/assets`,
-    '@website': `${ROOT}/theme`,
+    '@assets': `${ROOT}/doc_theme/assets`,
+    '@website': `${ROOT}/doc_theme`,
   });
 
   return config;

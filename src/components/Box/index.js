@@ -1,5 +1,6 @@
 // @flow
 import styled from 'styled-components';
+import findColorInvert from '../../utils/findColorInvert';
 
 const Box = styled.div`
   position: relative;
@@ -12,6 +13,14 @@ const Box = styled.div`
 
   min-width: 0;
   word-wrap: break-word;
+
+  ${({ color, theme }) => {
+    if (!color) return '';
+
+    const target = color === 'light' ? theme.color.greyLight : theme[color];
+    const invertColor = findColorInvert(target);
+    return `background-color: ${target}; color: ${invertColor};`;
+  }}
 `;
 Box.displayName = 'Box';
 

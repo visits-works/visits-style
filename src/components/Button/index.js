@@ -1,7 +1,9 @@
 // @flow
 import styled, { css } from 'styled-components';
 import { darken, rgba } from 'polished';
-import { findColorInvert, boxShadow, setSize } from '../../utils';
+import findColorInvert from '../../utils/findColorInvert';
+import boxShadow from '../../utils/boxShadow';
+import setSize from '../../utils/setSize';
 
 type ButtonProps = {
   color?: ColorType,

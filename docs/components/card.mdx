@@ -9,7 +9,7 @@ description:
 import { Playground, PropsTable } from 'docz';
 import Logo from '@assets/visits';
 import ImgUrl from '@assets/img01.png';
-import { Card, Col } from '@components';
+import { Card, Col, Row } from '@components';
 
 ## Props
 
@@ -49,4 +49,32 @@ import { Card, Col } from '@components';
       sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
     </Card>
   </Col>
+</Playground>
+
+## Colors
+
+<Playground>
+  <Row>
+    <Col size={4}>
+      <Card title="title" color="primary">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
+        sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+      </Card>
+    </Col>
+    <Col size={4}>
+      <Card title="title" color="link">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
+        sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+      </Card>
+    </Col>
+    <Col size={4}>
+      <Card title="title" color="dark">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
+        sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+      </Card>
+    </Col>
+  </Row>
 </Playground>

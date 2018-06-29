@@ -2,11 +2,9 @@
   "name": "visits-style",
   "version": "0.1.0",
   "private": true,
-  "main": "lib/index.js",
-  "module": "lib/index.es.js",
+  "main": "index.js",
   "source": "src/index.js",
   "dependencies": {
-    "dayjs": "^1.6.5",
     "polished": "^1.9.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
@@ -16,7 +14,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development docz dev",
-    "build": "NODE_ENV=production gulp",
+    "build": "yarn clean && BABEL_ENV=es NODE_ENV=production gulp",
     "build:doc": "docz build",
     "clean": "rm -rf ./lib",
     "develop": "start-storybook -p 9009 -s public",
