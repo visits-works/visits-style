@@ -1,5 +1,5 @@
-import React, { PureComponent, createRef } from 'react';
-import styled, { css } from 'styled-components';
+import * as React from 'react';
+import styled from '../../../src/styled';
 
 import 'prismjs';
 import 'prismjs/components/prism-json.min';
@@ -9,8 +9,10 @@ import 'prismjs/components/prism-markdown.min';
 import 'prismjs/components/prism-typescript.min';
 
 import prism from 'prismjs';
-import { Pre, Button } from '@components';
+import { Pre, Button } from '../../../src/components';
 import PrismStyle from './style';
+
+const { PureComponent, createRef } = React;
 
 const Wrapper = styled.figure`
   position: relative;

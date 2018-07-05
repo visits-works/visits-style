@@ -1,11 +1,10 @@
-import * as React from 'react'
-import { Fragment, SFC } from 'react'
-import { Docs, Entry, Link } from 'docz'
-import { Col, SideMenu, MenuList, MenuLabel } from '@components'
-import styled from 'styled-components'
+import * as React from 'react';
+import { Docs, Link } from 'docz';
+import styled from '../../../src/styled';
+import { Col, SideMenu, MenuList } from '../../../src/components';
 import { mediaMobile } from '../../../src/utils';
 
-const Menu = SideMenu.extend`
+const Menu = styled(SideMenu)`
   width: 250px;
   position: sticky;
   top: 3.5rem;
@@ -18,7 +17,7 @@ const Menu = SideMenu.extend`
   `}
 `;
 
-const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
+const MenuItem = ({ doc, active }) => (
   <li>
     <Link to={doc.route}>{doc.name}</Link>
     {active === doc.route && doc.headings && (
@@ -35,23 +34,24 @@ const MenuItem: SFC<MenuProps> = ({ doc, active }) => (
   </li>
 )
 
-export default function Sidebar({ parent, active }: SidebarProps): SFC<SidebarProps> {
+export default function Sidebar({ parent, active }: SidebarProps): React.SFC<SidebarProps> {
+  function renderDocs({ docs: allDocs }) {
+    const docs = allDocs.filter(doc => doc.parent === parent);
+    const parentDoc = allDocs.filter(doc => doc.name === parent)[0];
+    return (
+      <Menu>
+        <MenuList>
+          <MenuItem doc={{ name: 'Overview', route: parentDoc.route }} active={active} />
+          {docs.map(doc => <MenuItem key={doc.id} doc={doc} active={active} />)}
+        </MenuList>
+      </Menu>
+    );
+  }
+
   return (
     <Col narrow>
       <Docs>
-        {({ docs: allDocs }) => {
-          const docs = allDocs.filter(doc => doc.parent === parent);
-          const parentDoc = allDocs.filter(doc => doc.name === parent)[0];
-
-          return (
-            <Menu>
-              <MenuList>
-                <MenuItem doc={{ name: 'Overview', route: parentDoc.route }} active={active} />
-                {docs.map(doc => <MenuItem key={doc.id} doc={doc} active={active} />)}
-              </MenuList>
-            </Menu>
-          )
-        }}
+        {renderDocs}
       </Docs>
     </Col>
   );

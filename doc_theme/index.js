@@ -1,33 +1,33 @@
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import { theme, ThemeConfig, DocPreview } from 'docz';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from '../src/styled';
 
-import { Button, Code, Content, Table } from '@components';
-import publicTheme from '@theme/public';
+import { Button, Code, Content, Table } from '../src/components';
+import publicTheme from '../src/theme/public';
 
 import { Topbar, Renderer, Highlight, Page } from './components';
 
-import '@styles/global';
+import '../src/styles/global';
 
-const Theme = () => (
-  <ThemeConfig>
-    {config => (
-      <ThemeProvider theme={config}>
-        <Fragment>
-          <Topbar />
-          <DocPreview
-            components={{
-              render: Renderer,
-              page: Page,
-              table: (props) => <Table striped {...props} />,
-              pre: Highlight,
-              inlineCode: Code,
-            }}
-          />
-        </Fragment>
-      </ThemeProvider>
-    )}
-  </ThemeConfig>
-)
+const { Fragment } = React;
 
-export default theme(publicTheme)(Theme)
+function Theme () {
+  return (
+    <ThemeProvider theme={config}>
+      <Fragment>
+        <Topbar />
+        <DocPreview
+          components={{
+            render: Renderer,
+            page: Page,
+            table: (props) => <Table striped {...props} />,
+            pre: Highlight,
+            inlineCode: Code,
+          }}
+        />
+      </Fragment>
+    </ThemeProvider>
+  );
+}
+
+export default Theme;

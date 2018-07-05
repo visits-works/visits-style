@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-config-airbnb"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "scripts/**/*.js",
+      "doc_theme/**/*.ts",
+      "node_modules/**/*.ts"
+    ]
+  }
+}

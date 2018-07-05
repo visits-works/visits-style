@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { Docs, Link } from 'docz';
 import GithubIcon from 'react-icons/lib/go/mark-github';
-import { AppBar } from '@components';
-import Logo from '@assets/visits';
+import AppBar from '../../../src/components/AppBar';
+import Logo from '../../assets/visits';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||

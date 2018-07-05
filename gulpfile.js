@@ -4,13 +4,14 @@ const babel = require('gulp-babel');
 
 gulp.task('js', function () {
   return gulp.src([
-    'src/**/*.js',
+    'src/**/*.ts',
+    'src/**/*.tsx',
     '!./src/**/*.test.js',
     '!./src/**/__test__',
     '!./src/__mocks__/**/*.js'
   ])
     .pipe(babel())
-    .pipe(gulp.dest('./lib'));
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('default', ['js']);
