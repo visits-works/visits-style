@@ -18,6 +18,9 @@ bundle_report.html
 /styles
 /theme
 /lib2
+/styled.js
+/types.js
+**.d.ts
 
 # misc
 .DS_Store
