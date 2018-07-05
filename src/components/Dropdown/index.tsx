@@ -119,11 +119,14 @@ export default class Dropdown extends React.Component<Props, State> {
       <Wrapper innerRef={this.element}>
         <Button color={color} size={size} onClick={this.openDropdown}>{label}</Button>
         <Tooltip show={show} style={style}>
-          {children && children.map(child => (
-            child.props.divider ?
-            <Divider /> :
-            <MenuItem {...child.props} onClick={this.onClickChild(child.props)} />
-          ))}
+          {React.Children.map(children, child => {
+            // @ts-ignore
+            if (child.props.divider) {
+              return <Divider />;
+            }
+            // @ts-ignore
+            return <MenuItem {...child.props} onClick={this.onClickChild(child.props)} />;
+          })}
         </Tooltip>
         {show && <div style={shadowStyle} onClick={this.closeDropdown} />}
       </Wrapper>
