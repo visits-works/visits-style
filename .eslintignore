@@ -1,8 +1,0 @@
-**/node_modules/
-**/build/
-docs/
-theme/
-lib
-.docz
-.storybook
-gulpfile.js

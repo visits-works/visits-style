@@ -7,28 +7,44 @@ description:
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Modal, Button } from '@components';
+import { Modal, Button } from '../../src/components';
 
 ## Basic usage
 
 <Playground>
   {() => {
-    return (
-      <div>
-        <Button>Show Modal</Button>
-        <Modal
-          title="Modal title"
-          show
-          footer={(
-            <div style={{ width: '100%', textAlign: 'right' }}>
-              <Button>close</Button>
-              <Button color="link">Save changes</Button>
-            </div>
-          )}
-        >
-          Modal body text goes here.
-        </Modal>
-      </div>
-    );
+    class Test extends React.Component {
+      state = { show: false }
+
+      showModal = () => {
+        this.setState({ show: true });
+      }
+
+      closeModal = () => {
+        this.setState({ show: false });
+      }
+
+      render() {
+        return (
+          <div>
+            <Button onClick={this.showModal}>Show Modal</Button>
+            <Modal
+              title="Modal title"
+              show={this.state.show}
+              footer={(
+                <div style={{ width: '100%', textAlign: 'right' }}>
+                  <Button onClick={this.closeModal}>close</Button>
+                  <Button color="link">Save changes</Button>
+                </div>
+              )}
+            >
+              Modal body text goes here.
+            </Modal>
+          </div>
+        );
+      }
+    }
+
+    return <Test />;
   }}
 </Playground>

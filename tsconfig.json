@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "es2015",
+    "lib": ["es2017", "dom"],
+    "moduleResolution": "node",
+    "jsx": "react",
+    "strict": true,
+    "pretty": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types", "src/types"],
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "./gulpfile.js",
+    "./jest.setup.js",
+    "./doczrc.js",
+    "./node_modules/**",
+    "./doc_theme",
+    "build",
+    "lib",
+    "jest",
+  ]
+}

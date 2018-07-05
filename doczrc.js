@@ -1,28 +1,28 @@
 import * as path from 'path';
+import tsLoader from 'ts-loader';
 
-const SRC = path.resolve(__dirname, './src');
-const ROOT = path.resolve(__dirname, './');
+function modifyBundlerConfig(config) {
+  // console.log(config.module.rules[2].use);
 
-const modifyBundlerConfig = (config) => {
-  config.resolve.alias = Object.assign({}, config.resolve.alias, {
-    '@components': `${SRC}/components`,
-    '@styles': `${SRC}/styles`,
-    '@utils': `${SRC}/utils`,
-    '@theme': `${SRC}/theme`,
-    '@assets': `${ROOT}/doc_theme/assets`,
-    '@website': `${ROOT}/doc_theme`,
-  });
+  config.module.rules[2].use = [ { loader: 'ts-loader' } ]
 
   return config;
-};
+}
+
+function modifyBabelRc(babelrc) {
+  babelrc.presets = [babelrc.presets[3]];
+  return babelrc;
+}
 
 export default {
   title: 'visits-style',
   description: 'design compoentns for visits technology',
-  source: 'docs',
+  source: '.',
   base: process.env.NODE_ENV === 'production' ? '/visits-style' : '/',
+  // base: '/',
   port: '5000',
   indexHtml: 'doc_theme/index.html',
   theme: 'doc_theme/index',
   modifyBundlerConfig,
+  modifyBabelRc,
 };

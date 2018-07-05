@@ -1,9 +1,0 @@
-[ignore]
-./build/.*
-./theme/.*
-.*/lib/*
-.*/node_modules/styled-components/.*
-.*/node_modules/polished/.*
-
-[libs]
-flow-typed
