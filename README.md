@@ -18,13 +18,30 @@ yarn add github:visits-works/visits-style#<branch指定>
 ## Example
 
 ```javascript
-import React from 'react';
-import { render } from 'react-DOM';
-import { ThemeProvider } from 'styled-components';
-import { Button, Theme } from 'visits-style';
-// import Button from 'visits-style/lib/components/Button';
+// styled.ts
+import * as StyledComponents from 'styled-components';
+import { ThemedStyledComponentsModule } from 'styled-components';
+import { ThemeType } from 'visits-style/types';
 
-// 一番rootの一回のみ必ずこれを追加してください。cssのnormalizeです
+const {
+  default: styled,
+  css,
+  injectGlobal,
+  keyframes,
+  ThemeProvider,
+} = StyledComponents as ThemedStyledComponentsModule<ThemeType>;
+
+export { css, injectGlobal, keyframes, ThemeProvider };
+export default styled;
+```
+
+```javascript
+// index.tsx
+import * as React from 'react';
+import * as reactDOM from 'react-DOM';
+import { ThemeProvider } from './styled';
+import Button from 'visits-style/components/Button';
+
 import 'visits-style/lib/styles/global';
 
 function App() {
@@ -35,7 +52,7 @@ function App() {
   )
 }
 
-render(App, document.getElementById('root'));
+reactDOM.render(App, document.getElementById('root'));
 ```
 
 ## Docs
