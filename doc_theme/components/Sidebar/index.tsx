@@ -17,7 +17,18 @@ const Menu = styled(SideMenu)`
   `}
 `;
 
-const MenuItem = ({ doc, active }) => (
+interface SidebarProps {
+  parent: string;
+  active: string;
+}
+
+interface DocProps {
+  doc: { headings?: Array<any>, route?: any, name?: any };
+  docs?: Array<any>;
+  active?: any;
+}
+
+const MenuItem = ({ doc, active }: DocProps) => (
   <li>
     <Link to={doc.route}>{doc.name}</Link>
     {active === doc.route && doc.headings && (
@@ -34,8 +45,10 @@ const MenuItem = ({ doc, active }) => (
   </li>
 )
 
-export default function Sidebar({ parent, active }: SidebarProps): React.SFC<SidebarProps> {
-  function renderDocs({ docs: allDocs }) {
+export default class Sidebar extends React.PureComponent<SidebarProps> {
+
+  renderDocs = ({ docs: allDocs }: { docs: Array<any> }) => {
+    const { active, parent } = this.props;
     const docs = allDocs.filter(doc => doc.parent === parent);
     const parentDoc = allDocs.filter(doc => doc.name === parent)[0];
     return (
@@ -48,11 +61,13 @@ export default function Sidebar({ parent, active }: SidebarProps): React.SFC<Sid
     );
   }
 
-  return (
-    <Col narrow>
-      <Docs>
-        {renderDocs}
-      </Docs>
-    </Col>
-  );
+  render() {
+    return (
+      <Col narrow>
+        <Docs>
+          {this.renderDocs}
+        </Docs>
+      </Col>
+    );
+  }
 }

@@ -9,7 +9,12 @@ const Temp = styled.div`
   border-bottom: none;
 `;
 
-export default function Renderer({ component, code }) {
+interface Props {
+  component: any;
+  code: any;
+}
+
+export default function Renderer({ component, code }: Props) {
   return (
     <Fragment>
       <Temp>

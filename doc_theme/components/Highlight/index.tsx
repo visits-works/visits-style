@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PureComponent, createRef } from 'react';
 import styled from '../../../src/styled';
 
 import 'prismjs';
@@ -11,8 +12,6 @@ import 'prismjs/components/prism-typescript.min';
 import prism from 'prismjs';
 import { Pre, Button } from '../../../src/components';
 import PrismStyle from './style';
-
-const { PureComponent, createRef } = React;
 
 const Wrapper = styled.figure`
   position: relative;
@@ -54,18 +53,29 @@ const Wrapper = styled.figure`
   }
 `;
 
-export default class Highlight extends PureComponent {
+interface Props {
+  className?: string,
+  children: React.ReactChildren
+}
+
+export default class Highlight extends PureComponent<Props> {
 
   componentDidMount() {
-    prism.highlightElement(this.pre.current);
+    if (this.pre.current) {
+      prism.highlightElement(this.pre.current);
+    }
   }
 
   componentDidUpdate() {
-    prism.highlightElement(this.pre.current);
+    if (this.pre.current) {
+      prism.highlightElement(this.pre.current);
+    }
   }
 
   copyText = () => {
+    // @ts-ignore
     if (document.selection) {
+      // @ts-ignore
       var range = document.body.createTextRange();
       range.moveToElementText(this.pre.current);
       range.select();
@@ -79,17 +89,19 @@ export default class Highlight extends PureComponent {
   }
 
   onButtonHover = () => {
-    this.wrapper.current.classList.add('hover');
+    if (this.wrapper.current) {
+      this.wrapper.current.classList.add('hover');
+    }
   }
 
   onButtonHoverOut = () => {
-    if (this.wrapper.current.classList.contains('hover')) {
+    if (this.wrapper.current && this.wrapper.current.classList.contains('hover')) {
       this.wrapper.current.classList.remove('hover');
     }
   }
 
-  pre = createRef();
-  wrapper = createRef();
+  pre = createRef<HTMLParagraphElement>();
+  wrapper = createRef<HTMLDivElement>();
 
   render() {
     const { children, className } = this.props;

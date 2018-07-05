@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "rootDir": "src",
-    "outDir": "lib",
-    "module": "es2015",
     "target": "esnext",
+    "module": "es2015",
     "lib": ["es2017", "dom"],
     "moduleResolution": "node",
     "jsx": "react",
@@ -12,7 +9,6 @@
     "pretty": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "declaration": true,
     "typeRoots": ["node_modules/@types", "src/types"],
   },
   "include": ["src/**/*"],

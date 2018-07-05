@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Docs, Link } from 'docz';
 import GithubIcon from 'react-icons/lib/go/mark-github';
 import AppBar from '../../../src/components/AppBar';
+// @ts-ignore
 import Logo from '../../assets/visits';
 
 export const isActive = (route: string) => (match: any, location: any) =>
@@ -19,6 +20,7 @@ export default function Topbar() {
     >
       <Docs>
         {({ docs: allDocs }) => {
+          // @ts-ignore
           const docs = allDocs.filter(doc => !doc.parent).sort((a, b) => a.order > b.order)
 
           return (

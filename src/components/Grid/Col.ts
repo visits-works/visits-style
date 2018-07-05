@@ -3,7 +3,7 @@ import { mediaMobile } from '../../utils/media';
 import { ColSizeType } from '../../types';
 
 export interface ColProps {
-  narrow?: string,
+  narrow?: boolean,
   size?: ColSizeType,
   offset?: ColSizeType,
 }

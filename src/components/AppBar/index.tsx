@@ -31,7 +31,7 @@ interface NavProps {
   sticky?: boolean;
   fluid?: boolean;
   show?: boolean;
-  style: any;
+  style?: any;
   role: string;
 }
 
@@ -149,7 +149,7 @@ export interface Props {
   /** background色 */
   color?: ColorType;
   /** ロゴのイメージ、プロジェクト名など */
-  brand?: any;
+  brand?: React.ReactElement<any> | string;
   /** brandを押した時の遷移先url */
   to?: string;
   /** 定義された位置を固定にする */
@@ -162,7 +162,7 @@ export interface Props {
   backdrop?: boolean;
   /** cssのスタイルを入れてください */
   style?: any;
-  children?: Node;
+  children?: React.ReactChildren | any;
 }
 
 type State = {

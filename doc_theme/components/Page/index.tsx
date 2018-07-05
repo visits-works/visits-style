@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
-import { PageProps } from 'docz'
+import * as React from 'react';
 import styled from 'styled-components'
 
-import { Container, Row, Col } from '@components'
-import { Sidebar } from '../index'
+import { Container, Row, Col } from '../../../src/components'
+import Sidebar from '../Sidebar'
 
 const Wrapper = Container.extend`
   h1[id], h2[id], h3[id], h4[id] {
@@ -27,7 +26,13 @@ const Desc = styled.p`
   margin-bottom: 2rem;
 `;
 
-function renderChildren({ title, name, description }, children) {
+interface CProps {
+  title?: string;
+  name?: string;
+  description?: any;
+}
+
+function renderChildren({ title, name, description }: CProps, children: React.ReactChildren) {
   return (
     <Wrapper>
       <Header>{ title || name }</Header>
@@ -37,7 +42,13 @@ function renderChildren({ title, name, description }, children) {
   );
 }
 
-export default function Page({ children, doc, ...props }) {
+interface Props {
+  children: React.ReactChildren;
+  doc: any;
+  match: { url: string };
+}
+
+export default function Page({ children, doc, ...props }: Props) {
   const { parent, sidebar, fullpage } = doc;
   const showSidebar = Boolean(parent || sidebar);
 
