@@ -61,13 +61,8 @@ const NavBar = styled.header<NavProps>`
     }
   }
 
-  ${({ fluid }) => fluid ? `
-    ${mediaTablet`padding: 0 0.5rem;`}
-    ${mediaUntilFullHD`padding: 0 0.75rem;`}
-  ` : `
-    ${mediaTablet`padding: 0 3%;`}
-    ${mediaUntilFullHD`padding: 0 5%;`}
-  `}
+  ${mediaTablet`padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};`}
+  ${mediaUntilFullHD`padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};`}
 `;
 
 const Burger = styled.button`
