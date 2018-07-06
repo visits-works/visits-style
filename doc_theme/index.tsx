@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { theme, ThemeConfig, DocPreview } from 'docz';
-import { ThemeProvider } from '../src/styled';
+import { ThemeProvider } from 'styled-components';
 
 import { Code, Table } from '../src/components';
 import publicTheme from '../src/theme/public';

@@ -1,4 +1,4 @@
-import { css } from '../../../src/styled';
+import { css } from 'styled-components';
 
 export default css`
   color: #ffffff;

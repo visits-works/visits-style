@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import { boxShadow, setSize } from '../../utils';
 import commonStyle from './style';
 import { InputProps } from './types';

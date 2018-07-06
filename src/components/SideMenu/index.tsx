@@ -1,4 +1,4 @@
-import styled from '../../styled';
+import styled from 'styled-components';
 
 export const SideMenu = styled.aside`
   font-size: 1rem;

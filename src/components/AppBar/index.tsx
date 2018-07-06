@@ -1,6 +1,6 @@
 import * as React from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 import { findColorInvert, hambuger, mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils';
 import { ColorType, ThemeType } from '../../types';
 

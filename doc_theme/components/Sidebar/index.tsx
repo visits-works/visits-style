@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Docs, Link } from 'docz';
-import styled from '../../../src/styled';
+import styled from 'styled-components';
 import { Col, SideMenu, MenuList } from '../../../src/components';
 import { mediaMobile } from '../../../src/utils';
 

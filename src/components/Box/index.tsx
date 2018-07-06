@@ -1,4 +1,4 @@
-import styled from '../../styled';
+import styled from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';
 

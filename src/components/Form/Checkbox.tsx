@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import { InputProps } from './types';
 
 const Wrapper = styled.label`

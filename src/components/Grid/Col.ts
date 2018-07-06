@@ -1,4 +1,4 @@
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 import { mediaMobile } from '../../utils/media';
 import { ColSizeType } from '../../types';
 

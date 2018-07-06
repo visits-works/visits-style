@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PureComponent, createRef } from 'react';
-import styled from '../../../src/styled';
+import styled from 'styled-components';
 
 import 'prismjs';
 import 'prismjs/components/prism-json.min';
