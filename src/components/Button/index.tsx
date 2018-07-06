@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import * as React from 'react';
+import styled, { css, StyledComponentClass } from 'styled-components';
 import darken from 'polished/lib/color/darken';
 import rgba from 'polished/lib/color/rgba';
 import findColorInvert from '../../utils/findColorInvert';

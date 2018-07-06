@@ -2,8 +2,6 @@ import * as path from 'path';
 import tsLoader from 'ts-loader';
 
 function modifyBundlerConfig(config) {
-  // console.log(config.module.rules[2].use);
-
   config.module.rules[2].use = [ { loader: 'ts-loader' } ]
 
   return config;
@@ -21,6 +19,7 @@ export default {
   base: process.env.NODE_ENV === 'production' ? '/visits-style' : '/',
   // base: '/',
   port: '5000',
+  typescript: true,
   indexHtml: 'doc_theme/index.html',
   theme: 'doc_theme/index',
   modifyBundlerConfig,

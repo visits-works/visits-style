@@ -4,6 +4,17 @@
   "private": true,
   "main": "index.js",
   "typings": "index.d.ts",
+  "files": [
+    "components/",
+    "styles/",
+    "theme/",
+    "utils/",
+    "index.js",
+    "index.d.js",
+    "types.d.js",
+    "package.json",
+    "README.md"
+  ],
   "dependencies": {
     "polished": "^1.9.2",
     "react": "^16.3.2",
@@ -12,10 +23,10 @@
     "styled-components": "^3.3.3"
   },
   "scripts": {
-    "start": "NODE_ENV=development docz dev --ts",
+    "start": "NODE_ENV=development docz dev",
     "compile": "NODE_ENV=production tsc --d --emitDeclarationOnly --outDir ./ && tsc --outDir ./lib --module esnext",
     "build": "NODE_ENV=production babel ./lib --out-dir ./",
-    "build:doc": "docz build --ts",
+    "build:doc": "docz build",
     "clean": "rm -rf ./lib ./components ./utils ./theme ./styles ./index.js ./styled.js ./styled.js ./index.d.ts ./types.js ./types.d.ts",
     "test": "jest --env=jsdom",
     "type-check": "tsc --noEmit"

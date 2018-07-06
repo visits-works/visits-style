@@ -3,7 +3,7 @@ import { theme, ThemeConfig, DocPreview } from 'docz';
 import { ThemeProvider } from 'styled-components';
 
 import { Code, Table } from '../src/components';
-import publicTheme from '../src/theme/public';
+import lightTheme from '../src/theme/light';
 
 import { Topbar, Renderer, Highlight, Page } from './components';
 
@@ -13,7 +13,7 @@ function Theme () {
   return (
     <ThemeConfig>
       {() => (
-        <ThemeProvider theme={publicTheme}>
+        <ThemeProvider theme={lightTheme}>
           <>
             <Topbar />
             <DocPreview

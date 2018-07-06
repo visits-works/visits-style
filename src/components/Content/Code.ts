@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import * as React from 'react';
+import styled, { StyledComponentClass } from 'styled-components';
 
 const Code = styled.code`
   background-color: ${({ theme }) => theme.background};

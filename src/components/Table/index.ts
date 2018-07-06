@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import * as React from 'react';
+import styled, { css, StyledComponentClass } from 'styled-components';
 import { SizeType } from '../../types';
 
 const stripedStyle = css`

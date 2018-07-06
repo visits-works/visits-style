@@ -1,5 +1,5 @@
-// @flow
-import styled, { css } from 'styled-components';
+import * as React from 'react';
+import styled, { css, StyledComponentClass } from 'styled-components';
 import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
 import { fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 

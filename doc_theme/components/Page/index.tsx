@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Container, Row, Col } from '../../../src/components'
 import Sidebar from '../Sidebar'
 
-const Wrapper = Container.extend`
+const Wrapper = styled(Container)`
   h1[id], h2[id], h3[id], h4[id] {
     a {
       position: absolute;
