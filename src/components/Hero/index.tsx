@@ -11,6 +11,7 @@ interface Props {
   children?: React.ReactChild;
   center?: boolean;
   background?: string;
+  header?: React.ReactElement<any>;
 }
 
 function setColor({ color, theme }: { color?: ColorType, theme: ThemeType }) {
@@ -43,13 +44,12 @@ function setSize({ size }: { size?: SizeType | 'full' }) {
   }
 }
 
-const Wrapper = styled.div<{ color?: ColorType, size?: SizeType | 'full' }>`
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  ${setColor}
-  ${setSize}
+const Body = styled.div<{ center?: boolean }>`
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 3rem 1.5rem;
+
+  ${({ center }) => center ? 'text-align: center;' : ''}
 
   h1 {
     font-size: 2rem;
@@ -72,17 +72,28 @@ const Wrapper = styled.div<{ color?: ColorType, size?: SizeType | 'full' }>`
   }
 `;
 
-const Body = styled.div<{ center?: boolean }>`
-  flex-grow: 1;
-  flex-shrink: 0;
-  padding: 3rem 1.5rem;
+const Wrapper = styled.div<{ color?: ColorType, size?: SizeType | 'full' }>`
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  ${setColor}
+  ${setSize}
 
-  ${({ center }) => center ? 'text-align: center;' : ''}
+  header {
+    ${setSize}
+  }
+
+  header+${Body} {
+    margin-top: 3.25rem;
+    margin-bottom: 3.25rem;
+  }
 `;
 
-export default function Hero({ children, color, size, center }: Props) {
+export default function Hero({ children, color, size, center, header }: Props) {
   return (
     <Wrapper color={color} size={size}>
+      {header}
       <Body center={center}>
         <Container>
           {children}

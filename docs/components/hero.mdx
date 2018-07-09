@@ -7,6 +7,8 @@ description: Hero
 ---
 
 import { Playground, PropsTable } from 'docz';
+import Logo from '../../doc_theme/assets/visits';
+import AppBar from '../../src/components/AppBar';
 import Hero from '../../src/components/Hero';
 
 ## Basic Usage
@@ -88,5 +90,26 @@ default size is `small`
   <Hero color="light" center>
     <h1>Center Title</h1>
     <h2>center subtitle</h2>
+  </Hero>
+</Playground>
+
+## with Appbar
+<Playground>
+  <Hero
+    color="dark"
+    header={(
+      <AppBar brand={(<Logo />)} to="#">
+        <ul>
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link2</a></li>
+          <li><a href="#">link3</a></li>
+        </ul>
+      </AppBar>
+    )}
+    center
+  >
+    <h1>Title</h1>
+    <h2>subtitle</h2>
+    <p>some text here</p>
   </Hero>
 </Playground>

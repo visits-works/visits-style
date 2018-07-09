@@ -6,7 +6,7 @@ import Button from '../Button';
 import Box from '../Box';
 import { ColorType, SizeType } from '../../types';
 
-const Wrapper = styled.div`
+const Wrapper = styled(Button)`
   display: inline-flex;
   position: relative;
   vertical-align: top;
@@ -39,7 +39,7 @@ const MenuItem = styled.a`
   display: block;
   width: 100%;
   padding: 0.25rem 1.5rem;
-  text-align: inherit;
+  text-align: left;
   white-space: nowrap;
   background-color: transparent;
   color: ${({ theme }) => theme.text};
@@ -52,6 +52,7 @@ const MenuItem = styled.a`
   }
 
   &:hover, &:focus {
+    color: ${({ theme }) => theme.text};
     background-color: rgba(0, 0, 0, 0.05);
   }
 
@@ -62,16 +63,6 @@ const MenuItem = styled.a`
     `};
   }
 `;
-
-const shadowStyle: React.CSSProperties = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  opacity: 0,
-  zIndex: 1,
-}
 
 interface Props {
   label: React.ReactNode;
@@ -107,7 +98,7 @@ export default class Dropdown extends React.Component<Props, State> {
 
   onClickChild = (props: { onClick?: () => void }) => () => {
     if (props.onClick) props.onClick();
-    this.closeDropdown();
+    if (this.element.current) this.element.current.blur();
   }
 
   element = React.createRef<HTMLDivElement>();
@@ -116,8 +107,14 @@ export default class Dropdown extends React.Component<Props, State> {
     const { label, color, size, children } = this.props;
     const { show, style } = this.state;
     return (
-      <Wrapper innerRef={this.element}>
-        <Button color={color} size={size} onClick={this.openDropdown}>{label}</Button>
+      <Wrapper
+        innerRef={this.element}
+        color={color || 'text'}
+        size={size}
+        onFocus={this.openDropdown}
+        onBlur={this.closeDropdown}
+      >
+        {label}
         <Tooltip show={show} style={style}>
           {React.Children.map(children, child => {
             // @ts-ignore
@@ -128,7 +125,6 @@ export default class Dropdown extends React.Component<Props, State> {
             return <MenuItem {...child.props} onClick={this.onClickChild(child.props)} />;
           })}
         </Tooltip>
-        {show && <div style={shadowStyle} onClick={this.closeDropdown} />}
       </Wrapper>
     );
   }
