@@ -41,7 +41,6 @@ interface Props extends InputProps {
 
 export default class Textarea extends React.PureComponent<Props> {
   static defaultProps = {
-    name: null,
     placeholder: null,
     value: '',
     col: 2,

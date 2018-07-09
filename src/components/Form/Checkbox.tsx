@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import styled from 'styled-components';
 import { InputProps } from './types';
@@ -17,7 +16,7 @@ const Wrapper = styled.label`
 
 interface Props extends InputProps {
   placeholder?: string;
-  children?: string;
+  children?: React.ReactChild;
   checked?: boolean;
 }
 

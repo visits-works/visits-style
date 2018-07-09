@@ -33,7 +33,7 @@ const Input = styled.input`
 interface Props extends InputProps {
   placeholder?: string;
   type: 'text' | 'number' | 'password' | 'email' | 'phone';
-  value?: string;
+  value?: string | number;
 }
 
 export default class TextInput extends React.PureComponent<Props> {

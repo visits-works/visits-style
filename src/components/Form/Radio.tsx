@@ -19,7 +19,8 @@ const Wrapper = styled.label`
 `;
 
 interface Props extends InputProps {
-  children?: any;
+  value: string | number;
+  children?: React.ReactChild;
 }
 
 export default class Radio extends React.PureComponent<Props> {
@@ -29,12 +30,14 @@ export default class Radio extends React.PureComponent<Props> {
     onChange: () => {},
   }
 
+  id = `radio_${this.props.name}:${this.props.value}`
+
   render() {
     const { children, ...rest } = this.props;
     return (
       <Wrapper>
-        <input type="radio" {...rest} />
-        {children}
+        <input id={this.id} type="radio" {...rest} />
+        <label htmlFor={this.id}>{children}</label>
       </Wrapper>
     );
   }
