@@ -81,7 +81,8 @@ const Wrapper = styled.div<{ color?: ColorType, size?: SizeType | 'full' }>`
   ${setSize}
 
   header {
-    ${setSize}
+    background-color: inherit;
+    color: inherit;
   }
 
   header+${Body} {

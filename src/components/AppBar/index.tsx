@@ -140,7 +140,7 @@ const NavContent = styled.div<{ color?: ColorType, show?: boolean }>`
 `;
 
 
-export interface Props {
+interface Props {
   /** background色 */
   color?: ColorType;
   /** ロゴのイメージ、プロジェクト名など */
