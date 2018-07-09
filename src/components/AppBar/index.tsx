@@ -1,7 +1,9 @@
 import * as React from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled, { css } from 'styled-components';
-import { findColorInvert, hambuger, mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils';
+import findColorInvert from '../../utils/findColorInvert';
+import hambuger from '../../utils/hambuger';
+import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
 import { ColorType, ThemeType } from '../../types';
 
 function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
@@ -95,6 +97,8 @@ const NavContent = styled.div<{ color?: ColorType, show?: boolean }>`
 
 
   a {
+    display: block;
+    padding: .5rem 1rem;
     color: inherit;
     transform: color 100ms ease-out;
     &:hover, &.active {
@@ -106,10 +110,6 @@ const NavContent = styled.div<{ color?: ColorType, show?: boolean }>`
     display: flex;
     flex-direction: row;
     list-style: none;
-
-    li {
-      padding: .5rem 1rem;
-    }
   }
 
   & > div, & > span, & > form {

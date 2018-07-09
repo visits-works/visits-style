@@ -31,6 +31,7 @@ import { Modal, Button } from '../../src/components';
             <Modal
               title="Modal title"
               show={this.state.show}
+              closeModal={this.closeModal}
               footer={(
                 <div style={{ width: '100%', textAlign: 'right' }}>
                   <Button onClick={this.closeModal}>close</Button>

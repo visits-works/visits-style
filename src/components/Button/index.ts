@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css, StyledComponentClass } from 'styled-components';
 import darken from 'polished/lib/color/darken';
-import rgba from 'polished/lib/color/rgba';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
@@ -30,22 +29,13 @@ function setColor({ theme, color, outline }: { theme: ThemeType, color?: ColorTy
       }
     `;
   } else if (color === 'text') {
-    const target = rgba(theme.border, 0.5);
     return css`
       background-color: transparent;
       border-color: transparent;
       color: ${theme.text};
 
       &:hover{
-        background-color: ${target};
-      }
-
-      &:active{
-        background-color: ${target};
-      }
-
-      &:focus {
-        ${boxShadow('0.2rem', theme.border)}
+        text-decoration: underline;
       }
     `;
   }

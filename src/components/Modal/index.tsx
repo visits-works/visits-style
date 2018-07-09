@@ -32,6 +32,7 @@ interface Props {
   children?: Node;
   footer?: Node;
   color?: ColorType;
+  closeModal: () => void;
 }
 
 export default class Modal extends React.Component<Props> {
@@ -42,10 +43,11 @@ export default class Modal extends React.Component<Props> {
     color: 'white',
   }
 
-  static getModal = ({ size, title, children, footer, color }: Props) => {
+  static getModal = ({ show, size, title, children, footer, color, closeModal }: Props) => {
+    if (!show) return null;
     return (
       <div style={wrapperStyle}>
-        <div style={dropdownStyle} />
+        <div style={dropdownStyle} onClick={closeModal} />
         <Col size={size} role="dialog" style={{ alignItems: 'center' }}>
           <Card title={title} footer={footer} color={color}>
             {children}
@@ -75,7 +77,6 @@ export default class Modal extends React.Component<Props> {
   element: HTMLDivElement;
 
   render() {
-    if (!this.props.show) return null;
     return createPortal(
       Modal.getModal(this.props),
       this.element,
