@@ -26,6 +26,17 @@ function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeT
   return `background-color: ${backgroundColor}; color: ${textColor};`;
 }
 
+function setAlign({ align }: { align?: 'left' | 'right' }) {
+  switch (align) {
+    case 'left':
+      return 'flex-start';
+    case 'right':
+      return 'flex-end';
+    default:
+      return 'space-evenly';
+  }
+}
+
 interface NavProps {
   color?: ColorType;
   backdrop?: boolean;
@@ -34,6 +45,7 @@ interface NavProps {
   fluid?: boolean;
   show?: boolean;
   style?: any;
+  align?: 'left' | 'right';
   role: string;
 }
 
@@ -51,20 +63,7 @@ const NavBar = styled.header<NavProps>`
 
   ${setColor}
 
-  &>a {
-    display: inline-block;
-    cursor: pointer;
-    white-space: nowrap;
-    padding: .5rem 1rem;
-    color: inherit;
-
-    will-change: opacity;
-    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    &:hover{
-      opacity: 0.65;
-    }
-  }
+  a { color: inherit; }
 
   ${mediaTablet`padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};`}
   ${mediaUntilFullHD`padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};`}
@@ -76,6 +75,7 @@ const Burger = styled.button`
   margin-left: auto;
   border: none;
   background-color: transparent;
+  color: inherit;
 
   outline: none;
 
@@ -86,12 +86,54 @@ const Burger = styled.button`
   ${mediaMobile` display: block; `}
 `;
 
-const NavContent = styled.div<{ color?: ColorType, show?: boolean }>`
+const NavContent = styled.div<{ color?: ColorType, show?: boolean, align?: 'left' | 'right' }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-basis: auto;
   flex-grow: 1;
+
+  & > ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    flex-grow: 1;
+    justify-content: ${setAlign};
+  }
+
+  & > div, & > span, & > form {
+    display: flex;
+    ${({ color }) => (color ? `color: ${color};` : '')}
+  }
+
+  ${mediaMobile`
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding-bottom: 0.5rem;
+
+    button:not(.active)+& {
+      display:none;
+    }
+
+    & > ul {
+      flex-direction: column;
+      width: 100%;
+      li {
+        padding: .5rem 0;
+      }
+    }
+
+    & > div, & > span, & > form {
+      padding: .5rem 0;
+      width: 100%;
+    }
+  `}
+`;
+
+const NavItem = styled.li`
+  text-align: center;
 
   a {
     display: block;
@@ -106,38 +148,6 @@ const NavContent = styled.div<{ color?: ColorType, show?: boolean }>`
       opacity: 0.65;
     }
   }
-
-  & > ul {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-  }
-
-  & > div, & > span, & > form {
-    display: flex;
-    ${({ color }) => (color ? `color: ${color};` : '')}
-  }
-
-  ${({ show }) => show ? mediaMobile`
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-
-    padding-bottom: 0.5rem;
-
-    & > ul {
-      flex-direction: column;
-      width: 100%;
-      li {
-        padding: .5rem 0;
-      }
-    }
-
-    & > div, & > span, & > form {
-      padding: .5rem 0;
-      width: 100%;
-    }
-  ` : mediaMobile`display: none;`}
 `;
 
 
@@ -146,8 +156,6 @@ interface Props {
   color?: ColorType;
   /** ロゴのイメージ、プロジェクト名など */
   brand?: React.ReactElement<any> | string;
-  /** brandを押した時の遷移先url */
-  to?: string;
   /** 定義された位置を固定にする */
   fixed?: boolean;
   /** (IE11不可)画面がスクロールされても上で貼り付けいるようにする */
@@ -156,6 +164,7 @@ interface Props {
   fluid?: boolean;
   /** 背景がblurされます（safari専用、他は透明度） */
   backdrop?: boolean;
+  align?: 'left' | 'right';
   /** cssのスタイルを入れてください */
   style?: any;
   children?: React.ReactChildren | any;
@@ -169,13 +178,14 @@ export default class AppBar extends React.PureComponent<Props, State> {
   static defaultProps = {
     color: null,
     brand: null,
-    to: null,
     fixed: false,
     sticky: false,
     fluid: false,
     backdrop: false,
     style: null,
   }
+
+  static Item = NavItem;
 
   state = { show: false }
 
@@ -184,10 +194,8 @@ export default class AppBar extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { color, brand, children, style, fixed, sticky, backdrop } = this.props;
+    const { color, brand, children, style, fixed, sticky, backdrop, align } = this.props;
     const { show } = this.state;
-    const ua = navigator.userAgent.toLowerCase();
-    const isSafari = ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1;
     return (
       <NavBar
         color={color}
@@ -198,21 +206,14 @@ export default class AppBar extends React.PureComponent<Props, State> {
         style={style}
       >
         {brand}
-        {children && (
-          <React.Fragment>
-            <Burger className={show ? 'active' : ''} onClick={this.toggleMenu}>
-              <span />
-              <span />
-              <span />
-            </Burger>
-            <NavContent show={show}>
-              {children}
-            </NavContent>
-          </React.Fragment>
-        )}
-        {!isSafari && backdrop && (
-          <div className="backdrop"></div>
-        )}
+        <Burger className={show ? 'active' : ''} onClick={this.toggleMenu}>
+          <span />
+          <span />
+          <span />
+        </Burger>
+        <NavContent align={align}>
+          {children}
+        </NavContent>
       </NavBar>
     );
   }

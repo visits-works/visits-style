@@ -110,6 +110,7 @@ const Button = styled.button<ButtonProps>`
 
   &:not(:last-child) {
     margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 `;
 Button.displayName = 'Button';

@@ -15,7 +15,6 @@ export default function Topbar() {
       brand={<Link to="/"><Logo /></Link>}
       color="dark"
       fixed
-      backdrop
       style={{ zIndex: 9999 }}
     >
       <Docs>
@@ -26,11 +25,11 @@ export default function Topbar() {
           return (
             <ul>
               {docs.map(doc => (
-                <li key={doc.id}>
+                <AppBar.Item key={doc.id}>
                   <Link to={doc.route} isActive={isActive(doc.route)}>
                     {doc.name}
                   </Link>
-                </li>
+                </AppBar.Item>
               ))}
             </ul>
           )
