@@ -38,7 +38,6 @@ interface Props {
 
 export default class Modal extends React.Component<Props> {
   static defaultProps = {
-    size: 6,
     domId: 'modal',
     show: false,
     color: 'white',
