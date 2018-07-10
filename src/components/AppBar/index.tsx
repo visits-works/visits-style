@@ -58,8 +58,11 @@ const NavBar = styled.header<NavProps>`
     padding: .5rem 1rem;
     color: inherit;
 
+    will-change: opacity;
+    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+
     &:hover{
-      background-color: rgba(0, 0, 0, .05);
+      opacity: 0.65;
     }
   }
 
@@ -90,19 +93,17 @@ const NavContent = styled.div<{ color?: ColorType, show?: boolean }>`
   flex-basis: auto;
   flex-grow: 1;
 
-  transform-origin: center;
-  transition-duration: 100ms;
-  transition-property: transform;
-  transition-timing-function: ease-out;
-
-
   a {
     display: block;
     padding: .5rem 1rem;
     color: inherit;
-    transform: color 100ms ease-out;
+    opacity: 1;
+
+    will-change: opacity;
+    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+
     &:hover, &.active {
-      color: ${({ theme }) => theme.primary};
+      opacity: 0.65;
     }
   }
 

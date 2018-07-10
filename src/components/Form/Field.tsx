@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { boxShadow } from '../../utils';
-import { InputProps } from './types';
 
 const Wrapper = styled.div`
   display: block;
@@ -42,7 +41,7 @@ const InputControl = styled.div<{ error?: string }>`
   ` : ''}
 `;
 
-interface Props extends InputProps {
+interface Props {
   error?: string;
   help?: string;
   label?: string;
