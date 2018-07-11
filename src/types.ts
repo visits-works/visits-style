@@ -1,5 +1,5 @@
 
-export declare type ColorType = 'light' | 'primary' | 'link' | 'success' | 'warning' | 'danger' | 'dark' | 'text';
+export declare type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' | 'warning' | 'danger' | 'dark' | 'text';
 
 export declare type SizeType = 'small' | 'medium' | 'large';
 

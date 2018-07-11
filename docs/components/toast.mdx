@@ -1,0 +1,111 @@
+---
+name: Toast
+route: /components/toast
+parent: Components
+
+description: トースト
+---
+
+import { Playground, PropsTable } from 'docz';
+import Toast from '../../src/components/Toast';
+import Button from '../../src/components/Button';
+
+## Basic Usage
+
+<Playground>
+  {() => {
+    const colorList = ['warning', 'danger', 'info', 'primary', 'success'];
+
+    class Test extends React.Component {
+      state = { list: [] }
+
+      addToast = () => {
+        const list = this.state.list;
+        const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))]
+        const id = '_' + Math.random().toString(36).substr(2, 9);
+        list.push({ id, message: 'list number: ' + list.length, color });
+        this.setState({ list });
+      }
+
+      clearToast = (id) => {
+        const idx = this.state.list.map(item => item.id).indexOf(id);
+        if (idx > -1) {
+          const list = this.state.list;
+          list.splice(idx, 1);
+        this.setState({ list });
+        }
+      }
+
+      clearAll = () => {
+        this.setState({ list: [] });
+      }
+
+      render() {
+        return (
+          <div>
+            <Button color="info" onClick={this.addToast}>Toast!</Button>
+            <Button color="danger" onClick={this.clearAll}>Clear All</Button>
+            <Toast
+              toasts={this.state.list}
+              clear={this.clearToast}
+            />
+          </div>
+        );
+      }
+    }
+
+    return <Test />;
+  }}
+</Playground>
+
+a
+
+a
+
+s
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a
+
+a

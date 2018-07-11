@@ -3,10 +3,11 @@ import styled, { css, StyledComponentClass } from 'styled-components';
 import { mediaMobile } from '../../utils/media';
 import { ColSizeType } from '../../types';
 
-export interface ColProps {
-  narrow?: boolean,
-  size?: ColSizeType,
-  offset?: ColSizeType,
+interface ColProps {
+  narrow?: boolean;
+  size?: ColSizeType;
+  offset?: ColSizeType;
+  auto?: boolean;
 }
 
 function parcentage(value?: ColSizeType) {
@@ -15,7 +16,7 @@ function parcentage(value?: ColSizeType) {
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
 
-function renderSize({ size, narrow }: ColProps) {
+function renderSize({ size, narrow, auto }: ColProps) {
   if (narrow) return null;
   if (!size || size < 1 || size > 12) {
     return `
@@ -28,6 +29,9 @@ function renderSize({ size, narrow }: ColProps) {
     return css`
       flex: none;
       width: ${value}%;
+      ${auto ? mediaMobile`
+        width: ${(value > 33 ? 100 : value * 3)}%;
+      ` : ''}
     `;
   }
 }
@@ -41,6 +45,7 @@ const Col = styled.div`
   ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : ''}
 
   ${renderSize}
+
   padding: 0.75rem;
 
   ${mediaMobile`
