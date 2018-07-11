@@ -17,7 +17,7 @@ import { Card, Col, Row } from '../../src/components';
 ## Basic usage
 
 <Playground>
-  <Col size={4} offset={4}>
+  <Col size={4} offset={4} auto>
     <Card title="Card title">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
@@ -29,7 +29,7 @@ import { Card, Col, Row } from '../../src/components';
 ## With Image
 
 <Playground>
-  <Col size={4} offset={4}>
+  <Col size={4} offset={4} auto>
     <Card image={ImgUrl}>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
@@ -41,7 +41,7 @@ import { Card, Col, Row } from '../../src/components';
 ## Horizontal Image
 
 <Playground>
-  <Col size={8} offset={2}>
+  <Col size={8} offset={2} auto>
     <Card image={ImgUrl} horizontal>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
@@ -54,21 +54,21 @@ import { Card, Col, Row } from '../../src/components';
 
 <Playground>
   <Row>
-    <Col size={4}>
+    <Col size={4} auto>
       <Card title="title" color="primary">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
         sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
       </Card>
     </Col>
-    <Col size={4}>
+    <Col size={4} auto>
       <Card title="title" color="link">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis
         sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
       </Card>
     </Col>
-    <Col size={4}>
+    <Col size={4} auto>
       <Card title="title" color="dark">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis

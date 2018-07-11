@@ -16,7 +16,7 @@ function parcentage(value?: ColSizeType) {
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
 
-function renderSize({ size, narrow, auto }: ColProps) {
+function renderSize({ size, narrow, auto, offset }: ColProps) {
   if (narrow) return null;
   if (!size || size < 1 || size > 12) {
     return `
@@ -26,11 +26,14 @@ function renderSize({ size, narrow, auto }: ColProps) {
     `;
   } else {
     const value = parcentage(size);
+    const offVal = offset ? parcentage(offset) : 0;
     return css`
       flex: none;
       width: ${value}%;
+      ${offset ? `margin-left: ${offVal}%;` : ''}
       ${auto ? mediaMobile`
         width: ${(value > 33 ? 100 : value * 3)}%;
+        ${offset ? `margin-left: 0;` : ''}
       ` : ''}
     `;
   }
