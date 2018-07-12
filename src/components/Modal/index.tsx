@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { Transition } from 'react-spring';
+import { Transition, animated } from 'react-spring';
 import Card from '../Card';
 import Col from '../Grid/Col';
 import { ColorType, ColSizeType } from '../../types';
@@ -49,16 +49,19 @@ export default class Modal extends React.Component<Props> {
       <div style={wrapperStyle}>
         <div style={dropdownStyle} onClick={closeModal} />
         <Transition
+          native
           from={{ transform: 'scale(0.8)', opacity: 0 }}
           enter={{ transform: 'scale(1)', opacity: 1 }}
           leave={{ transform: 'scale(0.8)', opacity: 0 }}
         >
           {styles => (
-          <Col size={size} role="dialog" style={{ alignItems: 'center', ...styles }}>
-            <Card title={title} footer={footer} color={color}>
-              {children}
-            </Card>
-          </Col>
+            <animated.div style={styles}>
+              <Col size={size} role="dialog" style={{ alignItems: 'center' }}>
+                <Card title={title} footer={footer} color={color}>
+                  {children}
+                </Card>
+              </Col>
+            </animated.div>
           )}
         </Transition>
       </div>
