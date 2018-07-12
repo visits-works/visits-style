@@ -1,0 +1,22 @@
+import * as color from '../styles/colors';
+declare const _default: {
+    primary: string;
+    link: string;
+    info: string;
+    success: string;
+    warning: string;
+    danger: string;
+    dark: string;
+    black: string;
+    white: string;
+    text: string;
+    textDark: string;
+    textLight: string;
+    textStrong: string;
+    background: string;
+    border: string;
+    borderHover: string;
+    borderActive: string;
+    color: typeof color;
+};
+export default _default;
