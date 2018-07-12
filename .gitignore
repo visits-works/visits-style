@@ -12,17 +12,10 @@ bundle_report.html
 # production
 /build
 /lib
-/index.js
-/components
-/utils
-/styles
-/theme
-/lib2
-/styled.js
-/types.js
 **.d.ts
 
 # misc
+/tmp
 .DS_Store
 .env.local
 .env.development.local

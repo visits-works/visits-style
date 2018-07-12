@@ -25,10 +25,10 @@
   },
   "scripts": {
     "start": "NODE_ENV=development docz dev",
-    "compile": "NODE_ENV=production tsc --d --emitDeclarationOnly --outDir ./ && tsc --outDir ./lib --module esnext",
-    "build": "NODE_ENV=production babel ./lib --out-dir ./",
+    "compile": "tsc --d --emitDeclarationOnly --outDir ./build && tsc --outDir ./lib --module esnext",
+    "build": "NODE_ENV=production yarn clean && yarn compile && babel ./lib --out-dir ./build",
     "build:doc": "docz build",
-    "clean": "rm -rf ./lib ./components ./utils ./theme ./styles ./index.js ./styled.js ./styled.js ./index.d.ts ./types.js ./types.d.ts",
+    "clean": "rm -rf ./lib ./build",
     "test": "jest --env=jsdom",
     "type-check": "tsc --noEmit"
   },
