@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { Transition, animated } from 'react-spring';
+import Transition from 'react-transition-group/Transition';
+import anime from 'animejs';
 import Card from '../Card';
 import Col from '../Grid/Col';
 import { ColorType, ColSizeType } from '../../types';
+import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
 const wrapperStyle: React.CSSProperties = {
   width: '100%',
@@ -36,36 +38,44 @@ interface Props {
   closeModal: () => void;
 }
 
+function animeModalIn (modal: HTMLElement) {
+  anime({
+    targets: modal,
+    scale: [0.8, 1],
+    opacity: [0, 1],
+    complete: () => dispatchAnimeDone(modal),
+    easing: [0.645, 0.045, 0.355, 1],
+    duration: 200,
+  });
+}
+
+function getModal ({ show, size, title, children, footer, color, closeModal }: Props) {
+  if (!show) return null;
+  return (
+    <div style={wrapperStyle}>
+      <div style={dropdownStyle} onClick={closeModal} />
+        <Transition
+          addEndListener={addAnimeListener}
+          onEnter={animeModalIn}
+          timeout={200}
+          in={show}
+          appear
+        >
+          <Col size={size || 6} role="dialog" style={{ alignItems: 'center' }}>
+            <Card title={title} footer={footer} color={color}>
+              {children}
+            </Card>
+          </Col>
+        </Transition>
+    </div>
+  );
+}
+
 export default class Modal extends React.Component<Props> {
   static defaultProps = {
     domId: 'modal',
     show: false,
     color: 'white',
-  }
-
-  static getModal = ({ show, size, title, children, footer, color, closeModal }: Props) => {
-    if (!show) return null;
-    return (
-      <div style={wrapperStyle}>
-        <div style={dropdownStyle} onClick={closeModal} />
-        <Transition
-          native
-          from={{ transform: 'scale(0.8)', opacity: 0 }}
-          enter={{ transform: 'scale(1)', opacity: 1 }}
-          leave={{ transform: 'scale(0.8)', opacity: 0 }}
-        >
-          {styles => (
-            <animated.div style={styles}>
-              <Col size={size} role="dialog" style={{ alignItems: 'center' }}>
-                <Card title={title} footer={footer} color={color}>
-                  {children}
-                </Card>
-              </Col>
-            </animated.div>
-          )}
-        </Transition>
-      </div>
-    );
   }
 
   constructor(props: Props) {
@@ -89,7 +99,7 @@ export default class Modal extends React.Component<Props> {
 
   render() {
     return createPortal(
-      Modal.getModal(this.props),
+      getModal(this.props),
       this.element,
     );
   }
