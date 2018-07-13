@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, InterpolationValue } from 'styled-components';
 import { tablet, desktop, fullhd } from '../styles/variables';
 
 function mediaFrom(device: number, str: TemplateStringsArray, ...args: Array<any>) {
