@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyledComponentClass } from 'styled-components';
 import { ColorType } from '../../types';
 interface Props {
     /** background色 */
@@ -13,9 +14,11 @@ interface Props {
     fluid?: boolean;
     /** 背景がblurされます（safari専用、他は透明度） */
     backdrop?: boolean;
+    /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
     align?: 'left' | 'right';
     /** cssのスタイルを入れてください */
     style?: any;
+    /** メニュー、ボタンなどを自由に定義できます。メニューはできれば<ul>タグで指定してください */
     children?: React.ReactChildren | any;
 }
 declare type State = {
@@ -31,7 +34,7 @@ export default class AppBar extends React.PureComponent<Props, State> {
         backdrop: boolean;
         style: null;
     };
-    static Item: import("../../../../../../../Users/sung/Develop/visits-style/node_modules/styled-components").StyledComponentClass<React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>, any, React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>>;
+    static Item: StyledComponentClass<React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>, any, React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>>;
     state: {
         show: boolean;
     };
