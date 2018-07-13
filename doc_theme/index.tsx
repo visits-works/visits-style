@@ -32,4 +32,4 @@ function Theme () {
   );
 }
 
-export default theme()(Theme);
+export default theme({})(Theme);

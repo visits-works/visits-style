@@ -164,9 +164,11 @@ interface Props {
   fluid?: boolean;
   /** 背景がblurされます（safari専用、他は透明度） */
   backdrop?: boolean;
+  /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
   align?: 'left' | 'right';
   /** cssのスタイルを入れてください */
   style?: any;
+  /** メニュー、ボタンなどを自由に定義できます。メニューはできれば<ul>タグで指定してください */
   children?: React.ReactChildren | any;
 }
 

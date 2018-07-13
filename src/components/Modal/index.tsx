@@ -32,8 +32,8 @@ interface Props {
   size?: ColSizeType;
   domId?: string;
   show?: boolean;
-  children?: Node;
-  footer?: Node;
+  children?: React.ReactNode;
+  footer?: React.ReactNode;
   color?: ColorType;
   closeModal: () => void;
 }

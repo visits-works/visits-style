@@ -49,7 +49,8 @@ export default class Sidebar extends React.PureComponent<SidebarProps> {
 
   renderDocs = ({ docs: allDocs }: { docs: Array<any> }) => {
     const { active, parent } = this.props;
-    const docs = allDocs.filter(doc => doc.parent === parent);
+    // @ts-ignore
+    const docs = allDocs.filter(doc => doc.parent === parent).sort((a, b) => (a.name > b.name));
     const parentDoc = allDocs.filter(doc => doc.name === parent)[0];
     return (
       <Menu>

@@ -9,6 +9,8 @@ function modifyBundlerConfig(config) {
 
 function modifyBabelRc(babelrc) {
   babelrc.presets = [babelrc.presets[3]];
+  // babelrc.babelrc = true;
+  // babelrc.presets = [];
   return babelrc;
 }
 

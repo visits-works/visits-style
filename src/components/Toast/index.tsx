@@ -13,7 +13,7 @@ import Box from '../Box';
 interface ToastType {
   id: string;
   title?: string;
-  message?: React.ReactChildren;
+  message?: React.ReactNode;
   color?: ColorType;
 }
 
