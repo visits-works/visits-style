@@ -5,7 +5,6 @@ import Transition from 'react-transition-group/Transition';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import anime from 'animejs';
 import styled from 'styled-components';
-import { ColorType } from '../../types';
 import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
 import Box from '../Box';

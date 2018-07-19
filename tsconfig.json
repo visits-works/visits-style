@@ -9,7 +9,7 @@
     "pretty": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "typeRoots": ["node_modules/@types", "src/index"],
   },
   "include": ["src/**/*"],
   "exclude": [

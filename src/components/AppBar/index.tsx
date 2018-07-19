@@ -5,7 +5,6 @@ import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
-import { ColorType, ThemeType, AlignType } from '../../types';
 
 function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
   const backgroundColor = color ? (color === 'light' ? theme.color.greyLight : theme[color]) : 'transparent';

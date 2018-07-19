@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { StyledComponentClass } from 'styled-components';
 import setSize from '../../utils/setSize';
-import { ColorType, SizeType } from '../../types';
 
 interface Props {
   value: number;

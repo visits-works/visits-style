@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css, StyledComponentClass } from 'styled-components';
 import { mediaMobile } from '../../utils/media';
-import { ColSizeType } from '../../types';
 
 interface ColProps {
   narrow?: boolean;

@@ -4,7 +4,6 @@ import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
-import { ColorType, SizeType, ThemeType } from '../../types';
 
 interface ButtonProps {
   color?: ColorType;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled, { css, StyledComponentClass } from 'styled-components';
-import { SizeType } from '../../types';
 
 const stripedStyle = css`
   tbody > tr:nth-child(odd) {

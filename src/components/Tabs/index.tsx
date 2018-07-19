@@ -1,7 +1,6 @@
 import React, { Component, Children, CSSProperties } from 'react';
 import styled, { StyledComponentClass } from 'styled-components';
 import setAlign from '../../utils/setAlign';
-import { ThemeType, ColorType, AlignType } from '../../types';
 import Button from '../Button';
 
 const Wrapper = styled.nav`

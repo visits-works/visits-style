@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Tabs from '../../src/components/Tabs';
-import Button from '../../src/components/Button';
 
 interface State {
   current?: number;

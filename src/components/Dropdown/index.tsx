@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import Button from '../Button';
 import Box from '../Box';
-import { ColorType, SizeType } from '../../types';
 
 const Wrapper = styled(Button)`
   display: inline-flex;

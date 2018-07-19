@@ -4,8 +4,6 @@ import commonStyle from './style';
 import boxShadow from '../../utils/boxShadow';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
-import { SizeType } from '../../types';
-import { InputProps } from './types';
 
 const InputWrapper = styled.div<{ multiple?: boolean, size?: SizeType }>`
   display: inline-block;

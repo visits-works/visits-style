@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Toast from '../../src/components/Toast';
 import Button from '../../src/components/Button';
-import { ColorType } from '../../src/types';
 
 const colorList: Array<ColorType> = ['warning', 'danger', 'info', 'primary', 'success'];
 

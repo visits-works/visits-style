@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { StyledComponentClass } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
-import { ColorType } from '../../types';
 
 interface Props {
   color?: ColorType;

@@ -4,7 +4,6 @@ import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
 import Card from '../Card';
 import Col from '../Grid/Col';
-import { ColorType, ColSizeType } from '../../types';
 import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
 const wrapperStyle: React.CSSProperties = {
