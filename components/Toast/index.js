@@ -110,6 +110,9 @@ function (_PureComponent) {
 }(React.PureComponent);
 
 exports.Toast = Toast;
+Toast.defaultProps = {
+  duration: 5000
+};
 
 var ToastContainer =
 /*#__PURE__*/
@@ -142,8 +145,7 @@ function (_Component) {
           timeout: 250,
           unmountOnExit: true
         }, React.createElement(Toast, Object.assign({}, props, {
-          clear: _this2.clear(props.id),
-          duration: _this2.props.duration
+          clear: _this2.clear(props.id)
         })));
       }));
     };
@@ -171,6 +173,5 @@ function (_Component) {
 
 exports.default = ToastContainer;
 ToastContainer.defaultProps = {
-  toasts: [],
-  duration: 5000
+  toasts: []
 };

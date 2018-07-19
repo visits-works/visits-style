@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StyledComponentClass } from 'styled-components';
-import { ColorType, SizeType } from '../../types';
 interface ButtonProps {
     color?: ColorType;
     size?: SizeType;

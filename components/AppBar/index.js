@@ -15,6 +15,8 @@ var _findColorInvert = _interopRequireDefault(require("../../utils/findColorInve
 
 var _hambuger = _interopRequireDefault(require("../../utils/hambuger"));
 
+var _setAlign = _interopRequireDefault(require("../../utils/setAlign"));
+
 var _media = require("../../utils/media");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -102,32 +104,17 @@ function setColor(_ref) {
   return "background-color: ".concat(backgroundColor, "; color: ").concat(textColor, ";");
 }
 
-function setAlign(_ref2) {
-  var align = _ref2.align;
-
-  switch (align) {
-    case 'left':
-      return 'flex-start';
-
-    case 'right':
-      return 'flex-end';
-
-    default:
-      return 'space-evenly';
-  }
-}
-
 var NavBar = _styledComponents.default.header.withConfig({
   displayName: "AppBar__NavBar"
-})(["position:", ";display:flex;flex-wrap:wrap;align-items:center;justify-content:stretch;top:-1px;min-height:3.25rem;width:100%;z-index:30;", " a{color:inherit;}", " ", ""], function (_ref3) {
-  var fixed = _ref3.fixed,
-      sticky = _ref3.sticky;
+})(["position:", ";display:flex;flex-wrap:wrap;align-items:center;justify-content:stretch;top:-1px;min-height:3.25rem;width:100%;z-index:30;", " a{color:inherit;}", " ", ""], function (_ref2) {
+  var fixed = _ref2.fixed,
+      sticky = _ref2.sticky;
   return !(sticky || fixed) ? 'relative' : fixed ? 'fixed' : 'sticky';
-}, setColor, (0, _media.mediaTablet)(_templateObject(), function (_ref4) {
-  var fluid = _ref4.fluid;
+}, setColor, (0, _media.mediaTablet)(_templateObject(), function (_ref3) {
+  var fluid = _ref3.fluid;
   return fluid ? '0 0.5rem' : '0 3%';
-}), (0, _media.mediaUntilFullHD)(_templateObject2(), function (_ref5) {
-  var fluid = _ref5.fluid;
+}), (0, _media.mediaUntilFullHD)(_templateObject2(), function (_ref4) {
+  var fluid = _ref4.fluid;
   return fluid ? '0 0.75rem' : '0 5%';
 }));
 
@@ -137,8 +124,8 @@ var Burger = _styledComponents.default.button.withConfig({
 
 var NavContent = _styledComponents.default.div.withConfig({
   displayName: "AppBar__NavContent"
-})(["display:flex;justify-content:space-between;align-items:center;flex-basis:auto;flex-grow:1;& > ul{display:flex;flex-direction:row;list-style:none;flex-grow:1;justify-content:", ";}& > div,& > span,& > form{display:flex;", "}", ""], setAlign, function (_ref6) {
-  var color = _ref6.color;
+})(["display:flex;justify-content:space-between;align-items:center;flex-basis:auto;flex-grow:1;& > ul{display:flex;flex-direction:row;list-style:none;flex-grow:1;justify-content:", ";li{padding:0 0.75rem;}}& > div,& > span,& > form{display:flex;", "}", ""], _setAlign.default, function (_ref5) {
+  var color = _ref5.color;
   return color ? "color: ".concat(color, ";") : '';
 }, (0, _media.mediaMobile)(_templateObject4()));
 

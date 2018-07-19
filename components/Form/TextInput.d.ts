@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InputProps } from './types';
 interface Props extends InputProps {
     placeholder?: string;
     type: 'text' | 'number' | 'password' | 'email' | 'phone';

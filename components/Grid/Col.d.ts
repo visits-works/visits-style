@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StyledComponentClass } from 'styled-components';
-import { ColSizeType } from '../../types';
 interface ColProps {
     narrow?: boolean;
     size?: ColSizeType;

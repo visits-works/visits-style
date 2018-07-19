@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { ColorType, ColSizeType } from '../../types';
 interface Props {
     title?: string;
     size?: ColSizeType;
     domId?: string;
     show?: boolean;
-    children?: Node;
-    footer?: Node;
+    children?: React.ReactNode;
+    footer?: React.ReactNode;
     color?: ColorType;
     closeModal: () => void;
 }

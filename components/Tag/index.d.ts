@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ColorType } from '../../types';
 interface Props {
     /** aaa */
     children?: Node;

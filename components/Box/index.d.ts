@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StyledComponentClass } from 'styled-components';
-import { ColorType } from '../../types';
 interface Props {
     color?: ColorType;
     borderless?: boolean;

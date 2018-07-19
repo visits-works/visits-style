@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ColorType, SizeType } from '../../types';
 interface Props {
     color?: ColorType;
     size?: SizeType | 'full';

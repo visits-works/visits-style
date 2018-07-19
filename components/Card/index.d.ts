@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { ColorType } from '../../types';
 interface Props {
     /** レスポンシブなイメージを追加する */
     image?: string;
     /** タイトル */
     title?: string;
     /** ヘッダーの右側に追加する */
-    headerOptions?: Node;
+    headerOptions?: React.ReactNode;
     /** header部分（イメージ）を横並びにする */
     horizontal?: boolean;
     /** footer */
-    footer?: Node;
+    footer?: React.ReactNode;
     color?: ColorType;
     style?: any;
 }
