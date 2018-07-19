@@ -15,11 +15,11 @@ interface ToastType {
   title?: string;
   message?: React.ReactNode;
   color?: ColorType;
+  duration?: number;
 }
 
 interface ToastProps extends ToastType {
   clear: () => void;
-  duration?: number;
   styles?: any;
 }
 
@@ -51,6 +51,10 @@ function animeToastOut (toast: HTMLElement) {
 }
 
 export class Toast extends PureComponent<ToastProps> {
+  static defaultProps = {
+    duration: 5000,
+  }
+
   componentDidMount() {
     if (this.props.duration) {
       this.timer = setTimeout(() => {
@@ -73,14 +77,12 @@ export class Toast extends PureComponent<ToastProps> {
 
 interface ContainerProps {
   toasts: Array<ToastType>;
-  duration?: number;
   clear: (id: string) => void;
 }
 
 export default class ToastContainer extends Component<ContainerProps> {
   static defaultProps = {
     toasts: [],
-    duration: 5000,
   }
 
   constructor(props: ContainerProps) {
@@ -114,7 +116,6 @@ export default class ToastContainer extends Component<ContainerProps> {
             <Toast
               {...props}
               clear={this.clear(props.id)}
-              duration={this.props.duration}
             />
           </Transition>
         ))}
