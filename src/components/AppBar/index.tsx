@@ -3,6 +3,7 @@ import transparentize from 'polished/lib/color/transparentize';
 import styled, { css, StyledComponentClass } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
+import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
 import { ColorType, ThemeType } from '../../types';
 
@@ -24,17 +25,6 @@ function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeT
   }
 
   return `background-color: ${backgroundColor}; color: ${textColor};`;
-}
-
-function setAlign({ align }: { align?: 'left' | 'right' }) {
-  switch (align) {
-    case 'left':
-      return 'flex-start';
-    case 'right':
-      return 'flex-end';
-    default:
-      return 'space-evenly';
-  }
 }
 
 interface NavProps {
@@ -99,6 +89,10 @@ const NavContent = styled.div<{ color?: ColorType, show?: boolean, align?: 'left
     list-style: none;
     flex-grow: 1;
     justify-content: ${setAlign};
+
+    li {
+      padding: 0 0.75rem;
+    }
   }
 
   & > div, & > span, & > form {
