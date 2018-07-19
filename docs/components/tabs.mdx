@@ -1,0 +1,46 @@
+---
+name: Tabs
+route: /components/tabs
+parent: Components
+
+description: タブ
+---
+
+import { Playground, PropsTable } from 'docz';
+import Tabs from '../../src/components/Tabs';
+
+## Basic Usages
+
+<Playground>
+  <Tabs color="primary">
+    <li><a className="active" href="#">item1</a></li>
+    <li><a href="#">item2</a></li>
+    <li><a href="#">item3</a></li>
+    <li><a href="#">item4</a></li>
+  </Tabs>
+</Playground>
+
+
+## Positions
+
+<Playground>
+  <Tabs color="primary" align="left">
+    <li><a className="active" href="#">item1</a></li>
+    <li><a href="#">item2</a></li>
+    <li><a href="#">item3</a></li>
+    <li><a href="#">item4</a></li>
+  </Tabs>
+  <Tabs color="primary" align="right">
+    <li><a className="active" href="#">item1</a></li>
+    <li><a href="#">item2</a></li>
+    <li><a href="#">item3</a></li>
+    <li><a href="#">item4</a></li>
+  </Tabs>
+  <Tabs color="primary" align="center">
+    <li><a className="active" href="#">item1</a></li>
+    <li><a href="#">item2</a></li>
+    <li><a href="#">item3</a></li>
+    <li><a href="#">item4</a></li>
+  </Tabs>
+</Playground>
+
