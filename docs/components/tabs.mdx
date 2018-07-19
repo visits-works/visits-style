@@ -8,39 +8,44 @@ description: タブ
 
 import { Playground, PropsTable } from 'docz';
 import Tabs from '../../src/components/Tabs';
+import TabTest from './TabTest.tsx';
 
 ## Basic Usages
 
 <Playground>
   <Tabs color="primary">
-    <li><a className="active" href="#">item1</a></li>
-    <li><a href="#">item2</a></li>
-    <li><a href="#">item3</a></li>
-    <li><a href="#">item4</a></li>
+    <span active><a href="#">item1</a></span>
+    <span><a href="#">item2</a></span>
+    <span><a href="#">item3</a></span>
+    <span><a href="#">item4</a></span>
   </Tabs>
 </Playground>
+
+
+## Demo
+
+<TabTest />
 
 
 ## Positions
 
 <Playground>
   <Tabs color="primary" align="left">
-    <li><a className="active" href="#">item1</a></li>
-    <li><a href="#">item2</a></li>
-    <li><a href="#">item3</a></li>
-    <li><a href="#">item4</a></li>
+    <span active><a >item1</a></span>
+    <span><a href="#">item2</a></span>
+    <span><a href="#">item3</a></span>
+    <span><a href="#">item4</a></span>
   </Tabs>
   <Tabs color="primary" align="right">
-    <li><a className="active" href="#">item1</a></li>
-    <li><a href="#">item2</a></li>
-    <li><a href="#">item3</a></li>
-    <li><a href="#">item4</a></li>
+    <span active><a href="#">item1</a></span>
+    <span><a href="#">item2</a></span>
+    <span><a href="#">item3</a></span>
+    <span><a href="#">item4</a></span>
   </Tabs>
   <Tabs color="primary" align="center">
-    <li><a className="active" href="#">item1</a></li>
-    <li><a href="#">item2</a></li>
-    <li><a href="#">item3</a></li>
-    <li><a href="#">item4</a></li>
+    <span active><a href="#">item1</a></span>
+    <span><a href="#">item2</a></span>
+    <span><a href="#">item3</a></span>
+    <span><a href="#">item4</a></span>
   </Tabs>
 </Playground>
-
