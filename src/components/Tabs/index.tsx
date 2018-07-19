@@ -1,7 +1,7 @@
 import React, { Component, Children, CSSProperties } from 'react';
 import styled, { StyledComponentClass } from 'styled-components';
 import setAlign from '../../utils/setAlign';
-import { ThemeType, ColorType } from '../../types';
+import { ThemeType, ColorType, AlignType } from '../../types';
 import Button from '../Button';
 
 const Wrapper = styled.nav`
@@ -63,7 +63,7 @@ const Indicator = styled.div<{ color?: ColorType, style?: CSSProperties }>`
 interface Props {
   /**  */
   color?: ColorType;
-  align?: 'left' | 'right' | 'center';
+  align?: AlignType;
   maxItems?: number;
 
   children: any;
@@ -137,6 +137,7 @@ export default class Tabs extends Component<Props> {
     };
   }
 
+  // TODO: make tab scrollable via arrow icons
   renderChildren = (child: React.ReactChild, index: number) => {
     if (this.state.start > index) return null;
     if (this.state.start + index >= this.props.maxItems!) return null;

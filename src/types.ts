@@ -5,6 +5,8 @@ export declare type SizeType = 'small' | 'medium' | 'large';
 
 export declare type ColSizeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
+export declare type AlignType = 'left' | 'right' | 'center';
+
 export declare interface InputProps {
   name: string;
 }

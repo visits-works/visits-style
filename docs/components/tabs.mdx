@@ -10,14 +10,18 @@ import { Playground, PropsTable } from 'docz';
 import Tabs from '../../src/components/Tabs';
 import TabTest from './TabTest.tsx';
 
+## Props
+
+<PropsTable of={Tabs} />
+
 ## Basic Usages
 
 <Playground>
   <Tabs color="primary">
-    <span active><a href="#">item1</a></span>
-    <span><a href="#">item2</a></span>
-    <span><a href="#">item3</a></span>
-    <span><a href="#">item4</a></span>
+    <Tabs.Item active><a href="#">item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
   </Tabs>
 </Playground>
 
@@ -31,21 +35,21 @@ import TabTest from './TabTest.tsx';
 
 <Playground>
   <Tabs color="primary" align="left">
-    <span active><a >item1</a></span>
-    <span><a href="#">item2</a></span>
-    <span><a href="#">item3</a></span>
-    <span><a href="#">item4</a></span>
+    <Tabs.Item active><a >item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
   </Tabs>
   <Tabs color="primary" align="right">
-    <span active><a href="#">item1</a></span>
-    <span><a href="#">item2</a></span>
-    <span><a href="#">item3</a></span>
-    <span><a href="#">item4</a></span>
+    <Tabs.Item active><a href="#">item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
   </Tabs>
   <Tabs color="primary" align="center">
-    <span active><a href="#">item1</a></span>
-    <span><a href="#">item2</a></span>
-    <span><a href="#">item3</a></span>
-    <span><a href="#">item4</a></span>
+    <Tabs.Item active><a href="#">item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
   </Tabs>
 </Playground>
