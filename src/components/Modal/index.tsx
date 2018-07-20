@@ -14,7 +14,8 @@ const wrapperStyle: React.CSSProperties = {
   left: 0,
   right: 0,
   bottom: 0,
-  display: 'block',
+  display: 'flex',
+  alignItems: 'center',
   zIndex: 9997,
   overflowY: 'scroll',
   backgroundColor: 'rgba(30, 30, 30, 0.9)',
@@ -23,7 +24,7 @@ const wrapperStyle: React.CSSProperties = {
 const colStyle: React.CSSProperties = {
   zIndex: 9999,
   padding: '1rem',
-  margin: '0 auto'
+  margin: 'auto'
 }
 
 interface Props {
