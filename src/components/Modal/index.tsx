@@ -17,7 +17,7 @@ const wrapperStyle: React.CSSProperties = {
   display: 'block',
   zIndex: 9997,
   overflowY: 'scroll',
-  backgroundColor: 'rgba(0, 0, 0, 0.25)',
+  backgroundColor: 'rgba(30, 30, 30, 0.9)',
 }
 
 const colStyle: React.CSSProperties = {
@@ -102,7 +102,7 @@ export default class Modal extends React.Component<Props> {
     this.shouldClose = null;
   }
 
-  handleContentOnMouseUp = () => {
+  handleContentOnMouse = () => {
     this.shouldClose = false;
   };
 
@@ -119,7 +119,14 @@ export default class Modal extends React.Component<Props> {
           appear
           unmountOnExit
         >
-          <Col size={size || 6} role="dialog" style={colStyle} onMouseUp={this.handleContentOnMouseUp}>
+          <Col
+            size={size || 6}
+            role="dialog"
+            style={colStyle}
+            onMouseUp={this.handleContentOnMouse}
+            onMouseDown={this.handleContentOnMouse}
+            auto
+          >
             <Card title={title} footer={footer} color={color}>
               {children}
             </Card>

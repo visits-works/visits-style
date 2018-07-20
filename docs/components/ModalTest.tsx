@@ -27,6 +27,7 @@ export default class ModalTest extends React.PureComponent {
               <Button color="link">Save changes</Button>
             </div>
           )}
+          closeOnOverlay
         >
           Modal body text goes here.
         </Modal>
