@@ -8,9 +8,18 @@ description:
 
 import { Playground, PropsTable } from 'docz';
 import LoadingBarTest from './LoadingBarTest.tsx';
+import Spinner from '../../src/components/Loading/Spinner.tsx';
 
-## Loading Bar
+## Bar
 
 <Playground>
   <LoadingBarTest />
+</Playground>
+
+
+## Spinner
+
+<Playground>
+  <Spinner color="info" width="50px" height="50px" style={{ margin: '0.5rem' }} />
+  <Spinner color="primary" width="50px" height="50px" borderSize="5px" style={{ margin: '0.5rem' }} />
 </Playground>
