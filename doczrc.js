@@ -18,7 +18,7 @@ export default {
   title: 'visits-style',
   description: 'design compoentns for visits technology',
   source: '.',
-  base: process.env.NODE_ENV === 'production' ? '/visits-style' : '/',
+  base: '/visits-style',
   // base: '/',
   port: '5000',
   typescript: true,

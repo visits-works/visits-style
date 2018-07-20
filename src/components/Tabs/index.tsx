@@ -52,6 +52,7 @@ const Indicator = styled.div<{ color?: ColorType, style?: CSSProperties }>`
   height: 2px;
 
   visibility: hidden;
+  transform-origin: left;
 
   will-change: transform;
   transition-property: transform;
