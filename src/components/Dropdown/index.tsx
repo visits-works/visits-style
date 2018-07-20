@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 import findColorInvert from '../../utils/findColorInvert';
 import Button from '../Button';
@@ -11,20 +12,36 @@ const Wrapper = styled(Button)`
   vertical-align: top;
 `;
 
-const Tooltip = styled(Box)<{ show?: boolean }>`
+const Tooltip = styled(Box)`
   position: absolute;
-  display: none;
+  display: flex;
   clear: both;
   top: 0;
   left: 0;
   background-color: white;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   z-index: 9999;
-  will-change: transform;
   padding: 0.5rem 0;
   width: auto;
 
-  ${({ show }) => (show ? 'display: flex;' : '')}
+  will-change: transform, opacity;
+  transform: scaleY(0.75);
+  transform-origin: top;
+  opacity: 0;
+
+  transition-property: transform, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  &.start {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  &.end {
+    transform: scaleY(0.75);
+    opacity: 0;
+  }
 `;
 
 const Divider = styled.div`
@@ -86,7 +103,7 @@ export default class Dropdown extends React.Component<Props, State> {
   openDropdown = () => {
     if (this.state.show || !this.element.current) return;
     const height = this.element.current.offsetHeight + 2;
-    const style = { transform: `translate3d(0px, ${height}px, 0px)`, top: 0, left: 0 };
+    const style = { top: `${height}px`, left: 0 };
 
     this.setState({ show: true, style });
   }
@@ -114,16 +131,27 @@ export default class Dropdown extends React.Component<Props, State> {
         onBlur={this.closeDropdown}
       >
         {label}
-        <Tooltip show={show} style={style}>
-          {React.Children.map(children, child => {
-            // @ts-ignore
-            if (child.props.divider) {
-              return <Divider />;
-            }
-            // @ts-ignore
-            return <MenuItem {...child.props} onClick={this.onClickChild(child.props)} />;
-          })}
-        </Tooltip>
+        <CSSTransition
+          classNames={{
+            appear: 'start',
+            enterDone: 'start',
+            exit: 'end',
+          }}
+          in={show}
+          timeout={150}
+          unmountOnExit
+        >
+          <Tooltip style={style}>
+            {React.Children.map(children, child => {
+              // @ts-ignore
+              if (child.props.divider) {
+                return <Divider />;
+              }
+              // @ts-ignore
+              return <MenuItem {...child.props} onClick={this.onClickChild(child.props)} />;
+            })}
+          </Tooltip>
+        </CSSTransition>
       </Wrapper>
     );
   }
