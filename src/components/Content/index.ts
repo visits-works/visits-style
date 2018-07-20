@@ -33,11 +33,6 @@ const Content = styled.div`
   h1 {
     font-size: 2rem;
     margin-bottom: 0.5em;
-    padding-left: 1rem;
-
-    border-left: 1rem solid;
-    border-bottom: 1px solid;
-    border-color: ${({ theme }) => theme.border};
   }
 
   h2 {

@@ -22,24 +22,27 @@ export const Progress = styled.progress<Props>`
 
   ${({ size }) => setSize('height', size)}
 
+  will-change: width;
+
+  transition-property: width;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
   &::-webkit-progress-bar {
     background-color: ${({ theme }) => theme.background};
   }
 
   &::-webkit-progress-value {
     background-color: ${({ theme }) => theme.primary};
-    transition: width 400ms linear;
   }
 
   &::-moz-progress-bar {
     background-color: ${({ theme }) => theme.primary};
-    transition: width 400ms linear;
   }
 
   &::-ms-fill {
     border: 0;
     background-color: ${({ theme }) => theme.primary};
-    transition: width 400ms linear;
   }
 `;
 Progress.displayName = 'Progress';

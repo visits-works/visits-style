@@ -13,6 +13,7 @@ const Wrapper = styled.nav`
     ${({ align }) => align ? '' : 'flex-grow: 1;'}
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
 `;
 
