@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
@@ -6,35 +6,47 @@ import Card from '../Card';
 import Col from '../Grid/Col';
 import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
+const ESC_KEY = 27;
+
 const wrapperStyle: React.CSSProperties = {
-  width: '100%',
-  height: '100%',
   position: 'fixed',
   top: 0,
   left: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}
-
-const dropdownStyle: React.CSSProperties = {
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-  top: 0,
-  left: 0,
+  right: 0,
+  bottom: 0,
+  display: 'block',
+  zIndex: 9997,
+  overflowY: 'scroll',
   backgroundColor: 'rgba(0, 0, 0, 0.25)',
 }
 
+const colStyle: React.CSSProperties = {
+  zIndex: 9999,
+  padding: '1rem',
+  margin: '0 auto'
+}
+
 interface Props {
+  /** ヘッダーのタイトル文言 */
   title?: string;
+  /** 1~12のモーダルサイズ */
   size?: ColSizeType;
+  /** 特定のdomで表示したい場合はそのidを指定してください */
   domId?: string;
+  /** trueの場合、モーダルを表示します。 */
   show?: boolean;
+  /** モーダルのbodyに入れる内容 */
   children?: React.ReactNode;
+  /** モーダルのfooterに入れる内容 */
   footer?: React.ReactNode;
+  /** モーダルの色 */
   color?: ColorType;
+  /** モーダルを閉じる処理 */
   closeModal: () => void;
+  /** オーバーレイのクリックでモーダルクローズ */
+  closeOnOverlay?: boolean;
+  /** escボタンでクローズ */
+  closeOnEsc?: boolean;
 }
 
 function animeModalIn (modal: HTMLElement) {
@@ -46,28 +58,6 @@ function animeModalIn (modal: HTMLElement) {
     easing: [0.645, 0.045, 0.355, 1],
     duration: 200,
   });
-}
-
-function getModal ({ show, size, title, children, footer, color, closeModal }: Props) {
-  if (!show) return null;
-  return (
-    <div style={wrapperStyle}>
-      <div style={dropdownStyle} onClick={closeModal} />
-        <Transition
-          addEndListener={addAnimeListener}
-          onEnter={animeModalIn}
-          timeout={200}
-          in={show}
-          appear
-        >
-          <Col size={size || 6} role="dialog" style={{ alignItems: 'center' }}>
-            <Card title={title} footer={footer} color={color}>
-              {children}
-            </Card>
-          </Col>
-        </Transition>
-    </div>
-  );
 }
 
 export default class Modal extends React.Component<Props> {
@@ -94,11 +84,57 @@ export default class Modal extends React.Component<Props> {
     }
   }
 
+  onKeyDown = (e: any) => {
+    if (this.props.closeOnEsc && e.keyCode === ESC_KEY && this.props.closeModal) {
+      this.props.closeModal();
+    }
+  }
+
+  onClickOverlay = () => {
+    if (this.shouldClose === null) {
+      this.shouldClose = true;
+    }
+
+    if (this.shouldClose && this.props.closeOnOverlay && this.props.closeModal) {
+      this.props.closeModal();
+    }
+
+    this.shouldClose = null;
+  }
+
+  handleContentOnMouseUp = () => {
+    this.shouldClose = false;
+  };
+
+  getModal = () => {
+    const { show, size, title, children, footer, color } = this.props;
+    if (!show) return;
+    return (
+      <div style={wrapperStyle} onClick={this.onClickOverlay} aria-modal="true">
+        <Transition
+          addEndListener={addAnimeListener}
+          onEnter={animeModalIn}
+          timeout={200}
+          in={show}
+          appear
+          unmountOnExit
+        >
+          <Col size={size || 6} role="dialog" style={colStyle} onMouseUp={this.handleContentOnMouseUp}>
+            <Card title={title} footer={footer} color={color}>
+              {children}
+            </Card>
+          </Col>
+        </Transition>
+      </div>
+    );
+  }
+
   element: HTMLDivElement;
+  shouldClose: boolean | null = null;
 
   render() {
     return createPortal(
-      getModal(this.props),
+      this.getModal(),
       this.element,
     );
   }

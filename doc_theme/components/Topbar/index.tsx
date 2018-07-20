@@ -15,7 +15,7 @@ export default function Topbar() {
       brand={<Link to="/"><Logo /></Link>}
       color="dark"
       fixed
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 10 }}
     >
       <Docs>
         {({ docs: allDocs }) => {
