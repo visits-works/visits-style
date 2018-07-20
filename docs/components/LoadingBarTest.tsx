@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import LoadingBar from '../../src/components/Loading/Indicator';
+import LoadingBar from '../../src/components/Loading/Bar';
 import Button from '../../src/components/Button';
 
 export default class LoadingBarTest extends PureComponent {

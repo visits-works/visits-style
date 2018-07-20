@@ -12,7 +12,7 @@ export const Bar = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.primary};
 
-  will-change: transform;
+  will-change: transform, opacity;
   z-index: 1000000;
 
   transition-property: transform, opacity;
@@ -20,10 +20,6 @@ export const Bar = styled.div`
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
   &.start {
-    transform: scaleX(0.8);
-  }
-
-  &.waiting {
     transform: scaleX(0.8);
   }
 
@@ -47,7 +43,7 @@ export default class LoadingBar extends PureComponent<Props> {
       <CSSTransition
         classNames={{
           appear: 'start',
-          enterDone: 'waiting',
+          enterDone: 'start',
           exit: 'end',
         }}
         timeout={200}
