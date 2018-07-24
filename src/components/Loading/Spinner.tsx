@@ -1,3 +1,4 @@
+import * as React from 'react';
 import styled, { css, StyledComponentClass } from 'styled-components';
 
 interface Props {
