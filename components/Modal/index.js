@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = require("react-dom");
 
@@ -20,8 +20,6 @@ var _Col = _interopRequireDefault(require("../Grid/Col"));
 var _anime = require("../../utils/anime");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -41,23 +39,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var ESC_KEY = 27;
 var wrapperStyle = {
-  width: '100%',
-  height: '100%',
   position: 'fixed',
   top: 0,
   left: 0,
+  right: 0,
+  bottom: 0,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  zIndex: 9997,
+  overflowY: 'scroll',
+  backgroundColor: 'rgba(30, 30, 30, 0.9)'
 };
-var dropdownStyle = {
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.25)'
+var colStyle = {
+  zIndex: 9999,
+  padding: '1rem',
+  margin: 'auto'
 };
 
 function animeModalIn(modal) {
@@ -73,39 +71,6 @@ function animeModalIn(modal) {
   });
 }
 
-function getModal(_ref) {
-  var show = _ref.show,
-      size = _ref.size,
-      title = _ref.title,
-      children = _ref.children,
-      footer = _ref.footer,
-      color = _ref.color,
-      closeModal = _ref.closeModal;
-  if (!show) return null;
-  return React.createElement("div", {
-    style: wrapperStyle
-  }, React.createElement("div", {
-    style: dropdownStyle,
-    onClick: closeModal
-  }), React.createElement(_Transition.default, {
-    addEndListener: _anime.addAnimeListener,
-    onEnter: animeModalIn,
-    timeout: 200,
-    in: show,
-    appear: true
-  }, React.createElement(_Col.default, {
-    size: size || 6,
-    role: "dialog",
-    style: {
-      alignItems: 'center'
-    }
-  }, React.createElement(_Card.default, {
-    title: title,
-    footer: footer,
-    color: color
-  }, children))));
-}
-
 var Modal =
 /*#__PURE__*/
 function (_React$Component) {
@@ -117,6 +82,64 @@ function (_React$Component) {
     _classCallCheck(this, Modal);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Modal).call(this, props));
+
+    _this.onKeyDown = function (e) {
+      if (_this.props.closeOnEsc && e.keyCode === ESC_KEY && _this.props.closeModal) {
+        _this.props.closeModal();
+      }
+    };
+
+    _this.onClickOverlay = function () {
+      if (_this.shouldClose === null) {
+        _this.shouldClose = true;
+      }
+
+      if (_this.shouldClose && _this.props.closeOnOverlay && _this.props.closeModal) {
+        _this.props.closeModal();
+      }
+
+      _this.shouldClose = null;
+    };
+
+    _this.handleContentOnMouse = function () {
+      _this.shouldClose = false;
+    };
+
+    _this.getModal = function () {
+      var _this$props = _this.props,
+          show = _this$props.show,
+          size = _this$props.size,
+          title = _this$props.title,
+          children = _this$props.children,
+          footer = _this$props.footer,
+          color = _this$props.color;
+      if (!show) return;
+      return _react.default.createElement("div", {
+        style: wrapperStyle,
+        onClick: _this.onClickOverlay,
+        "aria-modal": "true"
+      }, _react.default.createElement(_Transition.default, {
+        addEndListener: _anime.addAnimeListener,
+        onEnter: animeModalIn,
+        timeout: 200,
+        in: show,
+        appear: true,
+        unmountOnExit: true
+      }, _react.default.createElement(_Col.default, {
+        size: size || 6,
+        role: "dialog",
+        style: colStyle,
+        onMouseUp: _this.handleContentOnMouse,
+        onMouseDown: _this.handleContentOnMouse,
+        auto: true
+      }, _react.default.createElement(_Card.default, {
+        title: title,
+        footer: footer,
+        color: color
+      }, children))));
+    };
+
+    _this.shouldClose = null;
     _this.element = document.createElement('div');
     _this.element.id = props.domId || 'modal';
     document.body.appendChild(_this.element);
@@ -138,12 +161,12 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return (0, _reactDom.createPortal)(getModal(this.props), this.element);
+      return (0, _reactDom.createPortal)(this.getModal(), this.element);
     }
   }]);
 
   return Modal;
-}(React.Component);
+}(_react.default.Component);
 
 exports.default = Modal;
 Modal.defaultProps = {

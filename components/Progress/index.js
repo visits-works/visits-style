@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Progress = _styledComponents.default.progress.withConfig({
   displayName: "Progress"
-})(["-moz-appearance:none;-webkit-appearance:none;border:none;border-radius:290486px;display:block;overflow:hidden;padding:0;width:100%;color:", ";", " &::-webkit-progress-bar{background-color:", ";}&::-webkit-progress-value{background-color:", ";transition:width 400ms linear;}&::-moz-progress-bar{background-color:", ";transition:width 400ms linear;}&::-ms-fill{border:0;background-color:", ";transition:width 400ms linear;}"], function (_ref) {
+})(["-moz-appearance:none;-webkit-appearance:none;border:none;border-radius:290486px;display:block;overflow:hidden;padding:0;width:100%;color:", ";", " will-change:width;transition-property:width;transition-duration:350ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&::-webkit-progress-bar{background-color:", ";}&::-webkit-progress-value{background-color:", ";}&::-moz-progress-bar{background-color:", ";}&::-ms-fill{border:0;background-color:", ";}"], function (_ref) {
   var theme = _ref.theme;
   return theme.background;
 }, function (_ref2) {

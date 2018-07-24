@@ -41,7 +41,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var Wrapper = _styledComponents.default.nav.withConfig({
   displayName: "Tabs__Wrapper"
-})(["display:flex;justify-content:", ";.tab-content{position:relative;display:flex;", " align-items:center;justify-content:center;}"], _setAlign.default, function (_ref) {
+})(["display:flex;justify-content:", ";.tab-content{position:relative;display:flex;", " align-items:center;justify-content:center;overflow:hidden;}"], _setAlign.default, function (_ref) {
   var align = _ref.align;
   return align ? '' : 'flex-grow: 1;';
 });
@@ -61,7 +61,7 @@ function setColor(_ref3) {
 
 var Indicator = _styledComponents.default.div.withConfig({
   displayName: "Tabs__Indicator"
-})(["position:absolute;bottom:0;left:0;background-color:", ";height:2px;visibility:hidden;will-change:transform;transition-property:transform;transition-duration:200ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);"], setColor);
+})(["position:absolute;bottom:0;left:0;background-color:", ";height:2px;visibility:hidden;transform-origin:left;will-change:transform;transition-property:transform;transition-duration:200ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);"], setColor);
 
 var Tabs =
 /*#__PURE__*/
