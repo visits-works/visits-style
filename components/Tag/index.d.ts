@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColorType } from '../../styled';
 interface Props {
     /** aaa */
     children?: Node;

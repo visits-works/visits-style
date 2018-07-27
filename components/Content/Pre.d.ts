@@ -1,4 +1,4 @@
-import * as React from 'react';
-import { StyledComponentClass } from 'styled-components';
-declare const Pre: StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>, any, React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>>;
+import React from 'react';
+import { StyledComponentClass, ThemeType } from '../../styled';
+declare const Pre: StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>, ThemeType, React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>>;
 export default Pre;

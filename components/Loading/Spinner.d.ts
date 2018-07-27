@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyledComponentClass } from 'styled-components';
+import React from 'react';
+import { ColorType, ThemeType, StyledComponentClass } from '../../styled';
 interface Props {
     color?: ColorType;
     style?: any;
@@ -7,5 +7,5 @@ interface Props {
     height?: string;
     borderSize?: string;
 }
-declare const Spinner: StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
+declare const Spinner: StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
 export default Spinner;

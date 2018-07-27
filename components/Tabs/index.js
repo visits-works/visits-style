@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _setAlign = _interopRequireDefault(require("../../utils/setAlign"));
 
@@ -39,14 +39,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = _styledComponents.default.nav.withConfig({
+var Wrapper = _styled.default.nav.withConfig({
   displayName: "Tabs__Wrapper"
 })(["display:flex;justify-content:", ";.tab-content{position:relative;display:flex;", " align-items:center;justify-content:center;overflow:hidden;}"], _setAlign.default, function (_ref) {
   var align = _ref.align;
   return align ? '' : 'flex-grow: 1;';
 });
 
-var TabItem = _styledComponents.default.div.withConfig({
+var TabItem = _styled.default.div.withConfig({
   displayName: "Tabs__TabItem"
 })(["display:block;flex-grow:1;cursor:pointer;a{display:flex;color:", ";justify-content:center;align-items:center;vertical-align:top;padding:0.375em 0.75em;border-bottom:2px solid transparent;transition-property:background-color;transition-duration:150ms;transition-timing-function:ease-in-out;&:hover{background-color:rgba(0,0,0,0.03);}}"], function (_ref2) {
   var theme = _ref2.theme;
@@ -59,7 +59,7 @@ function setColor(_ref3) {
   return !color || color === 'light' ? theme.background : theme[color];
 }
 
-var Indicator = _styledComponents.default.div.withConfig({
+var Indicator = _styled.default.div.withConfig({
   displayName: "Tabs__Indicator"
 })(["position:absolute;bottom:0;left:0;background-color:", ";height:2px;visibility:hidden;transform-origin:left;will-change:transform;transition-property:transform;transition-duration:200ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);"], setColor);
 

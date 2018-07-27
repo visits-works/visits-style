@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
+var _styled = _interopRequireWildcard(require("../../styled"));
 
 var _media = require("../../utils/media");
 
@@ -89,13 +89,13 @@ function setResponsive(_ref) {
   var fluid = _ref.fluid;
 
   if (fluid) {
-    return (0, _styledComponents.css)(["", " ", " ", ""], (0, _media.mediaMobile)(_templateObject()), (0, _media.mediaDesktop)(_templateObject2()), (0, _media.mediaFullHD)(_templateObject3()));
+    return (0, _styled.css)(["", " ", " ", ""], (0, _media.mediaMobile)(_templateObject()), (0, _media.mediaDesktop)(_templateObject2()), (0, _media.mediaFullHD)(_templateObject3()));
   }
 
-  return (0, _styledComponents.css)(["", " ", " ", " ", ""], (0, _media.mediaMobile)(_templateObject4()), (0, _media.mediaTablet)(_templateObject5(), _variables.tablet - 2 * _variables.smallGutter), (0, _media.mediaDesktop)(_templateObject6(), _variables.desktop - 2 * _variables.gutter), (0, _media.mediaFullHD)(_templateObject7(), _variables.fullhd - 2 * _variables.gutter));
+  return (0, _styled.css)(["", " ", " ", " ", ""], (0, _media.mediaMobile)(_templateObject4()), (0, _media.mediaTablet)(_templateObject5(), _variables.tablet - 2 * _variables.smallGutter), (0, _media.mediaDesktop)(_templateObject6(), _variables.desktop - 2 * _variables.gutter), (0, _media.mediaFullHD)(_templateObject7(), _variables.fullhd - 2 * _variables.gutter));
 }
 
-var Container = _styledComponents.default.div.withConfig({
+var Container = _styled.default.div.withConfig({
   displayName: "Container"
 })(["position:relative;margin:0 auto;width:auto;max-width:100%;", ""], setResponsive);
 

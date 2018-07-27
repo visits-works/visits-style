@@ -1,4 +1,5 @@
 import React from 'react';
+import { ColorType, SizeType } from '../../styled';
 interface Props {
     label: React.ReactNode;
     color?: ColorType;

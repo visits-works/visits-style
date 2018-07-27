@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyledComponentClass } from 'styled-components';
+import React, { PureComponent } from 'react';
+import { ColorType, ThemeType, StyledComponentClass } from '../../styled';
 interface Props {
     /** background色 */
     color?: ColorType;
@@ -23,7 +23,7 @@ interface Props {
 declare type State = {
     show: boolean;
 };
-export default class AppBar extends React.PureComponent<Props, State> {
+export default class AppBar extends PureComponent<Props, State> {
     static defaultProps: {
         color: null;
         brand: null;
@@ -33,7 +33,7 @@ export default class AppBar extends React.PureComponent<Props, State> {
         backdrop: boolean;
         style: null;
     };
-    static Item: StyledComponentClass<React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>, any, React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>>;
+    static Item: StyledComponentClass<React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>, ThemeType, React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>>;
     state: {
         show: boolean;
     };

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { PureComponent, ReactNode } from 'react';
 interface Props {
     error?: string;
     help?: string;
     label?: string;
-    children: React.ReactChildren;
+    children: ReactNode;
 }
-export default class Field extends React.PureComponent<Props> {
+export default class Field extends PureComponent<Props> {
     renderMessage(): JSX.Element | null;
     render(): JSX.Element;
 }

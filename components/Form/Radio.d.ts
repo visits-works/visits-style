@@ -1,9 +1,10 @@
-import * as React from 'react';
+import { PureComponent, ReactNode } from 'react';
+import { InputProps } from './style';
 interface Props extends InputProps {
     value: string | number;
-    children?: React.ReactChild;
+    children?: ReactNode;
 }
-export default class Radio extends React.PureComponent<Props> {
+export default class Radio extends PureComponent<Props> {
     static defaultProps: {
         name: null;
         children: null;

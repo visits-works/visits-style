@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.Toast = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = require("react-dom");
 
@@ -15,7 +15,7 @@ var _TransitionGroup = _interopRequireDefault(require("react-transition-group/Tr
 
 var _animejs = _interopRequireDefault(require("animejs"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _anime = require("../../utils/anime");
 
@@ -43,7 +43,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = (0, _styledComponents.default)(_Box.default).withConfig({
+var Wrapper = (0, _styled.default)(_Box.default).withConfig({
   displayName: "Toast__Wrapper"
 })(["padding:0.375em 0.75em;max-width:100%;margin-bottom:1rem;width:fit-content;"]);
 
@@ -99,7 +99,7 @@ function (_PureComponent) {
       var _this$props = this.props,
           message = _this$props.message,
           color = _this$props.color;
-      return React.createElement(Wrapper, {
+      return _react.default.createElement(Wrapper, {
         borderless: true,
         color: color
       }, message);
@@ -107,7 +107,7 @@ function (_PureComponent) {
   }]);
 
   return Toast;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.Toast = Toast;
 Toast.defaultProps = {
@@ -134,17 +134,17 @@ function (_Component) {
 
     _this2.renderToast = function () {
       var toasts = _this2.props.toasts;
-      return React.createElement(_TransitionGroup.default, {
+      return _react.default.createElement(_TransitionGroup.default, {
         component: null
       }, toasts.map(function (props) {
-        return React.createElement(_Transition.default, {
+        return _react.default.createElement(_Transition.default, {
           key: props.id,
           addEndListener: _anime.addAnimeListener,
           onEnter: animeToastIn,
           onExit: animeToastOut,
           timeout: 250,
           unmountOnExit: true
-        }, React.createElement(Toast, Object.assign({}, props, {
+        }, _react.default.createElement(Toast, Object.assign({}, props, {
           clear: _this2.clear(props.id)
         })));
       }));
@@ -169,7 +169,7 @@ function (_Component) {
   }]);
 
   return ToastContainer;
-}(React.Component);
+}(_react.Component);
 
 exports.default = ToastContainer;
 ToastContainer.defaultProps = {

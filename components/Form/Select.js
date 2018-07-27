@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _style = _interopRequireDefault(require("./style"));
 
@@ -43,7 +43,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var InputWrapper = _styledComponents.default.div.withConfig({
+var InputWrapper = _styled.default.div.withConfig({
   displayName: "Select__InputWrapper"
 })(["display:inline-block;max-width:100%;position:relative;vertical-align:top;", " select{", " display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;background-color:transparent;padding:0.375em 0.625em;", " ", " border-radius:4px;border:1px solid ", ";will-change:box-shadow;transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;option{padding:0.5em 1em;}&:hover{border-color:", ";}&:focus{outline:none;border-color:", ";", "}&::-ms-expand{display:none;}}&::after{", " right:1em;z-index:4;}"], function (_ref) {
   var multiple = _ref.multiple;
@@ -73,8 +73,8 @@ var InputWrapper = _styledComponents.default.div.withConfig({
 
 var Select =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Select, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(Select, _PureComponent);
 
   function Select() {
     _classCallCheck(this, Select);
@@ -89,10 +89,10 @@ function (_React$PureComponent) {
           options = _this$props.options,
           rest = _objectWithoutProperties(_this$props, ["options"]);
 
-      return React.createElement(InputWrapper, null, React.createElement("select", Object.assign({}, rest), options.map(function (_ref9) {
+      return _react.default.createElement(InputWrapper, null, _react.default.createElement("select", Object.assign({}, rest), options.map(function (_ref9) {
         var id = _ref9.id,
             name = _ref9.name;
-        return React.createElement("option", {
+        return _react.default.createElement("option", {
           key: id,
           value: id
         }, name);
@@ -101,7 +101,7 @@ function (_React$PureComponent) {
   }]);
 
   return Select;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = Select;
 Select.defaultProps = {

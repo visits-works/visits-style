@@ -1,4 +1,5 @@
 import React from 'react';
+import { ColSizeType, ColorType } from '../../styled';
 interface Props {
     /** ヘッダーのタイトル文言 */
     title?: string;

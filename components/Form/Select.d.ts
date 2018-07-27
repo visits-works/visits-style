@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { PureComponent } from 'react';
+import { InputProps } from './style';
 interface Props extends InputProps {
     placeholder?: string;
     options: Array<{
@@ -6,7 +7,7 @@ interface Props extends InputProps {
         name: string;
     }>;
 }
-export default class Select extends React.PureComponent<Props> {
+export default class Select extends PureComponent<Props> {
     static defaultProps: {
         name: null;
         placeholder: null;

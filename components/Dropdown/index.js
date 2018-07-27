@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _CSSTransition = _interopRequireDefault(require("react-transition-group/CSSTransition"));
 
@@ -37,21 +37,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = (0, _styledComponents.default)(_Button.default).withConfig({
+var Wrapper = (0, _styled.default)(_Button.default).withConfig({
   displayName: "Dropdown__Wrapper"
 })(["display:inline-flex;position:relative;vertical-align:top;"]);
-var Tooltip = (0, _styledComponents.default)(_Box.default).withConfig({
+var Tooltip = (0, _styled.default)(_Box.default).withConfig({
   displayName: "Dropdown__Tooltip"
 })(["position:absolute;display:flex;clear:both;top:0;left:0;background-color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);z-index:9999;padding:0.5rem 0;width:auto;will-change:transform,opacity;transform:scaleY(0.75);transform-origin:top;opacity:0;transition-property:transform,opacity;transition-duration:150ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&.start{transform:scaleY(1);opacity:1;}&.end{transform:scaleY(0.75);opacity:0;}"]);
 
-var Divider = _styledComponents.default.div.withConfig({
+var Divider = _styled.default.div.withConfig({
   displayName: "Dropdown__Divider"
 })(["height:0;margin:0.5rem 0;overflow:hidden;border-top:1px solid ", ";"], function (_ref) {
   var theme = _ref.theme;
   return theme.border;
 });
 
-var MenuItem = _styledComponents.default.a.withConfig({
+var MenuItem = _styled.default.a.withConfig({
   displayName: "Dropdown__MenuItem"
 })(["display:block;width:100%;padding:0.25rem 1.5rem;text-align:left;white-space:nowrap;background-color:transparent;color:", ";border:0;svg{margin-left:-1rem;padding-right:0.5rem;font-size:1.5rem;}&:hover,&:focus{color:", ";background-color:rgba(0,0,0,0.05);}&:active{", ";}"], function (_ref2) {
   var theme = _ref2.theme;

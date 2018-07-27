@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,14 +35,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = _styledComponents.default.label.withConfig({
+var Wrapper = _styled.default.label.withConfig({
   displayName: "Checkbox__Wrapper"
 })(["display:inline-block;cursor:pointer;line-height:1.25;position:relative;input{cursor:pointer;margin-right:0.5em;}"]);
 
 var Checkbox =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Checkbox, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(Checkbox, _PureComponent);
 
   function Checkbox() {
     _classCallCheck(this, Checkbox);
@@ -57,14 +57,14 @@ function (_React$PureComponent) {
           children = _this$props.children,
           rest = _objectWithoutProperties(_this$props, ["children"]);
 
-      return React.createElement(Wrapper, null, React.createElement("input", Object.assign({
+      return _react.default.createElement(Wrapper, null, _react.default.createElement("input", Object.assign({
         type: "checkbox"
       }, rest)), children);
     }
   }]);
 
   return Checkbox;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = Checkbox;
 Checkbox.defaultProps = {

@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
+var _styled = _interopRequireWildcard(require("../../styled"));
 
 var _utils = require("../../utils");
 
@@ -31,29 +31,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = _styledComponents.default.div.withConfig({
+var Wrapper = _styled.default.div.withConfig({
   displayName: "Field__Wrapper"
 })(["display:block;&:not(:last-child){margin-bottom:0.75rem;}"]);
 
-var Label = _styledComponents.default.label.withConfig({
+var Label = _styled.default.label.withConfig({
   displayName: "Field__Label"
 })(["color:", ";display:block;font-size:1rem;font-weight:700;"], function (_ref) {
   var theme = _ref.theme;
   return theme.textStrong;
 });
 
-var InputControl = _styledComponents.default.div.withConfig({
+var InputControl = _styled.default.div.withConfig({
   displayName: "Field__InputControl"
 })(["span{font-size:0.75em;display:block;}", ""], function (_ref2) {
   var error = _ref2.error,
       theme = _ref2.theme;
-  return error ? (0, _styledComponents.css)(["input,select,textarea{border-color:", ";&:hover{border-color:", ";}&:focus{border-color:", ";", "}}span{color:", ";}"], theme.danger, theme.danger, theme.danger, (0, _utils.boxShadow)('0.2em', theme.danger), theme.danger) : '';
+  return error ? (0, _styled.css)(["input,select,textarea{border-color:", ";&:hover{border-color:", ";}&:focus{border-color:", ";", "}}span{color:", ";}"], theme.danger, theme.danger, theme.danger, (0, _utils.boxShadow)('0.2em', theme.danger), theme.danger) : '';
 });
 
 var Field =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Field, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(Field, _PureComponent);
 
   function Field() {
     _classCallCheck(this, Field);
@@ -69,11 +69,11 @@ function (_React$PureComponent) {
           help = _this$props.help;
 
       if (error) {
-        return React.createElement("span", {
+        return _react.default.createElement("span", {
           className: "error"
         }, error);
       } else if (help) {
-        return React.createElement("span", null, help);
+        return _react.default.createElement("span", null, help);
       }
 
       return null;
@@ -85,14 +85,14 @@ function (_React$PureComponent) {
           label = _this$props2.label,
           children = _this$props2.children,
           error = _this$props2.error;
-      return React.createElement(Wrapper, null, label && React.createElement(Label, null, label), React.createElement(InputControl, {
+      return _react.default.createElement(Wrapper, null, label && _react.default.createElement(Label, null, label), _react.default.createElement(InputControl, {
         error: error
       }, children, this.renderMessage()));
     }
   }]);
 
   return Field;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = Field;
 ;

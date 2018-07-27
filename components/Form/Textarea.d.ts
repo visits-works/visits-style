@@ -1,11 +1,12 @@
-import * as React from 'react';
+import { PureComponent } from 'react';
+import { InputProps } from './style';
 interface Props extends InputProps {
     placeholder?: string;
     value?: string;
     col?: number;
     row?: number;
 }
-export default class Textarea extends React.PureComponent<Props> {
+export default class Textarea extends PureComponent<Props> {
     static defaultProps: {
         placeholder: null;
         value: string;

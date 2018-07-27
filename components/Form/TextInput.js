@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _utils = require("../../utils");
 
@@ -35,7 +35,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Input = _styledComponents.default.input.withConfig({
+var Input = _styled.default.input.withConfig({
   displayName: "TextInput__Input"
 })(["", " max-width:100%;width:100%;position:relative;padding:0.375em 0.625em;border-radius:4px;border:1px solid ", ";", " transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;&:hover{border-color:", ";}&:focus{outline:none;border-color:", ";", "}"], _style.default, function (_ref) {
   var theme = _ref.theme;
@@ -53,8 +53,8 @@ var Input = _styledComponents.default.input.withConfig({
 
 var TextInput =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(TextInput, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(TextInput, _PureComponent);
 
   function TextInput() {
     _classCallCheck(this, TextInput);
@@ -65,12 +65,12 @@ function (_React$PureComponent) {
   _createClass(TextInput, [{
     key: "render",
     value: function render() {
-      return React.createElement(Input, Object.assign({}, this.props));
+      return _react.default.createElement(Input, Object.assign({}, this.props));
     }
   }]);
 
   return TextInput;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = TextInput;
 TextInput.defaultProps = {

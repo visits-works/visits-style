@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,14 +35,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = _styledComponents.default.label.withConfig({
+var Wrapper = _styled.default.label.withConfig({
   displayName: "Radio__Wrapper"
 })(["display:inline-block;cursor:pointer;line-height:1.25;position:relative;input{cursor:pointer;margin-right:0.5em;}&:not(:first-child){margin-left:0.5em;}"]);
 
 var Radio =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Radio, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(Radio, _PureComponent);
 
   function Radio() {
     var _this;
@@ -61,17 +61,17 @@ function (_React$PureComponent) {
           children = _this$props.children,
           rest = _objectWithoutProperties(_this$props, ["children"]);
 
-      return React.createElement(Wrapper, null, React.createElement("input", Object.assign({
+      return _react.default.createElement(Wrapper, null, _react.default.createElement("input", Object.assign({
         id: this.id,
         type: "radio"
-      }, rest)), React.createElement("label", {
+      }, rest)), _react.default.createElement("label", {
         htmlFor: this.id
       }, children));
     }
   }]);
 
   return Radio;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = Radio;
 Radio.defaultProps = {

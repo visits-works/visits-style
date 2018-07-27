@@ -4,9 +4,5 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
-var _styledComponents = require("styled-components");
-
-var _default = (0, _styledComponents.css)(["font-size:1em;position:relative;text-align:left;clear:both;&[disabeld]{box-shadow:none;}&[readonly]{box-shadow:none;}"]);
-
+var _default = "\n  font-size: 1em;\n  position: relative;\n  text-align: left;\n  clear: both;\n\n  &[disabeld] {\n    box-shadow: none;\n  }\n  &[readonly] {\n    box-shadow: none;\n  }\n";
 exports.default = _default;

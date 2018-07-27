@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyledComponentClass } from 'styled-components';
+import { ColorType, AlignType, ThemeType, StyledComponentClass } from '../../styled';
 interface Props {
     /**  */
     color?: ColorType;
@@ -22,7 +22,7 @@ export default class Tabs extends Component<Props> {
     static Item: StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & {
         align?: any;
         active: boolean;
-    }, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & {
+    }, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & {
         align?: any;
         active: boolean;
     }>;

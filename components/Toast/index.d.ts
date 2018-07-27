@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Component, PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
+import { ColorType } from '../../styled';
 interface ToastType {
     id: string;
     title?: string;

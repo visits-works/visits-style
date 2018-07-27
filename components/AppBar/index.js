@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _transparentize = _interopRequireDefault(require("polished/lib/color/transparentize"));
 
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
+var _styled = _interopRequireWildcard(require("../../styled"));
 
 var _findColorInvert = _interopRequireDefault(require("../../utils/findColorInvert"));
 
@@ -98,13 +98,13 @@ function setColor(_ref) {
       return "background-color: ".concat(backColor, "; color: ").concat(textColor, "; backdrop-filter: blur(8px);");
     }
 
-    return (0, _styledComponents.css)(["background-color:", ";color:", ";"], backColor, textColor);
+    return (0, _styled.css)(["background-color:", ";color:", ";"], backColor, textColor);
   }
 
   return "background-color: ".concat(backgroundColor, "; color: ").concat(textColor, ";");
 }
 
-var NavBar = _styledComponents.default.header.withConfig({
+var NavBar = _styled.default.header.withConfig({
   displayName: "AppBar__NavBar"
 })(["position:", ";display:flex;flex-wrap:wrap;align-items:center;justify-content:stretch;top:-1px;min-height:3.25rem;width:100%;z-index:30;", " a{color:inherit;}", " ", ""], function (_ref2) {
   var fixed = _ref2.fixed,
@@ -118,25 +118,25 @@ var NavBar = _styledComponents.default.header.withConfig({
   return fluid ? '0 0.75rem' : '0 5%';
 }));
 
-var Burger = _styledComponents.default.button.withConfig({
+var Burger = _styled.default.button.withConfig({
   displayName: "AppBar__Burger"
 })(["", " display:none;margin-left:auto;border:none;background-color:transparent;color:inherit;outline:none;&:hover{background-color:rgba(0,0,0,.05);}", ""], (0, _hambuger.default)('3.25rem'), (0, _media.mediaMobile)(_templateObject3()));
 
-var NavContent = _styledComponents.default.div.withConfig({
+var NavContent = _styled.default.div.withConfig({
   displayName: "AppBar__NavContent"
 })(["display:flex;justify-content:space-between;align-items:center;flex-basis:auto;flex-grow:1;& > ul{display:flex;flex-direction:row;list-style:none;flex-grow:1;justify-content:", ";li{padding:0 0.75rem;}}& > div,& > span,& > form{display:flex;", "}", ""], _setAlign.default, function (_ref5) {
   var color = _ref5.color;
   return color ? "color: ".concat(color, ";") : '';
 }, (0, _media.mediaMobile)(_templateObject4()));
 
-var NavItem = _styledComponents.default.li.withConfig({
+var NavItem = _styled.default.li.withConfig({
   displayName: "AppBar__NavItem"
 })(["text-align:center;a{display:block;padding:.5rem 1rem;color:inherit;opacity:1;will-change:opacity;transition:opacity 200ms cubic-bezier(0.645,0.045,0.355,1);&:hover,&.active{opacity:0.65;}}"]);
 
 var AppBar =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(AppBar, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(AppBar, _PureComponent);
 
   function AppBar() {
     var _this;
@@ -170,24 +170,24 @@ function (_React$PureComponent) {
           backdrop = _this$props.backdrop,
           align = _this$props.align;
       var show = this.state.show;
-      return React.createElement(NavBar, {
+      return _react.default.createElement(NavBar, {
         color: color,
         fixed: fixed,
         sticky: sticky,
         backdrop: backdrop,
         role: "navigation",
         style: style
-      }, brand, React.createElement(Burger, {
+      }, brand, _react.default.createElement(Burger, {
         className: show ? 'active' : '',
         onClick: this.toggleMenu
-      }, React.createElement("span", null), React.createElement("span", null), React.createElement("span", null)), React.createElement(NavContent, {
+      }, _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null)), _react.default.createElement(NavContent, {
         align: align
       }, children));
     }
   }]);
 
   return AppBar;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = AppBar;
 AppBar.defaultProps = {

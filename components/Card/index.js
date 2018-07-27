@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _Box = _interopRequireDefault(require("../Box"));
 
@@ -33,29 +33,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var CardBody = _styledComponents.default.div.withConfig({
+var CardBody = _styled.default.div.withConfig({
   displayName: "Card__CardBody"
 })(["padding:1.25rem;margin:0;"]);
 
-var CardHeader = _styledComponents.default.header.withConfig({
+var CardHeader = _styled.default.header.withConfig({
   displayName: "Card__CardHeader"
 })(["display:flex;padding:0.5rem 1.5rem;min-height:3.5rem;border-bottom:1px solid ", ";align-items:center;justify-content:space-between;"], function (_ref) {
   var theme = _ref.theme;
   return theme.border;
 });
 
-var CardFooter = _styledComponents.default.footer.withConfig({
+var CardFooter = _styled.default.footer.withConfig({
   displayName: "Card__CardFooter"
 })(["display:flex;padding:0.5rem 1.5rem;min-height:3.5rem;border-top:1px solid ", ";align-items:center;justify-content:space-between;"], function (_ref2) {
   var theme = _ref2.theme;
   return theme.border;
 });
 
-var CardImage = _styledComponents.default.a.withConfig({
+var CardImage = _styled.default.a.withConfig({
   displayName: "Card__CardImage"
 })(["width:100%;img{width:100%;padding:0;margin:0;border-top-left-radius:3px;border-top-right-radius:3px;}"]);
 
-var CardImageHorizontal = _styledComponents.default.a.withConfig({
+var CardImageHorizontal = _styled.default.a.withConfig({
   displayName: "Card__CardImageHorizontal"
 })(["flex:0 0 30%;min-width:5rem;width:30%;border-top-left-radius:3px;border-bottom-left-radius:3px;background:no-repeat center/cover;", ""], function (_ref3) {
   var url = _ref3.url;
@@ -64,8 +64,8 @@ var CardImageHorizontal = _styledComponents.default.a.withConfig({
 
 var Card =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Card, _React$PureComponent);
+function (_PureComponent) {
+  _inherits(Card, _PureComponent);
 
   function Card() {
     var _this;
@@ -79,13 +79,13 @@ function (_React$PureComponent) {
           image = _this$props.image,
           title = _this$props.title,
           horizontal = _this$props.horizontal;
-      if (image && !horizontal) return React.createElement(CardImage, null, React.createElement("img", {
+      if (image && !horizontal) return _react.default.createElement(CardImage, null, _react.default.createElement("img", {
         src: image
       }));
-      if (image && horizontal) return React.createElement(CardImageHorizontal, {
+      if (image && horizontal) return _react.default.createElement(CardImageHorizontal, {
         url: image
       });
-      if (title && !horizontal) return React.createElement(CardHeader, null, React.createElement("h3", null, title));
+      if (title && !horizontal) return _react.default.createElement(CardHeader, null, _react.default.createElement("h3", null, title));
       return null;
     };
 
@@ -104,14 +104,14 @@ function (_React$PureComponent) {
       var wrapperStyle = horizontal ? {
         flexDirection: 'row'
       } : undefined;
-      return React.createElement(_Box.default, {
+      return _react.default.createElement(_Box.default, {
         style: wrapperStyle,
         color: color
-      }, header, React.createElement(CardBody, null, children), footer && React.createElement(CardFooter, null, React.Children.only(footer)));
+      }, header, _react.default.createElement(CardBody, null, children), footer && _react.default.createElement(CardFooter, null, _react.default.Children.only(footer)));
     }
   }]);
 
   return Card;
-}(React.PureComponent);
+}(_react.PureComponent);
 
 exports.default = Card;

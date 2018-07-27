@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
+var _styled = _interopRequireWildcard(require("../../styled"));
 
 var _darken = _interopRequireDefault(require("polished/lib/color/darken"));
 
@@ -50,13 +50,13 @@ function setColor(_ref) {
   var target = getColor(theme, color);
   var invertColor = (0, _findColorInvert.default)(target);
   var subColor = addonColor ? getColor(theme, addonColor) : (0, _darken.default)(0.05, target);
-  return (0, _styledComponents.css)(["color:", ";background-color:", ";a,span{color:", ";background-color:", ";}a:hover{background-color:", ";}"], invertColor, target, invertColor, subColor, (0, _darken.default)(0.05, subColor));
+  return (0, _styled.css)(["color:", ";background-color:", ";a,span{color:", ";background-color:", ";}a:hover{background-color:", ";}"], invertColor, target, invertColor, subColor, (0, _darken.default)(0.05, subColor));
 }
 
-var Wrapper = _styledComponents.default.div.withConfig({
+var Wrapper = _styled.default.div.withConfig({
   displayName: "Tag__Wrapper"
 })(["display:inline-flex;font-size:0.75rem;cursor:default;padding:0 .5rem;height:2em;user-select:none;border-radius:3px;justify-content:center;align-items:center;white-space:nowrap;line-height:1.5;", " &:not(:last-child){margin-right:0.5rem;}a,span{position:relative;display:inline-flex;flex-grow:0;flex-shrink:0;min-width:1.5rem;height:100%;margin-right:-0.5rem;margin-left:0.5rem;padding:0 .5rem;justify-content:center;align-items:center;&:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px;}&:focus{outline:none;}", "}"], setColor, function (props) {
-  return props.close ? (0, _styledComponents.css)(["&:before,&:after{background-color:currentColor;content:\"\";display:block;left:50%;position:absolute;top:50%;transform:translateX(-50%) translateY(-50%) rotate(45deg);transform-origin:center center;}&:before{height:1px;width:50%;}&:after{height:50%;width:1px;}&:hover{opacity:1;}"]) : '';
+  return props.close ? (0, _styled.css)(["&:before,&:after{background-color:currentColor;content:\"\";display:block;left:50%;position:absolute;top:50%;transform:translateX(-50%) translateY(-50%) rotate(45deg);transform-origin:center center;}&:before{height:1px;width:50%;}&:after{height:50%;width:1px;}&:hover{opacity:1;}"]) : '';
 });
 
 var Tag =

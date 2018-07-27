@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _findColorInvert = _interopRequireDefault(require("../../utils/findColorInvert"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Box = _styledComponents.default.div.withConfig({
+var Box = _styled.default.div.withConfig({
   displayName: "Box"
 })(["position:relative;display:flex;flex-direction:column;", " box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);border-radius:3px;width:100%;min-width:0;word-wrap:break-word;", ""], function (_ref) {
   var borderless = _ref.borderless,

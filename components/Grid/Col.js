@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
+var _styled = _interopRequireWildcard(require("../../styled"));
 
 var _media = require("../../utils/media");
 
@@ -51,11 +51,11 @@ function renderSize(_ref) {
   } else {
     var value = parcentage(size);
     var offVal = offset ? parcentage(offset) : 0;
-    return (0, _styledComponents.css)(["flex:none;width:", "%;", " ", ""], value, offset ? "margin-left: ".concat(offVal, "%;") : '', auto ? (0, _media.mediaMobile)(_templateObject(), value > 33 ? 100 : value * 3, offset ? "margin-left: 0;" : '') : '');
+    return (0, _styled.css)(["flex:none;width:", "%;", " ", ""], value, offset ? "margin-left: ".concat(offVal, "%;") : '', auto ? (0, _media.mediaMobile)(_templateObject(), value > 33 ? 100 : value * 3, offset ? "margin-left: 0;" : '') : '');
   }
 }
 
-var Col = _styledComponents.default.div.withConfig({
+var Col = _styled.default.div.withConfig({
   displayName: "Col"
 })(["display:block;min-height:1px;max-width:100%;", " ", " ", " padding:0.75rem;", ""], function (_ref2) {
   var narrow = _ref2.narrow;

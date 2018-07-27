@@ -7,7 +7,7 @@ exports.default = exports.Bar = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 var _CSSTransition = _interopRequireDefault(require("react-transition-group/CSSTransition"));
 
@@ -33,7 +33,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Bar = _styledComponents.default.div.withConfig({
+var Bar = _styled.default.div.withConfig({
   displayName: "Bar"
 })(["position:absolute;top:0;left:0;height:3px;transform:scaleX(0);transform-origin:left;width:100%;background:", ";will-change:transform,opacity;z-index:1000000;transition-property:transform,opacity;transition-duration:150ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&.start{transform:scaleX(0.8);}&.end{transform:scaleX(1);opacity:0;}"], function (_ref) {
   var theme = _ref.theme;
