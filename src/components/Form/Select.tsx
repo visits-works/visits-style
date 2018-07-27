@@ -1,6 +1,6 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import commonStyle from './style';
+import React, { PureComponent } from 'react';
+import styled, { SizeType } from '../../styled';
+import commonStyle, { InputProps } from './style';
 import boxShadow from '../../utils/boxShadow';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
@@ -64,7 +64,7 @@ interface Props extends InputProps {
   options: Array<{ id: string | number, name: string }>;
 }
 
-export default class Select extends React.PureComponent<Props> {
+export default class Select extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     placeholder: null,

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { css, StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { css, ColSizeType, StyledComponentClass, ThemeType } from '../../styled';
 import { mediaMobile } from '../../utils/media';
 
 interface ColProps {

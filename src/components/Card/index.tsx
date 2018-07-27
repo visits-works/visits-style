@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, ReactNode } from 'react';
+import styled, { ColorType } from '../../styled';
 import Box from '../Box';
 
 const CardBody = styled.div`
@@ -54,18 +54,18 @@ interface Props {
   /** タイトル */
   title?: string;
   /** ヘッダーの右側に追加する */
-  headerOptions?: React.ReactNode;
+  headerOptions?: ReactNode;
   /** header部分（イメージ）を横並びにする */
   horizontal?: boolean;
   /** footer */
-  footer?: React.ReactNode;
+  footer?: ReactNode;
 
   color?: ColorType;
 
   style?: any;
 }
 
-export default class Card extends React.PureComponent<Props> {
+export default class Card extends PureComponent<Props> {
   renderHeader = () => {
     const { image, title, horizontal } = this.props;
 

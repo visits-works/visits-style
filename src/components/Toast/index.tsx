@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { Component, PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import anime from 'animejs';
-import styled from 'styled-components';
+import styled, { ColorType } from '../../styled';
 import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
 import Box from '../Box';

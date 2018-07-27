@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { css, StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { css, ColorType, SizeType, ThemeType } from '../../styled';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { mediaDesktop } from '../../utils/media';

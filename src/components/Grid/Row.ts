@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { css, StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { css, ThemeType, StyledComponentClass } from '../../styled';
 import Col from './Col';
 import { fullhd, tablet } from '../../styles/variables';
 

@@ -1,3 +1,4 @@
+import { SizeType } from '../styled';
 
 type SizePropsNameType = 'font-size' | 'height';
 

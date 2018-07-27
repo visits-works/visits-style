@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { SizeType, ColorType, StyledComponentClass, ThemeType } from '../../styled';
 import setSize from '../../utils/setSize';
 
 interface Props {

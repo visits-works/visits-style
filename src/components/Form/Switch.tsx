@@ -1,5 +1,6 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, ReactNode } from 'react';
+import styled from '../../styled';
+import { InputProps } from './style';
 
 const Wrapper = styled.label`
   display: inline-block;
@@ -22,11 +23,11 @@ const Wrapper = styled.label`
 `;
 
 interface Props extends InputProps {
-  children: React.ReactChild;
+  children: ReactNode;
   checked?: boolean;
 }
 
-export default class Switch extends React.PureComponent<Props> {
+export default class Switch extends PureComponent<Props> {
   static defaultProps = {
     children: null,
     onChange: () => {},

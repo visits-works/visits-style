@@ -1,5 +1,6 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, ReactNode } from 'react';
+import styled from '../../styled';
+import { InputProps } from './style';
 
 const Wrapper = styled.label`
   display: inline-block;
@@ -15,11 +16,11 @@ const Wrapper = styled.label`
 
 interface Props extends InputProps {
   placeholder?: string;
-  children?: React.ReactChild;
+  children?: ReactNode;
   checked?: boolean;
 }
 
-export default class Checkbox extends React.PureComponent<Props> {
+export default class Checkbox extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     placeholder: null,

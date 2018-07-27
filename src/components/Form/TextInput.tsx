@@ -1,7 +1,7 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react';
+import styled from '../../styled';
 import { boxShadow, setSize } from '../../utils';
-import commonStyle from './style';
+import commonStyle, { InputProps } from './style';
 
 const Input = styled.input`
   ${commonStyle}
@@ -35,7 +35,7 @@ interface Props extends InputProps {
   value?: string | number;
 }
 
-export default class TextInput extends React.PureComponent<Props> {
+export default class TextInput extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     type: 'text',

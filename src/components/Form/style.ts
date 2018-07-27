@@ -1,6 +1,12 @@
-import { css } from 'styled-components';
 
-export default css`
+export interface InputProps {
+  name: string;
+  value?: string | number;
+  onChange: () => void;
+  onBlur: () => void;
+}
+
+export default `
   font-size: 1em;
   position: relative;
   text-align: left;

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { ThemeType, ColorType, StyledComponentClass } from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 
 interface Props {

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { css, StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { css, ColorType, SizeType, ThemeType, StyledComponentClass } from '../../styled';
 import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';

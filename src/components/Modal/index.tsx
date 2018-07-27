@@ -2,6 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
+import { ColSizeType, ColorType } from '../../styled';
 import Card from '../Card';
 import Col from '../Grid/Col';
 import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';

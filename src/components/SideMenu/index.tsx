@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { StyledComponentClass, ThemeType } from '../../styled';
 
 export const SideMenu = styled.aside`
   font-size: 1rem;

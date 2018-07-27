@@ -1,7 +1,7 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react';
+import styled from '../../styled';
 import { boxShadow, setSize } from '../../utils';
-import commonStyle from './style';
+import commonStyle, { InputProps } from './style';
 
 const Input = styled.textarea`
   ${commonStyle}
@@ -38,7 +38,7 @@ interface Props extends InputProps {
   row?: number;
 }
 
-export default class Textarea extends React.PureComponent<Props> {
+export default class Textarea extends PureComponent<Props> {
   static defaultProps = {
     placeholder: null,
     value: '',

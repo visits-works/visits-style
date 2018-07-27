@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { StyledComponentClass } from 'styled-components';
+import React from 'react';
+import styled, { StyledComponentClass, ThemeType } from '../../styled';
 import Button from '.';
 
 const ButtonGroup = styled.div`

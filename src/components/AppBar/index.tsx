@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css, StyledComponentClass } from 'styled-components';
+import styled, { css, ColorType, ThemeType, AlignType, StyledComponentClass } from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -169,7 +169,7 @@ type State = {
   show: boolean,
 };
 
-export default class AppBar extends React.PureComponent<Props, State> {
+export default class AppBar extends PureComponent<Props, State> {
   static defaultProps = {
     color: null,
     brand: null,

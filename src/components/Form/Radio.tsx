@@ -1,5 +1,6 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, ReactNode } from 'react';
+import styled from '../../styled';
+import { InputProps } from './style';
 
 const Wrapper = styled.label`
   display: inline-block;
@@ -19,10 +20,10 @@ const Wrapper = styled.label`
 
 interface Props extends InputProps {
   value: string | number;
-  children?: React.ReactChild;
+  children?: ReactNode;
 }
 
-export default class Radio extends React.PureComponent<Props> {
+export default class Radio extends PureComponent<Props> {
   static defaultProps = {
     name: null,
     children: null,
