@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Toast from '../../src/components/Toast';
 import Button from '../../src/components/Button';
+import { ColorType } from '../../src/styled';
 
-const colorList: Array<ColorType> = ['warning', 'danger', 'info', 'primary', 'success'];
+const colorList: ColorType[] = ['warning', 'danger', 'info', 'primary', 'success'];
 
 interface ToastType {
   id: string;
@@ -12,17 +13,17 @@ interface ToastType {
 }
 
 interface State {
-  list: Array<ToastType>;
+  list: ToastType[];
 }
 
 export default class ToastTest extends React.Component<{}, State> {
-  state: State = { list: [] }
+  state: State = { list: [] };
 
   addToast = () => {
     const list = this.state.list;
-    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))]
+    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
     const id = '_' + Math.random().toString(36).substr(2, 9);
-    list.push({ id, message: 'list number: ' + list.length, color });
+    list.push({ id, color, message: 'list number: ' + list.length });
     this.setState({ list });
   }
 

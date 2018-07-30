@@ -1,8 +1,10 @@
 import React from 'react';
 import * as st from 'styled-components';
+// tslint:disable-next-line
 import { ThemedStyledComponentsModule, StyledComponentClass } from 'styled-components';
 
-export type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' | 'warning' | 'danger' | 'dark' | 'text';
+export type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' |
+  'warning' | 'danger' | 'dark' | 'text';
 
 export type SizeType = 'small' | 'medium' | 'large';
 
@@ -13,8 +15,8 @@ export type AlignType = 'left' | 'right' | 'center';
 export interface InputProps {
   name: string;
   value?: string | number;
-  onChange: () => void;
-  onBlur: () => void;
+  onChange: (e: any) => void;
+  onBlur?: (e: any) => void;
 }
 
 export interface ThemeType {
