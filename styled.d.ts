@@ -8,8 +8,8 @@ export declare type AlignType = 'left' | 'right' | 'center';
 export interface InputProps {
     name: string;
     value?: string | number;
-    onChange: () => void;
-    onBlur: () => void;
+    onChange: (e: any) => void;
+    onBlur?: (e: any) => void;
 }
 export interface ThemeType {
     primary: string;
