@@ -15,8 +15,8 @@ export type AlignType = 'left' | 'right' | 'center';
 export interface InputProps {
   name: string;
   value?: string | number;
-  onChange: (e: any) => void;
-  onBlur?: (e: any) => void;
+  onChange: (e?: React.ChangeEvent<any>) => void;
+  onBlur?: (e?: React.ChangeEvent<any>) => void;
 }
 
 export interface ThemeType {

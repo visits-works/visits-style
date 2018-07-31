@@ -10,9 +10,12 @@ interface ButtonProps {
   size?: SizeType;
   outline?: boolean;
   onClick?: () => void;
+  full?: boolean;
 }
 
-function setColor({ theme, color, outline }: { theme: ThemeType, color?: ColorType, outline?: boolean }) {
+function setColor(
+  { theme, color, outline }: { theme: ThemeType, color?: ColorType, outline?: boolean }
+) {
   if (!color) {
     return css`
       background-color: ${theme.white};
@@ -27,7 +30,8 @@ function setColor({ theme, color, outline }: { theme: ThemeType, color?: ColorTy
         border-color: ${theme.borderActive};
       }
     `;
-  } else if (color === 'text') {
+  }
+  if (color === 'text') {
     return css`
       background-color: transparent;
       border-color: transparent;
@@ -100,6 +104,7 @@ const Button = styled.button<ButtonProps>`
 
   ${setColor}
   ${({ size }) => setSize('font-size', size)}
+  ${({ full }) => full ? 'width: 100%;' : ''}
 
   &:disabled {
     pointer-events: none;

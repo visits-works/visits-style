@@ -32,18 +32,18 @@ function setResponsive({ fluid }: Props) {
     `}
     ${mediaTablet`
       max-width: ${tablet - (2 * smallGutter)}px;
-      margin-right: 3%;
-      margin-left: 3%;
+      margin-right: auto;
+      margin-left: auto;
     `}
     ${mediaDesktop`
       max-width: ${desktop - (2 * gutter)}px;
-      margin-right: 5%;
-      margin-left: 5%;
+      margin-right: auto;
+      margin-left: auto;
     `}
     ${mediaFullHD`
       max-width: ${fullhd - (2 * gutter)}px;
-      margin-right: 5%;
-      margin-left: 5%;
+      margin-right: auto;
+      margin-left: auto;
     `}
   `;
 }

@@ -11,6 +11,7 @@ export default `
   position: relative;
   text-align: left;
   clear: both;
+  color: inherit;
 
   &[disabeld] {
     box-shadow: none;

@@ -83,7 +83,7 @@ const MenuItem = styled.a`
 interface Props {
   label: React.ReactNode;
   color?: ColorType;
-  children?: Array<React.ReactElement<any>>;
+  children?: React.ReactNode | React.ReactNode;
   right?: boolean;
   size?: SizeType;
 }
@@ -105,7 +105,7 @@ export default class Dropdown extends React.Component<Props, State> {
     const height = this.element.current.offsetHeight + 2;
     const style = { top: `${height}px`, left: 0 };
 
-    this.setState({ show: true, style });
+    this.setState({ style, show: true });
   }
 
   closeDropdown = () => {
