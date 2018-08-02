@@ -37,7 +37,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var Input = _styled.default.input.withConfig({
   displayName: "TextInput__Input"
-})(["", " max-width:100%;width:100%;position:relative;padding:0.375em 0.625em;border-radius:4px;border:1px solid ", ";", " transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;&:hover{border-color:", ";}&:focus{outline:none;border-color:", ";", "}"], _style.default, function (_ref) {
+})(["", " max-width:100%;width:100%;position:relative;padding:0.375em 0.625em;border-radius:4px;border:1px solid ", ";", " transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;&:hover:not(:disabled){border-color:", ";}&:focus{outline:none;border-color:", ";", "}"], _style.default, function (_ref) {
   var theme = _ref.theme;
   return theme.border;
 }, (0, _utils.setSize)('font-size'), function (_ref2) {
@@ -48,7 +48,7 @@ var Input = _styled.default.input.withConfig({
   return theme.primary;
 }, function (_ref4) {
   var theme = _ref4.theme;
-  return (0, _utils.boxShadow)('0.2em', theme.primary);
+  return (0, _utils.boxShadow)('0.1em', theme.primary);
 });
 
 var TextInput =

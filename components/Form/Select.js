@@ -45,7 +45,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var InputWrapper = _styled.default.div.withConfig({
   displayName: "Select__InputWrapper"
-})(["display:inline-block;max-width:100%;position:relative;vertical-align:top;", " select{", " display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;background-color:transparent;padding:0.375em 0.625em;", " ", " border-radius:4px;border:1px solid ", ";will-change:box-shadow;transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;option{padding:0.5em 1em;}&:hover{border-color:", ";}&:focus{outline:none;border-color:", ";", "}&::-ms-expand{display:none;}}&::after{", " right:1em;z-index:4;}"], function (_ref) {
+})(["display:inline-block;max-width:100%;position:relative;vertical-align:top;", " select{", " display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;background-color:transparent;padding:0.375em 0.625em;", " ", " border-radius:4px;border:1px solid ", ";will-change:box-shadow;transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;option{padding:0.5em 1em;}&:hover:not(:disabled){border-color:", ";}&:focus{outline:none;border-color:", ";", "}&::-ms-expand{display:none;}}&::after{", " right:1em;z-index:4;}"], function (_ref) {
   var multiple = _ref.multiple;
   return multiple ? '' : 'height: 2.25em;';
 }, _style.default, function (_ref2) {
@@ -65,7 +65,7 @@ var InputWrapper = _styled.default.div.withConfig({
   return theme.primary;
 }, function (_ref7) {
   var theme = _ref7.theme;
-  return (0, _boxShadow.default)('0.2em', theme.primary);
+  return (0, _boxShadow.default)('0.1em', theme.primary);
 }, function (_ref8) {
   var theme = _ref8.theme;
   return (0, _arrow.default)(theme.primary);

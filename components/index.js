@@ -119,7 +119,7 @@ var _Row = _interopRequireDefault(require("./Grid/Row"));
 
 var _Col = _interopRequireDefault(require("./Grid/Col"));
 
-var _Content = _interopRequireDefault(require("./Content"));
+var _Content = _interopRequireWildcard(require("./Content"));
 
 Object.keys(_Content).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -177,5 +177,7 @@ var _Card = _interopRequireDefault(require("./Card"));
 var _Dropdown = _interopRequireDefault(require("./Dropdown"));
 
 var _Modal = _interopRequireDefault(require("./Modal"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

@@ -26,7 +26,9 @@ function setColor(_ref) {
 
   if (!color) {
     return (0, _styled.css)(["background-color:", ";border-color:", ";color:", ";&:hover{border-color:", ";}&:active{border-color:", ";}"], theme.white, theme.border, theme.text, theme.borderHover, theme.borderActive);
-  } else if (color === 'text') {
+  }
+
+  if (color === 'text') {
     return (0, _styled.css)(["background-color:transparent;border-color:transparent;color:", ";&:hover{text-decoration:underline;}"], theme.text);
   }
 
@@ -34,17 +36,20 @@ function setColor(_ref) {
   var invertColor = (0, _findColorInvert.default)(target);
 
   if (outline) {
-    return (0, _styled.css)(["background-color:transparent;border-color:", ";color:", ";&:hover{background-color:", ";color:", ";}&:focus{", "}"], target, target, target, invertColor, (0, _boxShadow.default)('0.2rem', target));
+    return (0, _styled.css)(["background-color:transparent;border-color:", ";color:", ";&:hover{background-color:", ";color:", ";}&:focus{", "}"], target, target, target, invertColor, (0, _boxShadow.default)('0.2rem', target, 0.2));
   }
 
-  return (0, _styled.css)(["background-color:", ";border-color:", ";border-color:transparent;color:", ";box-shadow:none;&:hover{background-color:", ";}&:active{background-color:", ";}&:focus{", "}"], target, target, invertColor, (0, _darken.default)(0.025, target), (0, _darken.default)(0.05, target), (0, _boxShadow.default)('0.2rem', target));
+  return (0, _styled.css)(["background-color:", ";border-color:", ";border-color:transparent;color:", ";box-shadow:none;&:hover{background-color:", ";}&:active{background-color:", ";}&:focus{", "}"], target, target, invertColor, (0, _darken.default)(0.025, target), (0, _darken.default)(0.05, target), (0, _boxShadow.default)('0.2rem', target, 0.2));
 }
 
 var Button = _styled.default.button.withConfig({
   displayName: "Button"
-})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-flex;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;border:1px solid transparent;border-radius:4px;height:2.25em;padding:0.375em 0.75em;transition-property:background-color,color,box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " ", " &:disabled{pointer-events:none;box-shadow:none;opacity:0.5;}&:not(:last-child){margin-right:0.5rem;margin-bottom:0.5rem;}"], setColor, function (_ref2) {
+})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-flex;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;border:1px solid transparent;border-radius:4px;height:2.25em;padding:0.375em 0.75em;transition-property:background-color,color,box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " ", " ", " &:disabled{pointer-events:none;box-shadow:none;opacity:0.5;}&:not(:last-child){margin-right:0.5rem;margin-bottom:0.5rem;}"], setColor, function (_ref2) {
   var size = _ref2.size;
   return (0, _setSize.default)('font-size', size);
+}, function (_ref3) {
+  var full = _ref3.full;
+  return full ? 'width: 100%;' : '';
 });
 
 Button.displayName = 'Button';

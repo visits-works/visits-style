@@ -9,7 +9,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styled = _interopRequireWildcard(require("../../styled"));
 
-var _utils = require("../../utils");
+var _boxShadow = _interopRequireDefault(require("../../utils/boxShadow"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -37,7 +39,7 @@ var Wrapper = _styled.default.div.withConfig({
 
 var Label = _styled.default.label.withConfig({
   displayName: "Field__Label"
-})(["color:", ";display:block;font-size:1rem;font-weight:700;"], function (_ref) {
+})(["color:", ";display:block;font-size:1rem;font-weight:700;margin-bottom:0.325rem;"], function (_ref) {
   var theme = _ref.theme;
   return theme.textStrong;
 });
@@ -47,7 +49,7 @@ var InputControl = _styled.default.div.withConfig({
 })(["span{font-size:0.75em;display:block;}", ""], function (_ref2) {
   var error = _ref2.error,
       theme = _ref2.theme;
-  return error ? (0, _styled.css)(["input,select,textarea{border-color:", ";&:hover{border-color:", ";}&:focus{border-color:", ";", "}}span{color:", ";}"], theme.danger, theme.danger, theme.danger, (0, _utils.boxShadow)('0.2em', theme.danger), theme.danger) : '';
+  return error ? (0, _styled.css)(["input,select,textarea{border-color:", ";&:hover{border-color:", ";}&:focus{border-color:", ";", "}}span{color:", ";}"], theme.danger, theme.danger, theme.danger, (0, _boxShadow.default)('0.1em', theme.danger), theme.danger) : '';
 });
 
 var Field =
@@ -72,7 +74,9 @@ function (_PureComponent) {
         return _react.default.createElement("span", {
           className: "error"
         }, error);
-      } else if (help) {
+      }
+
+      if (help) {
         return _react.default.createElement("span", null, help);
       }
 
@@ -95,4 +99,3 @@ function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.default = Field;
-;

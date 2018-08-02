@@ -14,7 +14,7 @@ var _variables = require("../../styles/variables");
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n      max-width: ", "px;\n      margin-right: 5%;\n      margin-left: 5%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      max-width: ", "px;\n      margin-right: auto;\n      margin-left: auto;\n    "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -24,7 +24,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n      max-width: ", "px;\n      margin-right: 5%;\n      margin-left: 5%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      max-width: ", "px;\n      margin-right: auto;\n      margin-left: auto;\n    "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -34,7 +34,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      max-width: ", "px;\n      margin-right: 3%;\n      margin-left: 3%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      max-width: ", "px;\n      margin-right: auto;\n      margin-left: auto;\n    "]);
 
   _templateObject5 = function _templateObject5() {
     return data;

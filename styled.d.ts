@@ -8,8 +8,8 @@ export declare type AlignType = 'left' | 'right' | 'center';
 export interface InputProps {
     name: string;
     value?: string | number;
-    onChange: (e: any) => void;
-    onBlur?: (e: any) => void;
+    onChange: (e?: React.ChangeEvent<any>) => void;
+    onBlur?: (e?: React.ChangeEvent<any>) => void;
 }
 export interface ThemeType {
     primary: string;
@@ -31,7 +31,7 @@ export interface ThemeType {
     borderActive: string;
     color: any;
 }
-declare const styled: st.ThemedBaseStyledInterface<ThemeType>, css: st.ThemedCssFunction<ThemeType>, injectGlobal: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => void, keyframes: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => string, ThemeProvider: React.ComponentClass<st.ThemeProviderProps<ThemeType>>;
+declare const styled: st.ThemedBaseStyledInterface<ThemeType>, css: st.ThemedCssFunction<ThemeType>, injectGlobal: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => void, keyframes: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => string, ThemeProvider: React.ComponentClass<st.ThemeProviderProps<ThemeType>, React.ComponentState>;
 export { StyledComponentClass };
 export { css, injectGlobal, keyframes, ThemeProvider };
 export default styled;

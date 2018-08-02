@@ -89,8 +89,8 @@ function (_React$Component) {
       };
 
       _this.setState({
-        show: true,
-        style: style
+        style: style,
+        show: true
       });
     };
 
@@ -164,3 +164,5 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = Dropdown;
+Dropdown.Item = MenuItem;
+Dropdown.Divider = Divider;
