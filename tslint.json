@@ -11,6 +11,8 @@
     "member-access": false,
     "max-classes-per-file": false,
     "member-ordering": false,
+    "jsx-boolean-value": false,
+    "jsx-no-multiline-js": false,
     "variable-name": [true, "ban-keywords"],
     "align": [true, "parameters", "statements"]
   },

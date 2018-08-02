@@ -1,0 +1,19 @@
+---
+name: TextInput
+route: /forms/textinput
+parent: Forms
+
+description: import TextInput from 'visits-style/components/TextInput';
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Field, TextInput } from '../../src/components';
+
+## Basic usage
+
+<Playground>
+  <Field label="test-label">
+    <TextInput name="test" />
+  </Field>
+  <TextInput name="test" disabled value="test123" />
+</Playground>

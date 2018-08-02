@@ -32,10 +32,14 @@ export default function Topbar() {
                 </AppBar.Item>
               ))}
             </ul>
-          )
+          );
         }}
       </Docs>
-      <a href="https://github.com/visits-works/visits-style" target="_blank" style={{ fontSize: '1.5rem' }}>
+      <a
+        href="https://github.com/visits-works/visits-style"
+        target="_blank"
+        style={{ fontSize: '1.5rem' }}
+      >
         <GithubIcon />
       </a>
     </AppBar>

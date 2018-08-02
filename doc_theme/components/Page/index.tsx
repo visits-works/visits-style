@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import { Container, Row, Col } from '../../../src/components'
-import Sidebar from '../Sidebar'
+import { Container, Row, Col } from '../../../src/components';
+import Sidebar from '../Sidebar';
 
 const Wrapper = styled(Container)`
   h1[id], h2[id], h3[id], h4[id] {
@@ -20,7 +20,7 @@ const Header = styled.h1`
 `;
 
 const Desc = styled.p`
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: ${({ theme }) => theme.textLight};
 
   margin-bottom: 2rem;
@@ -35,7 +35,7 @@ interface CProps {
 function renderChildren({ title, name, description }: CProps, children: React.ReactChildren) {
   return (
     <Wrapper>
-      <Header>{ title || name }</Header>
+      <Header>{title || name}</Header>
       {description && <Desc>{description}</Desc>}
       {children}
     </Wrapper>

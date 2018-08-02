@@ -23,8 +23,8 @@ interface SidebarProps {
 }
 
 interface DocProps {
-  doc: { headings?: Array<any>, route?: any, name?: any };
-  docs?: Array<any>;
+  doc: { headings?: any[], route?: any, name?: any };
+  docs?: any[];
   active?: any;
 }
 
@@ -38,7 +38,7 @@ const MenuItem = ({ doc, active }: DocProps) => (
             heading.depth > 1 &&
             heading.depth < 3 && (
               <li key={heading.slug}><a href={`#${heading.slug}`}>{heading.value}</a></li>
-            )
+            ),
         )}
       </ul>
     )}
@@ -47,7 +47,7 @@ const MenuItem = ({ doc, active }: DocProps) => (
 
 export default class Sidebar extends React.PureComponent<SidebarProps> {
 
-  renderDocs = ({ docs: allDocs }: { docs: Array<any> }) => {
+  renderDocs = ({ docs: allDocs }: { docs: any[] }) => {
     const { active, parent } = this.props;
     // @ts-ignore
     const docs = allDocs.filter(doc => doc.parent === parent).sort((a, b) => (a.name > b.name));

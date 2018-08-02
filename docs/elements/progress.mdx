@@ -3,7 +3,7 @@ name: Progress Bar
 route: /elements/progress-bar
 parent: Elements
 
-description:
+description: import Progress from 'visits-style/components/Progress';
 ---
 
 import { Playground, PropsTable } from 'docz';
@@ -17,4 +17,26 @@ import { Progress } from '../../src/components';
 
 <Playground>
   <Progress value={20} max={100} />
+</Playground>
+
+
+## Sizes & custom height
+
+`size`と`height`は一緒に使えません。
+
+`size`が優先に適用されます。
+
+<Playground>
+  <Progress value={20} max={100} height="0.25rem" />
+  <br />
+  <Progress value={20} max={100} size="small" />
+  <br />
+  <Progress value={20} max={100} size="medium" />
+  <br />
+  <Progress value={20} max={100} size="large" />
+</Playground>
+
+## Circular Progress
+<Playground>
+  <Progress value={20} max={100} circle />
 </Playground>

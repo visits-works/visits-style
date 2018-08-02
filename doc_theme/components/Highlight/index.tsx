@@ -1,15 +1,13 @@
-import * as React from 'react';
-import { PureComponent, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import styled from 'styled-components';
 
-import 'prismjs';
+import prism from 'prismjs';
 import 'prismjs/components/prism-json.min';
 import 'prismjs/components/prism-jsx.min';
 import 'prismjs/components/prism-bash.min';
 import 'prismjs/components/prism-markdown.min';
 import 'prismjs/components/prism-typescript.min';
 
-import prism from 'prismjs';
 import { Pre, Button } from '../../../src/components';
 import PrismStyle from './style';
 
@@ -54,8 +52,8 @@ const Wrapper = styled.figure`
 `;
 
 interface Props {
-  className?: string,
-  children: React.ReactChildren
+  className?: string;
+  children: React.ReactChildren;
 }
 
 export default class Highlight extends PureComponent<Props> {
@@ -76,11 +74,12 @@ export default class Highlight extends PureComponent<Props> {
     // @ts-ignore
     if (document.selection) {
       // @ts-ignore
-      var range = document.body.createTextRange();
+      const range = document.body.createTextRange();
       range.moveToElementText(this.pre.current);
       range.select();
     } else if (window.getSelection) {
-      var range = document.createRange();
+      const range = document.createRange();
+      // @ts-ignore
       range.selectNode(this.pre.current);
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(range);
