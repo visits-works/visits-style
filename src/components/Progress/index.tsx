@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, SizeType, ColorType, StyledComponentClass, ThemeType } from '../../styled';
+import styled, { SizeType, ColorType, StyledComponentClass, ThemeType } from '../../styled';
 import setSize from '../../utils/setSize';
 
 interface Props {
@@ -8,12 +8,7 @@ interface Props {
   size?: SizeType;
   height?: string;
   color: ColorType;
-  circle?: boolean;
 }
-
-const circleStyle = css`
-
-`;
 
 export const Progress = styled.progress<Props>`
   -moz-appearance: none;
@@ -28,7 +23,6 @@ export const Progress = styled.progress<Props>`
 
   ${({ size }) => setSize('height', size)}
   ${({ size, height }) => !size && height ? `height: ${height};` : ''}
-  ${({ circle }) => circle ? circleStyle : ''}
 
   will-change: width;
 
