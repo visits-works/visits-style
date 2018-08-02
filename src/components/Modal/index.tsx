@@ -20,13 +20,13 @@ const wrapperStyle: React.CSSProperties = {
   zIndex: 9997,
   overflowY: 'scroll',
   backgroundColor: 'rgba(30, 30, 30, 0.9)',
-}
+};
 
 const colStyle: React.CSSProperties = {
   zIndex: 9999,
   padding: '1rem',
-  margin: 'auto'
-}
+  margin: 'auto',
+};
 
 interface Props {
   /** ヘッダーのタイトル文言 */
@@ -51,7 +51,7 @@ interface Props {
   closeOnEsc?: boolean;
 }
 
-function animeModalIn (modal: HTMLElement) {
+function animeModalIn(modal: HTMLElement) {
   anime({
     targets: modal,
     scale: [0.8, 1],
@@ -67,7 +67,7 @@ export default class Modal extends React.Component<Props> {
     domId: 'modal',
     show: false,
     color: 'white',
-  }
+  };
 
   constructor(props: Props) {
     super(props);

@@ -13,10 +13,12 @@ export default `
   clear: both;
   color: inherit;
 
-  &[disabeld] {
+  &:disabled {
     box-shadow: none;
+    background-color: rgb(128, 128, 128, 0.15);
   }
-  &[readonly] {
+  &:readonly {
     box-shadow: none;
+    background-color: rgb(128, 128, 128, 0.15);
   }
 `;

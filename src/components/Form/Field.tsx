@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react';
 import styled, { css } from '../../styled';
-import { boxShadow } from '../../utils';
+import boxShadow from '../../utils/boxShadow';
 
 const Wrapper = styled.div`
   display: block;
@@ -14,6 +14,7 @@ const Label = styled.label`
   display: block;
   font-size: 1rem;
   font-weight: 700;
+  margin-bottom: 0.325rem;
 `;
 
 const InputControl = styled.div<{ error?: string }>`
@@ -32,7 +33,7 @@ const InputControl = styled.div<{ error?: string }>`
 
       &:focus {
         border-color: ${theme.danger};
-        ${boxShadow('0.2em', theme.danger)}
+        ${boxShadow('0.1em', theme.danger)}
       }
     }
     span {
@@ -54,7 +55,8 @@ export default class Field extends PureComponent<Props> {
     const { error, help } = this.props;
     if (error) {
       return <span className="error">{error}</span>;
-    } else if (help) {
+    }
+    if (help) {
       return <span>{help}</span>;
     }
 
@@ -73,4 +75,4 @@ export default class Field extends PureComponent<Props> {
       </Wrapper>
     );
   }
-};
+}

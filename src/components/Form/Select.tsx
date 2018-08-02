@@ -38,14 +38,14 @@ const InputWrapper = styled.div<{ multiple?: boolean, size?: SizeType }>`
       padding: 0.5em 1em;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       border-color: ${({ theme }) => theme.borderHover};
     }
 
     &:focus {
       outline: none;
       border-color: ${({ theme }) => theme.primary};
-      ${({ theme }) => boxShadow('0.2em', theme.primary)}
+      ${({ theme }) => boxShadow('0.1em', theme.primary)}
     }
     &::-ms-expand {
       display: none;

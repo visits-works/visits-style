@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { ColorType, SizeType } from '../../styled';
+import styled, { ColorType, SizeType, StyledComponentClass } from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
 import findColorInvert from '../../utils/findColorInvert';
@@ -94,7 +94,10 @@ interface State {
 }
 
 export default class Dropdown extends React.Component<Props, State> {
-  state = { show: false, style: {} }
+  state = { show: false, style: {} };
+
+  static Item = MenuItem;
+  static Divider = Divider;
 
   shouldComponentUpdate(props: Props, state: State) {
     return this.state.show !== state.show;

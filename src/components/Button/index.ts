@@ -14,7 +14,7 @@ interface ButtonProps {
 }
 
 function setColor(
-  { theme, color, outline }: { theme: ThemeType, color?: ColorType, outline?: boolean }
+  { theme, color, outline }: { theme: ThemeType, color?: ColorType, outline?: boolean },
 ) {
   if (!color) {
     return css`
@@ -57,7 +57,7 @@ function setColor(
       }
 
       &:focus {
-        ${boxShadow('0.2rem', target)}
+        ${boxShadow('0.2rem', target, 0.2)}
       }
     `;
   }
@@ -78,7 +78,7 @@ function setColor(
     }
 
     &:focus {
-      ${boxShadow('0.2rem', target)}
+      ${boxShadow('0.2rem', target, 0.2)}
     }
   `;
 }

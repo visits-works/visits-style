@@ -18,14 +18,14 @@ const Input = styled.input`
   transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
 
-  &:hover {
+  &:hover:not(:disabled) {
     border-color: ${({ theme }) => theme.borderHover};
   }
 
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.primary};
-    ${({ theme }) => boxShadow('0.2em', theme.primary)}
+    ${({ theme }) => boxShadow('0.1em', theme.primary)}
   }
 `;
 
