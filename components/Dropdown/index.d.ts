@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorType, SizeType, StyledComponentClass } from '../../styled';
+import { ColorType, SizeType, StyledComponentClass, ThemeType } from '../../styled';
 interface Props {
     label: React.ReactNode;
     color?: ColorType;
@@ -16,8 +16,8 @@ export default class Dropdown extends React.Component<Props, State> {
         show: boolean;
         style: {};
     };
-    static Item: StyledComponentClass<React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, import("../../../../../../../Users/sung/Develop/visits-style/src/styled").ThemeType, React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>>;
-    static Divider: StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, import("../../../../../../../Users/sung/Develop/visits-style/src/styled").ThemeType, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
+    static Item: StyledComponentClass<React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, ThemeType, React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>>;
+    static Divider: StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, ThemeType, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
     shouldComponentUpdate(props: Props, state: State): boolean;
     openDropdown: () => void;
     closeDropdown: () => void;
