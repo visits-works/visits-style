@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { ColorType, SizeType, StyledComponentClass } from '../../styled';
+import styled, { ColorType, SizeType, StyledComponentClass, ThemeType } from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
 import findColorInvert from '../../utils/findColorInvert';
