@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import styled, { ThemeType, ColorType, StyledComponentClass } from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 
 interface Props {
   color?: ColorType;
+  /** borderを非表示する */
   borderless?: boolean;
-  style?: any;
+  style?: CSSProperties;
 }
 
 const Box = styled.div<Props>`
@@ -31,4 +32,6 @@ const Box = styled.div<Props>`
 Box.displayName = 'Box';
 
 
-export default Box;
+export default function (props: Props) {
+  return (<Box {...props} />);
+}

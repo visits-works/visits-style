@@ -5,14 +5,6 @@ import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
 
-interface ButtonProps {
-  color?: ColorType;
-  size?: SizeType;
-  outline?: boolean;
-  onClick?: () => void;
-  full?: boolean;
-}
-
 function setColor(
   { theme, color, outline }: { theme: ThemeType, color?: ColorType, outline?: boolean },
 ) {
@@ -81,6 +73,19 @@ function setColor(
       ${boxShadow('0.2rem', target, 0.2)}
     }
   `;
+}
+
+interface ButtonProps {
+  /** ボタンの色 */
+  color?: ColorType;
+  /** ボタンのサイズ */
+  size?: SizeType;
+  /** 背景が透明なボタンでする */
+  outline?: boolean;
+  /** ボタンのクリックイベント */
+  onClick?: () => void;
+  /** 全体幅のボタンで設定 */
+  full?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`

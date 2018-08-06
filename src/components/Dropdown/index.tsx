@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { ColorType, SizeType, StyledComponentClass, ThemeType } from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
@@ -81,10 +81,15 @@ const MenuItem = styled.a`
 `;
 
 interface Props {
+  /** ボタンの内容 */
   label: React.ReactNode;
+  /** ボタンの色 */
   color?: ColorType;
+  /** 内容のリスト */
   children?: React.ReactNode | React.ReactNode;
+  /** 右の基準でリストを表示する */
   right?: boolean;
+  /** ボタンのサイズ */
   size?: SizeType;
 }
 
@@ -93,7 +98,7 @@ interface State {
   style: any;
 }
 
-export default class Dropdown extends React.Component<Props, State> {
+export default class Dropdown extends Component<Props, State> {
   state = { show: false, style: {} };
 
   static Item = MenuItem;

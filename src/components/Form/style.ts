@@ -4,6 +4,7 @@ export interface InputProps {
   value?: string | number;
   onChange: () => void;
   onBlur: () => void;
+  disabled?: boolean;
 }
 
 export default `

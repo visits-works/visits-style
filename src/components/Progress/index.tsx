@@ -2,15 +2,20 @@ import React from 'react';
 import styled, { SizeType, ColorType, StyledComponentClass, ThemeType } from '../../styled';
 import setSize from '../../utils/setSize';
 
-interface Props {
+interface ProgressProps {
+  /** 現状の進捗 */
   value: number;
+  /** 進捗の最大値 */
   max: number;
+  /** バーのサイズ */
   size?: SizeType;
+  /** sizeを使わないときの縦幅を指定する */
   height?: string;
+  /** バーの色 */
   color: ColorType;
 }
 
-export const Progress = styled.progress<Props>`
+const Progress = styled.progress<ProgressProps>`
   -moz-appearance: none;
   -webkit-appearance: none;
   border: none;

@@ -28,36 +28,36 @@ const Wrapper = styled(Box)`
   width: fit-content;
 `;
 
-function animeToastIn (toast: HTMLElement) {
+function animeToastIn(toast: HTMLElement) {
   anime({
     targets: toast,
     translateX: ['100%', 0],
     complete: () => dispatchAnimeDone(toast),
     easing: [0.645, 0.045, 0.355, 1],
-    duration: 250
+    duration: 250,
   });
 }
 
-function animeToastOut (toast: HTMLElement) {
+function animeToastOut(toast: HTMLElement) {
   anime({
     targets: toast,
     translateX: [0, '100%'],
     complete: () => dispatchAnimeDone(toast),
     easing: [0.645, 0.045, 0.355, 1],
-    duration: 250
+    duration: 250,
   });
 }
 
 export class Toast extends PureComponent<ToastProps> {
   static defaultProps = {
     duration: 5000,
-  }
+  };
 
   componentDidMount() {
     if (this.props.duration) {
       this.timer = setTimeout(() => {
         this.props.clear();
-      }, this.props.duration)
+      }, this.props.duration);
     }
   }
 
@@ -74,18 +74,19 @@ export class Toast extends PureComponent<ToastProps> {
 }
 
 interface ContainerProps {
-  toasts: Array<ToastType>;
+  toasts: ToastType[];
   clear: (id: string) => void;
 }
 
 export default class ToastContainer extends Component<ContainerProps> {
   static defaultProps = {
     toasts: [],
-  }
+  };
 
   constructor(props: ContainerProps) {
     super(props);
     this.element = document.createElement('div');
+    // tslint:disable-next-line
     this.element.style.cssText = 'position: fixed; top: 1rem; right: 1rem; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end;';
     document.body.appendChild(this.element);
   }

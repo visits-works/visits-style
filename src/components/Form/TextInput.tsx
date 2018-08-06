@@ -31,8 +31,8 @@ const Input = styled.input`
 
 interface Props extends InputProps {
   placeholder?: string;
+  /** 'text' | 'number' | 'password' | 'email' | 'phone' */
   type: 'text' | 'number' | 'password' | 'email' | 'phone';
-  value?: string | number;
 }
 
 export default class TextInput extends PureComponent<Props> {
@@ -42,7 +42,7 @@ export default class TextInput extends PureComponent<Props> {
     placeholder: null,
     value: '',
     onChange: () => {},
-  }
+  };
 
   render() {
     return <Input {...this.props} />;

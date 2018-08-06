@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
@@ -9,7 +9,7 @@ import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
 const ESC_KEY = 27;
 
-const wrapperStyle: React.CSSProperties = {
+const wrapperStyle: CSSProperties = {
   position: 'fixed',
   top: 0,
   left: 0,
@@ -22,7 +22,7 @@ const wrapperStyle: React.CSSProperties = {
   backgroundColor: 'rgba(30, 30, 30, 0.9)',
 };
 
-const colStyle: React.CSSProperties = {
+const colStyle: CSSProperties = {
   zIndex: 9999,
   padding: '1rem',
   margin: 'auto',
@@ -62,7 +62,7 @@ function animeModalIn(modal: HTMLElement) {
   });
 }
 
-export default class Modal extends React.Component<Props> {
+export default class Modal extends Component<Props> {
   static defaultProps = {
     domId: 'modal',
     show: false,
