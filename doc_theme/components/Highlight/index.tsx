@@ -1,17 +1,11 @@
-import React, { PureComponent, createRef } from 'react';
+import React, { PureComponent, createRef, Fragment } from 'react';
 import styled from 'styled-components';
-
-import prism from 'prismjs';
-import 'prismjs/components/prism-json.min';
-import 'prismjs/components/prism-jsx.min';
-import 'prismjs/components/prism-bash.min';
-import 'prismjs/components/prism-markdown.min';
-import 'prismjs/components/prism-typescript.min';
+import SyntaxHighlighter from 'react-syntax-highlighter/prism-light';
+import PrismTheme from './style';
 
 import { Pre, Button } from '../../../src/components';
-import PrismStyle from './style';
 
-const Wrapper = styled.figure`
+const Wrapper = styled.div`
   position: relative;
   font-weight: 400;
   max-width: 100%;
@@ -19,19 +13,27 @@ const Wrapper = styled.figure`
   padding: 0;
   margin-bottom: 1rem;
   border: 2px solid ${({ theme }) => theme.border};
+  overflow: auto;
+  max-height: 340px;
+
+  color: #fff;
+  background-color: #282c34;
+  tab-size: 1.5em;
 
   &.hover {
     border-color: ${({ theme }) => theme.warning};
     box-shadow: 0 0 0 2px ${({ theme }) => theme.warning};
   }
 
-  ${PrismStyle}
-
-  pre {
-    overflow: auto;
-    max-width: 100%;
-    max-height: 340px;
-    margin: 0 !important;
+  .react-syntax-highlighter-line-number {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    left: 0;
+    display: block;
+    padding: 0 10px;
+    opacity: 0.3;
+    text-align: right;
+    border-right: 1px solid ${({ theme }) => theme.border};
   }
 
   ${Button} {
@@ -49,42 +51,41 @@ const Wrapper = styled.figure`
       color: rgba(0,0,0,.7);
     }
   }
+
+  ${PrismTheme}
 `;
+
+const getLanguage = (children: any) => {
+  if (typeof children === 'string') return 'language-jsx';
+  return children.props.props.className;
+};
+
+const getCode = (content: any) => ({ children }) => {
+  return <Pre className={getLanguage(content)}>{children}</Pre>;
+};
+
+const Nullable = ({ children }) => <Fragment>{children}</Fragment>;
+
+const getChildren = (children: any) => {
+  return children && typeof children !== 'string'
+    ? children.props.children
+    : children;
+};
 
 interface Props {
   className?: string;
-  children: React.ReactChildren;
+  children: any;
 }
 
 export default class Highlight extends PureComponent<Props> {
 
-  componentDidMount() {
-    if (this.pre.current) {
-      prism.highlightElement(this.pre.current);
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.pre.current) {
-      prism.highlightElement(this.pre.current);
-    }
-  }
-
   copyText = () => {
-    // @ts-ignore
-    if (document.selection) {
-      // @ts-ignore
-      const range = document.body.createTextRange();
-      range.moveToElementText(this.pre.current);
-      range.select();
-    } else if (window.getSelection) {
-      const range = document.createRange();
-      // @ts-ignore
-      range.selectNode(this.pre.current);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-    }
+    const el = document.createElement('textarea');
+    el.value = this.props.children;
+    document.body.appendChild(el);
+    el.select();
     document.execCommand('copy');
+    document.body.removeChild(el);
   }
 
   onButtonHover = () => {
@@ -104,11 +105,18 @@ export default class Highlight extends PureComponent<Props> {
 
   render() {
     const { children, className } = this.props;
+    const content = getChildren(children);
+
     return (
-      <Wrapper innerRef={this.wrapper}>
-        <Pre className={className} innerRef={this.pre}>
-          <code>{children}</code>
-        </Pre>
+      <Wrapper className={className} innerRef={this.wrapper}>
+        <SyntaxHighlighter
+          language="javascript"
+          useInlineStyles={false}
+          PreTag={Nullable}
+          CodeTag={getCode(children)}
+        >
+          {content}
+        </SyntaxHighlighter>
         <Button
           size="small"
           onClick={this.copyText}

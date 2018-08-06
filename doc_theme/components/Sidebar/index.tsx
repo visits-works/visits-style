@@ -23,14 +23,23 @@ interface SidebarProps {
 }
 
 interface DocProps {
-  doc: { headings?: any[], route?: any, name?: any };
+  doc: { headings?: any[], route?: any, name?: any, slug?: string };
   docs?: any[];
-  active?: any;
+  active?: string;
 }
+
+const isActive = (route: string) => (_, location: any) => {
+  return route === location.pathname;
+};
 
 const MenuItem = ({ doc, active }: DocProps) => (
   <li>
-    <Link to={doc.route}>{doc.name}</Link>
+    <Link
+      to={doc.route}
+      isActive={isActive(doc.route)}
+    >
+      {doc.name}
+    </Link>
     {active === doc.route && doc.headings && (
       <ul>
         {doc.headings.map(
@@ -43,7 +52,7 @@ const MenuItem = ({ doc, active }: DocProps) => (
       </ul>
     )}
   </li>
-)
+);
 
 export default class Sidebar extends React.PureComponent<SidebarProps> {
 

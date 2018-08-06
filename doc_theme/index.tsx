@@ -9,7 +9,7 @@ import { Topbar, Renderer, Highlight, Page } from './components';
 
 import '../src/styles/global';
 
-function Theme () {
+function Theme() {
   return (
     <ThemeConfig>
       {() => (
@@ -20,7 +20,7 @@ function Theme () {
               components={{
                 render: Renderer,
                 page: Page,
-                table: (props) => <Table striped {...props} />,
+                table: props => <Table striped {...props} />,
                 pre: Highlight,
                 inlineCode: Code,
               }}

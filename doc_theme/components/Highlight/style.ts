@@ -1,10 +1,6 @@
 import { css } from 'styled-components';
 
 export default css`
-  color: #ffffff;
-  background-color: #282c34;
-  tab-size: 1.5em;
-
   /* Code blocks */
   pre[class*="language-"] {
     padding: 1em;
@@ -14,7 +10,6 @@ export default css`
     font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace !important;
 
     height: auto !important;
-    margin: 1rem;
     font-size: 14px;
     line-height: 20px;
     white-space: pre-wrap;

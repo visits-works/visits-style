@@ -1,7 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { PureComponent } from 'react';
+import { RenderComponentProps } from 'docz';
 import styled from 'styled-components';
+import Highlight from '../Highlight';
 
-const Temp = styled.div`
+const Playground = styled.div`
   margin-top: 0.75rem;
   padding: 0.75rem;
   background: transparent;
@@ -14,13 +16,16 @@ interface Props {
   code: any;
 }
 
-export default function Renderer({ component, code }: Props) {
-  return (
-    <Fragment>
-      <Temp>
-        {component}
-      </Temp>
-      {code}
-    </Fragment>
-  );
+export default class Render extends PureComponent<RenderComponentProps> {
+  render() {
+    const { className, style, component, code } = this.props;
+    return (
+      <div>
+        <Playground className={className} style={style}>
+          {component}
+        </Playground>
+        <Highlight>{code}</Highlight>
+      </div>
+    );
+  }
 }
