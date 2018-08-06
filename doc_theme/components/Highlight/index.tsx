@@ -1,6 +1,6 @@
 import React, { PureComponent, createRef, Fragment } from 'react';
 import styled from 'styled-components';
-import SyntaxHighlighter from 'react-syntax-highlighter/prism-light';
+import SyntaxHighlighter from 'react-syntax-highlighter/prism';
 import PrismTheme from './style';
 
 import { Pre, Button } from '../../../src/components';
@@ -110,7 +110,7 @@ export default class Highlight extends PureComponent<Props> {
     return (
       <Wrapper className={className} innerRef={this.wrapper}>
         <SyntaxHighlighter
-          language="javascript"
+          language="jsx"
           useInlineStyles={false}
           PreTag={Nullable}
           CodeTag={getCode(children)}
