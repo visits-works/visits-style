@@ -150,7 +150,8 @@ function (_Component) {
       }));
     };
 
-    _this2.element = document.createElement('div');
+    _this2.element = document.createElement('div'); // tslint:disable-next-line
+
     _this2.element.style.cssText = 'position: fixed; top: 1rem; right: 1rem; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end;';
     document.body.appendChild(_this2.element);
     return _this2;

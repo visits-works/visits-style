@@ -3,7 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = _default;
+
+var _react = _interopRequireDefault(require("react"));
 
 var _styled = _interopRequireDefault(require("../../styled"));
 
@@ -27,5 +29,7 @@ var Box = _styled.default.div.withConfig({
 });
 
 Box.displayName = 'Box';
-var _default = Box;
-exports.default = _default;
+
+function _default(props) {
+  return _react.default.createElement(Box, Object.assign({}, props));
+}

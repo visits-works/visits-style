@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.Progress = void 0;
+exports.default = void 0;
 
 var _styled = _interopRequireDefault(require("../../styled"));
 
@@ -37,7 +37,6 @@ var Progress = _styled.default.progress.withConfig({
   return theme.primary;
 });
 
-exports.Progress = Progress;
 Progress.displayName = 'Progress';
 var _default = Progress;
 exports.default = _default;

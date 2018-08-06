@@ -20,7 +20,7 @@ export declare class Toast extends PureComponent<ToastProps> {
     render(): JSX.Element;
 }
 interface ContainerProps {
-    toasts: Array<ToastType>;
+    toasts: ToastType[];
     clear: (id: string) => void;
 }
 export default class ToastContainer extends Component<ContainerProps> {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ColSizeType, ColorType } from '../../styled';
 interface Props {
     /** ヘッダーのタイトル文言 */
@@ -22,7 +22,7 @@ interface Props {
     /** escボタンでクローズ */
     closeOnEsc?: boolean;
 }
-export default class Modal extends React.Component<Props> {
+export default class Modal extends Component<Props> {
     static defaultProps: {
         domId: string;
         show: boolean;

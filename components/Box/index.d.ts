@@ -1,9 +1,10 @@
-import React from 'react';
-import { ThemeType, ColorType, StyledComponentClass } from '../../styled';
+import { CSSProperties } from 'react';
+import { ColorType } from '../../styled';
 interface Props {
     color?: ColorType;
+    /** borderを非表示する */
     borderless?: boolean;
-    style?: any;
+    style?: CSSProperties;
 }
-declare const Box: StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
-export default Box;
+export default function (props: Props): JSX.Element;
+export {};

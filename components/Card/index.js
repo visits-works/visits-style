@@ -62,6 +62,10 @@ var CardImageHorizontal = _styled.default.a.withConfig({
   return url ? "background-image: url(".concat(url, ");") : '';
 });
 
+var horizontalStyle = {
+  flexDirection: 'row'
+};
+
 var Card =
 /*#__PURE__*/
 function (_PureComponent) {
@@ -101,9 +105,7 @@ function (_PureComponent) {
           footer = _this$props2.footer,
           color = _this$props2.color;
       var header = this.renderHeader();
-      var wrapperStyle = horizontal ? {
-        flexDirection: 'row'
-      } : undefined;
+      var wrapperStyle = horizontal ? horizontalStyle : undefined;
       return _react.default.createElement(_Box.default, {
         style: wrapperStyle,
         color: color
