@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode, CSSProperties } from 'react';
 import styled, { ColorType } from '../../styled';
 import Box from '../Box';
 
@@ -65,6 +65,8 @@ interface Props {
   style?: any;
 }
 
+const horizontalStyle: CSSProperties = { flexDirection: 'row' };
+
 export default class Card extends PureComponent<Props> {
   renderHeader = () => {
     const { image, title, horizontal } = this.props;
@@ -80,7 +82,7 @@ export default class Card extends PureComponent<Props> {
     const { children, horizontal, footer, color } = this.props;
 
     const header = this.renderHeader();
-    const wrapperStyle = horizontal ? { flexDirection: 'row' } : undefined;
+    const wrapperStyle = horizontal ? horizontalStyle : undefined;
     return (
       <Box style={wrapperStyle} color={color}>
         {header}
