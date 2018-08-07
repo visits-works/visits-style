@@ -1,9 +1,9 @@
-import React, { Component, CSSProperties } from 'react';
+import React, { Component, CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
 import { ColSizeType, ColorType } from '../../styled';
-import Card from '../Card';
+import Box from '../Box';
 import Col from '../Grid/Col';
 import { dispatchAnimeDone, addAnimeListener } from '../../utils/anime';
 
@@ -30,7 +30,7 @@ const colStyle: CSSProperties = {
 
 interface Props {
   /** ヘッダーのタイトル文言 */
-  title?: string;
+  title?: any;
   /** 1~12のモーダルサイズ */
   size?: ColSizeType;
   /** 特定のdomで表示したい場合はそのidを指定してください */
@@ -38,9 +38,9 @@ interface Props {
   /** trueの場合、モーダルを表示します。 */
   show?: boolean;
   /** モーダルのbodyに入れる内容 */
-  children?: React.ReactNode;
+  children?: any;
   /** モーダルのfooterに入れる内容 */
-  footer?: React.ReactNode;
+  footer?: any;
   /** モーダルの色 */
   color?: ColorType;
   /** モーダルを閉じる処理 */
@@ -49,6 +49,7 @@ interface Props {
   closeOnOverlay?: boolean;
   /** escボタンでクローズ */
   closeOnEsc?: boolean;
+  style?: any;
 }
 
 function animeModalIn(modal: HTMLElement) {
@@ -106,10 +107,10 @@ export default class Modal extends Component<Props> {
 
   handleContentOnMouse = () => {
     this.shouldClose = false;
-  };
+  }
 
   getModal = () => {
-    const { show, size, title, children, footer, color } = this.props;
+    const { show, size, title, children, footer, color, style } = this.props;
     if (!show) return;
     return (
       <div style={wrapperStyle} onClick={this.onClickOverlay} aria-modal="true">
@@ -129,9 +130,11 @@ export default class Modal extends Component<Props> {
             onMouseDown={this.handleContentOnMouse}
             auto
           >
-            <Card title={title} footer={footer} color={color}>
-              {children}
-            </Card>
+            <Box color={color}>
+              {title && (<header>{title}</header>)}
+              <main style={style}>{children}</main>
+              {footer && (<footer>{footer}</footer>)}
+            </Box>
           </Col>
         </Transition>
       </div>

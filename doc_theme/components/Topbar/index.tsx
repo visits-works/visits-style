@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Docs, Link } from 'docz';
-import GithubIcon from 'react-icons/lib/go/mark-github';
+import { GoMarkGithub } from 'react-icons/go';
 import AppBar from '../../../src/components/AppBar';
 // @ts-ignore
 import Logo from '../../assets/visits';
@@ -40,7 +40,7 @@ export default function Topbar() {
         target="_blank"
         style={{ fontSize: '1.5rem' }}
       >
-        <GithubIcon />
+        <GoMarkGithub />
       </a>
     </AppBar>
   );

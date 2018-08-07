@@ -34,7 +34,7 @@ interface CProps {
 
 function renderChildren({ title, name, description }: CProps, children: React.ReactChildren) {
   return (
-    <Wrapper>
+    <Wrapper fluid>
       <Header>{title || name}</Header>
       {description && <Desc>{description}</Desc>}
       {children}
@@ -56,12 +56,12 @@ export default function Page({ children, doc, ...props }: Props) {
 
   if (showSidebar) {
     return (
-      <Row style={{ marginTop: '2.8rem' }}>
+      <Row style={{ marginTop: '3rem' }}>
         <Sidebar parent={parent || doc.name} active={props.match.url} />
         <Col>{render}</Col>
       </Row>
     );
   }
 
-  return <div style={{ marginTop: '2.8rem' }}>{render}</div>;
+  return <div style={{ marginTop: '3rem' }}>{render}</div>;
 }

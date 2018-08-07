@@ -13,7 +13,8 @@ function getColor(theme: ThemeType, color?: ColorType) {
   return (!color || color === 'light') ? theme.background : theme[color];
 }
 
-function setColor({ theme, color, addonColor }: { theme: ThemeType, color?: ColorType, addonColor?: ColorType }) {
+function setColor({ theme, color, addonColor }:
+    { theme: ThemeType, color?: ColorType, addonColor?: ColorType }) {
   const target = getColor(theme, color);
   const invertColor = findColorInvert(target);
 
@@ -105,13 +106,13 @@ const Wrapper = styled.div<WrapperProps>`
 `;
 
 interface Props {
-  /** aaa */
-  children?: Node;
-  /** aaa */
+  /** タグの内容 */
+  children: any;
+  /** Xボタンの追加＋クリック時のイベントハンドラー */
   onClose?: () => void;
-  /** aaa */
+  /** クリック時のイベントハンドラー */
   onClick?: () => void;
-  /**  */
+  /** 色の指定 */
   color?: ColorType;
 }
 
@@ -121,7 +122,7 @@ export default class Tag extends React.PureComponent<Props> {
     onClose: null,
     onClick: null,
     color: null,
-  }
+  };
 
   render() {
     const { children, onClose, ...rest } = this.props;
