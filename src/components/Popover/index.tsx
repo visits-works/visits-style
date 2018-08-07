@@ -16,67 +16,30 @@ const Tooltip = styled(Box)`
   position: absolute;
   display: flex;
   clear: both;
-  top: 0;
-  left: 0;
   background-color: white;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   z-index: 9999;
   padding: 0.5rem 0;
   width: auto;
+  height: auto;
+  cursor: default;
 
   will-change: transform, opacity;
-  transform: scaleY(0.75);
-  transform-origin: top;
+  transform: scale(0.8);
   opacity: 0;
 
   transition-property: transform, opacity;
-  transition-duration: 150ms;
+  transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
   &.start {
-    transform: scaleY(1);
+    transform: scale(1);
     opacity: 1;
   }
 
   &.end {
-    transform: scaleY(0.75);
+    transform: scale(0.8);
     opacity: 0;
-  }
-`;
-
-const Divider = styled.div`
-  height: 0;
-  margin: 0.5rem 0;
-  overflow: hidden;
-  border-top: 1px solid ${({ theme }) => theme.border};
-`;
-
-const MenuItem = styled.a`
-  display: block;
-  width: 100%;
-  padding: 0.25rem 1.5rem;
-  text-align: left;
-  white-space: nowrap;
-  background-color: transparent;
-  color: ${({ theme }) => theme.text};
-  border: 0;
-
-  svg {
-    margin-left: -1rem;
-    padding-right: 0.5rem;
-    font-size: 1.5rem;
-  }
-
-  &:hover, &:focus {
-    color: ${({ theme }) => theme.text};
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  &:active {
-    ${({ theme }) => `
-      background-color: ${theme.primary};
-      color: ${findColorInvert(theme.primary)}
-    `};
   }
 `;
 
@@ -91,6 +54,8 @@ interface Props {
   right?: boolean;
   /** ボタンのサイズ */
   size?: SizeType;
+
+  position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 }
 
 interface State {
@@ -98,31 +63,59 @@ interface State {
   style: any;
 }
 
-export default class Dropdown extends Component<Props, State> {
+export default class Popover extends Component<Props, State> {
+  static defaultProps = {
+    position: 'bottom-left',
+  };
+
   state = { show: false, style: {} };
 
-  static Item = MenuItem;
-  static Divider = Divider;
-
   shouldComponentUpdate(props: Props, state: State) {
-    return this.state.show !== state.show;
+    return this.state.show !== state.show || this.props.label !== props.label;
   }
 
   openDropdown = () => {
     if (this.state.show || !this.element.current) return;
-    const height = this.element.current.offsetHeight + 2;
-    const style = { top: `${height}px`, left: 0 };
+    let style = {};
+
+    const height = this.element.current.offsetHeight + 8;
+
+    switch (this.props.position) {
+      case 'top-left': {
+        style = { bottom: `${height}px`, left: 0 };
+        break;
+      }
+      case 'top-right': {
+        style = { bottom: `${height}px`, right: 0 };
+        break;
+      }
+      case 'top': {
+        style = { bottom: `${height}px` };
+        break;
+      }
+      case 'bottom-left': {
+        style = { top: `${height}px`, left: 0 };
+        break;
+      }
+      case 'bottom-right': {
+        style = { top: `${height}px`, right: 0 };
+        break;
+      }
+      case 'bottom': {
+        style = { top: `${height}px` };
+        break;
+      }
+      default: {
+        style = { top: `${height}px`, left: 0 };
+        break;
+      }
+    }
 
     this.setState({ style, show: true });
   }
 
   closeDropdown = () => {
     if (this.state.show) this.setState({ show: false });
-  }
-
-  onClickChild = (props: { onClick?: () => void }) => () => {
-    if (props.onClick) props.onClick();
-    if (this.element.current) this.element.current.blur();
   }
 
   element = React.createRef<HTMLDivElement>();
@@ -150,14 +143,7 @@ export default class Dropdown extends Component<Props, State> {
           unmountOnExit
         >
           <Tooltip style={style}>
-            {React.Children.map(children, child => {
-              // @ts-ignore
-              if (child.props.divider) {
-                return <Divider />;
-              }
-              // @ts-ignore
-              return <MenuItem {...child.props} onClick={this.onClickChild(child.props)} />;
-            })}
+            {children}
           </Tooltip>
         </CSSTransition>
       </Wrapper>

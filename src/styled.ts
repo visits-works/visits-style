@@ -42,7 +42,7 @@ export interface ThemeType {
   borderHover: string;
   borderActive: string;
 
-  color: any;
+  [key: string]: string;
 }
 
 const {

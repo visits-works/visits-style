@@ -1,0 +1,121 @@
+---
+name: Popover
+route: /components/popover
+parent: Components
+
+description: import Popover from 'visits-style/components/Popover';
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Button, Tag } from '../../src/components';
+import Popover from '../../src/components/Popover';
+
+import PersonIcon from 'react-icons/lib/fa/user';
+import GearIcon from 'react-icons/lib/fa/cog';
+import MailboxIcon from 'react-icons/lib/fa/inbox';
+import SignoutIcon from 'react-icons/lib/fa/sign-out';
+
+## Props
+
+<PropsTable of={Popover} />
+
+## Basic usage
+
+<Playground>
+  <Popover
+    label="Click Me"
+    color="warning"
+  >
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '200px',
+      height: '250px',
+      color: '#000',
+    }}>
+      Empty State
+    </div>
+  </Popover>
+</Playground>
+
+## Positions
+
+<Playground>
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Popover label="top-left" position="top-left">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '200px',
+        height: '250px',
+        color: '#000',
+      }}>
+        Empty State
+      </div>
+    </Popover>
+    <Popover label="top" position="top">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '200px',
+        height: '250px',
+        color: '#000',
+      }}>
+        Empty State
+      </div>
+    </Popover>
+    <Popover label="top-right" position="top-right">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '200px',
+        height: '250px',
+        color: '#000',
+      }}>
+        Empty State
+      </div>
+    </Popover>
+  </div>
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Popover label="bottom-left" position="bottom-left">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '200px',
+        height: '250px',
+        color: '#000',
+      }}>
+        Empty State
+      </div>
+    </Popover>
+    <Popover label="bottom" position="bottom">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '200px',
+        height: '250px',
+        color: '#000',
+      }}>
+        Empty State
+      </div>
+    </Popover>
+    <Popover label="bottom-right" position="bottom-right">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '200px',
+        height: '250px',
+        color: '#000',
+      }}>
+        Empty State
+      </div>
+    </Popover>
+  </div>
+</Playground>
