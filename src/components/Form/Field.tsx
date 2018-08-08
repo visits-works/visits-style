@@ -1,6 +1,5 @@
 import React, { PureComponent, ReactNode } from 'react';
-import styled, { css } from '../../styled';
-import boxShadow from '../../utils/boxShadow';
+import styled from '../../styled';
 
 const Wrapper = styled.div`
   display: block;
@@ -17,61 +16,19 @@ const Label = styled.label`
   margin-bottom: 0.325rem;
 `;
 
-const InputControl = styled.div<{ error?: string }>`
-  span {
-    font-size: 0.75em;
-    display: block;
-  }
-
-  ${({ error, theme }) => error ? css`
-    input, select, textarea {
-      border-color: ${theme.danger};
-
-      &:hover {
-        border-color: ${theme.danger};
-      }
-
-      &:focus {
-        border-color: ${theme.danger};
-        ${boxShadow('0.1em', theme.danger)}
-      }
-    }
-    span {
-      color: ${theme.danger};
-    }
-  ` : ''}
-`;
-
 interface Props {
-  error?: string;
-  help?: string;
   label?: string;
   children: ReactNode;
+  style?: any;
 }
 
 export default class Field extends PureComponent<Props> {
-
-  renderMessage() {
-    const { error, help } = this.props;
-    if (error) {
-      return <span className="error">{error}</span>;
-    }
-    if (help) {
-      return <span>{help}</span>;
-    }
-
-    return null;
-  }
-
   render() {
-    const { label, children, error } = this.props;
+    const { label, children, style } = this.props;
     return (
-      <Wrapper>
+      <Wrapper style={style}>
         {label && (<Label>{label}</Label>)}
-        <InputControl error={error}>
-          {children}
-          {this.renderMessage()}
-        </InputControl>
+        {children}
       </Wrapper>
     );
   }

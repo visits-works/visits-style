@@ -9,9 +9,7 @@ export interface InputProps {
 
 export default `
   font-size: 1em;
-  position: relative;
   text-align: left;
-  clear: both;
   color: inherit;
 
   &:disabled {

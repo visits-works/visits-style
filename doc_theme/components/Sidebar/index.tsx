@@ -6,8 +6,6 @@ import { mediaMobile } from '../../../src/utils';
 
 const Menu = styled(SideMenu)`
   width: 250px;
-  position: sticky;
-  top: 3.5rem;
   padding: 1.5rem;
 
   ${mediaMobile`

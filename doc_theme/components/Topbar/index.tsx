@@ -14,7 +14,6 @@ export default function Topbar() {
     <AppBar
       brand={<Link to="/"><Logo /></Link>}
       color="dark"
-      fixed
       style={{ zIndex: 10 }}
     >
       <Docs>

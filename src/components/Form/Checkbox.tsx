@@ -27,7 +27,7 @@ export default class Checkbox extends PureComponent<Props> {
     children: null,
     checked: false,
     onChange: () => {},
-  }
+  };
 
   render() {
     const { children, ...rest } = this.props;

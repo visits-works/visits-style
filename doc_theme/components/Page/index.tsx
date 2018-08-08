@@ -56,12 +56,12 @@ export default function Page({ children, doc, ...props }: Props) {
 
   if (showSidebar) {
     return (
-      <Row style={{ marginTop: '3rem' }}>
+      <Row>
         <Sidebar parent={parent || doc.name} active={props.match.url} />
         <Col>{render}</Col>
       </Row>
     );
   }
 
-  return <div style={{ marginTop: '3rem' }}>{render}</div>;
+  return render;
 }
