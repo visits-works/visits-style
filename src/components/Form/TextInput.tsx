@@ -4,18 +4,38 @@ import { setSize } from '../../utils';
 import commonStyle, { InputProps } from './style';
 
 interface WrapperProps {
-  fullWidth?: boolean;
   outline?: boolean;
   error?: any;
 }
 
+
+const Icon = styled.span<{ right?: boolean }>`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  color: ${({ theme }) => theme.border};
+  ${({ right }) => right ?
+    'right: 0.375rem; & ~ input { padding-right: 1.555rem !important; }' :
+    'left: 0.375rem; & ~ input { padding-left: 1.55rem !important; }'
+  }
+
+  svg, img {
+    height: 1rem;
+    width: 1rem;
+  }
+`;
+
 const Wrapper = styled.span<WrapperProps>`
   position: relative;
-  display: inline-block;
+  display: block;
 
   input {
     ${commonStyle}
     max-width: 100%;
+    width: 100%;
     position: relative;
     display: block;
     outline: none;
@@ -32,12 +52,7 @@ const Wrapper = styled.span<WrapperProps>`
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
 
-    ${({ fullWidth }) => fullWidth ? 'width: 100%;' : ''}
     ${({ error, theme }) => error ? `border-color: ${theme.danger};` : ''}
-
-    &:hover:not(:disabled):not(:focus) {
-      border-color: ${({ theme }) => theme.borderHover};
-    }
 
     &:focus {
       border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
@@ -47,24 +62,14 @@ const Wrapper = styled.span<WrapperProps>`
       }
     }
   }
-`;
 
-const Icon = styled.span<{ right?: boolean }>`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-  color: ${({ theme }) => theme.border};
-  ${({ right }) => right ?
-    'right: 0.375rem; & ~ input { padding-right: 1.555rem; }' :
-    'left: 0.375rem; & ~ input { padding-left: 1.55rem; }'
-  }
-
-  svg, img {
-    height: 1rem;
-    width: 1rem;
+  &:hover {
+    input:not(:disabled):not(:focus) {
+      border-color: ${({ theme }) => theme.borderHover};
+    }
+    ${Icon} {
+      color: ${({ theme }) => theme.borderHover};
+    }
   }
 `;
 
@@ -83,8 +88,6 @@ interface Props extends InputProps {
   help?: string;
   /** ボックス系のデザインでする */
   outline?: boolean;
-  /** 全体の横幅で表示する */
-  fullWidth?: boolean;
   /** 左側のアイコン */
   leftIcon?: any;
   /** 右側のアイコン */
@@ -109,9 +112,9 @@ export default class TextInput extends PureComponent<Props> {
   };
 
   render() {
-    const { outline, fullWidth, error, help, leftIcon, rightIcon, ...rest } = this.props;
+    const { outline, error, help, leftIcon, rightIcon, ...rest } = this.props;
     return (
-      <Wrapper outline={outline} fullWidth={fullWidth} error={error}>
+      <Wrapper outline={outline} error={error}>
         {leftIcon && (<Icon>{leftIcon}</Icon>)}
         {rightIcon && (<Icon right>{rightIcon}</Icon>)}
         <input {...rest} />
