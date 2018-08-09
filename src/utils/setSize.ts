@@ -3,7 +3,7 @@ import { SizeType } from '../styled';
 type SizePropsNameType = 'font-size' | 'height';
 
 export default function setSize(name: SizePropsNameType, size?: SizeType) {
-  switch(size) {
+  switch (size) {
     case 'small':
       return name + ': 0.75rem;';
     case 'medium':
