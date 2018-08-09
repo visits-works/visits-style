@@ -40,20 +40,19 @@ const Wrapper = styled.span<WrapperProps>`
     position: relative;
     display: block;
     outline: none;
+    box-shadow: none;
 
     padding: 0.375em 0.625em;
     border: none;
-    ${({ outline, theme }) => outline ?
-      `border: 1px solid ${theme.border}; border-radius: 4px;` :
-      `border-bottom: 1px solid ${theme.border};`
+    ${({ outline, theme, error }) => outline ?
+      `border: 1px solid ${error ? theme.danger : theme.border}; border-radius: 4px;` :
+      `border-bottom: 1px solid ${error ? theme.danger : theme.border}; border-radius: 0;`
     }
     ${setSize('font-size')}
 
     transition-property: box-shadow;
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
-
-    ${({ error, theme }) => error ? `border-color: ${theme.danger};` : ''}
 
     &:focus {
       border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
@@ -65,7 +64,7 @@ const Wrapper = styled.span<WrapperProps>`
   }
 
   &:hover {
-    input:not(:disabled):not(:focus) {
+    input:not(:disabled):not(:focus):not(:active) {
       border-color: ${({ theme }) => theme.borderHover};
     }
     ${Icon} {
