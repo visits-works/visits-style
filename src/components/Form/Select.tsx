@@ -38,10 +38,6 @@ const InputWrapper = styled.div<{ multiple?: boolean, size?: SizeType }>`
       padding: 0.5em 1em;
     }
 
-    &:hover:not(:disabled) {
-      border-color: ${({ theme }) => theme.borderHover};
-    }
-
     &:focus {
       outline: none;
       border-color: ${({ theme }) => theme.primary};
@@ -49,6 +45,12 @@ const InputWrapper = styled.div<{ multiple?: boolean, size?: SizeType }>`
     }
     &::-ms-expand {
       display: none;
+    }
+  }
+
+  &:hover {
+    select:not(:disabled) {
+      border-color: ${({ theme }) => theme.borderHover};
     }
   }
 
@@ -70,7 +72,7 @@ export default class Select extends PureComponent<Props> {
     placeholder: null,
     onChange: () => {},
     options: [],
-  }
+  };
 
   render() {
     const { options, ...rest } = this.props;

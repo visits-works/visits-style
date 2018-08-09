@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styled, { css, ThemeType } from '../../styled';
 import { setSize } from '../../utils';
 import commonStyle, { InputProps } from './style';
+import HelpMessage from './HelpMessage';
 
 interface WrapperProps {
   outline?: boolean;
@@ -73,11 +74,6 @@ const Wrapper = styled.span<WrapperProps>`
   }
 `;
 
-const Message = styled.span<{ error?: boolean }>`
-  font-size: 0.8rem;
-  ${({ error, theme }) => error ? `color: ${theme.danger};` : `color: ${theme.textLight};`};
-`;
-
 interface Props extends InputProps {
   placeholder?: string;
   /** 'text' | 'number' | 'password' | 'email' | 'phone' */
@@ -93,15 +89,6 @@ interface Props extends InputProps {
   /** 右側のアイコン */
   rightIcon?: any;
   style?: any;
-}
-
-function HelpMessage(help?: string, error?: string) {
-  if (error) {
-    return (<Message error>{error}</Message>);
-  }
-  if (help) {
-    return (<Message>{help}</Message>);
-  }
 }
 
 export default class TextInput extends PureComponent<Props> {
