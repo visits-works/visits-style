@@ -4,10 +4,19 @@ import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
+import disabledColor from '../../utils/disabledColor';
 
-function setColor(
-  { theme, color, outline }: { theme: ThemeType, color?: ColorType, outline?: boolean },
-) {
+interface Props {
+  theme: ThemeType;
+  color?: ColorType;
+  outline?: boolean;
+  disabled?: boolean;
+}
+
+function setColor({ theme, color, outline, disabled }: Props) {
+  if (disabled) {
+    return disabledColor(theme);
+  }
   if (!color) {
     return css`
       background-color: ${theme.white};
@@ -86,6 +95,8 @@ interface ButtonProps {
   onClick?: () => void;
   /** 全体幅のボタンで設定 */
   full?: boolean;
+
+  disabled?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -110,12 +121,6 @@ const Button = styled.button<ButtonProps>`
   ${setColor}
   ${({ size }) => setSize('font-size', size)}
   ${({ full }) => full ? 'width: 100%;' : ''}
-
-  &:disabled {
-    pointer-events: none;
-    box-shadow: none;
-    opacity: 0.5;
-  }
 
   &:not(:last-child) {
     margin-right: 0.5rem;

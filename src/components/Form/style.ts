@@ -1,3 +1,5 @@
+import { css } from '../../styled';
+import disabledColor from '../../utils/disabledColor';
 export interface InputProps {
   name: string;
   value?: string | number;
@@ -6,17 +8,15 @@ export interface InputProps {
   disabled?: boolean;
 }
 
-export default `
+export default css`
   font-size: 1em;
   text-align: left;
   color: inherit;
 
-  &:disabled {
-    box-shadow: none;
-    background-color: rgb(128, 128, 128, 0.15);
+  &:disabled, [disabled] {
+    ${({ theme }) => disabledColor(theme)}
   }
   &:readonly {
-    box-shadow: none;
-    background-color: rgb(128, 128, 128, 0.15);
+    ${({ theme }) => disabledColor(theme)}
   }
 `;
