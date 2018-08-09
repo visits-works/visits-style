@@ -1,6 +1,6 @@
 {
   "vendors.js": "/visits-style/static/js/vendors.e74e0fa9.js",
-  "app.js": "/visits-style/static/js/app.131710d3.js",
+  "app.js": "/visits-style/static/js/app.3eabecc6.js",
   "docs-index.js": "/visits-style/static/js/docs-index.3e7d5c56.js",
   "docs-components-popover.js": "/visits-style/static/js/docs-components-popover.e5b43ab4.js",
   "docs-components-appbar.js": "/visits-style/static/js/docs-components-appbar.f9e10ffe.js",
@@ -21,11 +21,13 @@
   "docs-elements-index.js": "/visits-style/static/js/docs-elements-index.aa456695.js",
   "docs-elements-progress.js": "/visits-style/static/js/docs-elements-progress.86bb9af3.js",
   "docs-elements-table.js": "/visits-style/static/js/docs-elements-table.ece88866.js",
-  "docs-forms-index.js": "/visits-style/static/js/docs-forms-index.391874be.js",
-  "docs-forms-select.js": "/visits-style/static/js/docs-forms-select.fd3f293c.js",
-  "docs-forms-text-input.js": "/visits-style/static/js/docs-forms-text-input.4da4dc1c.js",
-  "docs-forms-textarea.js": "/visits-style/static/js/docs-forms-textarea.d4e99417.js",
-  "runtime~app.js": "/visits-style/static/js/runtime~app.eb6e2a498a1490333044.js",
+  "docs-forms-checkbox.js": "/visits-style/static/js/docs-forms-checkbox.bb05916b.js",
+  "docs-forms-index.js": "/visits-style/static/js/docs-forms-index.a00672ef.js",
+  "docs-forms-radio.js": "/visits-style/static/js/docs-forms-radio.3c4037f1.js",
+  "docs-forms-select.js": "/visits-style/static/js/docs-forms-select.e4a31794.js",
+  "docs-forms-text-input.js": "/visits-style/static/js/docs-forms-text-input.e9395b32.js",
+  "docs-forms-textarea.js": "/visits-style/static/js/docs-forms-textarea.61c81887.js",
+  "runtime~app.js": "/visits-style/static/js/runtime~app.76026c9c38d91d4794d9.js",
   "static/img/img01.png": "/visits-style/static/img/img01.ec6a086e.png",
   "index.html": "/visits-style/index.html"
 }
