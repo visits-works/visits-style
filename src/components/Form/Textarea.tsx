@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
 import styled from '../../styled';
-import { boxShadow, setSize } from '../../utils';
+import boxShadow from '../../utils/boxShadow';
+import setSize from '../../utils/setSize';
 import commonStyle, { InputProps } from './style';
 import HelpMessage from './HelpMessage';
 
-const Wrapper = styled.span`
+const Wrapper = styled.span<{ error?: string }>`
+  display: block;
+  position: relative;
+
   textarea {
     ${commonStyle}
     max-width: 100%;
@@ -13,9 +17,10 @@ const Wrapper = styled.span`
     resize: vertical;
     appearance: none;
     overflow: auto;
+    outline: none;
 
     border-radius: 4px;
-    border: 1px solid ${({ theme }) => theme.border};
+    border: 1px solid ${({ theme, error }) => error ? theme.danger : theme.border};
 
     transition-property: box-shadow;
     transition-duration: 0.15s;
@@ -24,9 +29,8 @@ const Wrapper = styled.span`
     ${setSize('font-size')}
 
     &:focus {
-      outline: none;
-      border-color: ${({ theme }) => theme.primary};
-      ${({ theme }) => boxShadow('0.1em', theme.primary)}
+      border-color: ${({ theme, error }) => error ? theme.danger : theme.primary};
+      ${({ theme, error }) => boxShadow('0.1em', error ? theme.danger : theme.primary)}
     }
 
     &:disabled {
@@ -35,7 +39,7 @@ const Wrapper = styled.span`
   }
 
   &:hover {
-    input:not(:disabled):not(:focus) {
+    textarea:not(:disabled):not(:focus) {
       border-color: ${({ theme }) => theme.borderHover};
     }
   }
@@ -63,7 +67,7 @@ export default class Textarea extends PureComponent<Props> {
   render() {
     const { help, error, ...rest } = this.props;
     return (
-      <Wrapper>
+      <Wrapper error={error}>
         <textarea {...rest} />
         {HelpMessage(help, error)}
       </Wrapper>

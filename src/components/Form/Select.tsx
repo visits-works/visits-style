@@ -77,14 +77,6 @@ const InputWrapper = styled.div<WrapperProps>`
   `}
 `;
 
-const Arrow = styled.span`
-${({ theme }) => arrow(theme.border)}
-  right: 0.625em;
-  z-index: 4;
-  display: flex;
-  align-items: center;
-`;
-
 interface Props extends InputProps {
   placeholder?: string;
   options: Array<{ id: string | number, name: string }>;
