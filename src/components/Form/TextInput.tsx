@@ -12,20 +12,18 @@ interface WrapperProps {
 
 const Icon = styled.span<{ right?: boolean }>`
   position: absolute;
-  display: flex;
-  align-items: center;
-  top: 0;
+  top: 0.375em;
   bottom: 0;
   z-index: 1;
   color: ${({ theme }) => theme.border};
   ${({ right }) => right ?
-    'right: 0.375rem; & ~ input { padding-right: 1.555rem !important; }' :
-    'left: 0.375rem; & ~ input { padding-left: 1.55rem !important; }'
+    'right: 0.375em; & ~ input { padding-right: 1.555em !important; }' :
+    'left: 0.375em; & ~ input { padding-left: 1.55em !important; }'
   }
 
   svg, img {
-    height: 1rem;
-    width: 1rem;
+    height: 1em;
+    width: 1em;
   }
 `;
 
