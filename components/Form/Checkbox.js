@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _transparentize = _interopRequireDefault(require("polished/lib/color/transparentize"));
+
 var _styled = _interopRequireDefault(require("../../styled"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35,9 +37,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = _styled.default.label.withConfig({
+var Wrapper = _styled.default.span.withConfig({
   displayName: "Checkbox__Wrapper"
-})(["display:inline-block;cursor:pointer;line-height:1.25;position:relative;input{cursor:pointer;margin-right:0.5em;}"]);
+})(["display:block;position:relative;width:auto;label{cursor:pointer;padding-left:0.625em;max-width:100%;width:100%;line-height:1.25;margin-right:0.625rem;&:before,&:after{content:\"\";position:absolute;}&:after{top:0.375em;left:0.325em;width:0.625em;height:0.325em;transform:rotate(-45deg);border:0.1em solid transparent;border-top-style:none;border-right-style:none;}&:before{width:1.25em;height:1.25em;left:0;top:0;background:transparent;border:1px solid ", ";border-radius:4px;cursor:pointer;will-change:background;transition:background 150ms ease-out;}}input{visibility:hidden;&:checked + label{&:before{background:", ";}&:after{border-color:", ";}}&:indeterminate + label{&:before{border-color:", ";background:", ";}&:after{border-color:", ";border-left-style:none;}}&:disabled{+ label{color:", ";&:before{background:", ";}}&:checked + label:after{border-color:", ";}}}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.border;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.primary;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.white;
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return (0, _transparentize.default)(0.55, theme.border);
+}, function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.primary;
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return theme.white;
+}, function (_ref7) {
+  var theme = _ref7.theme;
+  return (0, _transparentize.default)(0.25, theme.textDark);
+}, function (_ref8) {
+  var theme = _ref8.theme;
+  return (0, _transparentize.default)(0.55, theme.border);
+}, function (_ref9) {
+  var theme = _ref9.theme;
+  return (0, _transparentize.default)(0.15, theme.textDark);
+});
 
 var Checkbox =
 /*#__PURE__*/
@@ -45,9 +74,13 @@ function (_PureComponent) {
   _inherits(Checkbox, _PureComponent);
 
   function Checkbox() {
+    var _this;
+
     _classCallCheck(this, Checkbox);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Checkbox).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Checkbox).apply(this, arguments));
+    _this.id = "checkbox_".concat(_this.props.name);
+    return _this;
   }
 
   _createClass(Checkbox, [{
@@ -58,8 +91,11 @@ function (_PureComponent) {
           rest = _objectWithoutProperties(_this$props, ["children"]);
 
       return _react.default.createElement(Wrapper, null, _react.default.createElement("input", Object.assign({
-        type: "checkbox"
-      }, rest)), children);
+        type: "checkbox",
+        id: this.id
+      }, rest)), _react.default.createElement("label", {
+        htmlFor: this.id
+      }, children));
     }
   }]);
 
@@ -69,7 +105,6 @@ function (_PureComponent) {
 exports.default = Checkbox;
 Checkbox.defaultProps = {
   name: null,
-  placeholder: null,
   children: null,
   checked: false,
   onChange: function onChange() {}

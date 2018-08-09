@@ -11,11 +11,11 @@ var _styled = _interopRequireDefault(require("../../styled"));
 
 var _style = _interopRequireDefault(require("./style"));
 
-var _boxShadow = _interopRequireDefault(require("../../utils/boxShadow"));
-
 var _arrow = _interopRequireDefault(require("../../utils/arrow"));
 
 var _setSize = _interopRequireDefault(require("../../utils/setSize"));
+
+var _HelpMessage = _interopRequireDefault(require("./HelpMessage"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45,30 +45,30 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var InputWrapper = _styled.default.div.withConfig({
   displayName: "Select__InputWrapper"
-})(["display:inline-block;max-width:100%;position:relative;vertical-align:top;", " select{", " display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;background-color:transparent;padding:0.375em 0.625em;", " ", " border-radius:4px;border:1px solid ", ";will-change:box-shadow;transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;option{padding:0.5em 1em;}&:hover:not(:disabled){border-color:", ";}&:focus{outline:none;border-color:", ";", "}&::-ms-expand{display:none;}}&::after{", " right:1em;z-index:4;}"], function (_ref) {
-  var multiple = _ref.multiple;
-  return multiple ? '' : 'height: 2.25em;';
-}, _style.default, function (_ref2) {
-  var multiple = _ref2.multiple;
-  return multiple ? '' : 'padding-right: 2.25em;';
-}, function (_ref3) {
-  var size = _ref3.size;
+})(["position:relative;display:block;select{", " display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;background-color:transparent;padding:0.375em 0.625em;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", ""], _style.default, function (_ref) {
+  var size = _ref.size;
   return (0, _setSize.default)('font-size', size);
+}, function (_ref2) {
+  var outline = _ref2.outline,
+      theme = _ref2.theme,
+      error = _ref2.error;
+  return outline ? "border: 1px solid ".concat(error ? theme.danger : theme.border, "; border-radius: 4px;") : "border-bottom: 1px solid ".concat(error ? theme.danger : theme.border, "; border-radius: 0;");
+}, function (_ref3) {
+  var error = _ref3.error,
+      theme = _ref3.theme;
+  return error ? theme.danger : theme.primary;
 }, function (_ref4) {
-  var theme = _ref4.theme;
-  return theme.border;
+  var theme = _ref4.theme,
+      outline = _ref4.outline,
+      error = _ref4.error;
+  return outline ? "box-shadow: 0 0 0 0.1em ".concat(error ? theme.danger : theme.primary, ";") : "box-shadow: 0 0.1em ".concat(error ? theme.danger : theme.primary, ";");
 }, function (_ref5) {
   var theme = _ref5.theme;
-  return theme.borderHover;
+  return (0, _arrow.default)(theme.border);
 }, function (_ref6) {
-  var theme = _ref6.theme;
-  return theme.primary;
-}, function (_ref7) {
-  var theme = _ref7.theme;
-  return (0, _boxShadow.default)('0.1em', theme.primary);
-}, function (_ref8) {
-  var theme = _ref8.theme;
-  return (0, _arrow.default)(theme.primary);
+  var theme = _ref6.theme,
+      disabled = _ref6.disabled;
+  return disabled ? '' : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: ".concat(theme.borderHover, ";\n      }\n\n      &::after {\n        border-color: ").concat(theme.borderHover, ";\n      }\n    }\n  ");
 });
 
 var Select =
@@ -86,17 +86,33 @@ function (_PureComponent) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          size = _this$props.size,
+          outline = _this$props.outline,
           options = _this$props.options,
-          rest = _objectWithoutProperties(_this$props, ["options"]);
+          error = _this$props.error,
+          help = _this$props.help,
+          placeholder = _this$props.placeholder,
+          disabled = _this$props.disabled,
+          rest = _objectWithoutProperties(_this$props, ["size", "outline", "options", "error", "help", "placeholder", "disabled"]);
 
-      return _react.default.createElement(InputWrapper, null, _react.default.createElement("select", Object.assign({}, rest), options.map(function (_ref9) {
-        var id = _ref9.id,
-            name = _ref9.name;
+      return _react.default.createElement(InputWrapper, {
+        size: size,
+        outline: outline,
+        error: error,
+        disabled: disabled
+      }, _react.default.createElement("select", Object.assign({}, rest, {
+        disabled: disabled
+      }), placeholder && _react.default.createElement("option", {
+        disabled: true,
+        selected: true
+      }, placeholder), options.map(function (_ref7) {
+        var id = _ref7.id,
+            name = _ref7.name;
         return _react.default.createElement("option", {
           key: id,
           value: id
         }, name);
-      })));
+      })), (0, _HelpMessage.default)(help, error));
     }
   }]);
 
@@ -106,7 +122,6 @@ function (_PureComponent) {
 exports.default = Select;
 Select.defaultProps = {
   name: null,
-  placeholder: null,
   onChange: function onChange() {},
   options: []
 };

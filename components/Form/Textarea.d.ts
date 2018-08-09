@@ -5,10 +5,13 @@ interface Props extends InputProps {
     value?: string;
     col?: number;
     row?: number;
+    /** エラーの発生時の表示テキスト */
+    error?: string;
+    /** 捕捉テキスト */
+    help?: string;
 }
 export default class Textarea extends PureComponent<Props> {
     static defaultProps: {
-        placeholder: null;
         value: string;
         col: number;
         row: number;

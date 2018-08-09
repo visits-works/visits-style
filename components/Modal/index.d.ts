@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ColSizeType, ColorType } from '../../styled';
 interface Props {
     /** ヘッダーのタイトル文言 */
-    title?: string;
+    title?: any;
     /** 1~12のモーダルサイズ */
     size?: ColSizeType;
     /** 特定のdomで表示したい場合はそのidを指定してください */
@@ -10,9 +10,9 @@ interface Props {
     /** trueの場合、モーダルを表示します。 */
     show?: boolean;
     /** モーダルのbodyに入れる内容 */
-    children?: React.ReactNode;
+    children?: any;
     /** モーダルのfooterに入れる内容 */
-    footer?: React.ReactNode;
+    footer?: any;
     /** モーダルの色 */
     color?: ColorType;
     /** モーダルを閉じる処理 */
@@ -21,6 +21,7 @@ interface Props {
     closeOnOverlay?: boolean;
     /** escボタンでクローズ */
     closeOnEsc?: boolean;
+    style?: any;
 }
 export default class Modal extends Component<Props> {
     static defaultProps: {

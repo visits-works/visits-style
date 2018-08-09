@@ -14,5 +14,5 @@ export { default as AppBar } from './AppBar';
 export { default as Tag } from './Tag';
 export * from './SideMenu';
 export { default as Card } from './Card';
-export { default as Dropdown } from './Dropdown';
+export { default as Popover } from './Popover';
 export { default as Modal } from './Modal';

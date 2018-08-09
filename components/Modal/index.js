@@ -13,7 +13,7 @@ var _Transition = _interopRequireDefault(require("react-transition-group/Transit
 
 var _animejs = _interopRequireDefault(require("animejs"));
 
-var _Card = _interopRequireDefault(require("../Card"));
+var _Box = _interopRequireDefault(require("../Box"));
 
 var _Col = _interopRequireDefault(require("../Grid/Col"));
 
@@ -114,7 +114,8 @@ function (_Component) {
           title = _this$props.title,
           children = _this$props.children,
           footer = _this$props.footer,
-          color = _this$props.color;
+          color = _this$props.color,
+          style = _this$props.style;
       if (!show) return;
       return _react.default.createElement("div", {
         style: wrapperStyle,
@@ -134,11 +135,11 @@ function (_Component) {
         onMouseUp: _this.handleContentOnMouse,
         onMouseDown: _this.handleContentOnMouse,
         auto: true
-      }, _react.default.createElement(_Card.default, {
-        title: title,
-        footer: footer,
+      }, _react.default.createElement(_Box.default, {
         color: color
-      }, children))));
+      }, title && _react.default.createElement("header", null, title), _react.default.createElement("main", {
+        style: style
+      }, children), footer && _react.default.createElement("footer", null, footer)))));
     };
 
     _this.shouldClose = null;

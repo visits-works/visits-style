@@ -9,7 +9,7 @@ exports.mediaDesktop = mediaDesktop;
 exports.mediaFullHD = mediaFullHD;
 exports.mediaUntilFullHD = mediaUntilFullHD;
 
-var _styledComponents = require("styled-components");
+var _styled = require("../styled");
 
 var _variables = require("../styles/variables");
 
@@ -30,7 +30,7 @@ function mediaFrom(device, str) {
 
   var values = [device, ''].concat(args, ['']); // @ts-ignore
 
-  return _styledComponents.css.apply(void 0, [template].concat(_toConsumableArray(values)));
+  return _styled.css.apply(void 0, [template].concat(_toConsumableArray(values)));
 }
 
 function mediaUntil(device, str) {
@@ -42,7 +42,7 @@ function mediaUntil(device, str) {
 
   var values = [device, ''].concat(args, ['']); // @ts-ignore
 
-  return _styledComponents.css.apply(void 0, [template].concat(_toConsumableArray(values)));
+  return _styled.css.apply(void 0, [template].concat(_toConsumableArray(values)));
 }
 
 function mediaMobile(str) {

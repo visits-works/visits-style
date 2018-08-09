@@ -11,6 +11,7 @@ interface ButtonProps {
     onClick?: () => void;
     /** 全体幅のボタンで設定 */
     full?: boolean;
+    disabled?: boolean;
 }
 declare const Button: StyledComponentClass<React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps, ThemeType, React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps>;
 export default Button;

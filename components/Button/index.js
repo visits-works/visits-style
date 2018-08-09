@@ -15,6 +15,8 @@ var _boxShadow = _interopRequireDefault(require("../../utils/boxShadow"));
 
 var _setSize = _interopRequireDefault(require("../../utils/setSize"));
 
+var _disabledColor = _interopRequireDefault(require("../../utils/disabledColor"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -22,7 +24,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function setColor(_ref) {
   var theme = _ref.theme,
       color = _ref.color,
-      outline = _ref.outline;
+      outline = _ref.outline,
+      disabled = _ref.disabled;
+
+  if (disabled) {
+    return (0, _disabledColor.default)(theme);
+  }
 
   if (!color) {
     return (0, _styled.css)(["background-color:", ";border-color:", ";color:", ";&:hover{border-color:", ";}&:active{border-color:", ";}"], theme.white, theme.border, theme.text, theme.borderHover, theme.borderActive);
@@ -44,7 +51,7 @@ function setColor(_ref) {
 
 var Button = _styled.default.button.withConfig({
   displayName: "Button"
-})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-flex;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;border:1px solid transparent;border-radius:4px;height:2.25em;padding:0.375em 0.75em;transition-property:background-color,color,box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " ", " ", " &:disabled{pointer-events:none;box-shadow:none;opacity:0.5;}&:not(:last-child){margin-right:0.5rem;margin-bottom:0.5rem;}"], setColor, function (_ref2) {
+})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-flex;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;border:1px solid transparent;border-radius:4px;height:2.25em;padding:0.375em 0.75em;transition-property:background-color,color,box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " ", " ", " &:not(:last-child){margin-right:0.5rem;margin-bottom:0.5rem;}"], setColor, function (_ref2) {
   var size = _ref2.size;
   return (0, _setSize.default)('font-size', size);
 }, function (_ref3) {

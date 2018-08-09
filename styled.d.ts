@@ -29,7 +29,7 @@ export interface ThemeType {
     border: string;
     borderHover: string;
     borderActive: string;
-    color: any;
+    [key: string]: string | any;
 }
 declare const styled: st.ThemedBaseStyledInterface<ThemeType>, css: st.ThemedCssFunction<ThemeType>, injectGlobal: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => void, keyframes: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => string, ThemeProvider: React.ComponentClass<st.ThemeProviderProps<ThemeType>, React.ComponentState>;
 export { StyledComponentClass };

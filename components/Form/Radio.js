@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _transparentize = _interopRequireDefault(require("polished/lib/color/transparentize"));
+
 var _styled = _interopRequireDefault(require("../../styled"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35,9 +37,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Wrapper = _styled.default.label.withConfig({
+var Wrapper = _styled.default.span.withConfig({
   displayName: "Radio__Wrapper"
-})(["display:inline-block;cursor:pointer;line-height:1.25;position:relative;input{cursor:pointer;margin-right:0.5em;}&:not(:first-child){margin-left:0.5em;}"]);
+})(["display:block;position:relative;width:auto;label{cursor:pointer;padding-left:0.625em;max-width:100%;width:100%;line-height:1.25;margin-right:0.625rem;&:before,&:after{content:\"\";position:absolute;}&:after{top:0.375em;left:0.375em;width:0.5em;height:0.5em;background:", ";border:none;transform:scale(0);border-radius:50%;will-change:transform;transition:transform 150ms ease-out;}&:before{width:1.25em;height:1.25em;left:0;top:0;background:transparent;border:1px solid ", ";border-radius:50%;will-change:background;transition:background 150ms ease-out;}}input{visibility:hidden;&:checked{+ label:before{border-color:", ";background:", ";}+ label:after{transform:scale(1);}}&:disabled{+ label{color:", ";&:before{background:", ";}}&:checked + label:after{background:", ";}}}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.white;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.border;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return (0, _transparentize.default)(0.55, theme.border);
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.primary;
+}, function (_ref5) {
+  var theme = _ref5.theme;
+  return (0, _transparentize.default)(0.25, theme.textDark);
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return (0, _transparentize.default)(0.55, theme.border);
+}, function (_ref7) {
+  var theme = _ref7.theme;
+  return (0, _transparentize.default)(0.15, theme.textDark);
+});
 
 var Radio =
 /*#__PURE__*/
@@ -77,5 +100,6 @@ exports.default = Radio;
 Radio.defaultProps = {
   name: null,
   children: null,
+  checked: false,
   onChange: function onChange() {}
 };

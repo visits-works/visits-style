@@ -1,13 +1,15 @@
-import { PureComponent, ReactNode } from 'react';
+import { PureComponent } from 'react';
 import { InputProps } from './style';
 interface Props extends InputProps {
     value: string | number;
-    children?: ReactNode;
+    children?: any;
+    checked?: boolean;
 }
 export default class Radio extends PureComponent<Props> {
     static defaultProps: {
         name: null;
         children: null;
+        checked: boolean;
         onChange: () => void;
     };
     id: string;

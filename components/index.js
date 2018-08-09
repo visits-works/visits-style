@@ -17,7 +17,7 @@ var _exportNames = {
   AppBar: true,
   Tag: true,
   Card: true,
-  Dropdown: true,
+  Popover: true,
   Modal: true
 };
 Object.defineProperty(exports, "Break", {
@@ -98,10 +98,10 @@ Object.defineProperty(exports, "Card", {
     return _Card.default;
   }
 });
-Object.defineProperty(exports, "Dropdown", {
+Object.defineProperty(exports, "Popover", {
   enumerable: true,
   get: function get() {
-    return _Dropdown.default;
+    return _Popover.default;
   }
 });
 Object.defineProperty(exports, "Modal", {
@@ -174,7 +174,7 @@ Object.keys(_SideMenu).forEach(function (key) {
 
 var _Card = _interopRequireDefault(require("./Card"));
 
-var _Dropdown = _interopRequireDefault(require("./Dropdown"));
+var _Popover = _interopRequireDefault(require("./Popover"));
 
 var _Modal = _interopRequireDefault(require("./Modal"));
 

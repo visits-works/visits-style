@@ -7,9 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styled = _interopRequireWildcard(require("../../styled"));
-
-var _boxShadow = _interopRequireDefault(require("../../utils/boxShadow"));
+var _styled = _interopRequireDefault(require("../../styled"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,14 +42,6 @@ var Label = _styled.default.label.withConfig({
   return theme.textStrong;
 });
 
-var InputControl = _styled.default.div.withConfig({
-  displayName: "Field__InputControl"
-})(["span{font-size:0.75em;display:block;}", ""], function (_ref2) {
-  var error = _ref2.error,
-      theme = _ref2.theme;
-  return error ? (0, _styled.css)(["input,select,textarea{border-color:", ";&:hover{border-color:", ";}&:focus{border-color:", ";", "}}span{color:", ";}"], theme.danger, theme.danger, theme.danger, (0, _boxShadow.default)('0.1em', theme.danger), theme.danger) : '';
-});
-
 var Field =
 /*#__PURE__*/
 function (_PureComponent) {
@@ -64,34 +54,15 @@ function (_PureComponent) {
   }
 
   _createClass(Field, [{
-    key: "renderMessage",
-    value: function renderMessage() {
-      var _this$props = this.props,
-          error = _this$props.error,
-          help = _this$props.help;
-
-      if (error) {
-        return _react.default.createElement("span", {
-          className: "error"
-        }, error);
-      }
-
-      if (help) {
-        return _react.default.createElement("span", null, help);
-      }
-
-      return null;
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          label = _this$props2.label,
-          children = _this$props2.children,
-          error = _this$props2.error;
-      return _react.default.createElement(Wrapper, null, label && _react.default.createElement(Label, null, label), _react.default.createElement(InputControl, {
-        error: error
-      }, children, this.renderMessage()));
+      var _this$props = this.props,
+          label = _this$props.label,
+          children = _this$props.children,
+          style = _this$props.style;
+      return _react.default.createElement(Wrapper, {
+        style: style
+      }, label && _react.default.createElement(Label, null, label), children);
     }
   }]);
 

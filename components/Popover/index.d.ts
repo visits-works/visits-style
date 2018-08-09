@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ColorType, SizeType, StyledComponentClass, ThemeType } from '../../styled';
+import { ColorType, SizeType } from '../../styled';
 interface Props {
     /** ボタンの内容 */
     label: React.ReactNode;
@@ -11,24 +11,23 @@ interface Props {
     right?: boolean;
     /** ボタンのサイズ */
     size?: SizeType;
+    position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 }
 interface State {
     show: boolean;
     style: any;
 }
-export default class Dropdown extends Component<Props, State> {
+export default class Popover extends Component<Props, State> {
+    static defaultProps: {
+        position: string;
+    };
     state: {
         show: boolean;
         style: {};
     };
-    static Item: StyledComponentClass<React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, ThemeType, React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>>;
-    static Divider: StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, ThemeType, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
     shouldComponentUpdate(props: Props, state: State): boolean;
     openDropdown: () => void;
     closeDropdown: () => void;
-    onClickChild: (props: {
-        onClick?: (() => void) | undefined;
-    }) => () => void;
     element: React.RefObject<HTMLDivElement>;
     render(): JSX.Element;
 }

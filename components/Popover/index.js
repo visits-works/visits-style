@@ -11,8 +11,6 @@ var _styled = _interopRequireDefault(require("../../styled"));
 
 var _CSSTransition = _interopRequireDefault(require("react-transition-group/CSSTransition"));
 
-var _findColorInvert = _interopRequireDefault(require("../../utils/findColorInvert"));
-
 var _Button = _interopRequireDefault(require("../Button"));
 
 var _Box = _interopRequireDefault(require("../Box"));
@@ -40,43 +38,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 var Wrapper = (0, _styled.default)(_Button.default).withConfig({
-  displayName: "Dropdown__Wrapper"
+  displayName: "Popover__Wrapper"
 })(["display:inline-flex;position:relative;vertical-align:top;"]);
 var Tooltip = (0, _styled.default)(_Box.default).withConfig({
-  displayName: "Dropdown__Tooltip"
-})(["position:absolute;display:flex;clear:both;top:0;left:0;background-color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);z-index:9999;padding:0.5rem 0;width:auto;will-change:transform,opacity;transform:scaleY(0.75);transform-origin:top;opacity:0;transition-property:transform,opacity;transition-duration:150ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&.start{transform:scaleY(1);opacity:1;}&.end{transform:scaleY(0.75);opacity:0;}"]);
+  displayName: "Popover__Tooltip"
+})(["position:absolute;display:flex;clear:both;background-color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);z-index:9999;padding:0.5rem 0;width:auto;height:auto;cursor:default;will-change:transform,opacity;transform:scale(0.8);opacity:0;transition-property:transform,opacity;transition-duration:100ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&.start{transform:scale(1);opacity:1;}&.end{transform:scale(0.8);opacity:0;}"]);
 
-var Divider = _styled.default.div.withConfig({
-  displayName: "Dropdown__Divider"
-})(["height:0;margin:0.5rem 0;overflow:hidden;border-top:1px solid ", ";"], function (_ref) {
-  var theme = _ref.theme;
-  return theme.border;
-});
-
-var MenuItem = _styled.default.a.withConfig({
-  displayName: "Dropdown__MenuItem"
-})(["display:block;width:100%;padding:0.25rem 1.5rem;text-align:left;white-space:nowrap;background-color:transparent;color:", ";border:0;svg{margin-left:-1rem;padding-right:0.5rem;font-size:1.5rem;}&:hover,&:focus{color:", ";background-color:rgba(0,0,0,0.05);}&:active{", ";}"], function (_ref2) {
-  var theme = _ref2.theme;
-  return theme.text;
-}, function (_ref3) {
-  var theme = _ref3.theme;
-  return theme.text;
-}, function (_ref4) {
-  var theme = _ref4.theme;
-  return "\n      background-color: ".concat(theme.primary, ";\n      color: ").concat((0, _findColorInvert.default)(theme.primary), "\n    ");
-});
-
-var Dropdown =
+var Popover =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Dropdown, _Component);
+  _inherits(Popover, _Component);
 
-  function Dropdown() {
+  function Popover() {
     var _this;
 
-    _classCallCheck(this, Dropdown);
+    _classCallCheck(this, Popover);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Dropdown).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).apply(this, arguments));
     _this.state = {
       show: false,
       style: {}
@@ -84,11 +62,71 @@ function (_Component) {
 
     _this.openDropdown = function () {
       if (_this.state.show || !_this.element.current) return;
-      var height = _this.element.current.offsetHeight + 2;
-      var style = {
-        top: "".concat(height, "px"),
-        left: 0
-      };
+      var style = {};
+      var height = _this.element.current.offsetHeight + 8;
+
+      switch (_this.props.position) {
+        case 'top-left':
+          {
+            style = {
+              bottom: "".concat(height, "px"),
+              left: 0
+            };
+            break;
+          }
+
+        case 'top-right':
+          {
+            style = {
+              bottom: "".concat(height, "px"),
+              right: 0
+            };
+            break;
+          }
+
+        case 'top':
+          {
+            style = {
+              bottom: "".concat(height, "px")
+            };
+            break;
+          }
+
+        case 'bottom-left':
+          {
+            style = {
+              top: "".concat(height, "px"),
+              left: 0
+            };
+            break;
+          }
+
+        case 'bottom-right':
+          {
+            style = {
+              top: "".concat(height, "px"),
+              right: 0
+            };
+            break;
+          }
+
+        case 'bottom':
+          {
+            style = {
+              top: "".concat(height, "px")
+            };
+            break;
+          }
+
+        default:
+          {
+            style = {
+              top: "".concat(height, "px"),
+              left: 0
+            };
+            break;
+          }
+      }
 
       _this.setState({
         style: style,
@@ -102,27 +140,18 @@ function (_Component) {
       });
     };
 
-    _this.onClickChild = function (props) {
-      return function () {
-        if (props.onClick) props.onClick();
-        if (_this.element.current) _this.element.current.blur();
-      };
-    };
-
     _this.element = _react.default.createRef();
     return _this;
   }
 
-  _createClass(Dropdown, [{
+  _createClass(Popover, [{
     key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(props, state) {
-      return this.state.show !== state.show;
+      return this.state.show !== state.show || this.props.label !== props.label;
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$props = this.props,
           label = _this$props.label,
           color = _this$props.color,
@@ -148,23 +177,14 @@ function (_Component) {
         unmountOnExit: true
       }, _react.default.createElement(Tooltip, {
         style: style
-      }, _react.default.Children.map(children, function (child) {
-        // @ts-ignore
-        if (child.props.divider) {
-          return _react.default.createElement(Divider, null);
-        } // @ts-ignore
-
-
-        return _react.default.createElement(MenuItem, Object.assign({}, child.props, {
-          onClick: _this2.onClickChild(child.props)
-        }));
-      }))));
+      }, children)));
     }
   }]);
 
-  return Dropdown;
+  return Popover;
 }(_react.Component);
 
-exports.default = Dropdown;
-Dropdown.Item = MenuItem;
-Dropdown.Divider = Divider;
+exports.default = Popover;
+Popover.defaultProps = {
+  position: 'bottom-left'
+};
