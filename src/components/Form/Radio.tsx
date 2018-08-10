@@ -26,7 +26,7 @@ const Wrapper = styled.span`
       left: 0.375em;
       width: 0.5em;
       height: 0.5em;
-      background: ${({ theme }) => theme.white};
+      background: ${({ theme }) => theme.primary};
       border: none;
       transform: scale(0);
       border-radius: 50%;
@@ -41,7 +41,7 @@ const Wrapper = styled.span`
       left:0;
       top: 0;
       background: transparent;
-      border: 1px solid ${({ theme }) => theme.border};
+      border: 0.1em solid ${({ theme }) => theme.border};
       border-radius: 50%;
 
       will-change: background;
@@ -54,8 +54,7 @@ const Wrapper = styled.span`
 
     &:checked {
       + label:before {
-        border-color: ${({ theme }) => transparentize(0.55, theme.border)};
-        background: ${({ theme }) => theme.primary};
+        border-color: ${({ theme }) => theme.primary};
       }
       + label:after{
         transform: scale(1);
@@ -67,6 +66,7 @@ const Wrapper = styled.span`
         color: ${({ theme }) => transparentize(0.25, theme.textDark)};
         &:before {
           background: ${({ theme }) => transparentize(0.55, theme.border)};
+          border-color: ${({ theme }) => theme.border};
         }
       }
       &:checked + label:after {

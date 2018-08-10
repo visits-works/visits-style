@@ -22,10 +22,10 @@ const Wrapper = styled.span`
     }
 
     &:after {
-      top: 0.375em;
-      left: 0.325em;
-      width: 0.625em;
-      height: 0.325em;
+      top: 0.25em;
+      left: 0.2em;
+      width: 0.85em;
+      height: 0.5em;
       transform: rotate(-45deg);
       border: 0.1em solid transparent;
       border-top-style: none;
@@ -52,6 +52,7 @@ const Wrapper = styled.span`
 
     &:checked + label {
       &:before{
+        border-color: ${({ theme }) => theme.primary};
         background: ${({ theme }) => theme.primary};
       }
       &:after {
@@ -61,7 +62,7 @@ const Wrapper = styled.span`
 
     &:indeterminate + label {
       &:before {
-        border-color: ${({ theme }) => transparentize(0.55, theme.border)};
+        border-color: ${({ theme }) => theme.primary};
         background: ${({ theme }) => theme.primary};
       }
       &:after {
@@ -75,6 +76,7 @@ const Wrapper = styled.span`
         color: ${({ theme }) => transparentize(0.25, theme.textDark)};
         &:before {
           background: ${({ theme }) => transparentize(0.55, theme.border)};
+          border-color: ${({ theme }) => theme.border};
         }
       }
       &:checked + label:after {

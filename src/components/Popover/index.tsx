@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import styled, { ColorType, SizeType, StyledComponentClass, ThemeType } from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
-
-import findColorInvert from '../../utils/findColorInvert';
 import Button from '../Button';
 import Box from '../Box';
 
 const Wrapper = styled(Button)`
-  display: inline-flex;
+  display: block;
   position: relative;
-  vertical-align: top;
 `;
 
 const Tooltip = styled(Box)`
@@ -63,6 +60,32 @@ interface State {
   style: any;
 }
 
+function getPosition(height: number, position?: any) {
+  switch (position) {
+    case 'top-left': {
+      return { bottom: `${height}px`, left: 0 };
+    }
+    case 'top-right': {
+      return { bottom: `${height}px`, right: 0 };
+    }
+    case 'top': {
+      return { bottom: `${height}px` };
+    }
+    case 'bottom-left': {
+      return { top: `${height}px`, left: 0 };
+    }
+    case 'bottom-right': {
+      return { top: `${height}px`, right: 0 };
+    }
+    case 'bottom': {
+      return { top: `${height}px` };
+    }
+    default: {
+      return { top: `${height}px`, left: 0 };
+    }
+  }
+}
+
 export default class Popover extends Component<Props, State> {
   static defaultProps = {
     position: 'bottom-left',
@@ -76,40 +99,9 @@ export default class Popover extends Component<Props, State> {
 
   openDropdown = () => {
     if (this.state.show || !this.element.current) return;
-    let style = {};
 
     const height = this.element.current.offsetHeight + 8;
-
-    switch (this.props.position) {
-      case 'top-left': {
-        style = { bottom: `${height}px`, left: 0 };
-        break;
-      }
-      case 'top-right': {
-        style = { bottom: `${height}px`, right: 0 };
-        break;
-      }
-      case 'top': {
-        style = { bottom: `${height}px` };
-        break;
-      }
-      case 'bottom-left': {
-        style = { top: `${height}px`, left: 0 };
-        break;
-      }
-      case 'bottom-right': {
-        style = { top: `${height}px`, right: 0 };
-        break;
-      }
-      case 'bottom': {
-        style = { top: `${height}px` };
-        break;
-      }
-      default: {
-        style = { top: `${height}px`, left: 0 };
-        break;
-      }
-    }
+    const style = getPosition(height, this.props.position);
 
     this.setState({ style, show: true });
   }
