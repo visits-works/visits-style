@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties, ReactNode } from 'react';
+import React, { PureComponent, CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
@@ -63,7 +63,7 @@ function animeModalIn(modal: HTMLElement) {
   });
 }
 
-export default class Modal extends Component<Props> {
+export default class Modal extends PureComponent<Props> {
   static defaultProps = {
     domId: 'modal',
     show: false,
@@ -77,9 +77,9 @@ export default class Modal extends Component<Props> {
     document.body.appendChild(this.element);
   }
 
-  shouldComponentUpdate(props: Props) {
-    return this.props.show !== props.show;
-  }
+  // shouldComponentUpdate(props: Props) {
+  //   return this.props.show !== props.show;
+  // }
 
   componentWillUnmount() {
     if (this.props.domId) {
