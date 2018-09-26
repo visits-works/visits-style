@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { SizeType, ColorType, StyledComponentClass, ThemeType } from '../../styled';
+import styled, { SizeType, ColorType, ThemeType } from '../../styled';
 import setSize from '../../utils/setSize';
 
 interface ProgressProps {

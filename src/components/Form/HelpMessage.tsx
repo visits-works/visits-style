@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from '../../styled';
 
-const Message = styled.span<{ error?: boolean }>`
+interface MsgProps {
+  error?: boolean;
+}
+
+const Message = styled.span<MsgProps>`
   font-size: 0.8rem;
   ${({ error, theme }) => error ? `color: ${theme.danger};` : `color: ${theme.textLight};`};
 `;

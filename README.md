@@ -6,13 +6,13 @@ VISITS Technologyのreactデザインコンポーネント
 まずは、開発マシンから会社のgitアクセスをできるようにしてください。
 
 ```
-npm install github:visits-works/visits-style#<branch指定>
+npm install --save github:visits-works/visits-style#<branch指定> react react-dom styled-components
 ```
 
 [yarn](https://yarnpkg.com/ja/)でもできます
 
 ```
-yarn add github:visits-works/visits-style#<branch指定>
+yarn add github:visits-works/visits-style#<branch指定> react react-dom styled-components
 ```
 
 ## Example
@@ -70,4 +70,5 @@ github Pagesのurlは公開されるので、注意してください
 
 ## 参考のデザインフレームワーク
 [Bulma](https://bulma.io/)
+[Bootstrap](http://getbootstrap.com//)
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as st from 'styled-components';
 // tslint:disable-next-line
-import { ThemedStyledComponentsModule, StyledComponentClass } from 'styled-components';
+import { ThemedStyledComponentsModule } from 'styled-components';
 
 export type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' |
   'warning' | 'danger' | 'dark' | 'text';
@@ -53,6 +53,5 @@ const {
   ThemeProvider,
 } = st as ThemedStyledComponentsModule<ThemeType>;
 
-export { StyledComponentClass };
 export { css, injectGlobal, keyframes, ThemeProvider };
 export default styled;

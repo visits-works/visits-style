@@ -1,5 +1,4 @@
-import React from 'react';
-import styled, { css, ColSizeType, StyledComponentClass, ThemeType } from '../../styled';
+import styled, { css, ColSizeType, ThemeType } from '../../styled';
 import { mediaMobile } from '../../utils/media';
 
 interface ColProps {
@@ -38,7 +37,7 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
   }
 }
 
-const Col = styled.div`
+const Col = styled.div<ColProps>`
   display: block;
   min-height: 1px;
   max-width: 100%;

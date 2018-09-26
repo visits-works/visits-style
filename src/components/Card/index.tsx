@@ -37,7 +37,11 @@ const CardImage = styled.a`
   }
 `;
 
-const CardImageHorizontal = styled.a<{ url?: string }>`
+interface ImageProps {
+  url?: string;
+}
+
+const CardImageHorizontal = styled.a<ImageProps>`
   flex: 0 0 30%;
   min-width: 5rem;
   width: 30%;

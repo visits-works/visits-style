@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { ThemeType, StyledComponentClass } from '../../styled';
+import styled, { ThemeType } from '../../styled';
 
 const H1 = styled.h1`
   font-size: 2em;

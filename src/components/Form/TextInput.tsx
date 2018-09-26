@@ -9,8 +9,11 @@ interface WrapperProps {
   error?: any;
 }
 
+interface IconProps {
+  right?: boolean;
+}
 
-const Icon = styled.span<{ right?: boolean }>`
+const Icon = styled.span<IconProps>`
   position: absolute;
   top: 0.375em;
   bottom: 0;

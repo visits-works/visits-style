@@ -5,7 +5,11 @@ import setSize from '../../utils/setSize';
 import commonStyle, { InputProps } from './style';
 import HelpMessage from './HelpMessage';
 
-const Wrapper = styled.span<{ error?: string }>`
+interface WrapperProps {
+  error?: string;
+}
+
+const Wrapper = styled.span<WrapperProps>`
   display: block;
   position: relative;
 

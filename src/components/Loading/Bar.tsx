@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled, { StyledComponentClass, ThemeType } from '../../styled';
+import styled, { ThemeType } from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
 export const Bar = styled.div`

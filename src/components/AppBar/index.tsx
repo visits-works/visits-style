@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css, ColorType, ThemeType, AlignType, StyledComponentClass } from '../../styled';
+import styled, { css, ColorType, ThemeType, AlignType } from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -75,7 +75,13 @@ const Burger = styled.button`
   ${mediaMobile` display: block; `}
 `;
 
-const NavContent = styled.div<{ color?: ColorType, show?: boolean, align?: 'left' | 'right' }>`
+interface ContentProps {
+  color?: ColorType;
+  show?: boolean;
+  align?: 'left' | 'right';
+}
+
+const NavContent = styled.div<ContentProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;

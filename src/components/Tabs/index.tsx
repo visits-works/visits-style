@@ -1,5 +1,5 @@
 import React, { Component, Children, CSSProperties } from 'react';
-import styled, { ColorType, AlignType, ThemeType, StyledComponentClass } from '../../styled';
+import styled, { ColorType, AlignType, ThemeType } from '../../styled';
 import setAlign from '../../utils/setAlign';
 import Button from '../Button';
 
@@ -17,7 +17,12 @@ const Wrapper = styled.nav`
   }
 `;
 
-const TabItem = styled.div<{ align?: any, active: boolean }>`
+interface ItemProps {
+  align?: any;
+  active: boolean;
+}
+
+const TabItem = styled.div<ItemProps>`
   display: block;
   flex-grow: 1;
   cursor: pointer;
@@ -45,7 +50,12 @@ function setColor({ theme, color }: { theme: ThemeType, color?: ColorType }) {
   return (!color || color === 'light') ? theme.background : theme[color];
 }
 
-const Indicator = styled.div<{ color?: ColorType, style?: CSSProperties }>`
+interface IndicatorProps {
+  color?: ColorType;
+  style?: CSSProperties;
+}
+
+const Indicator = styled.div<IndicatorProps>`
   position: absolute;
   bottom: 0;
   left: 0;

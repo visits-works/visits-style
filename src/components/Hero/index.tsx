@@ -43,7 +43,11 @@ function setSize({ size }: { size?: SizeType | 'full' }) {
   }
 }
 
-const Body = styled.div<{ center?: boolean }>`
+interface BodyProps {
+  center?: boolean;
+}
+
+const Body = styled.div<BodyProps>`
   flex-grow: 1;
   flex-shrink: 0;
   padding: 3rem 1.5rem;
@@ -71,7 +75,12 @@ const Body = styled.div<{ center?: boolean }>`
   }
 `;
 
-const Wrapper = styled.div<{ color?: ColorType, size?: SizeType | 'full' }>`
+interface WrapperProps {
+  color?: ColorType;
+  size?: SizeType | 'full';
+}
+
+const Wrapper = styled.div<WrapperProps>`
   align-items: stretch;
   display: flex;
   flex-direction: column;
