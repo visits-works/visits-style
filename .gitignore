@@ -9,6 +9,9 @@ package-lock.json
 junit.xml
 bundle_report.html
 
+# development
+/src
+
 # production
 /build
 /lib
