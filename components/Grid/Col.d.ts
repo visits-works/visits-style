@@ -1,10 +1,10 @@
-import React from 'react';
-import { ColSizeType, StyledComponentClass, ThemeType } from '../../styled';
+/// <reference types="react" />
+import { ColSizeType, ThemeType } from '../../styled';
 interface ColProps {
     narrow?: boolean;
     size?: ColSizeType;
     offset?: ColSizeType;
     auto?: boolean;
 }
-declare const Col: StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & ColProps, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & ColProps>;
+declare const Col: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & ColProps, ThemeType, import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & ColProps>;
 export default Col;

@@ -1,35 +1,22 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styled = _interopRequireDefault(require("../../styled"));
-
-var _findColorInvert = _interopRequireDefault(require("../../utils/findColorInvert"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Box = _styled.default.div.withConfig({
-  displayName: "Box"
-})(["position:relative;display:flex;flex-direction:column;", " box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);border-radius:3px;width:100%;min-width:0;word-wrap:break-word;", ""], function (_ref) {
-  var borderless = _ref.borderless,
-      theme = _ref.theme;
-  return borderless ? "" : "border: 1px solid ".concat(theme.border, ";");
-}, function (_ref2) {
-  var color = _ref2.color,
-      theme = _ref2.theme;
+import React from 'react';
+import styled from '../../styled';
+import findColorInvert from '../../utils/findColorInvert';
+const Box = styled.div.withConfig({
+  displayName: "Box",
+  componentId: "v21x8u-0"
+})(["position:relative;display:flex;flex-direction:column;", " box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);border-radius:3px;width:100%;min-width:0;word-wrap:break-word;", ""], ({
+  borderless,
+  theme
+}) => borderless ? `` : `border: 1px solid ${theme.border};`, ({
+  color,
+  theme
+}) => {
   if (!color) return '';
-  var target = color === 'light' ? theme.color.greyLight : theme[color];
-  var invertColor = (0, _findColorInvert.default)(target);
-  return "background-color: ".concat(target, "; color: ").concat(invertColor, ";");
+  const target = color === 'light' ? theme.color.greyLight : theme[color];
+  const invertColor = findColorInvert(target);
+  return `background-color: ${target}; color: ${invertColor};`;
 });
-
 Box.displayName = 'Box';
-
-function _default(props) {
-  return _react.default.createElement(Box, Object.assign({}, props));
+export default function (props) {
+  return React.createElement(Box, props);
 }

@@ -1,32 +1,20 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = HelpMessage;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styled = _interopRequireDefault(require("../../styled"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Message = _styled.default.span.withConfig({
-  displayName: "HelpMessage__Message"
-})(["font-size:0.8rem;", ";"], function (_ref) {
-  var error = _ref.error,
-      theme = _ref.theme;
-  return error ? "color: ".concat(theme.danger, ";") : "color: ".concat(theme.textLight, ";");
-});
-
-function HelpMessage(help, error) {
+import React from 'react';
+import styled from '../../styled';
+const Message = styled.span.withConfig({
+  displayName: "HelpMessage__Message",
+  componentId: "sc-5r3ekc-0"
+})(["font-size:0.8rem;", ";"], ({
+  error,
+  theme
+}) => error ? `color: ${theme.danger};` : `color: ${theme.textLight};`);
+export default function HelpMessage(help, error) {
   if (error) {
-    return _react.default.createElement(Message, {
+    return React.createElement(Message, {
       error: true
     }, error);
   }
 
   if (help) {
-    return _react.default.createElement(Message, null, help);
+    return React.createElement(Message, null, help);
   }
 }

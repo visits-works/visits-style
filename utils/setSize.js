@@ -1,11 +1,4 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = setSize;
-
-function setSize(name, size) {
+export default function setSize(name, size) {
   switch (size) {
     case 'small':
       return name + ': 0.75rem;';

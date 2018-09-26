@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { StyledComponentClass, ThemeType } from '../../styled';
-export declare const Bar: StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, ThemeType, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
+import { ThemeType } from '../../styled';
+export declare const Bar: import("styled-components").StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, ThemeType, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
 interface Props {
     loading: boolean;
 }

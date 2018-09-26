@@ -1,190 +1,142 @@
-"use strict";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _styled = _interopRequireDefault(require("../../styled"));
-
-var _CSSTransition = _interopRequireDefault(require("react-transition-group/CSSTransition"));
-
-var _Button = _interopRequireDefault(require("../Button"));
-
-var _Box = _interopRequireDefault(require("../Box"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var Wrapper = (0, _styled.default)(_Button.default).withConfig({
-  displayName: "Popover__Wrapper"
-})(["display:inline-flex;position:relative;vertical-align:top;"]);
-var Tooltip = (0, _styled.default)(_Box.default).withConfig({
-  displayName: "Popover__Tooltip"
+import React, { Component } from 'react';
+import styled from '../../styled';
+import CSSTransition from 'react-transition-group/CSSTransition';
+import Button from '../Button';
+import Box from '../Box';
+const Wrapper = styled(Button).withConfig({
+  displayName: "Popover__Wrapper",
+  componentId: "sc-1huajr8-0"
+})(["display:block;position:relative;"]);
+const Tooltip = styled(Box).withConfig({
+  displayName: "Popover__Tooltip",
+  componentId: "sc-1huajr8-1"
 })(["position:absolute;display:flex;clear:both;background-color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);z-index:9999;padding:0.5rem 0;width:auto;height:auto;cursor:default;will-change:transform,opacity;transform:scale(0.8);opacity:0;transition-property:transform,opacity;transition-duration:100ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&.start{transform:scale(1);opacity:1;}&.end{transform:scale(0.8);opacity:0;}"]);
 
-var Popover =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Popover, _Component);
-
-  function Popover() {
-    var _this;
-
-    _classCallCheck(this, Popover);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Popover).apply(this, arguments));
-    _this.state = {
-      show: false,
-      style: {}
-    };
-
-    _this.openDropdown = function () {
-      if (_this.state.show || !_this.element.current) return;
-      var style = {};
-      var height = _this.element.current.offsetHeight + 8;
-
-      switch (_this.props.position) {
-        case 'top-left':
-          {
-            style = {
-              bottom: "".concat(height, "px"),
-              left: 0
-            };
-            break;
-          }
-
-        case 'top-right':
-          {
-            style = {
-              bottom: "".concat(height, "px"),
-              right: 0
-            };
-            break;
-          }
-
-        case 'top':
-          {
-            style = {
-              bottom: "".concat(height, "px")
-            };
-            break;
-          }
-
-        case 'bottom-left':
-          {
-            style = {
-              top: "".concat(height, "px"),
-              left: 0
-            };
-            break;
-          }
-
-        case 'bottom-right':
-          {
-            style = {
-              top: "".concat(height, "px"),
-              right: 0
-            };
-            break;
-          }
-
-        case 'bottom':
-          {
-            style = {
-              top: "".concat(height, "px")
-            };
-            break;
-          }
-
-        default:
-          {
-            style = {
-              top: "".concat(height, "px"),
-              left: 0
-            };
-            break;
-          }
+function getPosition(height, position) {
+  switch (position) {
+    case 'top-left':
+      {
+        return {
+          bottom: `${height}px`,
+          left: 0
+        };
       }
 
-      _this.setState({
-        style: style,
+    case 'top-right':
+      {
+        return {
+          bottom: `${height}px`,
+          right: 0
+        };
+      }
+
+    case 'top':
+      {
+        return {
+          bottom: `${height}px`
+        };
+      }
+
+    case 'bottom-left':
+      {
+        return {
+          top: `${height}px`,
+          left: 0
+        };
+      }
+
+    case 'bottom-right':
+      {
+        return {
+          top: `${height}px`,
+          right: 0
+        };
+      }
+
+    case 'bottom':
+      {
+        return {
+          top: `${height}px`
+        };
+      }
+
+    default:
+      {
+        return {
+          top: `${height}px`,
+          left: 0
+        };
+      }
+  }
+}
+
+export default class Popover extends Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      show: false,
+      style: {}
+    });
+
+    _defineProperty(this, "openDropdown", () => {
+      if (this.state.show || !this.element.current) return;
+      const height = this.element.current.offsetHeight + 8;
+      const style = getPosition(height, this.props.position);
+      this.setState({
+        style,
         show: true
       });
-    };
+    });
 
-    _this.closeDropdown = function () {
-      if (_this.state.show) _this.setState({
+    _defineProperty(this, "closeDropdown", () => {
+      if (this.state.show) this.setState({
         show: false
       });
-    };
+    });
 
-    _this.element = _react.default.createRef();
-    return _this;
+    _defineProperty(this, "element", React.createRef());
   }
 
-  _createClass(Popover, [{
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(props, state) {
-      return this.state.show !== state.show || this.props.label !== props.label;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          label = _this$props.label,
-          color = _this$props.color,
-          size = _this$props.size,
-          children = _this$props.children;
-      var _this$state = this.state,
-          show = _this$state.show,
-          style = _this$state.style;
-      return _react.default.createElement(Wrapper, {
-        innerRef: this.element,
-        color: color || 'text',
-        size: size,
-        onFocus: this.openDropdown,
-        onBlur: this.closeDropdown
-      }, label, _react.default.createElement(_CSSTransition.default, {
-        classNames: {
-          appear: 'start',
-          enterDone: 'start',
-          exit: 'end'
-        },
-        in: show,
-        timeout: 150,
-        unmountOnExit: true
-      }, _react.default.createElement(Tooltip, {
-        style: style
-      }, children)));
-    }
-  }]);
+  shouldComponentUpdate(props, state) {
+    return this.state.show !== state.show || this.props.label !== props.label;
+  }
 
-  return Popover;
-}(_react.Component);
+  render() {
+    const {
+      label,
+      color,
+      size,
+      children
+    } = this.props;
+    const {
+      show,
+      style
+    } = this.state;
+    return React.createElement(Wrapper, {
+      innerRef: this.element,
+      color: color || 'text',
+      size: size,
+      onFocus: this.openDropdown,
+      onBlur: this.closeDropdown
+    }, label, React.createElement(CSSTransition, {
+      classNames: {
+        appear: 'start',
+        enterDone: 'start',
+        exit: 'end'
+      },
+      in: show,
+      timeout: 150,
+      unmountOnExit: true
+    }, React.createElement(Tooltip, {
+      style: style
+    }, children)));
+  }
 
-exports.default = Popover;
-Popover.defaultProps = {
+}
+
+_defineProperty(Popover, "defaultProps", {
   position: 'bottom-left'
-};
+});

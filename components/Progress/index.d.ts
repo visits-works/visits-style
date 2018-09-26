@@ -1,5 +1,5 @@
 import React from 'react';
-import { SizeType, ColorType, StyledComponentClass, ThemeType } from '../../styled';
+import { SizeType, ColorType, ThemeType } from '../../styled';
 interface ProgressProps {
     /** 現状の進捗 */
     value: number;
@@ -12,5 +12,5 @@ interface ProgressProps {
     /** バーの色 */
     color: ColorType;
 }
-declare const Progress: StyledComponentClass<React.ClassAttributes<HTMLProgressElement> & React.ProgressHTMLAttributes<HTMLProgressElement> & ProgressProps, ThemeType, React.ClassAttributes<HTMLProgressElement> & React.ProgressHTMLAttributes<HTMLProgressElement> & ProgressProps>;
+declare const Progress: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLProgressElement> & React.ProgressHTMLAttributes<HTMLProgressElement> & ProgressProps, ThemeType, React.ClassAttributes<HTMLProgressElement> & React.ProgressHTMLAttributes<HTMLProgressElement> & ProgressProps>;
 export default Progress;

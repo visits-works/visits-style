@@ -1,13 +1,6 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = setAlign;
-
-function setAlign(_ref) {
-  var align = _ref.align;
-
+export default function setAlign({
+  align
+}) {
   switch (align) {
     case 'left':
       return 'flex-start';
