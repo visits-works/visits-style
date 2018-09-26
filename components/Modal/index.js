@@ -1,6 +1,6 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
 import anime from 'animejs';
@@ -37,7 +37,7 @@ function animeModalIn(modal) {
   });
 }
 
-export default class Modal extends Component {
+export default class Modal extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -106,11 +106,10 @@ export default class Modal extends Component {
     this.element = document.createElement('div');
     this.element.id = props.domId || 'modal';
     document.body.appendChild(this.element);
-  }
+  } // shouldComponentUpdate(props: Props) {
+  //   return this.props.show !== props.show;
+  // }
 
-  shouldComponentUpdate(props) {
-    return this.props.show !== props.show;
-  }
 
   componentWillUnmount() {
     if (this.props.domId) {

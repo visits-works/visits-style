@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { ColSizeType, ColorType } from '../../styled';
 interface Props {
     /** ヘッダーのタイトル文言 */
@@ -23,14 +23,13 @@ interface Props {
     closeOnEsc?: boolean;
     style?: any;
 }
-export default class Modal extends Component<Props> {
+export default class Modal extends PureComponent<Props> {
     static defaultProps: {
         domId: string;
         show: boolean;
         color: string;
     };
     constructor(props: Props);
-    shouldComponentUpdate(props: Props): boolean;
     componentWillUnmount(): void;
     onKeyDown: (e: any) => void;
     onClickOverlay: () => void;
