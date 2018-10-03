@@ -1,6 +1,7 @@
+import { css } from 'styled-components';
 
 export default function Arrow(color: string, direction?: string) {
-  return `
+  return css`
     position: absolute;
     border: 3px solid ${color};
     border-radius: 2px;

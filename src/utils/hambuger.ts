@@ -1,6 +1,7 @@
+import { css } from 'styled-components';
 
 export default function hamburger(size: string) {
-  return `
+  return css`
     display: block;
     position: relative;
     height: ${size};

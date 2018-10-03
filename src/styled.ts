@@ -48,10 +48,9 @@ export interface ThemeType {
 const {
   default: styled,
   css,
-  injectGlobal,
   keyframes,
   ThemeProvider,
 } = st as ThemedStyledComponentsModule<ThemeType>;
 
-export { css, injectGlobal, keyframes, ThemeProvider };
+export { css, keyframes, ThemeProvider };
 export default styled;
