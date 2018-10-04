@@ -9,16 +9,19 @@ import Box from '../Box';
 type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';
 
 interface ToastType {
+  /** 認識ID */
   id: string;
-  title?: string;
+  /** 表示する内容 */
   message?: React.ReactNode;
+  /** 背景の色 */
   color?: ColorType;
-  duration?: number;
+  /** 表示される時間 nullの場合は自動で閉じられません */
+  duration?: number | null;
 }
 
 interface ToastProps extends ToastType {
+  /** 定義不要、コンテナ側への操作系 */
   clear: () => void;
-  styles?: any;
 }
 
 const Wrapper = styled(Box)`
@@ -50,13 +53,15 @@ const Wrapper = styled(Box)`
   }
 `;
 
-export class Toast extends PureComponent<ToastProps> {
+export class ToastItem extends PureComponent<ToastProps> {
   static defaultProps = {
     duration: 5000,
   };
 
   componentDidMount() {
-    setTimeout(this.props.clear, this.props.duration);
+    if (this.props.duration !== null) {
+      setTimeout(this.props.clear, this.props.duration);
+    }
   }
 
   render() {
@@ -95,8 +100,11 @@ function setPosition(position: string) {
 }
 
 interface ContainerProps {
+  /** 表示するToastのリスト */
   toasts: ToastType[];
+  /** toastを消すタイミングのコールバック */
   clear: (id: string) => void;
+  /** top, top-right, top-left, bottom, bottom-right, bottom-left */
   position?: PositionType;
 }
 
@@ -116,7 +124,8 @@ export default class ToastContainer extends Component<ContainerProps> {
   }
 
   shouldComponentUpdate(props: ContainerProps) {
-    return props.toasts.length !== this.props.toasts.length;
+    return props.toasts.length !== this.props.toasts.length ||
+      props.position !== this.props.position;
   }
 
   componentWillUnmount() {
@@ -138,7 +147,7 @@ export default class ToastContainer extends Component<ContainerProps> {
             classNames="move"
             unmountOnExit
           >
-            <Toast
+            <ToastItem
               key={props.id}
               {...props}
               clear={this.clear(props.id)}
