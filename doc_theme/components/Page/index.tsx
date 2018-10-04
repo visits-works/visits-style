@@ -53,7 +53,6 @@ export default function Page({ children, doc, ...props }: Props) {
   const showSidebar = Boolean(parent || sidebar);
 
   const render = renderChildren(doc, children);
-  console.log('asdasd');
 
   if (showSidebar) {
     return (

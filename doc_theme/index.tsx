@@ -10,7 +10,6 @@ import { Topbar, Renderer, Highlight, Page } from './components';
 import '../src/styles/global';
 
 function render() {
-  console.log('render first');
   return (
     <ThemeProvider theme={lightTheme}>
       <Fragment>
