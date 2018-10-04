@@ -20,7 +20,7 @@ export default class ToastTest extends React.Component<{}, State> {
   state: State = { list: [] };
 
   addToast = () => {
-    const list = this.state.list;
+    const list = this.state.list.slice();
     const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
     const id = '_' + Math.random().toString(36).substr(2, 9);
     list.push({ id, color, message: 'list number: ' + list.length });
@@ -41,7 +41,7 @@ export default class ToastTest extends React.Component<{}, State> {
       <div>
         <Button color="info" onClick={this.addToast}>Toast!</Button>
         <Button color="danger" onClick={this.clearAll}>Clear All</Button>
-        <Toast toasts={this.state.list} clear={this.clearToast} />
+        <Toast toasts={this.state.list} clear={this.clearToast} position="top-right" />
       </div>
     );
   }
