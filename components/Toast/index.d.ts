@@ -1,33 +1,42 @@
 import React, { Component, PureComponent } from 'react';
 import { ColorType } from '../../styled';
+declare type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';
 interface ToastType {
+    /** 認識ID */
     id: string;
-    title?: string;
+    /** 表示する内容 */
     message?: React.ReactNode;
+    /** 背景の色 */
     color?: ColorType;
-    duration?: number;
+    /** 表示される時間 nullの場合は自動で閉じられません */
+    duration?: number | null;
 }
 interface ToastProps extends ToastType {
+    /** 定義不要、コンテナ側への操作系 */
     clear: () => void;
-    styles?: any;
 }
-export declare class Toast extends PureComponent<ToastProps> {
+export declare class ToastItem extends PureComponent<ToastProps> {
     static defaultProps: {
         duration: number;
     };
     componentDidMount(): void;
-    timer: any;
     render(): JSX.Element;
 }
 interface ContainerProps {
+    /** 表示するToastのリスト */
     toasts: ToastType[];
+    /** toastを消すタイミングのコールバック */
     clear: (id: string) => void;
+    /** top, top-right, top-left, bottom, bottom-right, bottom-left */
+    position?: PositionType;
 }
 export default class ToastContainer extends Component<ContainerProps> {
     static defaultProps: {
         toasts: never[];
+        position: string;
     };
     constructor(props: ContainerProps);
+    shouldComponentUpdate(props: ContainerProps): boolean;
     componentWillUnmount(): void;
     clear: (id: string) => () => void;
     renderToast: () => JSX.Element;

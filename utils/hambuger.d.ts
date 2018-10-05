@@ -1,1 +1,1 @@
-export default function hamburger(size: string): string;
+export default function hamburger(size: string): import("styled-components").InterpolationValue[];

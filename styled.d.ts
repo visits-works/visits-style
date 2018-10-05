@@ -30,6 +30,6 @@ export interface ThemeType {
     borderActive: string;
     [key: string]: string | any;
 }
-declare const styled: st.ThemedBaseStyledInterface<ThemeType>, css: st.ThemedCssFunction<ThemeType>, injectGlobal: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => void, keyframes: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => string, ThemeProvider: React.ComponentClass<st.ThemeProviderProps<ThemeType>, React.ComponentState>;
-export { css, injectGlobal, keyframes, ThemeProvider };
+declare const styled: st.ThemedBaseStyledInterface<ThemeType>, css: st.ThemedCssFunction<ThemeType>, keyframes: (strings: TemplateStringsArray, ...interpolations: st.SimpleInterpolation[]) => string, ThemeProvider: React.ComponentClass<st.ThemeProviderProps<ThemeType>, any>;
+export { css, keyframes, ThemeProvider };
 export default styled;
