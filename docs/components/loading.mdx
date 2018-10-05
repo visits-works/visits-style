@@ -38,7 +38,7 @@ import LoadingBar from '../../src/components/Loading/Bar';
       render() {
         return (
           <div style={{ position: 'relative' }}>
-            <LoadingBar loading={this.state.loading} />
+            <LoadingBar loading={this.state.loading} color="warning" background="#eee" />
             <br />
             <Button onClick={this.onClick}>Toggle Loading</Button>
           </div>
