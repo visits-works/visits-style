@@ -9,7 +9,7 @@ description:
 ---
 
 import { Playground, PropsTable } from 'docz';
-import LoadingBarTest from './LoadingBarTest.tsx';
+import Button from '../../src/components/Button';
 import Spinner from '../../src/components/Loading/Spinner.tsx';
 import LoadingBar from '../../src/components/Loading/Bar';
 
@@ -22,7 +22,31 @@ import LoadingBar from '../../src/components/Loading/Bar';
 ### Demo
 
 <Playground>
-  <LoadingBarTest />
+  {() => {
+    class BarDemo extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { loading: false };
+
+        this.onClick = this.onClick.bind(this);
+      }
+
+      onClick() {
+        this.setState(state => ({ loading: !state.loading }));
+      }
+
+      render() {
+        return (
+          <div style={{ position: 'relative' }}>
+            <LoadingBar loading={this.state.loading} color="warning" background="#eee" />
+            <br />
+            <Button onClick={this.onClick}>Toggle Loading</Button>
+          </div>
+        );
+      }
+    }
+    return <BarDemo />;
+  }}
 </Playground>
 
 

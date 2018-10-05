@@ -1,57 +1,81 @@
 import React, { PureComponent } from 'react';
-import styled, { ThemeType } from '../../styled';
+import styled, { ThemeType, ColorType } from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
+interface LoadingProps {
+  loading: boolean;
+  /** バーの色の指定 */
+  color?: ColorType;
+  /** バーのCSS positionの指定 */
+  position?: 'absolute' | 'fixed' | 'sticky';
+  /** バーの背景の色の自由指定 */
+  background?: string;
+  /** バーの縦幅の定義 */
+  size?: string;
+  /** バーのアニメーションのduration指定 (単位：ms) */
+  duration?: number;
+  style?: any;
+}
 
-export const Bar = styled.div`
-  position: absolute;
+const Wrapper = styled.div<LoadingProps>`
+  position: ${({ position }) => position};
+  background-color: ${({ background }) => background};
   top: 0;
   left: 0;
-  height: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
   width: 100%;
-  background: ${({ theme }) => theme.primary};
+`;
 
-  will-change: transform, opacity;
+export const Bar = styled.div<LoadingProps>`
+  height: ${({ size }) => size};
+  background-color: ${({ color, theme }) => theme[color!]};
+
+  will-change: width, opacity;
   z-index: 1000000;
 
-  transition-property: transform, opacity;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-property: width, opacity;
+  transition-duration: ${({ duration }) => duration}ms;
+  transition-timing-function: linear;
 
-  &.start {
-    transform: scaleX(0.8);
+  &.load-enter {
+    width: 0;
   }
 
-  &.end {
-    transform: scaleX(1);
+  &.load-enter-done {
+    width: 85%;
+  }
+
+  &.load-exit {
+    width: 85%;
+  }
+
+  &.load-exit-active {
+    width: 100%;
     opacity: 0;
   }
 `;
 
-interface Props {
-  loading: boolean;
-}
 
-export default class LoadingBar extends PureComponent<Props> {
+export default class LoadingBar extends PureComponent<LoadingProps> {
   static defaultProps = {
     loading: false,
+    color: 'primary',
+    position: 'absolute',
+    background: 'transparent',
+    size: '3px',
+    duration: 150,
   }
 
   render() {
     return (
-      <CSSTransition
-        classNames={{
-          appear: 'start',
-          enterDone: 'start',
-          exit: 'end',
-        }}
-        timeout={200}
-        in={this.props.loading}
-        unmountOnExit
-      >
-        <Bar />
-      </CSSTransition>
+      <Wrapper {...this.props}>
+        <CSSTransition
+          classNames="load"
+          timeout={this.props.duration!}
+          in={this.props.loading}
+          unmountOnExit
+        >
+          <Bar {...this.props} />
+        </CSSTransition>
+      </Wrapper>
     );
   }
 }
