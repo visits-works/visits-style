@@ -86,7 +86,7 @@ interface Props extends InputProps {
   help?: string;
 }
 
-function renderItem(item: { id: string | number, name: string } | string) {
+function _renderItem(item: { id: string | number, name: string } | string) {
   if (typeof item === 'string') {
     return <option key={item} value={item}>{item}</option>
   } else {
@@ -102,6 +102,11 @@ export default class Select extends PureComponent<Props> {
     options: [],
   };
 
+  renderItem = () => {
+    // @ts-ignore
+    return this.props.options.map(_renderItem);
+  }
+
   render() {
     const { size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;
     return (
@@ -110,7 +115,7 @@ export default class Select extends PureComponent<Props> {
           {placeholder && (
             <option disabled selected>{placeholder}</option>
           )}
-          {options.map(renderItem)}
+          {this.renderItem()}
         </select>
         {HelpMessage(help, error)}
       </InputWrapper>
