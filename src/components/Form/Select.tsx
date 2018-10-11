@@ -79,11 +79,20 @@ const InputWrapper = styled.div<WrapperProps>`
 
 interface Props extends InputProps {
   placeholder?: string;
-  options: Array<{ id: string | number, name: string }>;
+  options: Array<{ id: string | number, name: string }> | string[];
   size?: SizeType;
   outline?: boolean;
   error?: string;
   help?: string;
+}
+
+function renderItem(item: { id: string | number, name: string } | string) {
+  if (typeof item === 'string') {
+    return <option key={item} value={item}>{item}</option>
+  } else {
+    const { id, name } = item;
+    return <option key={id} value={id}>{name}</option>
+  }
 }
 
 export default class Select extends PureComponent<Props> {
@@ -101,7 +110,7 @@ export default class Select extends PureComponent<Props> {
           {placeholder && (
             <option disabled selected>{placeholder}</option>
           )}
-          {options.map(({ id, name }) => (<option key={id} value={id}>{name}</option>))}
+          {options.map(renderItem)}
         </select>
         {HelpMessage(help, error)}
       </InputWrapper>
