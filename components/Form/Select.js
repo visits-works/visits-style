@@ -44,7 +44,35 @@ const InputWrapper = styled.div.withConfig({
       }
     }
   `);
+
+function _renderItem(item) {
+  if (typeof item === 'string') {
+    return React.createElement("option", {
+      key: item,
+      value: item
+    }, item);
+  } else {
+    const {
+      id,
+      name
+    } = item;
+    return React.createElement("option", {
+      key: id,
+      value: id
+    }, name);
+  }
+}
+
 export default class Select extends PureComponent {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "renderItem", () => {
+      // @ts-ignore
+      return this.props.options.map(_renderItem);
+    });
+  }
+
   render() {
     const _this$props = this.props,
           {
@@ -68,13 +96,7 @@ export default class Select extends PureComponent {
     }), placeholder && React.createElement("option", {
       disabled: true,
       selected: true
-    }, placeholder), options.map(({
-      id,
-      name
-    }) => React.createElement("option", {
-      key: id,
-      value: id
-    }, name))), HelpMessage(help, error));
+    }, placeholder), this.renderItem()), HelpMessage(help, error));
   }
 
 }

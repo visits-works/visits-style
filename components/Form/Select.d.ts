@@ -6,7 +6,7 @@ interface Props extends InputProps {
     options: Array<{
         id: string | number;
         name: string;
-    }>;
+    }> | string[];
     size?: SizeType;
     outline?: boolean;
     error?: string;
@@ -18,6 +18,7 @@ export default class Select extends PureComponent<Props> {
         onChange: () => void;
         options: never[];
     };
+    renderItem: () => any;
     render(): JSX.Element;
 }
 export {};

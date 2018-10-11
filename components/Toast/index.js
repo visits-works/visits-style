@@ -38,36 +38,38 @@ _defineProperty(ToastItem, "defaultProps", {
 });
 
 function setPosition(position) {
+  const base = 'position: absolute; z-index: 9999; display: flex; flex-direction: column; ';
+
   switch (position) {
     case 'bottom':
       {
-        return 'bottom: 1rem; left: 50%; align-item: center;';
+        return base + 'bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);';
       }
 
     case 'bottom-left':
       {
-        return 'bottom: 1rem; left: 1rem; align-item: flex-start;';
+        return base + 'bottom: 1rem; left: 1rem; align-item: flex-start;';
       }
 
     case 'bottom-right':
       {
-        return 'bottom: 1rem; right: 1rem; align-item: flex-end;';
+        return base + 'bottom: 1rem; right: 1rem; align-item: flex-end;';
       }
 
     case 'top':
       {
-        return 'top: 1rem; left: 50%; align-items: center;';
+        return base + 'top: 1rem; left: 50%; align-items: center; transform: translateX(-50%);';
       }
 
     case 'top-left':
       {
-        return 'top: 1rem; left: 1rem; align-items: flex-start;';
+        return base + 'top: 1rem; left: 1rem; align-items: flex-start;';
       }
 
     case 'top-right':
     default:
       {
-        return 'top: 1rem; right: 1rem; align-items: flex-end;';
+        return base + 'top: 1rem; right: 1rem; align-items: flex-end;';
       }
   }
 }
@@ -100,15 +102,19 @@ export default class ToastContainer extends Component {
 
     _defineProperty(this, "element", void 0);
 
-    this.element = document.createElement('div'); // tslint:disable-next-line
-
-    this.element.style.cssText = 'position: absolute; z-index: 9999; display: flex; flex-direction: column;';
-    this.element.style.cssText += setPosition(_props.position);
+    this.element = document.createElement('div');
+    this.element.style.cssText = setPosition(_props.position);
     document.body.appendChild(this.element);
   }
 
   shouldComponentUpdate(props) {
     return props.toasts.length !== this.props.toasts.length || props.position !== this.props.position;
+  }
+
+  getSnapshotBeforeUpdate(props) {
+    if (props.position !== this.props.position) {
+      this.element.style.cssText = setPosition(this.props.position);
+    }
   }
 
   componentWillUnmount() {
