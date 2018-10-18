@@ -1,0 +1,38 @@
+---
+title: Forms
+description: import { ... } from 'visits-style/components/Form';
+menu: true
+---
+
+## Basic usage
+
+```jsx live
+<form onSubmit={(e) => { e.preventDefault(); }}>
+  <Field label="Name">
+    <TextInput placeholder="Text input" />
+  </Field>
+  <Field label="Username">
+    <TextInput value="visits" help="helper text" />
+  </Field>
+  <Field label="Email">
+    <TextInput type="email" value="wrong@email" error="invalid email" />
+  </Field>
+  <Field label="Message">
+    <Textarea placeholder="Textarea Text here" />
+  </Field>
+  <Field label="Select">
+    <Select value={2} options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Checkbox checked>
+      I agree to the <a href="#">terms and conditions</a>
+    </Checkbox>
+  </Field>
+  <Field style={{ display: 'flex' }}>
+    <Radio name="agree" value="yes" checked>Yes</Radio>
+    <Radio name="agree" value="no">No</Radio>
+  </Field>
+  <Button>Submit</Button>
+  <Button>Clear</Button>
+</form>
+```

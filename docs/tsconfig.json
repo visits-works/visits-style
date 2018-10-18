@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["es6", "dom"],
+    "moduleResolution": "node",
+    "jsx": "react",
+    "strict": true,
+    "pretty": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types", "src/index"],
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["../src/components/*"],
+      "@utils/*": ["../src/utils/*"],
+      "@theme/*": ["../src/theme/*"],
+      "@styles/*": ["../src/styles/*"],
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "./gulpfile.js",
+    "./jest.setup.js",
+    "./doczrc.js",
+    "./node_modules/**",
+    "./doc_theme",
+    "build",
+    "lib",
+    "jest",
+  ]
+}

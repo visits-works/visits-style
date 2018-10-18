@@ -1,0 +1,47 @@
+---
+title: Tooltip
+description: import Tooltip from 'visits-style/components/Tooltip';
+---
+
+## Props
+
+## Basic Usage
+
+```jsx live
+<>
+  <Tooltip label="some message">
+    Default
+  </Tooltip>
+  <br />
+  <Tooltip label="some message">
+    <Button>Button</Button>
+  </Tooltip>
+</>
+```
+
+## Positions
+
+```jsx live
+<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  <Tooltip label="message" position="top">
+    Top
+  </Tooltip>
+  <Tooltip label="message" position="left">
+    Left
+  </Tooltip>
+  <Tooltip label="message" position="right">
+    Right
+  </Tooltip>
+  <Tooltip label="message" position="bottom">
+    Bottom
+  </Tooltip>
+</div>
+```
+
+## non-text tooltip
+
+```jsx live
+<Tooltip position="top" label={<div>tooltip with image <img src={ImgUrl} /></div>}>
+  Non-Text
+</Tooltip>
+```

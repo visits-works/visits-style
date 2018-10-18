@@ -1,0 +1,42 @@
+---
+title: Tag
+description: import Tag from 'visits-style/components/Tag';
+---
+
+## Props
+
+## Basic usage
+
+```jsx live
+<Tag>basic</Tag>
+```
+
+## Colors
+
+```jsx live
+<>
+  <Tag color="primary">primary</Tag>
+  <Tag color="link">link</Tag>
+  <Tag color="info">info</Tag>
+  <Tag color="success">success</Tag>
+  <Tag color="warning">warning</Tag>
+  <Tag color="danger">danger</Tag>
+</>
+```
+
+## With Addons
+
+```jsx live
+<>
+  <Tag onClose={() => {}}>some tag</Tag>
+  <Tag color="info" onClose={() => {}}>some tag</Tag>
+  <Tag color="dark" addonColor="warning">
+    CSS gzip size
+    <span>20.9 KB</span>
+  </Tag>
+  <Tag color="link">
+    click me
+    <a href="#">🤔</a>
+  </Tag>
+</>
+```

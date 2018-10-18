@@ -1,0 +1,95 @@
+---
+title: Button
+description: ボタン
+---
+
+## Import
+
+```javascript
+import { Button } from 'visits-style/components';
+import Button from 'visits-style/components/Button';
+```
+
+## Props
+
+
+## Basic usage
+
+```jsx live
+<Button onClick={() => { alert('clicked!'); }}>default</Button>
+```
+
+## Color
+
+### monochrome
+
+```jsx live
+<>
+  <Button color="text">text</Button>
+  <Button color="light">light</Button>
+  <Button color="black">black</Button>
+</>
+```
+
+### colors
+
+```jsx live
+<>
+  <Button color="primary">primary</Button>
+  <Button color="link">link</Button>
+  <Button color="info">info</Button>
+  <Button color="success">success</Button>
+  <Button color="warning">warning</Button>
+  <Button color="danger">danger</Button>
+</>
+```
+
+
+## Outline
+
+```jsx live
+<>
+  <Button color="primary" outline>primary</Button>
+  <Button color="link" outline>link</Button>
+  <Button color="info" outline>info</Button>
+  <Button color="success" outline>success</Button>
+  <Button color="warning" outline>warning</Button>
+  <Button color="danger" outline>danger</Button>
+</>
+```
+
+## Disabled
+
+```jsx live
+<>
+  <Button color="primary" disabled>primary</Button>
+  <Button color="link" disabled outline>link</Button>
+  <Button color="text" disabled>info</Button>
+</>
+```
+
+## Sizes
+
+```jsx live
+<>
+  <Button size="small">small</Button>
+  <Button>normal</Button>
+  <Button size="medium">medium</Button>
+  <Button size="large">large</Button>
+</>
+```
+
+## Button Group
+
+```jsx live
+<>
+  <ButtonGroup>
+    <Button>Click</Button>
+    <Button>Me</Button>
+  </ButtonGroup>
+  <ButtonGroup>
+    <Button color="link">Dropdown</Button>
+    <Button color="link">.</Button>
+  </ButtonGroup>
+</>
+```

@@ -1,0 +1,21 @@
+---
+title: Core
+description: デザインシステムに必ず必要なこと
+menu: true
+---
+
+このプロジェクトは[styled-components](https://github.com/styled-components/styled-components)
+の`theme`機能を使っています
+
+```jsx
+import { ThemeProvider } from 'styled-components';
+import theme from 'visits-style/theme/light';
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>button</Button>
+    </ThemeProvider>
+  );
+}
+```

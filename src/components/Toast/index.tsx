@@ -117,9 +117,11 @@ export default class ToastContainer extends Component<ContainerProps> {
 
   constructor(props: ContainerProps) {
     super(props);
-    this.element = document.createElement('div');
-    this.element.style.cssText = setPosition(props.position!);
-    document.body.appendChild(this.element);
+    if(typeof document !== "undefined") {
+      this.element = document.createElement('div');
+      this.element.style.cssText = setPosition(props.position!);
+      document.body.appendChild(this.element);
+    }
   }
 
   shouldComponentUpdate(props: ContainerProps) {
@@ -163,13 +165,17 @@ export default class ToastContainer extends Component<ContainerProps> {
     );
   }
 
+  // @ts-ignore
   element: HTMLDivElement;
 
   render() {
-    return createPortal(
-      this.renderToast(),
-      this.element,
-    );
+    if(typeof document !== "undefined") {
+      return createPortal(
+        this.renderToast(),
+        this.element,
+      );
+    }
+    return null;
   }
 }
 

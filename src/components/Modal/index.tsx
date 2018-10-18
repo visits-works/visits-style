@@ -72,9 +72,11 @@ export default class Modal extends PureComponent<Props> {
 
   constructor(props: Props) {
     super(props);
-    this.element = document.createElement('div');
-    this.element.id = props.domId || 'modal';
-    document.body.appendChild(this.element);
+    if(typeof document !== "undefined") {
+      this.element = document.createElement('div');
+      this.element.id = props.domId || 'modal';
+      document.body.appendChild(this.element);
+    }
   }
 
   // shouldComponentUpdate(props: Props) {
@@ -141,13 +143,17 @@ export default class Modal extends PureComponent<Props> {
     );
   }
 
+  // @ts-ignore
   element: HTMLDivElement;
   shouldClose: boolean | null = null;
 
   render() {
-    return createPortal(
-      this.getModal(),
-      this.element,
-    );
+    if(typeof document !== "undefined") {
+      return createPortal(
+        this.getModal(),
+        this.element,
+      );
+    }
+    return null;
   }
 }

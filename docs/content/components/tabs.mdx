@@ -1,0 +1,72 @@
+---
+title: Tabs
+description: import Tabs from 'visits-style/components/Tabs';
+---
+
+## Props
+
+
+## Basic Usages
+
+```jsx live
+<Tabs color="primary">
+  <Tabs.Item active><a href="#">item1</a></Tabs.Item>
+  <Tabs.Item><a href="#">item2</a></Tabs.Item>
+  <Tabs.Item><a href="#">item3</a></Tabs.Item>
+  <Tabs.Item><a href="#">item4</a></Tabs.Item>
+</Tabs>
+```
+
+
+## Demo
+
+```jsx live
+const count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+export default class TabTest extends React.PureComponent<{}, State> {
+  state = { current: undefined };
+
+  onClick = (idx: number) => () => {
+    this.setState({ current: idx });
+  }
+
+  render() {
+    const { current } = this.state;
+    return (
+      <Tabs color="primary">
+        {count.map((_, idx) => (
+          <Tabs.Item key={idx} active={current === idx}>
+            <a onClick={this.onClick(idx)}>item{idx}</a>
+          </Tabs.Item>
+        ))}
+      </Tabs>
+    );
+  }
+}
+```
+
+
+## Positions
+
+```jsx live
+<>
+  <Tabs color="primary" align="left">
+    <Tabs.Item active><a >item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
+  </Tabs>
+  <Tabs color="primary" align="right">
+    <Tabs.Item active><a href="#">item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
+  </Tabs>
+  <Tabs color="primary" align="center">
+    <Tabs.Item active><a href="#">item1</a></Tabs.Item>
+    <Tabs.Item><a href="#">item2</a></Tabs.Item>
+    <Tabs.Item><a href="#">item3</a></Tabs.Item>
+    <Tabs.Item><a href="#">item4</a></Tabs.Item>
+  </Tabs>
+</>
+```
