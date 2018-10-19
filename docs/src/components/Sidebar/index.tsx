@@ -6,14 +6,14 @@ import { Col, SideMenu, MenuList } from '@components';
 // @ts-ignore
 import { mediaMobile } from '@utils';
 
-const Menu = styled(SideMenu)`
+const Wrapper = styled(Col)`
   width: 250px;
+  flex: 0 250px;
   padding: 1.5rem;
+  background-color: ${({ theme }) => theme.background};
 
   ${mediaMobile`
-    position: relative;
-    top: 0;
-    width: calc(100vw - 3rem);
+    flex: 1;
   `}
 `;
 
@@ -47,8 +47,8 @@ export default function Sidebar({ current }: any) {
       ({ node }: any) => node.fields.slug.indexOf(target) > -1 && node.fields.slug !== `/${target}/`
     ).sort((a: any, b: any) => a.node.frontmatter.title > b.node.frontmatter.title);
     return (
-      <Col narrow>
-        <Menu>
+      <Wrapper narrow>
+        <SideMenu>
           <MenuList>
             {menuList.map(({ node }: any) => (
               <li key={node.fields.slug}>
@@ -58,8 +58,8 @@ export default function Sidebar({ current }: any) {
               </li>
             ))}
           </MenuList>
-        </Menu>
-      </Col>
+        </SideMenu>
+      </Wrapper>
     );
   }
 

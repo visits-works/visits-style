@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { ThemeProvider, injectGlobal } from 'styled-components';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/tag';
@@ -13,9 +13,21 @@ import Sidebar from './components/Sidebar';
 import components from './components';
 
 import '@styles/global';
-import { Fragment } from 'react';
 
 injectGlobal`
+  html, body {
+    height: 100%;
+  }
+
+  #___gatsby {
+    min-height: 100%;
+    height: 100%;
+    & > div {
+      min-height: 100%;
+      height: auto;
+    }
+  }
+
   pre {
     font-family: inherit;
   }
@@ -26,11 +38,11 @@ export default function Layout({ children, current }: any) {
     <ThemeProvider theme={theme}>
       <Fragment>
         <Topbar current={current} />
-        <Row>
+        <Row style={{ height: '100%', minHeight: '100%' }}>
           <Sidebar current={current} />
-          <Col auto>
+          <Col>
             <MDXProvider components={components}>
-              <Container>
+              <Container style={{ overflowX: 'hidden' }}>
                 {children}
               </Container>
             </MDXProvider>

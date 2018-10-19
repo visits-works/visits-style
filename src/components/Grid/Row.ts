@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css, ThemeType } from '../../styled';
 import Col from './Col';
+import { mediaFullHD, mediaTablet, mediaMobile } from '../../utils/media';
 import { fullhd, tablet, mobile } from '../../styles/variables';
 
 interface Props {
@@ -24,21 +25,7 @@ function renderGutter({ noGutter }: Props) {
     `;
   } else {
     return css`
-      @media (min-width: ${fullhd}px) {
-        margin-left: -0.75rem;
-        margin-right: -0.75rem;
-        margin-top: -0.75rem;
-
-        &:last-child {
-          margin-bottom: -0.75rem;
-        }
-
-        &:not(:last-child) {
-          margin-bottom: 0.75rem;
-        }
-      }
-
-      @media (min-width: ${tablet}px) {
+      ${mediaTablet`
         margin-left: -0.5rem;
         margin-right: -0.5rem;
         margin-top: -0.5rem;
@@ -50,7 +37,21 @@ function renderGutter({ noGutter }: Props) {
         &:not(:last-child) {
           margin-bottom: 0.5rem;
         }
-      }
+      `}
+
+      ${mediaFullHD`
+          margin-left: -0.75rem;
+          margin-right: -0.75rem;
+          margin-top: -0.75rem;
+
+          &:last-child {
+            margin-bottom: -0.75rem;
+          }
+
+          &:not(:last-child) {
+            margin-bottom: 0.75rem;
+          }
+      `}
     `;
   }
 }

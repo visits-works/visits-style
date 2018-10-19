@@ -31,6 +31,7 @@ export const pageQuery = graphql`
   query($id: String!) {
     site {
       siteMetadata {
+        title
         docsLocation
       }
     }
@@ -60,7 +61,7 @@ export default class MDXRuntime extends Component {
     const {
       mdx,
       site: {
-        siteMetadata: { docsLocation }
+        siteMetadata: { title, docsLocation }
       }
     } = data;
 
@@ -70,7 +71,7 @@ export default class MDXRuntime extends Component {
       <Layout current={current}>
         <Fragment>
           <Helmet>
-            <title>{mdx.frontmatter.title}</title>
+            <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
             <meta name="description" content={mdx.frontmatter.description} />
           </Helmet>
           <Header>{mdx.frontmatter.title}</Header>

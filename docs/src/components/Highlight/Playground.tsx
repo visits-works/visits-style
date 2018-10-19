@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { LiveProvider, withLive, LiveError, LivePreview } from "react-live";
 import { IoIosPhonePortrait, IoMdDesktop, IoMdTabletPortrait } from 'react-icons/io';
+import { FiInfo, FiThumbsUp } from 'react-icons/fi';
 
 import { mediaMobile } from '@utils/media';
 
@@ -119,7 +120,7 @@ export default class Playground extends Component<Props> {
             <IoIosPhonePortrait />
           </Button>
         </Menu>
-        <LiveProvider code={children} scope={{...all, Logo, ImgUrl}} mountStylesheet={false}>
+        <LiveProvider code={children} scope={{...all, Logo, ImgUrl, FiInfo, FiThumbsUp}} mountStylesheet={false}>
           <LivePreview />
           <LiveError />
           <TextEditor />
