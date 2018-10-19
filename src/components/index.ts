@@ -28,5 +28,6 @@ export { default as Card } from './Card';
 export { default as Popover } from './Popover';
 export { default as Modal } from './Modal';
 export { default as Toast } from './Toast';
+export { default as Tabs } from './Tabs';
 export { default as LoadingBar } from './Loading/Bar';
 export { default as Spinner } from './Loading/Spinner';

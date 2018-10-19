@@ -69,7 +69,7 @@ function getPosition(height: number, position?: any) {
       return { bottom: `${height}px`, right: 0 };
     }
     case 'top': {
-      return { bottom: `${height}px` };
+      return { bottom: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
     }
     case 'bottom-left': {
       return { top: `${height}px`, left: 0 };
@@ -78,7 +78,7 @@ function getPosition(height: number, position?: any) {
       return { top: `${height}px`, right: 0 };
     }
     case 'bottom': {
-      return { top: `${height}px` };
+      return { top: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
     }
     default: {
       return { top: `${height}px`, left: 0 };

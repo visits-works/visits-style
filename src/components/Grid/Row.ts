@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css, ThemeType } from '../../styled';
 import Col from './Col';
-import { fullhd, tablet } from '../../styles/variables';
+import { fullhd, tablet, mobile } from '../../styles/variables';
 
 interface Props {
   width?: string;

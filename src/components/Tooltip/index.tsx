@@ -54,16 +54,16 @@ interface State {
 function getPosition(height: number, width: number, position?: any) {
   switch (position) {
     case 'top': {
-      return { bottom: `${height}px`, left: '-50%' };
+      return { bottom: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
     }
     case 'left': {
-      return { right: `${width}px`, top: '-50%' };
+      return { right: `${width}px`, top: '50%', transform: 'translateY(-50%)' };
     }
     case 'right': {
-      return { left: `${width}px`, top: '-50%' };
+      return { left: `${width}px`, top: '50%', transform: 'translateY(-50%)' };
     }
     default: {
-      return { top: `${height}px`, left: '-50%' };
+      return { top: `${height}px`, left: '50%', transform: 'translateX(-50%)'  };
     }
   }
 }

@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar';
 import components from './components';
 
 import '@styles/global';
+import { Fragment } from 'react';
 
 injectGlobal`
   pre {
@@ -23,19 +24,19 @@ injectGlobal`
 export default function Layout({ children, current }: any) {
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ minHeight: '100vh' }}>
+      <Fragment>
         <Topbar current={current} />
-        <Row style={{ minHeight: '100%' }}>
+        <Row>
           <Sidebar current={current} />
           <Col auto>
-            <Container fluid style={{ minHeight: '100%' }}>
-              <MDXProvider components={components}>
+            <MDXProvider components={components}>
+              <Container>
                 {children}
-              </MDXProvider>
-            </Container>
+              </Container>
+            </MDXProvider>
           </Col>
         </Row>
-      </div>
+      </Fragment>
     </ThemeProvider>
   );
 }

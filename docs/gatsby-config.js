@@ -11,6 +11,20 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "docs",
+        path: `${__dirname}/content/`
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "components",
+        path: `${__dirname}/../src/components/`
+      }
+    },
+    {
       resolve: 'gatsby-mdx',
       options: {
         extensions: ['.md', '.mdx'],
@@ -25,12 +39,6 @@ module.exports = {
         ]
       }
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "docs",
-        path: `${__dirname}/content/`
-      }
-    }
+    'gatsby-transformer-react-docgen',
   ]
 }

@@ -45,7 +45,7 @@ export default function Sidebar({ current }: any) {
   function renderSideBar({ allMdx }: any) {
     const menuList = allMdx.edges.filter(
       ({ node }: any) => node.fields.slug.indexOf(target) > -1 && node.fields.slug !== `/${target}/`
-    );
+    ).sort((a: any, b: any) => a.node.frontmatter.title > b.node.frontmatter.title);
     return (
       <Col narrow>
         <Menu>

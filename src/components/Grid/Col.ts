@@ -1,5 +1,5 @@
 import styled, { css, ColSizeType, ThemeType } from '../../styled';
-import { mediaMobile } from '../../utils/media';
+import { mediaMobile, mediaTablet } from '../../utils/media';
 
 interface ColProps {
   narrow?: boolean;
@@ -49,8 +49,12 @@ const Col = styled.div<ColProps>`
 
   padding: 0.75rem;
 
-  ${mediaMobile`
+  ${mediaTablet`
     padding: 0.5rem;
+  `}
+
+  ${mediaMobile`
+    padding: 0.25rem;
   `}
 `;
 
