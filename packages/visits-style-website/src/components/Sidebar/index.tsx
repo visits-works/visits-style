@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Col, SideMenu, MenuList } from '@components';
 // @ts-ignore
 import { mediaMobile } from '@utils';
+import { convertTitleToId } from '../H2';
 
 const Wrapper = styled(Col)`
   width: 250px;
@@ -19,9 +20,15 @@ const Wrapper = styled(Col)`
 
 const pageQuery = graphql`
   query {
-    allMdx {
+    allMdx(
+      sort: { fields: [fields___slug], order: ASC }
+    ) {
       edges {
         node {
+          headings {
+            value
+            depth
+          }
           frontmatter {
             title
           }
@@ -42,21 +49,38 @@ export default function Sidebar({ current }: any) {
     target = target.substr(0, target.indexOf('/'));
   }
 
+  function renderMenuItem({ node }: any) {
+    const headings = node.headings ? node.headings.filter((item: any) => item.depth === 2) : null;
+    const isActive = node.fields.slug === `/${current}`;
+    return (
+      <li key={node.fields.slug}>
+        <Link to={node.fields.slug} className={isActive ? 'active' : ''}>
+          {node.frontmatter.title}
+        </Link>
+        {(headings.length && isActive) ? (
+          <ul>
+            {headings.map((item: any) => {
+              const url = `${node.fields.slug}#${convertTitleToId(item.value)}`;
+              return (
+                <li key={url}>
+                  <Link to={url}>{item.value}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
+      </li>
+    );
+  }
+
   function renderSideBar({ allMdx }: any) {
-    const menuList = allMdx.edges.filter(
-      ({ node }: any) => node.fields.slug.indexOf(target) > -1 && node.fields.slug !== `/${target}/`
-    ).sort((a: any, b: any) => a.node.frontmatter.title > b.node.frontmatter.title);
+    const menuList = allMdx.edges
+      .filter(({ node }: any) => node.fields.slug.indexOf(target) > -1);
     return (
       <Wrapper narrow>
         <SideMenu>
           <MenuList>
-            {menuList.map(({ node }: any) => (
-              <li key={node.fields.slug}>
-                <Link to={node.fields.slug} className={node.fields.slug === `/${current}` ? 'active' : ''}>
-                  {node.frontmatter.title}
-                </Link>
-              </li>
-            ))}
+            {menuList.map(renderMenuItem)}
           </MenuList>
         </SideMenu>
       </Wrapper>

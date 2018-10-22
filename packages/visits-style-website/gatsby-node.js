@@ -50,7 +50,11 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
+      modules: [
+        path.resolve(__dirname, "src"),
+        path.resolve(__dirname, "../visits-style/src"),
+        "node_modules",
+      ],
       alias: {
         '@components': path.resolve(__dirname, "../visits-style/src/components"),
         '_components': path.resolve(__dirname, "./src/components"),
@@ -71,7 +75,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     let value = parent.relativePath.replace(parent.ext, "");
 
     if (value.indexOf("index") > -1) {
-      value = value.replace('index', '');
+      value = value.replace('/index', '');
     }
 
     createNodeField({
