@@ -16,13 +16,15 @@ import '@styles/global';
 injectGlobal`
   html, body {
     height: 100%;
+    width: 100%;
   }
 
   #___gatsby {
     display: flex;
-    height: 100%;
-
+    min-height: 100%;
     & > div {
+      display: flex;
+      flex-direction: column;
       flex: 1;
     }
   }
@@ -37,7 +39,7 @@ export default function Layout({ children, current }: any) {
     <ThemeProvider theme={theme}>
       <Fragment>
         <Topbar current={current} />
-        <Row style={{ height: '100%', minHeight: '100%', flex: 1 }}>
+        <Row style={{ flex: 1 }}>
           <Sidebar current={current} />
           <Col>
             <MDXProvider components={components}>
