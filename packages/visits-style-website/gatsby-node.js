@@ -1,6 +1,5 @@
 const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
 const path = require("path");
-const startCase = require("lodash.startcase");
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -53,20 +52,14 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
       alias: {
-        '@components': path.resolve(__dirname, "../src/components"),
+        '@components': path.resolve(__dirname, "../visits-style/src/components"),
         '_components': path.resolve(__dirname, "./src/components"),
         '_assets': path.resolve(__dirname, "./src/assets"),
-        '@utils': path.resolve(__dirname, "../src/utils"),
-        '@styles': path.resolve(__dirname, "../src/styles"),
-        '@theme': path.resolve(__dirname, "../src/theme"),
+        '@utils': path.resolve(__dirname, "../visits-style/src/utils"),
+        '@styles': path.resolve(__dirname, "../visits-style/src/styles"),
+        '@theme': path.resolve(__dirname, "../visits-style/src/theme"),
       }
     }
-  });
-};
-
-exports.onCreateBabelConfig = ({ actions }) => {
-  actions.setBabelPlugin({
-    name: "@babel/plugin-proposal-export-default-from"
   });
 };
 

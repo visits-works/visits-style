@@ -43,7 +43,9 @@ export default function Topbar({ current }: { current: string }) {
   }
 
   function renderMenu({ allMdx }: any) {
-    const MenuList = allMdx.edges.map(({ node }: any) => {
+    const list = allMdx.edges.map(({ node }: any) => node)
+      .sort((a: any, b: any) => a.frontmatter.title > b.frontmatter.title);
+    const MenuList = list.map((node: any) => {
       return (
         <AppBar.Item key={node.id}>
           <Link
@@ -62,8 +64,7 @@ export default function Topbar({ current }: { current: string }) {
     <AppBar
       brand={Logo}
       color="dark"
-      style={{ zIndex: 10 }}
-      sticky
+      style={{ zIndex: 100 }}
     >
       <StaticQuery
         query={pageQuery}

@@ -12,13 +12,12 @@
     "typeRoots": ["node_modules/@types", "src/index"],
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["../src/components/*"],
-      "@utils/*": ["../src/utils/*"],
-      "@theme/*": ["../src/theme/*"],
-      "@styles/*": ["../src/styles/*"],
+      "@components/*": ["../visits-style/src/components/*"],
+      "@utils/*": ["../visits-style/src/utils/*"],
+      "@theme/*": ["../visits-style/src/theme/*"],
+      "@styles/*": ["../visits-style/src/styles/*"],
     }
   },
-  "include": ["src/**/*"],
   "exclude": [
     "./gulpfile.js",
     "./jest.setup.js",

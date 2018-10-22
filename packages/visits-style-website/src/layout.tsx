@@ -4,9 +4,8 @@ import { ThemeProvider, injectGlobal } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
 // @ts-ignore
 import theme from '@theme/light';
-import Row from '@components/Grid/Row';
-import Col from '@components/Grid/Col';
-import Container from '@components/Grid/Container';
+// @ts-ignore
+import { Row, Col, Container } from '@components';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 
@@ -20,11 +19,11 @@ injectGlobal`
   }
 
   #___gatsby {
-    min-height: 100%;
+    display: flex;
     height: 100%;
+
     & > div {
-      min-height: 100%;
-      height: auto;
+      flex: 1;
     }
   }
 
@@ -38,7 +37,7 @@ export default function Layout({ children, current }: any) {
     <ThemeProvider theme={theme}>
       <Fragment>
         <Topbar current={current} />
-        <Row style={{ height: '100%', minHeight: '100%' }}>
+        <Row style={{ height: '100%', minHeight: '100%', flex: 1 }}>
           <Sidebar current={current} />
           <Col>
             <MDXProvider components={components}>

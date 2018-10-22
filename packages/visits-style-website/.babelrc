@@ -24,19 +24,20 @@
   "plugins": [
     "styled-components",
     "polished",
+    "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-class-properties",
-    [
-      "@babel/plugin-proposal-object-rest-spread",
-      { "useBuiltIns": true }
-    ],
+    "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-syntax-dynamic-import",
-    "babel-plugin-macros",
     [
       "@babel/plugin-transform-runtime",
       {
         "helpers": true,
         "regenerator": true
       }
+    ],
+    [
+      "react-docgen",
+      { "resolver": "findAllComponentDefinitions" }
     ]
   ]
 }

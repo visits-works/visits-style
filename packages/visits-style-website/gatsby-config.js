@@ -21,7 +21,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "components",
-        path: `${__dirname}/../src/components/`
+        path: `${__dirname}/../visits-style/src/components/`
       }
     },
     {
@@ -39,6 +39,5 @@ module.exports = {
         ]
       }
     },
-    'gatsby-transformer-react-docgen',
   ]
 }
