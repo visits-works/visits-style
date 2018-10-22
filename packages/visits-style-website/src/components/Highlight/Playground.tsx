@@ -28,8 +28,10 @@ const LiveWrapper = styled.div<State>`
   padding: 0;
   margin-top: 0.75rem;
   border-radius: 3px;
+  position: relative;
 
   .react-live-preview {
+    min-height: 3.25rem;
     padding: 0.75rem;
     background: white;
     margin: 0 auto;
@@ -40,9 +42,12 @@ const LiveWrapper = styled.div<State>`
   }
 
   .react-live-error {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+    max-height: 5rem;
+    max-width: 100%;
+    overflow: scroll;
     padding: 0.5rem;
     z-index: 9999;
     background: ${({ theme }) => theme.danger};
@@ -120,7 +125,11 @@ export default class Playground extends Component<Props> {
             <IoIosPhonePortrait />
           </Button>
         </Menu>
-        <LiveProvider code={children} scope={{...all, Logo, ImgUrl, FiInfo, FiThumbsUp}} mountStylesheet={false}>
+        <LiveProvider
+          code={children}
+          scope={{...all, Logo, ImgUrl, FiInfo, FiThumbsUp}}
+          mountStylesheet={false}
+        >
           <LivePreview />
           <LiveError />
           <TextEditor />
