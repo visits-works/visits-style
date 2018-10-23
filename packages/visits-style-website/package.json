@@ -31,6 +31,7 @@
   "scripts": {
     "start": "gatsby develop -H 0.0.0.0",
     "build": "rm -rf ./public && gatsby build",
+    "deploy": "rm -rf ./public && gatsby build --prefix-paths && gh-pages -d public",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
@@ -62,6 +63,7 @@
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "enzyme-to-json": "^3.3.4",
+    "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
     "jest-styled-components": "^6.2.2",
     "prismjs": "^1.15.0",
