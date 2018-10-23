@@ -4,8 +4,8 @@ import { Table } from '@components';
 import * as all from '@components/';
 
 export default function PropsTable({ of: component }) {
-  console.log(component);
-  console.log(component.__docgenInfo);
+  // console.log(component);
+  // console.log(component.__docgenInfo);
 
   return <Table></Table>;
 }

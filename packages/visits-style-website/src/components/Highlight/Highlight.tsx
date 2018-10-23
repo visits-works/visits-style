@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 
-import 'codemirror/mode/markdown/markdown';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/mode/jsx/jsx';
-import 'codemirror/mode/css/css';
-import 'codemirror/addon/edit/matchbrackets';
-import 'codemirror/addon/edit/closetag';
-import 'codemirror/addon/fold/xml-fold';
+try {
+  require('codemirror/mode/javascript/javascript');
+  require('codemirror/mode/jsx/jsx');
+  require('codemirror/mode/css/css');
+  require('codemirror/addon/edit/matchbrackets');
+  require('codemirror/addon/edit/closetag');
+  require('codemirror/addon/fold/xml-fold');
+} catch(e) {
+  console.error(e);
+}
 
 import { CodeMirrorStyle } from './styles';
 
