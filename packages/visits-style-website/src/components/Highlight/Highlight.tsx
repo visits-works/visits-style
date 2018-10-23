@@ -10,9 +10,7 @@ import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/addon/edit/closetag';
 import 'codemirror/addon/fold/xml-fold';
 
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-
+import { CodeMirrorStyle } from './styles';
 
 interface Props {
   className?: string;
@@ -27,27 +25,16 @@ interface State {
 }
 
 const Wrapper = styled(CodeMirror)`
-  position: relative;
-  font-weight: 400;
-  max-width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-
-  overflow: auto;
-  max-height: 340px;
-  font-family: Menlo, Monaco, "Courier New", monospace;
-  tab-size: 1.5em;
-
-  &.hover {
-    border-color: ${({ theme }) => theme.warning};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.warning};
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.link};
-  }
+  ${CodeMirrorStyle}
+  margin-bottom: 0.725rem;
 `;
+
+function removeLastLine(editor: any) {
+  if (editor) {
+    const lastLine = editor.lastLine()
+    editor.doc.replaceRange('', { line: lastLine - 1 }, { line: lastLine })
+  }
+}
 
 export default class HighlightCode extends Component<Props, State> {
   state = { code: this.props.children };
@@ -66,16 +53,16 @@ export default class HighlightCode extends Component<Props, State> {
   render() {
     const isReadOnly = this.props.onChange === undefined;
     return (
-      <CodeMirror
+      <Wrapper
         value={this.state.code}
         options={{
           mode: 'jsx',
-          theme: 'material',
           lineNumbers: true,
           tabSize: 2,
           readOnly: (isReadOnly ? 'nocursor' : false)
         }}
         onBeforeChange={this.onChange}
+        editorDidMount={removeLastLine}
       />
     );
   }

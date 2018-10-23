@@ -10,10 +10,11 @@ import { convertTitleToId } from '../H2';
 const Wrapper = styled(Col)`
   width: 250px;
   flex: 0 250px;
-  padding: 1.5rem;
+  padding: 1.5rem !important;
   background-color: ${({ theme }) => theme.background};
 
   ${mediaMobile`
+    width: 100%;
     flex: 1;
   `}
 `;

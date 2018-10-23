@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { LiveProvider, withLive, LiveError, LivePreview } from "react-live";
-import { IoIosPhonePortrait, IoMdDesktop, IoMdTabletPortrait } from 'react-icons/io';
+import { LiveProvider, withLive, LiveError } from "react-live";
 import { FiInfo, FiThumbsUp } from 'react-icons/fi';
 
 import { mediaMobile } from '@utils/media';
 
 import Editor from './Highlight';
+import Preview from './Preview';
 
 import Logo from '../Logo';
 // @ts-ignore
@@ -19,27 +19,13 @@ interface Props {
   children: string;
 }
 
-interface State {
-  width: string;
-}
 
-const LiveWrapper = styled.div<State>`
+const LiveWrapper = styled.div`
   max-width: 100%;
   padding: 0;
   margin-top: 0.75rem;
   border-radius: 3px;
   position: relative;
-
-  .react-live-preview {
-    min-height: 3.25rem;
-    padding: 0.75rem;
-    background: white;
-    margin: 0 auto;
-    width: ${({ width }) => width};
-    max-width: ${({ width }) => width};
-    min-width: ${({ width }) => width};
-    border: 1px solid #1e1e1e;
-  }
 
   .react-live-error {
     position: absolute;
@@ -59,10 +45,7 @@ const LiveWrapper = styled.div<State>`
 
 function LiveEditor({ live }: any) {
   return (
-    <Editor
-      className="language-jsx"
-      onChange={live.onChange}
-    >
+    <Editor onChange={live.onChange}>
       {live.code}
     </Editor>
   );
@@ -70,67 +53,17 @@ function LiveEditor({ live }: any) {
 
 const TextEditor = withLive(LiveEditor);
 
-const Menu = styled(all.ButtonGroup)`
-  text-align: right;
-  width: 100%;
-
-  ${mediaMobile`display: none;`}
-`;
-
 export default class Playground extends Component<Props> {
-  state = { width: '100%' };
-
-  shouldComponentUpdate(_: Props, state: State) {
-    return this.state.width !== state.width;
-  }
-
-  setResponsive = () => {
-    this.setState({ width: '100%' });
-  }
-
-  setIphoneSize = () => {
-    this.setState({ width: '375px' });
-  }
-
-  setIpadSize = () => {
-    this.setState({ width: '768px' });
-  }
-
   render() {
     const { children } = this.props;
-    const { width } = this.state;
-    const { Button } = all;
     return (
-      <LiveWrapper width={width}>
-        <Menu>
-          <Button
-            onClick={this.setResponsive}
-            color="info"
-            outline={width !== '100%'}
-          >
-            <IoMdDesktop />
-          </Button>
-          <Button
-            onClick={this.setIpadSize}
-            color="info"
-            outline={width !== '768px'}
-          >
-            <IoMdTabletPortrait />
-          </Button>
-          <Button
-            onClick={this.setIphoneSize}
-            color="info"
-            outline={width !== '375px'}
-          >
-            <IoIosPhonePortrait />
-          </Button>
-        </Menu>
+      <LiveWrapper>
         <LiveProvider
           code={children}
           scope={{...all, Logo, ImgUrl, FiInfo, FiThumbsUp}}
           mountStylesheet={false}
         >
-          <LivePreview />
+          <Preview />
           <LiveError />
           <TextEditor />
         </LiveProvider>

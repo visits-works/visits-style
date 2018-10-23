@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/tag';
 // @ts-ignore
@@ -11,21 +11,22 @@ import Sidebar from './components/Sidebar';
 
 import components from './components';
 
-import '@styles/global';
+import normalize from '@styles/normalize';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
+  ${normalize}
+
   html, body {
     height: 100%;
     width: 100%;
   }
 
   #___gatsby {
-    display: flex;
+    height: 100%;
     min-height: 100%;
     & > div {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
+      height: 100%;
+      max-height: 100%;
     }
   }
 
@@ -38,6 +39,7 @@ export default function Layout({ children, current }: any) {
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
+        <GlobalStyle />
         <Topbar current={current} />
         <Row style={{ flex: 1 }}>
           <Sidebar current={current} />

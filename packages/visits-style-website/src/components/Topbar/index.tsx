@@ -65,6 +65,7 @@ export default function Topbar({ current }: { current: string }) {
       brand={Logo}
       color="dark"
       style={{ zIndex: 100 }}
+      sticky
     >
       <StaticQuery
         query={pageQuery}

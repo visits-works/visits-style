@@ -57,7 +57,7 @@ export const pageQuery = graphql`
 export default class MDXRuntime extends Component {
   render() {
     // @ts-ignore
-    const { data, ...rest } = this.props;
+    const { data } = this.props;
     const {
       mdx,
       site: {
@@ -74,8 +74,8 @@ export default class MDXRuntime extends Component {
             <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
             <meta name="description" content={mdx.frontmatter.description} />
           </Helmet>
-          <Header>{mdx.frontmatter.title}</Header>
-          <Desc>{mdx.frontmatter.description}</Desc>
+          {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
+          {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
           <MDXRenderer>{mdx.code.body}</MDXRenderer>
           <Footer>
             <a href={`${docsLocation}/${mdx.parent.relativePath}`}>
