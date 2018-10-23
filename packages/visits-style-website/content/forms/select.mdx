@@ -1,0 +1,54 @@
+---
+title: Select
+description: import Select from 'visits-style/components/Select';
+---
+
+テキスト検索などの機能は、[react-select](https://react-select.com/home)を使ってください。
+<br />
+
+## Props
+
+
+## Basic usage
+
+```jsx live
+<>
+  <Field>
+    <Select placeholder="Select!!" options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select value={2} options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select value={2} help="some help message" options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select value={2} error="some error message" options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select value={2} disabled options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+</>
+```
+
+## Outlined
+
+```jsx live
+<>
+  <Field>
+    <Select outline placeholder="Select!!" options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select outline value={2} options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select outline value={2} help="some help message" options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select outline value={2} error="some error message" options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+  <Field>
+    <Select outline value={2} disabled options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]} />
+  </Field>
+</>
+```

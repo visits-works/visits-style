@@ -1,8 +1,18 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# dependencies
+/node_modules
+package-lock.json
+
+# testing
+/coverage
+junit.xml
+bundle_report.html
+
 # production
 /build
 /lib
+**.d.ts
 
 # misc
 /tmp

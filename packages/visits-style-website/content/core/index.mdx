@@ -1,0 +1,60 @@
+---
+title: Core
+description: デザインシステムに必ず必要なこと
+menu: true
+---
+
+このプロジェクトは[styled-components](https://github.com/styled-components/styled-components)
+の`theme`機能を使っています
+
+横の`theme`メニューの色は必須として必要なので、カスタムが必要になったら変更してください。
+
+```jsx
+import { ThemeProvider } from 'styled-components';
+import theme from 'visits-style/theme/light';
+import 'visits-style/styles/global';
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>button</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+## styled-component v4 の注意点
+
+グローバルの`injectGlobal`がバージョン4から削除される為、
+
+`import 'visits-style/styles/global';`のグローバル指定は動きません。
+
+以下の定義方法として、対応してください。
+
+```jsx
+import React, { Fragment } from 'react';
+// デフォルトグローバル定義のcss
+import normalize from 'visits-style/stlyes/normalize';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  ${normalize}
+  html, body {
+    height: 100%;
+  }
+
+  // ... その他のグローバルcss
+`;
+
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <GlobalStyle />
+        <Button>button</Button>
+      </Fragment>
+    </ThemeProvider>
+  );
+}
+```

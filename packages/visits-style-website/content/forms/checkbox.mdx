@@ -1,0 +1,32 @@
+---
+title: Checkbox
+description: import Checkbox from 'visits-style/components/Checkbox';
+---
+
+import { Checkbox } from '@components';
+import Props from '_components/Props';
+
+## Props
+
+<Props of={Checkbox} />
+
+## Basic usage
+```jsx live
+<>
+  <Field>
+    <Checkbox />
+  </Field>
+  <Field>
+    <Checkbox checked />
+  </Field>
+  <Field>
+    <Checkbox checked>with label!</Checkbox>
+  </Field>
+  <Field>
+    <Checkbox disabled>disabled uncheck</Checkbox>
+  </Field>
+  <Field>
+    <Checkbox checked disabled>disabled checked</Checkbox>
+  </Field>
+</>
+```

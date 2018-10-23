@@ -1,0 +1,34 @@
+---
+title: Theme
+description: デフォルト色スキーマ
+---
+
+import styled from 'styled-components';
+import { findColorInvert } from '@utils';
+import { Container } from '@components';
+import lightTheme from '@theme/light';
+
+プロジェクト事に色を設定してください。
+
+
+## public theme
+
+<Container>
+  {Object.keys(lightTheme).map(key => key !== 'color' && (
+    <div
+      key={key}
+      style={{
+        display: 'inline-block',
+        backgroundColor: lightTheme[key],
+        width: '150px', height: '150px',
+        textAlign: 'right', fontWeight: 600,
+        padding: '0.5rem',
+        margin: '0.5rem',
+        color: findColorInvert(lightTheme[key]),
+      }}
+    >
+      {key}<br />
+      {lightTheme[key]}
+    </div>
+  ))}
+</Container>
