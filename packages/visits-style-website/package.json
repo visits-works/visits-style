@@ -29,9 +29,9 @@
     "styled-components": "^4.0.2"
   },
   "scripts": {
-    "start": "gatsby develop -H 0.0.0.0",
-    "build": "rm -rf ./public && gatsby build",
-    "deploy": "rm -rf ./public && gatsby build --prefix-paths && gh-pages -d public",
+    "start": "gatsby develop -H 0.0.0.0 --prefix-paths",
+    "build": "rm -rf ./public && gatsby build --prefix-paths",
+    "deploy": "yarn build && gh-pages -d public",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
