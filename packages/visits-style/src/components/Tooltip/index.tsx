@@ -3,11 +3,6 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import Box from '../Box';
 import styled, { ColorType } from '../../styled';
 
-const Wrapper = styled.div`
-  display: inline-block;
-  position: relative;
-`;
-
 const TooltipDiv = styled(Box)`
   position: absolute;
   clear: both;
@@ -100,9 +95,9 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
     const { color, label, children } = this.props;
     const { show, style } = this.state;
     return (
-      <Wrapper
-        innerRef={this.element}
-        style={this.props.style}
+      <div
+        ref={this.element}
+        style={{ display: 'inline-block', position: 'relative', ...this.props.style}}
         onMouseOver={this.openTooltip}
         onMouseOut={this.closeTooltip}
       >
@@ -121,7 +116,7 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
             {label}
           </TooltipDiv>
         </CSSTransition>
-      </Wrapper>
+      </div>
     );
   }
 }

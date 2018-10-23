@@ -4,11 +4,6 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import Button from '../Button';
 import Box from '../Box';
 
-const Wrapper = styled(Button)`
-  display: block;
-  position: relative;
-`;
-
 const Tooltip = styled(Box)`
   position: absolute;
   display: flex;
@@ -60,28 +55,28 @@ interface State {
   style: any;
 }
 
-function getPosition(height: number, position?: any) {
+function getPosition(position?: any) {
   switch (position) {
     case 'top-left': {
-      return { bottom: `${height}px`, left: 0 };
+      return { top: 0, left: 0, transform: 'translateY(-100%)' };
     }
     case 'top-right': {
-      return { bottom: `${height}px`, right: 0 };
+      return { top: 0, right: 0, transform: 'translateY(-100%)' };
     }
     case 'top': {
-      return { bottom: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
+      return { top:  0, left: '50%', transform: 'translate(-50%, -100%)' };
     }
     case 'bottom-left': {
-      return { top: `${height}px`, left: 0 };
+      return { bottom: 0, left: 0, transform: 'translateY(100%)' };
     }
     case 'bottom-right': {
-      return { top: `${height}px`, right: 0 };
+      return { bottom: 0, right: 0, transform: 'translateY(100%)' };
     }
     case 'bottom': {
-      return { top: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
+      return { bottom: 0, left: '50%', transform: 'translate(-50%, 100%)' };
     }
     default: {
-      return { top: `${height}px`, left: 0 };
+      return { top: 0, left: 0, transform: 'translateY(100%)' };
     }
   }
 }
@@ -98,11 +93,9 @@ export default class Popover extends Component<Props, State> {
   }
 
   openDropdown = () => {
-    if (this.state.show || !this.element.current) return;
+    if (this.state.show) return;
 
-    const height = this.element.current.offsetHeight + 8;
-    const style = getPosition(height, this.props.position);
-
+    const style = getPosition(this.props.position);
     this.setState({ style, show: true });
   }
 
@@ -110,18 +103,16 @@ export default class Popover extends Component<Props, State> {
     if (this.state.show) this.setState({ show: false });
   }
 
-  element = React.createRef<HTMLDivElement>();
-
   render() {
     const { label, color, size, children } = this.props;
     const { show, style } = this.state;
     return (
-      <Wrapper
-        innerRef={this.element}
+      <Button
         color={color || 'text'}
         size={size}
         onFocus={this.openDropdown}
         onBlur={this.closeDropdown}
+        style={{ display: 'block', position: 'relative' }}
       >
         {label}
         <CSSTransition
@@ -138,7 +129,7 @@ export default class Popover extends Component<Props, State> {
             {children}
           </Tooltip>
         </CSSTransition>
-      </Wrapper>
+      </Button>
     );
   }
 }
