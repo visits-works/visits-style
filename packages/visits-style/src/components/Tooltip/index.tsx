@@ -89,7 +89,7 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
     }
   }
 
-  element: RefObject<HTMLElement> = createRef();
+  element: RefObject<HTMLDivElement> = createRef();
 
   render() {
     const { color, label, children } = this.props;
