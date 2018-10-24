@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { ThemeType, ColorType } from '../../styled';
 interface LoadingProps {
     loading: boolean;
     /** バーの色の指定 */

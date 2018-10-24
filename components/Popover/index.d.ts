@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ColorType, SizeType } from '../../styled';
 interface Props {
     /** ボタンの内容 */
     label: React.ReactNode;
@@ -28,7 +27,6 @@ export default class Popover extends Component<Props, State> {
     shouldComponentUpdate(props: Props, state: State): boolean;
     openDropdown: () => void;
     closeDropdown: () => void;
-    element: React.RefObject<HTMLDivElement>;
     render(): JSX.Element;
 }
 export {};

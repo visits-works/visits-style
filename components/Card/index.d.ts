@@ -1,5 +1,4 @@
 import { PureComponent, ReactNode } from 'react';
-import { ColorType } from '../../styled';
 interface Props {
     /** レスポンシブなイメージを追加する */
     image?: string;

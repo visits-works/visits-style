@@ -1,5 +1,4 @@
-import React from 'react';
-import { ColorType, SizeType, ThemeType } from '../../styled';
+/// <reference types="react" />
 interface ButtonProps {
     /** ボタンの色 */
     color?: ColorType;
@@ -13,5 +12,5 @@ interface ButtonProps {
     full?: boolean;
     disabled?: boolean;
 }
-declare const Button: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps, ThemeType, React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps>;
+declare const Button: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLButtonElement> & import("react").ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps, ThemeType, import("react").ClassAttributes<HTMLButtonElement> & import("react").ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps>;
 export default Button;

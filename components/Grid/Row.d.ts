@@ -1,5 +1,4 @@
-import React from 'react';
-import { ThemeType } from '../../styled';
+/// <reference types="react" />
 interface Props {
     width?: string;
     multiline?: boolean;
@@ -7,5 +6,5 @@ interface Props {
     center?: boolean;
     noGutter?: boolean;
 }
-declare const Row: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
+declare const Row: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & Props, ThemeType, import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & Props>;
 export default Row;

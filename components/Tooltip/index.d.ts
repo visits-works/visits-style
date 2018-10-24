@@ -1,5 +1,4 @@
 import { RefObject, PureComponent } from 'react';
-import { ColorType } from '../../styled';
 interface TooltipProps {
     label: any;
     children: any;
@@ -22,7 +21,7 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
     };
     openTooltip: () => void;
     closeTooltip: () => void;
-    element: RefObject<HTMLElement>;
+    element: RefObject<HTMLDivElement>;
     render(): JSX.Element;
 }
 export {};

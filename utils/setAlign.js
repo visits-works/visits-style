@@ -1,6 +1,6 @@
-export default function setAlign({
-  align
-}) {
+export default function setAlign(_ref) {
+  var align = _ref.align;
+
   switch (align) {
     case 'left':
       return 'flex-start';

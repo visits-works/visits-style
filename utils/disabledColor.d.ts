@@ -1,3 +1,1 @@
-import { InterpolationValue } from 'styled-components';
-import { ThemeType } from '../styled';
-export default function disabledColor(theme: ThemeType): InterpolationValue[];
+export default function disabledColor(theme: ThemeType): import("styled-components").InterpolationValue[];

@@ -1,30 +1,50 @@
+function _templateObject2() {
+  var data = _taggedTemplateLiteralLoose(["padding-bottom: 18rem; padding-top: 18rem;"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteralLoose(["padding-bottom: 9rem; padding-top: 9rem;"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = strings.slice(0); } strings.raw = raw; return strings; }
+
 import React from 'react';
 import styled, { css } from '../../styled';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { mediaDesktop } from '../../utils/media';
 
-function setColor({
-  color,
-  theme
-}) {
+function setColor(_ref) {
+  var color = _ref.color,
+      theme = _ref.theme;
   if (!color) return '';
-  const target = color === 'light' ? theme.color.greyLight : theme[color];
-  const invertColor = findColorInvert(target);
-  return `background-color: ${target}; color: ${invertColor};`;
+  var target = color === 'light' ? theme.color.greyLight : theme[color];
+  var invertColor = findColorInvert(target);
+  return "background-color: " + target + "; color: " + invertColor + ";";
 }
 
-function setSize({
-  size
-}) {
+function setSize(_ref2) {
+  var size = _ref2.size;
   if (!size || size === 'small') return '';
 
   switch (size) {
     case 'medium':
-      return mediaDesktop`padding-bottom: 9rem; padding-top: 9rem;`;
+      return mediaDesktop(_templateObject());
 
     case 'large':
-      return mediaDesktop`padding-bottom: 18rem; padding-top: 18rem;`;
+      return mediaDesktop(_templateObject2());
 
     case 'full':
       return css(["min-height:100vh;", "{align-items:center;display:flex;}"], Body);
@@ -34,23 +54,23 @@ function setSize({
   }
 }
 
-const Body = styled.div.withConfig({
+var Body = styled.div.withConfig({
   displayName: "Hero__Body",
   componentId: "sc-12m9apf-0"
-})(["flex-grow:1;flex-shrink:0;padding:3rem 1.5rem;", " h1{font-size:2rem;font-weight:600;line-height:1.125;&:not(:last-child){margin-bottom:1.5rem;}}h2{font-size:1.25rem;font-weight:400;line-height:1.25;}h1+h2{margin-top:-1.25rem;}"], ({
-  center
-}) => center ? 'text-align: center;' : '');
-const Wrapper = styled.div.withConfig({
+})(["flex-grow:1;flex-shrink:0;padding:3rem 1.5rem;", " h1{font-size:2rem;font-weight:600;line-height:1.125;&:not(:last-child){margin-bottom:1.5rem;}}h2{font-size:1.25rem;font-weight:400;line-height:1.25;}h1+h2{margin-top:-1.25rem;}"], function (_ref3) {
+  var center = _ref3.center;
+  return center ? 'text-align: center;' : '';
+});
+var Wrapper = styled.div.withConfig({
   displayName: "Hero__Wrapper",
   componentId: "sc-12m9apf-1"
 })(["align-items:stretch;display:flex;flex-direction:column;justify-content:space-between;", " ", " header{background-color:inherit;color:inherit;}header+", "{margin-top:3.25rem;margin-bottom:3.25rem;}"], setColor, setSize, Body);
-export default function Hero({
-  children,
-  color,
-  size,
-  center,
-  header
-}) {
+export default function Hero(_ref4) {
+  var children = _ref4.children,
+      color = _ref4.color,
+      size = _ref4.size,
+      center = _ref4.center,
+      header = _ref4.header;
   return React.createElement(Wrapper, {
     color: color,
     size: size

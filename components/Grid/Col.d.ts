@@ -1,5 +1,4 @@
 /// <reference types="react" />
-import { ColSizeType, ThemeType } from '../../styled';
 interface ColProps {
     narrow?: boolean;
     size?: ColSizeType;

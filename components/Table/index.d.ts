@@ -1,5 +1,4 @@
-import React from 'react';
-import { SizeType, ThemeType } from '../../styled';
+/// <reference types="react" />
 interface Props {
     size?: SizeType;
     full?: boolean;
@@ -9,5 +8,5 @@ interface Props {
     striped?: boolean;
     hover?: boolean;
 }
-declare const Table: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLTableElement> & React.TableHTMLAttributes<HTMLTableElement> & Props, ThemeType, React.ClassAttributes<HTMLTableElement> & React.TableHTMLAttributes<HTMLTableElement> & Props>;
+declare const Table: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLTableElement> & import("react").TableHTMLAttributes<HTMLTableElement> & Props, ThemeType, import("react").ClassAttributes<HTMLTableElement> & import("react").TableHTMLAttributes<HTMLTableElement> & Props>;
 export default Table;

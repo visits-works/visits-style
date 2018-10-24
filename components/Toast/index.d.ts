@@ -1,5 +1,4 @@
 import React, { Component, PureComponent } from 'react';
-import { ColorType } from '../../styled';
 declare type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';
 interface ToastType {
     /** 認識ID */
@@ -42,6 +41,6 @@ export default class ToastContainer extends Component<ContainerProps> {
     clear: (id: string) => () => void;
     renderToast: () => JSX.Element;
     element: HTMLDivElement;
-    render(): React.ReactPortal;
+    render(): React.ReactPortal | null;
 }
 export {};

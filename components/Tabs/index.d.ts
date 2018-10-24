@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ColorType, AlignType, ThemeType } from '../../styled';
 interface ItemProps {
     align?: any;
     active: boolean;

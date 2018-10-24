@@ -1,5 +1,4 @@
 import React from 'react';
-import { SizeType, ColorType, ThemeType } from '../../styled';
 interface ProgressProps {
     /** 現状の進捗 */
     value: number;

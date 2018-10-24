@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
-const Box = styled.div.withConfig({
+var Box = styled.div.withConfig({
   displayName: "Box",
   componentId: "v21x8u-0"
-})(["position:relative;display:flex;flex-direction:column;", " box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);border-radius:3px;width:100%;min-width:0;word-wrap:break-word;", ""], ({
-  borderless,
-  theme
-}) => borderless ? `` : `border: 1px solid ${theme.border};`, ({
-  color,
-  theme
-}) => {
+})(["position:relative;display:flex;flex-direction:column;", " box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);border-radius:3px;width:100%;min-width:0;word-wrap:break-word;", ""], function (_ref) {
+  var borderless = _ref.borderless,
+      theme = _ref.theme;
+  return borderless ? "" : "border: 1px solid " + theme.border + ";";
+}, function (_ref2) {
+  var color = _ref2.color,
+      theme = _ref2.theme;
   if (!color) return '';
-  const target = color === 'light' ? theme.color.greyLight : theme[color];
-  const invertColor = findColorInvert(target);
-  return `background-color: ${target}; color: ${invertColor};`;
+  var target = color === 'light' ? theme.color.greyLight : theme[color];
+  var invertColor = findColorInvert(target);
+  return "background-color: " + target + "; color: " + invertColor + ";";
 });
 Box.displayName = 'Box';
 export default function (props) {

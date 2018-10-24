@@ -17,5 +17,5 @@ export default {
   border: color.greyLighter,
   borderHover: color.greyLight,
   borderActive: color.greyDarker,
-  color
+  color: color
 };

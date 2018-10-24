@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { ColSizeType, ColorType } from '../../styled';
 interface Props {
     /** ヘッダーのタイトル文言 */
     title?: any;
@@ -34,9 +33,9 @@ export default class Modal extends PureComponent<Props> {
     onKeyDown: (e: any) => void;
     onClickOverlay: () => void;
     handleContentOnMouse: () => void;
-    getModal: () => JSX.Element | undefined;
+    getModal: () => JSX.Element;
     element: HTMLDivElement;
     shouldClose: boolean | null;
-    render(): React.ReactPortal;
+    render(): React.ReactPortal | null;
 }
 export {};

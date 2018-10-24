@@ -1,5 +1,3 @@
-import { FlattenInterpolation, ThemeProps } from 'styled-components';
-import { ThemeType } from '../../styled';
 export interface InputProps {
     name: string;
     value?: string | number;
@@ -7,5 +5,5 @@ export interface InputProps {
     onBlur: () => void;
     disabled?: boolean;
 }
-declare const _default: FlattenInterpolation<ThemeProps<ThemeType>>[];
+declare const _default: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<ThemeType>>[];
 export default _default;
