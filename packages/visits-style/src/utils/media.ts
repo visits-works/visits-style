@@ -1,4 +1,3 @@
-import { InterpolationValue } from 'styled-components';
 import { css } from '../styled';
 import { tablet, desktop, fullhd } from '../styles/variables';
 

@@ -1,5 +1,4 @@
-import { InterpolationValue } from 'styled-components';
-import { ThemeType, css } from '../styled';
+import { css } from '../styled';
 import transparentize from 'polished/lib/color/transparentize';
 
 export default function disabledColor(theme: ThemeType) {

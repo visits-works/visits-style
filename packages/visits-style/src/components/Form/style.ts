@@ -1,5 +1,4 @@
-import { InterpolationValue, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { ThemeType, css } from '../../styled';
+import { css } from '../../styled';
 import disabledColor from '../../utils/disabledColor';
 
 export interface InputProps {

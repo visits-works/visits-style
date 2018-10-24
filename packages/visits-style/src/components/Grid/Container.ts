@@ -1,5 +1,4 @@
-import React from 'react';
-import styled, { css, ThemeType } from '../../styled';
+import styled, { css } from '../../styled';
 import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
 import { fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 

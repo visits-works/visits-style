@@ -1,5 +1,4 @@
-import React from 'react';
-import styled, { ThemeType } from '../../styled';
+import styled from '../../styled';
 
 const Code = styled.code`
   background-color: ${({ theme }) => theme.background};

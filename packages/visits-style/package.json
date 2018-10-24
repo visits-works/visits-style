@@ -2,24 +2,12 @@
   "name": "visits-style",
   "version": "0.1.0",
   "private": true,
-  "main": "lib/index.js",
-  "module": "lib/index.es.js",
-  "typings": "lib/index.d.ts",
-  "files": [
-    "components/",
-    "styles/",
-    "theme/",
-    "utils/",
-    "index.js",
-    "index.d.js",
-    "types.d.js",
-    "package.json",
-    "README.md"
-  ],
+  "main": "index.js",
+  "typings": "index.d.ts",
   "peerDependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "styled-components": "^3.4.9"
+    "react": ">=16.4.1",
+    "react-dom": ">=16.4.1",
+    "styled-components": ">=3.4.9"
   },
   "dependencies": {
     "polished": "^1.9.2",
@@ -29,9 +17,10 @@
     "styled-components": "^3.4.9"
   },
   "scripts": {
-    "compile": "tsc --d --emitDeclarationOnly --outDir ../../build",
-    "build": "rollup -c",
+    "compile": "tsc --d --emitDeclarationOnly --outDir ./build && cp src/types.d.ts build/types.d.ts",
+    "build": "NODE_ENV=production yarn clean && yarn compile && babel ./src --out-dir ./build --extensions \".ts,.tsx\" --ignore \"**/__test__/**\",\"src/types.d.ts\"",
     "develop": "cd ../visits-style-website && yarn start",
+    "deploy": "yarn build && cp package.json ./build/package.json && gh-pages -d build -b master",
     "clean": "rm -rf ./lib ./build",
     "test": "jest --env=jsdom",
     "type-check": "tsc --noEmit"
@@ -43,6 +32,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@svgr/rollup": "^3.1.0",
@@ -64,6 +54,7 @@
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "enzyme-to-json": "^3.3.4",
+    "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
     "jest-styled-components": "^6.2.1",
     "rollup": "^0.66.6",
@@ -72,6 +63,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-typescript2": "^0.17.2",
+    "rollup-plugin-uglify": "^6.0.0",
     "rollup-plugin-url": "^2.0.1",
     "ts-jest": "^23.10.3",
     "ts-loader": "^5.2.1",

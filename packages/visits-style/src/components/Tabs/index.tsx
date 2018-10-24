@@ -1,5 +1,5 @@
 import React, { Component, Children, CSSProperties } from 'react';
-import styled, { ColorType, AlignType, ThemeType } from '../../styled';
+import styled from '../../styled';
 import setAlign from '../../utils/setAlign';
 import Button from '../Button';
 

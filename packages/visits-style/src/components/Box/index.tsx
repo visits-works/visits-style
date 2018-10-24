@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import styled, { ThemeType, ColorType } from '../../styled';
+import styled from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 
 interface Props {

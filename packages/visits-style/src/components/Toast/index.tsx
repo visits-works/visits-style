@@ -2,7 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import styled, { ColorType } from '../../styled';
+import styled from '../../styled';
 
 import Box from '../Box';
 

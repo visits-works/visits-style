@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled, { ThemeType, ColorType } from '../../styled';
+import styled from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
 interface LoadingProps {
   loading: boolean;

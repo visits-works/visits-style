@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled, { css, ThemeType } from '../../styled';
+import styled, { css } from '../../styled';
 import { setSize } from '../../utils';
 import commonStyle, { InputProps } from './style';
 import HelpMessage from './HelpMessage';

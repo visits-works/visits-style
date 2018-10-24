@@ -1,4 +1,4 @@
-import styled, { css, ColSizeType, ThemeType } from '../../styled';
+import styled, { css } from '../../styled';
 import { mediaMobile, mediaTablet } from '../../utils/media';
 
 interface ColProps {

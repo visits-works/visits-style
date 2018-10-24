@@ -1,8 +1,6 @@
-import React from 'react';
-import styled, { css, ThemeType } from '../../styled';
+import styled, { css } from '../../styled';
 import Col from './Col';
-import { mediaFullHD, mediaTablet, mediaMobile } from '../../utils/media';
-import { fullhd, tablet, mobile } from '../../styles/variables';
+import { mediaFullHD, mediaTablet } from '../../utils/media';
 
 interface Props {
   width?: string;

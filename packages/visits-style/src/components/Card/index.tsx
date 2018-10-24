@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactNode, CSSProperties } from 'react';
-import styled, { ColorType } from '../../styled';
+import styled from '../../styled';
 import Box from '../Box';
 
 const CardBody = styled.div`

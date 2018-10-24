@@ -1,5 +1,4 @@
-import React from 'react';
-import styled, { css, SizeType, ThemeType } from '../../styled';
+import styled, { css } from '../../styled';
 
 const stripedStyle = css`
   tbody > tr:nth-child(odd) {

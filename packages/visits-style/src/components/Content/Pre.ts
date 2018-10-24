@@ -1,5 +1,4 @@
-import React from 'react';
-import styled, { ThemeType } from '../../styled';
+import styled from '../../styled';
 
 const Pre = styled.pre`
   -webkit-overflow-scrolling: touch;

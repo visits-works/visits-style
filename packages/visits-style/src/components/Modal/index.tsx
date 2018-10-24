@@ -1,7 +1,7 @@
 import React, { PureComponent, CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
-import styled, { ColSizeType, ColorType } from '../../styled';
+import styled from '../../styled';
 import Box from '../Box';
 import Col from '../Grid/Col';
 

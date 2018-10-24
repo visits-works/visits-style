@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css, ColorType, ThemeType, AlignType } from '../../styled';
+import styled, { css } from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
