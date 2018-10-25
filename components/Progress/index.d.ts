@@ -10,6 +10,7 @@ interface ProgressProps {
     height?: string;
     /** バーの色 */
     color?: ColorType;
+    style?: any;
 }
 export default class Progress extends PureComponent<ProgressProps> {
     static defaultProps: {
