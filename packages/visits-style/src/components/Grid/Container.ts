@@ -6,7 +6,7 @@ interface Props {
   fluid?: boolean;
 }
 
-function setResponsive({ fluid }: Props) {
+function setResponsive({ fluid }: Props): any {
   if (fluid) {
     return css`
       ${mediaMobile`

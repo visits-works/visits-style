@@ -13,6 +13,8 @@ interface ProgressProps {
   height?: string;
   /** バーの色 */
   color?: ColorType;
+
+  style?: any;
 }
 
 const Wrapper = styled.div<ProgressProps>`

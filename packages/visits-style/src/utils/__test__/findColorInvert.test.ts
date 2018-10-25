@@ -1,5 +1,5 @@
 import findColorInvert from '../findColorInvert';
-import theme from '../../theme/light';
+import theme from '../../theme/default';
 
 describe('utils findColorInvert', () => {
   it('white to black', () => {

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 // @ts-ignore
-import theme from '@theme/light';
+import theme from '@theme/default';
 // @ts-ignore
 import { Row, Col, Container } from '@components';
 import Topbar from './components/Topbar';
