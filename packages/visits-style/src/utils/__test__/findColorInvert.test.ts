@@ -1,10 +1,11 @@
 import findColorInvert from '../findColorInvert';
+import theme from '../../theme/light';
 
 describe('utils findColorInvert', () => {
   it('white to black', () => {
-    expect(findColorInvert('#fff')).toEqual('#0a0a0a');
+    expect(findColorInvert(theme, '#fff')).toEqual('#0a0a0a');
   });
   it('black to white', () => {
-    expect(findColorInvert('#000')).toEqual('#ffffff');
+    expect(findColorInvert(theme, '#000')).toEqual('#ffffff');
   });
 });

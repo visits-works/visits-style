@@ -7,11 +7,11 @@ import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
 
 function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
-  const backgroundColor = color ? (color === 'light' ? theme.color.greyLight : theme[color]) : 'transparent';
-  const textColor = findColorInvert(backgroundColor === 'transparent' ? theme.background : backgroundColor);
+  const backgroundColor = color ? theme[color] : 'transparent';
+  const textColor = findColorInvert(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
 
   if (backdrop) {
-    const backColor = transparentize(0.2, (backgroundColor === 'transparent' ? '#fff' : backgroundColor));
+    const backColor = transparentize(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
     const ua = navigator.userAgent.toLowerCase();
     if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
       return `background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;

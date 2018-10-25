@@ -47,7 +47,7 @@ const TabItem = styled.div<ItemProps>`
 `;
 
 function setColor({ theme, color }: { theme: ThemeType, color?: ColorType }) {
-  return (!color || color === 'light') ? theme.background : theme[color];
+  return !color ? theme.background : theme[color];
 }
 
 interface IndicatorProps {

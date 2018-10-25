@@ -22,11 +22,11 @@ function setColor({ theme, color, outline, disabled }: Props) {
       border-color: ${theme.border};
       color: ${theme.text};
 
-      &:hover{
+      &:hover {
         border-color: ${theme.borderHover};
       }
 
-      &:active{
+      &:active {
         border-color: ${theme.borderActive};
       }
     `;
@@ -43,8 +43,8 @@ function setColor({ theme, color, outline, disabled }: Props) {
     `;
   }
 
-  const target = color === 'light' ? theme.color.greyLight : theme[color];
-  const invertColor = findColorInvert(target);
+  const target = theme[color] || color;
+  const invertColor = findColorInvert(theme, target);
   if (outline) {
     return css`
       background-color: transparent;
@@ -90,8 +90,6 @@ interface ButtonProps {
   size?: SizeType;
   /** 背景が透明なボタンでする */
   outline?: boolean;
-  /** ボタンのクリックイベント */
-  onClick?: () => void;
   /** 全体幅のボタンで設定 */
   full?: boolean;
 
@@ -114,7 +112,7 @@ const Button = styled.button<ButtonProps>`
   padding: 0.375em 0.75em;
 
   transition-property: background-color, color, box-shadow;
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
   transition-timing-function: ease-in-out;
 
   ${setColor}

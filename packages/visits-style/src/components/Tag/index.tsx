@@ -16,7 +16,7 @@ function getColor(theme: ThemeType, color?: ColorType) {
 function setColor({ theme, color, addonColor }:
     { theme: ThemeType, color?: ColorType, addonColor?: ColorType }) {
   const target = getColor(theme, color);
-  const invertColor = findColorInvert(target);
+  const invertColor = findColorInvert(theme, target);
 
   const subColor = addonColor ? getColor(theme, addonColor) : darken(0.05, target);
 

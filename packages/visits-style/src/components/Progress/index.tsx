@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from '../../styled';
 import setSize from '../../utils/setSize';
 
@@ -12,47 +12,45 @@ interface ProgressProps {
   /** sizeを使わないときの縦幅を指定する */
   height?: string;
   /** バーの色 */
-  color: ColorType;
+  color?: ColorType;
 }
 
-const Progress = styled.progress<ProgressProps>`
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  border: none;
-  border-radius: 290486px;
+const Wrapper = styled.div<ProgressProps>`
   display: block;
-  overflow: hidden;
-  padding: 0;
   width: 100%;
-  color: ${({ theme }) => theme.background};
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.background};
 
   ${({ size }) => setSize('height', size)}
   ${({ size, height }) => !size && height ? `height: ${height};` : ''}
 
-  will-change: width;
+  & > div {
+    height: 100%;
+    border-radius: 4px;
+    ${({ value, max }) => (value === max) ? '' : 'border-bottom-right-radius: 0; border-top-right-radius: 0;'}
+    background-color: ${({ color, theme }) => (theme[color!] || color)};
 
-  transition-property: width;
-  transition-duration: 350ms;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: width;
 
-  &::-webkit-progress-bar {
-    background-color: ${({ theme }) => theme.background};
-  }
-
-  &::-webkit-progress-value {
-    background-color: ${({ theme }) => theme.primary};
-  }
-
-  &::-moz-progress-bar {
-    background-color: ${({ theme }) => theme.primary};
-  }
-
-  &::-ms-fill {
-    border: 0;
-    background-color: ${({ theme }) => theme.primary};
+    transition-property: width;
+    transition-duration: 350ms;
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 `;
-Progress.displayName = 'Progress';
 
 
-export default Progress;
+export default class Progress extends PureComponent<ProgressProps> {
+  static defaultProps = {
+    color: 'primary',
+  }
+
+  render () {
+    const { value, max } = this.props;
+    const percent = Math.round((value/max) * 100);
+    return (
+      <Wrapper {...this.props}>
+        <div role="progressbar" style={{ width: `${percent > 100 ? 100 : percent}%` }} ></div>
+      </Wrapper>
+    );
+  }
+};

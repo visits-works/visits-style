@@ -15,20 +15,27 @@ function mediaUntil(device: number, str: TemplateStringsArray, ...args: any[]) {
   return css(template, ...values);
 }
 
+function withTheme(func: any, ...args: any[]) {
+  return function({ theme }: { theme: ThemeType }) {
+    if (theme && theme.responsive === false) return '';
+    return func(...args);
+  };
+}
+
 export function mediaMobile(str: TemplateStringsArray, ...args: any[]) {
-  return mediaUntil(tablet - 1, str, ...args);
+  return withTheme(mediaUntil, tablet - 1, str, ...args);
 }
 
 export function mediaTablet(str: TemplateStringsArray, ...args: any[]) {
-  return mediaFrom(tablet, str, ...args);
+  return withTheme(mediaFrom, tablet, str, ...args);
 }
 
 export function mediaDesktop(str: TemplateStringsArray, ...args: any[]) {
-  return mediaFrom(desktop, str, ...args);
+  return withTheme(mediaFrom, desktop, str, ...args);
 }
 
 export function mediaFullHD(str: TemplateStringsArray, ...args: any[]) {
-  return mediaFrom(fullhd, str, ...args);
+  return withTheme(mediaFrom, fullhd, str, ...args);
 }
 
 export function mediaUntilFullHD(str: TemplateStringsArray, ...args: any[]) {

@@ -24,8 +24,8 @@ const Box = styled.div<Props>`
   ${({ color, theme }) => {
     if (!color) return '';
 
-    const target = color === 'light' ? theme.color.greyLight : theme[color];
-    const invertColor = findColorInvert(target);
+    const target = theme[color] || color;
+    const invertColor = findColorInvert(theme, target);
     return `background-color: ${target}; color: ${invertColor};`;
   }}
 `;

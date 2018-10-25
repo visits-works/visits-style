@@ -16,19 +16,19 @@ interface Props {
 function setColor({ color, theme }: { color?: ColorType, theme: ThemeType }) {
   if (!color) return '';
 
-  const target = color === 'light' ? theme.color.greyLight : theme[color];
-  const invertColor = findColorInvert(target);
+  const target = theme[color] || color;
+  const invertColor = findColorInvert(theme, target);
   return `background-color: ${target}; color: ${invertColor};`;
 }
 
-function setSize({ size }: { size?: SizeType | 'full' }) {
+function setSize({ size, theme }: { size?: SizeType | 'full', theme: ThemeType }) {
   if (!size || size === 'small') return '';
 
   switch (size) {
     case 'medium' :
-      return mediaDesktop`padding-bottom: 9rem; padding-top: 9rem;`;
+      return mediaDesktop`padding-bottom: 9rem; padding-top: 9rem;`({ theme });
     case 'large' :
-      return mediaDesktop`padding-bottom: 18rem; padding-top: 18rem;`;
+      return mediaDesktop`padding-bottom: 18rem; padding-top: 18rem;`({ theme });
     case 'full' :
       return css`
         min-height: 100vh;

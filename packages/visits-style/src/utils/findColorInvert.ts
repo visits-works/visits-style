@@ -1,7 +1,6 @@
 import getLuminance from 'polished/lib/color/getLuminance';
-import { white, black } from '../styles/colors';
 
-export default function findColorInvert(color: string) {
+export default function findColorInvert({ black, white }: ThemeType, color: string) {
   if (getLuminance(color) > 0.55) {
     return black;
   } else {
