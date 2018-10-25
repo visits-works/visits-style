@@ -1,5 +1,7 @@
-import * as color from '../styles/colors';
 declare const _default: {
+    fontFamily: string;
+    fontSize: string;
+    responsive: boolean;
     primary: string;
     link: string;
     info: string;
@@ -7,8 +9,16 @@ declare const _default: {
     warning: string;
     danger: string;
     dark: string;
+    light: string;
     black: string;
+    blackBis: string;
+    blackTer: string;
     white: string;
+    whiteBis: string;
+    whiteTer: string;
+    grey: string;
+    greyLight: string;
+    greyLighter: string;
     text: string;
     textDark: string;
     textLight: string;
@@ -17,6 +27,5 @@ declare const _default: {
     border: string;
     borderHover: string;
     borderActive: string;
-    color: typeof color;
 };
 export default _default;

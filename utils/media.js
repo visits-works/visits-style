@@ -25,37 +25,49 @@ function mediaUntil(device, str) {
   return css.apply(void 0, [template].concat(values));
 }
 
-export function mediaMobile(str) {
+function withTheme(func) {
   for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
     args[_key3 - 1] = arguments[_key3];
   }
 
-  return mediaUntil.apply(void 0, [tablet - 1, str].concat(args));
+  return function (_ref) {
+    var theme = _ref.theme;
+    if (theme && theme.responsive === false) return '';
+    return func.apply(void 0, args);
+  };
 }
-export function mediaTablet(str) {
+
+export function mediaMobile(str) {
   for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
     args[_key4 - 1] = arguments[_key4];
   }
 
-  return mediaFrom.apply(void 0, [tablet, str].concat(args));
+  return withTheme.apply(void 0, [mediaUntil, tablet - 1, str].concat(args));
 }
-export function mediaDesktop(str) {
+export function mediaTablet(str) {
   for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
     args[_key5 - 1] = arguments[_key5];
   }
 
-  return mediaFrom.apply(void 0, [desktop, str].concat(args));
+  return withTheme.apply(void 0, [mediaFrom, tablet, str].concat(args));
 }
-export function mediaFullHD(str) {
+export function mediaDesktop(str) {
   for (var _len6 = arguments.length, args = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
     args[_key6 - 1] = arguments[_key6];
   }
 
-  return mediaFrom.apply(void 0, [fullhd, str].concat(args));
+  return withTheme.apply(void 0, [mediaFrom, desktop, str].concat(args));
 }
-export function mediaUntilFullHD(str) {
+export function mediaFullHD(str) {
   for (var _len7 = arguments.length, args = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
     args[_key7 - 1] = arguments[_key7];
+  }
+
+  return withTheme.apply(void 0, [mediaFrom, fullhd, str].concat(args));
+}
+export function mediaUntilFullHD(str) {
+  for (var _len8 = arguments.length, args = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+    args[_key8 - 1] = arguments[_key8];
   }
 
   return mediaUntil.apply(void 0, [fullhd - 1, str].concat(args));

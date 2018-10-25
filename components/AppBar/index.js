@@ -60,11 +60,11 @@ function setColor(_ref) {
   var color = _ref.color,
       theme = _ref.theme,
       backdrop = _ref.backdrop;
-  var backgroundColor = color ? color === 'light' ? theme.color.greyLight : theme[color] : 'transparent';
-  var textColor = findColorInvert(backgroundColor === 'transparent' ? theme.background : backgroundColor);
+  var backgroundColor = color ? theme[color] : 'transparent';
+  var textColor = findColorInvert(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
 
   if (backdrop) {
-    var backColor = transparentize(0.2, backgroundColor === 'transparent' ? '#fff' : backgroundColor);
+    var backColor = transparentize(0.2, backgroundColor === 'transparent' ? theme.white : backgroundColor);
     var ua = navigator.userAgent.toLowerCase();
 
     if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {

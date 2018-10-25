@@ -23,8 +23,8 @@ function setColor(_ref) {
     return css(["background-color:transparent;border-color:transparent;color:", ";&:hover{text-decoration:underline;}"], theme.text);
   }
 
-  var target = color === 'light' ? theme.color.greyLight : theme[color];
-  var invertColor = findColorInvert(target);
+  var target = theme[color] || color;
+  var invertColor = findColorInvert(theme, target);
 
   if (outline) {
     return css(["background-color:transparent;border-color:", ";color:", ";&:hover{background-color:", ";color:", ";}&:focus{", "}"], target, target, target, invertColor, boxShadow('0.2rem', target, 0.2));
@@ -36,7 +36,7 @@ function setColor(_ref) {
 var Button = styled.button.withConfig({
   displayName: "Button",
   componentId: "rhklzy-0"
-})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-flex;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;border:1px solid transparent;border-radius:4px;height:2.25em;padding:0.375em 0.75em;transition-property:background-color,color,box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " ", " ", " &:not(:last-child){margin-right:0.5rem;margin-bottom:0.5rem;}"], setColor, function (_ref2) {
+})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-flex;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;border:1px solid transparent;border-radius:4px;height:2.25em;padding:0.375em 0.75em;transition-property:background-color,color,box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;", " ", " ", " &:not(:last-child){margin-right:0.5rem;margin-bottom:0.5rem;}"], setColor, function (_ref2) {
   var size = _ref2.size;
   return setSize('font-size', size);
 }, function (_ref3) {

@@ -30,21 +30,26 @@ function setColor(_ref) {
   var color = _ref.color,
       theme = _ref.theme;
   if (!color) return '';
-  var target = color === 'light' ? theme.color.greyLight : theme[color];
-  var invertColor = findColorInvert(target);
+  var target = theme[color] || color;
+  var invertColor = findColorInvert(theme, target);
   return "background-color: " + target + "; color: " + invertColor + ";";
 }
 
 function setSize(_ref2) {
-  var size = _ref2.size;
+  var size = _ref2.size,
+      theme = _ref2.theme;
   if (!size || size === 'small') return '';
 
   switch (size) {
     case 'medium':
-      return mediaDesktop(_templateObject());
+      return mediaDesktop(_templateObject())({
+        theme: theme
+      });
 
     case 'large':
-      return mediaDesktop(_templateObject2());
+      return mediaDesktop(_templateObject2())({
+        theme: theme
+      });
 
     case 'full':
       return css(["min-height:100vh;", "{align-items:center;display:flex;}"], Body);

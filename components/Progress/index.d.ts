@@ -1,4 +1,4 @@
-import React from 'react';
+import { PureComponent } from 'react';
 interface ProgressProps {
     /** 現状の進捗 */
     value: number;
@@ -9,7 +9,12 @@ interface ProgressProps {
     /** sizeを使わないときの縦幅を指定する */
     height?: string;
     /** バーの色 */
-    color: ColorType;
+    color?: ColorType;
 }
-declare const Progress: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLProgressElement> & React.ProgressHTMLAttributes<HTMLProgressElement> & ProgressProps, ThemeType, React.ClassAttributes<HTMLProgressElement> & React.ProgressHTMLAttributes<HTMLProgressElement> & ProgressProps>;
-export default Progress;
+export default class Progress extends PureComponent<ProgressProps> {
+    static defaultProps: {
+        color: string;
+    };
+    render(): JSX.Element;
+}
+export {};

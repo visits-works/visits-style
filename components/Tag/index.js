@@ -25,7 +25,7 @@ function setColor(_ref) {
       color = _ref.color,
       addonColor = _ref.addonColor;
   var target = getColor(theme, color);
-  var invertColor = findColorInvert(target);
+  var invertColor = findColorInvert(theme, target);
   var subColor = addonColor ? getColor(theme, addonColor) : darken(0.05, target);
   return css(["color:", ";background-color:", ";a,span{color:", ";background-color:", ";}a:hover{background-color:", ";}"], invertColor, target, invertColor, subColor, darken(0.05, subColor));
 }

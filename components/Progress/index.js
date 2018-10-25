@@ -1,9 +1,14 @@
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+import React, { PureComponent } from 'react';
 import styled from '../../styled';
 import setSize from '../../utils/setSize';
-var Progress = styled.progress.withConfig({
-  displayName: "Progress",
+var Wrapper = styled.div.withConfig({
+  displayName: "Progress__Wrapper",
   componentId: "sc-1toznj0-0"
-})(["-moz-appearance:none;-webkit-appearance:none;border:none;border-radius:290486px;display:block;overflow:hidden;padding:0;width:100%;color:", ";", " ", " will-change:width;transition-property:width;transition-duration:350ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);&::-webkit-progress-bar{background-color:", ";}&::-webkit-progress-value{background-color:", ";}&::-moz-progress-bar{background-color:", ";}&::-ms-fill{border:0;background-color:", ";}"], function (_ref) {
+})(["display:block;width:100%;border-radius:4px;background-color:", ";", " ", " & > div{height:100%;border-radius:4px;", " background-color:", ";will-change:width;transition-property:width;transition-duration:350ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);}"], function (_ref) {
   var theme = _ref.theme;
   return theme.background;
 }, function (_ref2) {
@@ -14,17 +19,45 @@ var Progress = styled.progress.withConfig({
       height = _ref3.height;
   return !size && height ? "height: " + height + ";" : '';
 }, function (_ref4) {
-  var theme = _ref4.theme;
-  return theme.background;
+  var value = _ref4.value,
+      max = _ref4.max;
+  return value === max ? '' : 'border-bottom-right-radius: 0; border-top-right-radius: 0;';
 }, function (_ref5) {
-  var theme = _ref5.theme;
-  return theme.primary;
-}, function (_ref6) {
-  var theme = _ref6.theme;
-  return theme.primary;
-}, function (_ref7) {
-  var theme = _ref7.theme;
-  return theme.primary;
+  var color = _ref5.color,
+      theme = _ref5.theme;
+  return theme[color] || color;
 });
-Progress.displayName = 'Progress';
-export default Progress;
+
+var Progress =
+/*#__PURE__*/
+function (_PureComponent) {
+  _inheritsLoose(Progress, _PureComponent);
+
+  function Progress() {
+    return _PureComponent.apply(this, arguments) || this;
+  }
+
+  var _proto = Progress.prototype;
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        value = _this$props.value,
+        max = _this$props.max;
+    var percent = Math.round(value / max * 100);
+    return React.createElement(Wrapper, this.props, React.createElement("div", {
+      role: "progressbar",
+      style: {
+        width: (percent > 100 ? 100 : percent) + "%"
+      }
+    }));
+  };
+
+  return Progress;
+}(PureComponent);
+
+_defineProperty(Progress, "defaultProps", {
+  color: 'primary'
+});
+
+export { Progress as default };
+;

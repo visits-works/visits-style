@@ -12,8 +12,8 @@ var Box = styled.div.withConfig({
   var color = _ref2.color,
       theme = _ref2.theme;
   if (!color) return '';
-  var target = color === 'light' ? theme.color.greyLight : theme[color];
-  var invertColor = findColorInvert(target);
+  var target = theme[color] || color;
+  var invertColor = findColorInvert(theme, target);
   return "background-color: " + target + "; color: " + invertColor + ";";
 });
 Box.displayName = 'Box';

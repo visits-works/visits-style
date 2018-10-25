@@ -35,7 +35,7 @@ var TabItem = styled.div.withConfig({
 function setColor(_ref3) {
   var theme = _ref3.theme,
       color = _ref3.color;
-  return !color || color === 'light' ? theme.background : theme[color];
+  return !color ? theme.background : theme[color];
 }
 
 var Indicator = styled.div.withConfig({

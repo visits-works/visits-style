@@ -6,8 +6,6 @@ interface ButtonProps {
     size?: SizeType;
     /** 背景が透明なボタンでする */
     outline?: boolean;
-    /** ボタンのクリックイベント */
-    onClick?: () => void;
     /** 全体幅のボタンで設定 */
     full?: boolean;
     disabled?: boolean;

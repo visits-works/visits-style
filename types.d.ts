@@ -1,6 +1,6 @@
 
 declare type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' |
-'warning' | 'danger' | 'dark' | 'text';
+'warning' | 'danger' | 'dark' | 'text' | string;
 
 declare type SizeType = 'small' | 'medium' | 'large';
 
