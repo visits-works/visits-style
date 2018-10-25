@@ -55,11 +55,12 @@ export default class HighlightCode extends Component<Props, State> {
 
   render() {
     const isReadOnly = this.props.onChange === undefined;
+    const mode = this.props.className ? this.props.className.replace('language-', '') : 'jsx';
     return (
       <Wrapper
         value={this.state.code}
         options={{
-          mode: 'jsx',
+          mode,
           lineNumbers: true,
           tabSize: 2,
           readOnly: (isReadOnly ? 'nocursor' : false)

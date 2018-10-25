@@ -16,7 +16,7 @@ export default function LandingPage(props: any) {
       <Hero center>
         <h1>VISITS-STYLE</h1>
         <p>
-          <Link to="/core">
+          <Link to="/installation">
             <Button color="primary" outline>GET STARTED</Button>
           </Link>
           <a href="https://github.com/visits-works/visits-style" target="_blank">
