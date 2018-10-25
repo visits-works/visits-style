@@ -1,15 +1,12 @@
 import React, { Fragment } from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 // @ts-ignore
-import { MDXProvider } from '@mdx-js/tag';
-// @ts-ignore
 import theme from '@theme/light';
 // @ts-ignore
 import { Row, Col, Container } from '@components';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
-
-import components from './components';
+import Footer from './components/Footer';
 
 import normalize from '@styles/normalize';
 
@@ -18,7 +15,6 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     height: 100%;
-    width: 100%;
   }
 
   #___gatsby {
@@ -27,6 +23,8 @@ const GlobalStyle = createGlobalStyle`
     & > div {
       height: 100%;
       max-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
   }
 
@@ -41,16 +39,15 @@ export default function Layout({ children, current }: any) {
       <Fragment>
         <GlobalStyle />
         <Topbar current={current} />
-        <Row style={{ flex: 1 }}>
-          <Sidebar current={current} />
-          <Col>
-            <MDXProvider components={components}>
-              <Container style={{ overflowX: 'hidden' }}>
-                {children}
-              </Container>
-            </MDXProvider>
-          </Col>
-        </Row>
+        <main style={{ flexGrow: 1, paddingTop: '3.25rem', minHeight: 'calc(100vh - 3.25rem)' }}>
+          <Row style={{ marginBottom: 0 }}>
+            <Sidebar current={current} />
+            <Col>
+              {children}
+            </Col>
+          </Row>
+          <Footer />
+        </main>
       </Fragment>
     </ThemeProvider>
   );

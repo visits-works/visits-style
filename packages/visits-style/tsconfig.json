@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["es6", "dom"],
-    "outDir": "./lib",
     "moduleResolution": "node",
     "jsx": "react",
     "strict": true,

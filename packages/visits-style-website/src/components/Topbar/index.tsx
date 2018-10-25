@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import { GoMarkGithub } from 'react-icons/go';
 // @ts-ignore
 import AppBar from '@components/AppBar';
-
-import LogoImage from '../Logo';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||
@@ -31,7 +28,7 @@ query {
 
 const Logo = (
 <Link to="/">
-  <LogoImage />
+  <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Visits-style</h2>
 </Link>
 );
 
@@ -65,19 +62,12 @@ export default function Topbar({ current }: { current: string }) {
       brand={Logo}
       color="dark"
       style={{ zIndex: 100 }}
-      sticky
+      fixed
     >
       <StaticQuery
         query={pageQuery}
         render={renderMenu}
       />
-      <a
-        href="https://github.com/visits-works/visits-style"
-        target="_blank"
-        style={{ fontSize: '1.5rem' }}
-      >
-        <GoMarkGithub />
-      </a>
     </AppBar>
   );
 }

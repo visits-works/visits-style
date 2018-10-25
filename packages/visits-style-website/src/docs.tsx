@@ -4,6 +4,12 @@ import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
 // @ts-ignore
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+// @ts-ignore
+import { MDXProvider } from '@mdx-js/tag';
+// @ts-ignore
+import { Container } from '@components';
+
+import components from './components';
 
 import Layout from './layout';
 
@@ -69,20 +75,24 @@ export default class MDXRuntime extends Component {
     const current = this.props['*'];
     return (
       <Layout current={current}>
-        <Fragment>
-          <Helmet>
-            <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
-            <meta name="description" content={mdx.frontmatter.description} />
-          </Helmet>
-          {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
-          {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
-          <MDXRenderer>{mdx.code.body}</MDXRenderer>
-          <Footer>
-            <a href={`${docsLocation}/${mdx.parent.relativePath}`}>
-              edit this page on GitHub
-            </a>
-          </Footer>
-        </Fragment>
+        <MDXProvider components={components}>
+          <Container style={{ overflowX: 'hidden' }}>
+            <Fragment>
+              <Helmet>
+                <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
+                <meta name="description" content={mdx.frontmatter.description} />
+              </Helmet>
+              {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
+              {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
+              <MDXRenderer>{mdx.code.body}</MDXRenderer>
+              <Footer>
+                <a href={`${docsLocation}/${mdx.parent.relativePath}`}>
+                  edit this page on GitHub
+                </a>
+              </Footer>
+            </Fragment>
+          </Container>
+        </MDXProvider>
       </Layout>
     );
   }

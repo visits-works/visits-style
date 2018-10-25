@@ -8,10 +8,14 @@ import { mediaMobile } from '@utils';
 import { convertTitleToId } from '../H2';
 
 const Wrapper = styled(Col)`
-  width: 250px;
-  flex: 0 250px;
+  position: sticky;
+  width: 240px;
+  flex: 0 240px;
   padding: 1.5rem !important;
   background-color: ${({ theme }) => theme.background};
+  overflow-y: auto;
+  top: 3.25rem;
+  height: calc(100vh - 3.25rem);
 
   ${mediaMobile`
     width: 100%;

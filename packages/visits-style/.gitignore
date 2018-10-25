@@ -12,7 +12,6 @@ bundle_report.html
 # production
 /build
 /lib
-**.d.ts
 
 # misc
 /tmp

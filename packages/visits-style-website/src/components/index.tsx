@@ -8,5 +8,5 @@ export default {
   h2: H2,
   pre: Fragment,
   code: Highlight,
-  inlineCode: ({ children }: any) => <Tag as="code" style={{ userSelect: 'auto', cursor: 'auto' }}>{children}</Tag>,
+  inlineCode: ({ children }: any) => <Tag as="code" style={{ fontSize: '1rem', userSelect: 'auto', cursor: 'auto' }}>{children}</Tag>,
 };

@@ -3,10 +3,9 @@ title: Theme
 description: デフォルト色スキーマ
 ---
 
-import styled from 'styled-components';
-import { findColorInvert } from '@utils';
 import { Container } from '@components';
-import lightTheme from '@theme/light';
+import Cube from '_components/Cube';
+import theme from '@theme/light';
 
 プロジェクト事に色を設定してください。
 
@@ -14,21 +13,12 @@ import lightTheme from '@theme/light';
 ## public theme
 
 <Container>
-  {Object.keys(lightTheme).map(key => key !== 'color' && (
-    <div
-      key={key}
-      style={{
-        display: 'inline-block',
-        backgroundColor: lightTheme[key],
-        width: '150px', height: '150px',
-        textAlign: 'right', fontWeight: 600,
-        padding: '0.5rem',
-        margin: '0.5rem',
-        color: findColorInvert(lightTheme[key]),
-      }}
-    >
-      {key}<br />
-      {lightTheme[key]}
-    </div>
-  ))}
+  {Object.keys(theme).map(key => (typeof theme[key] === 'string' && theme[key].indexOf('#') === 0) ? (
+    <Cube key={key} color={theme[key]}>{key}<br />{theme[key]}</Cube>
+  ) : null)}
 </Container>
+
+## Responsive
+
+
+
