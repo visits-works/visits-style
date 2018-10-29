@@ -39,6 +39,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         docsLocation
+        description
       }
     }
     mdx(id: { eq: $id }) {
@@ -67,31 +68,25 @@ export default class MDXRuntime extends Component {
     const {
       mdx,
       site: {
-        siteMetadata: { title, docsLocation }
+        siteMetadata: { title, docsLocation, description }
       }
     } = data;
 
     // @ts-ignore
     const current = this.props['*'];
+    console.log(this.props);
     return (
       <Layout current={current}>
         <MDXProvider components={components}>
-          <Container style={{ overflowX: 'hidden' }}>
-            <Fragment>
-              <Helmet>
-                <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
-                <meta name="description" content={mdx.frontmatter.description} />
-              </Helmet>
-              {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
-              {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
-              <MDXRenderer>{mdx.code.body}</MDXRenderer>
-              <Footer>
-                <a href={`${docsLocation}/${mdx.parent.relativePath}`}>
-                  edit this page on GitHub
-                </a>
-              </Footer>
-            </Fragment>
-          </Container>
+          <Fragment>
+            <Helmet>
+              <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
+              <meta name="description" content={mdx.frontmatter.description || description} />
+            </Helmet>
+            {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
+            {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
+            <MDXRenderer>{mdx.code.body}</MDXRenderer>
+          </Fragment>
         </MDXProvider>
       </Layout>
     );

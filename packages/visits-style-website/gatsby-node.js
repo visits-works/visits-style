@@ -1,5 +1,19 @@
 const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
 const path = require("path");
+const docgen = require('react-docgen-typescript');
+
+const parseConfig = {
+  propFilter: {
+    skipPropsWithoutDoc: true,
+  },
+  componentNameResolver: (exp, source) => {
+    if (exp.getName() === 'StyledComponentClass') {
+      const res = docgen.getDefaultExportForFile(source);
+      return res;
+    }
+  },
+};
+const parse = docgen.withDefaultConfig(parseConfig).parse;
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -67,6 +81,24 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
+function parsePropsItem({ name, description, required, type, defaultValue }) {
+  if (name.indexOf('aria-') > -1) return;
+  const res = { name, description, required, type: type.name };
+  res.defaultValue = defaultValue ? defaultValue.value : defaultValue;
+  return res;
+}
+
+function parseMeta(meta) {
+  let res = [];
+  if (meta && meta.length > 0) {
+    res = meta.map((item) => {
+      const props = Object.keys(item.props).map(keys => parsePropsItem(item.props[keys])).filter(a => a);
+      return { name: item.displayName, props };
+    });
+  }
+  return res;
+}
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
 
@@ -82,6 +114,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       name: 'slug',
       node,
       value: `/${value}`
+    });
+  } else if (node.internal.type === 'File' && node.sourceInstanceName === 'components') {
+    const value = parseMeta(parse(node.absolutePath));
+    createNodeField({
+      name: 'meta',
+      node,
+      value,
     });
   }
 };
