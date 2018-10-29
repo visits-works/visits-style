@@ -1,4 +1,5 @@
 import "core-js/modules/es6.object.assign";
+import "core-js/modules/es6.string.fixed";
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -53,8 +54,8 @@ _defineProperty(ToastItem, "defaultProps", {
   duration: 5000
 });
 
-function setPosition(position) {
-  var base = 'position: absolute; z-index: 9999; display: flex; flex-direction: column; ';
+function setPosition(position, isFixed) {
+  var base = "position: " + (isFixed ? 'fixed' : 'absolute') + "; z-index: 9999; display: flex; flex-direction: column; ";
 
   switch (position) {
     case 'bottom':
@@ -128,7 +129,7 @@ function (_Component) {
 
     if (typeof document !== "undefined") {
       _this.element = document.createElement('div');
-      _this.element.style.cssText = setPosition(_props.position);
+      _this.element.style.cssText = setPosition(_props.position, _props.fixed);
       document.body.appendChild(_this.element);
     }
 
@@ -164,7 +165,8 @@ function (_Component) {
 
 _defineProperty(ToastContainer, "defaultProps", {
   toasts: [],
-  position: 'top-right'
+  position: 'top-right',
+  fixed: false
 });
 
 export { ToastContainer as default };

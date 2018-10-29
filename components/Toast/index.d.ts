@@ -28,11 +28,13 @@ interface ContainerProps {
     clear: (id: string) => void;
     /** top, top-right, top-left, bottom, bottom-right, bottom-left */
     position?: PositionType;
+    fixed?: boolean;
 }
 export default class ToastContainer extends Component<ContainerProps> {
     static defaultProps: {
         toasts: never[];
         position: string;
+        fixed: boolean;
     };
     constructor(props: ContainerProps);
     shouldComponentUpdate(props: ContainerProps): boolean;
