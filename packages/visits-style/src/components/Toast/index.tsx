@@ -74,8 +74,8 @@ export class ToastItem extends PureComponent<ToastProps> {
   }
 }
 
-function setPosition(position: string) {
-  const base = 'position: absolute; z-index: 9999; display: flex; flex-direction: column; ';
+function setPosition(position: string, isFixed?: boolean) {
+  const base = `position: ${isFixed ? 'fixed' : 'absolute'}; z-index: 9999; display: flex; flex-direction: column; `;
   switch (position) {
     case 'bottom': {
       return base + 'bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);';
@@ -107,19 +107,22 @@ interface ContainerProps {
   clear: (id: string) => void;
   /** top, top-right, top-left, bottom, bottom-right, bottom-left */
   position?: PositionType;
+
+  fixed?: boolean;
 }
 
 export default class ToastContainer extends Component<ContainerProps> {
   static defaultProps = {
     toasts: [],
     position: 'top-right',
+    fixed: false,
   };
 
   constructor(props: ContainerProps) {
     super(props);
     if(typeof document !== "undefined") {
       this.element = document.createElement('div');
-      this.element.style.cssText = setPosition(props.position!);
+      this.element.style.cssText = setPosition(props.position!, props.fixed);
       document.body.appendChild(this.element);
     }
   }
