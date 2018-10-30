@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColorType } from '../../types';
 interface Props {
     /** タグの内容 */
     children: any;

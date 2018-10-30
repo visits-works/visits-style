@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ColorType, SizeType } from '../../types';
 interface Props {
     /** ボタンの内容 */
     label: React.ReactNode;
@@ -10,6 +11,7 @@ interface Props {
     right?: boolean;
     /** ボタンのサイズ */
     size?: SizeType;
+    /** 吹き出しが表示される場所 */
     position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 }
 interface State {

@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import { ColorType, SizeType } from '../../types';
 interface ProgressProps {
     /** 現状の進捗 */
     value: number;

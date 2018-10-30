@@ -1,4 +1,5 @@
 import { PureComponent, ReactNode } from 'react';
+import { ColorType } from '../../types';
 interface Props {
     /** レスポンシブなイメージを追加する */
     image?: string;
@@ -10,7 +11,9 @@ interface Props {
     horizontal?: boolean;
     /** footer */
     footer?: ReactNode;
+    /** 色の指定 */
     color?: ColorType;
+    /** カスタinline style */
     style?: any;
 }
 export default class Card extends PureComponent<Props> {

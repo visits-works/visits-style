@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
 var Box = styled.div.withConfig({
@@ -17,6 +16,4 @@ var Box = styled.div.withConfig({
   return "background-color: " + target + "; color: " + invertColor + ";";
 });
 Box.displayName = 'Box';
-export default function (props) {
-  return React.createElement(Box, props);
-}
+export default Box;

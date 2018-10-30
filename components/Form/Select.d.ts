@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import { InputProps } from './style';
+import { SizeType } from '../../types';
 interface Props extends InputProps {
     placeholder?: string;
     options: Array<{

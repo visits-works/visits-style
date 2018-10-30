@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { ColorType, ThemeType, SizeType } from '../../types';
 interface ButtonProps {
     /** ボタンの色 */
     color?: ColorType;
@@ -8,6 +9,7 @@ interface ButtonProps {
     outline?: boolean;
     /** 全体幅のボタンで設定 */
     full?: boolean;
+    /** - */
     disabled?: boolean;
 }
 declare const Button: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLButtonElement> & import("react").ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps, ThemeType, import("react").ClassAttributes<HTMLButtonElement> & import("react").ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps>;

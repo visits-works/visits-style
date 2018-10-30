@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { ColorType, ColSizeType } from '../../types';
 interface Props {
     /** ヘッダーのタイトル文言 */
     title?: any;

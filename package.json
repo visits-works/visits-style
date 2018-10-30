@@ -17,7 +17,7 @@
     "styled-components": "^3.4.9"
   },
   "scripts": {
-    "compile": "tsc --d --emitDeclarationOnly --outDir ./build && cp src/types.d.ts build/types.d.ts",
+    "compile": "tsc --d --emitDeclarationOnly --outDir ./build",
     "build": "NODE_ENV=production yarn clean && yarn compile && babel ./src --out-dir ./build --extensions \".ts,.tsx\" --ignore \"**/__test__/**\",\"src/types.d.ts\"",
     "develop": "cd ../visits-style-website && yarn start",
     "deploy": "yarn build && cp package.json ./build/package.json && gh-pages -d build -b master",

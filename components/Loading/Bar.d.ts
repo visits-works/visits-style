@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
+import { ColorType } from '../../types';
 interface LoadingProps {
+    /** trueの場合開始します */
     loading: boolean;
     /** バーの色の指定 */
     color?: ColorType;
@@ -13,7 +15,7 @@ interface LoadingProps {
     duration?: number;
     style?: any;
 }
-export declare const Bar: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps>;
+export declare const Bar: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps, import("../../types").ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps>;
 export default class LoadingBar extends PureComponent<LoadingProps> {
     static defaultProps: {
         loading: boolean;

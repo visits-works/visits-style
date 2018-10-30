@@ -1,3 +1,4 @@
+import { ThemeType } from '../types';
 export declare function mediaMobile(str: TemplateStringsArray, ...args: any[]): ({ theme }: {
     theme: ThemeType;
 }) => any;

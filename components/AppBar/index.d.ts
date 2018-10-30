@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { ColorType, ThemeType } from '../../types';
 interface Props {
     /** background色 */
     color?: ColorType;

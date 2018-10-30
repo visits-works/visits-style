@@ -29,7 +29,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteralLoose(["\n      margin-right: 3%;\n      margin-left: 3%;\n    "]);
+  var data = _taggedTemplateLiteralLoose(["\n      max-width: 100%;\n      margin-right: 3%;\n      margin-left: 3%;\n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;

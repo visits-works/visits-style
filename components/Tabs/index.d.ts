@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { ColorType, ThemeType, AlignType } from '../../types';
 interface ItemProps {
     align?: any;
     active: boolean;
 }
 interface Props {
-    /**  */
+    /** 色指定 */
     color?: ColorType;
+    /** left | right | center */
     align?: AlignType;
+    /** 一気に表示する最大の数の指定 */
     maxItems?: number;
     children: any;
 }

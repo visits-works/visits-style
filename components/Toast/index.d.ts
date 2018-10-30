@@ -1,4 +1,5 @@
 import React, { Component, PureComponent } from 'react';
+import { ColorType } from '../../types';
 declare type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';
 interface ToastType {
     /** 認識ID */
@@ -28,6 +29,7 @@ interface ContainerProps {
     clear: (id: string) => void;
     /** top, top-right, top-left, bottom, bottom-right, bottom-left */
     position?: PositionType;
+    /** スクロールしても固定として表示する */
     fixed?: boolean;
 }
 export default class ToastContainer extends Component<ContainerProps> {
