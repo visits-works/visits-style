@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import styled from '../../styled';
 import findColorInvert from '../../utils/findColorInvert';
+import { ColorType } from '../../types';
 
 interface Props {
   color?: ColorType;

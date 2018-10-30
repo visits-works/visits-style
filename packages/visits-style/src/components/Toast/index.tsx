@@ -5,6 +5,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 import styled from '../../styled';
 
 import Box from '../Box';
+import { ColorType } from '../../types';
 
 type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';
 

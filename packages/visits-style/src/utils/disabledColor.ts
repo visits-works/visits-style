@@ -1,5 +1,6 @@
 import { css } from '../styled';
 import transparentize from 'polished/lib/color/transparentize';
+import { ThemeType } from '../types';
 
 export default function disabledColor(theme: ThemeType) {
   const textColor = transparentize(0.15, theme.textDark);

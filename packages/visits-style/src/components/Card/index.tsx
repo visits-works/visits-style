@@ -1,6 +1,7 @@
 import React, { PureComponent, ReactNode, CSSProperties } from 'react';
 import styled from '../../styled';
 import Box from '../Box';
+import { ColorType } from '../../types';
 
 const CardBody = styled.div`
   padding: 1.25rem;

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from '../../styled';
 import setSize from '../../utils/setSize';
+import { ColorType, SizeType } from '../../types';
 
 interface ProgressProps {
   /** 現状の進捗 */

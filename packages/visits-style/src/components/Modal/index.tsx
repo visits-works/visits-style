@@ -4,6 +4,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import styled from '../../styled';
 import Box from '../Box';
 import Col from '../Grid/Col';
+import { ColorType, ColSizeType } from '../../types';
 
 const ESC_KEY = 27;
 

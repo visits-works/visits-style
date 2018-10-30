@@ -2,6 +2,7 @@ import React, { createRef, RefObject, PureComponent } from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import Box from '../Box';
 import styled from '../../styled';
+import { ColorType } from '../../types';
 
 const TooltipDiv = styled(Box)`
   position: absolute;

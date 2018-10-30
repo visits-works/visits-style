@@ -3,6 +3,7 @@ import styled, { css } from '../../styled';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { mediaDesktop } from '../../utils/media';
+import { ColorType, ThemeType, SizeType } from '../../types';
 
 interface Props {
   color?: ColorType;

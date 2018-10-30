@@ -47,7 +47,7 @@ function setResponsive({ fluid }: Props): any {
   `;
 }
 
-const Container = styled.div`
+const Container = styled.div<Props>`
   position: relative;
   margin: 0 auto;
   width: auto;

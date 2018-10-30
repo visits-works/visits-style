@@ -4,6 +4,7 @@ import commonStyle, { InputProps } from './style';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
 import HelpMessage from './HelpMessage';
+import { SizeType } from '../../types';
 
 interface WrapperProps {
   size?: SizeType;

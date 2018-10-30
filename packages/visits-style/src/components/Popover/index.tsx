@@ -3,6 +3,7 @@ import styled from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import Button from '../Button';
 import Box from '../Box';
+import { ColorType, SizeType } from '../../types';
 
 const Tooltip = styled(Box)`
   position: absolute;

@@ -4,6 +4,7 @@ import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
 import disabledColor from '../../utils/disabledColor';
+import { ColorType, ThemeType, SizeType } from '../../types';
 
 interface Props {
   theme: ThemeType;

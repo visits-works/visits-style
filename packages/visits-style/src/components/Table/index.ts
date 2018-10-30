@@ -1,4 +1,5 @@
 import styled, { css } from '../../styled';
+import { SizeType } from '../../types';
 
 const stripedStyle = css`
   tbody > tr:nth-child(odd) {

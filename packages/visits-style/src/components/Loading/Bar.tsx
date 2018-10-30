@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled from '../../styled';
 import CSSTransition from 'react-transition-group/CSSTransition';
+import { ColorType } from '../../types';
+
 interface LoadingProps {
   loading: boolean;
   /** バーの色の指定 */

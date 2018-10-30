@@ -2,6 +2,7 @@ import React, { Component, Children, CSSProperties } from 'react';
 import styled from '../../styled';
 import setAlign from '../../utils/setAlign';
 import Button from '../Button';
+import { ColorType, ThemeType, AlignType } from '../../types';
 
 const Wrapper = styled.nav`
   display: flex;

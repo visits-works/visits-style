@@ -9,7 +9,10 @@
     "pretty": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "include": ["src/**/*"],
   "exclude": [

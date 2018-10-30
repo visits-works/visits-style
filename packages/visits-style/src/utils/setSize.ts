@@ -1,3 +1,4 @@
+import { SizeType } from '../types';
 
 type SizePropsNameType = 'font-size' | 'height';
 

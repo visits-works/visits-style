@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from '../../styled';
+import { ColorType, ThemeType } from '../../types';
 
 interface Props {
   color?: ColorType;
