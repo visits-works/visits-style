@@ -20,6 +20,11 @@ query {
         fields {
           slug
         }
+        parent {
+          ... on File {
+            relativePath
+          }
+        }
       }
     }
   }
@@ -33,12 +38,6 @@ const Logo = (
 );
 
 export default function Topbar({ current }: { current: string }) {
-  let target = current;
-
-  if (target.indexOf('/') > -1) {
-    target = target.substr(0, target.indexOf('/'));
-  }
-
   function renderMenu({ allMdx }: any) {
     const list = allMdx.edges.map(({ node }: any) => node)
       .sort((a: any, b: any) => a.frontmatter.title > b.frontmatter.title);
@@ -46,7 +45,7 @@ export default function Topbar({ current }: { current: string }) {
       return (
         <AppBar.Item key={node.id}>
           <Link
-            className={node.fields.slug === `/${target}/` ? 'active' : ''}
+            className={node.parent.relativePath === current ? 'active' : ''}
             to={node.fields.slug}
           >
             {node.frontmatter.title}

@@ -12,7 +12,6 @@ import GlobalStyle from './globalStyle';
 
 
 export default function Layout({ children, current }: any) {
-  const colStyle = current ? undefined : { padding: 0 };
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
@@ -20,8 +19,8 @@ export default function Layout({ children, current }: any) {
         <Topbar current={current} />
         <main style={{ flex: 1, paddingTop: '3.2rem', minHeight: 'calc(100vh - 3.2rem)' }}>
           <Row style={{ margin: 0 }}>
-            {current ? (<Sidebar current={current} />) : null}
-            <Col style={colStyle}>
+            {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
+            <Col style={{ padding: 0 }}>
               {children}
             </Col>
           </Row>

@@ -2,42 +2,27 @@ const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
 const path = require("path");
 const docgen = require('react-docgen-typescript');
 
-const parseConfig = {
-  propFilter: {
-    skipPropsWithoutDoc: true,
-  },
-  componentNameResolver: (exp, source) => {
-    if (exp.getName() === 'StyledComponentClass') {
-      const res = docgen.getDefaultExportForFile(source);
-      return res;
-    }
-  },
-};
-const parse = docgen.withDefaultConfig(parseConfig).parse;
-
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return new Promise((resolve, reject) => {
     resolve(
-      graphql(
-        `
-          {
-            allMdx {
-              edges {
-                node {
-                  id
-                  fields {
-                    slug
-                  }
-                  code {
-                    scope
-                  }
+      graphql(`
+        {
+          allMdx {
+            edges {
+              node {
+                id
+                fields {
+                  slug
+                }
+                code {
+                  scope
                 }
               }
             }
           }
-        `
-      ).then(result => {
+        }
+      `).then(result => {
         if (result.errors) {
           console.log(result.errors); // eslint-disable-line no-console
           reject(result.errors);
@@ -80,6 +65,19 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     }
   });
 };
+
+const parseConfig = {
+  propFilter: {
+    skipPropsWithoutDoc: true,
+  },
+  componentNameResolver: (exp, source) => {
+    if (exp.getName() === 'StyledComponentClass') {
+      const res = docgen.getDefaultExportForFile(source);
+      return res;
+    }
+  },
+};
+const parse = docgen.withDefaultConfig(parseConfig).parse;
 
 function parsePropsItem({ name, description, required, type, defaultValue }) {
   if (name.indexOf('aria-') > -1) return;

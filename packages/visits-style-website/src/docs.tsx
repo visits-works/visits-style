@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
@@ -81,24 +81,25 @@ function renderDoc(mdx, title, description) {
 }
 
 
-export default function MDXRuntime(props: any) {
-  // @ts-ignore
-  const { data } = props;
-  const {
-    mdx,
-    site: {
-      siteMetadata: { title, docsLocation, description }
-    }
-  } = data;
+export default class MDXRuntime extends Component {
+  render() {
+    // @ts-ignore
+    const { data } = this.props;
+    const {
+      mdx,
+      site: {
+        siteMetadata: { title, description }
+      }
+    } = data;
 
-  // @ts-ignore
-  const current = props['*'];
-  // console.log(this.props);
-  return (
-    <Layout current={current}>
-      <MDXProvider components={components}>
-        {renderDoc(mdx, title, description)}
-      </MDXProvider>
-    </Layout>
-  );
+    // @ts-ignore
+    const current = mdx.parent.relativePath;
+    return (
+      <Layout current={current}>
+        <MDXProvider components={components}>
+          {renderDoc(mdx, title, description)}
+        </MDXProvider>
+      </Layout>
+    );
+  }
 }

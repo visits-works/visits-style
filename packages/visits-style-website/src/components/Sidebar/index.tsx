@@ -18,6 +18,9 @@ const Wrapper = styled(Col)`
   height: calc(100vh - 3.25rem);
 
   ${mediaMobile`
+    position: relative;
+    overflow-y: hidden;
+    top: 0;
     width: 100%;
     flex: 1;
   `}
@@ -40,6 +43,11 @@ const pageQuery = graphql`
           fields {
             slug
           }
+          parent {
+            ... on File {
+              relativePath
+            }
+          }
         }
       }
     }
@@ -56,7 +64,7 @@ export default function Sidebar({ current }: any) {
 
   function renderMenuItem({ node }: any) {
     const headings = node.headings ? node.headings.filter((item: any) => item.depth === 2) : null;
-    const isActive = node.fields.slug === `/${current}`;
+    const isActive = node.parent.relativePath === current;
     return (
       <li key={node.fields.slug}>
         <Link to={node.fields.slug} className={isActive ? 'active' : ''}>
