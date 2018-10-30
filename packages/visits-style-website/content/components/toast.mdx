@@ -60,7 +60,7 @@ class ToastDemo extends React.Component {
     const { list, position } = this.state;
     return (
       <div>
-        <span style={{ width: '150px' }}>
+        <div style={{ width: '150px' }}>
           <Select
             name="position"
             value={position}
@@ -68,7 +68,7 @@ class ToastDemo extends React.Component {
             onChange={this.onSelect}
             outline
           />
-        </span>
+        </div>
         <br />
         <Button color="info" onClick={this.addToast}>Toast!</Button>
         <Button color="danger" onClick={this.clearAll}>Clear All</Button>

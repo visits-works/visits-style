@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
@@ -23,14 +23,6 @@ const Desc = styled.p`
   font-size: 0.8rem;
   color: ${({ theme }) => theme.textLight};
   margin-bottom: 2rem;
-`;
-
-const Footer = styled.footer`
-  margin-top: 0.725rem;
-  text-align: right;
-  font-size: 0.8rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid ${({ theme }) => theme.border};
 `;
 
 export const pageQuery = graphql`
@@ -60,35 +52,53 @@ export const pageQuery = graphql`
   }
 `;
 
-
-export default class MDXRuntime extends Component {
-  render() {
-    // @ts-ignore
-    const { data } = this.props;
-    const {
-      mdx,
-      site: {
-        siteMetadata: { title, docsLocation, description }
-      }
-    } = data;
-
-    // @ts-ignore
-    const current = this.props['*'];
-    console.log(this.props);
+function renderDoc(mdx, title, description) {
+  if (mdx.parent.relativePath === 'index.mdx') {
     return (
-      <Layout current={current}>
-        <MDXProvider components={components}>
-          <Fragment>
-            <Helmet>
-              <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
-              <meta name="description" content={mdx.frontmatter.description || description} />
-            </Helmet>
-            {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
-            {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
-            <MDXRenderer>{mdx.code.body}</MDXRenderer>
-          </Fragment>
-        </MDXProvider>
-      </Layout>
+      <Fragment>
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+        </Helmet>
+        <MDXRenderer>{mdx.code.body}</MDXRenderer>
+      </Fragment>
     );
   }
+
+  return (
+    <Fragment>
+      <Helmet>
+        <title>{title}{mdx.frontmatter.title ? ` > ${mdx.frontmatter.title}` : ''}</title>
+        <meta name="description" content={mdx.frontmatter.description || description} />
+      </Helmet>
+      <Container>
+        {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
+        {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
+        <MDXRenderer>{mdx.code.body}</MDXRenderer>
+      </Container>
+    </Fragment>
+  );
+}
+
+
+export default function MDXRuntime(props: any) {
+  // @ts-ignore
+  const { data } = props;
+  const {
+    mdx,
+    site: {
+      siteMetadata: { title, docsLocation, description }
+    }
+  } = data;
+
+  // @ts-ignore
+  const current = props['*'];
+  // console.log(this.props);
+  return (
+    <Layout current={current}>
+      <MDXProvider components={components}>
+        {renderDoc(mdx, title, description)}
+      </MDXProvider>
+    </Layout>
+  );
 }

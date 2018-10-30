@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 // @ts-ignore
 import theme from '@theme/default';
 // @ts-ignore
-import { Row, Col } from '@components';
+import { Row, Col, Container } from '@components';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -18,10 +18,10 @@ export default function Layout({ children, current }: any) {
       <Fragment>
         <GlobalStyle />
         <Topbar current={current} />
-        <main style={{ flexGrow: 1, paddingTop: '3.2rem', minHeight: 'calc(100vh - 3.2rem)' }}>
+        <main style={{ flex: 1, paddingTop: '3.2rem', minHeight: 'calc(100vh - 3.2rem)' }}>
           <Row style={{ margin: 0 }}>
             {current ? (<Sidebar current={current} />) : null}
-            <Col auto style={colStyle}>
+            <Col style={colStyle}>
               {children}
             </Col>
           </Row>

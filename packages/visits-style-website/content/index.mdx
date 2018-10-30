@@ -1,6 +1,15 @@
 
-import { Hero } from '@components';
+import { Hero, Button } from '@components';
+import { Link } from 'gatsby';
 
 <Hero color="dark" center>
   <h1>visits-style</h1>
+  <div>
+    <Link to="/installation">
+      <Button color="primary" outline>Getting Started</Button>
+    </Link>
+    <a href="https://github.com/visits-works/visits-style" target="_blank" style={{ marginLeft: '0.725rem' }}>
+      <Button color="primary" outline>Github</Button>
+    </a>
+  </div>
 </Hero>

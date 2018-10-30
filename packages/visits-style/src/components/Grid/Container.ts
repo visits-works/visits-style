@@ -27,6 +27,7 @@ function setResponsive({ fluid }: Props): any {
 
   return css`
     ${mediaMobile`
+      max-width: 100%;
       margin-right: 3%;
       margin-left: 3%;
     `}
