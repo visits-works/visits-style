@@ -4,6 +4,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import { ColorType } from '../../types';
 
 interface LoadingProps {
+  /** trueの場合開始します */
   loading: boolean;
   /** バーの色の指定 */
   color?: ColorType;

@@ -3,6 +3,7 @@ import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils
 import { fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 
 interface Props {
+  /**  */
   fluid?: boolean;
 }
 

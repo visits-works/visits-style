@@ -93,7 +93,7 @@ interface ButtonProps {
   outline?: boolean;
   /** 全体幅のボタンで設定 */
   full?: boolean;
-
+  /** - */
   disabled?: boolean;
 }
 

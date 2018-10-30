@@ -3,12 +3,15 @@ import styled, { css } from '../../styled';
 import { ColorType, ThemeType } from '../../types';
 
 interface Props {
+  /** 色の指定 */
   color?: ColorType;
-  style?: any;
+  /** 横幅 */
   width?: string;
+  /** 縦幅 */
   height?: string;
+  /** spinnerの太さ */
   borderSize?: string;
-
+  style?: any;
 }
 
 function getColor({ theme, color }: { theme: ThemeType, color?: ColorType }) {

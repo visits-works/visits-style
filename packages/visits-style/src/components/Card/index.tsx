@@ -64,9 +64,9 @@ interface Props {
   horizontal?: boolean;
   /** footer */
   footer?: ReactNode;
-
+  /** 色の指定 */
   color?: ColorType;
-
+  /** カスタinline style */
   style?: any;
 }
 

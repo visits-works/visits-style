@@ -6,11 +6,15 @@ import { mediaDesktop } from '../../utils/media';
 import { ColorType, ThemeType, SizeType } from '../../types';
 
 interface Props {
+  /** 背景の色 */
   color?: ColorType;
+  /** small | medium | large | full */
   size?: SizeType | 'full';
+  /**  */
   children?: React.ReactChild;
+  /** childrenの中央揃え */
   center?: boolean;
-  background?: string;
+  /** カスタムヘッダー */
   header?: React.ReactElement<any>;
 }
 

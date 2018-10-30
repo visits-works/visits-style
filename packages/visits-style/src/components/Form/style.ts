@@ -2,6 +2,7 @@ import { css } from '../../styled';
 import disabledColor from '../../utils/disabledColor';
 
 export interface InputProps {
+  /** inputの対象名 */
   name: string;
   value?: string | number;
   onChange: () => void;

@@ -4,10 +4,11 @@ import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';
 
 interface Props {
+  /** 色指定 */
   color?: ColorType;
   /** borderを非表示する */
   borderless?: boolean;
-  style?: CSSProperties;
+  style?: any;
 }
 
 const Box = styled.div<Props>`
@@ -32,7 +33,4 @@ const Box = styled.div<Props>`
 `;
 Box.displayName = 'Box';
 
-
-export default function (props: Props) {
-  return (<Box {...props} />);
-}
+export default Box;

@@ -34,10 +34,6 @@
         "helpers": true,
         "regenerator": true
       }
-    ],
-    [
-      "react-docgen",
-      { "resolver": "findAllComponentDefinitions" }
     ]
   ]
 }

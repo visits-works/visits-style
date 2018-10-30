@@ -73,9 +73,11 @@ const Indicator = styled.div<IndicatorProps>`
 `;
 
 interface Props {
-  /**  */
+  /** 色指定 */
   color?: ColorType;
+  /** left | right | center */
   align?: AlignType;
+  /** 一気に表示する最大の数の指定 */
   maxItems?: number;
 
   children: any;

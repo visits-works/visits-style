@@ -47,7 +47,7 @@ interface Props {
   right?: boolean;
   /** ボタンのサイズ */
   size?: SizeType;
-
+  /** 吹き出しが表示される場所 */
   position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 }
 

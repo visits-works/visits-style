@@ -108,7 +108,7 @@ interface ContainerProps {
   clear: (id: string) => void;
   /** top, top-right, top-left, bottom, bottom-right, bottom-left */
   position?: PositionType;
-
+  /** スクロールしても固定として表示する */
   fixed?: boolean;
 }
 
