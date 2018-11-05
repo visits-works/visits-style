@@ -46,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
   });
 };
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, loaders }) => {
   actions.setWebpackConfig({
     resolve: {
       modules: [
@@ -62,8 +62,22 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         '@styles': path.resolve(__dirname, "../visits-style/src/styles"),
         '@theme': path.resolve(__dirname, "../visits-style/src/theme"),
       }
-    }
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: modulePath =>
+            /node_modules/.test(modulePath) &&
+            // whitelist specific es6 module
+            !/node_modules\/@mdx-js\/tag/.test(modulePath),
+          use: loaders.js(),
+        },
+      ],
+    },
+
   });
+
 };
 
 const parseConfig = {

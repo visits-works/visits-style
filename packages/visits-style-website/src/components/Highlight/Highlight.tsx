@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Controlled as CodeMirror } from 'react-codemirror2';
-
-try {
-  require('codemirror/mode/javascript/javascript');
-  require('codemirror/mode/jsx/jsx');
-  require('codemirror/mode/css/css');
-  require('codemirror/addon/edit/matchbrackets');
-  require('codemirror/addon/edit/closetag');
-  require('codemirror/addon/fold/xml-fold');
-} catch(e) {
-  console.error(e);
-}
-
-import { CodeMirrorStyle } from './styles';
+import { Editor } from 'react-live';
+import { HighlightStyle } from './styles';
 
 interface Props {
-  className?: string;
-  children: any;
+  children: string;
   live?: boolean;
   onChange?: (code: string) => void;
   onError?: (e: any) => void;
@@ -27,47 +14,38 @@ interface State {
   code: string;
 }
 
-const Wrapper = styled(CodeMirror)`
-  ${CodeMirrorStyle}
+const Wrapper = styled(Editor)`
+  ${HighlightStyle}
   margin-bottom: 0.725rem;
+
+  &[contenteditable] {
+    max-height: 300px;
+    overflow-y: auto;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    outline: none;
+  }
 `;
 
-function removeLastLine(editor: any) {
-  if (editor) {
-    const lastLine = editor.lastLine()
-    editor.doc.replaceRange('', { line: lastLine - 1 }, { line: lastLine })
-  }
-}
-
 export default class HighlightCode extends Component<Props, State> {
-  state = { code: this.props.children };
-
-  shouldComponentUpdate(props: Props, state: State) {
-    return this.state.code !== state.code;
+  static defaultProps = {
+    live: false,
   }
 
-  onChange = (editor: any, data: any, value: string) => {
+  componentDidMount() {
+
+  }
+
+  onChange = (code: string) => {
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(code);
     }
-    this.setState({ code: value });
   }
 
   render() {
-    const isReadOnly = this.props.onChange === undefined;
-    const mode = this.props.className ? this.props.className.replace('language-', '') : 'jsx';
+    const { children, live } = this.props;
     return (
-      <Wrapper
-        value={this.state.code}
-        options={{
-          mode,
-          lineNumbers: true,
-          tabSize: 2,
-          readOnly: (isReadOnly ? 'nocursor' : false)
-        }}
-        onBeforeChange={this.onChange}
-        editorDidMount={removeLastLine}
-      />
+      <Wrapper code={children} onChange={this.onChange} contentEditable={live} />
     );
   }
 }

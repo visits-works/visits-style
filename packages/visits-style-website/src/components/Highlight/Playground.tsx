@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { LiveProvider, withLive, LiveError } from "react-live";
+import { LiveProvider, LiveError, withLive } from "react-live";
 import { FiInfo, FiThumbsUp } from 'react-icons/fi';
-
 import { mediaMobile } from '@utils/media';
 
 import Editor from './Highlight';
@@ -18,7 +17,6 @@ import * as all from '@components';
 interface Props {
   children: string;
 }
-
 
 const LiveWrapper = styled.div`
   max-width: 100%;
@@ -45,24 +43,25 @@ const LiveWrapper = styled.div`
 
 function LiveEditor({ live }: any) {
   return (
-    <Editor onChange={live.onChange}>
+    <Editor onChange={live.onChange} live>
       {live.code}
     </Editor>
   );
 }
 
 const TextEditor = withLive(LiveEditor);
+const scope = { ...all, Logo, ImgUrl, FiInfo, FiThumbsUp };
 
 export default class Playground extends Component<Props> {
+  shouldComponentUpdate(props: Props) {
+    return props.children.length !== this.props.children.length;
+  }
+
   render() {
     const { children } = this.props;
     return (
       <LiveWrapper>
-        <LiveProvider
-          code={children}
-          scope={{...all, Logo, ImgUrl, FiInfo, FiThumbsUp}}
-          mountStylesheet={false}
-        >
+        <LiveProvider code={children} scope={scope} mountStylesheet={false}>
           <Preview />
           <LiveError />
           <TextEditor />

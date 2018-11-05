@@ -14,8 +14,10 @@ interface Props {
   live?: boolean;
 }
 
-export default function Highlight({ children, className, live }: Props) {
+export default function Highlight({ children, live, ...rest }: Props) {
   const content = getChildren(children);
-  if (live) return <Playground>{content}</Playground>;
-  return <HighlightCode className={className}>{content}</HighlightCode>;
+  if (live) {
+    return <Playground {...rest} >{content}</Playground>;
+  }
+  return <HighlightCode>{content}</HighlightCode>
 }
