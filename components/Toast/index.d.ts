@@ -12,7 +12,6 @@ interface ToastType {
     duration?: number | null;
 }
 interface ToastProps extends ToastType {
-    /** 定義不要、コンテナ側への操作系 */
     clear: () => void;
 }
 export declare class ToastItem extends PureComponent<ToastProps> {
