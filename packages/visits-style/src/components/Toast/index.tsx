@@ -21,7 +21,6 @@ interface ToastType {
 }
 
 interface ToastProps extends ToastType {
-  /** 定義不要、コンテナ側への操作系 */
   clear: () => void;
 }
 
