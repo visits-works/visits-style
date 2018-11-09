@@ -2,7 +2,9 @@
   "name": "visits-style",
   "version": "0.0.1",
   "private": true,
-  "main": "index.js",
+  "main": "__cjs/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
   "peerDependencies": {
     "react": ">=16.4.1",
     "react-dom": ">=16.4.1",
@@ -16,10 +18,11 @@
     "styled-components": "^3.4.9"
   },
   "scripts": {
-    "compile": "tsc --d --emitDeclarationOnly --outDir ./build",
-    "build": "NODE_ENV=production yarn clean && yarn compile && babel ./src --out-dir ./build --extensions \".ts,.tsx\" --ignore \"**/__test__/**\",\"src/types.d.ts\"",
+    "compile": "tsc --outDir ./build",
+    "compile:cjs": "tsc --outDir ./build/__cjs --m commonjs",
+    "build": "NODE_ENV=production yarn clean && yarn compile && yarn compile:cjs && cp package.json ./build/package.json",
     "develop": "cd ../visits-style-website && yarn start",
-    "deploy": "yarn build && cp package.json ./build/package.json && gh-pages -d build -b master",
+    "deploy": "yarn build && gh-pages -d build -b master",
     "clean": "rm -rf ./lib ./build",
     "test": "jest --env=jsdom",
     "type-check": "tsc --noEmit"
