@@ -1,4 +1,4 @@
-import { css } from '../styled';
+import { css } from 'styled-components';
 import transparentize from 'polished/lib/color/transparentize';
 import { ThemeType } from '../types';
 

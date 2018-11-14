@@ -1,4 +1,4 @@
-import { css } from '../styled';
+import { css } from 'styled-components';
 import { tablet, desktop, fullhd } from '../styles/variables';
 import { ThemeType } from '../types';
 

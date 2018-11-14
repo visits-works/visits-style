@@ -1,4 +1,4 @@
-import styled from '../../styled';
+import styled from 'styled-components';
 
 const Code = styled.code`
   background-color: ${({ theme }) => theme.background};

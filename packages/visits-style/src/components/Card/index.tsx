@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactNode, CSSProperties } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import Box from '../Box';
 import { ColorType } from '../../types';
 

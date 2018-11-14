@@ -26,7 +26,7 @@
   "scripts": {
     "start": "gatsby develop -H 0.0.0.0 --prefix-paths",
     "build": "rm -rf ./public && gatsby build",
-    "deploy": "yarn build　--prefix-paths && gh-pages -d public",
+    "deploy": "yarn build --prefix-paths && gh-pages -d public",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

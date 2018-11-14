@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Toast, { ToastItem } from '../index';
+import Toast, { ToastItem } from './index';
 
 jest.useFakeTimers();
 

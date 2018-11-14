@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
 import commonStyle, { InputProps } from './style';

@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es5",
+    "module": "commonjs",
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "jsx": "react",
     "strict": true,
     "pretty": true,
-    "declaration": true,
+    "declaration": false,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "exclude": [
     "./jest.setup.js",
     "./node_modules/**",
     "**/__test__/**",
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.story.tsx",
     "build",
     "lib",
     "jest",

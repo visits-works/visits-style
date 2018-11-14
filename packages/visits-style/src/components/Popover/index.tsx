@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import Button from '../Button';
 import Box from '../Box';

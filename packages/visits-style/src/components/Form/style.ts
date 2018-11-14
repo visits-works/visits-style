@@ -1,4 +1,4 @@
-import { css } from '../../styled';
+import { css } from 'styled-components';
 import disabledColor from '../../utils/disabledColor';
 
 export interface InputProps {

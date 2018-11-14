@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactNode } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import { InputProps } from './style';
 
 const Wrapper = styled.label`

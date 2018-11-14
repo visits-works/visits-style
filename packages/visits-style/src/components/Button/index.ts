@@ -1,4 +1,4 @@
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';

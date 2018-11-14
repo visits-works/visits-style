@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactNode } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: block;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -186,8 +186,6 @@ export default class AppBar extends PureComponent<Props, State> {
     backdrop: false,
     style: null,
   }
-
-  static Item = NavItem;
 
   state = { show: false }
 
