@@ -2,7 +2,7 @@
   "name": "visits-style",
   "version": "0.0.1",
   "private": true,
-  "main": "__cjs/index.js",
+  "main": "cjs/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "peerDependencies": {
@@ -19,11 +19,11 @@
   },
   "scripts": {
     "compile": "tsc --outDir ./build",
-    "compile:cjs": "tsc --outDir ./build/__cjs --m commonjs",
+    "compile:cjs": "tsc --outDir ./build/cjs --m commonjs",
     "build": "NODE_ENV=production yarn clean && yarn compile && yarn compile:cjs && cp package.json ./build/package.json",
     "develop": "cd ../visits-style-website && yarn start",
     "deploy": "yarn build && gh-pages -d build -b master",
-    "clean": "rm -rf ./lib ./build",
+    "clean": "rm -rf ./build",
     "test": "jest --env=jsdom",
     "type-check": "tsc --noEmit"
   },
