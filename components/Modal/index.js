@@ -85,8 +85,8 @@ export default class Modal extends PureComponent {
         }
     }
     componentWillUnmount() {
-        if (this.props.domId) {
-            this.element.remove();
+        if (this.props.domId && this.element) {
+            document.body.removeChild(this.element);
         }
     }
     render() {

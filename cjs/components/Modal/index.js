@@ -97,8 +97,8 @@ class Modal extends react_1.PureComponent {
         }
     }
     componentWillUnmount() {
-        if (this.props.domId) {
-            this.element.remove();
+        if (this.props.domId && this.element) {
+            document.body.removeChild(this.element);
         }
     }
     render() {
