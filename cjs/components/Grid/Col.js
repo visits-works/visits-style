@@ -1,4 +1,8 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,8 +11,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const styled_1 = __importStar(require("../../styled"));
-const media_1 = require("../../utils/media");
+var styled_components_1 = __importStar(require("styled-components"));
+var media_1 = require("../../utils/media");
 function parcentage(value) {
     if (!value)
         return 0;
@@ -16,49 +20,29 @@ function parcentage(value) {
         return 100;
     return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
-function renderSize({ size, narrow, auto, offset }) {
+function renderSize(_a) {
+    var size = _a.size, narrow = _a.narrow, auto = _a.auto, offset = _a.offset;
     if (narrow)
         return null;
     if (!size || size < 1 || size > 12) {
-        return `
-      flex-basis: 0;
-      flex-grow: 1;
-      flex-shrink: 1;
-    `;
+        return "\n      flex-basis: 0;\n      flex-grow: 1;\n      flex-shrink: 1;\n    ";
     }
     else {
-        const value = parcentage(size);
-        const offVal = offset ? parcentage(offset) : 0;
-        return styled_1.css `
-      flex: none;
-      width: ${value}%;
-      ${offset ? `margin-left: ${offVal}%;` : ''}
-      ${auto ? media_1.mediaMobile `
-        width: ${(value > 33 ? 100 : value * 3)}%;
-        ${offset ? `margin-left: 0;` : ''}
-      ` : ''}
-    `;
+        var value = parcentage(size);
+        var offVal = offset ? parcentage(offset) : 0;
+        return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      flex: none;\n      width: ", "%;\n      ", "\n      ", "\n    "], ["\n      flex: none;\n      width: ", "%;\n      ", "\n      ",
+            "\n    "])), value, offset ? "margin-left: " + offVal + "%;" : '', auto ? media_1.mediaMobile(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        width: ", "%;\n        ", "\n      "], ["\n        width: ", "%;\n        ", "\n      "])), (value > 33 ? 100 : value * 3), offset ? "margin-left: 0;" : '') : '');
     }
 }
-const Col = styled_1.default.div `
-  display: block;
-  min-height: 1px;
-  max-width: 100%;
-
-  ${({ narrow }) => narrow ? 'flex: none;' : ''}
-  ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : ''}
-
-  ${renderSize}
-
-  padding: 0.75rem;
-
-  ${media_1.mediaTablet `
-    padding: 0.5rem;
-  `}
-
-  ${media_1.mediaMobile `
-    padding: 0.25rem;
-  `}
-`;
+var Col = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n  max-width: 100%;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  min-height: 1px;\n  max-width: 100%;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ",
+    "\n\n  ",
+    "\n"])), function (_a) {
+    var narrow = _a.narrow;
+    return narrow ? 'flex: none;' : '';
+}, function (_a) {
+    var offset = _a.offset;
+    return offset ? "margin-left: " + parcentage(offset) + "%;" : '';
+}, renderSize, media_1.mediaTablet(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    padding: 0.5rem;\n  "], ["\n    padding: 0.5rem;\n  "]))), media_1.mediaMobile(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    padding: 0.25rem;\n  "], ["\n    padding: 0.25rem;\n  "]))));
 Col.displayName = 'Col';
 exports.default = Col;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;

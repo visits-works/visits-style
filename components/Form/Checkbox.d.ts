@@ -1,6 +1,5 @@
-import { PureComponent } from 'react';
-import { InputProps } from './style';
-interface Props extends InputProps {
+import { PureComponent, InputHTMLAttributes } from 'react';
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     children?: any;
     checked?: boolean;
 }

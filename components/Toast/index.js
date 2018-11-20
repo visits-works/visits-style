@@ -2,7 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import styled from '../../styled';
+import styled from 'styled-components';
 import Box from '../Box';
 const Wrapper = styled(Box) `
   padding: 0.375em 0.75em;

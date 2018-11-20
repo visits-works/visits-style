@@ -1,4 +1,21 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -10,141 +27,57 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importStar(require("react"));
-const transparentize_1 = __importDefault(require("polished/lib/color/transparentize"));
-const styled_1 = __importStar(require("../../styled"));
-const findColorInvert_1 = __importDefault(require("../../utils/findColorInvert"));
-const hambuger_1 = __importDefault(require("../../utils/hambuger"));
-const setAlign_1 = __importDefault(require("../../utils/setAlign"));
-const media_1 = require("../../utils/media");
-function setColor({ color, theme, backdrop }) {
-    const backgroundColor = color ? theme[color] : 'transparent';
-    const textColor = findColorInvert_1.default(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
+var react_1 = __importStar(require("react"));
+var transparentize_1 = __importDefault(require("polished/lib/color/transparentize"));
+var styled_components_1 = __importStar(require("styled-components"));
+var findColorInvert_1 = __importDefault(require("../../utils/findColorInvert"));
+var hambuger_1 = __importDefault(require("../../utils/hambuger"));
+var setAlign_1 = __importDefault(require("../../utils/setAlign"));
+var media_1 = require("../../utils/media");
+function setColor(_a) {
+    var color = _a.color, theme = _a.theme, backdrop = _a.backdrop;
+    var backgroundColor = color ? theme[color] : 'transparent';
+    var textColor = findColorInvert_1.default(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
     if (backdrop) {
-        const backColor = transparentize_1.default(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
-        const ua = navigator.userAgent.toLowerCase();
+        var backColor = transparentize_1.default(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
+        var ua = navigator.userAgent.toLowerCase();
         if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
-            return `background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;
+            return "background-color: " + backColor + "; color: " + textColor + "; backdrop-filter: blur(8px);";
         }
-        return styled_1.css `
-      background-color: ${backColor};
-      color: ${textColor};
-    `;
+        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      background-color: ", ";\n      color: ", ";\n    "], ["\n      background-color: ", ";\n      color: ", ";\n    "])), backColor, textColor);
     }
-    return `background-color: ${backgroundColor}; color: ${textColor};`;
+    return "background-color: " + backgroundColor + "; color: " + textColor + ";";
 }
-const NavBar = styled_1.default.header `
-  position: ${({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))};
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: stretch;
-  top: -1px;
-
-  min-height: 3.25rem;
-  width: 100%;
-  z-index: 30;
-
-  ${setColor}
-
-  a { color: inherit; }
-
-  ${media_1.mediaTablet `padding: ${({ fluid }) => fluid ? '0 0.5rem' : '0 3%'};`}
-  ${media_1.mediaUntilFullHD `padding: ${({ fluid }) => fluid ? '0 0.75rem' : '0 5%'};`}
-`;
-const Burger = styled_1.default.button `
-  ${hambuger_1.default('3.25rem')}
-  display: none;
-  margin-left: auto;
-  border: none;
-  background-color: transparent;
-  color: inherit;
-
-  outline: none;
-
-  &:hover{
-    background-color: rgba(0, 0, 0, .05);
-  }
-
-  ${media_1.mediaMobile ` display: block; `}
-`;
-const NavContent = styled_1.default.div `
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-basis: auto;
-  flex-grow: 1;
-
-  & > ul {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    flex-grow: 1;
-    justify-content: ${setAlign_1.default};
-
-    li {
-      padding: 0 0.75rem;
-    }
-  }
-
-  & > div, & > span, & > form {
-    display: flex;
-    ${({ color }) => (color ? `color: ${color};` : '')}
-  }
-
-  ${media_1.mediaMobile `
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-
-    padding-bottom: 0.5rem;
-
-    button:not(.active)+& {
-      display:none;
-    }
-
-    & > ul {
-      flex-direction: column;
-      width: 100%;
-      li {
-        padding: .5rem 0;
-      }
-    }
-
-    & > div, & > span, & > form {
-      padding: .5rem 0;
-      width: 100%;
-    }
-  `}
-`;
-const NavItem = styled_1.default.li `
-  text-align: center;
-
-  a {
-    display: block;
-    padding: .5rem 1rem;
-    color: inherit;
-    opacity: 1;
-
-    will-change: opacity;
-    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    &:hover, &.active {
-      opacity: 0.65;
-    }
-  }
-`;
-class AppBar extends react_1.PureComponent {
-    constructor() {
-        super(...arguments);
-        this.state = { show: false };
-        this.toggleMenu = () => {
-            this.setState({ show: !this.state.show });
+var NavBar = styled_components_1.default.header(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n"], ["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n"])), function (_a) {
+    var fixed = _a.fixed, sticky = _a.sticky;
+    return (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'));
+}, setColor, media_1.mediaTablet(templateObject_2 || (templateObject_2 = __makeTemplateObject(["padding: ", ";"], ["padding: ", ";"])), function (_a) {
+    var fluid = _a.fluid;
+    return fluid ? '0 0.5rem' : '0 3%';
+}), media_1.mediaUntilFullHD(templateObject_3 || (templateObject_3 = __makeTemplateObject(["padding: ", ";"], ["padding: ", ";"])), function (_a) {
+    var fluid = _a.fluid;
+    return fluid ? '0 0.75rem' : '0 5%';
+}));
+var Burger = styled_components_1.default.button(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  ", "\n  display: none;\n  margin-left: auto;\n  border: none;\n  background-color: transparent;\n  color: inherit;\n\n  outline: none;\n\n  &:hover{\n    background-color: rgba(0, 0, 0, .05);\n  }\n\n  ", "\n"], ["\n  ", "\n  display: none;\n  margin-left: auto;\n  border: none;\n  background-color: transparent;\n  color: inherit;\n\n  outline: none;\n\n  &:hover{\n    background-color: rgba(0, 0, 0, .05);\n  }\n\n  ", "\n"])), hambuger_1.default('3.25rem'), media_1.mediaMobile(templateObject_5 || (templateObject_5 = __makeTemplateObject([" display: block; "], [" display: block; "]))));
+var NavContent = styled_components_1.default.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-basis: auto;\n  flex-grow: 1;\n\n  & > ul {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    flex-grow: 1;\n    justify-content: ", ";\n\n    li {\n      padding: 0 0.75rem;\n    }\n  }\n\n  & > div, & > span, & > form {\n    display: flex;\n    ", "\n  }\n\n  ", "\n"], ["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-basis: auto;\n  flex-grow: 1;\n\n  & > ul {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    flex-grow: 1;\n    justify-content: ", ";\n\n    li {\n      padding: 0 0.75rem;\n    }\n  }\n\n  & > div, & > span, & > form {\n    display: flex;\n    ", "\n  }\n\n  ",
+    "\n"])), setAlign_1.default, function (_a) {
+    var color = _a.color;
+    return (color ? "color: " + color + ";" : '');
+}, media_1.mediaMobile(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  "], ["\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  "]))));
+var NavItem = styled_components_1.default.li(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  text-align: center;\n\n  a {\n    display: block;\n    padding: .5rem 1rem;\n    color: inherit;\n    opacity: 1;\n\n    will-change: opacity;\n    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);\n\n    &:hover, &.active {\n      opacity: 0.65;\n    }\n  }\n"], ["\n  text-align: center;\n\n  a {\n    display: block;\n    padding: .5rem 1rem;\n    color: inherit;\n    opacity: 1;\n\n    will-change: opacity;\n    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);\n\n    &:hover, &.active {\n      opacity: 0.65;\n    }\n  }\n"])));
+var AppBar = /** @class */ (function (_super) {
+    __extends(AppBar, _super);
+    function AppBar() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = { show: false };
+        _this.toggleMenu = function () {
+            _this.setState({ show: !_this.state.show });
         };
+        return _this;
     }
-    render() {
-        const { color, brand, children, style, fixed, sticky, backdrop, align } = this.props;
-        const { show } = this.state;
+    AppBar.prototype.render = function () {
+        var _a = this.props, color = _a.color, brand = _a.brand, children = _a.children, style = _a.style, fixed = _a.fixed, sticky = _a.sticky, backdrop = _a.backdrop, align = _a.align;
+        var show = this.state.show;
         return (react_1.default.createElement(NavBar, { color: color, fixed: fixed, sticky: sticky, backdrop: backdrop, role: "navigation", style: style },
             brand,
             react_1.default.createElement(Burger, { className: show ? 'active' : '', onClick: this.toggleMenu },
@@ -152,16 +85,17 @@ class AppBar extends react_1.PureComponent {
                 react_1.default.createElement("span", null),
                 react_1.default.createElement("span", null)),
             react_1.default.createElement(NavContent, { align: align }, children)));
-    }
-}
-AppBar.defaultProps = {
-    color: null,
-    brand: null,
-    fixed: false,
-    sticky: false,
-    fluid: false,
-    backdrop: false,
-    style: null,
-};
-AppBar.Item = NavItem;
+    };
+    AppBar.defaultProps = {
+        color: null,
+        brand: null,
+        fixed: false,
+        sticky: false,
+        fluid: false,
+        backdrop: false,
+        style: null,
+    };
+    return AppBar;
+}(react_1.PureComponent));
 exports.default = AppBar;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;

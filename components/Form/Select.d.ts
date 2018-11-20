@@ -1,7 +1,6 @@
-import { PureComponent } from 'react';
-import { InputProps } from './style';
+import { PureComponent, HTMLAttributes } from 'react';
 import { SizeType } from '../../types';
-interface Props extends InputProps {
+interface Props extends HTMLAttributes<HTMLSelectElement> {
     placeholder?: string;
     options: Array<{
         id: string | number;
@@ -11,6 +10,7 @@ interface Props extends InputProps {
     outline?: boolean;
     error?: string;
     help?: string;
+    disabled?: boolean;
 }
 export default class Select extends PureComponent<Props> {
     static defaultProps: {

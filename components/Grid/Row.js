@@ -1,4 +1,4 @@
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 import Col from './Col';
 import { mediaFullHD, mediaTablet } from '../../utils/media';
 function renderGutter({ noGutter }) {

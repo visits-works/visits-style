@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import Box from '../Box';
 const CardBody = styled.div `
   padding: 1.25rem;

@@ -1,52 +1,12 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const styled_components_1 = require("styled-components");
+var styled_components_1 = require("styled-components");
 function hamburger(size) {
-    return styled_components_1.css `
-    display: block;
-    position: relative;
-    height: ${size};
-    width: ${size};
-
-    cursor: pointer;
-    span {
-      background-color: currentColor;
-      display: block;
-      height: 1px;
-      left: calc(50% - 8px);
-      position: absolute;
-      transform-origin: center;
-      transition-duration: 100ms;
-      transition-property: background-color, opacity, transform;
-      transition-timing-function: ease-out;
-      width: 16px;
-
-      &:nth-child(1) {
-        top: calc(50% - 6px);
-      }
-      &:nth-child(2) {
-        top: calc(50% - 1px);
-      }
-      &:nth-child(3) {
-        top: calc(50% + 4px);
-      }
-
-      &:hover {
-        background-color: rgba(black, 0.05);
-      }
-    }
-
-    &.active span {
-      &:nth-child(1) {
-        transform: translateY(5px) rotate(45deg);
-      }
-      &:nth-child(2) {
-        opacity: 0;
-      }
-      &:nth-child(3) {
-        transform: translateY(-5px) rotate(-45deg);
-      }
-    }
-  `;
+    return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    display: block;\n    position: relative;\n    height: ", ";\n    width: ", ";\n\n    cursor: pointer;\n    span {\n      background-color: currentColor;\n      display: block;\n      height: 1px;\n      left: calc(50% - 8px);\n      position: absolute;\n      transform-origin: center;\n      transition-duration: 100ms;\n      transition-property: background-color, opacity, transform;\n      transition-timing-function: ease-out;\n      width: 16px;\n\n      &:nth-child(1) {\n        top: calc(50% - 6px);\n      }\n      &:nth-child(2) {\n        top: calc(50% - 1px);\n      }\n      &:nth-child(3) {\n        top: calc(50% + 4px);\n      }\n\n      &:hover {\n        background-color: rgba(black, 0.05);\n      }\n    }\n\n    &.active span {\n      &:nth-child(1) {\n        transform: translateY(5px) rotate(45deg);\n      }\n      &:nth-child(2) {\n        opacity: 0;\n      }\n      &:nth-child(3) {\n        transform: translateY(-5px) rotate(-45deg);\n      }\n    }\n  "], ["\n    display: block;\n    position: relative;\n    height: ", ";\n    width: ", ";\n\n    cursor: pointer;\n    span {\n      background-color: currentColor;\n      display: block;\n      height: 1px;\n      left: calc(50% - 8px);\n      position: absolute;\n      transform-origin: center;\n      transition-duration: 100ms;\n      transition-property: background-color, opacity, transform;\n      transition-timing-function: ease-out;\n      width: 16px;\n\n      &:nth-child(1) {\n        top: calc(50% - 6px);\n      }\n      &:nth-child(2) {\n        top: calc(50% - 1px);\n      }\n      &:nth-child(3) {\n        top: calc(50% + 4px);\n      }\n\n      &:hover {\n        background-color: rgba(black, 0.05);\n      }\n    }\n\n    &.active span {\n      &:nth-child(1) {\n        transform: translateY(5px) rotate(45deg);\n      }\n      &:nth-child(2) {\n        opacity: 0;\n      }\n      &:nth-child(3) {\n        transform: translateY(-5px) rotate(-45deg);\n      }\n    }\n  "])), size, size);
 }
 exports.default = hamburger;
+var templateObject_1;

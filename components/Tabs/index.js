@@ -1,5 +1,5 @@
 import React, { Component, Children } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import setAlign from '../../utils/setAlign';
 import Button from '../Button';
 const Wrapper = styled.nav `

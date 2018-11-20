@@ -1,4 +1,4 @@
-import styled from '../../styled';
+import styled from 'styled-components';
 const Pre = styled.pre `
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;

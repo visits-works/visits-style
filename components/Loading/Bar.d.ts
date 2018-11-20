@@ -15,7 +15,7 @@ interface LoadingProps {
     duration?: number;
     style?: any;
 }
-export declare const Bar: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps, import("../../types").ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps>;
+export declare const Bar: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & LoadingProps>;
 export default class LoadingBar extends PureComponent<LoadingProps> {
     static defaultProps: {
         loading: boolean;

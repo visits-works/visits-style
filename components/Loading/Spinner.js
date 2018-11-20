@@ -1,4 +1,4 @@
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 function getColor({ theme, color }) {
     const value = (!color || color === 'light') ? theme.background : theme[color];
     return css `

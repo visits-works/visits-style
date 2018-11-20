@@ -1,4 +1,32 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -10,81 +38,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importStar(require("react"));
-const CSSTransition_1 = __importDefault(require("react-transition-group/CSSTransition"));
-const Box_1 = __importDefault(require("../Box"));
-const styled_1 = __importDefault(require("../../styled"));
-const TooltipDiv = styled_1.default(Box_1.default) `
-  position: absolute;
-  clear: both;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  z-index: 9999;
-  padding: 0.375rem 0.625rem;
-  cursor: default;
-  width: auto;
-  white-space: pre;
-  font-size: 0.85rem;
-
-  transform: scale(0.8);
-  opacity: 0;
-
-  will-change: transform, opacity;
-  transition-property: transform, opacity;
-  transition-duration: 100ms;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-
-  &.start {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  &.end {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-`;
+var react_1 = __importStar(require("react"));
+var CSSTransition_1 = __importDefault(require("react-transition-group/CSSTransition"));
+var Box_1 = __importDefault(require("../Box"));
+var styled_components_1 = __importDefault(require("styled-components"));
+var TooltipDiv = styled_components_1.default(Box_1.default)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  clear: both;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.375rem 0.625rem;\n  cursor: default;\n  width: auto;\n  white-space: pre;\n  font-size: 0.85rem;\n\n  transform: scale(0.8);\n  opacity: 0;\n\n  will-change: transform, opacity;\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"], ["\n  position: absolute;\n  clear: both;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.375rem 0.625rem;\n  cursor: default;\n  width: auto;\n  white-space: pre;\n  font-size: 0.85rem;\n\n  transform: scale(0.8);\n  opacity: 0;\n\n  will-change: transform, opacity;\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"])));
 function getPosition(height, width, position) {
     switch (position) {
         case 'top': {
-            return { bottom: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
+            return { bottom: height + "px", left: '50%', transform: 'translateX(-50%)' };
         }
         case 'left': {
-            return { right: `${width}px`, top: '50%', transform: 'translateY(-50%)' };
+            return { right: width + "px", top: '50%', transform: 'translateY(-50%)' };
         }
         case 'right': {
-            return { left: `${width}px`, top: '50%', transform: 'translateY(-50%)' };
+            return { left: width + "px", top: '50%', transform: 'translateY(-50%)' };
         }
         default: {
-            return { top: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
+            return { top: height + "px", left: '50%', transform: 'translateX(-50%)' };
         }
     }
 }
-class Tooltip extends react_1.PureComponent {
-    constructor() {
-        super(...arguments);
-        this.state = {
+var Tooltip = /** @class */ (function (_super) {
+    __extends(Tooltip, _super);
+    function Tooltip() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
             show: false,
             style: {},
         };
-        this.openTooltip = () => {
-            if (this.state.show || !this.element.current)
+        _this.openTooltip = function () {
+            if (_this.state.show || !_this.element.current)
                 return;
-            const width = this.element.current.offsetWidth + 8;
-            const height = this.element.current.offsetHeight + 8;
-            const style = getPosition(height, width, this.props.position);
-            this.setState({ style, show: true });
+            var width = _this.element.current.offsetWidth + 8;
+            var height = _this.element.current.offsetHeight + 8;
+            var style = getPosition(height, width, _this.props.position);
+            _this.setState({ style: style, show: true });
         };
-        this.closeTooltip = () => {
-            if (this.state.show && this.element.current) {
-                this.setState({ show: false });
+        _this.closeTooltip = function () {
+            if (_this.state.show && _this.element.current) {
+                _this.setState({ show: false });
             }
         };
-        this.element = react_1.createRef();
+        _this.element = react_1.createRef();
+        return _this;
     }
-    render() {
-        const { color, label, children } = this.props;
-        const { show, style } = this.state;
-        return (react_1.default.createElement("div", { ref: this.element, style: { display: 'inline-block', position: 'relative', ...this.props.style }, onMouseOver: this.openTooltip, onMouseOut: this.closeTooltip },
+    Tooltip.prototype.render = function () {
+        var _a = this.props, color = _a.color, label = _a.label, children = _a.children;
+        var _b = this.state, show = _b.show, style = _b.style;
+        return (react_1.default.createElement("div", { ref: this.element, style: __assign({ display: 'inline-block', position: 'relative' }, this.props.style), onMouseOver: this.openTooltip, onMouseOut: this.closeTooltip },
             children,
             react_1.default.createElement(CSSTransition_1.default, { classNames: {
                     appear: 'start',
@@ -92,10 +94,12 @@ class Tooltip extends react_1.PureComponent {
                     exit: 'end',
                 }, in: show, timeout: 150, unmountOnExit: true },
                 react_1.default.createElement(TooltipDiv, { color: color, style: style, borderless: true }, label))));
-    }
-}
-Tooltip.defaultProps = {
-    position: 'bottom',
-    color: 'dark',
-};
+    };
+    Tooltip.defaultProps = {
+        position: 'bottom',
+        color: 'dark',
+    };
+    return Tooltip;
+}(react_1.PureComponent));
 exports.default = Tooltip;
+var templateObject_1;

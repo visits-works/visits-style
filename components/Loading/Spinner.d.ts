@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorType, ThemeType } from '../../types';
+import { ColorType } from '../../types';
 interface Props {
     /** 色の指定 */
     color?: ColorType;
@@ -11,5 +11,5 @@ interface Props {
     borderSize?: string;
     style?: any;
 }
-declare const Spinner: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, ThemeType, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
+declare const Spinner: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
 export default Spinner;

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function setAlign({ align }) {
+function setAlign(_a) {
+    var align = _a.align;
     switch (align) {
         case 'left':
             return 'flex-start';

@@ -1,6 +1,5 @@
-import { PureComponent } from 'react';
-import { InputProps } from './style';
-interface Props extends InputProps {
+import { PureComponent, InputHTMLAttributes } from 'react';
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     placeholder?: string;
     /** 'text' | 'number' | 'password' | 'email' | 'phone' */
     type: 'text' | 'number' | 'password' | 'email' | 'phone';

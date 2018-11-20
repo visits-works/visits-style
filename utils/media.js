@@ -1,4 +1,4 @@
-import { css } from '../styled';
+import { css } from 'styled-components';
 import { tablet, desktop, fullhd } from '../styles/variables';
 function mediaFrom(device, str, ...args) {
     const template = ['@media screen and (min-width: ', 'px) {', ...str, '}'];

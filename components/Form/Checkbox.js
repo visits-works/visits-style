@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled from '../../styled';
+import styled from 'styled-components';
 const Wrapper = styled.span `
   display: block;
   position: relative;

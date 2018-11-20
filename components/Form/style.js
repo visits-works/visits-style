@@ -1,4 +1,4 @@
-import { css } from '../../styled';
+import { css } from 'styled-components';
 import disabledColor from '../../utils/disabledColor';
 export default css `
   font-size: 1em;

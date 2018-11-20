@@ -1,4 +1,4 @@
-import styled from '../../styled';
+import styled from 'styled-components';
 const Content = styled.div `
   color: ${({ theme }) => theme.text};
 

@@ -1,4 +1,4 @@
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 const stripedStyle = css `
   tbody > tr:nth-child(odd) {
     background-color: rgba(0, 0, 0, 0.02);

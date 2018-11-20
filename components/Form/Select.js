@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import commonStyle from './style';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';

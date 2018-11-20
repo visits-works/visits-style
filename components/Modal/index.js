@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
-import styled from '../../styled';
+import styled from 'styled-components';
 import Box from '../Box';
 import Col from '../Grid/Col';
 const ESC_KEY = 27;

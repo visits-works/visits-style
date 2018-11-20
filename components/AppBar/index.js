@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css } from '../../styled';
+import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -151,4 +151,3 @@ AppBar.defaultProps = {
     backdrop: false,
     style: null,
 };
-AppBar.Item = NavItem;

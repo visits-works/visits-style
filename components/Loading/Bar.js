@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from '../../styled';
+import styled from 'styled-components';
 import CSSTransition from 'react-transition-group/CSSTransition';
 const Wrapper = styled.div `
   position: ${({ position }) => position};

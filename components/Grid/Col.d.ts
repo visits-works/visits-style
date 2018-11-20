@@ -10,5 +10,5 @@ interface ColProps {
     /** 1-12基準のサイズを画面サイズのよって可変にする */
     auto?: boolean;
 }
-declare const Col: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & ColProps, import("../../types").ThemeType, import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & ColProps>;
+declare const Col: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & ColProps, any, import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & ColProps>;
 export default Col;

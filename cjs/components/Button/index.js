@@ -1,4 +1,8 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -10,107 +14,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const styled_1 = __importStar(require("../../styled"));
-const darken_1 = __importDefault(require("polished/lib/color/darken"));
-const findColorInvert_1 = __importDefault(require("../../utils/findColorInvert"));
-const boxShadow_1 = __importDefault(require("../../utils/boxShadow"));
-const setSize_1 = __importDefault(require("../../utils/setSize"));
-const disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
-function setColor({ theme, color, outline, disabled }) {
+var styled_components_1 = __importStar(require("styled-components"));
+var darken_1 = __importDefault(require("polished/lib/color/darken"));
+var findColorInvert_1 = __importDefault(require("../../utils/findColorInvert"));
+var boxShadow_1 = __importDefault(require("../../utils/boxShadow"));
+var setSize_1 = __importDefault(require("../../utils/setSize"));
+var disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
+function setColor(_a) {
+    var theme = _a.theme, color = _a.color, outline = _a.outline, disabled = _a.disabled;
     if (disabled) {
         return disabledColor_1.default(theme);
     }
     if (!color) {
-        return styled_1.css `
-      background-color: ${theme.white};
-      border-color: ${theme.border};
-      color: ${theme.text};
-
-      &:hover {
-        border-color: ${theme.borderHover};
-      }
-
-      &:active {
-        border-color: ${theme.borderActive};
-      }
-    `;
+        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      background-color: ", ";\n      border-color: ", ";\n      color: ", ";\n\n      &:hover {\n        border-color: ", ";\n      }\n\n      &:active {\n        border-color: ", ";\n      }\n    "], ["\n      background-color: ", ";\n      border-color: ", ";\n      color: ", ";\n\n      &:hover {\n        border-color: ", ";\n      }\n\n      &:active {\n        border-color: ", ";\n      }\n    "])), theme.white, theme.border, theme.text, theme.borderHover, theme.borderActive);
     }
     if (color === 'text') {
-        return styled_1.css `
-      background-color: transparent;
-      border-color: transparent;
-      color: ${theme.text};
-
-      &:hover{
-        text-decoration: underline;
-      }
-    `;
+        return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      background-color: transparent;\n      border-color: transparent;\n      color: ", ";\n\n      &:hover{\n        text-decoration: underline;\n      }\n    "], ["\n      background-color: transparent;\n      border-color: transparent;\n      color: ", ";\n\n      &:hover{\n        text-decoration: underline;\n      }\n    "])), theme.text);
     }
-    const target = theme[color] || color;
-    const invertColor = findColorInvert_1.default(theme, target);
+    var target = theme[color] || color;
+    var invertColor = findColorInvert_1.default(theme, target);
     if (outline) {
-        return styled_1.css `
-      background-color: transparent;
-      border-color: ${target};
-      color: ${target};
-
-      &:hover {
-        background-color: ${target};
-        color: ${invertColor};
-      }
-
-      &:focus {
-        ${boxShadow_1.default('0.2rem', target, 0.2)}
-      }
-    `;
+        return styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      background-color: transparent;\n      border-color: ", ";\n      color: ", ";\n\n      &:hover {\n        background-color: ", ";\n        color: ", ";\n      }\n\n      &:focus {\n        ", "\n      }\n    "], ["\n      background-color: transparent;\n      border-color: ", ";\n      color: ", ";\n\n      &:hover {\n        background-color: ", ";\n        color: ", ";\n      }\n\n      &:focus {\n        ", "\n      }\n    "])), target, target, target, invertColor, boxShadow_1.default('0.2rem', target, 0.2));
     }
-    return styled_1.css `
-    background-color: ${target};
-    border-color: ${target};
-    border-color: transparent;
-    color: ${invertColor};
-    box-shadow: none;
-
-    &:hover {
-      background-color: ${darken_1.default(0.025, target)};
-    }
-
-    &:active {
-      background-color: ${darken_1.default(0.05, target)};
-    }
-
-    &:focus {
-      ${boxShadow_1.default('0.2rem', target, 0.2)}
-    }
-  `;
+    return styled_components_1.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    background-color: ", ";\n    border-color: ", ";\n    border-color: transparent;\n    color: ", ";\n    box-shadow: none;\n\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:active {\n      background-color: ", ";\n    }\n\n    &:focus {\n      ", "\n    }\n  "], ["\n    background-color: ", ";\n    border-color: ", ";\n    border-color: transparent;\n    color: ", ";\n    box-shadow: none;\n\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:active {\n      background-color: ", ";\n    }\n\n    &:focus {\n      ", "\n    }\n  "])), target, target, invertColor, darken_1.default(0.025, target), darken_1.default(0.05, target), boxShadow_1.default('0.2rem', target, 0.2));
 }
-const Button = styled_1.default.button `
-  position: relative;
-  outline: none;
-  appearance: none;
-  box-sizing: border-box;
-  display: inline-flex;
-  text-align: center;
-  white-space: nowrap;
-  cursor: pointer;
-  justify-content: center;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  height: 2.25em;
-  padding: 0.375em 0.75em;
-
-  transition-property: background-color, color, box-shadow;
-  transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
-
-  ${setColor}
-  ${({ size }) => setSize_1.default('font-size', size)}
-  ${({ full }) => full ? 'width: 100%;' : ''}
-
-  &:not(:last-child) {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-`;
+var Button = styled_components_1.default.button(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  position: relative;\n  outline: none;\n  appearance: none;\n  box-sizing: border-box;\n  display: inline-flex;\n  text-align: center;\n  white-space: nowrap;\n  cursor: pointer;\n  justify-content: center;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  height: 2.25em;\n  padding: 0.375em 0.75em;\n\n  transition-property: background-color, color, box-shadow;\n  transition-duration: 150ms;\n  transition-timing-function: ease-in-out;\n\n  ", "\n  ", "\n  ", "\n\n  &:not(:last-child) {\n    margin-right: 0.5rem;\n    margin-bottom: 0.5rem;\n  }\n"], ["\n  position: relative;\n  outline: none;\n  appearance: none;\n  box-sizing: border-box;\n  display: inline-flex;\n  text-align: center;\n  white-space: nowrap;\n  cursor: pointer;\n  justify-content: center;\n  border: 1px solid transparent;\n  border-radius: 4px;\n  height: 2.25em;\n  padding: 0.375em 0.75em;\n\n  transition-property: background-color, color, box-shadow;\n  transition-duration: 150ms;\n  transition-timing-function: ease-in-out;\n\n  ", "\n  ", "\n  ", "\n\n  &:not(:last-child) {\n    margin-right: 0.5rem;\n    margin-bottom: 0.5rem;\n  }\n"])), setColor, function (_a) {
+    var size = _a.size;
+    return setSize_1.default('font-size', size);
+}, function (_a) {
+    var full = _a.full;
+    return full ? 'width: 100%;' : '';
+});
 Button.displayName = 'Button';
 exports.default = Button;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;
