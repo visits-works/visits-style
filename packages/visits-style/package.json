@@ -16,7 +16,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-transition-group": "^2.5.0",
-    "styled-components": "^3.4.9"
+    "styled-components": "^4.1.1"
   },
   "scripts": {
     "compile": "tsc -d --outDir ./build --m esnext --t esnext",

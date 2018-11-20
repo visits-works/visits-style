@@ -23,7 +23,7 @@ class BarDemo extends React.Component<any, { loading: boolean }> {
   }
 }
 
-storiesOf('elements|Loading', module)
+storiesOf('components|Loading', module)
   .add('loading Bar', () => (
     <BarDemo />
   ))

@@ -1,7 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, InputHTMLAttributes } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled from 'styled-components';
-import { InputProps } from './style';
 
 const Wrapper = styled.span`
   display: block;
@@ -86,7 +85,7 @@ const Wrapper = styled.span`
   }
 `;
 
-interface Props extends InputProps {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   children?: any;
   checked?: boolean;
 }

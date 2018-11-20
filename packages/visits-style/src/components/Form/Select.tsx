@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import commonStyle, { InputProps } from './style';
+import commonStyle from './style';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
 import HelpMessage from './HelpMessage';
@@ -78,13 +78,14 @@ const InputWrapper = styled.div<WrapperProps>`
   `}
 `;
 
-interface Props extends InputProps {
+interface Props extends HTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
   options: Array<{ id: string | number, name: string }> | string[];
   size?: SizeType;
   outline?: boolean;
   error?: string;
   help?: string;
+  disabled?: boolean;
 }
 
 function _renderItem(item: { id: string | number, name: string } | string) {

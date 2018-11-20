@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { setSize } from '../../utils';
-import commonStyle, { InputProps } from './style';
+import commonStyle from './style';
 import HelpMessage from './HelpMessage';
 
 interface WrapperProps {
@@ -74,7 +74,7 @@ const Wrapper = styled.span<WrapperProps>`
   }
 `;
 
-interface Props extends InputProps {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   /** 'text' | 'number' | 'password' | 'email' | 'phone' */
   type: 'text' | 'number' | 'password' | 'email' | 'phone';

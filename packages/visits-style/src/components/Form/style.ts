@@ -5,8 +5,8 @@ export interface InputProps {
   /** inputの対象名 */
   name: string;
   value?: string | number;
-  onChange: () => void;
-  onBlur: () => void;
+  onChange: (e?: any) => void;
+  onBlur?: (e?: any) => void;
   disabled?: boolean;
 }
 

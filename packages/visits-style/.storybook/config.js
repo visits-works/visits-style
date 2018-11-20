@@ -1,28 +1,29 @@
 // @ts-ignore
 import 'react-app-polyfill/ie11';
 
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { configure, addDecorator } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
+import { withOptions } from '@storybook/addon-options';
 // @ts-ignore
 import { themes } from '@storybook/components';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import theme from '../src/theme/default';
 import css from '../src/styles/normalize';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   ${css}
 `;
-
-setOptions({
-  name: 'visits-style',
-  url: 'https://github.com/visits-works/visits-style',
-  hierarchySeparator: /\/|\./,
-  hierarchyRootSeparator: /\|/,
-  // @ts-ignore
-  theme: themes.dark,
-});
+addDecorator(
+  withOptions({
+    name: 'visits-style',
+    url: 'https://github.com/visits-works/visits-style',
+    hierarchySeparator: /\/|\./,
+    hierarchyRootSeparator: /\|/,
+    // @ts-ignore
+    theme: themes.dark,
+  })
+);
 
 const containerStyle: any = {
   padding: '3rem',
@@ -32,11 +33,16 @@ const containerStyle: any = {
 }
 
 addDecorator(story => (
-  <ThemeProvider theme={theme}>
-    <div style={containerStyle}>
-      {story()}
-    </div>
-  </ThemeProvider>
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <>
+        <GlobalStyle  />
+        <div style={containerStyle}>
+          {story()}
+        </div>
+      </>
+    </ThemeProvider>
+  </StrictMode>
 ));
 
 function loadStories() {
