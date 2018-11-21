@@ -12,6 +12,7 @@ const Wrapper = styled.span `
     ${commonStyle}
     max-width: 100%;
     width: 100%;
+    height: 100%;
     padding: 0.625em;
     resize: vertical;
     appearance: none;
@@ -45,8 +46,8 @@ const Wrapper = styled.span `
 `;
 export default class Textarea extends PureComponent {
     render() {
-        const { help, error, ...rest } = this.props;
-        return (React.createElement(Wrapper, { error: error },
+        const { help, error, style, ...rest } = this.props;
+        return (React.createElement(Wrapper, { error: error, style: style },
             React.createElement("textarea", Object.assign({}, rest)),
             HelpMessage(help, error)));
     }

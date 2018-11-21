@@ -30,6 +30,7 @@ const Wrapper = styled.span `
     display: block;
     outline: none;
     box-shadow: none;
+    appearance: none;
 
     padding: 0.375em 0.625em;
     border: none;
@@ -72,5 +73,6 @@ export default class TextInput extends PureComponent {
 TextInput.defaultProps = {
     type: 'text',
     value: '',
+    maxLength: 255,
     onChange: () => { },
 };

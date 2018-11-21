@@ -53,7 +53,7 @@ var boxShadow_1 = __importDefault(require("../../utils/boxShadow"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
 var style_1 = __importDefault(require("./style"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
-var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  position: relative;\n\n  textarea {\n    ", "\n    max-width: 100%;\n    width: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled {\n      resize: none;\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"], ["\n  display: block;\n  position: relative;\n\n  textarea {\n    ", "\n    max-width: 100%;\n    width: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled {\n      resize: none;\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"])), style_1.default, function (_a) {
+var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  position: relative;\n\n  textarea {\n    ", "\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled {\n      resize: none;\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"], ["\n  display: block;\n  position: relative;\n\n  textarea {\n    ", "\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled {\n      resize: none;\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"])), style_1.default, function (_a) {
     var theme = _a.theme, error = _a.error;
     return error ? theme.danger : theme.border;
 }, setSize_1.default('font-size'), function (_a) {
@@ -72,8 +72,8 @@ var Textarea = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Textarea.prototype.render = function () {
-        var _a = this.props, help = _a.help, error = _a.error, rest = __rest(_a, ["help", "error"]);
-        return (react_1.default.createElement(Wrapper, { error: error },
+        var _a = this.props, help = _a.help, error = _a.error, style = _a.style, rest = __rest(_a, ["help", "error", "style"]);
+        return (react_1.default.createElement(Wrapper, { error: error, style: style },
             react_1.default.createElement("textarea", __assign({}, rest)),
             HelpMessage_1.default(help, error)));
     };

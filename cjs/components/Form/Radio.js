@@ -49,8 +49,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var transparentize_1 = __importDefault(require("polished/lib/color/transparentize"));
-var styled_components_1 = __importDefault(require("styled-components"));
-var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  position: relative;\n  width: auto;\n\n  label {\n    cursor: pointer;\n    padding-left: 0.625em;\n    max-width: 100%;\n    width: 100%;\n    line-height: 1.25;\n    margin-right: 0.625rem;\n\n    &:before, &:after {\n      content: \"\";\n      position: absolute;\n    }\n\n    &:after {\n      top: 0.375em;\n      left: 0.375em;\n      width: 0.5em;\n      height: 0.5em;\n      background: ", ";\n      border: none;\n      transform: scale(0);\n      border-radius: 50%;\n\n      will-change: transform;\n      transition: transform 150ms ease-out;\n    }\n\n    &:before {\n      width: 1.25em;\n      height: 1.25em;\n      left:0;\n      top: 0;\n      background: transparent;\n      border: 0.1em solid ", ";\n      border-radius: 50%;\n\n      will-change: background;\n      transition: background 150ms ease-out;\n    }\n  }\n\n  input {\n    visibility: hidden;\n\n    &:checked {\n      + label:before {\n        border-color: ", ";\n      }\n      + label:after{\n        transform: scale(1);\n      }\n    }\n\n    &:disabled {\n      + label {\n        color: ", ";\n        &:before {\n          background: ", ";\n          border-color: ", ";\n        }\n      }\n      &:checked + label:after {\n        background: ", ";\n      }\n    }\n  }\n"], ["\n  display: block;\n  position: relative;\n  width: auto;\n\n  label {\n    cursor: pointer;\n    padding-left: 0.625em;\n    max-width: 100%;\n    width: 100%;\n    line-height: 1.25;\n    margin-right: 0.625rem;\n\n    &:before, &:after {\n      content: \"\";\n      position: absolute;\n    }\n\n    &:after {\n      top: 0.375em;\n      left: 0.375em;\n      width: 0.5em;\n      height: 0.5em;\n      background: ", ";\n      border: none;\n      transform: scale(0);\n      border-radius: 50%;\n\n      will-change: transform;\n      transition: transform 150ms ease-out;\n    }\n\n    &:before {\n      width: 1.25em;\n      height: 1.25em;\n      left:0;\n      top: 0;\n      background: transparent;\n      border: 0.1em solid ", ";\n      border-radius: 50%;\n\n      will-change: background;\n      transition: background 150ms ease-out;\n    }\n  }\n\n  input {\n    visibility: hidden;\n\n    &:checked {\n      + label:before {\n        border-color: ", ";\n      }\n      + label:after{\n        transform: scale(1);\n      }\n    }\n\n    &:disabled {\n      + label {\n        color: ", ";\n        &:before {\n          background: ", ";\n          border-color: ", ";\n        }\n      }\n      &:checked + label:after {\n        background: ", ";\n      }\n    }\n  }\n"])), function (_a) {
+var styled_components_1 = __importStar(require("styled-components"));
+var RadioLabel = styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  label {\n    cursor: pointer;\n    padding-left: 0.625em;\n    max-width: 100%;\n    width: 100%;\n    line-height: 1.25;\n    margin-right: 0.625rem;\n\n    &:before, &:after {\n      content: \"\";\n      position: absolute;\n    }\n\n    &:after {\n      top: 0.375em;\n      left: 0.375em;\n      width: 0.5em;\n      height: 0.5em;\n      background: ", ";\n      border: none;\n      transform: scale(0);\n      border-radius: 50%;\n\n      will-change: transform;\n      transition: transform 150ms ease-out;\n    }\n\n    &:before {\n      width: 1.25em;\n      height: 1.25em;\n      left:0;\n      top: 0;\n      background: transparent;\n      border: 0.1em solid ", ";\n      border-radius: 50%;\n\n      will-change: background;\n      transition: background 150ms ease-out;\n    }\n  }\n\n  input {\n    visibility: hidden;\n\n    &:checked {\n      + label:before {\n        border-color: ", ";\n      }\n      + label:after{\n        transform: scale(1);\n      }\n    }\n\n    &:disabled {\n      + label {\n        color: ", ";\n        &:before {\n          background: ", ";\n          border-color: ", ";\n        }\n      }\n      &:checked + label:after {\n        background: ", ";\n      }\n    }\n  }\n"], ["\n  label {\n    cursor: pointer;\n    padding-left: 0.625em;\n    max-width: 100%;\n    width: 100%;\n    line-height: 1.25;\n    margin-right: 0.625rem;\n\n    &:before, &:after {\n      content: \"\";\n      position: absolute;\n    }\n\n    &:after {\n      top: 0.375em;\n      left: 0.375em;\n      width: 0.5em;\n      height: 0.5em;\n      background: ", ";\n      border: none;\n      transform: scale(0);\n      border-radius: 50%;\n\n      will-change: transform;\n      transition: transform 150ms ease-out;\n    }\n\n    &:before {\n      width: 1.25em;\n      height: 1.25em;\n      left:0;\n      top: 0;\n      background: transparent;\n      border: 0.1em solid ", ";\n      border-radius: 50%;\n\n      will-change: background;\n      transition: background 150ms ease-out;\n    }\n  }\n\n  input {\n    visibility: hidden;\n\n    &:checked {\n      + label:before {\n        border-color: ", ";\n      }\n      + label:after{\n        transform: scale(1);\n      }\n    }\n\n    &:disabled {\n      + label {\n        color: ", ";\n        &:before {\n          background: ", ";\n          border-color: ", ";\n        }\n      }\n      &:checked + label:after {\n        background: ", ";\n      }\n    }\n  }\n"])), function (_a) {
     var theme = _a.theme;
     return theme.primary;
 }, function (_a) {
@@ -72,6 +72,38 @@ var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObje
     var theme = _a.theme;
     return transparentize_1.default(0.15, theme.textDark);
 });
+var ButtonLabel = styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: inline-flex;\n\n  label {\n    cursor: pointer;\n    padding: 0.375em 0.75em;\n    height: 2.25em;\n    border: 1px solid ", ";\n    text-align: center;\n    width: 100%;\n\n    &:hover {\n      border-color: ", ";\n    }\n  }\n\n  input {\n    display: none;\n\n    &:checked + label {\n      z-index: 1;\n      border-color: ", ";\n      background-color: ", ";\n    }\n\n    &:disabled {\n      + label {\n        cursor: default;\n        color: ", ";\n        background-color: ", ";\n        border-color: ", ";\n      }\n\n      &:checked + label {\n        border-color: ", ";\n        background-color: ", ";\n      }\n    }\n  }\n\n  & + & {\n    margin-left: -1px;\n  }\n\n  &:first-child label {\n    border-top-left-radius: 4px;\n    border-bottom-left-radius: 4px;\n  }\n\n  &:last-child label {\n    border-top-right-radius: 4px;\n    border-bottom-right-radius: 4px;\n  }\n"], ["\n  display: inline-flex;\n\n  label {\n    cursor: pointer;\n    padding: 0.375em 0.75em;\n    height: 2.25em;\n    border: 1px solid ", ";\n    text-align: center;\n    width: 100%;\n\n    &:hover {\n      border-color: ", ";\n    }\n  }\n\n  input {\n    display: none;\n\n    &:checked + label {\n      z-index: 1;\n      border-color: ", ";\n      background-color: ", ";\n    }\n\n    &:disabled {\n      + label {\n        cursor: default;\n        color: ", ";\n        background-color: ", ";\n        border-color: ", ";\n      }\n\n      &:checked + label {\n        border-color: ", ";\n        background-color: ", ";\n      }\n    }\n  }\n\n  & + & {\n    margin-left: -1px;\n  }\n\n  &:first-child label {\n    border-top-left-radius: 4px;\n    border-bottom-left-radius: 4px;\n  }\n\n  &:last-child label {\n    border-top-right-radius: 4px;\n    border-bottom-right-radius: 4px;\n  }\n"])), function (_a) {
+    var theme = _a.theme;
+    return theme.border;
+}, function (_a) {
+    var theme = _a.theme;
+    return theme.borderHover;
+}, function (_a) {
+    var theme = _a.theme;
+    return theme.primary;
+}, function (_a) {
+    var theme = _a.theme;
+    return transparentize_1.default(0.55, theme.primary);
+}, function (_a) {
+    var theme = _a.theme;
+    return transparentize_1.default(0.25, theme.textDark);
+}, function (_a) {
+    var theme = _a.theme;
+    return transparentize_1.default(0.55, theme.border);
+}, function (_a) {
+    var theme = _a.theme;
+    return theme.border;
+}, function (_a) {
+    var theme = _a.theme;
+    return theme.textDark;
+}, function (_a) {
+    var theme = _a.theme;
+    return transparentize_1.default(0.65, theme.textDark);
+});
+var Wrapper = styled_components_1.default.span(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  display: block;\n  position: relative;\n  width: auto;\n\n  ", "\n"], ["\n  display: block;\n  position: relative;\n  width: auto;\n\n  ", "\n"])), function (_a) {
+    var button = _a.button;
+    return button ? ButtonLabel : RadioLabel;
+});
 var Radio = /** @class */ (function (_super) {
     __extends(Radio, _super);
     function Radio() {
@@ -80,8 +112,8 @@ var Radio = /** @class */ (function (_super) {
         return _this;
     }
     Radio.prototype.render = function () {
-        var _a = this.props, children = _a.children, rest = __rest(_a, ["children"]);
-        return (react_1.default.createElement(Wrapper, null,
+        var _a = this.props, children = _a.children, button = _a.button, color = _a.color, style = _a.style, rest = __rest(_a, ["children", "button", "color", "style"]);
+        return (react_1.default.createElement(Wrapper, { button: button, color: color, style: style },
             react_1.default.createElement("input", __assign({ id: this.id, type: "radio" }, rest)),
             react_1.default.createElement("label", { htmlFor: this.id }, children)));
     };
@@ -89,9 +121,10 @@ var Radio = /** @class */ (function (_super) {
         name: null,
         children: null,
         checked: false,
+        button: false,
         onChange: function () { },
     };
     return Radio;
 }(react_1.PureComponent));
 exports.default = Radio;
-var templateObject_1;
+var templateObject_1, templateObject_2, templateObject_3;

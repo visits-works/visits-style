@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled from 'styled-components';
-const Wrapper = styled.span `
-  display: block;
-  position: relative;
-  width: auto;
-
+import styled, { css } from 'styled-components';
+const RadioLabel = css `
   label {
     cursor: pointer;
     padding-left: 0.625em;
@@ -73,14 +69,75 @@ const Wrapper = styled.span `
     }
   }
 `;
+const ButtonLabel = css `
+  display: inline-flex;
+
+  label {
+    cursor: pointer;
+    padding: 0.375em 0.75em;
+    height: 2.25em;
+    border: 1px solid ${({ theme }) => theme.border};
+    text-align: center;
+    width: 100%;
+
+    &:hover {
+      border-color: ${({ theme }) => theme.borderHover};
+    }
+  }
+
+  input {
+    display: none;
+
+    &:checked + label {
+      z-index: 1;
+      border-color: ${({ theme }) => theme.primary};
+      background-color: ${({ theme }) => transparentize(0.55, theme.primary)};
+    }
+
+    &:disabled {
+      + label {
+        cursor: default;
+        color: ${({ theme }) => transparentize(0.25, theme.textDark)};
+        background-color: ${({ theme }) => transparentize(0.55, theme.border)};
+        border-color: ${({ theme }) => theme.border};
+      }
+
+      &:checked + label {
+        border-color: ${({ theme }) => theme.textDark};
+        background-color: ${({ theme }) => transparentize(0.65, theme.textDark)};
+      }
+    }
+  }
+
+  & + & {
+    margin-left: -1px;
+  }
+
+  &:first-child label {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  &:last-child label {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+`;
+const Wrapper = styled.span `
+  display: block;
+  position: relative;
+  width: auto;
+
+  ${({ button }) => button ? ButtonLabel : RadioLabel}
+`;
 export default class Radio extends PureComponent {
     constructor() {
         super(...arguments);
         this.id = `radio_${this.props.name}:${this.props.value}`;
     }
     render() {
-        const { children, ...rest } = this.props;
-        return (React.createElement(Wrapper, null,
+        const { children, button, color, style, ...rest } = this.props;
+        return (React.createElement(Wrapper, { button: button, color: color, style: style },
             React.createElement("input", Object.assign({ id: this.id, type: "radio" }, rest)),
             React.createElement("label", { htmlFor: this.id }, children)));
     }
@@ -89,5 +146,6 @@ Radio.defaultProps = {
     name: null,
     children: null,
     checked: false,
+    button: false,
     onChange: () => { },
 };

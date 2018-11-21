@@ -1,8 +1,8 @@
 import { PureComponent, InputHTMLAttributes } from 'react';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     placeholder?: string;
-    /** 'text' | 'number' | 'password' | 'email' | 'phone' */
-    type: 'text' | 'number' | 'password' | 'email' | 'phone';
+    /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
+    type: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
     /** エラーの発生時の表示テキスト */
     error?: string;
     /** 捕捉テキスト */
@@ -19,6 +19,7 @@ export default class TextInput extends PureComponent<Props> {
     static defaultProps: {
         type: string;
         value: string;
+        maxLength: number;
         onChange: () => void;
     };
     render(): JSX.Element;
