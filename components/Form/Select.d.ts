@@ -1,6 +1,8 @@
 import { PureComponent, HTMLAttributes } from 'react';
 import { SizeType } from '../../types';
 interface Props extends HTMLAttributes<HTMLSelectElement> {
+    name: string;
+    value: string | number;
     placeholder?: string;
     options: Array<{
         id: string | number;
