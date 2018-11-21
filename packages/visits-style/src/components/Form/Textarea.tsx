@@ -17,6 +17,7 @@ const Wrapper = styled.span<WrapperProps>`
     ${commonStyle}
     max-width: 100%;
     width: 100%;
+    height: 100%;
     padding: 0.625em;
     resize: vertical;
     appearance: none;
@@ -69,9 +70,9 @@ export default class Textarea extends PureComponent<Props> {
   };
 
   render() {
-    const { help, error, ...rest } = this.props;
+    const { help, error, style, ...rest } = this.props;
     return (
-      <Wrapper error={error}>
+      <Wrapper error={error} style={style}>
         <textarea {...rest} />
         {HelpMessage(help, error)}
       </Wrapper>

@@ -4,8 +4,6 @@ import 'react-app-polyfill/ie11';
 import React, { StrictMode } from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withOptions } from '@storybook/addon-options';
-// @ts-ignore
-import { themes } from '@storybook/components';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import theme from '../src/theme/default';
@@ -20,8 +18,29 @@ addDecorator(
     url: 'https://github.com/visits-works/visits-style',
     hierarchySeparator: /\/|\./,
     hierarchyRootSeparator: /\|/,
-    // @ts-ignore
-    theme: themes.dark,
+    theme: {
+      mainTextFace: theme.fontFamily,
+      // monoTextFace: theme.fontFamily,
+      mainBackground: theme.background,
+      mainBorder: `1px solid ${theme.border}`,
+      mainBorderColor: theme.borderHover,
+      mainBorderRadius: 4,
+      // mainFill: 'rgba(255,255,255,0.1)',
+      barFill: theme.greyLighter,
+      barSelectedColor: theme.greyLight,
+      inputFill: 'rgba(255,255,255,1)',
+      mainTextColor: theme.text,
+      dimmedTextColor: theme.textLight,
+      highlightColor: '#9fdaff',
+      successColor: theme.success,
+      failColor: theme.danger,
+      warnColor: theme.warning,
+      mainTextSize: 13,
+      layoutMargin: 10,
+      brand: {
+        background: '',
+      },
+    },
   })
 );
 

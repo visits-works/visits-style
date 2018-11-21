@@ -42,6 +42,7 @@ const Wrapper = styled.span<WrapperProps>`
     display: block;
     outline: none;
     box-shadow: none;
+    appearance: none;
 
     padding: 0.375em 0.625em;
     border: none;
@@ -76,8 +77,8 @@ const Wrapper = styled.span<WrapperProps>`
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
-  /** 'text' | 'number' | 'password' | 'email' | 'phone' */
-  type: 'text' | 'number' | 'password' | 'email' | 'phone';
+  /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
+  type: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
   /** エラーの発生時の表示テキスト */
   error?: string;
   /** 捕捉テキスト */
@@ -95,6 +96,7 @@ export default class TextInput extends PureComponent<Props> {
   static defaultProps = {
     type: 'text',
     value: '',
+    maxLength: 255,
     onChange: () => {},
   };
 
