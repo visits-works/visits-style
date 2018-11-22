@@ -132,7 +132,7 @@ export default class ToastContainer extends Component<ContainerProps> {
       props.position !== this.props.position;
   }
 
-  getSnapshotBeforeUpdate(props: ContainerProps) {
+  componentDidUpdate(props: ContainerProps) {
     if (props.position !== this.props.position || props.fixed !== this.props.fixed) {
       this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
     }
