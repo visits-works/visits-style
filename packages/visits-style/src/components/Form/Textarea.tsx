@@ -1,4 +1,4 @@
-import React, { PureComponent, InputHTMLAttributes } from 'react';
+import React, { Component, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
@@ -61,13 +61,19 @@ interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
   help?: string;
 }
 
-export default class Textarea extends PureComponent<Props> {
+export default class Textarea extends Component<Props> {
   static defaultProps = {
     value: '',
     col: 2,
     row: 5,
     onChange: () => {},
   };
+
+  shouldComponentUpdate(props: Props) {
+    return props.value !== this.props.value ||
+      props.help !== this.props.help ||
+      props.error !== this.props.error;
+  }
 
   render() {
     const { help, error, style, ...rest } = this.props;

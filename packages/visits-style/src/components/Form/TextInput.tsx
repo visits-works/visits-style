@@ -101,9 +101,9 @@ export default class TextInput extends PureComponent<Props> {
   };
 
   render() {
-    const { outline, error, help, leftIcon, rightIcon, ...rest } = this.props;
+    const { outline, error, help, leftIcon, rightIcon, style, ...rest } = this.props;
     return (
-      <Wrapper outline={outline} error={error}>
+      <Wrapper outline={outline} error={error} style={style}>
         {leftIcon && (<Icon>{leftIcon}</Icon>)}
         {rightIcon && (<Icon right>{rightIcon}</Icon>)}
         <input {...rest} />

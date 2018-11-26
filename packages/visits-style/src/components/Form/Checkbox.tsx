@@ -1,4 +1,4 @@
-import React, { PureComponent, InputHTMLAttributes } from 'react';
+import React, { Component, InputHTMLAttributes } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled from 'styled-components';
 
@@ -90,7 +90,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean;
 }
 
-export default class Checkbox extends PureComponent<Props> {
+export default class Checkbox extends Component<Props> {
   static defaultProps = {
     name: null,
     children: null,
@@ -99,6 +99,11 @@ export default class Checkbox extends PureComponent<Props> {
   };
 
   id = `checkbox_${this.props.name}`;
+
+  shouldComponentUpdate(props: Props) {
+    return props.checked !== this.props.checked ||
+      props.children !== this.props.children;
+  }
 
   render() {
     const { children, ...rest } = this.props;

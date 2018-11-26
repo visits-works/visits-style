@@ -1,4 +1,4 @@
-import React, { PureComponent, InputHTMLAttributes } from 'react';
+import React, { Component, InputHTMLAttributes } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled, { css } from 'styled-components';
 import { ColorType } from '../../types';
@@ -6,7 +6,7 @@ import { ColorType } from '../../types';
 const RadioLabel = css`
   label {
     cursor: pointer;
-    padding-left: 0.625em;
+    padding-left: 1.625em;
     max-width: 100%;
     width: 100%;
     line-height: 1.25;
@@ -46,7 +46,7 @@ const RadioLabel = css`
   }
 
   input {
-    visibility: hidden;
+    display: none;
 
     &:checked {
       + label:before {
@@ -144,7 +144,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   color?: ColorType;
 }
 
-export default class Radio extends PureComponent<Props> {
+export default class Radio extends Component<Props> {
   static defaultProps = {
     name: null,
     children: null,
@@ -154,6 +154,10 @@ export default class Radio extends PureComponent<Props> {
   };
 
   id = `radio_${this.props.name}:${this.props.value}`;
+
+  shouldComponentUpdate(props: Props) {
+    return props.checked !== this.props.checked;
+  }
 
   render() {
     const { children, button, color, style, ...rest } = this.props;
