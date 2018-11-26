@@ -1,4 +1,4 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
+import React, { Component, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import commonStyle from './style';
 import arrow from '../../utils/arrow';
@@ -78,37 +78,52 @@ const InputWrapper = styled.div<WrapperProps>`
   `}
 `;
 
+type ItemType = { id: string | number, name: string } | string;
+
 interface Props extends HTMLAttributes<HTMLSelectElement> {
   name: string;
   value: string | number;
   placeholder?: string;
-  options: Array<{ id: string | number, name: string }> | string[];
+  options: Array<ItemType>;
   size?: SizeType;
   outline?: boolean;
   error?: string;
   help?: string;
   disabled?: boolean;
+  render?: (label: string) => any,
 }
 
-function _renderItem(item: { id: string | number, name: string } | string) {
-  if (typeof item === 'string') {
-    return <option key={item} value={item}>{item}</option>
-  } else {
-    const { id, name } = item;
-    return <option key={id} value={id}>{name}</option>
-  }
-}
-
-export default class Select extends PureComponent<Props> {
+export default class Select extends Component<Props> {
   static defaultProps = {
     name: null,
     onChange: () => {},
     options: [],
   };
 
+  shouldComponentUpdate(props: Props) {
+    return props.options.length !== this.props.options.length ||
+      props.value !== this.props.value ||
+      props.disabled !== this.props.disabled ||
+      props.help !== this.props.help ||
+      props.error !== this.props.error;
+  }
+
+  renderLabel = (label: string) => {
+    if (this.props.render) {
+      return this.props.render(label);
+    }
+    return label;
+  }
+
   renderItem = () => {
-    // @ts-ignore
-    return this.props.options.map(_renderItem);
+    return this.props.options.map((item, idx) => {
+      if (typeof item === 'string') {
+        return <option key={item} value={item}>{this.renderLabel(item)}</option>
+      } else {
+        const { id, name } = item;
+        return <option key={`${id}_${idx}`} value={id}>{this.renderLabel(name)}</option>
+      }
+    });
   }
 
   render() {
