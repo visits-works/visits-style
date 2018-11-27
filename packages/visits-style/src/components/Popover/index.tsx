@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import CSSTransition from 'react-transition-group/CSSTransition';
-import Button from '../Button';
 import Box from '../Box';
-import { ColorType, SizeType } from '../../types';
+
+const Wrapper = styled.a`
+  outline: none;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
 
 const Tooltip = styled(Box)`
   position: absolute;
@@ -15,7 +23,7 @@ const Tooltip = styled(Box)`
   padding: 0.5rem 0;
   width: auto;
   height: auto;
-  cursor: default;
+  cursor: auto;
 
   will-change: transform, opacity;
   transform: scale(0.8);
@@ -39,14 +47,10 @@ const Tooltip = styled(Box)`
 interface Props {
   /** ボタンの内容 */
   label: React.ReactNode;
-  /** ボタンの色 */
-  color?: ColorType;
   /** 内容のリスト */
   children?: React.ReactNode | React.ReactNode;
   /** 右の基準でリストを表示する */
   right?: boolean;
-  /** ボタンのサイズ */
-  size?: SizeType;
   /** 吹き出しが表示される場所 */
   position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 }
@@ -105,12 +109,12 @@ export default class Popover extends Component<Props, State> {
   }
 
   render() {
-    const { label, color, size, children } = this.props;
+    const { label, children } = this.props;
     const { show, style } = this.state;
     return (
-      <Button
-        color={color || 'text'}
-        size={size}
+      <Wrapper
+        tabIndex={0}
+        role="button"
         onFocus={this.openDropdown}
         onBlur={this.closeDropdown}
         style={{ display: 'block', position: 'relative' }}
@@ -130,7 +134,7 @@ export default class Popover extends Component<Props, State> {
             {children}
           </Tooltip>
         </CSSTransition>
-      </Button>
+      </Wrapper>
     );
   }
 }
