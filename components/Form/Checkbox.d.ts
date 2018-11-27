@@ -1,9 +1,9 @@
-import { PureComponent, InputHTMLAttributes } from 'react';
+import { Component, InputHTMLAttributes } from 'react';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     children?: any;
     checked?: boolean;
 }
-export default class Checkbox extends PureComponent<Props> {
+export default class Checkbox extends Component<Props> {
     static defaultProps: {
         name: null;
         children: null;
@@ -11,6 +11,7 @@ export default class Checkbox extends PureComponent<Props> {
         onChange: () => void;
     };
     id: string;
+    shouldComponentUpdate(props: Props): boolean;
     render(): JSX.Element;
 }
 export {};

@@ -30,9 +30,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var CSSTransition_1 = __importDefault(require("react-transition-group/CSSTransition"));
-var Button_1 = __importDefault(require("../Button"));
 var Box_1 = __importDefault(require("../Box"));
-var Tooltip = styled_components_1.default(Box_1.default)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  display: flex;\n  clear: both;\n  background-color: white;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: default;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"], ["\n  position: absolute;\n  display: flex;\n  clear: both;\n  background-color: white;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: default;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"])));
+var Wrapper = styled_components_1.default.a(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n"], ["\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n"])));
+var Tooltip = styled_components_1.default(Box_1.default)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: absolute;\n  display: flex;\n  clear: both;\n  background-color: white;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: auto;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"], ["\n  position: absolute;\n  display: flex;\n  clear: both;\n  background-color: white;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: auto;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"])));
 function getPosition(position) {
     switch (position) {
         case 'top-left': {
@@ -79,9 +79,9 @@ var Popover = /** @class */ (function (_super) {
         return this.state.show !== state.show || this.props.label !== props.label;
     };
     Popover.prototype.render = function () {
-        var _a = this.props, label = _a.label, color = _a.color, size = _a.size, children = _a.children;
+        var _a = this.props, label = _a.label, children = _a.children;
         var _b = this.state, show = _b.show, style = _b.style;
-        return (react_1.default.createElement(Button_1.default, { color: color || 'text', size: size, onFocus: this.openDropdown, onBlur: this.closeDropdown, style: { display: 'block', position: 'relative' } },
+        return (react_1.default.createElement(Wrapper, { tabIndex: 0, role: "button", onFocus: this.openDropdown, onBlur: this.closeDropdown, style: { display: 'block', position: 'relative' } },
             label,
             react_1.default.createElement(CSSTransition_1.default, { classNames: {
                     appear: 'start',
@@ -96,4 +96,4 @@ var Popover = /** @class */ (function (_super) {
     return Popover;
 }(react_1.Component));
 exports.default = Popover;
-var templateObject_1;
+var templateObject_1, templateObject_2;

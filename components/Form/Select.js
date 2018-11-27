@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import commonStyle from './style';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
 import HelpMessage from './HelpMessage';
-const InputWrapper = styled.div `
+const InputWrapper = styled.span `
   position: relative;
   display: block;
 
@@ -66,22 +66,33 @@ const InputWrapper = styled.div `
     }
   `}
 `;
-function _renderItem(item) {
-    if (typeof item === 'string') {
-        return React.createElement("option", { key: item, value: item }, item);
-    }
-    else {
-        const { id, name } = item;
-        return React.createElement("option", { key: id, value: id }, name);
-    }
-}
-export default class Select extends PureComponent {
+export default class Select extends Component {
     constructor() {
         super(...arguments);
-        this.renderItem = () => {
-            // @ts-ignore
-            return this.props.options.map(_renderItem);
+        this.renderLabel = (label) => {
+            if (this.props.render) {
+                return this.props.render(label);
+            }
+            return label;
         };
+        this.renderItem = () => {
+            return this.props.options.map((item, idx) => {
+                if (typeof item === 'string') {
+                    return React.createElement("option", { key: item, value: item }, this.renderLabel(item));
+                }
+                else {
+                    const { id, name } = item;
+                    return React.createElement("option", { key: `${id}_${idx}`, value: id }, this.renderLabel(name));
+                }
+            });
+        };
+    }
+    shouldComponentUpdate(props) {
+        return props.options.length !== this.props.options.length ||
+            props.value !== this.props.value ||
+            props.disabled !== this.props.disabled ||
+            props.help !== this.props.help ||
+            props.error !== this.props.error;
     }
     render() {
         const { size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;

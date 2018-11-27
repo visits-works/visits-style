@@ -71,6 +71,11 @@ var Textarea = /** @class */ (function (_super) {
     function Textarea() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Textarea.prototype.shouldComponentUpdate = function (props) {
+        return props.value !== this.props.value ||
+            props.help !== this.props.help ||
+            props.error !== this.props.error;
+    };
     Textarea.prototype.render = function () {
         var _a = this.props, help = _a.help, error = _a.error, style = _a.style, rest = __rest(_a, ["help", "error", "style"]);
         return (react_1.default.createElement(Wrapper, { error: error, style: style },
@@ -84,6 +89,6 @@ var Textarea = /** @class */ (function (_super) {
         onChange: function () { },
     };
     return Textarea;
-}(react_1.PureComponent));
+}(react_1.Component));
 exports.default = Textarea;
 var templateObject_1;

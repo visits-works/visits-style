@@ -91,6 +91,10 @@ var Checkbox = /** @class */ (function (_super) {
         _this.id = "checkbox_" + _this.props.name;
         return _this;
     }
+    Checkbox.prototype.shouldComponentUpdate = function (props) {
+        return props.checked !== this.props.checked ||
+            props.children !== this.props.children;
+    };
     Checkbox.prototype.render = function () {
         var _a = this.props, children = _a.children, rest = __rest(_a, ["children"]);
         return (react_1.default.createElement(Wrapper, null,
@@ -104,6 +108,6 @@ var Checkbox = /** @class */ (function (_super) {
         onChange: function () { },
     };
     return Checkbox;
-}(react_1.PureComponent));
+}(react_1.Component));
 exports.default = Checkbox;
 var templateObject_1;

@@ -1,4 +1,4 @@
-import { PureComponent, InputHTMLAttributes } from 'react';
+import { Component, InputHTMLAttributes } from 'react';
 import { ColorType } from '../../types';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     value: string | number;
@@ -7,7 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
     button?: boolean;
     color?: ColorType;
 }
-export default class Radio extends PureComponent<Props> {
+export default class Radio extends Component<Props> {
     static defaultProps: {
         name: null;
         children: null;
@@ -16,6 +16,7 @@ export default class Radio extends PureComponent<Props> {
         onChange: () => void;
     };
     id: string;
+    shouldComponentUpdate(props: Props): boolean;
     render(): JSX.Element;
 }
 export {};

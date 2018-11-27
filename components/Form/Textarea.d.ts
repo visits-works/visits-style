@@ -1,4 +1,4 @@
-import { PureComponent, InputHTMLAttributes } from 'react';
+import { Component, InputHTMLAttributes } from 'react';
 interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
     placeholder?: string;
     value?: string;
@@ -9,13 +9,14 @@ interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
     /** 捕捉テキスト */
     help?: string;
 }
-export default class Textarea extends PureComponent<Props> {
+export default class Textarea extends Component<Props> {
     static defaultProps: {
         value: string;
         col: number;
         row: number;
         onChange: () => void;
     };
+    shouldComponentUpdate(props: Props): boolean;
     render(): JSX.Element;
 }
 export {};

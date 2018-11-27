@@ -30,7 +30,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  &:not(:last-child) {\n    margin-bottom: 0.75rem;\n  }\n"], ["\n  display: block;\n  &:not(:last-child) {\n    margin-bottom: 0.75rem;\n  }\n"])));
-var Label = styled_components_1.default.label(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  font-weight: 700;\n  margin-bottom: 0.325rem;\n"], ["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  font-weight: 700;\n  margin-bottom: 0.325rem;\n"])), function (_a) {
+var Label = styled_components_1.default.label(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  margin-bottom: 0.325rem;\n"], ["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  margin-bottom: 0.325rem;\n"])), function (_a) {
     var theme = _a.theme;
     return theme.textStrong;
 });

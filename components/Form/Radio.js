@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled, { css } from 'styled-components';
 const RadioLabel = css `
   label {
     cursor: pointer;
-    padding-left: 0.625em;
+    padding-left: 1.625em;
     max-width: 100%;
     width: 100%;
     line-height: 1.25;
@@ -44,7 +44,7 @@ const RadioLabel = css `
   }
 
   input {
-    visibility: hidden;
+    display: none;
 
     &:checked {
       + label:before {
@@ -130,10 +130,13 @@ const Wrapper = styled.span `
 
   ${({ button }) => button ? ButtonLabel : RadioLabel}
 `;
-export default class Radio extends PureComponent {
+export default class Radio extends Component {
     constructor() {
         super(...arguments);
         this.id = `radio_${this.props.name}:${this.props.value}`;
+    }
+    shouldComponentUpdate(props) {
+        return props.checked !== this.props.checked;
     }
     render() {
         const { children, button, color, style, ...rest } = this.props;

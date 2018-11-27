@@ -1,26 +1,30 @@
-import { PureComponent, HTMLAttributes } from 'react';
+import { Component, HTMLAttributes } from 'react';
 import { SizeType } from '../../types';
+declare type ItemType = {
+    id: string | number;
+    name: string;
+} | string;
 interface Props extends HTMLAttributes<HTMLSelectElement> {
     name: string;
     value: string | number;
     placeholder?: string;
-    options: Array<{
-        id: string | number;
-        name: string;
-    }> | string[];
+    options: Array<ItemType>;
     size?: SizeType;
     outline?: boolean;
     error?: string;
     help?: string;
     disabled?: boolean;
+    render?: (label: string) => any;
 }
-export default class Select extends PureComponent<Props> {
+export default class Select extends Component<Props> {
     static defaultProps: {
         name: null;
         onChange: () => void;
         options: never[];
     };
-    renderItem: () => any;
+    shouldComponentUpdate(props: Props): boolean;
+    renderLabel: (label: string) => any;
+    renderItem: () => JSX.Element[];
     render(): JSX.Element;
 }
 export {};

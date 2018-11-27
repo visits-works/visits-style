@@ -90,8 +90,8 @@ var TextInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TextInput.prototype.render = function () {
-        var _a = this.props, outline = _a.outline, error = _a.error, help = _a.help, leftIcon = _a.leftIcon, rightIcon = _a.rightIcon, rest = __rest(_a, ["outline", "error", "help", "leftIcon", "rightIcon"]);
-        return (react_1.default.createElement(Wrapper, { outline: outline, error: error },
+        var _a = this.props, outline = _a.outline, error = _a.error, help = _a.help, leftIcon = _a.leftIcon, rightIcon = _a.rightIcon, style = _a.style, rest = __rest(_a, ["outline", "error", "help", "leftIcon", "rightIcon", "style"]);
+        return (react_1.default.createElement(Wrapper, { outline: outline, error: error, style: style },
             leftIcon && (react_1.default.createElement(Icon, null, leftIcon)),
             rightIcon && (react_1.default.createElement(Icon, { right: true }, rightIcon)),
             react_1.default.createElement("input", __assign({}, rest)),

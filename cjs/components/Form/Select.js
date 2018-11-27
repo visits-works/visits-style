@@ -53,7 +53,7 @@ var style_1 = __importDefault(require("./style"));
 var arrow_1 = __importDefault(require("../../utils/arrow"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
-var InputWrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    ", "\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    ", "\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n\n    ", "\n\n    border: none;\n    ",
+var InputWrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    ", "\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    ", "\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n\n    ", "\n\n    border: none;\n    ",
     "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ",
     "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
     "\n"])), style_1.default, function (_a) {
@@ -79,25 +79,36 @@ var InputWrapper = styled_components_1.default.div(templateObject_1 || (template
     var theme = _a.theme, disabled = _a.disabled;
     return disabled ? '' : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: " + theme.borderHover + ";\n      }\n\n      &::after {\n        border-color: " + theme.borderHover + ";\n      }\n    }\n  ";
 });
-function _renderItem(item) {
-    if (typeof item === 'string') {
-        return react_1.default.createElement("option", { key: item, value: item }, item);
-    }
-    else {
-        var id = item.id, name_1 = item.name;
-        return react_1.default.createElement("option", { key: id, value: id }, name_1);
-    }
-}
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
     function Select() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.renderLabel = function (label) {
+            if (_this.props.render) {
+                return _this.props.render(label);
+            }
+            return label;
+        };
         _this.renderItem = function () {
-            // @ts-ignore
-            return _this.props.options.map(_renderItem);
+            return _this.props.options.map(function (item, idx) {
+                if (typeof item === 'string') {
+                    return react_1.default.createElement("option", { key: item, value: item }, _this.renderLabel(item));
+                }
+                else {
+                    var id = item.id, name_1 = item.name;
+                    return react_1.default.createElement("option", { key: id + "_" + idx, value: id }, _this.renderLabel(name_1));
+                }
+            });
         };
         return _this;
     }
+    Select.prototype.shouldComponentUpdate = function (props) {
+        return props.options.length !== this.props.options.length ||
+            props.value !== this.props.value ||
+            props.disabled !== this.props.disabled ||
+            props.help !== this.props.help ||
+            props.error !== this.props.error;
+    };
     Select.prototype.render = function () {
         var _a = this.props, size = _a.size, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["size", "outline", "options", "error", "help", "placeholder", "disabled"]);
         return (react_1.default.createElement(InputWrapper, { size: size, outline: outline, error: error, disabled: disabled },
@@ -112,6 +123,6 @@ var Select = /** @class */ (function (_super) {
         options: [],
     };
     return Select;
-}(react_1.PureComponent));
+}(react_1.Component));
 exports.default = Select;
 var templateObject_1;

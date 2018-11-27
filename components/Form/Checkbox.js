@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled from 'styled-components';
 const Wrapper = styled.span `
@@ -83,10 +83,14 @@ const Wrapper = styled.span `
     }
   }
 `;
-export default class Checkbox extends PureComponent {
+export default class Checkbox extends Component {
     constructor() {
         super(...arguments);
         this.id = `checkbox_${this.props.name}`;
+    }
+    shouldComponentUpdate(props) {
+        return props.checked !== this.props.checked ||
+            props.children !== this.props.children;
     }
     render() {
         const { children, ...rest } = this.props;

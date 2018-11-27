@@ -39,7 +39,7 @@ export default class ToastContainer extends Component<ContainerProps> {
     };
     constructor(props: ContainerProps);
     shouldComponentUpdate(props: ContainerProps): boolean;
-    getSnapshotBeforeUpdate(props: ContainerProps): void;
+    componentDidUpdate(props: ContainerProps): void;
     componentWillUnmount(): void;
     clear: (id: string) => () => void;
     renderToast: () => JSX.Element;

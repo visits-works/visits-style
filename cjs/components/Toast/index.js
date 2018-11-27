@@ -112,7 +112,7 @@ var ToastContainer = /** @class */ (function (_super) {
         return props.toasts.length !== this.props.toasts.length ||
             props.position !== this.props.position;
     };
-    ToastContainer.prototype.getSnapshotBeforeUpdate = function (props) {
+    ToastContainer.prototype.componentDidUpdate = function (props) {
         if (props.position !== this.props.position || props.fixed !== this.props.fixed) {
             this.element.style.cssText = setPosition(this.props.position, this.props.fixed);
         }

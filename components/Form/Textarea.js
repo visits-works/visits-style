@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
@@ -44,7 +44,12 @@ const Wrapper = styled.span `
     }
   }
 `;
-export default class Textarea extends PureComponent {
+export default class Textarea extends Component {
+    shouldComponentUpdate(props) {
+        return props.value !== this.props.value ||
+            props.help !== this.props.help ||
+            props.error !== this.props.error;
+    }
     render() {
         const { help, error, style, ...rest } = this.props;
         return (React.createElement(Wrapper, { error: error, style: style },

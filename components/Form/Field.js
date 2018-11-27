@@ -10,7 +10,6 @@ const Label = styled.label `
   color: ${({ theme }) => theme.textStrong};
   display: block;
   font-size: 1rem;
-  font-weight: 700;
   margin-bottom: 0.325rem;
 `;
 export default class Field extends PureComponent {
