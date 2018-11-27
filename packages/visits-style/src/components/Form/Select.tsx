@@ -13,7 +13,7 @@ interface WrapperProps {
   disabled?: boolean;
 }
 
-const InputWrapper = styled.div<WrapperProps>`
+const InputWrapper = styled.span<WrapperProps>`
   position: relative;
   display: block;
 
