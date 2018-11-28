@@ -61,7 +61,7 @@ function renderGutter({ noGutter }: Props) {
 
 const Row = styled.div<Props>`
   display: flex;
-  max-width: 100%;
+  width: 100%;
   flex-wrap: wrap;
 
   ${({ vcenter }) => vcenter ? 'align-items: center;' : ''}
