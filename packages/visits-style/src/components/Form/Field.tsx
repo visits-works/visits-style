@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -15,17 +15,16 @@ const Label = styled.label`
   margin-bottom: 0.325rem;
 `;
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   children: ReactNode;
-  style?: any;
 }
 
 export default class Field extends PureComponent<Props> {
   render() {
-    const { label, children, style } = this.props;
+    const { label, children, ...rest } = this.props;
     return (
-      <Wrapper style={style}>
+      <Wrapper {...rest}>
         {label && (<Label>{label}</Label>)}
         {children}
       </Wrapper>

@@ -160,9 +160,9 @@ export default class Radio extends Component<Props> {
   }
 
   render() {
-    const { children, button, color, style, ...rest } = this.props;
+    const { className, children, button, color, style, ...rest } = this.props;
     return (
-      <Wrapper button={button!} color={color} style={style}>
+      <Wrapper className={className} button={button!} color={color} style={style}>
         <input id={this.id} type="radio" {...rest} />
         <label htmlFor={this.id}>{children}</label>
       </Wrapper>

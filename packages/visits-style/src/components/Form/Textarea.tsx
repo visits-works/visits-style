@@ -56,9 +56,9 @@ interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
   col?: number;
   row?: number;
   /** エラーの発生時の表示テキスト */
-  error?: string;
+  error?: string | any;
   /** 捕捉テキスト */
-  help?: string;
+  help?: string | any;
 }
 
 export default class Textarea extends Component<Props> {
@@ -76,9 +76,9 @@ export default class Textarea extends Component<Props> {
   }
 
   render() {
-    const { help, error, style, ...rest } = this.props;
+    const { className, help, error, style, ...rest } = this.props;
     return (
-      <Wrapper error={error} style={style}>
+      <Wrapper className={className} error={error} style={style}>
         <textarea {...rest} />
         {HelpMessage(help, error)}
       </Wrapper>

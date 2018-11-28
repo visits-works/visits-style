@@ -80,9 +80,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
   type: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
   /** エラーの発生時の表示テキスト */
-  error?: string;
+  error?: string | any;
   /** 捕捉テキスト */
-  help?: string;
+  help?: string | any;
   /** ボックス系のデザインでする */
   outline?: boolean;
   /** 左側のアイコン */
@@ -101,9 +101,9 @@ export default class TextInput extends PureComponent<Props> {
   };
 
   render() {
-    const { outline, error, help, leftIcon, rightIcon, style, ...rest } = this.props;
+    const { className, outline, error, help, leftIcon, rightIcon, style, ...rest } = this.props;
     return (
-      <Wrapper outline={outline} error={error} style={style}>
+      <Wrapper className={className} outline={outline} error={error} style={style}>
         {leftIcon && (<Icon>{leftIcon}</Icon>)}
         {rightIcon && (<Icon right>{rightIcon}</Icon>)}
         <input {...rest} />

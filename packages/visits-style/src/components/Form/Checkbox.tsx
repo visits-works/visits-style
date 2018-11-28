@@ -106,9 +106,9 @@ export default class Checkbox extends Component<Props> {
   }
 
   render() {
-    const { children, ...rest } = this.props;
+    const { className, children, ...rest } = this.props;
     return (
-      <Wrapper>
+      <Wrapper className={className} >
         <input type="checkbox" id={this.id} {...rest} />
         <label htmlFor={this.id}>{children}</label>
       </Wrapper>

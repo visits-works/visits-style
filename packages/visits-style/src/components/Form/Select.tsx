@@ -78,7 +78,7 @@ const InputWrapper = styled.span<WrapperProps>`
   `}
 `;
 
-type ItemType = { id: string | number, name: string } | string;
+type ItemType = { id: string | number, name: string, [key: string]: any } | string;
 
 interface Props extends HTMLAttributes<HTMLSelectElement> {
   name: string;
@@ -87,8 +87,8 @@ interface Props extends HTMLAttributes<HTMLSelectElement> {
   options: Array<ItemType>;
   size?: SizeType;
   outline?: boolean;
-  error?: string;
-  help?: string;
+  error?: string | any;
+  help?: string | any;
   disabled?: boolean;
   render?: (label: string) => any,
 }
@@ -127,9 +127,9 @@ export default class Select extends Component<Props> {
   }
 
   render() {
-    const { size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;
+    const { className, size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;
     return (
-      <InputWrapper size={size} outline={outline} error={error} disabled={disabled}>
+      <InputWrapper className={className} size={size} outline={outline} error={error} disabled={disabled}>
         <select {...rest} disabled={disabled}>
           {placeholder && (
             <option disabled selected>{placeholder}</option>
