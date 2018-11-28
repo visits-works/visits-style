@@ -115,8 +115,8 @@ var Radio = /** @class */ (function (_super) {
         return props.checked !== this.props.checked;
     };
     Radio.prototype.render = function () {
-        var _a = this.props, children = _a.children, button = _a.button, color = _a.color, style = _a.style, rest = __rest(_a, ["children", "button", "color", "style"]);
-        return (react_1.default.createElement(Wrapper, { button: button, color: color, style: style },
+        var _a = this.props, className = _a.className, children = _a.children, button = _a.button, color = _a.color, style = _a.style, rest = __rest(_a, ["className", "children", "button", "color", "style"]);
+        return (react_1.default.createElement(Wrapper, { className: className, button: button, color: color, style: style },
             react_1.default.createElement("input", __assign({ id: this.id, type: "radio" }, rest)),
             react_1.default.createElement("label", { htmlFor: this.id }, children)));
     };

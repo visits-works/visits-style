@@ -1,4 +1,4 @@
-export default {
+const theme = {
     fontFamily: '"Hiragino Sans", ヒラギノ角ゴシック, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", HiraKakuPro-W3, "Hiragino Kaku Gothic Pro", Quicksand, メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif',
     fontSize: '16px',
     responsive: true,
@@ -28,3 +28,4 @@ export default {
     borderHover: '#9b9b9b',
     borderActive: '#4a4a4a',
 };
+export default theme;

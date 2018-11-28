@@ -95,8 +95,8 @@ export default class Select extends Component {
             props.error !== this.props.error;
     }
     render() {
-        const { size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;
-        return (React.createElement(InputWrapper, { size: size, outline: outline, error: error, disabled: disabled },
+        const { className, size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;
+        return (React.createElement(InputWrapper, { className: className, size: size, outline: outline, error: error, disabled: disabled },
             React.createElement("select", Object.assign({}, rest, { disabled: disabled }),
                 placeholder && (React.createElement("option", { disabled: true, selected: true }, placeholder)),
                 this.renderItem()),

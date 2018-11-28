@@ -1,51 +1,43 @@
 import styled, { css } from 'styled-components';
 import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
-import { fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
+import { mobile, fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 function setResponsive({ fluid }) {
     if (fluid) {
         return css `
       ${mediaMobile `
-        margin-right: 0.5rem;
-        margin-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
       `}
       ${mediaDesktop `
-        margin-right: 0.75rem;
-        margin-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
       `}
       ${mediaFullHD `
-        margin-right: 0.75rem;
-        margin-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
       `}
     `;
     }
     return css `
+    margin-right: auto;
+    margin-left: auto;
     ${mediaMobile `
-      max-width: 100%;
-      margin-right: 3%;
-      margin-left: 3%;
+      max-width: ${mobile - (2 * smallGutter)}px;
     `}
     ${mediaTablet `
       max-width: ${tablet - (2 * smallGutter)}px;
-      margin-right: auto;
-      margin-left: auto;
     `}
     ${mediaDesktop `
       max-width: ${desktop - (2 * gutter)}px;
-      margin-right: auto;
-      margin-left: auto;
     `}
     ${mediaFullHD `
       max-width: ${fullhd - (2 * gutter)}px;
-      margin-right: auto;
-      margin-left: auto;
     `}
   `;
 }
 const Container = styled.div `
   position: relative;
-  margin: 0 auto;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
 
   ${setResponsive}
 `;

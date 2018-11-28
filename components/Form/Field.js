@@ -14,8 +14,8 @@ const Label = styled.label `
 `;
 export default class Field extends PureComponent {
     render() {
-        const { label, children, style } = this.props;
-        return (React.createElement(Wrapper, { style: style },
+        const { label, children, ...rest } = this.props;
+        return (React.createElement(Wrapper, Object.assign({}, rest),
             label && (React.createElement(Label, null, label)),
             children));
     }

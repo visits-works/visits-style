@@ -1,8 +1,7 @@
-import { PureComponent, ReactNode } from 'react';
-interface Props {
+import { PureComponent, ReactNode, HTMLAttributes } from 'react';
+interface Props extends HTMLAttributes<HTMLDivElement> {
     label?: string;
     children: ReactNode;
-    style?: any;
 }
 export default class Field extends PureComponent<Props> {
     render(): JSX.Element;

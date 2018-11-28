@@ -62,8 +62,8 @@ const Wrapper = styled.span `
 `;
 export default class TextInput extends PureComponent {
     render() {
-        const { outline, error, help, leftIcon, rightIcon, style, ...rest } = this.props;
-        return (React.createElement(Wrapper, { outline: outline, error: error, style: style },
+        const { className, outline, error, help, leftIcon, rightIcon, style, ...rest } = this.props;
+        return (React.createElement(Wrapper, { className: className, outline: outline, error: error, style: style },
             leftIcon && (React.createElement(Icon, null, leftIcon)),
             rightIcon && (React.createElement(Icon, { right: true }, rightIcon)),
             React.createElement("input", Object.assign({}, rest)),

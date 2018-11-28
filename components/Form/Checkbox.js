@@ -93,8 +93,8 @@ export default class Checkbox extends Component {
             props.children !== this.props.children;
     }
     render() {
-        const { children, ...rest } = this.props;
-        return (React.createElement(Wrapper, null,
+        const { className, children, ...rest } = this.props;
+        return (React.createElement(Wrapper, { className: className },
             React.createElement("input", Object.assign({ type: "checkbox", id: this.id }, rest)),
             React.createElement("label", { htmlFor: this.id }, children)));
     }

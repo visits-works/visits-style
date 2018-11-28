@@ -96,8 +96,8 @@ var Checkbox = /** @class */ (function (_super) {
             props.children !== this.props.children;
     };
     Checkbox.prototype.render = function () {
-        var _a = this.props, children = _a.children, rest = __rest(_a, ["children"]);
-        return (react_1.default.createElement(Wrapper, null,
+        var _a = this.props, className = _a.className, children = _a.children, rest = __rest(_a, ["className", "children"]);
+        return (react_1.default.createElement(Wrapper, { className: className },
             react_1.default.createElement("input", __assign({ type: "checkbox", id: this.id }, rest)),
             react_1.default.createElement("label", { htmlFor: this.id }, children)));
     };

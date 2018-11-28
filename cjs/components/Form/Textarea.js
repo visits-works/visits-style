@@ -77,8 +77,8 @@ var Textarea = /** @class */ (function (_super) {
             props.error !== this.props.error;
     };
     Textarea.prototype.render = function () {
-        var _a = this.props, help = _a.help, error = _a.error, style = _a.style, rest = __rest(_a, ["help", "error", "style"]);
-        return (react_1.default.createElement(Wrapper, { error: error, style: style },
+        var _a = this.props, className = _a.className, help = _a.help, error = _a.error, style = _a.style, rest = __rest(_a, ["className", "help", "error", "style"]);
+        return (react_1.default.createElement(Wrapper, { className: className, error: error, style: style },
             react_1.default.createElement("textarea", __assign({}, rest)),
             HelpMessage_1.default(help, error)));
     };

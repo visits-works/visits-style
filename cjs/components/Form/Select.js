@@ -110,8 +110,8 @@ var Select = /** @class */ (function (_super) {
             props.error !== this.props.error;
     };
     Select.prototype.render = function () {
-        var _a = this.props, size = _a.size, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["size", "outline", "options", "error", "help", "placeholder", "disabled"]);
-        return (react_1.default.createElement(InputWrapper, { size: size, outline: outline, error: error, disabled: disabled },
+        var _a = this.props, className = _a.className, size = _a.size, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
+        return (react_1.default.createElement(InputWrapper, { className: className, size: size, outline: outline, error: error, disabled: disabled },
             react_1.default.createElement("select", __assign({}, rest, { disabled: disabled }),
                 placeholder && (react_1.default.createElement("option", { disabled: true, selected: true }, placeholder)),
                 this.renderItem()),

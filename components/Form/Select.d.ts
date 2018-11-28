@@ -3,6 +3,7 @@ import { SizeType } from '../../types';
 declare type ItemType = {
     id: string | number;
     name: string;
+    [key: string]: any;
 } | string;
 interface Props extends HTMLAttributes<HTMLSelectElement> {
     name: string;
@@ -11,8 +12,8 @@ interface Props extends HTMLAttributes<HTMLSelectElement> {
     options: Array<ItemType>;
     size?: SizeType;
     outline?: boolean;
-    error?: string;
-    help?: string;
+    error?: string | any;
+    help?: string | any;
     disabled?: boolean;
     render?: (label: string) => any;
 }

@@ -139,8 +139,8 @@ export default class Radio extends Component {
         return props.checked !== this.props.checked;
     }
     render() {
-        const { children, button, color, style, ...rest } = this.props;
-        return (React.createElement(Wrapper, { button: button, color: color, style: style },
+        const { className, children, button, color, style, ...rest } = this.props;
+        return (React.createElement(Wrapper, { className: className, button: button, color: color, style: style },
             React.createElement("input", Object.assign({ id: this.id, type: "radio" }, rest)),
             React.createElement("label", { htmlFor: this.id }, children)));
     }

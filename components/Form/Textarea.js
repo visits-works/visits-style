@@ -51,8 +51,8 @@ export default class Textarea extends Component {
             props.error !== this.props.error;
     }
     render() {
-        const { help, error, style, ...rest } = this.props;
-        return (React.createElement(Wrapper, { error: error, style: style },
+        const { className, help, error, style, ...rest } = this.props;
+        return (React.createElement(Wrapper, { className: className, error: error, style: style },
             React.createElement("textarea", Object.assign({}, rest)),
             HelpMessage(help, error)));
     }

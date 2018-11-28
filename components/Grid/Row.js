@@ -47,7 +47,7 @@ function renderGutter({ noGutter }) {
 }
 const Row = styled.div `
   display: flex;
-  max-width: 100%;
+  width: 100%;
   flex-wrap: wrap;
 
   ${({ vcenter }) => vcenter ? 'align-items: center;' : ''}
