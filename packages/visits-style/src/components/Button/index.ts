@@ -111,6 +111,7 @@ const Button = styled.button<ButtonProps>`
   border-radius: 4px;
   height: 2.25em;
   padding: 0.375em 0.75em;
+  line-height: normal;
 
   transition-property: background-color, color, box-shadow;
   transition-duration: 150ms;
