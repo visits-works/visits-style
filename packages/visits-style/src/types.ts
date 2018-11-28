@@ -38,5 +38,10 @@ export interface ThemeType {
   borderHover: string;
   borderActive: string;
 
-  [key: string]: string | any;
+  fontSize: string;
+  fontFamily: string;
+
+  responsive: boolean;
+
+  [key: string]: string | number | boolean | any;
 }
