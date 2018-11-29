@@ -74,7 +74,9 @@ var Textarea = /** @class */ (function (_super) {
     Textarea.prototype.shouldComponentUpdate = function (props) {
         return props.value !== this.props.value ||
             props.help !== this.props.help ||
-            props.error !== this.props.error;
+            props.error !== this.props.error ||
+            props.disabled !== this.props.disabled ||
+            props.readOnly !== this.props.readOnly;
     };
     Textarea.prototype.render = function () {
         var _a = this.props, className = _a.className, help = _a.help, error = _a.error, style = _a.style, rest = __rest(_a, ["className", "help", "error", "style"]);

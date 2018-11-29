@@ -48,7 +48,9 @@ export default class Textarea extends Component {
     shouldComponentUpdate(props) {
         return props.value !== this.props.value ||
             props.help !== this.props.help ||
-            props.error !== this.props.error;
+            props.error !== this.props.error ||
+            props.disabled !== this.props.disabled ||
+            props.readOnly !== this.props.readOnly;
     }
     render() {
         const { className, help, error, style, ...rest } = this.props;
