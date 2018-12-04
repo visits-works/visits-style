@@ -1,6 +1,5 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { InputProps } from './style';
 
 const Wrapper = styled.label`
   display: inline-block;
@@ -22,9 +21,8 @@ const Wrapper = styled.label`
   }
 `;
 
-interface Props extends InputProps {
-  children: ReactNode;
-  checked?: boolean;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  children: any;
 }
 
 export default class Switch extends PureComponent<Props> {
@@ -36,9 +34,9 @@ export default class Switch extends PureComponent<Props> {
   id = `switch_${this.props.name}`;
 
   render() {
-    const { children, ...rest } = this.props;
+    const { children, className, ...rest } = this.props;
     return (
-      <Wrapper>
+      <Wrapper className={className}>
         <input id={this.id} type="checkbox" {...rest} />
         <label htmlFor={this.id}>{children}</label>
       </Wrapper>

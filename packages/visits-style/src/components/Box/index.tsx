@@ -1,9 +1,9 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';
 
-interface Props {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** 色指定 */
   color?: ColorType;
   /** borderを非表示する */
