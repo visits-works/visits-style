@@ -5,3 +5,5 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./components"));
 __export(require("./utils"));
+var default_1 = require("./theme/default");
+exports.defaultTheme = default_1.default;
