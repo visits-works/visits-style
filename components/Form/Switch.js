@@ -25,8 +25,8 @@ export default class Switch extends PureComponent {
         this.id = `switch_${this.props.name}`;
     }
     render() {
-        const { children, ...rest } = this.props;
-        return (React.createElement(Wrapper, null,
+        const { children, className, ...rest } = this.props;
+        return (React.createElement(Wrapper, { className: className },
             React.createElement("input", Object.assign({ id: this.id, type: "checkbox" }, rest)),
             React.createElement("label", { htmlFor: this.id }, children)));
     }

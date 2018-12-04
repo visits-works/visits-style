@@ -58,8 +58,8 @@ var Switch = /** @class */ (function (_super) {
         return _this;
     }
     Switch.prototype.render = function () {
-        var _a = this.props, children = _a.children, rest = __rest(_a, ["children"]);
-        return (react_1.default.createElement(Wrapper, null,
+        var _a = this.props, children = _a.children, className = _a.className, rest = __rest(_a, ["children", "className"]);
+        return (react_1.default.createElement(Wrapper, { className: className },
             react_1.default.createElement("input", __assign({ id: this.id, type: "checkbox" }, rest)),
             react_1.default.createElement("label", { htmlFor: this.id }, children)));
     };

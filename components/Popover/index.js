@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import Box from '../Box';
 const Wrapper = styled.a `
+  display: inline-block;
   outline: none;
   color: inherit;
 
@@ -15,7 +16,6 @@ const Tooltip = styled(Box) `
   position: absolute;
   display: flex;
   clear: both;
-  background-color: white;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   z-index: 9999;
   padding: 0.5rem 0;
@@ -85,8 +85,9 @@ export default class Popover extends Component {
         return this.state.show !== state.show || this.props.label !== props.label;
     }
     render() {
-        const { label, children } = this.props;
-        const { show, style } = this.state;
+        const { label, children, style, ...rest } = this.props;
+        const { show } = this.state;
+        const tooltipStyle = { ...style, ...this.state.style };
         return (React.createElement(Wrapper, { tabIndex: 0, role: "button", onFocus: this.openDropdown, onBlur: this.closeDropdown, style: { display: 'block', position: 'relative' } },
             label,
             React.createElement(CSSTransition, { classNames: {
@@ -94,9 +95,11 @@ export default class Popover extends Component {
                     enterDone: 'start',
                     exit: 'end',
                 }, in: show, timeout: 150, unmountOnExit: true },
-                React.createElement(Tooltip, { style: style }, children))));
+                React.createElement(Tooltip, Object.assign({ style: tooltipStyle }, rest), children))));
     }
 }
 Popover.defaultProps = {
     position: 'bottom-left',
+    color: 'white',
+    style: {},
 };

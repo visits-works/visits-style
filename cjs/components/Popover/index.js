@@ -16,6 +16,26 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -31,8 +51,8 @@ var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var CSSTransition_1 = __importDefault(require("react-transition-group/CSSTransition"));
 var Box_1 = __importDefault(require("../Box"));
-var Wrapper = styled_components_1.default.a(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n"], ["\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n"])));
-var Tooltip = styled_components_1.default(Box_1.default)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: absolute;\n  display: flex;\n  clear: both;\n  background-color: white;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: auto;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"], ["\n  position: absolute;\n  display: flex;\n  clear: both;\n  background-color: white;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: auto;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"])));
+var Wrapper = styled_components_1.default.a(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: inline-block;\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n"], ["\n  display: inline-block;\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n"])));
+var Tooltip = styled_components_1.default(Box_1.default)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: absolute;\n  display: flex;\n  clear: both;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: auto;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"], ["\n  position: absolute;\n  display: flex;\n  clear: both;\n  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);\n  z-index: 9999;\n  padding: 0.5rem 0;\n  width: auto;\n  height: auto;\n  cursor: auto;\n\n  will-change: transform, opacity;\n  transform: scale(0.8);\n  opacity: 0;\n\n  transition-property: transform, opacity;\n  transition-duration: 100ms;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n\n  &.start {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  &.end {\n    transform: scale(0.8);\n    opacity: 0;\n  }\n"])));
 function getPosition(position) {
     switch (position) {
         case 'top-left': {
@@ -79,8 +99,9 @@ var Popover = /** @class */ (function (_super) {
         return this.state.show !== state.show || this.props.label !== props.label;
     };
     Popover.prototype.render = function () {
-        var _a = this.props, label = _a.label, children = _a.children;
-        var _b = this.state, show = _b.show, style = _b.style;
+        var _a = this.props, label = _a.label, children = _a.children, style = _a.style, rest = __rest(_a, ["label", "children", "style"]);
+        var show = this.state.show;
+        var tooltipStyle = __assign({}, style, this.state.style);
         return (react_1.default.createElement(Wrapper, { tabIndex: 0, role: "button", onFocus: this.openDropdown, onBlur: this.closeDropdown, style: { display: 'block', position: 'relative' } },
             label,
             react_1.default.createElement(CSSTransition_1.default, { classNames: {
@@ -88,10 +109,12 @@ var Popover = /** @class */ (function (_super) {
                     enterDone: 'start',
                     exit: 'end',
                 }, in: show, timeout: 150, unmountOnExit: true },
-                react_1.default.createElement(Tooltip, { style: style }, children))));
+                react_1.default.createElement(Tooltip, __assign({ style: tooltipStyle }, rest), children))));
     };
     Popover.defaultProps = {
         position: 'bottom-left',
+        color: 'white',
+        style: {},
     };
     return Popover;
 }(react_1.Component));

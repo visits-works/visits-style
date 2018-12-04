@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { ColorType } from '../../types';
-interface Props {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** 色指定 */
     color?: ColorType;
     /** borderを非表示する */

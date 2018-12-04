@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-interface Props {
+import { Props as BoxProps } from '../Box';
+interface Props extends BoxProps {
     /** ボタンの内容 */
     label: React.ReactNode;
     /** 内容のリスト */
@@ -16,6 +17,8 @@ interface State {
 export default class Popover extends Component<Props, State> {
     static defaultProps: {
         position: string;
+        color: string;
+        style: {};
     };
     state: {
         show: boolean;
