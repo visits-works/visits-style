@@ -25,6 +25,7 @@ const InputWrapper = styled.span<WrapperProps>`
     outline: none;
     max-width: 100%;
     width: 100%;
+    height: 100%;
     background-color: transparent;
     padding: 0.375em 0.625em;
 
