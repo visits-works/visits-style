@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import Box, { Props as BoxProps } from '../Box';
+import { CSSType } from '../../types';
 
-const Wrapper = styled.a`
+const Wrapper = styled.a<{ css?: CSSType }>`
   display: inline-block;
   outline: none;
   color: inherit;
@@ -12,6 +13,8 @@ const Wrapper = styled.a`
     color: inherit;
     text-decoration: none;
   }
+
+  ${({ css }) => css || ''}
 `;
 
 const Tooltip = styled(Box)`
@@ -53,6 +56,8 @@ interface Props extends BoxProps {
   right?: boolean;
   /** 吹き出しが表示される場所 */
   position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
 interface State {
@@ -111,7 +116,7 @@ export default class Popover extends Component<Props, State> {
   }
 
   render() {
-    const { label, children, style, ...rest } = this.props;
+    const { label, children, style, css, ...rest } = this.props;
     const { show } = this.state;
     const tooltipStyle = { ...style, ...this.state.style };
     return (
@@ -121,6 +126,7 @@ export default class Popover extends Component<Props, State> {
         onFocus={this.openDropdown}
         onBlur={this.closeDropdown}
         style={{ display: 'block', position: 'relative' }}
+        css={css}
       >
         {label}
         <CSSTransition
@@ -133,7 +139,7 @@ export default class Popover extends Component<Props, State> {
           timeout={150}
           unmountOnExit
         >
-          <Tooltip style={tooltipStyle} {...rest}>
+          <Tooltip role="tooltip" style={tooltipStyle} {...rest}>
             {children}
           </Tooltip>
         </CSSTransition>

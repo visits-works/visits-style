@@ -1,7 +1,7 @@
 import React, { PureComponent, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { setSize } from '../../utils';
-import commonStyle from './style';
+import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
 
 interface WrapperProps {
@@ -35,7 +35,6 @@ const Wrapper = styled.span<WrapperProps>`
   display: block;
 
   input {
-    ${commonStyle}
     max-width: 100%;
     width: 100%;
     height: 100%;
@@ -44,6 +43,8 @@ const Wrapper = styled.span<WrapperProps>`
     outline: none;
     box-shadow: none;
     appearance: none;
+    text-align: left;
+    color: inherit;
 
     padding: 0.375em 0.625em;
     border: none;
@@ -63,6 +64,15 @@ const Wrapper = styled.span<WrapperProps>`
         `box-shadow: 0 0 0 0.1em ${error ? theme.danger : theme.primary};` :
         `box-shadow: 0 0.1em ${error ? theme.danger : theme.primary};`
       }
+    }
+
+    &:disabled, [disabled] {
+      resize: none;
+      ${({ theme }) => disabledColor(theme)}
+    }
+
+    &:readonly {
+      ${({ theme }) => disabledColor(theme)}
     }
   }
 

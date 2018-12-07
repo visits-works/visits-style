@@ -2,21 +2,13 @@
   "presets": [
     [
       "@babel/preset-env",
-      {
-        "loose": true,
-        "modules": false,
-        "useBuiltIns": "usage",
-        "shippedProposals": true,
-        "targets": {
-          "browsers": [">0.25%", "not dead"]
-        }
-      }
+      { "modules": false }
     ],
     "@babel/preset-react",
     "@babel/preset-typescript"
   ],
   "plugins": [
-    "styled-components",
+    ["styled-components", { "pure": true }],
     "polished",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-class-properties",

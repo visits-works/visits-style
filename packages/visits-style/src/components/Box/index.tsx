@@ -1,4 +1,4 @@
-import React, { CSSProperties, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';

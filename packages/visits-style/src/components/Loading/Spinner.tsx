@@ -1,8 +1,8 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { HTMLAttributes } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 import { ColorType, ThemeType } from '../../types';
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement>{
   /** 色の指定 */
   color?: ColorType;
   /** 横幅 */
@@ -11,7 +11,6 @@ interface Props {
   height?: string;
   /** spinnerの太さ */
   borderSize?: string;
-  style?: any;
 }
 
 function getColor({ theme, color }: { theme: ThemeType, color?: ColorType }) {
@@ -23,6 +22,15 @@ function getColor({ theme, color }: { theme: ThemeType, color?: ColorType }) {
     border-top-color: ${theme.border};
   `;
 }
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+`;
 
 const Spinner = styled.div<Props>`
   display: inline-block;
@@ -36,7 +44,7 @@ const Spinner = styled.div<Props>`
     display: block;
     top: 0;
     left: 0;
-    animation: spin 750ms infinite linear;
+    animation: ${spin} 750ms infinite linear;
     border: ${({ borderSize }) => borderSize} solid;
     border-radius: 100%;
     ${getColor}
@@ -44,15 +52,6 @@ const Spinner = styled.div<Props>`
     height: 100%;
     width: 100%;
     position: absolute;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(359deg);
-    }
   }
 `;
 Spinner.displayName = 'Spinner';

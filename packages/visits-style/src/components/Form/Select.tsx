@@ -1,10 +1,10 @@
 import React, { Component, HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import commonStyle from './style';
 import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
 import HelpMessage from './HelpMessage';
 import { SizeType } from '../../types';
+import disabledColor from '../../utils/disabledColor';
 
 interface WrapperProps {
   size?: SizeType;
@@ -18,7 +18,6 @@ const InputWrapper = styled.span<WrapperProps>`
   display: block;
 
   select {
-    ${commonStyle}
     display: block;
     cursor: pointer;
     appearance: none;
@@ -28,6 +27,8 @@ const InputWrapper = styled.span<WrapperProps>`
     height: 100%;
     background-color: transparent;
     padding: 0.375em 0.625em;
+    text-align: left;
+    color: inherit;
 
     ${({ size }) => setSize('font-size', size)}
 
@@ -56,6 +57,14 @@ const InputWrapper = styled.span<WrapperProps>`
     &:-moz-focusring {
       color: transparent;
       text-shadow: 0 0 0 #000;
+    }
+
+    &:disabled, [disabled] {
+      ${({ theme }) => disabledColor(theme)}
+    }
+
+    &:readonly {
+      ${({ theme }) => disabledColor(theme)}
     }
   }
 

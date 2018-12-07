@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, HTMLAttributes } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
-import { ColorType, ThemeType, AlignType } from '../../types';
+import { ColorType, AlignType, CSSType, ThemeType } from '../../types';
 
 function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
   const backgroundColor = color ? theme[color] : 'transparent';
@@ -37,6 +37,7 @@ interface NavProps {
   style?: any;
   align?: AlignType;
   role: string;
+  css?: CSSType;
 }
 
 const NavBar = styled.header<NavProps>`
@@ -57,6 +58,7 @@ const NavBar = styled.header<NavProps>`
 
   ${mediaTablet`padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};`}
   ${mediaUntilFullHD`padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};`}
+  ${({ css }) => css || ''}
 `;
 
 const Burger = styled.button`
@@ -132,26 +134,8 @@ const NavContent = styled.div<ContentProps>`
   `}
 `;
 
-const NavItem = styled.li`
-  text-align: center;
 
-  a {
-    display: block;
-    padding: .5rem 1rem;
-    color: inherit;
-    opacity: 1;
-
-    will-change: opacity;
-    transition: opacity 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    &:hover, &.active {
-      opacity: 0.65;
-    }
-  }
-`;
-
-
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   /** background色 */
   color?: ColorType;
   /** ロゴのイメージ、プロジェクト名など */
@@ -166,10 +150,8 @@ interface Props {
   backdrop?: boolean;
   /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
   align?: 'left' | 'right';
-  /** cssのスタイルを入れてください */
-  style?: any;
-  /** メニュー、ボタンなどを自由に定義できます。メニューはできれば<ul>タグで指定してください */
-  children?: React.ReactChildren | any;
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
 type State = {
@@ -194,16 +176,12 @@ export default class AppBar extends PureComponent<Props, State> {
   }
 
   render() {
-    const { color, brand, children, style, fixed, sticky, backdrop, align } = this.props;
+    const { children, align, brand, ...rest } = this.props;
     const { show } = this.state;
     return (
       <NavBar
-        color={color}
-        fixed={fixed}
-        sticky={sticky}
-        backdrop={backdrop}
         role="navigation"
-        style={style}
+        {...rest}
       >
         {brand}
         <Burger className={show ? 'active' : ''} onClick={this.toggleMenu}>

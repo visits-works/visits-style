@@ -1,37 +1,42 @@
 import React, { createRef, RefObject, PureComponent } from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
-import Box from '../Box';
 import styled from 'styled-components';
-import { ColorType } from '../../types';
+import { ColorType, CSSType } from '../../types';
 
-const TooltipDiv = styled(Box)`
-  position: absolute;
-  clear: both;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  z-index: 9999;
-  padding: 0.375rem 0.625rem;
-  cursor: default;
-  width: auto;
-  white-space: pre;
-  font-size: 0.85rem;
+const Wrapper = styled.div<{ css?: CSSType }>`
+  position: relative;
+  display: 'inline-block';
 
-  transform: scale(0.8);
-  opacity: 0;
+  & > div[role="tooltip"] {
+    position: absolute;
+    clear: both;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    z-index: 9999;
+    padding: 0.375rem 0.625rem;
+    cursor: default;
+    width: auto;
+    white-space: pre;
+    font-size: 0.85rem;
 
-  will-change: transform, opacity;
-  transition-property: transform, opacity;
-  transition-duration: 100ms;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-
-  &.start {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  &.end {
     transform: scale(0.8);
     opacity: 0;
+
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-duration: 100ms;
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &.start {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    &.end {
+      transform: scale(0.8);
+      opacity: 0;
+    }
   }
+  ${({ css }) => css || ''}
 `;
 
 interface TooltipProps {
@@ -43,7 +48,8 @@ interface TooltipProps {
   color?: ColorType;
   /** 表示される場所 */
   position?: 'top' | 'left' | 'right' | 'bottom';
-  style?: any;
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
 interface State {
@@ -97,14 +103,14 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
   element: RefObject<HTMLDivElement> = createRef();
 
   render() {
-    const { color, label, children } = this.props;
+    const { label, children, ...rest } = this.props;
     const { show, style } = this.state;
     return (
-      <div
+      <Wrapper
         ref={this.element}
-        style={{ display: 'inline-block', position: 'relative', ...this.props.style}}
         onMouseOver={this.openTooltip}
         onMouseOut={this.closeTooltip}
+        {...rest}
       >
         {children}
         <CSSTransition
@@ -117,11 +123,11 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
           timeout={150}
           unmountOnExit
         >
-          <TooltipDiv color={color} style={style} borderless>
+          <div role="tooltip">
             {label}
-          </TooltipDiv>
+          </div>
         </CSSTransition>
-      </div>
+      </Wrapper>
     );
   }
 }

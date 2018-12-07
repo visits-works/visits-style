@@ -6,21 +6,16 @@
     "moduleResolution": "node",
     "jsx": "react",
     "strict": true,
-    "pretty": true,
-    "declaration": false,
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "exclude": [
-    "./jest.setup.js",
     "./node_modules/**",
     "**/__test__/**",
-    "src/**/*.test.tsx",
-    "src/**/*.test.ts",
-    "src/**/*.story.tsx",
-    "build",
-    "lib",
-    "jest",
+    "**/*.test.tsx",
+    "**/*.test.ts",
+    "**/*.story.tsx",
   ]
 }

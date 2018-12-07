@@ -1,29 +1,29 @@
-import React, { PureComponent, CSSProperties, ReactNode } from 'react';
+import React, { PureComponent, HTMLAttributes } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import styled from 'styled-components';
 import Box from '../Box';
 import Col from '../Grid/Col';
-import { ColorType, ColSizeType } from '../../types';
+import { ColorType, ColSizeType, CSSType } from '../../types';
 
 const ESC_KEY = 27;
 
-const wrapperStyle: CSSProperties = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  display: 'flex',
-  alignItems: 'center',
-  zIndex: 9997,
-  overflowY: 'scroll',
-  backgroundColor: 'rgba(30, 30, 30, 0.9)',
-};
-
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ css?: CSSType }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 9997;
+  overflow-y: scroll;
+  background-color: rgba(30, 30, 30, 0.9);
 
   & > ${Col} {
+    z-index: 9999;
+    padding: 1rem;
+    margin: auto;
     transition-property: transform, opacity;
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     transition-duration: 200ms;
@@ -45,15 +45,10 @@ const Wrapper = styled.div`
     opacity: 0.01;
     transform: scale(0.8);
   }
+  ${({ css }) => css || ''}
 `;
 
-const colStyle: CSSProperties = {
-  zIndex: 9999,
-  padding: '1rem',
-  margin: 'auto',
-};
-
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ヘッダーのタイトル文言 */
   title?: any;
   /** 1~12のモーダルサイズ */
@@ -74,7 +69,7 @@ interface Props {
   closeOnOverlay?: boolean;
   /** escボタンでクローズ */
   closeOnEsc?: boolean;
-  style?: any;
+  css?: CSSType;
 }
 
 export default class Modal extends PureComponent<Props> {
@@ -122,7 +117,7 @@ export default class Modal extends PureComponent<Props> {
   }
 
   getModal = () => {
-    const { show, size, title, children, footer, color, style } = this.props;
+    const { show, size, title, children, footer, color, style, onClick, ...rest } = this.props;
     return (
       <CSSTransition
         classNames="fade"
@@ -130,11 +125,10 @@ export default class Modal extends PureComponent<Props> {
         in={show}
         unmountOnExit
       >
-        <Wrapper style={wrapperStyle} onClick={this.onClickOverlay} aria-modal="true">
+        <Wrapper onClick={this.onClickOverlay} aria-modal="true" {...rest}>
           <Col
             size={size || 6}
             role="dialog"
-            style={colStyle}
             onMouseUp={this.handleContentOnMouse}
             onMouseDown={this.handleContentOnMouse}
             auto
@@ -150,16 +144,12 @@ export default class Modal extends PureComponent<Props> {
     );
   }
 
-  // @ts-ignore
-  element: HTMLDivElement;
+  element?: HTMLDivElement;
   shouldClose: boolean | null = null;
 
-  render() {
-    if(typeof document !== "undefined") {
-      return createPortal(
-        this.getModal(),
-        this.element,
-      );
+  render(): React.ReactPortal | null {
+    if(this.element) {
+      return createPortal(this.getModal(), this.element);
     }
     return null;
   }

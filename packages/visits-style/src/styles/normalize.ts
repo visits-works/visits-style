@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 /*! based on normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
-export default css`
+const normalized: any = css`
   *, ::after, ::before {
     box-sizing: border-box;
   }
@@ -239,3 +239,5 @@ export default css`
     list-style-type: none;
   }
 `;
+
+export default normalized;

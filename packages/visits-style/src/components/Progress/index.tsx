@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import setSize from '../../utils/setSize';
-import { ColorType, SizeType } from '../../types';
+import { ColorType, SizeType, CSSType } from '../../types';
 
-interface ProgressProps {
+interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   /** 現状の進捗 */
   value: number;
   /** 進捗の最大値 */
@@ -14,11 +14,12 @@ interface ProgressProps {
   height?: string;
   /** バーの色 */
   color?: ColorType;
-
-  style?: any;
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
 const Wrapper = styled.div<ProgressProps>`
+  position: relative;
   display: block;
   width: 100%;
   border-radius: 4px;
@@ -27,7 +28,8 @@ const Wrapper = styled.div<ProgressProps>`
   ${({ size }) => setSize('height', size)}
   ${({ size, height }) => !size && height ? `height: ${height};` : ''}
 
-  & > div {
+  & > div[role="progressbar"] {
+    position: relative;
     height: 100%;
     border-radius: 4px;
     ${({ value, max }) => (value === max) ? '' : 'border-bottom-right-radius: 0; border-top-right-radius: 0;'}
@@ -38,7 +40,9 @@ const Wrapper = styled.div<ProgressProps>`
     transition-property: width;
     transition-duration: 350ms;
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    z-index: 1;
   }
+  ${({ css }) => (css || '')}
 `;
 
 

@@ -2,7 +2,7 @@ import React, { Component, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
-import commonStyle from './style';
+import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
 
 interface WrapperProps {
@@ -14,7 +14,6 @@ const Wrapper = styled.span<WrapperProps>`
   position: relative;
 
   textarea {
-    ${commonStyle}
     max-width: 100%;
     width: 100%;
     height: 100%;
@@ -23,6 +22,8 @@ const Wrapper = styled.span<WrapperProps>`
     appearance: none;
     overflow: auto;
     outline: none;
+    text-align: left;
+    color: inherit;
 
     border-radius: 4px;
     border: 1px solid ${({ theme, error }) => error ? theme.danger : theme.border};
@@ -38,8 +39,13 @@ const Wrapper = styled.span<WrapperProps>`
       ${({ theme, error }) => boxShadow('0.1em', error ? theme.danger : theme.primary)}
     }
 
-    &:disabled {
+    &:disabled, [disabled] {
       resize: none;
+      ${({ theme }) => disabledColor(theme)}
+    }
+
+    &:readonly {
+      ${({ theme }) => disabledColor(theme)}
     }
   }
 

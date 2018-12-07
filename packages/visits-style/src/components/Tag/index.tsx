@@ -1,13 +1,14 @@
-import * as React from 'react';
+import React, { HTMLAttributes, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
-import { ColorType, ThemeType } from '../../types';
+import { ColorType, ThemeType, CSSType } from '../../types';
 
 interface WrapperProps {
   color?: ColorType;
   addonColor?: ColorType;
   close: boolean;
+  css?: CSSType;
 }
 
 function getColor(theme: ThemeType, color?: ColorType) {
@@ -104,9 +105,11 @@ const Wrapper = styled.div<WrapperProps>`
       }
     ` : '')}
   }
+
+  ${({ css }) => css || ''}
 `;
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   /** タグの内容 */
   children: any;
   /** Xボタンの追加＋クリック時のイベントハンドラー */
@@ -115,9 +118,11 @@ interface Props {
   onClick?: () => void;
   /** 色の指定 */
   color?: ColorType;
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
-export default class Tag extends React.PureComponent<Props> {
+export default class Tag extends PureComponent<Props> {
   static defaultProps = {
     children: null,
     onClose: null,

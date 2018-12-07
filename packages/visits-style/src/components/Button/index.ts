@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { HTMLAttributes } from 'react';
 import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
@@ -84,7 +85,7 @@ function setColor({ theme, color, outline, disabled }: Props) {
   `;
 }
 
-interface ButtonProps {
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** ボタンの色 */
   color?: ColorType;
   /** ボタンのサイズ */
@@ -93,8 +94,6 @@ interface ButtonProps {
   outline?: boolean;
   /** 全体幅のボタンで設定 */
   full?: boolean;
-  /** - */
-  disabled?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`

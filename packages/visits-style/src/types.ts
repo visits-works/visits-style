@@ -1,3 +1,4 @@
+import { BaseThemedCssFunction } from 'styled-components';
 
 export type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' |
 'warning' | 'danger' | 'dark' | 'text' | string;
@@ -8,12 +9,7 @@ export type ColSizeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export type AlignType = 'left' | 'right' | 'center';
 
-export interface InputProps {
-  name: string;
-  value?: string | number;
-  onChange: (e?: any) => void;
-  onBlur?: (e?: any) => void;
-}
+export type CSSType = ReturnType<BaseThemedCssFunction<ThemeType | any>> | string;
 
 export interface ThemeType {
   primary: string;

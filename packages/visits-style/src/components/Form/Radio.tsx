@@ -22,7 +22,7 @@ const RadioLabel = css`
       left: 0.375em;
       width: 0.5em;
       height: 0.5em;
-      background: ${({ theme }) => theme.primary};
+      background: ${({ theme }: any) => theme.primary};
       border: none;
       transform: scale(0);
       border-radius: 50%;
@@ -37,7 +37,7 @@ const RadioLabel = css`
       left:0;
       top: 0;
       background: transparent;
-      border: 0.1em solid ${({ theme }) => theme.border};
+      border: 0.1em solid ${({ theme }: any) => theme.border};
       border-radius: 50%;
 
       will-change: background;
@@ -50,7 +50,7 @@ const RadioLabel = css`
 
     &:checked {
       + label:before {
-        border-color: ${({ theme }) => theme.primary};
+        border-color: ${({ theme }: any) => theme.primary};
       }
       + label:after{
         transform: scale(1);
@@ -59,14 +59,14 @@ const RadioLabel = css`
 
     &:disabled {
       + label {
-        color: ${({ theme }) => transparentize(0.25, theme.textDark)};
+        color: ${({ theme }: any) => transparentize(0.25, theme.textDark)};
         &:before {
-          background: ${({ theme }) => transparentize(0.55, theme.border)};
-          border-color: ${({ theme }) => theme.border};
+          background: ${({ theme }: any) => transparentize(0.55, theme.border)};
+          border-color: ${({ theme }: any) => theme.border};
         }
       }
       &:checked + label:after {
-        background: ${({ theme }) => transparentize(0.15, theme.textDark)};
+        background: ${({ theme }: any) => transparentize(0.15, theme.textDark)};
       }
     }
   }
@@ -79,12 +79,12 @@ const ButtonLabel = css`
     cursor: pointer;
     padding: 0.375em 0.75em;
     height: 2.25em;
-    border: 1px solid ${({ theme }) => theme.border};
+    border: 1px solid ${({ theme }: any) => theme.border};
     text-align: center;
     width: 100%;
 
     &:hover {
-      border-color: ${({ theme }) => theme.borderHover};
+      border-color: ${({ theme }: any) => theme.borderHover};
     }
   }
 
@@ -93,21 +93,21 @@ const ButtonLabel = css`
 
     &:checked + label {
       z-index: 1;
-      border-color: ${({ theme }) => theme.primary};
-      background-color: ${({ theme }) => transparentize(0.55, theme.primary)};
+      border-color: ${({ theme }: any) => theme.primary};
+      background-color: ${({ theme }: any) => transparentize(0.55, theme.primary)};
     }
 
     &:disabled {
       + label {
         cursor: default;
-        color: ${({ theme }) => transparentize(0.25, theme.textDark)};
-        background-color: ${({ theme }) => transparentize(0.55, theme.border)};
-        border-color: ${({ theme }) => theme.border};
+        color: ${({ theme }: any) => transparentize(0.25, theme.textDark)};
+        background-color: ${({ theme }: any) => transparentize(0.55, theme.border)};
+        border-color: ${({ theme }: any) => theme.border};
       }
 
       &:checked + label {
-        border-color: ${({ theme }) => theme.textDark};
-        background-color: ${({ theme }) => transparentize(0.65, theme.textDark)};
+        border-color: ${({ theme }: any) => theme.textDark};
+        background-color: ${({ theme }: any) => transparentize(0.65, theme.textDark)};
       }
     }
   }

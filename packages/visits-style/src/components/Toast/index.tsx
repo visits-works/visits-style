@@ -65,7 +65,7 @@ export class ToastItem extends PureComponent<ToastProps> {
   }
 
   render() {
-    const { message, color, id } = this.props;
+    const { message, color } = this.props;
     return (
       <Wrapper borderless color={color}>
         {message}
@@ -133,7 +133,7 @@ export default class ToastContainer extends Component<ContainerProps> {
   }
 
   componentDidUpdate(props: ContainerProps) {
-    if (props.position !== this.props.position || props.fixed !== this.props.fixed) {
+    if (this.element && (props.position !== this.props.position || props.fixed !== this.props.fixed)) {
       this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
     }
   }
@@ -168,15 +168,11 @@ export default class ToastContainer extends Component<ContainerProps> {
     );
   }
 
-  // @ts-ignore
-  element: HTMLDivElement;
+  element?: HTMLDivElement;
 
-  render() {
-    if(typeof document !== "undefined") {
-      return createPortal(
-        this.renderToast(),
-        this.element,
-      );
+  render(): React.ReactPortal | null {
+    if(this.element) {
+      return createPortal(this.renderToast(), this.element);
     }
     return null;
   }
