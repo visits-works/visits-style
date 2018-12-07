@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -41,14 +41,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var CSSTransition_1 = __importDefault(require("react-transition-group/CSSTransition"));
-var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: ", ";\n  background-color: ", ";\n  top: 0;\n  left: 0;\n  width: 100%;\n"], ["\n  position: ", ";\n  background-color: ", ";\n  top: 0;\n  left: 0;\n  width: 100%;\n"])), function (_a) {
+var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: ", ";\n  background-color: ", ";\n  top: 0;\n  left: 0;\n  width: 100%;\n\n  .loading-bar {\n    height: ", ";\n    background-color: ", ";\n\n    will-change: width, opacity;\n    z-index: 1000000;\n\n    transition-property: width, opacity;\n    transition-duration: ", "ms;\n    transition-timing-function: linear;\n\n    &.load-enter {\n      width: 0;\n    }\n\n    &.load-enter-done {\n      width: 85%;\n    }\n\n    &.load-exit {\n      width: 85%;\n    }\n\n    &.load-exit-active {\n      width: 100%;\n      opacity: 0;\n    }\n  }\n\n  ", "\n"], ["\n  position: ", ";\n  background-color: ", ";\n  top: 0;\n  left: 0;\n  width: 100%;\n\n  .loading-bar {\n    height: ", ";\n    background-color: ", ";\n\n    will-change: width, opacity;\n    z-index: 1000000;\n\n    transition-property: width, opacity;\n    transition-duration: ", "ms;\n    transition-timing-function: linear;\n\n    &.load-enter {\n      width: 0;\n    }\n\n    &.load-enter-done {\n      width: 85%;\n    }\n\n    &.load-exit {\n      width: 85%;\n    }\n\n    &.load-exit-active {\n      width: 100%;\n      opacity: 0;\n    }\n  }\n\n  ", "\n"])), function (_a) {
     var position = _a.position;
     return position;
 }, function (_a) {
     var background = _a.background;
     return background;
-});
-exports.Bar = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  height: ", ";\n  background-color: ", ";\n\n  will-change: width, opacity;\n  z-index: 1000000;\n\n  transition-property: width, opacity;\n  transition-duration: ", "ms;\n  transition-timing-function: linear;\n\n  &.load-enter {\n    width: 0;\n  }\n\n  &.load-enter-done {\n    width: 85%;\n  }\n\n  &.load-exit {\n    width: 85%;\n  }\n\n  &.load-exit-active {\n    width: 100%;\n    opacity: 0;\n  }\n"], ["\n  height: ", ";\n  background-color: ", ";\n\n  will-change: width, opacity;\n  z-index: 1000000;\n\n  transition-property: width, opacity;\n  transition-duration: ", "ms;\n  transition-timing-function: linear;\n\n  &.load-enter {\n    width: 0;\n  }\n\n  &.load-enter-done {\n    width: 85%;\n  }\n\n  &.load-exit {\n    width: 85%;\n  }\n\n  &.load-exit-active {\n    width: 100%;\n    opacity: 0;\n  }\n"])), function (_a) {
+}, function (_a) {
     var size = _a.size;
     return size;
 }, function (_a) {
@@ -57,6 +56,9 @@ exports.Bar = styled_components_1.default.div(templateObject_2 || (templateObjec
 }, function (_a) {
     var duration = _a.duration;
     return duration;
+}, function (_a) {
+    var css = _a.css;
+    return css || '';
 });
 var LoadingBar = /** @class */ (function (_super) {
     __extends(LoadingBar, _super);
@@ -66,7 +68,7 @@ var LoadingBar = /** @class */ (function (_super) {
     LoadingBar.prototype.render = function () {
         return (react_1.default.createElement(Wrapper, __assign({}, this.props),
             react_1.default.createElement(CSSTransition_1.default, { classNames: "load", timeout: this.props.duration, in: this.props.loading, unmountOnExit: true },
-                react_1.default.createElement(exports.Bar, __assign({}, this.props)))));
+                react_1.default.createElement("div", { className: "loading-bar" }))));
     };
     LoadingBar.defaultProps = {
         loading: false,
@@ -79,4 +81,4 @@ var LoadingBar = /** @class */ (function (_super) {
     return LoadingBar;
 }(react_1.PureComponent));
 exports.default = LoadingBar;
-var templateObject_1, templateObject_2;
+var templateObject_1;

@@ -1,6 +1,6 @@
-import { PureComponent } from 'react';
-import { ColorType, SizeType } from '../../types';
-interface ProgressProps {
+import { PureComponent, HTMLAttributes } from 'react';
+import { ColorType, SizeType, CSSType } from '../../types';
+interface ProgressProps extends HTMLAttributes<HTMLDivElement> {
     /** 現状の進捗 */
     value: number;
     /** 進捗の最大値 */
@@ -11,7 +11,8 @@ interface ProgressProps {
     height?: string;
     /** バーの色 */
     color?: ColorType;
-    style?: any;
+    /** カスタムCSS定義 */
+    css?: CSSType;
 }
 export default class Progress extends PureComponent<ProgressProps> {
     static defaultProps: {

@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -41,7 +41,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
-var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  width: 100%;\n  border-radius: 4px;\n  background-color: ", ";\n\n  ", "\n  ", "\n\n  & > div {\n    height: 100%;\n    border-radius: 4px;\n    ", "\n    background-color: ", ";\n\n    will-change: width;\n\n    transition-property: width;\n    transition-duration: 350ms;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n  }\n"], ["\n  display: block;\n  width: 100%;\n  border-radius: 4px;\n  background-color: ", ";\n\n  ", "\n  ", "\n\n  & > div {\n    height: 100%;\n    border-radius: 4px;\n    ", "\n    background-color: ", ";\n\n    will-change: width;\n\n    transition-property: width;\n    transition-duration: 350ms;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n  }\n"])), function (_a) {
+var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n  width: 100%;\n  border-radius: 4px;\n  background-color: ", ";\n\n  ", "\n  ", "\n\n  & > div[role=\"progressbar\"] {\n    position: relative;\n    height: 100%;\n    border-radius: 4px;\n    ", "\n    background-color: ", ";\n\n    will-change: width;\n\n    transition-property: width;\n    transition-duration: 350ms;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n    z-index: 1;\n  }\n  ", "\n"], ["\n  position: relative;\n  display: block;\n  width: 100%;\n  border-radius: 4px;\n  background-color: ", ";\n\n  ", "\n  ", "\n\n  & > div[role=\"progressbar\"] {\n    position: relative;\n    height: 100%;\n    border-radius: 4px;\n    ", "\n    background-color: ", ";\n\n    will-change: width;\n\n    transition-property: width;\n    transition-duration: 350ms;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n    z-index: 1;\n  }\n  ", "\n"])), function (_a) {
     var theme = _a.theme;
     return theme.background;
 }, function (_a) {
@@ -56,6 +56,9 @@ var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObjec
 }, function (_a) {
     var color = _a.color, theme = _a.theme;
     return (theme[color] || color);
+}, function (_a) {
+    var css = _a.css;
+    return (css || '');
 });
 var Progress = /** @class */ (function (_super) {
     __extends(Progress, _super);

@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -51,9 +51,9 @@ var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var boxShadow_1 = __importDefault(require("../../utils/boxShadow"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
-var style_1 = __importDefault(require("./style"));
+var disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
-var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  position: relative;\n\n  textarea {\n    ", "\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled {\n      resize: none;\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"], ["\n  display: block;\n  position: relative;\n\n  textarea {\n    ", "\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled {\n      resize: none;\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"])), style_1.default, function (_a) {
+var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  position: relative;\n\n  textarea {\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n    text-align: left;\n    color: inherit;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled, [disabled] {\n      resize: none;\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"], ["\n  display: block;\n  position: relative;\n\n  textarea {\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    padding: 0.625em;\n    resize: vertical;\n    appearance: none;\n    overflow: auto;\n    outline: none;\n    text-align: left;\n    color: inherit;\n\n    border-radius: 4px;\n    border: 1px solid ", ";\n\n    transition-property: box-shadow;\n    transition-duration: 0.15s;\n    transition-timing-function: ease-in-out;\n\n    ", "\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled, [disabled] {\n      resize: none;\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &:hover {\n    textarea:not(:disabled):not(:focus) {\n      border-color: ", ";\n    }\n  }\n"])), function (_a) {
     var theme = _a.theme, error = _a.error;
     return error ? theme.danger : theme.border;
 }, setSize_1.default('font-size'), function (_a) {
@@ -62,6 +62,12 @@ var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObje
 }, function (_a) {
     var theme = _a.theme, error = _a.error;
     return boxShadow_1.default('0.1em', error ? theme.danger : theme.primary);
+}, function (_a) {
+    var theme = _a.theme;
+    return disabledColor_1.default(theme);
+}, function (_a) {
+    var theme = _a.theme;
+    return disabledColor_1.default(theme);
 }, function (_a) {
     var theme = _a.theme;
     return theme.borderHover;

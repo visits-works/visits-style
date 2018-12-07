@@ -25,7 +25,7 @@ export default class Tabs extends Component<Props> {
         current: number | undefined;
         start: number;
     };
-    static Item: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & ItemProps, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & ItemProps>;
+    static Item: import("styled-components").StyledComponent<"div", any, ItemProps, never>;
     state: {
         start: number;
         current: null;

@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -49,14 +49,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
-var style_1 = __importDefault(require("./style"));
 var arrow_1 = __importDefault(require("../../utils/arrow"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
-var InputWrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    ", "\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    ", "\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n\n    ", "\n\n    border: none;\n    ",
+var disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
+var InputWrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled] {\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ",
     "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ",
-    "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
-    "\n"])), style_1.default, function (_a) {
+    "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled] {\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
+    "\n"])), function (_a) {
     var size = _a.size;
     return setSize_1.default('font-size', size);
 }, function (_a) {
@@ -72,6 +72,12 @@ var InputWrapper = styled_components_1.default.span(templateObject_1 || (templat
     return outline ?
         "box-shadow: 0 0 0 0.1em " + (error ? theme.danger : theme.primary) + ";" :
         "box-shadow: 0 0.1em " + (error ? theme.danger : theme.primary) + ";";
+}, function (_a) {
+    var theme = _a.theme;
+    return disabledColor_1.default(theme);
+}, function (_a) {
+    var theme = _a.theme;
+    return disabledColor_1.default(theme);
 }, function (_a) {
     var theme = _a.theme;
     return arrow_1.default(theme.border);

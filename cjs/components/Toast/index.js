@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -56,7 +56,7 @@ var ToastItem = /** @class */ (function (_super) {
         }
     };
     ToastItem.prototype.render = function () {
-        var _a = this.props, message = _a.message, color = _a.color, id = _a.id;
+        var _a = this.props, message = _a.message, color = _a.color;
         return (react_1.default.createElement(Wrapper, { borderless: true, color: color }, message));
     };
     ToastItem.defaultProps = {
@@ -113,7 +113,7 @@ var ToastContainer = /** @class */ (function (_super) {
             props.position !== this.props.position;
     };
     ToastContainer.prototype.componentDidUpdate = function (props) {
-        if (props.position !== this.props.position || props.fixed !== this.props.fixed) {
+        if (this.element && (props.position !== this.props.position || props.fixed !== this.props.fixed)) {
             this.element.style.cssText = setPosition(this.props.position, this.props.fixed);
         }
     };
@@ -122,7 +122,7 @@ var ToastContainer = /** @class */ (function (_super) {
             document.body.removeChild(this.element);
     };
     ToastContainer.prototype.render = function () {
-        if (typeof document !== "undefined") {
+        if (this.element) {
             return react_dom_1.createPortal(this.renderToast(), this.element);
         }
         return null;

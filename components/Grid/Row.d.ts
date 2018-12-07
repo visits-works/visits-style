@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface Props {
     /** 固定幅 */
     width?: string;
@@ -11,5 +10,5 @@ interface Props {
     /** Colの間隔をなくす */
     noGutter?: boolean;
 }
-declare const Row: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & Props, any, import("react").ClassAttributes<HTMLDivElement> & import("react").HTMLAttributes<HTMLDivElement> & Props>;
+declare const Row: import("styled-components").StyledComponent<"div", any, Props, never>;
 export default Row;

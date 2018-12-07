@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { ColorType } from '../../types';
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** 色指定 */
@@ -7,5 +7,5 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     borderless?: boolean;
     style?: any;
 }
-declare const Box: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
+declare const Box: import("styled-components").StyledComponent<"div", any, Props, never>;
 export default Box;

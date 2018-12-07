@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import { HTMLAttributes } from 'react';
 import { ColorType, SizeType } from '../../types';
-interface ButtonProps {
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     /** ボタンの色 */
     color?: ColorType;
     /** ボタンのサイズ */
@@ -9,8 +9,6 @@ interface ButtonProps {
     outline?: boolean;
     /** 全体幅のボタンで設定 */
     full?: boolean;
-    /** - */
-    disabled?: boolean;
 }
-declare const Button: import("styled-components").StyledComponentClass<import("react").ClassAttributes<HTMLButtonElement> & import("react").ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps, any, import("react").ClassAttributes<HTMLButtonElement> & import("react").ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps>;
+declare const Button: import("styled-components").StyledComponent<"button", any, ButtonProps, never>;
 export default Button;

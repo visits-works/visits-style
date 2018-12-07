@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Props as BoxProps } from '../Box';
+import { CSSType } from '../../types';
 interface Props extends BoxProps {
     /** ボタンの内容 */
     label: React.ReactNode;
@@ -9,6 +10,8 @@ interface Props extends BoxProps {
     right?: boolean;
     /** 吹き出しが表示される場所 */
     position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+    /** カスタムCSS定義 */
+    css?: CSSType;
 }
 interface State {
     show: boolean;

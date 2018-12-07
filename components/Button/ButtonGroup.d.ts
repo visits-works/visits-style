@@ -1,3 +1,2 @@
-/// <reference types="react" />
-declare const ButtonGroup: import("styled-components").StyledComponentClass<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, any, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
+declare const ButtonGroup: import("styled-components").StyledComponent<"div", any, {}, never>;
 export default ButtonGroup;

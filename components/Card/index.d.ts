@@ -1,4 +1,4 @@
-import { PureComponent, ReactNode } from 'react';
+import { PureComponent } from 'react';
 import { ColorType } from '../../types';
 interface Props {
     /** レスポンシブなイメージを追加する */
@@ -6,13 +6,15 @@ interface Props {
     /** タイトル */
     title?: string;
     /** ヘッダーの右側に追加する */
-    headerOptions?: ReactNode;
+    headerOptions?: any;
     /** header部分（イメージ）を横並びにする */
     horizontal?: boolean;
     /** footer */
-    footer?: ReactNode;
+    footer?: any;
     /** 色の指定 */
     color?: ColorType;
+    /** ヘッダを */
+    headerOnTop?: boolean;
     /** カスタinline style */
     style?: any;
 }

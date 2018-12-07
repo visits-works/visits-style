@@ -1,3 +1,2 @@
-/// <reference types="react" />
-declare const Pre: import("styled-components").StyledComponentClass<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLPreElement>, HTMLPreElement>, any, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLPreElement>, HTMLPreElement>>;
+declare const Pre: import("styled-components").StyledComponent<"pre", any, {}, never>;
 export default Pre;

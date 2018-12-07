@@ -1,5 +1,5 @@
 import { RefObject, PureComponent } from 'react';
-import { ColorType } from '../../types';
+import { ColorType, CSSType } from '../../types';
 interface TooltipProps {
     /** 吹き出しとして表示したい内容 */
     label: any;
@@ -9,7 +9,8 @@ interface TooltipProps {
     color?: ColorType;
     /** 表示される場所 */
     position?: 'top' | 'left' | 'right' | 'bottom';
-    style?: any;
+    /** カスタムCSS定義 */
+    css?: CSSType;
 }
 interface State {
     show: boolean;

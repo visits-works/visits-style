@@ -1,6 +1,6 @@
-import React from 'react';
+import { HTMLAttributes } from 'react';
 import { ColorType } from '../../types';
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
     /** 色の指定 */
     color?: ColorType;
     /** 横幅 */
@@ -9,7 +9,6 @@ interface Props {
     height?: string;
     /** spinnerの太さ */
     borderSize?: string;
-    style?: any;
 }
-declare const Spinner: import("styled-components").StyledComponentClass<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props, any, React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & Props>;
+declare const Spinner: import("styled-components").StyledComponent<"div", any, Props, never>;
 export default Spinner;

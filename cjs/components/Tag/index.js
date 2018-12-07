@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -47,7 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __importStar(require("react"));
+var react_1 = __importStar(require("react"));
 var styled_components_1 = __importStar(require("styled-components"));
 var darken_1 = __importDefault(require("polished/lib/color/darken"));
 var findColorInvert_1 = __importDefault(require("../../utils/findColorInvert"));
@@ -61,8 +61,11 @@ function setColor(_a) {
     var subColor = addonColor ? getColor(theme, addonColor) : darken_1.default(0.05, target);
     return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    color: ", ";\n    background-color: ", ";\n\n    a, span {\n      color: ", ";\n      background-color: ", ";\n    }\n\n    a:hover {\n      background-color: ", ";\n    }\n  "], ["\n    color: ", ";\n    background-color: ", ";\n\n    a, span {\n      color: ", ";\n      background-color: ", ";\n    }\n\n    a:hover {\n      background-color: ", ";\n    }\n  "])), invertColor, target, invertColor, subColor, darken_1.default(0.05, subColor));
 }
-var Wrapper = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  display: inline-flex;\n  font-size: 0.75rem;\n  cursor: default;\n  padding: 0 .5rem;\n  height: 2em;\n  user-select: none;\n  border-radius: 3px;\n  justify-content: center;\n  align-items: center;\n  white-space: nowrap;\n  line-height: 1.5;\n\n  ", "\n\n  &:not(:last-child) {\n    margin-right: 0.5rem;\n  }\n\n  a, span {\n    position: relative;\n    display: inline-flex;\n    flex-grow: 0;\n    flex-shrink: 0;\n    min-width: 1.5rem;\n    height: 100%;\n    margin-right: -0.5rem;\n    margin-left: 0.5rem;\n    padding: 0 .5rem;\n    justify-content: center;\n    align-items: center;\n\n    &:last-child {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n    }\n\n    &:focus {\n      outline: none;\n    }\n\n    ", "\n  }\n"], ["\n  display: inline-flex;\n  font-size: 0.75rem;\n  cursor: default;\n  padding: 0 .5rem;\n  height: 2em;\n  user-select: none;\n  border-radius: 3px;\n  justify-content: center;\n  align-items: center;\n  white-space: nowrap;\n  line-height: 1.5;\n\n  ", "\n\n  &:not(:last-child) {\n    margin-right: 0.5rem;\n  }\n\n  a, span {\n    position: relative;\n    display: inline-flex;\n    flex-grow: 0;\n    flex-shrink: 0;\n    min-width: 1.5rem;\n    height: 100%;\n    margin-right: -0.5rem;\n    margin-left: 0.5rem;\n    padding: 0 .5rem;\n    justify-content: center;\n    align-items: center;\n\n    &:last-child {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n    }\n\n    &:focus {\n      outline: none;\n    }\n\n    ",
-    "\n  }\n"])), setColor, function (props) { return (props.close ? styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      &:before, &:after {\n        background-color: currentColor;\n        content: \"\";\n        display: block;\n        left: 50%;\n        position: absolute;\n        top: 50%;\n        transform: translateX(-50%) translateY(-50%) rotate(45deg);\n        transform-origin: center center;\n      }\n\n      &:before {\n        height: 1px;\n        width: 50%;\n      }\n\n      &:after {\n        height: 50%;\n        width: 1px;\n      }\n\n      &:hover {\n        opacity: 1;\n      }\n    "], ["\n      &:before, &:after {\n        background-color: currentColor;\n        content: \"\";\n        display: block;\n        left: 50%;\n        position: absolute;\n        top: 50%;\n        transform: translateX(-50%) translateY(-50%) rotate(45deg);\n        transform-origin: center center;\n      }\n\n      &:before {\n        height: 1px;\n        width: 50%;\n      }\n\n      &:after {\n        height: 50%;\n        width: 1px;\n      }\n\n      &:hover {\n        opacity: 1;\n      }\n    "]))) : ''); });
+var Wrapper = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  display: inline-flex;\n  font-size: 0.75rem;\n  cursor: default;\n  padding: 0 .5rem;\n  height: 2em;\n  user-select: none;\n  border-radius: 3px;\n  justify-content: center;\n  align-items: center;\n  white-space: nowrap;\n  line-height: 1.5;\n\n  ", "\n\n  &:not(:last-child) {\n    margin-right: 0.5rem;\n  }\n\n  a, span {\n    position: relative;\n    display: inline-flex;\n    flex-grow: 0;\n    flex-shrink: 0;\n    min-width: 1.5rem;\n    height: 100%;\n    margin-right: -0.5rem;\n    margin-left: 0.5rem;\n    padding: 0 .5rem;\n    justify-content: center;\n    align-items: center;\n\n    &:last-child {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n    }\n\n    &:focus {\n      outline: none;\n    }\n\n    ", "\n  }\n\n  ", "\n"], ["\n  display: inline-flex;\n  font-size: 0.75rem;\n  cursor: default;\n  padding: 0 .5rem;\n  height: 2em;\n  user-select: none;\n  border-radius: 3px;\n  justify-content: center;\n  align-items: center;\n  white-space: nowrap;\n  line-height: 1.5;\n\n  ", "\n\n  &:not(:last-child) {\n    margin-right: 0.5rem;\n  }\n\n  a, span {\n    position: relative;\n    display: inline-flex;\n    flex-grow: 0;\n    flex-shrink: 0;\n    min-width: 1.5rem;\n    height: 100%;\n    margin-right: -0.5rem;\n    margin-left: 0.5rem;\n    padding: 0 .5rem;\n    justify-content: center;\n    align-items: center;\n\n    &:last-child {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n    }\n\n    &:focus {\n      outline: none;\n    }\n\n    ",
+    "\n  }\n\n  ", "\n"])), setColor, function (props) { return (props.close ? styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      &:before, &:after {\n        background-color: currentColor;\n        content: \"\";\n        display: block;\n        left: 50%;\n        position: absolute;\n        top: 50%;\n        transform: translateX(-50%) translateY(-50%) rotate(45deg);\n        transform-origin: center center;\n      }\n\n      &:before {\n        height: 1px;\n        width: 50%;\n      }\n\n      &:after {\n        height: 50%;\n        width: 1px;\n      }\n\n      &:hover {\n        opacity: 1;\n      }\n    "], ["\n      &:before, &:after {\n        background-color: currentColor;\n        content: \"\";\n        display: block;\n        left: 50%;\n        position: absolute;\n        top: 50%;\n        transform: translateX(-50%) translateY(-50%) rotate(45deg);\n        transform-origin: center center;\n      }\n\n      &:before {\n        height: 1px;\n        width: 50%;\n      }\n\n      &:after {\n        height: 50%;\n        width: 1px;\n      }\n\n      &:hover {\n        opacity: 1;\n      }\n    "]))) : ''); }, function (_a) {
+    var css = _a.css;
+    return css || '';
+});
 var Tag = /** @class */ (function (_super) {
     __extends(Tag, _super);
     function Tag() {
@@ -70,9 +73,9 @@ var Tag = /** @class */ (function (_super) {
     }
     Tag.prototype.render = function () {
         var _a = this.props, children = _a.children, onClose = _a.onClose, rest = __rest(_a, ["children", "onClose"]);
-        return (React.createElement(Wrapper, __assign({ close: onClose !== null }, rest),
+        return (react_1.default.createElement(Wrapper, __assign({ close: onClose !== null }, rest),
             children,
-            onClose && (React.createElement("a", { tabIndex: 0, role: "link", onClick: onClose }, "\u00A0"))));
+            onClose && (react_1.default.createElement("a", { tabIndex: 0, role: "link", onClick: onClose }, "\u00A0"))));
     };
     Tag.defaultProps = {
         children: null,
@@ -81,6 +84,6 @@ var Tag = /** @class */ (function (_super) {
         color: null,
     };
     return Tag;
-}(React.PureComponent));
+}(react_1.PureComponent));
 exports.default = Tag;
 var templateObject_1, templateObject_2, templateObject_3;

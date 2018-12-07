@@ -1,1 +1,2 @@
-export default function hamburger(size: string): import("styled-components").InterpolationValue[];
+import { CSSType } from '../types';
+export default function hamburger(size: string): CSSType;

@@ -43,7 +43,7 @@ export default class ToastContainer extends Component<ContainerProps> {
     componentWillUnmount(): void;
     clear: (id: string) => () => void;
     renderToast: () => JSX.Element;
-    element: HTMLDivElement;
+    element?: HTMLDivElement;
     render(): React.ReactPortal | null;
 }
 export {};

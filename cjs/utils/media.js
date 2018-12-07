@@ -9,7 +9,6 @@ function mediaFrom(device, str) {
     }
     var template = ['@media screen and (min-width: ', 'px) {'].concat(str, ['}']);
     var values = [device, ''].concat(args, ['']);
-    // @ts-ignore
     return styled_components_1.css.apply(void 0, [template].concat(values));
 }
 function mediaUntil(device, str) {
@@ -19,7 +18,6 @@ function mediaUntil(device, str) {
     }
     var template = ['@media screen and (max-width: ', 'px) {'].concat(str, ['}']);
     var values = [device, ''].concat(args, ['']);
-    // @ts-ignore
     return styled_components_1.css.apply(void 0, [template].concat(values));
 }
 function withTheme(func) {

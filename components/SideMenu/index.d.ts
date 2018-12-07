@@ -1,4 +1,3 @@
-import React from 'react';
-export declare const SideMenu: import("styled-components").StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>, any, React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>>;
-export declare const MenuList: import("styled-components").StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>, any, React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>>;
-export declare const MenuLabel: import("styled-components").StyledComponentClass<React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, any, React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>>;
+export declare const SideMenu: import("styled-components").StyledComponent<"aside", any, {}, never>;
+export declare const MenuList: import("styled-components").StyledComponent<"ul", any, {}, never>;
+export declare const MenuLabel: import("styled-components").StyledComponent<"p", any, {}, never>;

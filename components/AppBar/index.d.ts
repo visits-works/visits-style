@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import { ColorType } from '../../types';
-interface Props {
+import React, { PureComponent, HTMLAttributes } from 'react';
+import { ColorType, CSSType } from '../../types';
+interface Props extends HTMLAttributes<HTMLDivElement> {
     /** background色 */
     color?: ColorType;
     /** ロゴのイメージ、プロジェクト名など */
@@ -15,10 +15,8 @@ interface Props {
     backdrop?: boolean;
     /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
     align?: 'left' | 'right';
-    /** cssのスタイルを入れてください */
-    style?: any;
-    /** メニュー、ボタンなどを自由に定義できます。メニューはできれば<ul>タグで指定してください */
-    children?: React.ReactChildren | any;
+    /** カスタムCSS定義 */
+    css?: CSSType;
 }
 declare type State = {
     show: boolean;

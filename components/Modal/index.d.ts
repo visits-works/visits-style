@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import { ColorType, ColSizeType } from '../../types';
-interface Props {
+import React, { PureComponent, HTMLAttributes } from 'react';
+import { ColorType, ColSizeType, CSSType } from '../../types';
+interface Props extends HTMLAttributes<HTMLDivElement> {
     /** ヘッダーのタイトル文言 */
     title?: any;
     /** 1~12のモーダルサイズ */
@@ -21,7 +21,7 @@ interface Props {
     closeOnOverlay?: boolean;
     /** escボタンでクローズ */
     closeOnEsc?: boolean;
-    style?: any;
+    css?: CSSType;
 }
 export default class Modal extends PureComponent<Props> {
     static defaultProps: {
@@ -35,7 +35,7 @@ export default class Modal extends PureComponent<Props> {
     onClickOverlay: () => void;
     handleContentOnMouse: () => void;
     getModal: () => JSX.Element;
-    element: HTMLDivElement;
+    element?: HTMLDivElement;
     shouldClose: boolean | null;
     render(): React.ReactPortal | null;
 }

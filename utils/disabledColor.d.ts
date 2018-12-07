@@ -1,2 +1,2 @@
-import { ThemeType } from '../types';
-export default function disabledColor(theme: ThemeType): import("styled-components").InterpolationValue[];
+import { ThemeType, CSSType } from '../types';
+export default function disabledColor(theme: ThemeType): CSSType;
