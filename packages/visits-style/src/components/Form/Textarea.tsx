@@ -39,13 +39,16 @@ const Wrapper = styled.span<WrapperProps>`
       ${({ theme, error }) => boxShadow('0.1em', error ? theme.danger : theme.primary)}
     }
 
-    &:disabled, [disabled] {
-      resize: none;
+    &:disabled, [disabled], &:readonly {
       ${({ theme }) => disabledColor(theme)}
     }
 
-    &:readonly {
-      ${({ theme }) => disabledColor(theme)}
+    &:disabled, [disabled] {
+      resize: none;
+    }
+
+    &::placeholder {
+      color: ${({ theme }) => theme.placeholder};
     }
   }
 

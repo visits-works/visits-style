@@ -65,13 +65,12 @@ const InputWrapper = styled.span<WrapperProps>`
       text-shadow: 0 0 0 #000;
     }
 
-    &:disabled,
-    [disabled] {
+    &:disabled, [disabled], &:readonly {
       ${({ theme }) => disabledColor(theme)}
     }
 
-    &:readonly {
-      ${({ theme }) => disabledColor(theme)}
+    &:invalid {
+      color: ${({ theme }) => theme.placeholder};
     }
   }
 
@@ -184,9 +183,9 @@ export default class Select extends Component<Props> {
         disabled={disabled}
         css={css}
       >
-        <select {...rest} disabled={disabled}>
+        <select {...rest} disabled={disabled} required={Boolean(placeholder)}>
           {placeholder && (
-            <option disabled value={''}>
+            <option value="" disabled>
               {placeholder}
             </option>
           )}

@@ -66,13 +66,16 @@ const Wrapper = styled.span<WrapperProps>`
       }
     }
 
-    &:disabled, [disabled] {
-      resize: none;
+    &:disabled, [disabled], &:readonly {
       ${({ theme }) => disabledColor(theme)}
     }
 
-    &:readonly {
-      ${({ theme }) => disabledColor(theme)}
+    &:disabled, [disabled] {
+      resize: none;
+    }
+
+    &::placeholder {
+      color: ${({ theme }) => theme.placeholder};
     }
   }
 
