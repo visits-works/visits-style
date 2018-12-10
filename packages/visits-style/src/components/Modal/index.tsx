@@ -1,4 +1,4 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
+import React, { PureComponent, HTMLAttributes, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import styled from 'styled-components';
@@ -8,44 +8,41 @@ import { ColorType, ColSizeType, CSSType } from '../../types';
 
 const ESC_KEY = 27;
 
-const Wrapper = styled.div<{ css?: CSSType }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  z-index: 9997;
-  overflow-y: scroll;
-  background-color: rgba(30, 30, 30, 0.9);
+const Wrapper = styled(Col)<{ css?: CSSType }>`
+  z-index: 9999;
+  margin: 0;
+  will-change: transform, opacity;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-duration: 200ms;
 
-  & > ${Col} {
-    z-index: 9999;
-    padding: 1rem;
-    margin: auto;
-    transition-property: transform, opacity;
-    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition-duration: 200ms;
-  }
-
-  &.fade-enter > ${Col} {
+  &.fade-enter {
     opacity: 0.01;
     transform: scale(0.8);
   }
-  &.fade-enter-active > ${Col} {
+  &.fade-enter-active {
     opacity: 1;
     transform: scale(1);
   }
-  &.fade-exit > ${Col} {
+  &.fade-exit {
     opacity: 1;
     transform: scale(1);
   }
-  &.fade-exit-active > ${Col} {
+  &.fade-exit-active {
     opacity: 0.01;
     transform: scale(0.8);
   }
   ${({ css }) => css || ''}
+`;
+
+const Shadow = styled.div<{ color: string, show: boolean }>`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  ${({ show }) => show ? '' : 'display: none;'}
+  background-color: ${({ color }) => color};
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -67,6 +64,9 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   closeOnOverlay?: boolean;
   /** escボタンでクローズ */
   closeOnEsc?: boolean;
+  /** overlayの背景の設定 */
+  shadowColor?: string;
+  /** カスタムCSS定義 */
   css?: CSSType;
 }
 
@@ -74,10 +74,12 @@ export default class Modal extends PureComponent<Props> {
   static defaultProps = {
     show: false,
     color: 'white',
+    size: 6,
+    shadowColor: 'rgba(10,10,10,.86)',
   };
 
   componentWillUnmount() {
-    if (this.props.domId && this.element) {
+    if (this.element) {
       document.body.removeChild(this.element);
     }
   }
@@ -89,60 +91,53 @@ export default class Modal extends PureComponent<Props> {
   }
 
   onClickOverlay = () => {
-    if (this.shouldClose === null) {
-      this.shouldClose = true;
-    }
-
-    if (this.shouldClose && this.props.closeOnOverlay && this.props.closeModal) {
+    if (this.props.closeOnOverlay && this.props.closeModal) {
       this.props.closeModal();
     }
-
-    this.shouldClose = null;
-  }
-
-  handleContentOnMouse = () => {
-    this.shouldClose = false;
-  }
-
-  getModal = () => {
-    const { show, size, title, children, footer, color, style, onClick, ...rest } = this.props;
-    return (
-      <CSSTransition
-        classNames="fade"
-        timeout={200}
-        in={show}
-        unmountOnExit
-      >
-        <Wrapper onClick={this.onClickOverlay} aria-modal="true" {...rest}>
-          <Col
-            size={size || 6}
-            role="dialog"
-            onMouseUp={this.handleContentOnMouse}
-            onMouseDown={this.handleContentOnMouse}
-            auto
-          >
-            <Box color={color}>
-              {title && (<header>{title}</header>)}
-              <main style={style}>{children}</main>
-              {footer && (<footer>{footer}</footer>)}
-            </Box>
-          </Col>
-        </Wrapper>
-      </CSSTransition>
-    );
   }
 
   element?: HTMLDivElement;
   shouldClose: boolean | null = null;
 
   render(): React.ReactPortal | null {
-    if (typeof document !== 'undefined' && !this.element) {
+    if (typeof document !== "undefined" && !this.element) {
       this.element = document.createElement('div');
       document.body.appendChild(this.element);
     }
 
     if (this.element) {
-      return createPortal(this.getModal(), this.element);
+      const {
+        show, size, title, children, footer, color, style, onClick, shadowColor, ...rest
+      } = this.props;
+
+      if (show) {
+        this.element.style.cssText =
+        'position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 9997; overflow-y: auto;' +
+        'display: flex; align-items: center; justify-content: center;' +
+        'flex-direction: column; padding: 0.75rem;';
+      } else {
+        this.element.style.cssText = '';
+      }
+
+      return createPortal((
+        <Fragment>
+          <CSSTransition
+            classNames="fade"
+            timeout={200}
+            in={show}
+            unmountOnExit
+          >
+            <Wrapper size={size} role="document" auto {...rest}>
+              <Box color={color} role="dialog">
+                {title ? title : null}
+                {children}
+                {footer ? footer : null}
+              </Box>
+            </Wrapper>
+          </CSSTransition>
+          <Shadow onClick={this.onClickOverlay} show={show} color={shadowColor} />
+        </Fragment>
+      ), this.element);
     }
     return null;
   }

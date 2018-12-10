@@ -4,6 +4,7 @@ import 'react-app-polyfill/ie11';
 import React, { StrictMode } from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withOptions } from '@storybook/addon-options';
+import { withKnobs } from '@storybook/addon-knobs';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import theme from '../src/theme/default';
@@ -63,6 +64,8 @@ addDecorator(story => (
     </ThemeProvider>
   </StrictMode>
 ));
+
+addDecorator(withKnobs);
 
 function loadStories() {
   const req = require.context('../src/components', true, /\.story\.tsx$/);

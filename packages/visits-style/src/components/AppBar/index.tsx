@@ -7,12 +7,16 @@ import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
 import { ColorType, AlignType, CSSType, ThemeType } from '../../types';
 
-function setColor({ color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
+function setColor(
+  { color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean },
+) {
   const backgroundColor = color ? theme[color] : 'transparent';
-  const textColor = findColorInvert(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
+  const textColor =
+    findColorInvert(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
 
   if (backdrop) {
-    const backColor = transparentize(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
+    const backColor =
+      transparentize(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
     const ua = navigator.userAgent.toLowerCase();
     if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
       return `background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;
@@ -41,7 +45,9 @@ interface NavProps {
 }
 
 const NavBar = styled.header<NavProps>`
-  position: ${({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))};
+  position: ${
+    ({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))
+  };
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -166,10 +172,9 @@ export default class AppBar extends PureComponent<Props, State> {
     sticky: false,
     fluid: false,
     backdrop: false,
-    style: null,
-  }
+  };
 
-  state = { show: false }
+  state = { show: false };
 
   toggleMenu = () => {
     this.setState({ show: !this.state.show });

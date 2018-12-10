@@ -22,30 +22,25 @@ function parcentage(value?: ColSizeType) {
 function renderSize({ size, narrow, auto, offset }: ColProps) {
   if (narrow) return null;
   if (!size || size < 1 || size > 12) {
-    return `
-      flex-basis: 0;
-      flex-grow: 1;
-      flex-shrink: 1;
-    `;
-  } else {
-    const value = parcentage(size);
-    const offVal = offset ? parcentage(offset) : 0;
-    return css`
-      max-width: ${value}%;
-      ${offset ? `margin-left: ${offVal}%;` : ''}
-      ${auto ? mediaMobile`
-        max-width: ${(value > 33 ? 100 : value * 3)}%;
-        ${offset ? `margin-left: 0;` : ''}
-      ` : ''}
-    `;
+    return '';
   }
+
+  const value = parcentage(size);
+  const offVal = offset ? parcentage(offset) : 0;
+  return css`
+    width: ${value}%;
+    max-width: ${value}%;
+    ${offset ? `margin-left: ${offVal}%;` : ''}
+    ${auto ? mediaMobile`
+      width: ${(value > 33 ? 100 : value * 3)}%;
+      ${offset ? `margin-left: 0;` : ''}
+    ` : ''}
+  `;
 }
 
 const Col = styled.div<ColProps>`
   display: block;
   min-height: 1px;
-  flex-basis: 0;
-  flex-grow: 1;
 
   ${({ narrow }) => narrow ? 'flex: none;' : ''}
   ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : ''}
