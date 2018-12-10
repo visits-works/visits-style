@@ -1,16 +1,17 @@
-import React, { Component, HTMLAttributes } from 'react';
-import styled from 'styled-components';
-import arrow from '../../utils/arrow';
-import setSize from '../../utils/setSize';
-import HelpMessage from './HelpMessage';
-import { SizeType } from '../../types';
-import disabledColor from '../../utils/disabledColor';
+import React, { Component, HTMLAttributes } from "react";
+import styled from "styled-components";
+import arrow from "../../utils/arrow";
+import setSize from "../../utils/setSize";
+import HelpMessage from "./HelpMessage";
+import { SizeType, CSSType } from "../../types";
+import disabledColor from "../../utils/disabledColor";
 
 interface WrapperProps {
   size?: SizeType;
   outline?: boolean;
   error?: string;
   disabled?: boolean;
+  css?: CSSType;
 }
 
 const InputWrapper = styled.span<WrapperProps>`
@@ -30,13 +31,17 @@ const InputWrapper = styled.span<WrapperProps>`
     text-align: left;
     color: inherit;
 
-    ${({ size }) => setSize('font-size', size)}
+    ${({ size }) => setSize("font-size", size)}
 
     border: none;
-    ${({ outline, theme, error }) => outline ?
-      `border: 1px solid ${error ? theme.danger : theme.border}; border-radius: 4px;` :
-      `border-bottom: 1px solid ${error ? theme.danger : theme.border}; border-radius: 0;`
-    }
+    ${({ outline, theme, error }) =>
+      outline
+        ? `border: 1px solid ${
+            error ? theme.danger : theme.border
+          }; border-radius: 4px;`
+        : `border-bottom: 1px solid ${
+            error ? theme.danger : theme.border
+          }; border-radius: 0;`}
 
     will-change: box-shadow;
     transition-property: box-shadow;
@@ -44,11 +49,12 @@ const InputWrapper = styled.span<WrapperProps>`
     transition-timing-function: ease-in-out;
 
     &:focus {
-      border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
-      ${({ theme, outline, error }) => outline ?
-        `box-shadow: 0 0 0 0.1em ${error ? theme.danger : theme.primary};` :
-        `box-shadow: 0 0.1em ${error ? theme.danger : theme.primary};`
-      }
+      border-color: ${({ error, theme }) =>
+        error ? theme.danger : theme.primary};
+      ${({ theme, outline, error }) =>
+        outline
+          ? `box-shadow: 0 0 0 0.1em ${error ? theme.danger : theme.primary};`
+          : `box-shadow: 0 0.1em ${error ? theme.danger : theme.primary};`}
     }
 
     &::-ms-expand {
@@ -59,7 +65,8 @@ const InputWrapper = styled.span<WrapperProps>`
       text-shadow: 0 0 0 #000;
     }
 
-    &:disabled, [disabled] {
+    &:disabled,
+    [disabled] {
       ${({ theme }) => disabledColor(theme)}
     }
 
@@ -75,7 +82,10 @@ const InputWrapper = styled.span<WrapperProps>`
     z-index: 4;
   }
 
-  ${({ theme, disabled }) => disabled ? '' : `
+  ${({ theme, disabled }) =>
+    disabled
+      ? ""
+      : `
     &:hover {
       select:not(:disabled):not(:focus) {
         border-color: ${theme.borderHover};
@@ -86,36 +96,44 @@ const InputWrapper = styled.span<WrapperProps>`
       }
     }
   `}
+
+  ${({ css }) => css || ''}
 `;
 
-type ItemType = { id: string | number, name: string, [key: string]: any } | string;
+type ItemType =
+  | { id: string | number; name: string; [key: string]: any }
+  | string;
 
 interface Props extends HTMLAttributes<HTMLSelectElement> {
   name: string;
   value: string | number;
   placeholder?: string;
-  options: Array<ItemType>;
+  options: ItemType[];
   size?: SizeType;
   outline?: boolean;
   error?: string | any;
   help?: string | any;
   disabled?: boolean;
-  render?: (label: string) => any,
+  render?: (label: string) => any;
+  css?: CSSType;
 }
 
 export default class Select extends Component<Props> {
   static defaultProps = {
     name: null,
+    value: '',
     onChange: () => {},
     options: [],
   };
 
   shouldComponentUpdate(props: Props) {
-    return props.options.length !== this.props.options.length ||
+    return (
+      props.options.length !== this.props.options.length ||
       props.value !== this.props.value ||
       props.disabled !== this.props.disabled ||
       props.help !== this.props.help ||
-      props.error !== this.props.error;
+      props.error !== this.props.error
+    );
   }
 
   renderLabel = (label: string) => {
@@ -128,21 +146,49 @@ export default class Select extends Component<Props> {
   renderItem = () => {
     return this.props.options.map((item, idx) => {
       if (typeof item === 'string') {
-        return <option key={item} value={item}>{this.renderLabel(item)}</option>
-      } else {
-        const { id, name } = item;
-        return <option key={`${id}_${idx}`} value={id}>{this.renderLabel(name)}</option>
+        return (
+          <option key={item} value={item}>
+            {this.renderLabel(item)}
+          </option>
+        );
       }
+      const { id, name } = item;
+      return (
+        <option key={`${id}_${idx}`} value={id}>
+          {this.renderLabel(name)}
+        </option>
+      );
     });
   }
 
   render() {
-    const { className, size, outline, options, error, help, placeholder, disabled, ...rest } = this.props;
+    const {
+      css,
+      className,
+      size,
+      outline,
+      options,
+      error,
+      help,
+      placeholder,
+      disabled,
+      ...rest
+    } = this.props;
+
     return (
-      <InputWrapper className={className} size={size} outline={outline} error={error} disabled={disabled}>
+      <InputWrapper
+        className={className}
+        size={size}
+        outline={outline}
+        error={error}
+        disabled={disabled}
+        css={css}
+      >
         <select {...rest} disabled={disabled}>
           {placeholder && (
-            <option disabled selected>{placeholder}</option>
+            <option disabled value={''}>
+              {placeholder}
+            </option>
           )}
           {this.renderItem()}
         </select>
