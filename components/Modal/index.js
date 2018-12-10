@@ -24,7 +24,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import styled from 'styled-components';
@@ -33,12 +33,24 @@ import Col from '../Grid/Col';
 var ESC_KEY = 27;
 var Wrapper =
 /*#__PURE__*/
-styled.div.withConfig({
+styled(Col).withConfig({
   displayName: "Modal__Wrapper",
   componentId: "pb7lhx-0"
-})(["position:fixed;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;z-index:9997;overflow-y:scroll;background-color:rgba(30,30,30,0.9);& > ", "{z-index:9999;padding:1rem;margin:auto;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;}&.fade-enter > ", "{opacity:0.01;transform:scale(0.8);}&.fade-enter-active > ", "{opacity:1;transform:scale(1);}&.fade-exit > ", "{opacity:1;transform:scale(1);}&.fade-exit-active > ", "{opacity:0.01;transform:scale(0.8);}", ""], Col, Col, Col, Col, Col, function (_ref) {
+})(["z-index:9999;margin:0;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;&.fade-enter{opacity:0.01;transform:scale(0.8);}&.fade-enter-active{opacity:1;transform:scale(1);}&.fade-exit{opacity:1;transform:scale(1);}&.fade-exit-active{opacity:0.01;transform:scale(0.8);}", ""], function (_ref) {
   var css = _ref.css;
   return css || '';
+});
+var Shadow =
+/*#__PURE__*/
+styled.div.withConfig({
+  displayName: "Modal__Shadow",
+  componentId: "pb7lhx-1"
+})(["position:fixed;bottom:0;left:0;right:0;top:0;", " background-color:", ";"], function (_ref2) {
+  var show = _ref2.show;
+  return show ? '' : 'display: none;';
+}, function (_ref3) {
+  var color = _ref3.color;
+  return color;
 });
 
 var Modal =
@@ -46,12 +58,18 @@ var Modal =
 function (_PureComponent) {
   _inherits(Modal, _PureComponent);
 
-  function Modal(props) {
+  function Modal() {
+    var _getPrototypeOf2;
+
     var _this;
 
     _classCallCheck(this, Modal);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Modal).call(this, props));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Modal)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onKeyDown", function (e) {
       if (_this.props.closeOnEsc && e.keyCode === ESC_KEY && _this.props.closeModal) {
@@ -60,63 +78,14 @@ function (_PureComponent) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onClickOverlay", function () {
-      if (_this.shouldClose === null) {
-        _this.shouldClose = true;
-      }
-
-      if (_this.shouldClose && _this.props.closeOnOverlay && _this.props.closeModal) {
+      if (_this.props.closeOnOverlay && _this.props.closeModal) {
         _this.props.closeModal();
       }
-
-      _this.shouldClose = null;
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleContentOnMouse", function () {
-      _this.shouldClose = false;
-    });
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getModal", function () {
-      var _this$props = _this.props,
-          show = _this$props.show,
-          size = _this$props.size,
-          title = _this$props.title,
-          children = _this$props.children,
-          footer = _this$props.footer,
-          color = _this$props.color,
-          style = _this$props.style,
-          onClick = _this$props.onClick,
-          rest = _objectWithoutProperties(_this$props, ["show", "size", "title", "children", "footer", "color", "style", "onClick"]);
-
-      return React.createElement(CSSTransition, {
-        classNames: "fade",
-        timeout: 200,
-        in: show,
-        unmountOnExit: true
-      }, React.createElement(Wrapper, _extends({
-        onClick: _this.onClickOverlay,
-        "aria-modal": "true"
-      }, rest), React.createElement(Col, {
-        size: size || 6,
-        role: "dialog",
-        onMouseUp: _this.handleContentOnMouse,
-        onMouseDown: _this.handleContentOnMouse,
-        auto: true
-      }, React.createElement(Box, {
-        color: color
-      }, title && React.createElement("header", null, title), React.createElement("main", {
-        style: style
-      }, children), footer && React.createElement("footer", null, footer)))));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "element", void 0);
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "shouldClose", null);
-
-    if (typeof document !== "undefined") {
-      _this.element = document.createElement('div');
-      _this.element.id = props.domId || 'modal';
-      document.body.appendChild(_this.element);
-    }
 
     return _this;
   }
@@ -124,15 +93,54 @@ function (_PureComponent) {
   _createClass(Modal, [{
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      if (this.props.domId && this.element) {
+      if (this.element) {
         document.body.removeChild(this.element);
       }
     }
   }, {
     key: "render",
     value: function render() {
+      if (typeof document !== "undefined" && !this.element) {
+        this.element = document.createElement('div');
+        document.body.appendChild(this.element);
+      }
+
       if (this.element) {
-        return createPortal(this.getModal(), this.element);
+        var _this$props = this.props,
+            _show = _this$props.show,
+            _size = _this$props.size,
+            _title = _this$props.title,
+            _children = _this$props.children,
+            _footer = _this$props.footer,
+            _color = _this$props.color,
+            style = _this$props.style,
+            onClick = _this$props.onClick,
+            _shadowColor = _this$props.shadowColor,
+            rest = _objectWithoutProperties(_this$props, ["show", "size", "title", "children", "footer", "color", "style", "onClick", "shadowColor"]);
+
+        if (_show) {
+          this.element.style.cssText = 'position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 9997; overflow-y: auto;' + 'display: flex; align-items: center; justify-content: center;' + 'flex-direction: column; padding: 0.75rem;';
+        } else {
+          this.element.style.cssText = '';
+        }
+
+        return createPortal(React.createElement(Fragment, null, React.createElement(CSSTransition, {
+          classNames: "fade",
+          timeout: 200,
+          in: _show,
+          unmountOnExit: true
+        }, React.createElement(Wrapper, _extends({
+          size: _size,
+          role: "document",
+          auto: true
+        }, rest), React.createElement(Box, {
+          color: _color,
+          role: "dialog"
+        }, _title ? _title : null, _children, _footer ? _footer : null))), React.createElement(Shadow, {
+          onClick: this.onClickOverlay,
+          show: _show,
+          color: _shadowColor
+        })), this.element);
       }
 
       return null;
@@ -143,9 +151,10 @@ function (_PureComponent) {
 }(PureComponent);
 
 _defineProperty(Modal, "defaultProps", {
-  domId: 'modal',
   show: false,
-  color: 'white'
+  color: 'white',
+  size: 6,
+  shadowColor: 'rgba(10,10,10,.86)'
 });
 
 export { Modal as default };

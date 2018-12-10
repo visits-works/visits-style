@@ -37,7 +37,6 @@ export default class ToastContainer extends Component<ContainerProps> {
         position: string;
         fixed: boolean;
     };
-    constructor(props: ContainerProps);
     shouldComponentUpdate(props: ContainerProps): boolean;
     componentDidUpdate(props: ContainerProps): void;
     componentWillUnmount(): void;

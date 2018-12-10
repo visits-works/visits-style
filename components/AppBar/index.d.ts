@@ -29,7 +29,6 @@ export default class AppBar extends PureComponent<Props, State> {
         sticky: boolean;
         fluid: boolean;
         backdrop: boolean;
-        style: null;
     };
     state: {
         show: boolean;

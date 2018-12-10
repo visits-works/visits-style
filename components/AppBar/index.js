@@ -191,8 +191,7 @@ _defineProperty(AppBar, "defaultProps", {
   fixed: false,
   sticky: false,
   fluid: false,
-  backdrop: false,
-  style: null
+  backdrop: false
 });
 
 export { AppBar as default };

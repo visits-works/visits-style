@@ -71,38 +71,39 @@ _defineProperty(ToastItem, "defaultProps", {
 });
 
 function setPosition(position, isFixed) {
+  // tslint:disable-next-line
   var base = "position: ".concat(isFixed ? 'fixed' : 'absolute', "; z-index: 9999; display: flex; flex-direction: column; ");
 
   switch (position) {
     case 'bottom':
       {
-        return base + 'bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);';
+        return "".concat(base, " bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);");
       }
 
     case 'bottom-left':
       {
-        return base + 'bottom: 1rem; left: 1rem; align-item: flex-start;';
+        return "".concat(base, " bottom: 1rem; left: 1rem; align-item: flex-start;");
       }
 
     case 'bottom-right':
       {
-        return base + 'bottom: 1rem; right: 1rem; align-item: flex-end;';
+        return "".concat(base, " bottom: 1rem; right: 1rem; align-item: flex-end;");
       }
 
     case 'top':
       {
-        return base + 'top: 1rem; left: 50%; align-items: center; transform: translateX(-50%);';
+        return "".concat(base, " top: 1rem; left: 50%; align-item: center; transform: translateX(-50%);");
       }
 
     case 'top-left':
       {
-        return base + 'top: 1rem; left: 1rem; align-items: flex-start;';
+        return "".concat(base, " top: 1rem; left: 1rem; align-item: flex-start;");
       }
 
     case 'top-right':
     default:
       {
-        return base + 'top: 1rem; right: 1rem; align-items: flex-end;';
+        return "".concat(base, " top: 1rem; right: 1rem; align-item: flex-end;");
       }
   }
 }
@@ -112,12 +113,18 @@ var ToastContainer =
 function (_Component) {
   _inherits(ToastContainer, _Component);
 
-  function ToastContainer(_props) {
+  function ToastContainer() {
+    var _getPrototypeOf2;
+
     var _this;
 
     _classCallCheck(this, ToastContainer);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ToastContainer).call(this, _props));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ToastContainer)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "clear", function (id) {
       return function () {
@@ -145,12 +152,6 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "element", void 0);
 
-    if (typeof document !== "undefined") {
-      _this.element = document.createElement('div');
-      _this.element.style.cssText = setPosition(_props.position, _props.fixed);
-      document.body.appendChild(_this.element);
-    }
-
     return _this;
   }
 
@@ -174,6 +175,12 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      if (typeof document !== 'undefined' && !this.element) {
+        this.element = document.createElement('div');
+        this.element.style.cssText = setPosition(this.props.position, this.props.fixed);
+        document.body.appendChild(this.element);
+      }
+
       if (this.element) {
         return createPortal(this.renderToast(), this.element);
       }

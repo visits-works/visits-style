@@ -68,7 +68,8 @@ function setColor(_a) {
     }
     return "background-color: " + backgroundColor + "; color: " + textColor + ";";
 }
-var NavBar = styled_components_1.default.header(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n  ", "\n"], ["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
+var NavBar = styled_components_1.default.header(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n  ", "\n"], ["\n  position: ",
+    ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
     var fixed = _a.fixed, sticky = _a.sticky;
     return (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'));
 }, setColor, media_1.mediaTablet(templateObject_2 || (templateObject_2 = __makeTemplateObject(["padding: ", ";"], ["padding: ", ";"])), function (_a) {
@@ -115,7 +116,6 @@ var AppBar = /** @class */ (function (_super) {
         sticky: false,
         fluid: false,
         backdrop: false,
-        style: null,
     };
     return AppBar;
 }(react_1.PureComponent));

@@ -66,33 +66,34 @@ var ToastItem = /** @class */ (function (_super) {
 }(react_1.PureComponent));
 exports.ToastItem = ToastItem;
 function setPosition(position, isFixed) {
+    // tslint:disable-next-line
     var base = "position: " + (isFixed ? 'fixed' : 'absolute') + "; z-index: 9999; display: flex; flex-direction: column; ";
     switch (position) {
         case 'bottom': {
-            return base + 'bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);';
+            return base + " bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);";
         }
         case 'bottom-left': {
-            return base + 'bottom: 1rem; left: 1rem; align-item: flex-start;';
+            return base + " bottom: 1rem; left: 1rem; align-item: flex-start;";
         }
         case 'bottom-right': {
-            return base + 'bottom: 1rem; right: 1rem; align-item: flex-end;';
+            return base + " bottom: 1rem; right: 1rem; align-item: flex-end;";
         }
         case 'top': {
-            return base + 'top: 1rem; left: 50%; align-items: center; transform: translateX(-50%);';
+            return base + " top: 1rem; left: 50%; align-item: center; transform: translateX(-50%);";
         }
         case 'top-left': {
-            return base + 'top: 1rem; left: 1rem; align-items: flex-start;';
+            return base + " top: 1rem; left: 1rem; align-item: flex-start;";
         }
         case 'top-right':
         default: {
-            return base + 'top: 1rem; right: 1rem; align-items: flex-end;';
+            return base + " top: 1rem; right: 1rem; align-item: flex-end;";
         }
     }
 }
 var ToastContainer = /** @class */ (function (_super) {
     __extends(ToastContainer, _super);
-    function ToastContainer(props) {
-        var _this = _super.call(this, props) || this;
+    function ToastContainer() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.clear = function (id) { return function () {
             _this.props.clear(id);
         }; };
@@ -101,11 +102,6 @@ var ToastContainer = /** @class */ (function (_super) {
             return (react_1.default.createElement(TransitionGroup_1.default, { component: null }, toasts.map(function (props) { return (react_1.default.createElement(CSSTransition_1.default, { key: props.id, timeout: 250, classNames: "move", unmountOnExit: true },
                 react_1.default.createElement(ToastItem, __assign({ key: props.id }, props, { clear: _this.clear(props.id) })))); })));
         };
-        if (typeof document !== "undefined") {
-            _this.element = document.createElement('div');
-            _this.element.style.cssText = setPosition(props.position, props.fixed);
-            document.body.appendChild(_this.element);
-        }
         return _this;
     }
     ToastContainer.prototype.shouldComponentUpdate = function (props) {
@@ -113,7 +109,8 @@ var ToastContainer = /** @class */ (function (_super) {
             props.position !== this.props.position;
     };
     ToastContainer.prototype.componentDidUpdate = function (props) {
-        if (this.element && (props.position !== this.props.position || props.fixed !== this.props.fixed)) {
+        if (this.element &&
+            (props.position !== this.props.position || props.fixed !== this.props.fixed)) {
             this.element.style.cssText = setPosition(this.props.position, this.props.fixed);
         }
     };
@@ -122,6 +119,11 @@ var ToastContainer = /** @class */ (function (_super) {
             document.body.removeChild(this.element);
     };
     ToastContainer.prototype.render = function () {
+        if (typeof document !== 'undefined' && !this.element) {
+            this.element = document.createElement('div');
+            this.element.style.cssText = setPosition(this.props.position, this.props.fixed);
+            document.body.appendChild(this.element);
+        }
         if (this.element) {
             return react_dom_1.createPortal(this.renderToast(), this.element);
         }

@@ -54,66 +54,73 @@ var styled_components_1 = __importDefault(require("styled-components"));
 var Box_1 = __importDefault(require("../Box"));
 var Col_1 = __importDefault(require("../Grid/Col"));
 var ESC_KEY = 27;
-var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  align-items: center;\n  z-index: 9997;\n  overflow-y: scroll;\n  background-color: rgba(30, 30, 30, 0.9);\n\n  & > ", " {\n    z-index: 9999;\n    padding: 1rem;\n    margin: auto;\n    transition-property: transform, opacity;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n    transition-duration: 200ms;\n  }\n\n  &.fade-enter > ", " {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active > ", " {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit > ", " {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active > ", " {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  ", "\n"], ["\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  align-items: center;\n  z-index: 9997;\n  overflow-y: scroll;\n  background-color: rgba(30, 30, 30, 0.9);\n\n  & > ", " {\n    z-index: 9999;\n    padding: 1rem;\n    margin: auto;\n    transition-property: transform, opacity;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n    transition-duration: 200ms;\n  }\n\n  &.fade-enter > ", " {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active > ", " {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit > ", " {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active > ", " {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  ", "\n"])), Col_1.default, Col_1.default, Col_1.default, Col_1.default, Col_1.default, function (_a) {
+var Wrapper = styled_components_1.default(Col_1.default)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  z-index: 9999;\n  margin: 0;\n  will-change: transform, opacity;\n  transition-property: transform, opacity;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition-duration: 200ms;\n\n  &.fade-enter {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  ", "\n"], ["\n  z-index: 9999;\n  margin: 0;\n  will-change: transform, opacity;\n  transition-property: transform, opacity;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition-duration: 200ms;\n\n  &.fade-enter {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  ", "\n"])), function (_a) {
     var css = _a.css;
     return css || '';
 });
+var Shadow = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n  ", "\n  background-color: ", ";\n"], ["\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n  ", "\n  background-color: ", ";\n"])), function (_a) {
+    var show = _a.show;
+    return show ? '' : 'display: none;';
+}, function (_a) {
+    var color = _a.color;
+    return color;
+});
 var Modal = /** @class */ (function (_super) {
     __extends(Modal, _super);
-    function Modal(props) {
-        var _this = _super.call(this, props) || this;
+    function Modal() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.onKeyDown = function (e) {
             if (_this.props.closeOnEsc && e.keyCode === ESC_KEY && _this.props.closeModal) {
                 _this.props.closeModal();
             }
         };
         _this.onClickOverlay = function () {
-            if (_this.shouldClose === null) {
-                _this.shouldClose = true;
-            }
-            if (_this.shouldClose && _this.props.closeOnOverlay && _this.props.closeModal) {
+            if (_this.props.closeOnOverlay && _this.props.closeModal) {
                 _this.props.closeModal();
             }
-            _this.shouldClose = null;
-        };
-        _this.handleContentOnMouse = function () {
-            _this.shouldClose = false;
-        };
-        _this.getModal = function () {
-            var _a = _this.props, show = _a.show, size = _a.size, title = _a.title, children = _a.children, footer = _a.footer, color = _a.color, style = _a.style, onClick = _a.onClick, rest = __rest(_a, ["show", "size", "title", "children", "footer", "color", "style", "onClick"]);
-            return (react_1.default.createElement(CSSTransition_1.default, { classNames: "fade", timeout: 200, in: show, unmountOnExit: true },
-                react_1.default.createElement(Wrapper, __assign({ onClick: _this.onClickOverlay, "aria-modal": "true" }, rest),
-                    react_1.default.createElement(Col_1.default, { size: size || 6, role: "dialog", onMouseUp: _this.handleContentOnMouse, onMouseDown: _this.handleContentOnMouse, auto: true },
-                        react_1.default.createElement(Box_1.default, { color: color },
-                            title && (react_1.default.createElement("header", null, title)),
-                            react_1.default.createElement("main", { style: style }, children),
-                            footer && (react_1.default.createElement("footer", null, footer)))))));
         };
         _this.shouldClose = null;
-        if (typeof document !== "undefined") {
-            _this.element = document.createElement('div');
-            _this.element.id = props.domId || 'modal';
-            document.body.appendChild(_this.element);
-        }
         return _this;
     }
     Modal.prototype.componentWillUnmount = function () {
-        if (this.props.domId && this.element) {
+        if (this.element) {
             document.body.removeChild(this.element);
         }
     };
     Modal.prototype.render = function () {
+        if (typeof document !== "undefined" && !this.element) {
+            this.element = document.createElement('div');
+            document.body.appendChild(this.element);
+        }
         if (this.element) {
-            return react_dom_1.createPortal(this.getModal(), this.element);
+            var _a = this.props, show = _a.show, size = _a.size, title = _a.title, children = _a.children, footer = _a.footer, color = _a.color, style = _a.style, onClick = _a.onClick, shadowColor = _a.shadowColor, rest = __rest(_a, ["show", "size", "title", "children", "footer", "color", "style", "onClick", "shadowColor"]);
+            if (show) {
+                this.element.style.cssText =
+                    'position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 9997; overflow-y: auto;' +
+                        'display: flex; align-items: center; justify-content: center;' +
+                        'flex-direction: column; padding: 0.75rem;';
+            }
+            else {
+                this.element.style.cssText = '';
+            }
+            return react_dom_1.createPortal((react_1.default.createElement(react_1.Fragment, null,
+                react_1.default.createElement(CSSTransition_1.default, { classNames: "fade", timeout: 200, in: show, unmountOnExit: true },
+                    react_1.default.createElement(Wrapper, __assign({ size: size, role: "document", auto: true }, rest),
+                        react_1.default.createElement(Box_1.default, { color: color, role: "dialog" },
+                            title ? title : null,
+                            children,
+                            footer ? footer : null))),
+                react_1.default.createElement(Shadow, { onClick: this.onClickOverlay, show: show, color: shadowColor }))), this.element);
         }
         return null;
     };
     Modal.defaultProps = {
-        domId: 'modal',
         show: false,
         color: 'white',
+        size: 6,
+        shadowColor: 'rgba(10,10,10,.86)',
     };
     return Modal;
 }(react_1.PureComponent));
 exports.default = Modal;
-var templateObject_1;
+var templateObject_1, templateObject_2;

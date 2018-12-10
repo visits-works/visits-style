@@ -25,16 +25,14 @@ function renderSize(_a) {
     if (narrow)
         return null;
     if (!size || size < 1 || size > 12) {
-        return "\n      flex-basis: 0;\n      flex-grow: 1;\n      flex-shrink: 1;\n    ";
+        return '';
     }
-    else {
-        var value = parcentage(size);
-        var offVal = offset ? parcentage(offset) : 0;
-        return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      max-width: ", "%;\n      ", "\n      ", "\n    "], ["\n      max-width: ", "%;\n      ", "\n      ",
-            "\n    "])), value, offset ? "margin-left: " + offVal + "%;" : '', auto ? media_1.mediaMobile(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        max-width: ", "%;\n        ", "\n      "], ["\n        max-width: ", "%;\n        ", "\n      "])), (value > 33 ? 100 : value * 3), offset ? "margin-left: 0;" : '') : '');
-    }
+    var value = parcentage(size);
+    var offVal = offset ? parcentage(offset) : 0;
+    return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ", "\n  "], ["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ",
+        "\n  "])), value, value, offset ? "margin-left: " + offVal + "%;" : '', auto ? media_1.mediaMobile(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      width: ", "%;\n      ", "\n    "], ["\n      width: ", "%;\n      ", "\n    "])), (value > 33 ? 100 : value * 3), offset ? "margin-left: 0;" : '') : '');
 }
-var Col = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n  flex-basis: 0;\n  flex-grow: 1;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  min-height: 1px;\n  flex-basis: 0;\n  flex-grow: 1;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ",
+var Col = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ",
     "\n\n  ",
     "\n"])), function (_a) {
     var narrow = _a.narrow;

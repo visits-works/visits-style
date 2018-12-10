@@ -5,8 +5,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     title?: any;
     /** 1~12のモーダルサイズ */
     size?: ColSizeType;
-    /** 特定のdomで表示したい場合はそのidを指定してください */
-    domId?: string;
     /** trueの場合、モーダルを表示します。 */
     show?: boolean;
     /** モーダルのbodyに入れる内容 */
@@ -21,20 +19,21 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     closeOnOverlay?: boolean;
     /** escボタンでクローズ */
     closeOnEsc?: boolean;
+    /** overlayの背景の設定 */
+    shadowColor?: string;
+    /** カスタムCSS定義 */
     css?: CSSType;
 }
 export default class Modal extends PureComponent<Props> {
     static defaultProps: {
-        domId: string;
         show: boolean;
         color: string;
+        size: number;
+        shadowColor: string;
     };
-    constructor(props: Props);
     componentWillUnmount(): void;
     onKeyDown: (e: any) => void;
     onClickOverlay: () => void;
-    handleContentOnMouse: () => void;
-    getModal: () => JSX.Element;
     element?: HTMLDivElement;
     shouldClose: boolean | null;
     render(): React.ReactPortal | null;
