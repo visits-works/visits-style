@@ -24,20 +24,20 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import arrow from '../../utils/arrow';
-import setSize from '../../utils/setSize';
-import HelpMessage from './HelpMessage';
-import disabledColor from '../../utils/disabledColor';
+import React, { Component } from "react";
+import styled from "styled-components";
+import arrow from "../../utils/arrow";
+import setSize from "../../utils/setSize";
+import HelpMessage from "./HelpMessage";
+import disabledColor from "../../utils/disabledColor";
 var InputWrapper =
 /*#__PURE__*/
 styled.span.withConfig({
   displayName: "Select__InputWrapper",
   componentId: "ffa0bn-0"
-})(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled]{", "}&:readonly{", "}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", ""], function (_ref) {
+})(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled]{", "}&:readonly{", "}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
   var size = _ref.size;
-  return setSize('font-size', size);
+  return setSize("font-size", size);
 }, function (_ref2) {
   var outline = _ref2.outline,
       theme = _ref2.theme,
@@ -64,7 +64,10 @@ styled.span.withConfig({
 }, function (_ref8) {
   var theme = _ref8.theme,
       disabled = _ref8.disabled;
-  return disabled ? '' : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: ".concat(theme.borderHover, ";\n      }\n\n      &::after {\n        border-color: ").concat(theme.borderHover, ";\n      }\n    }\n  ");
+  return disabled ? "" : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: ".concat(theme.borderHover, ";\n      }\n\n      &::after {\n        border-color: ").concat(theme.borderHover, ";\n      }\n    }\n  ");
+}, function (_ref9) {
+  var css = _ref9.css;
+  return css || '';
 });
 
 var Select =
@@ -100,14 +103,14 @@ function (_Component) {
             key: item,
             value: item
           }, _this.renderLabel(item));
-        } else {
-          var _id = item.id,
-              _name = item.name;
-          return React.createElement("option", {
-            key: "".concat(_id, "_").concat(idx),
-            value: _id
-          }, _this.renderLabel(_name));
         }
+
+        var id = item.id,
+            name = item.name;
+        return React.createElement("option", {
+          key: "".concat(id, "_").concat(idx),
+          value: id
+        }, _this.renderLabel(name));
       });
     });
 
@@ -123,6 +126,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          css = _this$props.css,
           className = _this$props.className,
           size = _this$props.size,
           outline = _this$props.outline,
@@ -131,19 +135,20 @@ function (_Component) {
           help = _this$props.help,
           placeholder = _this$props.placeholder,
           disabled = _this$props.disabled,
-          rest = _objectWithoutProperties(_this$props, ["className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
+          rest = _objectWithoutProperties(_this$props, ["css", "className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
 
-      return React.createElement(InputWrapper, {
+      return React.createElement(_StyledInputWrapper, {
         className: className,
         size: size,
         outline: outline,
         error: error,
-        disabled: disabled
+        disabled: disabled,
+        _$p_: css
       }, React.createElement("select", _extends({}, rest, {
         disabled: disabled
       }), placeholder && React.createElement("option", {
         disabled: true,
-        selected: true
+        value: ''
       }, placeholder), this.renderItem()), HelpMessage(help, error));
     }
   }]);
@@ -153,8 +158,18 @@ function (_Component) {
 
 _defineProperty(Select, "defaultProps", {
   name: null,
+  value: '',
   onChange: function onChange() {},
   options: []
 });
 
 export { Select as default };
+
+var _StyledInputWrapper =
+/*#__PURE__*/
+styled(InputWrapper).withConfig({
+  displayName: "Select___StyledInputWrapper",
+  componentId: "ffa0bn-1"
+})(["undefined", "undefined"], function (p) {
+  return p._$p_;
+});

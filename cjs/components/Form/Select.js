@@ -53,25 +53,26 @@ var arrow_1 = __importDefault(require("../../utils/arrow"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
 var disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
-var InputWrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled] {\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ",
-    "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ",
-    "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled] {\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
-    "\n"])), function (_a) {
+var InputWrapper = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled,\n    [disabled] {\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ",
+    "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ",
+    ";\n      ",
+    "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled,\n    [disabled] {\n      ", "\n    }\n\n    &:readonly {\n      ", "\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
+    "\n\n  ", "\n"])), function (_a) {
     var size = _a.size;
-    return setSize_1.default('font-size', size);
+    return setSize_1.default("font-size", size);
 }, function (_a) {
     var outline = _a.outline, theme = _a.theme, error = _a.error;
-    return outline ?
-        "border: 1px solid " + (error ? theme.danger : theme.border) + "; border-radius: 4px;" :
-        "border-bottom: 1px solid " + (error ? theme.danger : theme.border) + "; border-radius: 0;";
+    return outline
+        ? "border: 1px solid " + (error ? theme.danger : theme.border) + "; border-radius: 4px;"
+        : "border-bottom: 1px solid " + (error ? theme.danger : theme.border) + "; border-radius: 0;";
 }, function (_a) {
     var error = _a.error, theme = _a.theme;
-    return (error ? theme.danger : theme.primary);
+    return error ? theme.danger : theme.primary;
 }, function (_a) {
     var theme = _a.theme, outline = _a.outline, error = _a.error;
-    return outline ?
-        "box-shadow: 0 0 0 0.1em " + (error ? theme.danger : theme.primary) + ";" :
-        "box-shadow: 0 0.1em " + (error ? theme.danger : theme.primary) + ";";
+    return outline
+        ? "box-shadow: 0 0 0 0.1em " + (error ? theme.danger : theme.primary) + ";"
+        : "box-shadow: 0 0.1em " + (error ? theme.danger : theme.primary) + ";";
 }, function (_a) {
     var theme = _a.theme;
     return disabledColor_1.default(theme);
@@ -83,7 +84,12 @@ var InputWrapper = styled_components_1.default.span(templateObject_1 || (templat
     return arrow_1.default(theme.border);
 }, function (_a) {
     var theme = _a.theme, disabled = _a.disabled;
-    return disabled ? '' : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: " + theme.borderHover + ";\n      }\n\n      &::after {\n        border-color: " + theme.borderHover + ";\n      }\n    }\n  ";
+    return disabled
+        ? ""
+        : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: " + theme.borderHover + ";\n      }\n\n      &::after {\n        border-color: " + theme.borderHover + ";\n      }\n    }\n  ";
+}, function (_a) {
+    var css = _a.css;
+    return css || '';
 });
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
@@ -98,33 +104,32 @@ var Select = /** @class */ (function (_super) {
         _this.renderItem = function () {
             return _this.props.options.map(function (item, idx) {
                 if (typeof item === 'string') {
-                    return react_1.default.createElement("option", { key: item, value: item }, _this.renderLabel(item));
+                    return (react_1.default.createElement("option", { key: item, value: item }, _this.renderLabel(item)));
                 }
-                else {
-                    var id = item.id, name_1 = item.name;
-                    return react_1.default.createElement("option", { key: id + "_" + idx, value: id }, _this.renderLabel(name_1));
-                }
+                var id = item.id, name = item.name;
+                return (react_1.default.createElement("option", { key: id + "_" + idx, value: id }, _this.renderLabel(name)));
             });
         };
         return _this;
     }
     Select.prototype.shouldComponentUpdate = function (props) {
-        return props.options.length !== this.props.options.length ||
+        return (props.options.length !== this.props.options.length ||
             props.value !== this.props.value ||
             props.disabled !== this.props.disabled ||
             props.help !== this.props.help ||
-            props.error !== this.props.error;
+            props.error !== this.props.error);
     };
     Select.prototype.render = function () {
-        var _a = this.props, className = _a.className, size = _a.size, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
-        return (react_1.default.createElement(InputWrapper, { className: className, size: size, outline: outline, error: error, disabled: disabled },
+        var _a = this.props, css = _a.css, className = _a.className, size = _a.size, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["css", "className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
+        return (react_1.default.createElement(InputWrapper, { className: className, size: size, outline: outline, error: error, disabled: disabled, css: css },
             react_1.default.createElement("select", __assign({}, rest, { disabled: disabled }),
-                placeholder && (react_1.default.createElement("option", { disabled: true, selected: true }, placeholder)),
+                placeholder && (react_1.default.createElement("option", { disabled: true, value: '' }, placeholder)),
                 this.renderItem()),
             HelpMessage_1.default(help, error)));
     };
     Select.defaultProps = {
         name: null,
+        value: '',
         onChange: function () { },
         options: [],
     };
