@@ -75,27 +75,27 @@ export class ToastItem extends PureComponent<ToastProps> {
 }
 
 function setPosition(position: string, isFixed?: boolean) {
+  // tslint:disable-next-line
   const base = `position: ${isFixed ? 'fixed' : 'absolute'}; z-index: 9999; display: flex; flex-direction: column; `;
   switch (position) {
     case 'bottom': {
-      return base + 'bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);';
+      return `${base} bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
     }
     case 'bottom-left': {
-      return base + 'bottom: 1rem; left: 1rem; align-item: flex-start;';
+      return `${base} bottom: 1rem; left: 1rem; align-item: flex-start;`;
     }
     case 'bottom-right': {
-      return base + 'bottom: 1rem; right: 1rem; align-item: flex-end;';
+      return `${base} bottom: 1rem; right: 1rem; align-item: flex-end;`;
     }
-
     case 'top': {
-      return base + 'top: 1rem; left: 50%; align-items: center; transform: translateX(-50%);';
+      return `${base} top: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
     }
     case 'top-left': {
-      return base + 'top: 1rem; left: 1rem; align-items: flex-start;';
+      return `${base} top: 1rem; left: 1rem; align-item: flex-start;`;
     }
     case 'top-right':
     default: {
-      return base + 'top: 1rem; right: 1rem; align-items: flex-end;';
+      return `${base} top: 1rem; right: 1rem; align-item: flex-end;`;
     }
   }
 }
@@ -118,22 +118,16 @@ export default class ToastContainer extends Component<ContainerProps> {
     fixed: false,
   };
 
-  constructor(props: ContainerProps) {
-    super(props);
-    if(typeof document !== "undefined") {
-      this.element = document.createElement('div');
-      this.element.style.cssText = setPosition(props.position!, props.fixed);
-      document.body.appendChild(this.element);
-    }
-  }
-
   shouldComponentUpdate(props: ContainerProps) {
     return props.toasts.length !== this.props.toasts.length ||
       props.position !== this.props.position;
   }
 
   componentDidUpdate(props: ContainerProps) {
-    if (this.element && (props.position !== this.props.position || props.fixed !== this.props.fixed)) {
+    if (
+      this.element &&
+      (props.position !== this.props.position || props.fixed !== this.props.fixed)
+    ) {
       this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
     }
   }
@@ -171,7 +165,14 @@ export default class ToastContainer extends Component<ContainerProps> {
   element?: HTMLDivElement;
 
   render(): React.ReactPortal | null {
-    if(this.element) {
+    if (typeof document !== 'undefined' && !this.element) {
+      this.element = document.createElement('div');
+      this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
+      document.body.appendChild(this.element);
+    }
+
+
+    if (this.element) {
       return createPortal(this.renderToast(), this.element);
     }
     return null;

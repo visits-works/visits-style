@@ -53,8 +53,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   title?: any;
   /** 1~12のモーダルサイズ */
   size?: ColSizeType;
-  /** 特定のdomで表示したい場合はそのidを指定してください */
-  domId?: string;
   /** trueの場合、モーダルを表示します。 */
   show?: boolean;
   /** モーダルのbodyに入れる内容 */
@@ -74,19 +72,9 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export default class Modal extends PureComponent<Props> {
   static defaultProps = {
-    domId: 'modal',
     show: false,
     color: 'white',
   };
-
-  constructor(props: Props) {
-    super(props);
-    if(typeof document !== "undefined") {
-      this.element = document.createElement('div');
-      this.element.id = props.domId || 'modal';
-      document.body.appendChild(this.element);
-    }
-  }
 
   componentWillUnmount() {
     if (this.props.domId && this.element) {
@@ -148,7 +136,12 @@ export default class Modal extends PureComponent<Props> {
   shouldClose: boolean | null = null;
 
   render(): React.ReactPortal | null {
-    if(this.element) {
+    if (typeof document !== 'undefined' && !this.element) {
+      this.element = document.createElement('div');
+      document.body.appendChild(this.element);
+    }
+
+    if (this.element) {
       return createPortal(this.getModal(), this.element);
     }
     return null;
