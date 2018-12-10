@@ -44,7 +44,7 @@ var Wrapper =
 styled.span.withConfig({
   displayName: "TextInput__Wrapper",
   componentId: "sc-1mtsepk-1"
-})(["position:relative;display:block;input{max-width:100%;width:100%;height:100%;position:relative;display:block;outline:none;box-shadow:none;appearance:none;text-align:left;color:inherit;padding:0.375em 0.625em;border:none;", " ", " transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&:disabled,[disabled]{resize:none;", "}&:readonly{", "}}&:hover{input:not(:disabled):not(:focus):not(:active){border-color:", ";}", "{color:", ";}}"], function (_ref3) {
+})(["position:relative;display:block;input{max-width:100%;width:100%;height:100%;position:relative;display:block;outline:none;box-shadow:none;appearance:none;text-align:left;color:inherit;padding:0.375em 0.625em;border:none;", " ", " transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&:disabled,[disabled],&:readonly{", "}&:disabled,[disabled]{resize:none;}&::placeholder{color:", ";}}&:hover{input:not(:disabled):not(:focus):not(:active){border-color:", ";}", "{color:", ";}}"], function (_ref3) {
   var outline = _ref3.outline,
       theme = _ref3.theme,
       error = _ref3.error;
@@ -63,7 +63,7 @@ styled.span.withConfig({
   return disabledColor(theme);
 }, function (_ref7) {
   var theme = _ref7.theme;
-  return disabledColor(theme);
+  return theme.placeholder;
 }, function (_ref8) {
   var theme = _ref8.theme;
   return theme.borderHover;

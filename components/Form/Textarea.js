@@ -33,7 +33,7 @@ var Wrapper =
 styled.span.withConfig({
   displayName: "Textarea__Wrapper",
   componentId: "jj36u2-0"
-})(["display:block;position:relative;textarea{max-width:100%;width:100%;height:100%;padding:0.625em;resize:vertical;appearance:none;overflow:auto;outline:none;text-align:left;color:inherit;border-radius:4px;border:1px solid ", ";transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " &:focus{border-color:", ";", "}&:disabled,[disabled]{resize:none;", "}&:readonly{", "}}&:hover{textarea:not(:disabled):not(:focus){border-color:", ";}}"], function (_ref) {
+})(["display:block;position:relative;textarea{max-width:100%;width:100%;height:100%;padding:0.625em;resize:vertical;appearance:none;overflow:auto;outline:none;text-align:left;color:inherit;border-radius:4px;border:1px solid ", ";transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " &:focus{border-color:", ";", "}&:disabled,[disabled],&:readonly{", "}&:disabled,[disabled]{resize:none;}&::placeholder{color:", ";}}&:hover{textarea:not(:disabled):not(:focus){border-color:", ";}}"], function (_ref) {
   var theme = _ref.theme,
       error = _ref.error;
   return error ? theme.danger : theme.border;
@@ -50,7 +50,7 @@ styled.span.withConfig({
   return disabledColor(theme);
 }, function (_ref5) {
   var theme = _ref5.theme;
-  return disabledColor(theme);
+  return theme.placeholder;
 }, function (_ref6) {
   var theme = _ref6.theme;
   return theme.borderHover;

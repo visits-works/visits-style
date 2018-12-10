@@ -1,5 +1,5 @@
 var theme = {
-  fontFamily: '"Hiragino Sans", ヒラギノ角ゴシック, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", HiraKakuPro-W3, "Hiragino Kaku Gothic Pro", Quicksand, メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif',
+  fontFamily: 'ヒラギノ角ゴシック,"ヒラギノ角ゴ ProN W3",メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif',
   fontSize: '16px',
   responsive: true,
   primary: '#37B151',
@@ -26,6 +26,7 @@ var theme = {
   background: '#f5f5f5',
   border: '#dbdbdb',
   borderHover: '#9b9b9b',
-  borderActive: '#4a4a4a'
+  borderActive: '#4a4a4a',
+  placeholder: '#7a7a7a'
 };
 export default theme;

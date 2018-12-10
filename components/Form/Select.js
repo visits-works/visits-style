@@ -35,7 +35,7 @@ var InputWrapper =
 styled.span.withConfig({
   displayName: "Select__InputWrapper",
   componentId: "ffa0bn-0"
-})(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled]{", "}&:readonly{", "}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
+})(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled],&:readonly{", "}&:invalid{color:", ";}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
   var size = _ref.size;
   return setSize("font-size", size);
 }, function (_ref2) {
@@ -57,7 +57,7 @@ styled.span.withConfig({
   return disabledColor(theme);
 }, function (_ref6) {
   var theme = _ref6.theme;
-  return disabledColor(theme);
+  return theme.placeholder;
 }, function (_ref7) {
   var theme = _ref7.theme;
   return arrow(theme.border);
@@ -145,10 +145,11 @@ function (_Component) {
         disabled: disabled,
         _$p_: css
       }, React.createElement("select", _extends({}, rest, {
-        disabled: disabled
+        disabled: disabled,
+        required: Boolean(placeholder)
       }), placeholder && React.createElement("option", {
-        disabled: true,
-        value: ''
+        value: "",
+        disabled: true
       }, placeholder), this.renderItem()), HelpMessage(help, error));
     }
   }]);
