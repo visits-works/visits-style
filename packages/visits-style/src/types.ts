@@ -39,5 +39,15 @@ export interface ThemeType {
 
   responsive: boolean;
 
+  gutter: number;
+  smallGutter: number;
+
+  media: {
+    mobile: number;
+    tablet: number;
+    desktop: number;
+    fullhd: number;
+  };
+
   [key: string]: string | number | boolean | any;
 }

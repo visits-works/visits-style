@@ -1,42 +1,40 @@
 import { css } from 'styled-components';
-import { tablet, desktop, fullhd } from '../styles/variables';
 import { CSSType, ThemeType } from '../types';
 
-function mediaFrom(device: number, str: TemplateStringsArray, ...args: any[]): CSSType {
+function mediaFrom(device: any, str: TemplateStringsArray, ...args: any[]): CSSType {
   const template = ['@media screen and (min-width: ', 'px) {', ...str, '}'];
   const values = [device, '', ...args, ''];
-  return css(template, ...values);
+  return css(
+    ['', ''],
+    [({ theme }: any) => theme.responsive ? css(template, ...values) : ''],
+  );
 }
 
-function mediaUntil(device: number, str: TemplateStringsArray, ...args: any[]): CSSType {
+function mediaUntil(device: any, str: TemplateStringsArray, ...args: any[]): CSSType {
   const template = ['@media screen and (max-width: ', 'px) {', ...str, '}'];
   const values = [device, '', ...args, ''];
-  return css(template, ...values);
-}
-
-function withTheme(func: any, ...args: any[]) {
-  return function({ theme }: { theme: ThemeType }): CSSType | string {
-    if (theme && theme.responsive === false) return '';
-    return func(...args);
-  };
+  return css(
+    ['', ''],
+    [({ theme }: any) => theme.responsive ? css(template, ...values) : ''],
+  );
 }
 
 export function mediaMobile(str: TemplateStringsArray, ...args: any[]) {
-  return withTheme(mediaUntil, tablet - 1, str, ...args);
+  return mediaUntil(({ theme }: any) => theme.media.tablet - 1, str, ...args);
 }
 
 export function mediaTablet(str: TemplateStringsArray, ...args: any[]) {
-  return withTheme(mediaFrom, tablet, str, ...args);
+  return mediaFrom(({ theme }: any) => theme.media.tablet, str, ...args);
 }
 
 export function mediaDesktop(str: TemplateStringsArray, ...args: any[]) {
-  return withTheme(mediaFrom, desktop, str, ...args);
+  return mediaFrom(({ theme }: any) => theme.media.desktop, str, ...args);
 }
 
 export function mediaFullHD(str: TemplateStringsArray, ...args: any[]) {
-  return withTheme(mediaFrom, fullhd, str, ...args);
+  return mediaFrom(({ theme }: any) => theme.media.fullhd, str, ...args);
 }
 
 export function mediaUntilFullHD(str: TemplateStringsArray, ...args: any[]) {
-  return mediaUntil(fullhd - 1, str, ...args);
+  return mediaUntil(({ theme }: any) => theme.media.fullhd - 1, str, ...args);
 }

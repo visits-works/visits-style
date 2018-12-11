@@ -1,4 +1,4 @@
-import React, { Component, HTMLAttributes } from "react";
+import React, { Component, SelectHTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 import arrow from "../../utils/arrow";
 import setSize from "../../utils/setSize";
@@ -31,7 +31,7 @@ const InputWrapper = styled.span<WrapperProps>`
     text-align: left;
     color: inherit;
 
-    ${({ size }) => setSize("font-size", size)}
+    ${({ inputSize }) => setSize("font-size", inputSize)}
 
     border: none;
     ${({ outline, theme, error }) =>
@@ -102,14 +102,15 @@ type ItemType =
   | { id: string | number; name: string; [key: string]: any }
   | string;
 
-interface Props extends HTMLAttributes<HTMLSelectElement> {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
   options: ItemType[];
-  size?: SizeType;
   outline?: boolean;
   error?: string | any;
   help?: string | any;
+  inputSize?: SizeType;
   render?: (label: string) => any;
+  disabled?: boolean;
   css?: CSSType;
 }
 

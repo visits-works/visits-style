@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
-import { mobile, fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 
 interface Props {
   /**  */
@@ -29,16 +28,16 @@ function setResponsive({ fluid }: Props): any {
     margin-right: auto;
     margin-left: auto;
     ${mediaMobile`
-      max-width: ${mobile - (2 * smallGutter)}px;
+      max-width: ${({ theme }: any) => theme.media.mobile - (2 * theme.smallGutter)}px;
     `}
     ${mediaTablet`
-      max-width: ${tablet - (2 * smallGutter)}px;
+      max-width: ${({ theme }: any) => theme.media.tablet - (2 * theme.smallGutter)}px;
     `}
     ${mediaDesktop`
-      max-width: ${desktop - (2 * gutter)}px;
+      max-width: ${({ theme }: any) => theme.media.desktop - (2 * theme.gutter)}px;
     `}
     ${mediaFullHD`
-      max-width: ${fullhd - (2 * gutter)}px;
+      max-width: ${({ theme }: any) => theme.media.fullhd - (2 * theme.gutter)}px;
     `}
   `;
 }

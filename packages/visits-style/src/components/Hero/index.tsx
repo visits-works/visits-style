@@ -31,9 +31,9 @@ function setSize({ size, theme }: { size?: SizeType | 'full', theme: ThemeType }
 
   switch (size) {
     case 'medium' :
-      return mediaDesktop`padding-bottom: 9rem; padding-top: 9rem;`({ theme });
+      return mediaDesktop`padding-bottom: 9rem; padding-top: 9rem;`;
     case 'large' :
-      return mediaDesktop`padding-bottom: 18rem; padding-top: 18rem;`({ theme });
+      return mediaDesktop`padding-bottom: 18rem; padding-top: 18rem;`;
     case 'full' :
       return css`
         min-height: 100vh;

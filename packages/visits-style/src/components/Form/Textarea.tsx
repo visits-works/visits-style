@@ -1,4 +1,4 @@
-import React, { Component, InputHTMLAttributes } from 'react';
+import React, { Component, TextareaHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
@@ -59,7 +59,7 @@ const Wrapper = styled.span<WrapperProps>`
   }
 `;
 
-interface Props extends InputHTMLAttributes<HTMLTextAreaElement> {
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** エラーの発生時の表示テキスト */
   error?: string | any;
   /** 捕捉テキスト */

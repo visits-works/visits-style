@@ -81,7 +81,7 @@ const Burger = styled.button`
     background-color: rgba(0, 0, 0, .05);
   }
 
-  ${mediaMobile` display: block; `}
+  ${mediaMobile`display: block;`}
 `;
 
 interface ContentProps {
