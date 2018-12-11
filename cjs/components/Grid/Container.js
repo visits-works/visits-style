@@ -13,7 +13,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var styled_components_1 = __importStar(require("styled-components"));
 var media_1 = require("../../utils/media");
-var variables_1 = require("../../styles/variables");
 function setResponsive(_a) {
     var fluid = _a.fluid;
     if (fluid) {
@@ -26,7 +25,19 @@ function setResponsive(_a) {
         "\n    ",
         "\n    ",
         "\n    ",
-        "\n  "])), media_1.mediaMobile(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), variables_1.mobile - (2 * variables_1.smallGutter)), media_1.mediaTablet(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), variables_1.tablet - (2 * variables_1.smallGutter)), media_1.mediaDesktop(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), variables_1.desktop - (2 * variables_1.gutter)), media_1.mediaFullHD(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), variables_1.fullhd - (2 * variables_1.gutter)));
+        "\n  "])), media_1.mediaMobile(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        var theme = _a.theme;
+        return theme.media.mobile - (2 * theme.smallGutter);
+    }), media_1.mediaTablet(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        var theme = _a.theme;
+        return theme.media.tablet - (2 * theme.smallGutter);
+    }), media_1.mediaDesktop(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        var theme = _a.theme;
+        return theme.media.desktop - (2 * theme.gutter);
+    }), media_1.mediaFullHD(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        var theme = _a.theme;
+        return theme.media.fullhd - (2 * theme.gutter);
+    }));
 }
 var Container = styled_components_1.default.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n\n  ", "\n"], ["\n  position: relative;\n  width: 100%;\n\n  ", "\n"])), setResponsive);
 Container.displayName = 'Container';

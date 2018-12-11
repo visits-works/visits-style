@@ -42,14 +42,10 @@ function setSize(_ref2) {
 
   switch (size) {
     case 'medium':
-      return mediaDesktop(_templateObject())({
-        theme: theme
-      });
+      return mediaDesktop(_templateObject());
 
     case 'large':
-      return mediaDesktop(_templateObject2())({
-        theme: theme
-      });
+      return mediaDesktop(_templateObject2());
 
     case 'full':
       return css(["min-height:100vh;", "{align-items:center;display:flex;}"], Body);

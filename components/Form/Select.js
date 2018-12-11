@@ -25,7 +25,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import arrow from "../../utils/arrow";
 import setSize from "../../utils/setSize";
 import HelpMessage from "./HelpMessage";
@@ -36,13 +36,13 @@ styled.span.withConfig({
   displayName: "Select__InputWrapper",
   componentId: "ffa0bn-0"
 })(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled],&:readonly{", "}&:invalid{color:", ";}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
-  var size = _ref.size;
-  return setSize("font-size", size);
+  var inputSize = _ref.inputSize;
+  return setSize("font-size", inputSize);
 }, function (_ref2) {
   var outline = _ref2.outline,
       theme = _ref2.theme,
       error = _ref2.error;
-  return outline ? "border: 1px solid ".concat(error ? theme.danger : theme.border, "; border-radius: 4px;") : "border-bottom: 1px solid ".concat(error ? theme.danger : theme.border, "; border-radius: 0;");
+  return outline ? css(["border:1px solid ", ";border-radius:4px;"], error ? theme.danger : theme.border) : css(["border-bottom:1px solid ", ";border-radius:0;"], error ? theme.danger : theme.border);
 }, function (_ref3) {
   var error = _ref3.error,
       theme = _ref3.theme;
@@ -148,8 +148,7 @@ function (_Component) {
         disabled: disabled,
         required: Boolean(placeholder)
       }), placeholder && React.createElement("option", {
-        value: "",
-        disabled: true
+        value: ""
       }, placeholder), this.renderItem()), HelpMessage(help, error));
     }
   }]);

@@ -35,7 +35,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral([" display: block; "]);
+  var data = _taggedTemplateLiteral(["display: block;"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

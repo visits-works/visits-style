@@ -33,9 +33,9 @@ function setSize(_a) {
         return '';
     switch (size) {
         case 'medium':
-            return media_1.mediaDesktop(templateObject_1 || (templateObject_1 = __makeTemplateObject(["padding-bottom: 9rem; padding-top: 9rem;"], ["padding-bottom: 9rem; padding-top: 9rem;"])))({ theme: theme });
+            return media_1.mediaDesktop(templateObject_1 || (templateObject_1 = __makeTemplateObject(["padding-bottom: 9rem; padding-top: 9rem;"], ["padding-bottom: 9rem; padding-top: 9rem;"])));
         case 'large':
-            return media_1.mediaDesktop(templateObject_2 || (templateObject_2 = __makeTemplateObject(["padding-bottom: 18rem; padding-top: 18rem;"], ["padding-bottom: 18rem; padding-top: 18rem;"])))({ theme: theme });
+            return media_1.mediaDesktop(templateObject_2 || (templateObject_2 = __makeTemplateObject(["padding-bottom: 18rem; padding-top: 18rem;"], ["padding-bottom: 18rem; padding-top: 18rem;"])));
         case 'full':
             return styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n        min-height: 100vh;\n\n        ", " {\n          align-items: center;\n          display: flex;\n        }\n      "], ["\n        min-height: 100vh;\n\n        ", " {\n          align-items: center;\n          display: flex;\n        }\n      "])), Body);
         default:

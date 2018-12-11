@@ -1,21 +1,19 @@
-import { Component, HTMLAttributes } from "react";
+import { Component, SelectHTMLAttributes } from "react";
 import { SizeType, CSSType } from "../../types";
 declare type ItemType = {
     id: string | number;
     name: string;
     [key: string]: any;
 } | string;
-interface Props extends HTMLAttributes<HTMLSelectElement> {
-    name: string;
-    value: string | number;
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
     placeholder?: string;
     options: ItemType[];
-    size?: SizeType;
     outline?: boolean;
     error?: string | any;
     help?: string | any;
-    disabled?: boolean;
+    inputSize?: SizeType;
     render?: (label: string) => any;
+    disabled?: boolean;
     css?: CSSType;
 }
 export default class Select extends Component<Props> {

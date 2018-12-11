@@ -1,5 +1,5 @@
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n          margin-left: -0.75rem;\n          margin-right: -0.75rem;\n          margin-top: -0.75rem;\n\n          &:last-child {\n            margin-bottom: -0.75rem;\n          }\n\n          &:not(:last-child) {\n            margin-bottom: 0.75rem;\n          }\n      "]);
+  var data = _taggedTemplateLiteral(["\n        margin-left: -0.75rem;\n        margin-right: -0.75rem;\n        margin-top: -0.75rem;\n\n        &:last-child {\n          margin-bottom: -0.75rem;\n        }\n\n        &:not(:last-child) {\n          margin-bottom: 0.75rem;\n        }\n    "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -9,7 +9,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n        margin-left: -0.5rem;\n        margin-right: -0.5rem;\n        margin-top: -0.5rem;\n\n        &:last-child {\n          margin-bottom: -0.5rem;\n        }\n\n        &:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n      "]);
+  var data = _taggedTemplateLiteral(["\n      margin-left: -0.5rem;\n      margin-right: -0.5rem;\n      margin-top: -0.5rem;\n\n      &:last-child {\n        margin-bottom: -0.5rem;\n      }\n\n      &:not(:last-child) {\n        margin-bottom: 0.5rem;\n      }\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -29,9 +29,9 @@ function renderGutter(_ref) {
 
   if (noGutter) {
     return css(["margin-right:0;margin-left:0;> ", "{padding-right:0;padding-left:0;}"], Col);
-  } else {
-    return css(["", " ", ""], mediaTablet(_templateObject()), mediaFullHD(_templateObject2()));
   }
+
+  return css(["", " ", ""], mediaTablet(_templateObject()), mediaFullHD(_templateObject2()));
 }
 
 var Row =
@@ -46,11 +46,5 @@ styled.div.withConfig({
   var center = _ref3.center;
   return center ? 'justify-content: center;' : '';
 }, renderGutter);
-Row.displayName = 'Row'; // Row.defaultProps = {
-//   width: null,
-//   multiline: false,
-//   vcenter: false,
-//   noGutter: false,
-// };
-
+Row.displayName = 'Row';
 export default Row;

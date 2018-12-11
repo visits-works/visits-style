@@ -72,7 +72,6 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 import styled, { css } from 'styled-components';
 import { mediaFullHD, mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
-import { mobile, fullhd, desktop, tablet, gutter, smallGutter } from '../../styles/variables';
 
 function setResponsive(_ref) {
   var fluid = _ref.fluid;
@@ -81,7 +80,19 @@ function setResponsive(_ref) {
     return css(["", " ", " ", ""], mediaMobile(_templateObject()), mediaDesktop(_templateObject2()), mediaFullHD(_templateObject3()));
   }
 
-  return css(["margin-right:auto;margin-left:auto;", " ", " ", " ", ""], mediaMobile(_templateObject4(), mobile - 2 * smallGutter), mediaTablet(_templateObject5(), tablet - 2 * smallGutter), mediaDesktop(_templateObject6(), desktop - 2 * gutter), mediaFullHD(_templateObject7(), fullhd - 2 * gutter));
+  return css(["margin-right:auto;margin-left:auto;", " ", " ", " ", ""], mediaMobile(_templateObject4(), function (_ref2) {
+    var theme = _ref2.theme;
+    return theme.media.mobile - 2 * theme.smallGutter;
+  }), mediaTablet(_templateObject5(), function (_ref3) {
+    var theme = _ref3.theme;
+    return theme.media.tablet - 2 * theme.smallGutter;
+  }), mediaDesktop(_templateObject6(), function (_ref4) {
+    var theme = _ref4.theme;
+    return theme.media.desktop - 2 * theme.gutter;
+  }), mediaFullHD(_templateObject7(), function (_ref5) {
+    var theme = _ref5.theme;
+    return theme.media.fullhd - 2 * theme.gutter;
+  }));
 }
 
 var Container =

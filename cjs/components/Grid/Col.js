@@ -25,22 +25,22 @@ function renderSize(_a) {
     if (narrow)
         return null;
     if (!size || size < 1 || size > 12) {
-        return '';
+        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      flex-grow: 1;\n      flex-shrink: 0;\n    "], ["\n      flex-grow: 1;\n      flex-shrink: 0;\n    "])));
     }
     var value = parcentage(size);
     var offVal = offset ? parcentage(offset) : 0;
-    return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ", "\n  "], ["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ",
-        "\n  "])), value, value, offset ? "margin-left: " + offVal + "%;" : '', auto ? media_1.mediaMobile(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      width: ", "%;\n      ", "\n    "], ["\n      width: ", "%;\n      ", "\n    "])), (value > 33 ? 100 : value * 3), offset ? "margin-left: 0;" : '') : '');
+    var autoSize = value > 33 ? 100 : value * 3;
+    return styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ", "\n  "], ["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ",
+        "\n  "])), value, value, offset ? "margin-left: " + offVal + "%;" : '', auto ? media_1.mediaMobile(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    "], ["\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    "])), autoSize, autoSize, offset ? "margin-left: 0;" : '') : '');
 }
-var Col = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ",
-    "\n\n  ",
+var Col = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", "\n"], ["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ",
     "\n"])), function (_a) {
     var narrow = _a.narrow;
     return narrow ? 'flex: none;' : '';
 }, function (_a) {
     var offset = _a.offset;
     return offset ? "margin-left: " + parcentage(offset) + "%;" : '';
-}, renderSize, media_1.mediaTablet(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    padding: 0.5rem;\n  "], ["\n    padding: 0.5rem;\n  "]))), media_1.mediaMobile(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    padding: 0.25rem;\n  "], ["\n    padding: 0.25rem;\n  "]))));
+}, renderSize, media_1.mediaTablet(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    padding: 0.5rem;\n  "], ["\n    padding: 0.5rem;\n  "]))));
 Col.displayName = 'Col';
 exports.default = Col;
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;

@@ -1,13 +1,3 @@
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    padding: 0.25rem;\n  "]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["\n    padding: 0.5rem;\n  "]);
 
@@ -19,7 +9,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n      width: ", "%;\n      ", "\n    "]);
+  var data = _taggedTemplateLiteral(["\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -47,12 +37,13 @@ function renderSize(_ref) {
   if (narrow) return null;
 
   if (!size || size < 1 || size > 12) {
-    return '';
+    return css(["flex-grow:1;flex-shrink:0;"]);
   }
 
   var value = parcentage(size);
   var offVal = offset ? parcentage(offset) : 0;
-  return css(["width:", "%;max-width:", "%;", " ", ""], value, value, offset ? "margin-left: ".concat(offVal, "%;") : '', auto ? mediaMobile(_templateObject(), value > 33 ? 100 : value * 3, offset ? "margin-left: 0;" : '') : '');
+  var autoSize = value > 33 ? 100 : value * 3;
+  return css(["width:", "%;max-width:", "%;", " ", ""], value, value, offset ? "margin-left: ".concat(offVal, "%;") : '', auto ? mediaMobile(_templateObject(), autoSize, autoSize, offset ? "margin-left: 0;" : '') : '');
 }
 
 var Col =
@@ -60,12 +51,12 @@ var Col =
 styled.div.withConfig({
   displayName: "Col",
   componentId: "sc-1q9tfma-0"
-})(["display:block;min-height:1px;", " ", " ", " padding:0.75rem;", " ", ""], function (_ref2) {
+})(["display:block;min-height:1px;", " ", " ", " padding:0.75rem;", ""], function (_ref2) {
   var narrow = _ref2.narrow;
   return narrow ? 'flex: none;' : '';
 }, function (_ref3) {
   var offset = _ref3.offset;
   return offset ? "margin-left: ".concat(parcentage(offset), "%;") : '';
-}, renderSize, mediaTablet(_templateObject2()), mediaMobile(_templateObject3()));
+}, renderSize, mediaTablet(_templateObject2()));
 Col.displayName = 'Col';
 export default Col;

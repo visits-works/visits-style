@@ -2,6 +2,14 @@ var theme = {
   fontFamily: 'ヒラギノ角ゴシック,"ヒラギノ角ゴ ProN W3",メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif',
   fontSize: '16px',
   responsive: true,
+  gutter: 24,
+  smallGutter: 16,
+  media: {
+    mobile: 576,
+    tablet: 769,
+    desktop: 960,
+    fullhd: 1344
+  },
   primary: '#37B151',
   link: '#578ba9',
   info: '#209cee',
