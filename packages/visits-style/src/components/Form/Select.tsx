@@ -1,5 +1,5 @@
 import React, { Component, HTMLAttributes } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import arrow from "../../utils/arrow";
 import setSize from "../../utils/setSize";
 import HelpMessage from "./HelpMessage";
@@ -35,13 +35,13 @@ const InputWrapper = styled.span<WrapperProps>`
 
     border: none;
     ${({ outline, theme, error }) =>
-      outline
-        ? `border: 1px solid ${
-            error ? theme.danger : theme.border
-          }; border-radius: 4px;`
-        : `border-bottom: 1px solid ${
-            error ? theme.danger : theme.border
-          }; border-radius: 0;`}
+      outline ? css`
+        border: 1px solid ${error ? theme.danger : theme.border};
+        border-radius: 4px;
+      ` : css`
+        border-bottom: 1px solid ${error ? theme.danger : theme.border};
+        border-radius: 0;
+      `}
 
     will-change: box-shadow;
     transition-property: box-shadow;
@@ -49,8 +49,7 @@ const InputWrapper = styled.span<WrapperProps>`
     transition-timing-function: ease-in-out;
 
     &:focus {
-      border-color: ${({ error, theme }) =>
-        error ? theme.danger : theme.primary};
+      border-color: ${({ error, theme }) => error ? theme.danger : theme.primary};
       ${({ theme, outline, error }) =>
         outline
           ? `box-shadow: 0 0 0 0.1em ${error ? theme.danger : theme.primary};`
@@ -104,15 +103,12 @@ type ItemType =
   | string;
 
 interface Props extends HTMLAttributes<HTMLSelectElement> {
-  name: string;
-  value: string | number;
   placeholder?: string;
   options: ItemType[];
   size?: SizeType;
   outline?: boolean;
   error?: string | any;
   help?: string | any;
-  disabled?: boolean;
   render?: (label: string) => any;
   css?: CSSType;
 }
@@ -185,7 +181,7 @@ export default class Select extends Component<Props> {
       >
         <select {...rest} disabled={disabled} required={Boolean(placeholder)}>
           {placeholder && (
-            <option value="" disabled>
+            <option value="">
               {placeholder}
             </option>
           )}

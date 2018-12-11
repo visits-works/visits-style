@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-// @ts-ignore
 import AppBar from '@components/AppBar';
 
 export const isActive = (route: string) => (match: any, location: any) =>
@@ -43,14 +42,14 @@ export default function Topbar({ current }: { current: string }) {
       .sort((a: any, b: any) => a.frontmatter.title > b.frontmatter.title);
     const MenuList = list.map((node: any) => {
       return (
-        <AppBar.Item key={node.id}>
+        <li key={node.id}>
           <Link
             className={node.parent.relativePath === current ? 'active' : ''}
             to={node.fields.slug}
           >
             {node.frontmatter.title}
           </Link>
-        </AppBar.Item>
+        </li>
       );
     })
     return (<ul>{MenuList}</ul>);

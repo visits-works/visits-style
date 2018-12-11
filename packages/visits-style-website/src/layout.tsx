@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
+import defaultTheme from '@theme/default';
 // @ts-ignore
-import theme from '@theme/default';
-// @ts-ignore
-import { Row, Col, Container } from '@components';
+import { Row, Col } from '@components';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 
 import GlobalStyle from './globalStyle';
+
+const theme = {
+  ...defaultTheme,
+  // tslint:disable-next-line
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,ヒラギノ角ゴシック,Meiryo,Helvetica,"MS PGothic",Arial,sans-serif',
+};
 
 
 export default function Layout({ children, current }: any) {

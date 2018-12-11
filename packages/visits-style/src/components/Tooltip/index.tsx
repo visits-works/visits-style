@@ -5,9 +5,9 @@ import { ColorType, CSSType } from '../../types';
 
 const Wrapper = styled.div<{ css?: CSSType }>`
   position: relative;
-  display: 'inline-block';
+  display: inline-block;
 
-  & > div[role="tooltip"] {
+  div[role="tooltip"] {
     position: absolute;
     clear: both;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

@@ -26,37 +26,36 @@ function renderGutter({ noGutter }: Props) {
         padding-left: 0;
       }
     `;
-  } else {
-    return css`
-      ${mediaTablet`
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
-        margin-top: -0.5rem;
+  }
+  return css`
+    ${mediaTablet`
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+      margin-top: -0.5rem;
+
+      &:last-child {
+        margin-bottom: -0.5rem;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+    `}
+
+    ${mediaFullHD`
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        margin-top: -0.75rem;
 
         &:last-child {
-          margin-bottom: -0.5rem;
+          margin-bottom: -0.75rem;
         }
 
         &:not(:last-child) {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.75rem;
         }
-      `}
-
-      ${mediaFullHD`
-          margin-left: -0.75rem;
-          margin-right: -0.75rem;
-          margin-top: -0.75rem;
-
-          &:last-child {
-            margin-bottom: -0.75rem;
-          }
-
-          &:not(:last-child) {
-            margin-bottom: 0.75rem;
-          }
-      `}
-    `;
-  }
+    `}
+  `;
 }
 
 const Row = styled.div<Props>`
@@ -71,11 +70,5 @@ const Row = styled.div<Props>`
 `;
 
 Row.displayName = 'Row';
-// Row.defaultProps = {
-//   width: null,
-//   multiline: false,
-//   vcenter: false,
-//   noGutter: false,
-// };
 
 export default Row;

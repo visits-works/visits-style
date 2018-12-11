@@ -12,7 +12,6 @@ menu: true
 ```jsx
 import { ThemeProvider } from 'styled-components';
 import theme from 'visits-style/theme/light';
-import 'visits-style/styles/global';
 
 export default function App() {
   return (
@@ -23,11 +22,7 @@ export default function App() {
 }
 ```
 
-## styled-component v4 の注意点
-
-グローバルの`injectGlobal`がバージョン4から削除される為、
-
-`import 'visits-style/styles/global';`のグローバル指定は動きません。
+## グローバルCSSの定義
 
 以下の定義方法として、対応してください。
 
