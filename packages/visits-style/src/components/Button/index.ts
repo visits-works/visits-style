@@ -72,6 +72,7 @@ function setColor({ theme, color, outline, disabled }: Props) {
     box-shadow: none;
 
     &:hover {
+      color: ${invertColor};
       background-color: ${darken(0.025, target)};
     }
 
@@ -108,8 +109,7 @@ const Button = styled.button<ButtonProps>`
   justify-content: center;
   border: 1px solid transparent;
   border-radius: 4px;
-  height: 2.25em;
-  padding: 0.375em 0.75em;
+  padding: 0.5em 0.75em;
   line-height: normal;
 
   transition-property: background-color, color, box-shadow;
