@@ -44,7 +44,7 @@ var Wrapper =
 styled.span.withConfig({
   displayName: "TextInput__Wrapper",
   componentId: "sc-1mtsepk-1"
-})(["position:relative;display:block;input{max-width:100%;width:100%;height:100%;position:relative;display:block;outline:none;box-shadow:none;appearance:none;text-align:left;color:inherit;padding:0.375em 0.625em;border:none;", " ", " transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&:disabled,[disabled],&:readonly{", "}&:disabled,[disabled]{resize:none;}&::placeholder{color:", ";}}&:hover{input:not(:disabled):not(:focus):not(:active){border-color:", ";}", "{color:", ";}}"], function (_ref3) {
+})(["position:relative;display:block;input{max-width:100%;width:100%;height:100%;position:relative;display:block;outline:none;box-shadow:none;appearance:none;text-align:left;color:inherit;padding:0.375em 0.625em;border:none;", " ", " transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&:disabled,[disabled],&:readonly{", "}&:disabled,[disabled]{resize:none;}&::placeholder{color:", ";}}&:hover{input:not(:disabled):not(:focus):not(:active){border-color:", ";}", "{color:", ";}}", ""], function (_ref3) {
   var outline = _ref3.outline,
       theme = _ref3.theme,
       error = _ref3.error;
@@ -70,6 +70,9 @@ styled.span.withConfig({
 }, Icon, function (_ref9) {
   var theme = _ref9.theme;
   return theme.borderHover;
+}, function (_ref10) {
+  var css = _ref10.css;
+  return css || '';
 });
 
 var TextInput =
@@ -94,13 +97,15 @@ function (_PureComponent) {
           leftIcon = _this$props.leftIcon,
           rightIcon = _this$props.rightIcon,
           style = _this$props.style,
-          rest = _objectWithoutProperties(_this$props, ["className", "outline", "error", "help", "leftIcon", "rightIcon", "style"]);
+          css = _this$props.css,
+          rest = _objectWithoutProperties(_this$props, ["className", "outline", "error", "help", "leftIcon", "rightIcon", "style", "css"]);
 
-      return React.createElement(Wrapper, {
+      return React.createElement(_StyledWrapper, {
         className: className,
         outline: outline,
         error: error,
-        style: style
+        style: style,
+        _$p_: css
       }, leftIcon && React.createElement(Icon, null, leftIcon), rightIcon && React.createElement(Icon, {
         right: true
       }, rightIcon), React.createElement("input", rest), HelpMessage(help, error));
@@ -118,3 +123,12 @@ _defineProperty(TextInput, "defaultProps", {
 });
 
 export { TextInput as default };
+
+var _StyledWrapper =
+/*#__PURE__*/
+styled(Wrapper).withConfig({
+  displayName: "TextInput___StyledWrapper",
+  componentId: "sc-1mtsepk-2"
+})(["undefined", "undefined"], function (p) {
+  return p._$p_;
+});

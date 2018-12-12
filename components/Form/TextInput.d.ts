@@ -1,4 +1,5 @@
 import { PureComponent, InputHTMLAttributes } from 'react';
+import { CSSType } from '../../types';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     placeholder?: string;
     /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
@@ -13,7 +14,8 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
     leftIcon?: any;
     /** 右側のアイコン */
     rightIcon?: any;
-    style?: any;
+    /** カスタムCSS定義 */
+    css?: CSSType;
 }
 export default class TextInput extends PureComponent<Props> {
     static defaultProps: {

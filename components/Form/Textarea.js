@@ -33,7 +33,7 @@ var Wrapper =
 styled.span.withConfig({
   displayName: "Textarea__Wrapper",
   componentId: "jj36u2-0"
-})(["display:block;position:relative;textarea{max-width:100%;width:100%;height:100%;padding:0.625em;resize:vertical;appearance:none;overflow:auto;outline:none;text-align:left;color:inherit;border-radius:4px;border:1px solid ", ";transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " &:focus{border-color:", ";", "}&:disabled,[disabled],&:readonly{", "}&:disabled,[disabled]{resize:none;}&::placeholder{color:", ";}}&:hover{textarea:not(:disabled):not(:focus){border-color:", ";}}"], function (_ref) {
+})(["display:block;position:relative;textarea{max-width:100%;width:100%;height:100%;padding:0.625em;resize:vertical;appearance:none;overflow:auto;outline:none;text-align:left;color:inherit;border-radius:4px;border:1px solid ", ";transition-property:box-shadow;transition-duration:0.15s;transition-timing-function:ease-in-out;", " &:focus{border-color:", ";", "}&:disabled,[disabled],&:readonly{", "}&:disabled,[disabled]{resize:none;}&::placeholder{color:", ";}}&:hover{textarea:not(:disabled):not(:focus){border-color:", ";}}", ""], function (_ref) {
   var theme = _ref.theme,
       error = _ref.error;
   return error ? theme.danger : theme.border;
@@ -54,6 +54,9 @@ styled.span.withConfig({
 }, function (_ref6) {
   var theme = _ref6.theme;
   return theme.borderHover;
+}, function (_ref7) {
+  var css = _ref7.css;
+  return css || '';
 });
 
 var Textarea =
@@ -80,12 +83,14 @@ function (_Component) {
           help = _this$props.help,
           error = _this$props.error,
           style = _this$props.style,
-          rest = _objectWithoutProperties(_this$props, ["className", "help", "error", "style"]);
+          css = _this$props.css,
+          rest = _objectWithoutProperties(_this$props, ["className", "help", "error", "style", "css"]);
 
-      return React.createElement(Wrapper, {
+      return React.createElement(_StyledWrapper, {
         className: className,
         error: error,
-        style: style
+        style: style,
+        _$p_: css
       }, React.createElement("textarea", rest), HelpMessage(help, error));
     }
   }]);
@@ -101,3 +106,12 @@ _defineProperty(Textarea, "defaultProps", {
 });
 
 export { Textarea as default };
+
+var _StyledWrapper =
+/*#__PURE__*/
+styled(Wrapper).withConfig({
+  displayName: "Textarea___StyledWrapper",
+  componentId: "jj36u2-1"
+})(["undefined", "undefined"], function (p) {
+  return p._$p_;
+});
