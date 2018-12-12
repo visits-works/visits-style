@@ -4,9 +4,11 @@ import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
+import { CSSType } from '../../types';
 
 interface WrapperProps {
   error?: string;
+  css?: CSSType;
 }
 
 const Wrapper = styled.span<WrapperProps>`
@@ -57,6 +59,7 @@ const Wrapper = styled.span<WrapperProps>`
       border-color: ${({ theme }) => theme.borderHover};
     }
   }
+  ${({ css }) => css || ''}
 `;
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -64,6 +67,8 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string | any;
   /** 捕捉テキスト */
   help?: string | any;
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
 export default class Textarea extends Component<Props> {
@@ -83,9 +88,9 @@ export default class Textarea extends Component<Props> {
   }
 
   render() {
-    const { className, help, error, style, ...rest } = this.props;
+    const { className, help, error, style, css, ...rest } = this.props;
     return (
-      <Wrapper className={className} error={error} style={style}>
+      <Wrapper className={className} error={error} style={style} css={css}>
         <textarea {...rest} />
         {HelpMessage(help, error)}
       </Wrapper>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
+import { CSSType } from '../../types';
 
 interface WrapperProps {
   outline?: boolean;
@@ -87,6 +88,7 @@ const Wrapper = styled.span<WrapperProps>`
       color: ${({ theme }) => theme.borderHover};
     }
   }
+  ${({ css }) => css || ''}
 `;
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -103,7 +105,8 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: any;
   /** 右側のアイコン */
   rightIcon?: any;
-  style?: any;
+  /** カスタムCSS定義 */
+  css?: CSSType;
 }
 
 export default class TextInput extends PureComponent<Props> {
@@ -115,9 +118,11 @@ export default class TextInput extends PureComponent<Props> {
   };
 
   render() {
-    const { className, outline, error, help, leftIcon, rightIcon, style, ...rest } = this.props;
+    const {
+      className, outline, error, help, leftIcon, rightIcon, style, css, ...rest
+    } = this.props;
     return (
-      <Wrapper className={className} outline={outline} error={error} style={style}>
+      <Wrapper className={className} outline={outline} error={error} style={style} css={css}>
         {leftIcon && (<Icon>{leftIcon}</Icon>)}
         {rightIcon && (<Icon right>{rightIcon}</Icon>)}
         <input {...rest} />
