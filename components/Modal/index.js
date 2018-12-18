@@ -121,7 +121,7 @@ function (_PureComponent) {
           role: "dialog"
         }, React.createElement(Box, {
           color: _color
-        }, _title ? _title : null, _children, _footer ? _footer : null)), React.createElement("div", {
+        }, _title ? _title : null, _children, _footer ? _footer : null)), this.props.external, React.createElement("div", {
           className: "v-modal-shadow",
           onClick: this.onClickOverlay
         }))), this.element);

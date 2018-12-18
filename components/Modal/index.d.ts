@@ -21,6 +21,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     closeOnEsc?: boolean;
     /** overlayの背景の設定 */
     shadowColor?: string;
+    /** モーダル外に表示するElements */
+    external?: any;
     /** カスタムCSS定義 */
     css?: CSSType;
 }

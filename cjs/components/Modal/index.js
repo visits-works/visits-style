@@ -97,6 +97,7 @@ var Modal = /** @class */ (function (_super) {
                             title ? title : null,
                             children,
                             footer ? footer : null)),
+                    this.props.external,
                     react_1.default.createElement("div", { className: "v-modal-shadow", onClick: this.onClickOverlay })))), this.element);
         }
         return null;

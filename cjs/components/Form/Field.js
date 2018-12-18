@@ -43,14 +43,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
-var styled_components_1 = __importDefault(require("styled-components"));
-var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: block;\n  &:not(:last-child) {\n    margin-bottom: 0.75rem;\n  }\n"], ["\n  display: block;\n  &:not(:last-child) {\n    margin-bottom: 0.75rem;\n  }\n"])));
-var Label = styled_components_1.default.label(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  margin-bottom: 0.325rem;\n"], ["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  margin-bottom: 0.325rem;\n"])), function (_a) {
+var styled_components_1 = __importStar(require("styled-components"));
+var Wrapper = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: block;\n  &:not(:last-child) {\n    margin-bottom: 0.75rem;\n  }\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  &:not(:last-child) {\n    margin-bottom: 0.75rem;\n  }\n  ",
+    "\n\n  ", "\n"])), function (_a) {
+    var required = _a.required, theme = _a.theme;
+    return required ? styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    label::after {\n      content: '*';\n      color: ", ";\n      margin-left: 0.325rem;\n    }\n  "], ["\n    label::after {\n      content: '*';\n      color: ", ";\n      margin-left: 0.325rem;\n    }\n  "])), theme.primary) : '';
+}, function (_a) {
+    var css = _a.css;
+    return css || '';
+});
+var Label = styled_components_1.default.label(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  margin-bottom: 0.325rem;\n"], ["\n  color: ", ";\n  display: block;\n  font-size: 1rem;\n  margin-bottom: 0.325rem;\n"])), function (_a) {
     var theme = _a.theme;
     return theme.textStrong;
 });
@@ -68,4 +72,4 @@ var Field = /** @class */ (function (_super) {
     return Field;
 }(react_1.PureComponent));
 exports.default = Field;
-var templateObject_1, templateObject_2;
+var templateObject_1, templateObject_2, templateObject_3;

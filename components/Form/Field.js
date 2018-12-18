@@ -21,20 +21,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 var Wrapper =
 /*#__PURE__*/
 styled.div.withConfig({
   displayName: "Field__Wrapper",
   componentId: "sc-1vvmhhp-0"
-})(["display:block;&:not(:last-child){margin-bottom:0.75rem;}"]);
+})(["display:block;&:not(:last-child){margin-bottom:0.75rem;}", " ", ""], function (_ref) {
+  var required = _ref.required,
+      theme = _ref.theme;
+  return required ? css(["label::after{content:'*';color:", ";margin-left:0.325rem;}"], theme.primary) : '';
+}, function (_ref2) {
+  var css = _ref2.css;
+  return css || '';
+});
 var Label =
 /*#__PURE__*/
 styled.label.withConfig({
   displayName: "Field__Label",
   componentId: "sc-1vvmhhp-1"
-})(["color:", ";display:block;font-size:1rem;margin-bottom:0.325rem;"], function (_ref) {
-  var theme = _ref.theme;
+})(["color:", ";display:block;font-size:1rem;margin-bottom:0.325rem;"], function (_ref3) {
+  var theme = _ref3.theme;
   return theme.textStrong;
 });
 
