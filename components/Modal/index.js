@@ -24,7 +24,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import styled from 'styled-components';
@@ -33,24 +33,15 @@ import Col from '../Grid/Col';
 var ESC_KEY = 27;
 var Wrapper =
 /*#__PURE__*/
-styled(Col).withConfig({
+styled.div.withConfig({
   displayName: "Modal__Wrapper",
   componentId: "pb7lhx-0"
-})(["z-index:9999;margin:0;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;&.fade-enter{opacity:0.01;transform:scale(0.8);}&.fade-enter-active{opacity:1;transform:scale(1);}&.fade-exit{opacity:1;transform:scale(1);}&.fade-exit-active{opacity:0.01;transform:scale(0.8);}", ""], function (_ref) {
-  var css = _ref.css;
+})(["position:fixed;top:0;right:0;left:0;bottom:0;z-index:9997;overflow-y:auto;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:0.75rem;.v-modal-body{z-index:9999;margin:0;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;}&.fade-enter > .v-modal-body{opacity:0.01;transform:scale(0.8);}&.fade-enter-active > .v-modal-body{opacity:1;transform:scale(1);}&.fade-exit > .v-modal-body{opacity:1;transform:scale(1);}&.fade-exit-active > .v-modal-body{opacity:0.01;transform:scale(0.8);}.v-modal-shadow{position:fixed;bottom:0;left:0;right:0;top:0;background-color:", ";}", ""], function (_ref) {
+  var shadowColor = _ref.shadowColor;
+  return shadowColor || 'transparent';
+}, function (_ref2) {
+  var css = _ref2.css;
   return css || '';
-});
-var Shadow =
-/*#__PURE__*/
-styled.div.withConfig({
-  displayName: "Modal__Shadow",
-  componentId: "pb7lhx-1"
-})(["position:fixed;bottom:0;left:0;right:0;top:0;", " background-color:", ";"], function (_ref2) {
-  var show = _ref2.show;
-  return show ? '' : 'display: none;';
-}, function (_ref3) {
-  var color = _ref3.color;
-  return color;
 });
 
 var Modal =
@@ -113,34 +104,27 @@ function (_PureComponent) {
             _children = _this$props.children,
             _footer = _this$props.footer,
             _color = _this$props.color,
-            style = _this$props.style,
             onClick = _this$props.onClick,
-            _shadowColor = _this$props.shadowColor,
-            rest = _objectWithoutProperties(_this$props, ["show", "size", "title", "children", "footer", "color", "style", "onClick", "shadowColor"]);
+            rest = _objectWithoutProperties(_this$props, ["show", "size", "title", "children", "footer", "color", "onClick"]);
 
-        if (_show) {
-          this.element.style.cssText = 'position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 9997; overflow-y: auto;' + 'display: flex; align-items: center; justify-content: center;' + 'flex-direction: column; padding: 0.75rem;';
-        } else {
-          this.element.style.cssText = '';
-        }
-
-        return createPortal(React.createElement(Fragment, null, React.createElement(CSSTransition, {
+        return createPortal(React.createElement(CSSTransition, {
           classNames: "fade",
           timeout: 200,
           in: _show,
           unmountOnExit: true
         }, React.createElement(Wrapper, _extends({
+          role: "document"
+        }, rest), React.createElement(Col, {
+          className: "v-modal-body",
           size: _size,
-          role: "document",
-          auto: true
-        }, rest), React.createElement(Box, {
-          color: _color,
+          auto: true,
           role: "dialog"
-        }, _title ? _title : null, _children, _footer ? _footer : null))), React.createElement(Shadow, {
-          onClick: this.onClickOverlay,
-          show: _show,
-          color: _shadowColor
-        })), this.element);
+        }, React.createElement(Box, {
+          color: _color
+        }, _title ? _title : null, _children, _footer ? _footer : null)), React.createElement("div", {
+          className: "v-modal-shadow",
+          onClick: this.onClickOverlay
+        }))), this.element);
       }
 
       return null;

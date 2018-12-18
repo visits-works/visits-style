@@ -54,16 +54,12 @@ var styled_components_1 = __importDefault(require("styled-components"));
 var Box_1 = __importDefault(require("../Box"));
 var Col_1 = __importDefault(require("../Grid/Col"));
 var ESC_KEY = 27;
-var Wrapper = styled_components_1.default(Col_1.default)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  z-index: 9999;\n  margin: 0;\n  will-change: transform, opacity;\n  transition-property: transform, opacity;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition-duration: 200ms;\n\n  &.fade-enter {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  ", "\n"], ["\n  z-index: 9999;\n  margin: 0;\n  will-change: transform, opacity;\n  transition-property: transform, opacity;\n  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition-duration: 200ms;\n\n  &.fade-enter {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  ", "\n"])), function (_a) {
+var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  bottom: 0;\n  z-index: 9997;\n  overflow-y: auto;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  padding: 0.75rem;\n\n  .v-modal-body {\n    z-index: 9999;\n    margin: 0;\n    will-change: transform, opacity;\n    transition-property: transform, opacity;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n    transition-duration: 200ms;\n  }\n\n  &.fade-enter > .v-modal-body {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active > .v-modal-body {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit > .v-modal-body {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active > .v-modal-body {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n\n  .v-modal-shadow {\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    top: 0;\n    background-color: ", ";\n  }\n\n  ", "\n"], ["\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  bottom: 0;\n  z-index: 9997;\n  overflow-y: auto;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  padding: 0.75rem;\n\n  .v-modal-body {\n    z-index: 9999;\n    margin: 0;\n    will-change: transform, opacity;\n    transition-property: transform, opacity;\n    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);\n    transition-duration: 200ms;\n  }\n\n  &.fade-enter > .v-modal-body {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n  &.fade-enter-active > .v-modal-body {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit > .v-modal-body {\n    opacity: 1;\n    transform: scale(1);\n  }\n  &.fade-exit-active > .v-modal-body {\n    opacity: 0.01;\n    transform: scale(0.8);\n  }\n\n  .v-modal-shadow {\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    top: 0;\n    background-color: ", ";\n  }\n\n  ", "\n"])), function (_a) {
+    var shadowColor = _a.shadowColor;
+    return shadowColor || 'transparent';
+}, function (_a) {
     var css = _a.css;
     return css || '';
-});
-var Shadow = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n  ", "\n  background-color: ", ";\n"], ["\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n  ", "\n  background-color: ", ";\n"])), function (_a) {
-    var show = _a.show;
-    return show ? '' : 'display: none;';
-}, function (_a) {
-    var color = _a.color;
-    return color;
 });
 var Modal = /** @class */ (function (_super) {
     __extends(Modal, _super);
@@ -93,24 +89,15 @@ var Modal = /** @class */ (function (_super) {
             document.body.appendChild(this.element);
         }
         if (this.element) {
-            var _a = this.props, show = _a.show, size = _a.size, title = _a.title, children = _a.children, footer = _a.footer, color = _a.color, style = _a.style, onClick = _a.onClick, shadowColor = _a.shadowColor, rest = __rest(_a, ["show", "size", "title", "children", "footer", "color", "style", "onClick", "shadowColor"]);
-            if (show) {
-                this.element.style.cssText =
-                    'position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 9997; overflow-y: auto;' +
-                        'display: flex; align-items: center; justify-content: center;' +
-                        'flex-direction: column; padding: 0.75rem;';
-            }
-            else {
-                this.element.style.cssText = '';
-            }
-            return react_dom_1.createPortal((react_1.default.createElement(react_1.Fragment, null,
-                react_1.default.createElement(CSSTransition_1.default, { classNames: "fade", timeout: 200, in: show, unmountOnExit: true },
-                    react_1.default.createElement(Wrapper, __assign({ size: size, role: "document", auto: true }, rest),
-                        react_1.default.createElement(Box_1.default, { color: color, role: "dialog" },
+            var _a = this.props, show = _a.show, size = _a.size, title = _a.title, children = _a.children, footer = _a.footer, color = _a.color, onClick = _a.onClick, rest = __rest(_a, ["show", "size", "title", "children", "footer", "color", "onClick"]);
+            return react_dom_1.createPortal((react_1.default.createElement(CSSTransition_1.default, { classNames: "fade", timeout: 200, in: show, unmountOnExit: true },
+                react_1.default.createElement(Wrapper, __assign({ role: "document" }, rest),
+                    react_1.default.createElement(Col_1.default, { className: "v-modal-body", size: size, auto: true, role: "dialog" },
+                        react_1.default.createElement(Box_1.default, { color: color },
                             title ? title : null,
                             children,
-                            footer ? footer : null))),
-                react_1.default.createElement(Shadow, { onClick: this.onClickOverlay, show: show, color: shadowColor }))), this.element);
+                            footer ? footer : null)),
+                    react_1.default.createElement("div", { className: "v-modal-shadow", onClick: this.onClickOverlay })))), this.element);
         }
         return null;
     };
@@ -123,4 +110,4 @@ var Modal = /** @class */ (function (_super) {
     return Modal;
 }(react_1.PureComponent));
 exports.default = Modal;
-var templateObject_1, templateObject_2;
+var templateObject_1;
