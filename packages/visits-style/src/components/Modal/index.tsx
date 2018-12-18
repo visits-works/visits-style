@@ -81,6 +81,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   closeOnEsc?: boolean;
   /** overlayの背景の設定 */
   shadowColor?: string;
+  /** モーダル外に表示するElements */
+  external?: any;
   /** カスタムCSS定義 */
   css?: CSSType;
 }
@@ -140,6 +142,7 @@ export default class Modal extends PureComponent<Props> {
                 {footer ? footer : null}
               </Box>
             </Col>
+            {this.props.external}
             <div className="v-modal-shadow" onClick={this.onClickOverlay} />
           </Wrapper>
         </CSSTransition>

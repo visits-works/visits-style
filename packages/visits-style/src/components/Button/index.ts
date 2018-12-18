@@ -66,7 +66,6 @@ function setColor({ theme, color, outline, disabled }: Props) {
 
   return css`
     background-color: ${target};
-    border-color: ${target};
     border-color: transparent;
     color: ${invertColor};
     box-shadow: none;
@@ -102,15 +101,17 @@ const Button = styled.button<ButtonProps>`
   outline: none;
   appearance: none;
   box-sizing: border-box;
-  display: inline-flex;
+  display: inline-block;
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
   justify-content: center;
+  vertical-align: middle;
+  user-select: none;
   border: 1px solid transparent;
   border-radius: 4px;
-  padding: 0.5em 0.75em;
-  line-height: normal;
+  padding: 0.375em 0.75em;
+  line-height: 1.5;
 
   transition-property: background-color, color, box-shadow;
   transition-duration: 150ms;
@@ -119,11 +120,6 @@ const Button = styled.button<ButtonProps>`
   ${setColor}
   ${({ size }) => setSize('font-size', size)}
   ${({ full }) => full ? 'width: 100%;' : ''}
-
-  &:not(:last-child) {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
 `;
 Button.displayName = 'Button';
 

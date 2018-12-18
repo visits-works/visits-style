@@ -17,8 +17,8 @@ const ButtonGroup = styled.div`
       border-bottom-left-radius: 4px;
     }
 
-    &:not(:last-child) {
-      border-right-color: transparent;
+    &:not(:first-child) {
+      margin-left: -1px;
     }
 
     &:last-child {

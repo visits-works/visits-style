@@ -37,6 +37,7 @@ const normalized: any = css`
 
   a {
     background-color: transparent;
+    color: ${({ theme }: any) => theme.link};
   }
 
   abbr[title] {
