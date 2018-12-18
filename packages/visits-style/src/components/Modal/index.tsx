@@ -8,41 +8,56 @@ import { ColorType, ColSizeType, CSSType } from '../../types';
 
 const ESC_KEY = 27;
 
-const Wrapper = styled(Col)<{ css?: CSSType }>`
-  z-index: 9999;
-  margin: 0;
-  will-change: transform, opacity;
-  transition-property: transform, opacity;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition-duration: 200ms;
-
-  &.fade-enter {
-    opacity: 0.01;
-    transform: scale(0.8);
-  }
-  &.fade-enter-active {
-    opacity: 1;
-    transform: scale(1);
-  }
-  &.fade-exit {
-    opacity: 1;
-    transform: scale(1);
-  }
-  &.fade-exit-active {
-    opacity: 0.01;
-    transform: scale(0.8);
-  }
-  ${({ css }) => css || ''}
-`;
-
-const Shadow = styled.div<{ color: string, show: boolean }>`
+const Wrapper = styled.div<{ css?: CSSType, shadowColor?: string }>`
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   top: 0;
-  ${({ show }) => show ? '' : 'display: none;'}
-  background-color: ${({ color }) => color};
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 9997;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.75rem;
+
+  .v-modal-body {
+    z-index: 9999;
+    margin: 0;
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-duration: 200ms;
+  }
+
+  &.fade-enter > .v-modal-body {
+    opacity: 0.01;
+    transform: scale(0.8);
+  }
+  &.fade-enter-active > .v-modal-body {
+    opacity: 1;
+    transform: scale(1);
+  }
+  &.fade-exit > .v-modal-body {
+    opacity: 1;
+    transform: scale(1);
+  }
+  &.fade-exit-active > .v-modal-body {
+    opacity: 0.01;
+    transform: scale(0.8);
+  }
+
+  .v-modal-shadow {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: ${({ shadowColor }) => shadowColor || 'transparent'};
+  }
+
+  ${({ css }) => css || ''}
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -107,36 +122,27 @@ export default class Modal extends PureComponent<Props> {
 
     if (this.element) {
       const {
-        show, size, title, children, footer, color, style, onClick, shadowColor, ...rest
+        show, size, title, children, footer, color, onClick, ...rest
       } = this.props;
 
-      if (show) {
-        this.element.style.cssText =
-        'position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 9997; overflow-y: auto;' +
-        'display: flex; align-items: center; justify-content: center;' +
-        'flex-direction: column; padding: 0.75rem;';
-      } else {
-        this.element.style.cssText = '';
-      }
-
       return createPortal((
-        <Fragment>
-          <CSSTransition
-            classNames="fade"
-            timeout={200}
-            in={show}
-            unmountOnExit
-          >
-            <Wrapper size={size} role="document" auto {...rest}>
-              <Box color={color} role="dialog">
+        <CSSTransition
+          classNames="fade"
+          timeout={200}
+          in={show}
+          unmountOnExit
+        >
+          <Wrapper role="document" {...rest}>
+            <Col className="v-modal-body" size={size} auto role="dialog">
+              <Box color={color}>
                 {title ? title : null}
                 {children}
                 {footer ? footer : null}
               </Box>
-            </Wrapper>
-          </CSSTransition>
-          <Shadow onClick={this.onClickOverlay} show={show} color={shadowColor} />
-        </Fragment>
+            </Col>
+            <div className="v-modal-shadow" onClick={this.onClickOverlay} />
+          </Wrapper>
+        </CSSTransition>
       ), this.element);
     }
     return null;
