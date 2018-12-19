@@ -23,8 +23,8 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
   if (narrow) return null;
   if (!size || size < 1 || size > 12) {
     return css`
-      flex-grow: 1;
-      flex-shrink: 0;
+      width: auto;
+      max-width: auto;
     `;
   }
 
