@@ -25,7 +25,7 @@ function renderSize(_a) {
     if (narrow)
         return null;
     if (!size || size < 1 || size > 12) {
-        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      flex-grow: 1;\n      flex-shrink: 0;\n    "], ["\n      flex-grow: 1;\n      flex-shrink: 0;\n    "])));
+        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      width: auto;\n      max-width: auto;\n    "], ["\n      width: auto;\n      max-width: auto;\n    "])));
     }
     var value = parcentage(size);
     var offVal = offset ? parcentage(offset) : 0;

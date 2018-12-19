@@ -37,7 +37,7 @@ function renderSize(_ref) {
   if (narrow) return null;
 
   if (!size || size < 1 || size > 12) {
-    return css(["flex-grow:1;flex-shrink:0;"]);
+    return css(["width:auto;max-width:auto;"]);
   }
 
   var value = parcentage(size);
