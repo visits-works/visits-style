@@ -1,0 +1,10 @@
+{
+  "name": "visits-style-workspace",
+  "author": "@Nukbal",
+  "repository": "https://github.com/visits-works/visits-style",
+  "version": "0.0.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true
+}

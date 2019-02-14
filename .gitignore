@@ -3,6 +3,7 @@
 # production
 /build
 /lib
+node_modules
 
 # misc
 /tmp

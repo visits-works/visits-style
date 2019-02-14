@@ -5,7 +5,9 @@ function mediaFrom(device: any, str: TemplateStringsArray, ...args: any[]): CSST
   const template = ['@media screen and (min-width: ', 'px) {', ...str, '}'];
   const values = [device, '', ...args, ''];
   return css(
+    // @ts-ignore
     ['', ''],
+    // @ts-ignore
     [({ theme }: any) => theme.responsive ? css(template, ...values) : ''],
   );
 }
@@ -14,7 +16,9 @@ function mediaUntil(device: any, str: TemplateStringsArray, ...args: any[]): CSS
   const template = ['@media screen and (max-width: ', 'px) {', ...str, '}'];
   const values = [device, '', ...args, ''];
   return css(
+    // @ts-ignore
     ['', ''],
+    // @ts-ignore
     [({ theme }: any) => theme.responsive ? css(template, ...values) : ''],
   );
 }

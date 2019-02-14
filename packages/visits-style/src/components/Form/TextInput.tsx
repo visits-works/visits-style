@@ -8,6 +8,7 @@ import { CSSType } from '../../types';
 interface WrapperProps {
   outline?: boolean;
   error?: any;
+  css?: CSSType;
 }
 
 interface IconProps {

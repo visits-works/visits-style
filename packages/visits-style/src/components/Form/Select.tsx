@@ -31,7 +31,7 @@ const InputWrapper = styled.span<WrapperProps>`
     text-align: left;
     color: inherit;
 
-    ${({ inputSize }) => setSize("font-size", inputSize)}
+    ${({ size }) => setSize("font-size", size)}
 
     border: none;
     ${({ outline, theme, error }) =>
@@ -161,7 +161,7 @@ export default class Select extends Component<Props> {
     const {
       css,
       className,
-      size,
+      inputSize,
       outline,
       options,
       error,
@@ -174,7 +174,7 @@ export default class Select extends Component<Props> {
     return (
       <InputWrapper
         className={className}
-        size={size}
+        size={inputSize}
         outline={outline}
         error={error}
         disabled={disabled}
