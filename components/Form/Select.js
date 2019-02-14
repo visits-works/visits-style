@@ -1,3 +1,17 @@
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["", ""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+import _styled from "styled-components";
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -36,8 +50,8 @@ styled.span.withConfig({
   displayName: "Select__InputWrapper",
   componentId: "ffa0bn-0"
 })(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled],&:readonly{", "}&:invalid{color:", ";}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
-  var inputSize = _ref.inputSize;
-  return setSize("font-size", inputSize);
+  var size = _ref.size;
+  return setSize("font-size", size);
 }, function (_ref2) {
   var outline = _ref2.outline,
       theme = _ref2.theme,
@@ -128,22 +142,22 @@ function (_Component) {
       var _this$props = this.props,
           css = _this$props.css,
           className = _this$props.className,
-          size = _this$props.size,
+          inputSize = _this$props.inputSize,
           outline = _this$props.outline,
           options = _this$props.options,
           error = _this$props.error,
           help = _this$props.help,
           placeholder = _this$props.placeholder,
           disabled = _this$props.disabled,
-          rest = _objectWithoutProperties(_this$props, ["css", "className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
+          rest = _objectWithoutProperties(_this$props, ["css", "className", "inputSize", "outline", "options", "error", "help", "placeholder", "disabled"]);
 
       return React.createElement(_StyledInputWrapper, {
         className: className,
-        size: size,
+        size: inputSize,
         outline: outline,
         error: error,
         disabled: disabled,
-        _$p_: css
+        _css: css
       }, React.createElement("select", _extends({}, rest, {
         disabled: disabled,
         required: Boolean(placeholder)
@@ -165,11 +179,6 @@ _defineProperty(Select, "defaultProps", {
 
 export { Select as default };
 
-var _StyledInputWrapper =
-/*#__PURE__*/
-styled(InputWrapper).withConfig({
-  displayName: "Select___StyledInputWrapper",
-  componentId: "ffa0bn-1"
-})(["undefined", "undefined"], function (p) {
-  return p._$p_;
+var _StyledInputWrapper = _styled(InputWrapper)(_templateObject(), function (p) {
+  return p._css;
 });

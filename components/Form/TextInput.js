@@ -1,3 +1,17 @@
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["", ""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+import _styled from "styled-components";
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -105,7 +119,7 @@ function (_PureComponent) {
         outline: outline,
         error: error,
         style: style,
-        _$p_: css
+        _css: css
       }, leftIcon && React.createElement(Icon, null, leftIcon), rightIcon && React.createElement(Icon, {
         right: true
       }, rightIcon), React.createElement("input", rest), HelpMessage(help, error));
@@ -124,11 +138,6 @@ _defineProperty(TextInput, "defaultProps", {
 
 export { TextInput as default };
 
-var _StyledWrapper =
-/*#__PURE__*/
-styled(Wrapper).withConfig({
-  displayName: "TextInput___StyledWrapper",
-  componentId: "sc-1mtsepk-2"
-})(["undefined", "undefined"], function (p) {
-  return p._$p_;
+var _StyledWrapper = _styled(Wrapper)(_templateObject(), function (p) {
+  return p._css;
 });

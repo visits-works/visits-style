@@ -7,3 +7,5 @@ __export(require("./components"));
 __export(require("./utils"));
 var default_1 = require("./theme/default");
 exports.defaultTheme = default_1.default;
+var normalize_1 = require("./styles/normalize");
+exports.normalizeStyle = normalize_1.default;

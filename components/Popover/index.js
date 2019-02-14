@@ -1,3 +1,17 @@
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["", ""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+import _styled from "styled-components";
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -183,7 +197,7 @@ function (_Component) {
           display: 'block',
           position: 'relative'
         },
-        _$p_: css
+        _css: css
       }, label, React.createElement(CSSTransition, {
         classNames: {
           appear: 'start',
@@ -211,11 +225,6 @@ _defineProperty(Popover, "defaultProps", {
 
 export { Popover as default };
 
-var _StyledWrapper =
-/*#__PURE__*/
-styled(Wrapper).withConfig({
-  displayName: "Popover___StyledWrapper",
-  componentId: "sc-1huajr8-2"
-})(["undefined", "undefined"], function (p) {
-  return p._$p_;
+var _StyledWrapper = _styled(Wrapper)(_templateObject(), function (p) {
+  return p._css;
 });

@@ -57,8 +57,8 @@ var InputWrapper = styled_components_1.default.span(templateObject_3 || (templat
     "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ",
     "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:invalid {\n      color: ", ";\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
     "\n\n  ", "\n"])), function (_a) {
-    var inputSize = _a.inputSize;
-    return setSize_1.default("font-size", inputSize);
+    var size = _a.size;
+    return setSize_1.default("font-size", size);
 }, function (_a) {
     var outline = _a.outline, theme = _a.theme, error = _a.error;
     return outline ? styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        border: 1px solid ", ";\n        border-radius: 4px;\n      "], ["\n        border: 1px solid ", ";\n        border-radius: 4px;\n      "])), error ? theme.danger : theme.border) : styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        border-bottom: 1px solid ", ";\n        border-radius: 0;\n      "], ["\n        border-bottom: 1px solid ", ";\n        border-radius: 0;\n      "])), error ? theme.danger : theme.border);
@@ -117,8 +117,8 @@ var Select = /** @class */ (function (_super) {
             props.error !== this.props.error);
     };
     Select.prototype.render = function () {
-        var _a = this.props, css = _a.css, className = _a.className, size = _a.size, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["css", "className", "size", "outline", "options", "error", "help", "placeholder", "disabled"]);
-        return (react_1.default.createElement(InputWrapper, { className: className, size: size, outline: outline, error: error, disabled: disabled, css: css },
+        var _a = this.props, css = _a.css, className = _a.className, inputSize = _a.inputSize, outline = _a.outline, options = _a.options, error = _a.error, help = _a.help, placeholder = _a.placeholder, disabled = _a.disabled, rest = __rest(_a, ["css", "className", "inputSize", "outline", "options", "error", "help", "placeholder", "disabled"]);
+        return (react_1.default.createElement(InputWrapper, { className: className, size: inputSize, outline: outline, error: error, disabled: disabled, css: css },
             react_1.default.createElement("select", __assign({}, rest, { disabled: disabled, required: Boolean(placeholder) }),
                 placeholder && (react_1.default.createElement("option", { value: "" }, placeholder)),
                 this.renderItem()),

@@ -8,7 +8,11 @@ function mediaFrom(device, str) {
     }
     var template = ['@media screen and (min-width: ', 'px) {'].concat(str, ['}']);
     var values = [device, ''].concat(args, ['']);
-    return styled_components_1.css(['', ''], [function (_a) {
+    return styled_components_1.css(
+    // @ts-ignore
+    ['', ''], 
+    // @ts-ignore
+    [function (_a) {
             var theme = _a.theme;
             return theme.responsive ? styled_components_1.css.apply(void 0, [template].concat(values)) : '';
         }]);
@@ -20,7 +24,11 @@ function mediaUntil(device, str) {
     }
     var template = ['@media screen and (max-width: ', 'px) {'].concat(str, ['}']);
     var values = [device, ''].concat(args, ['']);
-    return styled_components_1.css(['', ''], [function (_a) {
+    return styled_components_1.css(
+    // @ts-ignore
+    ['', ''], 
+    // @ts-ignore
+    [function (_a) {
             var theme = _a.theme;
             return theme.responsive ? styled_components_1.css.apply(void 0, [template].concat(values)) : '';
         }]);

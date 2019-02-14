@@ -16,7 +16,9 @@ function mediaFrom(device, str) {
   }
 
   var values = [device, ''].concat(args, ['']);
-  return css(['', ''], [function (_ref) {
+  return css( // @ts-ignore
+  ['', ''], // @ts-ignore
+  [function (_ref) {
     var theme = _ref.theme;
     return theme.responsive ? css.apply(void 0, [template].concat(_toConsumableArray(values))) : '';
   }]);
@@ -30,7 +32,9 @@ function mediaUntil(device, str) {
   }
 
   var values = [device, ''].concat(args, ['']);
-  return css(['', ''], [function (_ref2) {
+  return css( // @ts-ignore
+  ['', ''], // @ts-ignore
+  [function (_ref2) {
     var theme = _ref2.theme;
     return theme.responsive ? css.apply(void 0, [template].concat(_toConsumableArray(values))) : '';
   }]);
