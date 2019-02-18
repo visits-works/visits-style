@@ -4,7 +4,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import Box, { Props as BoxProps } from '../Box';
 import { CSSType } from '../../types';
 
-const Wrapper = styled.a<{ css?: CSSType }>`
+const Wrapper = styled.div<{ css?: CSSType }>`
   display: inline-block;
   outline: none;
   color: inherit;
