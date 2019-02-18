@@ -51,7 +51,7 @@ var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var CSSTransition_1 = __importDefault(require("react-transition-group/CSSTransition"));
 var Box_1 = __importDefault(require("../Box"));
-var Wrapper = styled_components_1.default.a(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: inline-block;\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  ", "\n"], ["\n  display: inline-block;\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  ", "\n"])), function (_a) {
+var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: inline-block;\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  ", "\n"], ["\n  display: inline-block;\n  outline: none;\n  color: inherit;\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  ", "\n"])), function (_a) {
     var css = _a.css;
     return css || '';
 });

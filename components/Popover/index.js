@@ -46,7 +46,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import Box from '../Box';
 var Wrapper =
 /*#__PURE__*/
-styled.a.withConfig({
+styled.div.withConfig({
   displayName: "Popover__Wrapper",
   componentId: "sc-1huajr8-0"
 })(["display:inline-block;outline:none;color:inherit;&:hover{color:inherit;text-decoration:none;}", ""], function (_ref) {
