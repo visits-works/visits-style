@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Content = styled.div`
   color: ${({ theme }) => theme.text};
+  line-height: 1.5;
 
   li + li {
     margin-top: 0.25em;
