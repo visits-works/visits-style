@@ -5,7 +5,6 @@ interface Props {
 }
 
 export function mediaMobile({ theme }: Props) {
-  console.log(theme);
   return `@media screen and (max-width: ${theme.responsive ? theme.mobile : 0}px)`;
 }
 
