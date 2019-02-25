@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import { SizeType } from '../../types';
 
 const stripedStyle = css`
@@ -25,7 +25,7 @@ interface Props {
 
 const Table = styled.table<Props>`
   display: block;
-  ${({ full }) => full ? 'width: 100%;' : ''}
+  ${({ full }) => full ? css`width: 100%;` : ''}
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
@@ -36,11 +36,9 @@ const Table = styled.table<Props>`
   td, th {
     vertical-align: top;
     padding: 0.75rem;
-    ${({ theme, bordered }) => bordered ? `
+    ${({ theme, bordered }) => bordered ? css`
       border: 1px solid ${theme.border};
-    ` : `
-      border: 1px solid ${theme.border};
-    `}
+    ` : ''}
     border-width: 0 0 1px;
   }
 

@@ -32,10 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
         result.data.allMdx.edges.forEach(({ node }) => {
           createPage({
             path: node.fields.slug ? node.fields.slug : "/",
-            component: componentWithMDXScope(
-              path.resolve("./src/docs.tsx"),
-              node.code.scope
-            ),
+            component: path.resolve("./src/docs.tsx"),
             context: {
               id: node.id
             }

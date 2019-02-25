@@ -8,18 +8,23 @@ export default createGlobalStyle`
     height: 100%;
   }
 
-  #___gatsby {
-    height: 100%;
-    min-height: 100%;
-    & > div {
-      height: 100%;
-      max-height: 100%;
+  body {
+    overflow-y: auto;
+    position: relative;
+    background-color: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
+
+    #___gatsby {
       display: flex;
       flex-direction: column;
-    }
-  }
+      min-height: 100%;
 
-  pre {
-    font-family: inherit;
+      & > div {
+        height: 100%;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 `;

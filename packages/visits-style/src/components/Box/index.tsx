@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';
 

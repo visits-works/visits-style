@@ -1,11 +1,11 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { HTMLAttributes } from 'react';
+import styled, { css } from 'styled-components/macro';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { mediaDesktop } from '../../utils/media';
 import { ColorType, ThemeType, SizeType } from '../../types';
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   /** 背景の色 */
   color?: ColorType;
   /** small | medium | large | full */
@@ -23,7 +23,7 @@ function setColor({ color, theme }: { color?: ColorType, theme: ThemeType }) {
 
   const target = theme[color] || color;
   const invertColor = findColorInvert(theme, target);
-  return `background-color: ${target}; color: ${invertColor};`;
+  return css`background-color: ${target}; color: ${invertColor};`;
 }
 
 function setSize({ size, theme }: { size?: SizeType | 'full', theme: ThemeType }) {
@@ -104,9 +104,9 @@ const Wrapper = styled.div<WrapperProps>`
   }
 `;
 
-export default function Hero({ children, color, size, center, header }: Props) {
+export default function Hero({ children, color, size, center, header, ...rest }: Props) {
   return (
-    <Wrapper color={color} size={size}>
+    <Wrapper color={color} size={size} {...rest}>
       {header}
       <Body center={center}>
         <Container>

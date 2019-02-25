@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import defaultTheme from '@theme/default';
 // @ts-ignore
-import { Row, Col } from '@components';
+import { Row, Col, Container } from '@components';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -12,7 +12,7 @@ import GlobalStyle from './globalStyle';
 const theme = {
   ...defaultTheme,
   // tslint:disable-next-line
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,ヒラギノ角ゴシック,Meiryo,Helvetica,"MS PGothic",Arial,sans-serif',
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Helvetica Neue",HelveticaNeue,"Hiragino Kaku Gothic ProN","游ゴシック Medium",YuGothic,YuGothicM,メイリオ,Meiryo,sans-serif',
 };
 
 
@@ -22,15 +22,15 @@ export default function Layout({ children, current }: any) {
       <Fragment>
         <GlobalStyle />
         <Topbar current={current} />
-        <main style={{ flex: 1, paddingTop: '3.2rem', minHeight: 'calc(100vh - 3.2rem)' }}>
+        <Container as="main" style={{ margin: 0, marginTop: '3.25rem' }} fluid>
           <Row style={{ margin: 0 }}>
             {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
-            <Col style={{ padding: 0 }}>
+            <Col style={{ flex: 1, backgroundColor: 'white' }}>
               {children}
             </Col>
           </Row>
-          <Footer />
-        </main>
+        </Container>
+        <Footer />
       </Fragment>
     </ThemeProvider>
   );

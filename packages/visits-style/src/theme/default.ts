@@ -7,13 +7,12 @@ const theme: ThemeType = {
   responsive: true,
   gutter: 24,
   smallGutter: 16,
+  boxShadow: '',
 
-  media: {
-    mobile: 576,
-    tablet: 769,
-    desktop: 960,
-    fullhd: 1344,
-  },
+  mobile: 576,
+  tablet: 769,
+  desktop: 960,
+  fullhd: 1344,
 
   primary: '#37B151',
   link: '#578ba9',

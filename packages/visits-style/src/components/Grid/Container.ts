@@ -28,16 +28,16 @@ function setResponsive({ fluid }: Props): any {
     margin-right: auto;
     margin-left: auto;
     ${mediaMobile`
-      max-width: ${({ theme }: any) => theme.media.mobile - (2 * theme.smallGutter)}px;
+      max-width: ${({ theme }: any) => theme.mobile - (2 * theme.smallGutter)}px;
     `}
     ${mediaTablet`
-      max-width: ${({ theme }: any) => theme.media.tablet - (2 * theme.smallGutter)}px;
+      max-width: ${({ theme }: any) => theme.tablet - (2 * theme.smallGutter)}px;
     `}
     ${mediaDesktop`
-      max-width: ${({ theme }: any) => theme.media.desktop - (2 * theme.gutter)}px;
+      max-width: ${({ theme }: any) => theme.desktop - (2 * theme.gutter)}px;
     `}
     ${mediaFullHD`
-      max-width: ${({ theme }: any) => theme.media.fullhd - (2 * theme.gutter)}px;
+      max-width: ${({ theme }: any) => theme.fullhd - (2 * theme.gutter)}px;
     `}
   `;
 }

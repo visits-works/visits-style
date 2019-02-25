@@ -24,21 +24,21 @@ function mediaUntil(device: any, str: TemplateStringsArray, ...args: any[]): CSS
 }
 
 export function mediaMobile(str: TemplateStringsArray, ...args: any[]) {
-  return mediaUntil(({ theme }: any) => theme.media.tablet - 1, str, ...args);
+  return mediaUntil(({ theme }: any) => theme.tablet - 1, str, ...args);
 }
 
 export function mediaTablet(str: TemplateStringsArray, ...args: any[]) {
-  return mediaFrom(({ theme }: any) => theme.media.tablet, str, ...args);
+  return mediaFrom(({ theme }: any) => theme.tablet, str, ...args);
 }
 
 export function mediaDesktop(str: TemplateStringsArray, ...args: any[]) {
-  return mediaFrom(({ theme }: any) => theme.media.desktop, str, ...args);
+  return mediaFrom(({ theme }: any) => theme.desktop, str, ...args);
 }
 
 export function mediaFullHD(str: TemplateStringsArray, ...args: any[]) {
-  return mediaFrom(({ theme }: any) => theme.media.fullhd, str, ...args);
+  return mediaFrom(({ theme }: any) => theme.fullhd, str, ...args);
 }
 
 export function mediaUntilFullHD(str: TemplateStringsArray, ...args: any[]) {
-  return mediaUntil(({ theme }: any) => theme.media.fullhd - 1, str, ...args);
+  return mediaUntil(({ theme }: any) => theme.fullhd - 1, str, ...args);
 }

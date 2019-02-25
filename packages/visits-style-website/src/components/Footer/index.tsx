@@ -3,18 +3,20 @@ import styled from 'styled-components';
 import Logo from '../Logo';
 
 const Wrapper = styled.footer`
+  display: flex;
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.dark};
   color: ${({ theme }) => theme.white};
-  text-align: center;
-  padding: 1.5rem;
+  padding: 1rem 2.5rem;
 `;
+
+const currentYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
     <Wrapper>
       <Logo />
-      <div>Copyright © 2018 Visits Technologies.</div>
+      <div>Copyright ©{currentYear} Visits Technologies.</div>
     </Wrapper>
   );
 }
-

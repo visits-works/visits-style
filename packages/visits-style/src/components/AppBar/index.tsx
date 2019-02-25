@@ -1,6 +1,6 @@
 import React, { PureComponent, HTMLAttributes } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -19,7 +19,7 @@ function setColor(
       transparentize(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
     const ua = navigator.userAgent.toLowerCase();
     if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
-      return `background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;
+      return css`background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;
     }
 
     return css`
@@ -28,7 +28,7 @@ function setColor(
     `;
   }
 
-  return `background-color: ${backgroundColor}; color: ${textColor};`;
+  return css`background-color: ${backgroundColor}; color: ${textColor};`;
 }
 
 interface NavProps {
