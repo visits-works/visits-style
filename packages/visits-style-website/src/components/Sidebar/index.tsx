@@ -17,13 +17,13 @@ const Wrapper = styled(Col)`
   top: 3.25rem;
   height: calc(100vh - 3.25rem);
 
-  ${mediaMobile`
+  ${mediaMobile} {
     position: relative;
     overflow-y: hidden;
     top: 0;
     width: 100%;
     flex: 1;
-  `}
+  }
 `;
 
 const pageQuery = graphql`

@@ -46,6 +46,7 @@ export interface ThemeType {
   tablet: number;
   desktop: number;
   fullhd: number;
+  radius: number;
 
   [key: string]: string | number | boolean | any;
 }

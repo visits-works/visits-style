@@ -59,7 +59,7 @@ const Wrapper = styled.span<WrapperProps>`
       border-color: ${({ theme }) => theme.borderHover};
     }
   }
-  ${({ css }) => css || ''}
+  ${({ css }) => css || {}}
 `;
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {

@@ -1,5 +1,5 @@
-import React, { PureComponent, ReactNode, CSSProperties } from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, CSSProperties } from 'react';
+import styled, { css } from 'styled-components';
 import Box from '../Box';
 import { ColorType } from '../../types';
 
@@ -50,7 +50,7 @@ const CardImageHorizontal = styled.a<ImageProps>`
   border-bottom-left-radius: 3px;
 
   background: no-repeat center/cover;
-  ${({ url }) => url ? `background-image: url(${url});` : ''}
+  ${({ url }) => url ? css`background-image: url(${url});` : {}}
 `;
 
 interface Props {

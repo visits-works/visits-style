@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';
 
@@ -9,6 +9,14 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** borderを非表示する */
   borderless?: boolean;
   style?: any;
+}
+
+function setColor({ color, theme }: any) {
+  if (!color) return {};
+
+  const target = theme[color] || color;
+  const invertColor = findColorInvert(theme, target);
+  return css`background-color: ${target}; color: ${invertColor};`;
 }
 
 const Box = styled.div<Props>`
@@ -23,13 +31,7 @@ const Box = styled.div<Props>`
   min-width: 0;
   word-wrap: break-word;
 
-  ${({ color, theme }) => {
-    if (!color) return '';
-
-    const target = theme[color] || color;
-    const invertColor = findColorInvert(theme, target);
-    return `background-color: ${target}; color: ${invertColor};`;
-  }}
+  ${setColor}
 `;
 Box.displayName = 'Box';
 

@@ -34,12 +34,13 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
   return css`
     width: ${value}%;
     max-width: ${value}%;
-    ${offset ? `margin-left: ${offVal}%;` : ''}
-    ${auto ? mediaMobile`
+    ${offset ? `margin-left: ${offVal}%;` : {}}
+
+    ${mediaMobile} {
       width: ${autoSize}%;
       max-width: ${autoSize}%;
-      ${offset ? `margin-left: 0;` : ''}
-    ` : ''}
+      ${offset ? `margin-left: 0;` : {}}
+    }
   `;
 }
 
@@ -47,16 +48,16 @@ const Col = styled.div<ColProps>`
   display: block;
   min-height: 1px;
 
-  ${({ narrow }) => narrow ? 'flex: none;' : ''}
-  ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : ''}
+  ${({ narrow }) => narrow ? 'flex: none;' : {}}
+  ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : {}}
 
   ${renderSize}
 
   padding: 0.75rem;
 
-  ${mediaTablet`
+  ${mediaTablet} {
     padding: 0.5rem;
-  `}
+  }
 `;
 
 Col.displayName = 'Col';

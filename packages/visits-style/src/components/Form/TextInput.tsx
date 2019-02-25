@@ -1,5 +1,5 @@
 import React, { PureComponent, InputHTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
@@ -15,16 +15,27 @@ interface IconProps {
   right?: boolean;
 }
 
+const rightIcon = css`
+  right: 0.375em;
+  & ~ input {
+    padding-right: 1.555em !important;
+  }
+`;
+
+const leftIcon = css`
+  left: 0.375em;
+  & ~ input {
+    padding-left: 1.55em !important;
+  }
+`;
+
 const Icon = styled.span<IconProps>`
   position: absolute;
   top: 0.375em;
   bottom: 0;
   z-index: 1;
   color: ${({ theme }) => theme.border};
-  ${({ right }) => right ?
-    'right: 0.375em; & ~ input { padding-right: 1.555em !important; }' :
-    'left: 0.375em; & ~ input { padding-left: 1.55em !important; }'
-  }
+  ${({ right }) => right ? rightIcon : leftIcon}
 
   svg, img {
     height: 1em;

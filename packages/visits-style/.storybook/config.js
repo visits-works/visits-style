@@ -1,5 +1,5 @@
 // @ts-ignore
-import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/ie9';
 
 import React, { StrictMode } from 'react';
 import { configure, addDecorator } from '@storybook/react';

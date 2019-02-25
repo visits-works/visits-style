@@ -7,7 +7,7 @@ interface MsgProps {
 
 const Message = styled.span<MsgProps>`
   font-size: 0.8rem;
-  ${({ error, theme }) => error ? `color: ${theme.danger};` : `color: ${theme.textLight};`};
+  color: ${({ error, theme }) => error ? theme.danger : theme.textLight};
 `;
 
 export default function HelpMessage(help?: string, error?: string) {

@@ -28,7 +28,7 @@ function renderGutter({ noGutter }: Props) {
     `;
   }
   return css`
-    ${mediaTablet`
+    ${mediaTablet} {
       margin-left: -0.5rem;
       margin-right: -0.5rem;
       margin-top: -0.5rem;
@@ -40,21 +40,21 @@ function renderGutter({ noGutter }: Props) {
       &:not(:last-child) {
         margin-bottom: 0.5rem;
       }
-    `}
+    }
 
-    ${mediaFullHD`
-        margin-left: -0.75rem;
-        margin-right: -0.75rem;
-        margin-top: -0.75rem;
+    ${mediaFullHD} {
+      margin-left: -0.75rem;
+      margin-right: -0.75rem;
+      margin-top: -0.75rem;
 
-        &:last-child {
-          margin-bottom: -0.75rem;
-        }
+      &:last-child {
+        margin-bottom: -0.75rem;
+      }
 
-        &:not(:last-child) {
-          margin-bottom: 0.75rem;
-        }
-    `}
+      &:not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
+    }
   `;
 }
 

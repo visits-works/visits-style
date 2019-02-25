@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { LiveProvider, LiveError, withLive } from "react-live";
 import { FiInfo, FiThumbsUp } from 'react-icons/fi';
-import { mediaMobile } from '@utils/media';
 
 import Editor from './Highlight';
 import Preview from './Preview';

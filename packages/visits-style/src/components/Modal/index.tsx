@@ -57,7 +57,7 @@ const Wrapper = styled.div<{ css?: CSSType, shadowColor?: string }>`
     background-color: ${({ shadowColor }) => shadowColor || 'transparent'};
   }
 
-  ${({ css }) => css || ''}
+  ${({ css }) => css || {}}
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {

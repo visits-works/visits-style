@@ -50,10 +50,11 @@ const InputWrapper = styled.span<WrapperProps>`
 
     &:focus {
       border-color: ${({ error, theme }) => error ? theme.danger : theme.primary};
-      ${({ theme, outline, error }) =>
-        outline
-          ? `box-shadow: 0 0 0 0.1em ${error ? theme.danger : theme.primary};`
-          : `box-shadow: 0 0.1em ${error ? theme.danger : theme.primary};`}
+      box-shadow: ${
+        ({ theme, outline, error }) => outline ?
+          (error ? theme.danger : theme.primary) :
+          (error ? theme.danger : theme.primary)
+        };
     }
 
     &::-ms-expand {
@@ -82,8 +83,8 @@ const InputWrapper = styled.span<WrapperProps>`
 
   ${({ theme, disabled }) =>
     disabled
-      ? ""
-      : `
+      ? {}
+      : css`
     &:hover {
       select:not(:disabled):not(:focus) {
         border-color: ${theme.borderHover};
@@ -95,7 +96,7 @@ const InputWrapper = styled.span<WrapperProps>`
     }
   `}
 
-  ${({ css }) => css || ''}
+  ${({ css }) => css || {}}
 `;
 
 type ItemType =

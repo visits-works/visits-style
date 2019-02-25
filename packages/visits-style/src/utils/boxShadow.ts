@@ -1,4 +1,4 @@
-import { css } from 'styled-components/macro';
+import { css } from 'styled-components';
 import transparentize from 'polished/lib/color/transparentize';
 
 export default function boxShadow(size: string, color: string, amount?: number) {

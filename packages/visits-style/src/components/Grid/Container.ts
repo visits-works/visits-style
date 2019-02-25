@@ -9,36 +9,36 @@ interface Props {
 function setResponsive({ fluid }: Props): any {
   if (fluid) {
     return css`
-      ${mediaMobile`
+      ${mediaMobile} {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
-      `}
-      ${mediaDesktop`
+      }
+      ${mediaDesktop} {
         padding-right: 0.75rem;
         padding-left: 0.75rem;
-      `}
-      ${mediaFullHD`
+      }
+      ${mediaFullHD} {
         padding-right: 0.75rem;
         padding-left: 0.75rem;
-      `}
+      }
     `;
   }
 
   return css`
     margin-right: auto;
     margin-left: auto;
-    ${mediaMobile`
+    ${mediaMobile} {
       max-width: ${({ theme }: any) => theme.mobile - (2 * theme.smallGutter)}px;
-    `}
-    ${mediaTablet`
+    }
+    ${mediaTablet} {
       max-width: ${({ theme }: any) => theme.tablet - (2 * theme.smallGutter)}px;
-    `}
-    ${mediaDesktop`
+    }
+    ${mediaDesktop} {
       max-width: ${({ theme }: any) => theme.desktop - (2 * theme.gutter)}px;
-    `}
-    ${mediaFullHD`
+    }
+    ${mediaFullHD} {
       max-width: ${({ theme }: any) => theme.fullhd - (2 * theme.gutter)}px;
-    `}
+    }
   `;
 }
 

@@ -37,7 +37,9 @@ const Menu = styled(ButtonGroup)`
   text-align: right;
   width: 100%;
 
-  ${mediaMobile`display: none;`}
+  ${mediaMobile} {
+    display: none;
+  }
 `;
 
 

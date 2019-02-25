@@ -8,11 +8,10 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
-    ["styled-components", { "pure": true }],
+    ["babel-plugin-styled-components", { "pure": true }],
     "polished",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-class-properties",
-    "@babel/proposal-object-rest-spread",
-    "@babel/plugin-syntax-dynamic-import"
+    "@babel/proposal-object-rest-spread"
   ]
 }

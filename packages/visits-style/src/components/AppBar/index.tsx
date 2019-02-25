@@ -1,6 +1,6 @@
 import React, { PureComponent, HTMLAttributes } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -62,9 +62,13 @@ const NavBar = styled.header<NavProps>`
 
   a { color: inherit; }
 
-  ${mediaTablet`padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};`}
-  ${mediaUntilFullHD`padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};`}
-  ${({ css }) => css || ''}
+  ${mediaTablet} {
+    padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};
+  }
+  ${mediaUntilFullHD} {
+    padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};
+  }
+  ${({ css }) => css || {}}
 `;
 
 const Burger = styled.button`
@@ -81,7 +85,9 @@ const Burger = styled.button`
     background-color: rgba(0, 0, 0, .05);
   }
 
-  ${mediaMobile`display: block;`}
+  ${mediaMobile} {
+    display: block;
+  }
 `;
 
 interface ContentProps {
@@ -114,7 +120,7 @@ const NavContent = styled.div<ContentProps>`
     ${({ color }) => (color ? `color: ${color};` : '')}
   }
 
-  ${mediaMobile`
+  ${mediaMobile} {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
@@ -137,7 +143,7 @@ const NavContent = styled.div<ContentProps>`
       padding: .5rem 0;
       width: 100%;
     }
-  `}
+  }
 `;
 
 

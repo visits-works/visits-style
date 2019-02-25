@@ -13,9 +13,9 @@ const Wrapper = styled.div<{ required?: boolean, css?: CSSType }>`
       color: ${theme.primary};
       margin-left: 0.325rem;
     }
-  ` : ''}
+  ` : {}}
 
-  ${({ css }) => css || ''}
+  ${({ css }) => css || {}}
 `;
 
 const Label = styled.label`

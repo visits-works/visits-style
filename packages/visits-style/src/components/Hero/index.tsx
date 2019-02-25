@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { mediaDesktop } from '../../utils/media';
@@ -31,9 +31,9 @@ function setSize({ size, theme }: { size?: SizeType | 'full', theme: ThemeType }
 
   switch (size) {
     case 'medium' :
-      return mediaDesktop`padding-bottom: 9rem; padding-top: 9rem;`;
+      return css`padding-bottom: 9rem; padding-top: 9rem;`;
     case 'large' :
-      return mediaDesktop`padding-bottom: 18rem; padding-top: 18rem;`;
+      return css`padding-bottom: 18rem; padding-top: 18rem;`;
     case 'full' :
       return css`
         min-height: 100vh;

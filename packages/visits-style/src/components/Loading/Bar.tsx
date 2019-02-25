@@ -55,7 +55,7 @@ const Wrapper = styled.div<LoadingProps>`
     }
   }
 
-  ${({ css }) => css || ''}
+  ${({ css }) => css || {}}
 `;
 
 
