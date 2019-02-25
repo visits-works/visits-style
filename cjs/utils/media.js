@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 function mediaMobile(_a) {
     var theme = _a.theme;
-    console.log(theme);
     return "@media screen and (max-width: " + (theme.responsive ? theme.mobile : 0) + "px)";
 }
 exports.mediaMobile = mediaMobile;

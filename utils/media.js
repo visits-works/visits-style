@@ -1,6 +1,5 @@
 export function mediaMobile(_ref) {
   var theme = _ref.theme;
-  console.log(theme);
   return "@media screen and (max-width: ".concat(theme.responsive ? theme.mobile : 0, "px)");
 }
 export function mediaTablet(_ref2) {
