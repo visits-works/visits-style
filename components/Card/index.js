@@ -19,7 +19,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Box from '../Box';
 var CardBody =
 /*#__PURE__*/
@@ -58,7 +58,7 @@ styled.a.withConfig({
   componentId: "sc-1xqn2rf-4"
 })(["flex:0 0 30%;min-width:5rem;width:30%;border-top-left-radius:3px;border-bottom-left-radius:3px;background:no-repeat center/cover;", ""], function (_ref3) {
   var url = _ref3.url;
-  return url ? "background-image: url(".concat(url, ");") : '';
+  return url ? css(["background-image:url(", ");"], url) : {};
 });
 var horizontalStyle = {
   flexDirection: 'row'

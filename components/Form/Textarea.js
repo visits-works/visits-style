@@ -70,7 +70,7 @@ styled.span.withConfig({
   return theme.borderHover;
 }, function (_ref7) {
   var css = _ref7.css;
-  return css || '';
+  return css || {};
 });
 
 var Textarea =

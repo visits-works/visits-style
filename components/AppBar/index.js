@@ -24,48 +24,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  "]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["display: block;"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["padding: ", ";"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["padding: ", ";"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 import React, { PureComponent } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled, { css } from 'styled-components';
@@ -86,13 +44,13 @@ function setColor(_ref) {
     var ua = navigator.userAgent.toLowerCase();
 
     if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
-      return "background-color: ".concat(backColor, "; color: ").concat(textColor, "; backdrop-filter: blur(8px);");
+      return css(["background-color:", ";color:", ";backdrop-filter:blur(8px);"], backColor, textColor);
     }
 
     return css(["background-color:", ";color:", ";"], backColor, textColor);
   }
 
-  return "background-color: ".concat(backgroundColor, "; color: ").concat(textColor, ";");
+  return css(["background-color:", ";color:", ";"], backgroundColor, textColor);
 }
 
 var NavBar =
@@ -100,35 +58,35 @@ var NavBar =
 styled.header.withConfig({
   displayName: "AppBar__NavBar",
   componentId: "t8gqca-0"
-})(["position:", ";display:flex;flex-wrap:wrap;align-items:center;justify-content:stretch;top:-1px;min-height:3.25rem;width:100%;z-index:30;", " a{color:inherit;}", " ", " ", ""], function (_ref2) {
+})(["position:", ";display:flex;flex-wrap:wrap;align-items:center;justify-content:stretch;top:-1px;min-height:3.25rem;width:100%;z-index:30;", " a{color:inherit;}", "{padding:", ";}", "{padding:", ";}", ""], function (_ref2) {
   var fixed = _ref2.fixed,
       sticky = _ref2.sticky;
   return !(sticky || fixed) ? 'relative' : fixed ? 'fixed' : 'sticky';
-}, setColor, mediaTablet(_templateObject(), function (_ref3) {
+}, setColor, mediaTablet, function (_ref3) {
   var fluid = _ref3.fluid;
   return fluid ? '0 0.5rem' : '0 3%';
-}), mediaUntilFullHD(_templateObject2(), function (_ref4) {
+}, mediaUntilFullHD, function (_ref4) {
   var fluid = _ref4.fluid;
   return fluid ? '0 0.75rem' : '0 5%';
-}), function (_ref5) {
+}, function (_ref5) {
   var css = _ref5.css;
-  return css || '';
+  return css || {};
 });
 var Burger =
 /*#__PURE__*/
 styled.button.withConfig({
   displayName: "AppBar__Burger",
   componentId: "t8gqca-1"
-})(["", " display:none;margin-left:auto;border:none;background-color:transparent;color:inherit;outline:none;&:hover{background-color:rgba(0,0,0,.05);}", ""], hambuger('3.25rem'), mediaMobile(_templateObject3()));
+})(["", " display:none;margin-left:auto;border:none;background-color:transparent;color:inherit;outline:none;&:hover{background-color:rgba(0,0,0,.05);}", "{display:block;}"], hambuger('3.25rem'), mediaMobile);
 var NavContent =
 /*#__PURE__*/
 styled.div.withConfig({
   displayName: "AppBar__NavContent",
   componentId: "t8gqca-2"
-})(["display:flex;justify-content:space-between;align-items:center;flex-basis:auto;flex-grow:1;& > ul{display:flex;flex-direction:row;list-style:none;flex-grow:1;justify-content:", ";li{padding:0 0.75rem;}}& > div,& > span,& > form{display:flex;", "}", ""], setAlign, function (_ref6) {
+})(["display:flex;justify-content:space-between;align-items:center;flex-basis:auto;flex-grow:1;& > ul{display:flex;flex-direction:row;list-style:none;flex-grow:1;justify-content:", ";li{padding:0 0.75rem;}}& > div,& > span,& > form{display:flex;", "}", "{width:100%;flex-direction:column;align-items:flex-start;padding-bottom:0.5rem;button:not(.active)+&{display:none;}& > ul{flex-direction:column;width:100%;li{padding:.5rem 0;}}& > div,& > span,& > form{padding:.5rem 0;width:100%;}}"], setAlign, function (_ref6) {
   var color = _ref6.color;
   return color ? "color: ".concat(color, ";") : '';
-}, mediaMobile(_templateObject4()));
+}, mediaMobile);
 
 var AppBar =
 /*#__PURE__*/

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { ColorType, SizeType } from '../../types';
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
     /** 背景の色 */
     color?: ColorType;
     /** small | medium | large | full */
@@ -12,5 +12,5 @@ interface Props {
     /** カスタムヘッダー */
     header?: React.ReactElement<any>;
 }
-export default function Hero({ children, color, size, center, header }: Props): JSX.Element;
+export default function Hero({ children, color, size, center, header, ...rest }: Props): JSX.Element;
 export {};

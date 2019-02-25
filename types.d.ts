@@ -27,11 +27,10 @@ export interface ThemeType {
     responsive: boolean;
     gutter: number;
     smallGutter: number;
-    media: {
-        mobile: number;
-        tablet: number;
-        desktop: number;
-        fullhd: number;
-    };
+    mobile: number;
+    tablet: number;
+    desktop: number;
+    fullhd: number;
+    radius: number;
     [key: string]: string | number | boolean | any;
 }

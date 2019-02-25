@@ -9,8 +9,6 @@ function findColorInvert(_a, color) {
     if (!color || getLuminance_1.default(color) > 0.55) {
         return black;
     }
-    else {
-        return white;
-    }
+    return white;
 }
 exports.default = findColorInvert;

@@ -49,7 +49,7 @@ var InputWrapper =
 styled.span.withConfig({
   displayName: "Select__InputWrapper",
   componentId: "ffa0bn-0"
-})(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";", "}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled],&:readonly{", "}&:invalid{color:", ";}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
+})(["position:relative;display:block;select{display:block;cursor:pointer;appearance:none;outline:none;max-width:100%;width:100%;height:100%;background-color:transparent;padding:0.375em 0.625em;text-align:left;color:inherit;", " border:none;", " will-change:box-shadow;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;&:focus{border-color:", ";box-shadow:", ";}&::-ms-expand{display:none;}&:-moz-focusring{color:transparent;text-shadow:0 0 0 #000;}&:disabled,[disabled],&:readonly{", "}&:invalid{color:", ";}}&::after{", " top:1.25em;right:0.625em;z-index:4;}", " ", ""], function (_ref) {
   var size = _ref.size;
   return setSize("font-size", size);
 }, function (_ref2) {
@@ -65,7 +65,7 @@ styled.span.withConfig({
   var theme = _ref4.theme,
       outline = _ref4.outline,
       error = _ref4.error;
-  return outline ? "box-shadow: 0 0 0 0.1em ".concat(error ? theme.danger : theme.primary, ";") : "box-shadow: 0 0.1em ".concat(error ? theme.danger : theme.primary, ";");
+  return outline ? error ? theme.danger : theme.primary : error ? theme.danger : theme.primary;
 }, function (_ref5) {
   var theme = _ref5.theme;
   return disabledColor(theme);
@@ -78,10 +78,10 @@ styled.span.withConfig({
 }, function (_ref8) {
   var theme = _ref8.theme,
       disabled = _ref8.disabled;
-  return disabled ? "" : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: ".concat(theme.borderHover, ";\n      }\n\n      &::after {\n        border-color: ").concat(theme.borderHover, ";\n      }\n    }\n  ");
+  return disabled ? {} : css(["&:hover{select:not(:disabled):not(:focus){border-color:", ";}&::after{border-color:", ";}}"], theme.borderHover, theme.borderHover);
 }, function (_ref9) {
   var css = _ref9.css;
-  return css || '';
+  return css || {};
 });
 
 var Select =

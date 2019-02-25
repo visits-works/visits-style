@@ -16,33 +16,26 @@ var media_1 = require("../../utils/media");
 function setResponsive(_a) {
     var fluid = _a.fluid;
     if (fluid) {
-        return styled_components_1.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n      ", "\n      ", "\n      ", "\n    "], ["\n      ",
-            "\n      ",
-            "\n      ",
-            "\n    "])), media_1.mediaMobile(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n        padding-right: 0.5rem;\n        padding-left: 0.5rem;\n      "], ["\n        padding-right: 0.5rem;\n        padding-left: 0.5rem;\n      "]))), media_1.mediaDesktop(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      "], ["\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      "]))), media_1.mediaFullHD(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      "], ["\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      "]))));
+        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      ", " {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem;\n      }\n      ", " {\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      }\n      ", " {\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      }\n    "], ["\n      ", " {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem;\n      }\n      ", " {\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      }\n      ", " {\n        padding-right: 0.75rem;\n        padding-left: 0.75rem;\n      }\n    "])), media_1.mediaMobile, media_1.mediaDesktop, media_1.mediaFullHD);
     }
-    return styled_components_1.css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n    margin-right: auto;\n    margin-left: auto;\n    ", "\n    ", "\n    ", "\n    ", "\n  "], ["\n    margin-right: auto;\n    margin-left: auto;\n    ",
-        "\n    ",
-        "\n    ",
-        "\n    ",
-        "\n  "])), media_1.mediaMobile(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+    return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    margin-right: auto;\n    margin-left: auto;\n    ", " {\n      max-width: ", "px;\n    }\n    ", " {\n      max-width: ", "px;\n    }\n    ", " {\n      max-width: ", "px;\n    }\n    ", " {\n      max-width: ", "px;\n    }\n  "], ["\n    margin-right: auto;\n    margin-left: auto;\n    ", " {\n      max-width: ", "px;\n    }\n    ", " {\n      max-width: ", "px;\n    }\n    ", " {\n      max-width: ", "px;\n    }\n    ", " {\n      max-width: ", "px;\n    }\n  "])), media_1.mediaMobile, function (_a) {
         var theme = _a.theme;
-        return theme.media.mobile - (2 * theme.smallGutter);
-    }), media_1.mediaTablet(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        return theme.mobile - (2 * theme.smallGutter);
+    }, media_1.mediaTablet, function (_a) {
         var theme = _a.theme;
-        return theme.media.tablet - (2 * theme.smallGutter);
-    }), media_1.mediaDesktop(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        return theme.tablet - (2 * theme.smallGutter);
+    }, media_1.mediaDesktop, function (_a) {
         var theme = _a.theme;
-        return theme.media.desktop - (2 * theme.gutter);
-    }), media_1.mediaFullHD(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      max-width: ", "px;\n    "], ["\n      max-width: ", "px;\n    "])), function (_a) {
+        return theme.desktop - (2 * theme.gutter);
+    }, media_1.mediaFullHD, function (_a) {
         var theme = _a.theme;
-        return theme.media.fullhd - (2 * theme.gutter);
-    }));
+        return theme.fullhd - (2 * theme.gutter);
+    });
 }
-var Container = styled_components_1.default.div(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n\n  ", "\n"], ["\n  position: relative;\n  width: 100%;\n\n  ", "\n"])), setResponsive);
+var Container = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n\n  ", "\n"], ["\n  position: relative;\n  width: 100%;\n\n  ", "\n"])), setResponsive);
 Container.displayName = 'Container';
 Container.defaultProps = {
     fluid: false,
 };
 exports.default = Container;
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10;
+var templateObject_1, templateObject_2, templateObject_3;

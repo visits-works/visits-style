@@ -53,9 +53,9 @@ var arrow_1 = __importDefault(require("../../utils/arrow"));
 var setSize_1 = __importDefault(require("../../utils/setSize"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
 var disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
-var InputWrapper = styled_components_1.default.span(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:invalid {\n      color: ", ";\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ",
-    "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ",
-    "\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:invalid {\n      color: ", ";\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
+var InputWrapper = styled_components_1.default.span(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ", "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      box-shadow: ", ";\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:invalid {\n      color: ", ";\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ", "\n\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  select {\n    display: block;\n    cursor: pointer;\n    appearance: none;\n    outline: none;\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    background-color: transparent;\n    padding: 0.375em 0.625em;\n    text-align: left;\n    color: inherit;\n\n    ", "\n\n    border: none;\n    ",
+    "\n\n    will-change: box-shadow;\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      box-shadow: ",
+    ";\n    }\n\n    &::-ms-expand {\n      display: none;\n    }\n    &:-moz-focusring {\n      color: transparent;\n      text-shadow: 0 0 0 #000;\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:invalid {\n      color: ", ";\n    }\n  }\n\n  &::after {\n    ", "\n    top: 1.25em;\n    right: 0.625em;\n    z-index: 4;\n  }\n\n  ",
     "\n\n  ", "\n"])), function (_a) {
     var size = _a.size;
     return setSize_1.default("font-size", size);
@@ -67,9 +67,9 @@ var InputWrapper = styled_components_1.default.span(templateObject_3 || (templat
     return error ? theme.danger : theme.primary;
 }, function (_a) {
     var theme = _a.theme, outline = _a.outline, error = _a.error;
-    return outline
-        ? "box-shadow: 0 0 0 0.1em " + (error ? theme.danger : theme.primary) + ";"
-        : "box-shadow: 0 0.1em " + (error ? theme.danger : theme.primary) + ";";
+    return outline ?
+        (error ? theme.danger : theme.primary) :
+        (error ? theme.danger : theme.primary);
 }, function (_a) {
     var theme = _a.theme;
     return disabledColor_1.default(theme);
@@ -82,11 +82,11 @@ var InputWrapper = styled_components_1.default.span(templateObject_3 || (templat
 }, function (_a) {
     var theme = _a.theme, disabled = _a.disabled;
     return disabled
-        ? ""
-        : "\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: " + theme.borderHover + ";\n      }\n\n      &::after {\n        border-color: " + theme.borderHover + ";\n      }\n    }\n  ";
+        ? {}
+        : styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: ", ";\n      }\n\n      &::after {\n        border-color: ", ";\n      }\n    }\n  "], ["\n    &:hover {\n      select:not(:disabled):not(:focus) {\n        border-color: ", ";\n      }\n\n      &::after {\n        border-color: ", ";\n      }\n    }\n  "])), theme.borderHover, theme.borderHover);
 }, function (_a) {
     var css = _a.css;
-    return css || '';
+    return css || {};
 });
 var Select = /** @class */ (function (_super) {
     __extends(Select, _super);
@@ -133,4 +133,4 @@ var Select = /** @class */ (function (_super) {
     return Select;
 }(react_1.Component));
 exports.default = Select;
-var templateObject_1, templateObject_2, templateObject_3;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4;

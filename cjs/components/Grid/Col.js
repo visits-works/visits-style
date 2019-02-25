@@ -30,17 +30,15 @@ function renderSize(_a) {
     var value = parcentage(size);
     var offVal = offset ? parcentage(offset) : 0;
     var autoSize = value > 33 ? 100 : value * 3;
-    return styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ", "\n  "], ["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n    ",
-        "\n  "])), value, value, offset ? "margin-left: " + offVal + "%;" : '', auto ? media_1.mediaMobile(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    "], ["\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    "])), autoSize, autoSize, offset ? "margin-left: 0;" : '') : '');
+    return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n\n    ", " {\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    }\n  "], ["\n    width: ", "%;\n    max-width: ", "%;\n    ", "\n\n    ", " {\n      width: ", "%;\n      max-width: ", "%;\n      ", "\n    }\n  "])), value, value, offset ? "margin-left: " + offVal + "%;" : {}, media_1.mediaMobile, autoSize, autoSize, offset ? "margin-left: 0;" : {});
 }
-var Col = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", "\n"], ["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ",
-    "\n"])), function (_a) {
+var Col = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", " {\n    padding: 0.5rem;\n  }\n"], ["\n  display: block;\n  min-height: 1px;\n\n  ", "\n  ", "\n\n  ", "\n\n  padding: 0.75rem;\n\n  ", " {\n    padding: 0.5rem;\n  }\n"])), function (_a) {
     var narrow = _a.narrow;
-    return narrow ? 'flex: none;' : '';
+    return narrow ? 'flex: none;' : {};
 }, function (_a) {
     var offset = _a.offset;
-    return offset ? "margin-left: " + parcentage(offset) + "%;" : '';
-}, renderSize, media_1.mediaTablet(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    padding: 0.5rem;\n  "], ["\n    padding: 0.5rem;\n  "]))));
+    return offset ? "margin-left: " + parcentage(offset) + "%;" : {};
+}, renderSize, media_1.mediaTablet);
 Col.displayName = 'Col';
 exports.default = Col;
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;
+var templateObject_1, templateObject_2, templateObject_3;

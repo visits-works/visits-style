@@ -41,7 +41,7 @@ styled.div.withConfig({
   return shadowColor || 'transparent';
 }, function (_ref2) {
   var css = _ref2.css;
-  return css || '';
+  return css || {};
 });
 
 var Modal =

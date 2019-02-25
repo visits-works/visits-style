@@ -5,10 +5,10 @@ var Message =
 styled.span.withConfig({
   displayName: "HelpMessage__Message",
   componentId: "sc-5r3ekc-0"
-})(["font-size:0.8rem;", ";"], function (_ref) {
+})(["font-size:0.8rem;color:", ";"], function (_ref) {
   var error = _ref.error,
       theme = _ref.theme;
-  return error ? "color: ".concat(theme.danger, ";") : "color: ".concat(theme.textLight, ";");
+  return error ? theme.danger : theme.textLight;
 });
 export default function HelpMessage(help, error) {
   if (error) {

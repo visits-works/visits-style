@@ -30,10 +30,10 @@ styled.div.withConfig({
 })(["display:block;&:not(:last-child){margin-bottom:0.75rem;}", " ", ""], function (_ref) {
   var required = _ref.required,
       theme = _ref.theme;
-  return required ? css(["label::after{content:'*';color:", ";margin-left:0.325rem;}"], theme.primary) : '';
+  return required ? css(["label::after{content:'*';color:", ";margin-left:0.325rem;}"], theme.primary) : {};
 }, function (_ref2) {
   var css = _ref2.css;
-  return css || '';
+  return css || {};
 });
 var Label =
 /*#__PURE__*/

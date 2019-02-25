@@ -44,7 +44,7 @@ styled.div.withConfig({
   return duration;
 }, function (_ref6) {
   var css = _ref6.css;
-  return css || '';
+  return css || {};
 });
 
 var LoadingBar =

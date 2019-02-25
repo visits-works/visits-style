@@ -58,7 +58,7 @@ var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObjec
     return duration;
 }, function (_a) {
     var css = _a.css;
-    return css || '';
+    return css || {};
 });
 var LoadingBar = /** @class */ (function (_super) {
     __extends(LoadingBar, _super);

@@ -62,32 +62,31 @@ function setColor(_a) {
         var backColor = transparentize_1.default(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
         var ua = navigator.userAgent.toLowerCase();
         if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
-            return "background-color: " + backColor + "; color: " + textColor + "; backdrop-filter: blur(8px);";
+            return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["background-color: ", "; color: ", "; backdrop-filter: blur(8px);"], ["background-color: ", "; color: ", "; backdrop-filter: blur(8px);"])), backColor, textColor);
         }
-        return styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      background-color: ", ";\n      color: ", ";\n    "], ["\n      background-color: ", ";\n      color: ", ";\n    "])), backColor, textColor);
+        return styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n      background-color: ", ";\n      color: ", ";\n    "], ["\n      background-color: ", ";\n      color: ", ";\n    "])), backColor, textColor);
     }
-    return "background-color: " + backgroundColor + "; color: " + textColor + ";";
+    return styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["background-color: ", "; color: ", ";"], ["background-color: ", "; color: ", ";"])), backgroundColor, textColor);
 }
-var NavBar = styled_components_1.default.header(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n  ", "\n"], ["\n  position: ",
-    ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", "\n  ", "\n  ", "\n"])), function (_a) {
+var NavBar = styled_components_1.default.header(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", " {\n    padding: ", ";\n  }\n  ", " {\n    padding: ", ";\n  }\n  ", "\n"], ["\n  position: ",
+    ";\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: stretch;\n  top: -1px;\n\n  min-height: 3.25rem;\n  width: 100%;\n  z-index: 30;\n\n  ", "\n\n  a { color: inherit; }\n\n  ", " {\n    padding: ", ";\n  }\n  ", " {\n    padding: ", ";\n  }\n  ", "\n"])), function (_a) {
     var fixed = _a.fixed, sticky = _a.sticky;
     return (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'));
-}, setColor, media_1.mediaTablet(templateObject_2 || (templateObject_2 = __makeTemplateObject(["padding: ", ";"], ["padding: ", ";"])), function (_a) {
+}, setColor, media_1.mediaTablet, function (_a) {
     var fluid = _a.fluid;
     return fluid ? '0 0.5rem' : '0 3%';
-}), media_1.mediaUntilFullHD(templateObject_3 || (templateObject_3 = __makeTemplateObject(["padding: ", ";"], ["padding: ", ";"])), function (_a) {
+}, media_1.mediaUntilFullHD, function (_a) {
     var fluid = _a.fluid;
     return fluid ? '0 0.75rem' : '0 5%';
-}), function (_a) {
+}, function (_a) {
     var css = _a.css;
-    return css || '';
+    return css || {};
 });
-var Burger = styled_components_1.default.button(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  ", "\n  display: none;\n  margin-left: auto;\n  border: none;\n  background-color: transparent;\n  color: inherit;\n\n  outline: none;\n\n  &:hover{\n    background-color: rgba(0, 0, 0, .05);\n  }\n\n  ", "\n"], ["\n  ", "\n  display: none;\n  margin-left: auto;\n  border: none;\n  background-color: transparent;\n  color: inherit;\n\n  outline: none;\n\n  &:hover{\n    background-color: rgba(0, 0, 0, .05);\n  }\n\n  ", "\n"])), hambuger_1.default('3.25rem'), media_1.mediaMobile(templateObject_5 || (templateObject_5 = __makeTemplateObject(["display: block;"], ["display: block;"]))));
-var NavContent = styled_components_1.default.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-basis: auto;\n  flex-grow: 1;\n\n  & > ul {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    flex-grow: 1;\n    justify-content: ", ";\n\n    li {\n      padding: 0 0.75rem;\n    }\n  }\n\n  & > div, & > span, & > form {\n    display: flex;\n    ", "\n  }\n\n  ", "\n"], ["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-basis: auto;\n  flex-grow: 1;\n\n  & > ul {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    flex-grow: 1;\n    justify-content: ", ";\n\n    li {\n      padding: 0 0.75rem;\n    }\n  }\n\n  & > div, & > span, & > form {\n    display: flex;\n    ", "\n  }\n\n  ",
-    "\n"])), setAlign_1.default, function (_a) {
+var Burger = styled_components_1.default.button(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  ", "\n  display: none;\n  margin-left: auto;\n  border: none;\n  background-color: transparent;\n  color: inherit;\n\n  outline: none;\n\n  &:hover{\n    background-color: rgba(0, 0, 0, .05);\n  }\n\n  ", " {\n    display: block;\n  }\n"], ["\n  ", "\n  display: none;\n  margin-left: auto;\n  border: none;\n  background-color: transparent;\n  color: inherit;\n\n  outline: none;\n\n  &:hover{\n    background-color: rgba(0, 0, 0, .05);\n  }\n\n  ", " {\n    display: block;\n  }\n"])), hambuger_1.default('3.25rem'), media_1.mediaMobile);
+var NavContent = styled_components_1.default.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-basis: auto;\n  flex-grow: 1;\n\n  & > ul {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    flex-grow: 1;\n    justify-content: ", ";\n\n    li {\n      padding: 0 0.75rem;\n    }\n  }\n\n  & > div, & > span, & > form {\n    display: flex;\n    ", "\n  }\n\n  ", " {\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  }\n"], ["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-basis: auto;\n  flex-grow: 1;\n\n  & > ul {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    flex-grow: 1;\n    justify-content: ", ";\n\n    li {\n      padding: 0 0.75rem;\n    }\n  }\n\n  & > div, & > span, & > form {\n    display: flex;\n    ", "\n  }\n\n  ", " {\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  }\n"])), setAlign_1.default, function (_a) {
     var color = _a.color;
     return (color ? "color: " + color + ";" : '');
-}, media_1.mediaMobile(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  "], ["\n    width: 100%;\n    flex-direction: column;\n    align-items: flex-start;\n\n    padding-bottom: 0.5rem;\n\n    button:not(.active)+& {\n      display:none;\n    }\n\n    & > ul {\n      flex-direction: column;\n      width: 100%;\n      li {\n        padding: .5rem 0;\n      }\n    }\n\n    & > div, & > span, & > form {\n      padding: .5rem 0;\n      width: 100%;\n    }\n  "]))));
+}, media_1.mediaMobile);
 var AppBar = /** @class */ (function (_super) {
     __extends(AppBar, _super);
     function AppBar() {
@@ -120,4 +119,4 @@ var AppBar = /** @class */ (function (_super) {
     return AppBar;
 }(react_1.PureComponent));
 exports.default = AppBar;
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;

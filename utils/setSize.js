@@ -1,15 +1,15 @@
 export default function setSize(name, size) {
   switch (size) {
     case 'small':
-      return name + ': 0.75rem;';
+      return "".concat(name, ": 0.75rem;");
 
     case 'medium':
-      return name + ': 1.25rem;';
+      return "".concat(name, ": 1.25rem;");
 
     case 'large':
-      return name + ': 1.5rem;';
+      return "".concat(name, ": 1.5rem;");
 
     default:
-      return name + ': 1rem;';
+      return "".concat(name, ": 1rem;");
   }
 }

@@ -48,21 +48,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
-var styled_components_1 = __importDefault(require("styled-components"));
+var styled_components_1 = __importStar(require("styled-components"));
 var utils_1 = require("../../utils");
 var disabledColor_1 = __importDefault(require("../../utils/disabledColor"));
 var HelpMessage_1 = __importDefault(require("./HelpMessage"));
-var Icon = styled_components_1.default.span(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: absolute;\n  top: 0.375em;\n  bottom: 0;\n  z-index: 1;\n  color: ", ";\n  ", "\n\n  svg, img {\n    height: 1em;\n    width: 1em;\n  }\n"], ["\n  position: absolute;\n  top: 0.375em;\n  bottom: 0;\n  z-index: 1;\n  color: ", ";\n  ",
-    "\n\n  svg, img {\n    height: 1em;\n    width: 1em;\n  }\n"])), function (_a) {
+var rightIcon = styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  right: 0.375em;\n  & ~ input {\n    padding-right: 1.555em !important;\n  }\n"], ["\n  right: 0.375em;\n  & ~ input {\n    padding-right: 1.555em !important;\n  }\n"])));
+var leftIcon = styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  left: 0.375em;\n  & ~ input {\n    padding-left: 1.55em !important;\n  }\n"], ["\n  left: 0.375em;\n  & ~ input {\n    padding-left: 1.55em !important;\n  }\n"])));
+var Icon = styled_components_1.default.span(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  position: absolute;\n  top: 0.375em;\n  bottom: 0;\n  z-index: 1;\n  color: ", ";\n  ", "\n\n  svg, img {\n    height: 1em;\n    width: 1em;\n  }\n"], ["\n  position: absolute;\n  top: 0.375em;\n  bottom: 0;\n  z-index: 1;\n  color: ", ";\n  ", "\n\n  svg, img {\n    height: 1em;\n    width: 1em;\n  }\n"])), function (_a) {
     var theme = _a.theme;
     return theme.border;
 }, function (_a) {
     var right = _a.right;
-    return right ?
-        'right: 0.375em; & ~ input { padding-right: 1.555em !important; }' :
-        'left: 0.375em; & ~ input { padding-left: 1.55em !important; }';
+    return right ? rightIcon : leftIcon;
 });
-var Wrapper = styled_components_1.default.span(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  input {\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    position: relative;\n    display: block;\n    outline: none;\n    box-shadow: none;\n    appearance: none;\n    text-align: left;\n    color: inherit;\n\n    padding: 0.375em 0.625em;\n    border: none;\n    ", "\n    ", "\n\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:disabled, [disabled] {\n      resize: none;\n    }\n\n    &::placeholder {\n      color: ", ";\n    }\n  }\n\n  &:hover {\n    input:not(:disabled):not(:focus):not(:active) {\n      border-color: ", ";\n    }\n    ", " {\n      color: ", ";\n    }\n  }\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  input {\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    position: relative;\n    display: block;\n    outline: none;\n    box-shadow: none;\n    appearance: none;\n    text-align: left;\n    color: inherit;\n\n    padding: 0.375em 0.625em;\n    border: none;\n    ",
+var Wrapper = styled_components_1.default.span(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: relative;\n  display: block;\n\n  input {\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    position: relative;\n    display: block;\n    outline: none;\n    box-shadow: none;\n    appearance: none;\n    text-align: left;\n    color: inherit;\n\n    padding: 0.375em 0.625em;\n    border: none;\n    ", "\n    ", "\n\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ", "\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:disabled, [disabled] {\n      resize: none;\n    }\n\n    &::placeholder {\n      color: ", ";\n    }\n  }\n\n  &:hover {\n    input:not(:disabled):not(:focus):not(:active) {\n      border-color: ", ";\n    }\n    ", " {\n      color: ", ";\n    }\n  }\n  ", "\n"], ["\n  position: relative;\n  display: block;\n\n  input {\n    max-width: 100%;\n    width: 100%;\n    height: 100%;\n    position: relative;\n    display: block;\n    outline: none;\n    box-shadow: none;\n    appearance: none;\n    text-align: left;\n    color: inherit;\n\n    padding: 0.375em 0.625em;\n    border: none;\n    ",
     "\n    ", "\n\n    transition-property: box-shadow;\n    transition-duration: 150ms;\n    transition-timing-function: ease-in-out;\n\n    &:focus {\n      border-color: ", ";\n      ",
     "\n    }\n\n    &:disabled, [disabled], &:readonly {\n      ", "\n    }\n\n    &:disabled, [disabled] {\n      resize: none;\n    }\n\n    &::placeholder {\n      color: ", ";\n    }\n  }\n\n  &:hover {\n    input:not(:disabled):not(:focus):not(:active) {\n      border-color: ", ";\n    }\n    ", " {\n      color: ", ";\n    }\n  }\n  ", "\n"])), function (_a) {
     var outline = _a.outline, theme = _a.theme, error = _a.error;
@@ -115,4 +114,4 @@ var TextInput = /** @class */ (function (_super) {
     return TextInput;
 }(react_1.PureComponent));
 exports.default = TextInput;
-var templateObject_1, templateObject_2;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4;

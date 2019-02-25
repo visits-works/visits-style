@@ -1,6 +1,10 @@
-import { CSSType } from '../types';
-export declare function mediaMobile(str: TemplateStringsArray, ...args: any[]): CSSType;
-export declare function mediaTablet(str: TemplateStringsArray, ...args: any[]): CSSType;
-export declare function mediaDesktop(str: TemplateStringsArray, ...args: any[]): CSSType;
-export declare function mediaFullHD(str: TemplateStringsArray, ...args: any[]): CSSType;
-export declare function mediaUntilFullHD(str: TemplateStringsArray, ...args: any[]): CSSType;
+import { ThemeType } from '../types';
+interface Props {
+    theme: ThemeType;
+}
+export declare function mediaMobile({ theme }: Props): string;
+export declare function mediaTablet({ theme }: Props): string;
+export declare function mediaDesktop({ theme }: Props): string;
+export declare function mediaFullHD({ theme }: Props): string;
+export declare function mediaUntilFullHD({ theme }: Props): string;
+export {};

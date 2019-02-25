@@ -37,10 +37,16 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
+var rightIcon =
+/*#__PURE__*/
+css(["right:0.375em;& ~ input{padding-right:1.555em !important;}"]);
+var leftIcon =
+/*#__PURE__*/
+css(["left:0.375em;& ~ input{padding-left:1.55em !important;}"]);
 var Icon =
 /*#__PURE__*/
 styled.span.withConfig({
@@ -51,7 +57,7 @@ styled.span.withConfig({
   return theme.border;
 }, function (_ref2) {
   var right = _ref2.right;
-  return right ? 'right: 0.375em; & ~ input { padding-right: 1.555em !important; }' : 'left: 0.375em; & ~ input { padding-left: 1.55em !important; }';
+  return right ? rightIcon : leftIcon;
 });
 var Wrapper =
 /*#__PURE__*/

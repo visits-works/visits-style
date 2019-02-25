@@ -1,30 +1,13 @@
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["padding-bottom: 18rem; padding-top: 18rem;"]);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["padding-bottom: 9rem; padding-top: 9rem;"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
-import { mediaDesktop } from '../../utils/media';
 
 function setColor(_ref) {
   var color = _ref.color,
@@ -32,7 +15,7 @@ function setColor(_ref) {
   if (!color) return '';
   var target = theme[color] || color;
   var invertColor = findColorInvert(theme, target);
-  return "background-color: ".concat(target, "; color: ").concat(invertColor, ";");
+  return css(["background-color:", ";color:", ";"], target, invertColor);
 }
 
 function setSize(_ref2) {
@@ -42,10 +25,10 @@ function setSize(_ref2) {
 
   switch (size) {
     case 'medium':
-      return mediaDesktop(_templateObject());
+      return css(["padding-bottom:9rem;padding-top:9rem;"]);
 
     case 'large':
-      return mediaDesktop(_templateObject2());
+      return css(["padding-bottom:18rem;padding-top:18rem;"]);
 
     case 'full':
       return css(["min-height:100vh;", "{align-items:center;display:flex;}"], Body);
@@ -75,11 +58,13 @@ export default function Hero(_ref4) {
       color = _ref4.color,
       size = _ref4.size,
       center = _ref4.center,
-      header = _ref4.header;
-  return React.createElement(Wrapper, {
+      header = _ref4.header,
+      rest = _objectWithoutProperties(_ref4, ["children", "color", "size", "center", "header"]);
+
+  return React.createElement(Wrapper, _extends({
     color: color,
     size: size
-  }, header, React.createElement(Body, {
+  }, rest), header, React.createElement(Body, {
     center: center
   }, React.createElement(Container, null, children)));
 }

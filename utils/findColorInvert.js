@@ -5,7 +5,7 @@ export default function findColorInvert(_ref, color) {
 
   if (!color || getLuminance(color) > 0.55) {
     return black;
-  } else {
-    return white;
   }
+
+  return white;
 }

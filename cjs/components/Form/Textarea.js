@@ -73,7 +73,7 @@ var Wrapper = styled_components_1.default.span(templateObject_1 || (templateObje
     return theme.borderHover;
 }, function (_a) {
     var css = _a.css;
-    return css || '';
+    return css || {};
 });
 var Textarea = /** @class */ (function (_super) {
     __extends(Textarea, _super);

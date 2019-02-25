@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
-var styled_components_1 = __importDefault(require("styled-components"));
+var styled_components_1 = __importStar(require("styled-components"));
 var Box_1 = __importDefault(require("../Box"));
 var CardBody = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  padding: 1.25rem;\n  margin: 0;\n"], ["\n  padding: 1.25rem;\n  margin: 0;\n"])));
 var CardHeader = styled_components_1.default.header(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  padding: 0.5rem 1.5rem;\n  min-height: 3.5rem;\n  border-bottom: 1px solid ", ";\n  align-items: center;\n  justify-content: space-between;\n"], ["\n  display: flex;\n  padding: 0.5rem 1.5rem;\n  min-height: 3.5rem;\n  border-bottom: 1px solid ", ";\n  align-items: center;\n  justify-content: space-between;\n"])), function (_a) {
@@ -40,9 +40,9 @@ var CardFooter = styled_components_1.default.footer(templateObject_3 || (templat
     return theme.border;
 });
 var CardImage = styled_components_1.default.a(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  width: 100%;\n\n  img {\n    width: 100%;\n    padding: 0;\n    margin: 0;\n    border-top-left-radius: 3px;\n    border-top-right-radius: 3px;\n  }\n"], ["\n  width: 100%;\n\n  img {\n    width: 100%;\n    padding: 0;\n    margin: 0;\n    border-top-left-radius: 3px;\n    border-top-right-radius: 3px;\n  }\n"])));
-var CardImageHorizontal = styled_components_1.default.a(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  flex: 0 0 30%;\n  min-width: 5rem;\n  width: 30%;\n  border-top-left-radius: 3px;\n  border-bottom-left-radius: 3px;\n\n  background: no-repeat center/cover;\n  ", "\n"], ["\n  flex: 0 0 30%;\n  min-width: 5rem;\n  width: 30%;\n  border-top-left-radius: 3px;\n  border-bottom-left-radius: 3px;\n\n  background: no-repeat center/cover;\n  ", "\n"])), function (_a) {
+var CardImageHorizontal = styled_components_1.default.a(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  flex: 0 0 30%;\n  min-width: 5rem;\n  width: 30%;\n  border-top-left-radius: 3px;\n  border-bottom-left-radius: 3px;\n\n  background: no-repeat center/cover;\n  ", "\n"], ["\n  flex: 0 0 30%;\n  min-width: 5rem;\n  width: 30%;\n  border-top-left-radius: 3px;\n  border-bottom-left-radius: 3px;\n\n  background: no-repeat center/cover;\n  ", "\n"])), function (_a) {
     var url = _a.url;
-    return url ? "background-image: url(" + url + ");" : '';
+    return url ? styled_components_1.css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["background-image: url(", ");"], ["background-image: url(", ");"])), url) : {};
 });
 var horizontalStyle = { flexDirection: 'row' };
 var Card = /** @class */ (function (_super) {
@@ -75,4 +75,4 @@ var Card = /** @class */ (function (_super) {
     return Card;
 }(react_1.PureComponent));
 exports.default = Card;
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
