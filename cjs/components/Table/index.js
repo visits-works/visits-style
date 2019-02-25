@@ -11,17 +11,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var macro_1 = __importStar(require("styled-components/macro"));
-var stripedStyle = macro_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  tbody > tr:nth-child(odd) {\n    background-color: rgba(0, 0, 0, 0.02);\n  }\n"], ["\n  tbody > tr:nth-child(odd) {\n    background-color: rgba(0, 0, 0, 0.02);\n  }\n"])));
-var hoverStyle = macro_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  tbody > tr:hover {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n"], ["\n  tbody > tr:hover {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n"])));
-var Table = macro_1.default.table(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: block;\n  ", "\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent;\n\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar;\n\n  td, th {\n    vertical-align: top;\n    padding: 0.75rem;\n    ", "\n    border-width: 0 0 1px;\n  }\n\n  th { white-space: nowrap; }\n\n  ", "\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  ", "\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent;\n\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar;\n\n  td, th {\n    vertical-align: top;\n    padding: 0.75rem;\n    ",
+var styled_components_1 = __importStar(require("styled-components"));
+var stripedStyle = styled_components_1.css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  tbody > tr:nth-child(odd) {\n    background-color: rgba(0, 0, 0, 0.02);\n  }\n"], ["\n  tbody > tr:nth-child(odd) {\n    background-color: rgba(0, 0, 0, 0.02);\n  }\n"])));
+var hoverStyle = styled_components_1.css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  tbody > tr:hover {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n"], ["\n  tbody > tr:hover {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n"])));
+var Table = styled_components_1.default.table(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  display: block;\n  ", "\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent;\n\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar;\n\n  td, th {\n    vertical-align: top;\n    padding: 0.75rem;\n    ", "\n    border-width: 0 0 1px;\n  }\n\n  th { white-space: nowrap; }\n\n  ", "\n  ", "\n\n  ", "\n"], ["\n  display: block;\n  ", "\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent;\n\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar;\n\n  td, th {\n    vertical-align: top;\n    padding: 0.75rem;\n    ",
     "\n    border-width: 0 0 1px;\n  }\n\n  th { white-space: nowrap; }\n\n  ", "\n  ", "\n\n  ",
     "\n"])), function (_a) {
     var full = _a.full;
-    return full ? macro_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["width: 100%;"], ["width: 100%;"]))) : '';
+    return full ? styled_components_1.css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["width: 100%;"], ["width: 100%;"]))) : '';
 }, function (_a) {
     var theme = _a.theme, bordered = _a.bordered;
-    return bordered ? macro_1.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n      border: 1px solid ", ";\n    "], ["\n      border: 1px solid ", ";\n    "])), theme.border) : '';
+    return bordered ? styled_components_1.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n      border: 1px solid ", ";\n    "], ["\n      border: 1px solid ", ";\n    "])), theme.border) : '';
 }, function (_a) {
     var striped = _a.striped;
     return striped ? stripedStyle : '';
@@ -30,7 +30,7 @@ var Table = macro_1.default.table(templateObject_6 || (templateObject_6 = __make
     return hover ? hoverStyle : '';
 }, function (_a) {
     var headerStyle = _a.headerStyle;
-    return headerStyle ? macro_1.css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n    th {\n      ", "\n    }\n  "], ["\n    th {\n      ", "\n    }\n  "])), headerStyle) : '';
+    return headerStyle ? styled_components_1.css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n    th {\n      ", "\n    }\n  "], ["\n    th {\n      ", "\n    }\n  "])), headerStyle) : '';
 });
 exports.default = Table;
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
