@@ -9,8 +9,12 @@
     "pretty": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types", "src/index"],
     "baseUrl": ".",
+    "paths": {
+      "@components": ["../visits-style/components"],
+      "@theme": ["../visits-style/theme"],
+      "@styles": ["../visits-style/styles"],
+    },
   },
   "exclude": [
     "./gulpfile.js",

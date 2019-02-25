@@ -15,15 +15,13 @@ export default createGlobalStyle`
     color: ${({ theme }) => theme.text};
 
     #___gatsby {
-      display: flex;
-      flex-direction: column;
+      height: 100%;
       min-height: 100%;
 
       & > div {
-        height: 100%;
-        max-height: 100%;
         display: flex;
         flex-direction: column;
+        min-height: 100%;
       }
     }
   }

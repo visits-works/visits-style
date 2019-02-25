@@ -24,7 +24,7 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
   if (!size || size < 1 || size > 12) {
     return css`
       width: auto;
-      max-width: auto;
+      max-width: none;
     `;
   }
 

@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import defaultTheme from '@theme/default';
-// @ts-ignore
 import { Row, Col, Container } from '@components';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
@@ -25,7 +24,7 @@ export default function Layout({ children, current }: any) {
         <Container as="main" style={{ margin: 0, marginTop: '3.25rem' }} fluid>
           <Row style={{ margin: 0 }}>
             {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
-            <Col style={{ flex: 1, backgroundColor: 'white' }}>
+            <Col size={10} auto style={{ backgroundColor: 'white' }}>
               {children}
             </Col>
           </Row>

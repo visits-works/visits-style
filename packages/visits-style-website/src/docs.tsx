@@ -6,7 +6,6 @@ import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/tag';
-// @ts-ignore
 import { Container } from '@components';
 
 import components from './components';
