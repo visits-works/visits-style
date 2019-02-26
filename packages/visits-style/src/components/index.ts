@@ -18,6 +18,9 @@ export { default as Progress } from './Progress';
 // form
 export * from './Form';
 
+// icons
+export * from './Icons';
+
 // components
 export { default as AppBar } from './AppBar';
 export { default as Tag } from './Tag';
