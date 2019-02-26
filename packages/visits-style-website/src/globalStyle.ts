@@ -4,6 +4,12 @@ import normalize from '@styles/normalize';
 export default createGlobalStyle`
   ${normalize}
 
+  html {
+    font-weight: 400;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+
   html, body {
     height: 100%;
   }

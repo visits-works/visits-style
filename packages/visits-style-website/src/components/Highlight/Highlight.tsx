@@ -32,10 +32,6 @@ export default class HighlightCode extends Component<Props, State> {
     live: false,
   }
 
-  componentDidMount() {
-
-  }
-
   onChange = (code: string) => {
     if (this.props.onChange) {
       this.props.onChange(code);

@@ -18,11 +18,13 @@ const prismColors = {
 };
 
 export const HighlightStyle = css`
+  margin: 1rem 0;
   background-color: rgb(40, 44, 52);
   color: rgb(255, 255, 255);
   border-radius: 4px;
   tab-size: 1.5rem;
   padding: 0.725rem;
+  font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace;
 
   &,
   & > code {

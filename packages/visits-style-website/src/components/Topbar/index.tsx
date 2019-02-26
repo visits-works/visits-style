@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { css } from 'styled-components';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import AppBar from '@components/AppBar';
 
@@ -36,6 +37,15 @@ const Logo = (
 </Link>
 );
 
+const customCss = css`
+  a {
+    transition: color 150ms ease-in-out;
+    &:hover {
+      color: ${({ theme }) => theme.primary};
+    }
+  }
+`;
+
 export default function Topbar({ current }: { current: string }) {
   function renderMenu({ allMdx }: any) {
     const list = allMdx.edges.map(({ node }: any) => node)
@@ -60,6 +70,7 @@ export default function Topbar({ current }: { current: string }) {
       brand={Logo}
       color="dark"
       style={{ zIndex: 100 }}
+      css={customCss}
       fixed
     >
       <StaticQuery

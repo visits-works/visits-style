@@ -116,7 +116,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     let value = parent.relativePath.replace(parent.ext, "");
 
     if (value.indexOf("index") > -1) {
-      value = (value === 'index') ? '/' : value.replace('/index', '');
+      value = (value === 'index') ? '' : value.replace('/index', '');
     }
 
     createNodeField({

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.h2`
   color: ${({ theme }) => theme.text};
+  margin: 1rem 0;
   a {
     color: inherit;
   }

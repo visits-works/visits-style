@@ -1,15 +1,51 @@
 
 import { Hero, Button } from '@components';
 import { Link } from 'gatsby';
+import Highlight from '_components/Highlight';
 
-<Hero color="dark" center style={{ margin: '-1rem -1.5rem' }}>
-  <h1>visits-style</h1>
-  <div>
-    <Link to="/installation">
-      <Button color="primary" outline>Getting Started</Button>
-    </Link>
-    <a href="https://github.com/visits-works/visits-style" target="_blank" style={{ marginLeft: '0.725rem' }}>
-      <Button color="primary" outline>Github</Button>
-    </a>
-  </div>
-</Hero>
+<div style={{ margin: '-1rem -1.5rem' }}>
+  <Hero color="dark" center>
+    <h1>Visits-style</h1>
+    <div>
+      <Link to="/core">
+        <Button color="primary" outline>GET STARTED</Button>
+      </Link>
+      <a href="https://github.com/visits-works/visits-style" target="_blank" style={{ marginLeft: '0.725rem' }}>
+        <Button color="primary" outline>GITHUB</Button>
+      </a>
+    </div>
+  </Hero>
+
+  <section style={{ padding: '1rem', background: '#f7f7f7' }}>
+  </section>
+
+  <section style={{ padding: '1rem', background: 'white' }}>
+    <h1 style={{ textAlign: 'center' }}>Installation</h1>
+    <h2 style={{ textAlign: 'center', margin: '2rem 0' }}>1. visits-styleを追加します</h2>
+    <Highlight className="language-bash">
+      {
+        'npm install --save github:visits-works/visits-style#master styled-components react react-dom\n' +
+        'yarn add github:visits-works/visits-style#master styled-components react react-dom'
+      }
+    </Highlight>
+    <h2 style={{ textAlign: 'center', margin: '2rem 0' }}>2. themeの適用でvisits-styleを使う</h2>
+    <Highlight className="language-typescript">
+      {
+        "import React, { Fragment } from 'react';\n" +
+        "import { createGlobalStyle, ThemeProvider } from 'styled-components';\n" +
+        "import { Button, defaultTheme, normalizeStyle } from 'visits-style';\n\n" +
+        "const GlobalStyle = createGlobalStyle`${normalizeStyle}`;\n" +
+        "function App() {\n" +
+        "  return (\n" +
+        "    <ThemeProvider theme={defaultTheme}>\n"+
+        "      <Fragment>\n"+
+        "        <GlobalStyle />\n"+
+        "        <Button>Hello World!</Button>\n"+
+        "      </Fragment>\n"+
+        "    </ThemeProvider>\n"+
+        "  );\n" +
+        "}"
+      }
+    </Highlight>
+  </section>
+</div>

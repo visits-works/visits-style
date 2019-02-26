@@ -10,8 +10,6 @@ import GlobalStyle from './globalStyle';
 
 const theme = {
   ...defaultTheme,
-  // tslint:disable-next-line
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Helvetica Neue",HelveticaNeue,"Hiragino Kaku Gothic ProN","游ゴシック Medium",YuGothic,YuGothicM,メイリオ,Meiryo,sans-serif',
 };
 
 
