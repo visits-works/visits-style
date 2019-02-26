@@ -7,7 +7,7 @@
   "main": "visits.cjs.js",
   "module": "visits.js",
   "jsnext:main": "visits.js",
-  "typings": "visits.d.ts",
+  "typings": "index.d.ts",
   "peerDependencies": {
     "react": ">=16.4.1",
     "react-dom": ">=16.4.1",
@@ -18,7 +18,7 @@
     "react-transition-group": "^2.5.3"
   },
   "scripts": {
-    "compile": "tsc -d --emitDeclarationOnly --outFile ./build/visits.d.ts",
+    "compile": "tsc -d --emitDeclarationOnly --outDir ./build",
     "build": "yarn clean && yarn compile && rollup -c && cp package.json ./build/package.json",
     "develop": "cd ../visits-style-website && yarn start",
     "deploy": "yarn build && gh-pages -d build -b master --add",
