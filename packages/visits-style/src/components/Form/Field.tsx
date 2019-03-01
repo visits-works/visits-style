@@ -29,15 +29,16 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   children: ReactNode;
   required?: boolean;
+  htmlFor?: string;
   css?: CSSType;
 }
 
 export default class Field extends PureComponent<Props> {
   render() {
-    const { label, children, ...rest } = this.props;
+    const { label, children, htmlFor, ...rest } = this.props;
     return (
       <Wrapper {...rest}>
-        {label && (<Label>{label}</Label>)}
+        {label && (<Label htmlFor={htmlFor}>{label}</Label>)}
         {children}
       </Wrapper>
     );
