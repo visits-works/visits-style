@@ -4,6 +4,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     label?: string;
     children: ReactNode;
     required?: boolean;
+    htmlFor?: string;
     css?: CSSType;
 }
 export default class Field extends PureComponent<Props> {
