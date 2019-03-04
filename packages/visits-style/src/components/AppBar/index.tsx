@@ -49,15 +49,20 @@ const NavBar = styled.header<NavProps>`
     ({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))
   };
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: stretch;
   top: -1px;
-
   min-height: 3.25rem;
   width: 100%;
   z-index: 30;
+
   padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};
+
+  & > nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1 0 auto;
+  }
 
   ${setColor}
 
@@ -96,20 +101,25 @@ interface ContentProps {
 
 const NavContent = styled.div<ContentProps>`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   flex-basis: auto;
   flex-grow: 1;
+  height: 100%;
 
   & > ul {
     display: flex;
     flex-direction: row;
     list-style: none;
     flex-grow: 1;
+    flex-basis: 100%;
+    height: inherit;
+    align-items: center;
     justify-content: ${setAlign};
 
     li {
-      padding: 0 0.75rem;
+      padding: 0.85rem;
     }
   }
 
@@ -122,16 +132,19 @@ const NavContent = styled.div<ContentProps>`
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    height: auto;
 
     padding-bottom: 0.5rem;
 
-    button:not(.active)+& {
+    &:not(.active) {
       display:none;
     }
 
     & > ul {
       flex-direction: column;
+      align-items: flex-start;
       width: 100%;
+      flex-basis: auto;
       li {
         padding: .5rem 0;
       }
@@ -192,15 +205,17 @@ export default class AppBar extends PureComponent<Props, State> {
         role="navigation"
         {...rest}
       >
-        {brand}
-        <Burger className={show ? 'active' : ''} onClick={this.toggleMenu}>
-          <span />
-          <span />
-          <span />
-        </Burger>
-        <NavContent align={align}>
-          {children}
-        </NavContent>
+        <nav>
+          {brand}
+          <Burger className={show ? 'active' : undefined} onClick={this.toggleMenu}>
+            <span />
+            <span />
+            <span />
+          </Burger>
+          <NavContent className={show ? 'active' : undefined} align={align}>
+            {children}
+          </NavContent>
+        </nav>
       </NavBar>
     );
   }
