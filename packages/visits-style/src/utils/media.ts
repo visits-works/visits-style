@@ -5,21 +5,26 @@ interface Props {
 }
 
 export function mediaMobile({ theme }: Props) {
-  return `@media screen and (max-width: ${theme.responsive ? theme.mobile : 0}px)`;
+  if (!theme.responsive) return '@media (max-width: 0)';
+  return `@media screen and (max-width: ${theme.mobile}px)`;
 }
 
 export function mediaTablet({ theme }: Props) {
-  return `@media screen and (min-width: ${theme.responsive ? theme.tablet : 0}px)`;
+  if (!theme.responsive) return '@media (max-width: 0)';
+  return `@media screen and (max-width: ${theme.tablet}px)`;
 }
 
 export function mediaDesktop({ theme }: Props) {
-  return `@media screen and (min-width: ${theme.responsive ? theme.desktop : 0}px)`;
+  if (!theme.responsive) return '@media (max-width: 0)';
+  return `@media screen and (max-width: ${theme.desktop}px)`;
 }
 
 export function mediaFullHD({ theme }: Props) {
-  return `@media screen and (min-width: ${theme.responsive ? theme.fullhd : 0}px)`;
+  if (!theme.responsive) return '@media (max-width: 0)';
+  return `@media screen and (max-width: ${theme.fullhd}px)`;
 }
 
 export function mediaUntilFullHD({ theme }: Props) {
-  return `@media screen and (max-width: ${theme.responsive ? theme.fullhd : 0}px)`;
+  if (!theme.responsive) return '@media (max-width: 0)';
+  return `@media (min-width: ${theme.fullhd}px)`;
 }

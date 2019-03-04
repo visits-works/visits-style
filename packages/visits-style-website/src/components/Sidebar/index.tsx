@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // @ts-ignore
 import { Col, SideMenu, MenuList } from '@components';
 // @ts-ignore
-import { mediaMobile } from '@utils';
+import { mediaTablet } from '@utils';
 import { convertTitleToId } from '../H2';
 
 const Wrapper = styled(Col)`
@@ -17,7 +17,7 @@ const Wrapper = styled(Col)`
   top: 3.25rem;
   height: calc(100vh - 3.25rem);
 
-  ${mediaMobile} {
+  ${mediaTablet} {
     position: relative;
     overflow-y: hidden;
     top: 0;

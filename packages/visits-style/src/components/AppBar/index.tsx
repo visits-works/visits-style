@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
-import { mediaTablet, mediaUntilFullHD, mediaMobile } from '../../utils/media';
+import { mediaTablet, mediaMobile } from '../../utils/media';
 import { ColorType, AlignType, CSSType, ThemeType } from '../../types';
 
 function setColor(
@@ -57,6 +57,7 @@ const NavBar = styled.header<NavProps>`
   min-height: 3.25rem;
   width: 100%;
   z-index: 30;
+  padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};
 
   ${setColor}
 
@@ -64,9 +65,6 @@ const NavBar = styled.header<NavProps>`
 
   ${mediaTablet} {
     padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};
-  }
-  ${mediaUntilFullHD} {
-    padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};
   }
   ${({ css }) => css || {}}
 `;

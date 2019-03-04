@@ -9,17 +9,17 @@ interface Props {
 function setResponsive({ fluid }: Props): any {
   if (fluid) {
     return css`
-      ${mediaMobile} {
-        padding-right: 0.5rem;
-        padding-left: 0.5rem;
+      ${mediaFullHD} {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
       }
       ${mediaDesktop} {
         padding-right: 0.75rem;
         padding-left: 0.75rem;
       }
-      ${mediaFullHD} {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
+      ${mediaMobile} {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
       }
     `;
   }
@@ -27,17 +27,17 @@ function setResponsive({ fluid }: Props): any {
   return css`
     margin-right: auto;
     margin-left: auto;
-    ${mediaMobile} {
-      max-width: ${({ theme }: any) => theme.mobile - (2 * theme.smallGutter)}px;
-    }
-    ${mediaTablet} {
-      max-width: ${({ theme }: any) => theme.tablet - (2 * theme.smallGutter)}px;
+    ${mediaFullHD} {
+      max-width: ${({ theme }: any) => theme.fullhd - (2 * theme.gutter)}px;
     }
     ${mediaDesktop} {
       max-width: ${({ theme }: any) => theme.desktop - (2 * theme.gutter)}px;
     }
-    ${mediaFullHD} {
-      max-width: ${({ theme }: any) => theme.fullhd - (2 * theme.gutter)}px;
+    ${mediaTablet} {
+      max-width: ${({ theme }: any) => theme.tablet - (2 * theme.smallGutter)}px;
+    }
+    ${mediaMobile} {
+      max-width: ${({ theme }: any) => theme.mobile - (2 * theme.smallGutter)}px;
     }
   `;
 }

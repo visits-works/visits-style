@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { mediaMobile, mediaTablet } from '../../utils/media';
+import { mediaTablet } from '../../utils/media';
 import { ColSizeType } from '../../types';
 
 interface ColProps {
@@ -25,6 +25,10 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
     return css`
       width: auto;
       max-width: none;
+
+      ${mediaTablet} {
+        padding: 0.5rem;
+      }
     `;
   }
 
@@ -36,9 +40,10 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
     max-width: ${value}%;
     ${offset ? `margin-left: ${offVal}%;` : {}}
 
-    ${mediaMobile} {
+    ${mediaTablet} {
       width: ${autoSize}%;
       max-width: ${autoSize}%;
+      padding: 0.5rem;
       ${offset ? `margin-left: 0;` : {}}
     }
   `;
@@ -47,17 +52,12 @@ function renderSize({ size, narrow, auto, offset }: ColProps) {
 const Col = styled.div<ColProps>`
   display: block;
   min-height: 1px;
+  padding: 0.75rem;
 
   ${({ narrow }) => narrow ? 'flex: none;' : {}}
   ${({ offset }) => offset ? `margin-left: ${parcentage(offset)}%;` : {}}
 
   ${renderSize}
-
-  padding: 0.75rem;
-
-  ${mediaTablet} {
-    padding: 0.5rem;
-  }
 `;
 
 Col.displayName = 'Col';

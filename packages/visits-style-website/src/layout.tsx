@@ -22,7 +22,7 @@ export default function Layout({ children, current }: any) {
         <Container as="main" style={{ margin: 0, marginTop: '3.25rem' }} fluid>
           <Row style={{ margin: 0 }}>
             {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
-            <Col auto style={{ flex: 1, backgroundColor: 'white' }}>
+            <Col size={10} auto style={{ flex: 1, backgroundColor: 'white' }}>
               {children}
             </Col>
           </Row>
