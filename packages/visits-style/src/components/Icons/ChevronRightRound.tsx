@@ -1,9 +1,15 @@
 /* tslint:disable max-line-length */
-import React, { SVGAttributes } from 'react';
+import React, { SVGAttributes } from "react";
 
 export default function ChevronRightRound(props: SVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+      {...props}
+    >
       <g transform="translate(93 206) rotate(180)">
         <g transform="translate(63 176)" fill="none">
           <path
@@ -17,7 +23,13 @@ export default function ChevronRightRound(props: SVGAttributes<SVGSVGElement>) {
           />
         </g>
         <g transform="translate(-180 -1996)">
-          <path d="M1811.182,4362.342l-7.567,6.731,7.567,6.2" transform="translate(-1550.116 -2181.842)" fill="none" stroke="currentColor" strokeWidth="2"/>
+          <path
+            d="M1811.182,4362.342l-7.567,6.731,7.567,6.2"
+            transform="translate(-1550.116 -2181.842)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
         </g>
       </g>
     </svg>

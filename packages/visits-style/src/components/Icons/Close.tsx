@@ -1,12 +1,13 @@
+/* tslint:disable max-line-length */
 import React, { SVGAttributes } from 'react';
 
 export default function Close(props: SVGAttributes<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="26.998"
-      height="26.998"
-      viewBox="0 0 26.998 26.998"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
       pointerEvents="bounding-box"
       {...props}
     >

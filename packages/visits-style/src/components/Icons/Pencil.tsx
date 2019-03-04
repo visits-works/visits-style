@@ -9,7 +9,7 @@ export default function Pencil(props: SVGAttributes<SVGSVGElement>) {
       viewBox="0 0 17.796 17.908"
       {...props}
     >
-      <g opacity="0.6">
+      <g>
         <g>
           <path
             d="M1.254,12.674.5,17.408l4.726-.8L17.3,4.472,13.281.5Z"

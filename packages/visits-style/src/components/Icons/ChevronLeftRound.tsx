@@ -1,3 +1,4 @@
+/* tslint:disable max-line-length */
 import React, { SVGAttributes } from 'react';
 
 export default function ChevronLeftRound(props: SVGAttributes<SVGSVGElement>) {

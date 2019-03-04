@@ -4,11 +4,19 @@ title: Icons
 
 import * as Icons from '@components/Icons';
 
-<section style={{ display: 'flex', marginTop: '2rem' }}>
+
+<section style={{ display: 'flex', marginTop: '2rem', flexWrap: 'wrap' }}>
   {Object.keys(Icons).map(key => {
     const Icon = Icons[key];
     return (
-      <div key={key} style={{ textAlign: 'center', flex: 1, margin: '1rem' }}>
+      <div key={key} style={{
+        textAlign: 'center',
+        flex: 1,
+        padding: '0 1rem',
+        margin: '1rem',
+        height: '5rem',
+      }}
+      >
         <Icon />
         <span style={{ display: 'block', marginTop: '0.85rem' }}>{key}</span>
       </div>
