@@ -22,6 +22,7 @@ bundle_report.html
 .env.production.local
 .vscode
 .cache
+.out
 
 npm-debug.log*
 yarn-debug.log*
