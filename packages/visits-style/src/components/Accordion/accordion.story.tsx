@@ -43,7 +43,7 @@ function Fancy() {
   );
 }
 
-storiesOf('components|Collapse', module)
+storiesOf('components|Accordion', module)
   .add('default', () => <Default />)
   .add('multiple', () => (
     <>
