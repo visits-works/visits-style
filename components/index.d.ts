@@ -11,6 +11,7 @@ export { default as Box } from './Box';
 export { default as Progress } from './Progress';
 export * from './Form';
 export * from './Icons';
+export { default as Accordion } from './Accordion';
 export { default as AppBar } from './AppBar';
 export { default as Tag } from './Tag';
 export { default as Hero } from './Hero';

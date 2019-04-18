@@ -14,8 +14,8 @@
     "styled-components": ">=4.1.1"
   },
   "dependencies": {
-    "polished": "^3.0.0",
-    "react-transition-group": "^2.5.3"
+    "polished": "^3.2.0",
+    "react-transition-group": "^2.9.0"
   },
   "scripts": {
     "compile": "tsc -d --emitDeclarationOnly --outDir ./build",
@@ -25,6 +25,8 @@
     "clean": "rm -rf ./build",
     "test": "jest --env=jsdom",
     "start": "start-storybook -p 9000",
+    "storybook:build": "build-storybook -c .storybook -o .out",
+    "storybook:deploy": "yarn storybook:build && gh-pages -d .out -b gh-pages --add --dest storybook",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
@@ -37,12 +39,13 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@storybook/addon-actions": "^4.1.13",
-    "@storybook/addon-knobs": "^4.1.13",
-    "@storybook/addon-options": "^4.1.13",
-    "@storybook/addon-viewport": "^4.1.13",
-    "@storybook/components": "^4.1.13",
-    "@storybook/react": "^4.1.13",
+    "@emotion/core": "^10.0.10",
+    "@storybook/addon-actions": "^5.0.9",
+    "@storybook/addon-knobs": "^5.0.9",
+    "@storybook/addon-options": "^5.0.9",
+    "@storybook/addon-viewport": "^5.0.9",
+    "@storybook/components": "^5.0.9",
+    "@storybook/react": "^5.0.9",
     "@svgr/rollup": "^4.1.0",
     "@types/jest": "^23.3.3",
     "@types/node": "^10.11.4",
