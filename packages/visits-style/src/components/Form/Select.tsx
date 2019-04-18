@@ -28,6 +28,7 @@ const InputWrapper = styled.span<WrapperProps>`
     height: 100%;
     background-color: transparent;
     padding: 0.375em 0.625em;
+    padding-right: 1.35em;
     text-align: left;
     color: inherit;
 
