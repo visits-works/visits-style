@@ -79,14 +79,6 @@ export default class Textarea extends Component<Props> {
     onChange: () => {},
   };
 
-  shouldComponentUpdate(props: Props) {
-    return props.value !== this.props.value ||
-      props.help !== this.props.help ||
-      props.error !== this.props.error ||
-      props.disabled !== this.props.disabled ||
-      props.readOnly !== this.props.readOnly;
-  }
-
   render() {
     const { className, help, error, style, css, ...rest } = this.props;
     return (

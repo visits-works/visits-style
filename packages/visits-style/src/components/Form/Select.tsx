@@ -124,16 +124,6 @@ export default class Select extends Component<Props> {
     options: [],
   };
 
-  shouldComponentUpdate(props: Props) {
-    return (
-      props.options.length !== this.props.options.length ||
-      props.value !== this.props.value ||
-      props.disabled !== this.props.disabled ||
-      props.help !== this.props.help ||
-      props.error !== this.props.error
-    );
-  }
-
   renderLabel = (label: string) => {
     if (this.props.render) {
       return this.props.render(label);

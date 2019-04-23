@@ -155,10 +155,6 @@ export default class Radio extends Component<Props> {
 
   id = `radio_${this.props.name}:${this.props.value}`;
 
-  shouldComponentUpdate(props: Props) {
-    return props.checked !== this.props.checked;
-  }
-
   render() {
     const { className, children, button, color, style, ...rest } = this.props;
     return (

@@ -100,11 +100,6 @@ export default class Checkbox extends Component<Props> {
 
   id = `checkbox_${this.props.name}`;
 
-  shouldComponentUpdate(props: Props) {
-    return props.checked !== this.props.checked ||
-      props.children !== this.props.children;
-  }
-
   render() {
     const { className, children, ...rest } = this.props;
     return (
