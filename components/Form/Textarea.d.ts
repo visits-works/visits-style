@@ -15,7 +15,6 @@ export default class Textarea extends Component<Props> {
         row: number;
         onChange: () => void;
     };
-    shouldComponentUpdate(props: Props): boolean;
     render(): JSX.Element;
 }
 export {};

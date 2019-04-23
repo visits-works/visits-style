@@ -11,7 +11,6 @@ export default class Checkbox extends Component<Props> {
         onChange: () => void;
     };
     id: string;
-    shouldComponentUpdate(props: Props): boolean;
     render(): JSX.Element;
 }
 export {};

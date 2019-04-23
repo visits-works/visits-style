@@ -23,7 +23,6 @@ export default class Select extends Component<Props> {
         onChange: () => void;
         options: never[];
     };
-    shouldComponentUpdate(props: Props): boolean;
     renderLabel: (label: string) => any;
     renderItem: () => JSX.Element[];
     render(): JSX.Element;

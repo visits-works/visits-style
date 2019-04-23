@@ -16,7 +16,6 @@ export default class Radio extends Component<Props> {
         onChange: () => void;
     };
     id: string;
-    shouldComponentUpdate(props: Props): boolean;
     render(): JSX.Element;
 }
 export {};
