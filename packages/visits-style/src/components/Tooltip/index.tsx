@@ -17,6 +17,7 @@ const Wrapper = styled.div<{ css?: CSSType }>`
     width: auto;
     white-space: pre;
     font-size: 0.85rem;
+    z-index: 9999;
 
     transform: scale(0.8);
     opacity: 0;
@@ -123,7 +124,7 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
           timeout={150}
           unmountOnExit
         >
-          <div role="tooltip">
+          <div role="tooltip" style={style}>
             {label}
           </div>
         </CSSTransition>
