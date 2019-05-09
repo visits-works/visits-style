@@ -126,6 +126,7 @@ export default class Popover extends Component<Props, State> {
         onFocus={this.openDropdown}
         onBlur={this.closeDropdown}
         style={{ display: 'block', position: 'relative' }}
+        className={this.props.className}
         css={css}
       >
         {label}
