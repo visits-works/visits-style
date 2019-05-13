@@ -1,8 +1,8 @@
 import React, { createRef, RefObject, PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ColorType, CSSType } from '../../types';
 
-const Wrapper = styled.div<{ css?: CSSType }>`
+const Wrapper = styled.div<{ show?: boolean, css?: CSSType }>`
   position: relative;
   display: inline-block;
 
@@ -27,11 +27,11 @@ const Wrapper = styled.div<{ css?: CSSType }>`
     transition-duration: 100ms;
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
-    &.start {
+    ${({ show }) => show && css`
       transform: scale(1);
       opacity: 1;
       visibility: visible;
-    }
+    `}
   }
   ${({ css }) => css || ''}
 `;

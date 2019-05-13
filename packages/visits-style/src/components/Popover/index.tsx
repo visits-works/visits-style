@@ -1,12 +1,13 @@
-import React, { Component, createRef, RefObject } from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, createRef, RefObject } from 'react';
+import styled, { css } from 'styled-components';
 import Box, { Props as BoxProps } from '../Box';
 import { CSSType } from '../../types';
 
 const Wrapper = styled.div<{ css?: CSSType }>`
-  display: inline-block;
+  display: block;
   outline: none;
   color: inherit;
+  position: relative;
 
   &:hover {
     color: inherit;
@@ -16,7 +17,7 @@ const Wrapper = styled.div<{ css?: CSSType }>`
   ${({ css }) => css || ''}
 `;
 
-const Tooltip = styled(Box)`
+const Tooltip = styled(Box)<{ show?: boolean }>`
   position: absolute;
   display: flex;
   clear: both;
@@ -36,11 +37,11 @@ const Tooltip = styled(Box)`
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
-  &.start {
+  ${({ show }) => show && css`
     transform: scale(1);
     opacity: 1;
     visibility: visible;
-  }
+  `}
 `;
 
 interface Props extends BoxProps {
@@ -61,22 +62,12 @@ interface State {
   style: any;
 }
 
-export default class Popover extends Component<Props, State> {
+export default class Popover extends PureComponent<Props, State> {
   static defaultProps = {
     color: 'white',
     style: {},
   };
-
   state = { show: false, style: {} };
-
-  shouldComponentUpdate(props: Props, state: State) {
-    return (
-      this.state.show !== state.show
-      || this.state.style !== state.style
-      || this.props.label !== props.label
-      || this.props.position !== props.position
-    );
-  }
 
   openDropdown = () => {
     if (this.state.show || !this.tooltip.current || !this.wrapper.current) return;
@@ -132,7 +123,6 @@ export default class Popover extends Component<Props, State> {
   render() {
     const { label, children, style, css, ...rest } = this.props;
     const { show } = this.state;
-    const tooltipStyle = { ...style, ...this.state.style };
     return (
       <Wrapper
         tabIndex={0}
@@ -140,13 +130,12 @@ export default class Popover extends Component<Props, State> {
         ref={this.wrapper}
         onFocus={this.openDropdown}
         onBlur={this.closeDropdown}
-        style={{ display: 'block', position: 'relative' }}
         className={this.props.className}
         css={css}
       >
         {label}
         <Tooltip
-          className={show ? 'start' : undefined}
+          show={show}
           role="tooltip"
           ref={this.tooltip}
           style={this.state.style}
