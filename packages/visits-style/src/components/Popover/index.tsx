@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, createRef, RefObject } from 'react';
 import styled from 'styled-components';
-import CSSTransition from 'react-transition-group/CSSTransition';
 import Box, { Props as BoxProps } from '../Box';
 import { CSSType } from '../../types';
 
@@ -28,22 +27,19 @@ const Tooltip = styled(Box)`
   height: auto;
   cursor: auto;
 
-  will-change: transform, opacity;
+  will-change: transform, opacity, visibility;
   transform: scale(0.8);
   opacity: 0;
+  visibility: hidden;
 
-  transition-property: transform, opacity;
+  transition-property: transform, opacity, visibility;
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
   &.start {
     transform: scale(1);
     opacity: 1;
-  }
-
-  &.end {
-    transform: scale(0.8);
-    opacity: 0;
+    visibility: visible;
   }
 `;
 
@@ -65,35 +61,8 @@ interface State {
   style: any;
 }
 
-function getPosition(position?: any) {
-  switch (position) {
-    case 'top-left': {
-      return { top: 0, left: 0, transform: 'translateY(-100%)' };
-    }
-    case 'top-right': {
-      return { top: 0, right: 0, transform: 'translateY(-100%)' };
-    }
-    case 'top': {
-      return { top:  0, left: '50%', transform: 'translate(-50%, -100%)' };
-    }
-    case 'bottom-left': {
-      return { bottom: 0, left: 0, transform: 'translateY(100%)' };
-    }
-    case 'bottom-right': {
-      return { bottom: 0, right: 0, transform: 'translateY(100%)' };
-    }
-    case 'bottom': {
-      return { bottom: 0, left: '50%', transform: 'translate(-50%, 100%)' };
-    }
-    default: {
-      return { top: 0, left: 0, transform: 'translateY(100%)' };
-    }
-  }
-}
-
 export default class Popover extends Component<Props, State> {
   static defaultProps = {
-    position: 'bottom-left',
     color: 'white',
     style: {},
   };
@@ -101,19 +70,64 @@ export default class Popover extends Component<Props, State> {
   state = { show: false, style: {} };
 
   shouldComponentUpdate(props: Props, state: State) {
-    return this.state.show !== state.show || this.props.label !== props.label;
+    return (
+      this.state.show !== state.show
+      || this.state.style !== state.style
+      || this.props.label !== props.label
+      || this.props.position !== props.position
+    );
   }
 
   openDropdown = () => {
-    if (this.state.show) return;
+    if (this.state.show || !this.tooltip.current || !this.wrapper.current) return;
 
-    const style = getPosition(this.props.position);
+    let style = {};
+    const parentRect = this.wrapper.current.getBoundingClientRect();
+    const tooltipRect = this.tooltip.current.getBoundingClientRect();
+
+    switch (this.props.position) {
+      case 'top-left': {
+        style = { bottom: `${parentRect.height + 8}px`, left: 0 };
+        break;
+      }
+      case 'top-right': {
+        style = { bottom: `${parentRect.height + 8}px`, right: 0 };
+        break;
+      }
+      case 'top': {
+        style = {
+          bottom: `${parentRect.height + 8}px`,
+          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
+        };
+        break;
+      }
+      case 'bottom-right': {
+        style = { top: `${parentRect.height + 8}px`, right: 0 };
+        break;
+      }
+      case 'bottom': {
+        style = {
+          top: `${parentRect.height + 8}px`,
+          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
+        };
+        break;
+      }
+      // bottom-left
+      default: {
+        style = { top: `${parentRect.height + 8}px`, left: 0 };
+        break;
+      }
+    }
+
     this.setState({ style, show: true });
   }
 
   closeDropdown = () => {
     if (this.state.show) this.setState({ show: false });
   }
+
+  tooltip: RefObject<HTMLDivElement> = createRef();
+  wrapper: RefObject<HTMLDivElement> = createRef();
 
   render() {
     const { label, children, style, css, ...rest } = this.props;
@@ -123,6 +137,7 @@ export default class Popover extends Component<Props, State> {
       <Wrapper
         tabIndex={0}
         role="button"
+        ref={this.wrapper}
         onFocus={this.openDropdown}
         onBlur={this.closeDropdown}
         style={{ display: 'block', position: 'relative' }}
@@ -130,20 +145,15 @@ export default class Popover extends Component<Props, State> {
         css={css}
       >
         {label}
-        <CSSTransition
-          classNames={{
-            appear: 'start',
-            enterDone: 'start',
-            exit: 'end',
-          }}
-          in={show}
-          timeout={150}
-          unmountOnExit
+        <Tooltip
+          className={show ? 'start' : undefined}
+          role="tooltip"
+          ref={this.tooltip}
+          style={this.state.style}
+          {...rest}
         >
-          <Tooltip role="tooltip" style={tooltipStyle} {...rest}>
-            {children}
-          </Tooltip>
-        </CSSTransition>
+          {children}
+        </Tooltip>
       </Wrapper>
     );
   }

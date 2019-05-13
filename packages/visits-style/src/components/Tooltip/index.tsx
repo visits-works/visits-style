@@ -1,5 +1,4 @@
 import React, { createRef, RefObject, PureComponent } from 'react';
-import CSSTransition from 'react-transition-group/CSSTransition';
 import styled from 'styled-components';
 import { ColorType, CSSType } from '../../types';
 
@@ -21,20 +20,17 @@ const Wrapper = styled.div<{ css?: CSSType }>`
 
     transform: scale(0.8);
     opacity: 0;
+    visibility: hidden;
 
-    will-change: transform, opacity;
-    transition-property: transform, opacity;
+    will-change: transform, opacity, visibility;
+    transition-property: transform, opacity, visibility;
     transition-duration: 100ms;
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
     &.start {
       transform: scale(1);
       opacity: 1;
-    }
-
-    &.end {
-      transform: scale(0.8);
-      opacity: 0;
+      visibility: visible;
     }
   }
   ${({ css }) => css || ''}
@@ -58,23 +54,6 @@ interface State {
   style: any;
 }
 
-function getPosition(height: number, width: number, position?: any) {
-  switch (position) {
-    case 'top': {
-      return { bottom: `${height}px`, left: '50%', transform: 'translateX(-50%)' };
-    }
-    case 'left': {
-      return { right: `${width}px`, top: '50%', transform: 'translateY(-50%)' };
-    }
-    case 'right': {
-      return { left: `${width}px`, top: '50%', transform: 'translateY(-50%)' };
-    }
-    default: {
-      return { top: `${height}px`, left: '50%', transform: 'translateX(-50%)'  };
-    }
-  }
-}
-
 export default class Tooltip extends PureComponent<TooltipProps, State> {
   static defaultProps = {
     position: 'bottom',
@@ -87,21 +66,44 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
   };
 
   openTooltip = () => {
-    if (this.state.show || !this.element.current) return;
+    if (this.state.show || !this.element.current || !this.tooltip.current) return;
 
-    const width = this.element.current.offsetWidth + 8;
-    const height = this.element.current.offsetHeight + 8;
-    const style = getPosition(height, width, this.props.position);
+    const parentRect = this.element.current.getBoundingClientRect();
+    const rect = this.tooltip.current.getBoundingClientRect();
+    const left = parentRect.width + 8;
+    const top = parentRect.height + 8;
+    const width = (parentRect.width - rect.width) >> 1;
+    const height = (parentRect.height - rect.height) >> 1;
+    let style = {};
+
+    switch (this.props.position) {
+      case 'top': {
+        style = { bottom: `${top}px`, left: `${width}px` };
+        break;
+      }
+      case 'left': {
+        style = { right: `${left}px`, top: `${height}px` };
+        break;
+      }
+      case 'right': {
+        style = { left: `${left}px`, top: `${height}px` };
+        break;
+      }
+      default: {
+        style = { top: `${top}px`, left: `${width}px`  };
+        break;
+      }
+    }
+
     this.setState({ style, show: true });
   }
 
   closeTooltip = () => {
-    if (this.state.show && this.element.current) {
-      this.setState({ show: false });
-    }
+    if (this.state.show) this.setState({ show: false });
   }
 
   element: RefObject<HTMLDivElement> = createRef();
+  tooltip: RefObject<HTMLDivElement> = createRef();
 
   render() {
     const { label, children, ...rest } = this.props;
@@ -114,20 +116,14 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
         {...rest}
       >
         {children}
-        <CSSTransition
-          classNames={{
-            appear: 'start',
-            enterDone: 'start',
-            exit: 'end',
-          }}
-          in={show}
-          timeout={150}
-          unmountOnExit
+        <div
+          ref={this.tooltip}
+          className={show ? 'start' : undefined}
+          role="tooltip"
+          style={style}
         >
-          <div role="tooltip" style={style}>
-            {label}
-          </div>
-        </CSSTransition>
+          {label}
+        </div>
       </Wrapper>
     );
   }
