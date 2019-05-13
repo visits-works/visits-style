@@ -1,12 +1,33 @@
 import React, { HTMLAttributes } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
-import { CSSType } from '../../types';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   show: boolean;
   header: any;
-  css?: CSSType;
+}
+
+export default function Accordion({ header, show, children, ...rest }: Props) {
+  return (
+    <Wrapper {...rest}>
+      {header}
+      <CSSTransition
+        classNames={{
+          enter: 'collapsed',
+          enterActive: 'collapsing',
+          exit: 'expanded',
+          exitActive: 'expanding',
+        }}
+        timeout={300}
+        in={show}
+        unmountOnExit
+      >
+        <div className="__content">
+          {children}
+        </div>
+      </CSSTransition>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`
@@ -40,29 +61,4 @@ const Wrapper = styled.div`
       transform: scaleY(0);
     }
   }
-
-  ${({ css }: { css?: CSSType }) => css || {}}
 `;
-
-export default function Accordion({ header, show, children, ...rest }: Props) {
-  return (
-    <Wrapper {...rest}>
-      {header}
-      <CSSTransition
-        classNames={{
-          enter: 'collapsed',
-          enterActive: 'collapsing',
-          exit: 'expanded',
-          exitActive: 'expanding',
-        }}
-        timeout={300}
-        in={show}
-        unmountOnExit
-      >
-        <div className="__content">
-          {children}
-        </div>
-      </CSSTransition>
-    </Wrapper>
-  );
-}

@@ -1,7 +1,96 @@
-import React, { PureComponent, createRef, RefObject } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import Box, { Props as BoxProps } from '../Box';
 import { CSSType } from '../../types';
+
+interface Props extends BoxProps {
+  /** ボタンの内容 */
+  label: React.ReactNode;
+  /** 内容のリスト */
+  children?: React.ReactNode | React.ReactNode;
+  /** 右の基準でリストを表示する */
+  right?: boolean;
+  /** 吹き出しが表示される場所 */
+  position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+}
+
+export default function Popover({ position, label, children, ...rest }: Props) {
+  const parent = useRef<HTMLDivElement | null>(null);
+  const tooltip = useRef<HTMLDivElement | null>(null);
+
+  const [show, setShow] = useState(false);
+  const [tooltipStyle, setStyle] = useState({});
+
+  const onOpen = useCallback(() => {
+    if (show || !parent.current || !tooltip.current) return;
+    const parentRect = parent.current.getBoundingClientRect();
+    const tooltipRect = tooltip.current.getBoundingClientRect();
+
+    switch (position) {
+      case 'top-left': {
+        setStyle({ bottom: `${parentRect.height + 8}px`, left: 0 });
+        break;
+      }
+      case 'top-right': {
+        setStyle({ bottom: `${parentRect.height + 8}px`, right: 0 });
+        break;
+      }
+      case 'top': {
+        setStyle({
+          bottom: `${parentRect.height + 8}px`,
+          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
+        });
+        break;
+      }
+      case 'bottom-right': {
+        setStyle({ top: `${parentRect.height + 8}px`, right: 0 });
+        break;
+      }
+      case 'bottom': {
+        setStyle({
+          top: `${parentRect.height + 8}px`,
+          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
+        });
+        break;
+      }
+      // bottom-left
+      default: {
+        setStyle({ top: `${parentRect.height + 8}px`, left: 0 });
+        break;
+      }
+    }
+    setShow(true);
+  }, [show, position]);
+
+  const onClose = useCallback(() => {
+    if (show) setShow(false);
+  }, [show]);
+
+  return (
+    <Wrapper
+      tabIndex={0}
+      role="button"
+      ref={parent}
+      onFocus={onOpen}
+      onBlur={onClose}
+    >
+      {label}
+      <Tooltip
+        show={show}
+        role="tooltip"
+        ref={tooltip}
+        style={tooltipStyle}
+        {...rest}
+      >
+        {children}
+      </Tooltip>
+    </Wrapper>
+  );
+}
+
+Popover.defaultProps = {
+  color: 'white',
+};
 
 const Wrapper = styled.div<{ css?: CSSType }>`
   display: block;
@@ -13,8 +102,6 @@ const Wrapper = styled.div<{ css?: CSSType }>`
     color: inherit;
     text-decoration: none;
   }
-
-  ${({ css }) => css || ''}
 `;
 
 const Tooltip = styled(Box)<{ show?: boolean }>`
@@ -43,107 +130,3 @@ const Tooltip = styled(Box)<{ show?: boolean }>`
     visibility: visible;
   `}
 `;
-
-interface Props extends BoxProps {
-  /** ボタンの内容 */
-  label: React.ReactNode;
-  /** 内容のリスト */
-  children?: React.ReactNode | React.ReactNode;
-  /** 右の基準でリストを表示する */
-  right?: boolean;
-  /** 吹き出しが表示される場所 */
-  position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
-  /** カスタムCSS定義 */
-  css?: CSSType;
-}
-
-interface State {
-  show: boolean;
-  style: any;
-}
-
-export default class Popover extends PureComponent<Props, State> {
-  static defaultProps = {
-    color: 'white',
-    style: {},
-  };
-  state = { show: false, style: {} };
-
-  openDropdown = () => {
-    if (this.state.show || !this.tooltip.current || !this.wrapper.current) return;
-
-    let style = {};
-    const parentRect = this.wrapper.current.getBoundingClientRect();
-    const tooltipRect = this.tooltip.current.getBoundingClientRect();
-
-    switch (this.props.position) {
-      case 'top-left': {
-        style = { bottom: `${parentRect.height + 8}px`, left: 0 };
-        break;
-      }
-      case 'top-right': {
-        style = { bottom: `${parentRect.height + 8}px`, right: 0 };
-        break;
-      }
-      case 'top': {
-        style = {
-          bottom: `${parentRect.height + 8}px`,
-          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
-        };
-        break;
-      }
-      case 'bottom-right': {
-        style = { top: `${parentRect.height + 8}px`, right: 0 };
-        break;
-      }
-      case 'bottom': {
-        style = {
-          top: `${parentRect.height + 8}px`,
-          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
-        };
-        break;
-      }
-      // bottom-left
-      default: {
-        style = { top: `${parentRect.height + 8}px`, left: 0 };
-        break;
-      }
-    }
-
-    this.setState({ style, show: true });
-  }
-
-  closeDropdown = () => {
-    if (this.state.show) this.setState({ show: false });
-  }
-
-  tooltip: RefObject<HTMLDivElement> = createRef();
-  wrapper: RefObject<HTMLDivElement> = createRef();
-
-  render() {
-    const { label, children, style, css, ...rest } = this.props;
-    const { show } = this.state;
-    return (
-      <Wrapper
-        tabIndex={0}
-        role="button"
-        ref={this.wrapper}
-        onFocus={this.openDropdown}
-        onBlur={this.closeDropdown}
-        className={this.props.className}
-        css={css}
-      >
-        {label}
-        <Tooltip
-          show={show}
-          role="tooltip"
-          ref={this.tooltip}
-          style={this.state.style}
-          {...rest}
-        >
-          {children}
-        </Tooltip>
-      </Wrapper>
-    );
-  }
-}

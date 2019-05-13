@@ -19,7 +19,8 @@
   },
   "scripts": {
     "build": "yarn clean && rollup -c && cp ./package.json ./build/package.json",
-    "test": "tsdx test --env=jsdom",
+    "lint": "eslint --ext .tsx,.ts src",
+    "test": "jest test --env=jsdom",
     "compile": "tsc -d --emitDeclarationOnly --outDir ./build",
     "develop": "cd ../visits-style-website && yarn start",
     "deploy": "yarn build && gh-pages -d build -b master",
