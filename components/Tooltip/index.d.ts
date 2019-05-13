@@ -28,6 +28,7 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
     openTooltip: () => void;
     closeTooltip: () => void;
     element: RefObject<HTMLDivElement>;
+    tooltip: RefObject<HTMLDivElement>;
     render(): JSX.Element;
 }
 export {};
