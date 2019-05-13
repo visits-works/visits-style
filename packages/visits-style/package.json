@@ -21,7 +21,7 @@
     "compile": "tsc -d --emitDeclarationOnly --outDir ./build",
     "build": "yarn clean && yarn compile && rollup -c && cp package.json ./build/package.json",
     "develop": "cd ../visits-style-website && yarn start",
-    "deploy": "yarn build && gh-pages -d build -b master --add",
+    "deploy": "yarn build && gh-pages -d build -b v0 --add",
     "clean": "rm -rf ./build",
     "test": "jest --env=jsdom",
     "start": "start-storybook -p 9000",
