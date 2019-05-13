@@ -3,17 +3,6 @@ import styled, { css } from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from './HelpMessage';
-import { CSSType } from '../../types';
-
-interface WrapperProps {
-  outline?: boolean;
-  error?: any;
-  css?: CSSType;
-}
-
-interface IconProps {
-  right?: boolean;
-}
 
 const rightIcon = css`
   right: 0.375em;
@@ -29,13 +18,13 @@ const leftIcon = css`
   }
 `;
 
-const Icon = styled.span<IconProps>`
+const Icon = styled.span<{ right?: boolean }>`
   position: absolute;
   top: 0.375em;
   bottom: 0;
   z-index: 1;
   color: ${({ theme }) => theme.border};
-  ${({ right }) => right ? rightIcon : leftIcon}
+  ${({ right }) => (right ? rightIcon : leftIcon)}
 
   svg, img {
     height: 1em;
@@ -43,7 +32,7 @@ const Icon = styled.span<IconProps>`
   }
 `;
 
-const Wrapper = styled.span<WrapperProps>`
+const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
   position: relative;
   display: block;
 
@@ -100,7 +89,6 @@ const Wrapper = styled.span<WrapperProps>`
       color: ${({ theme }) => theme.borderHover};
     }
   }
-  ${({ css }) => css || ''}
 `;
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -117,8 +105,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: any;
   /** 右側のアイコン */
   rightIcon?: any;
-  /** カスタムCSS定義 */
-  css?: CSSType;
 }
 
 export default class TextInput extends PureComponent<Props> {
@@ -131,10 +117,10 @@ export default class TextInput extends PureComponent<Props> {
 
   render() {
     const {
-      className, outline, error, help, leftIcon, rightIcon, style, css, ...rest
+      className, outline, error, help, leftIcon, rightIcon, style, ...rest
     } = this.props;
     return (
-      <Wrapper className={className} outline={outline} error={error} style={style} css={css}>
+      <Wrapper className={className} outline={outline} error={error} style={style}>
         {leftIcon && (<Icon>{leftIcon}</Icon>)}
         {rightIcon && (<Icon right>{rightIcon}</Icon>)}
         <input {...rest} />

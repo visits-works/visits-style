@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import transparentize from 'polished/lib/color/transparentize';
+import { transparentize } from 'polished';
 
 export default function boxShadow(size: string, color: string, amount?: number) {
   const shadowColor = amount ? transparentize(amount, color) : color;

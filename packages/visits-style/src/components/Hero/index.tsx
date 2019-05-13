@@ -2,7 +2,6 @@ import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import Container from '../Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
-import { mediaDesktop } from '../../utils/media';
 import { ColorType, ThemeType, SizeType } from '../../types';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -26,7 +25,7 @@ function setColor({ color, theme }: { color?: ColorType, theme: ThemeType }) {
   return css`background-color: ${target}; color: ${invertColor};`;
 }
 
-function setSize({ size, theme }: { size?: SizeType | 'full', theme: ThemeType }) {
+function setSize({ size }: { size?: SizeType | 'full', theme: ThemeType }) {
   if (!size || size === 'small') return '';
 
   switch (size) {

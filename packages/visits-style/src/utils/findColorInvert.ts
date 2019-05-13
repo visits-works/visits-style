@@ -1,4 +1,4 @@
-import getLuminance from 'polished/lib/color/getLuminance';
+import { getLuminance } from 'polished';
 import { ThemeType } from '../types';
 
 export default function findColorInvert({ black, white }: ThemeType, color: string) {

@@ -113,7 +113,7 @@ export default class Tabs extends Component<Props> {
 
   state = { start: 0, current: null };
 
-  shouldComponentUpdate(props: Props, state: State) {
+  shouldComponentUpdate(_: Props, state: State) {
     return this.state.start !== state.start ||
       this.state.current !== state.current;
   }

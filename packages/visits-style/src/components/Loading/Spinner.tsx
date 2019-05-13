@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { ColorType, ThemeType } from '../../types';
 

@@ -1,5 +1,5 @@
 import React, { Component, InputHTMLAttributes } from 'react';
-import transparentize from 'polished/lib/color/transparentize';
+import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { ColorType } from '../../types';
 

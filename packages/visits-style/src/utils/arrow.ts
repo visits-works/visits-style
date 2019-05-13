@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import { CSSType } from '../types';
 
-export default function Arrow(color: string, direction?: string): CSSType {
+export default function Arrow(color: string): CSSType {
   return css`
     position: absolute;
     border: 3px solid ${color};

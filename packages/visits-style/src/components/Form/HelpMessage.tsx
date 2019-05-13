@@ -10,6 +10,7 @@ const Message = styled.span<MsgProps>`
   color: ${({ error, theme }) => error ? theme.danger : theme.textLight};
 `;
 
+// @ts-ignore
 export default function HelpMessage(help?: string, error?: string) {
   if (error) {
     return (<Message error>{error}</Message>);

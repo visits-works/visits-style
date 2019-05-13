@@ -12,6 +12,7 @@ bundle_report.html
 # production
 /build
 /lib
+/dist
 
 # misc
 /tmp
@@ -23,6 +24,7 @@ bundle_report.html
 .vscode
 .cache
 .out
+.rts2_cache_*
 
 npm-debug.log*
 yarn-debug.log*

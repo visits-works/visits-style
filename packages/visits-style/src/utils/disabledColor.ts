@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import transparentize from 'polished/lib/color/transparentize';
+import { transparentize } from 'polished';
 import { ThemeType, CSSType } from '../types';
 
 export default function disabledColor(theme: ThemeType): CSSType {

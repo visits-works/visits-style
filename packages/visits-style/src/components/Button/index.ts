@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { HTMLAttributes } from 'react';
-import darken from 'polished/lib/color/darken';
+import { darken } from 'polished';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';

@@ -1,26 +1,65 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useCallback, useState } from 'react';
 import transparentize from 'polished/lib/color/transparentize';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaMobile } from '../../utils/media';
-import { ColorType, AlignType, CSSType, ThemeType } from '../../types';
+import { ColorType, ThemeType } from '../../types';
+
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  /** background色 */
+  color?: ColorType;
+  /** ロゴのイメージ、プロジェクト名など */
+  brand?: React.ReactElement<any> | string;
+  /** 定義された位置を固定にする */
+  fixed?: boolean;
+  /** (IE11不可)画面がスクロールされても上で貼り付けいるようにする */
+  sticky?: boolean;
+  /** 中央並びから自動幅で表示します */
+  fluid?: boolean;
+  /** 背景がblurされます（safari専用、他は透明度） */
+  backdrop?: boolean;
+  /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
+  align?: 'left' | 'right';
+}
+
+export default function AppBar({ children, align, brand, ...rest }: Props) {
+  const [show, setShow] = useState(false);
+  const toggleMenu = useCallback(() => setShow(!show), [show]);
+
+  return (
+    <NavBar
+      role="navigation"
+      {...rest}
+    >
+      <nav>
+        {brand}
+        <Burger className={show ? 'active' : undefined} onClick={toggleMenu}>
+          <span />
+          <span />
+          <span />
+        </Burger>
+        <NavContent className={show ? 'active' : undefined} align={align}>
+          {children}
+        </NavContent>
+      </nav>
+    </NavBar>
+  );
+}
 
 function setColor(
   { color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean },
 ) {
   const backgroundColor = color ? theme[color] : 'transparent';
-  const textColor =
-    findColorInvert(theme, backgroundColor === 'transparent' ? theme.background : backgroundColor);
+  const textColor = findColorInvert(
+    theme, backgroundColor === 'transparent' ? theme.background : backgroundColor,
+  );
 
   if (backdrop) {
-    const backColor =
-      transparentize(0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor));
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf('safari') > -1 && ua.indexOf('chrome') === -1) {
-      return css`background-color: ${backColor}; color: ${textColor}; backdrop-filter: blur(8px);`;
-    }
+    const backColor = transparentize(
+      0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor),
+    );
 
     return css`
       background-color: ${backColor};
@@ -31,20 +70,7 @@ function setColor(
   return css`background-color: ${backgroundColor}; color: ${textColor};`;
 }
 
-interface NavProps {
-  color?: ColorType;
-  backdrop?: boolean;
-  fixed?: boolean;
-  sticky?: boolean;
-  fluid?: boolean;
-  show?: boolean;
-  style?: any;
-  align?: AlignType;
-  role: string;
-  css?: CSSType;
-}
-
-const NavBar = styled.header<NavProps>`
+const NavBar = styled.header<Props>`
   position: ${
     ({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))
   };
@@ -54,7 +80,7 @@ const NavBar = styled.header<NavProps>`
   width: 100%;
   z-index: 30;
 
-  padding: ${({ fluid }: NavProps) => fluid ? '0 0.75rem' : '0 5%'};
+  padding: ${({ fluid }) => (fluid ? '0 0.75rem' : '0 5%')};
 
   & > nav {
     display: flex;
@@ -69,9 +95,8 @@ const NavBar = styled.header<NavProps>`
   a { color: inherit; }
 
   ${mediaTablet} {
-    padding: ${({ fluid }: NavProps) => fluid ? '0 0.5rem' : '0 3%'};
+    padding: ${({ fluid }) => fluid ? '0 0.5rem' : '0 3%'};
   }
-  ${({ css }) => css || {}}
 `;
 
 const Burger = styled.button`
@@ -156,67 +181,3 @@ const NavContent = styled.div<ContentProps>`
     }
   }
 `;
-
-
-interface Props extends HTMLAttributes<HTMLDivElement> {
-  /** background色 */
-  color?: ColorType;
-  /** ロゴのイメージ、プロジェクト名など */
-  brand?: React.ReactElement<any> | string;
-  /** 定義された位置を固定にする */
-  fixed?: boolean;
-  /** (IE11不可)画面がスクロールされても上で貼り付けいるようにする */
-  sticky?: boolean;
-  /** 中央並びから自動幅で表示します */
-  fluid?: boolean;
-  /** 背景がblurされます（safari専用、他は透明度） */
-  backdrop?: boolean;
-  /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
-  align?: 'left' | 'right';
-  /** カスタムCSS定義 */
-  css?: CSSType;
-}
-
-type State = {
-  show: boolean,
-};
-
-export default class AppBar extends PureComponent<Props, State> {
-  static defaultProps = {
-    color: null,
-    brand: null,
-    fixed: false,
-    sticky: false,
-    fluid: false,
-    backdrop: false,
-  };
-
-  state = { show: false };
-
-  toggleMenu = () => {
-    this.setState({ show: !this.state.show });
-  }
-
-  render() {
-    const { children, align, brand, ...rest } = this.props;
-    const { show } = this.state;
-    return (
-      <NavBar
-        role="navigation"
-        {...rest}
-      >
-        <nav>
-          {brand}
-          <Burger className={show ? 'active' : undefined} onClick={this.toggleMenu}>
-            <span />
-            <span />
-            <span />
-          </Burger>
-          <NavContent className={show ? 'active' : undefined} align={align}>
-            {children}
-          </NavContent>
-        </nav>
-      </NavBar>
-    );
-  }
-}

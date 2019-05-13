@@ -19,7 +19,7 @@ function parcentage(value?: ColSizeType) {
   return Math.ceil((value / 12) * 100 * 100000) / 100000;
 }
 
-function renderSize({ size, narrow, auto, offset }: ColProps) {
+function renderSize({ size, narrow, offset }: ColProps) {
   if (narrow) return null;
   if (!size || size < 1 || size > 12) {
     return css`
