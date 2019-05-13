@@ -1,4 +1,4 @@
-import React, { Component, RefObject } from 'react';
+import React, { PureComponent, RefObject } from 'react';
 import { Props as BoxProps } from '../Box';
 import { CSSType } from '../../types';
 interface Props extends BoxProps {
@@ -17,7 +17,7 @@ interface State {
     show: boolean;
     style: any;
 }
-export default class Popover extends Component<Props, State> {
+export default class Popover extends PureComponent<Props, State> {
     static defaultProps: {
         color: string;
         style: {};
@@ -26,7 +26,6 @@ export default class Popover extends Component<Props, State> {
         show: boolean;
         style: {};
     };
-    shouldComponentUpdate(props: Props, state: State): boolean;
     openDropdown: () => void;
     closeDropdown: () => void;
     tooltip: RefObject<HTMLDivElement>;
