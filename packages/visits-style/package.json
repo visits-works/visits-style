@@ -26,7 +26,7 @@
     "test": "jest --env=jsdom",
     "start": "start-storybook -p 9000",
     "storybook:build": "build-storybook -c .storybook -o .out",
-    "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e storybook",
+    "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e v0/storybook",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

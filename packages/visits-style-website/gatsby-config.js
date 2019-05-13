@@ -5,7 +5,7 @@ module.exports = {
     description: 'react style guide for VISITS Technologies',
     docsLocation: 'https://github.com/visits-works/visits-style/tree/develop/docs/content'
   },
-  pathPrefix: '/visits-style',
+  pathPrefix: '/visits-style/v0',
   plugins: [
     'gatsby-plugin-typescript',
     'gatsby-plugin-styled-components',
