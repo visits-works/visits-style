@@ -2,38 +2,38 @@ import React, { createRef, RefObject, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { ColorType, CSSType } from '../../types';
 
-const Wrapper = styled.div<{ show?: boolean, css?: CSSType }>`
+const Wrapper = styled.div<{ css?: CSSType }>`
   position: relative;
   display: inline-block;
-
-  div[role="tooltip"] {
-    position: absolute;
-    clear: both;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    z-index: 9999;
-    padding: 0.375rem 0.625rem;
-    cursor: default;
-    width: auto;
-    white-space: pre;
-    font-size: 0.85rem;
-    z-index: 9999;
-
-    transform: scale(0.8);
-    opacity: 0;
-    visibility: hidden;
-
-    will-change: transform, opacity, visibility;
-    transition-property: transform, opacity, visibility;
-    transition-duration: 100ms;
-    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    ${({ show }) => show && css`
-      transform: scale(1);
-      opacity: 1;
-      visibility: visible;
-    `}
-  }
   ${({ css }) => css || ''}
+`;
+
+const TooltipWrapper = styled.div<{ show?: boolean }>`
+  position: absolute;
+  clear: both;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  z-index: 9999;
+  padding: 0.375rem 0.625rem;
+  cursor: default;
+  width: auto;
+  white-space: pre;
+  font-size: 0.85rem;
+  z-index: 9999;
+
+  transform: scale(0.8);
+  opacity: 0;
+  visibility: hidden;
+
+  will-change: transform, opacity, visibility;
+  transition-property: transform, opacity, visibility;
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  ${({ show }) => show && css`
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+  `}
 `;
 
 interface TooltipProps {
@@ -116,14 +116,14 @@ export default class Tooltip extends PureComponent<TooltipProps, State> {
         {...rest}
       >
         {children}
-        <div
+        <TooltipWrapper
           ref={this.tooltip}
-          className={show ? 'start' : undefined}
+          show={show}
           role="tooltip"
           style={style}
         >
           {label}
-        </div>
+        </TooltipWrapper>
       </Wrapper>
     );
   }
