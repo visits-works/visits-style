@@ -21,11 +21,12 @@
       "components": [ "Link" ],
       "specialLink": ["to"]
     }],
+    "jsx-a11y/label-has-for": [2, {"required": { "some": ["nesting", "id"] }}],
+    "jsx-a11y/label-has-associated-control": "off",
     "react/no-unused-prop-types": "off",
     "no-bitwise": "off",
     "object-curly-newline": "off",
     "react/jsx-filename-extension": "off",
-    "jsx-a11y/label-has-for": [2, {"required": { "some": ["nesting", "id"] }}],
     "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-function-return-type": "off",
