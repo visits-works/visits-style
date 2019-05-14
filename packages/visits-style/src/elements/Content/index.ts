@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Content = styled.div`
+export default styled.div`
   color: ${({ theme }) => theme.text};
   line-height: 1.5;
 
@@ -127,10 +127,3 @@ const Content = styled.div`
     }
   }
 `;
-Content.displayName = 'Content';
-
-export { default as Pre } from './Pre';
-export { default as Code } from './Code';
-export { default as H1 } from './H1';
-
-export default Content;

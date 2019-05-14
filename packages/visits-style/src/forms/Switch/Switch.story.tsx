@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
-import Switch from './Switch';
+import Switch from '.';
 
 storiesOf('forms|Switch', module)
   .add('default', () => (

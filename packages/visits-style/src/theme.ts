@@ -1,20 +1,17 @@
-import { ThemeType } from "../types";
+import { ThemeType } from './types';
 
 const theme: ThemeType = {
   fontFamily: 'ヒラギノ角ゴシック,"ヒラギノ角ゴ ProN W3",メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif',
   fontSize: '16px',
-
-  responsive: true,
   gutter: 24,
   smallGutter: 16,
-  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-
-  mobile: 576,
-  tablet: 769,
-  desktop: 960,
-  fullhd: 1344,
-
-  radius: 4,
+  media: {
+    mobile: '576px',
+    tablet: '769px',
+    desktop: '960px',
+    fullhd: '1344px',
+  },
+  radius: '4px',
 
   primary: '#37B151',
   link: '#578ba9',
@@ -49,7 +46,7 @@ const theme: ThemeType = {
   borderActive: '#4a4a4a',
 
   placeholder: '#7a7a7a',
+  responsive: true,
 };
-
 
 export default theme;

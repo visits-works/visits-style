@@ -1,6 +1,6 @@
 import React, { PureComponent, CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import Box from '../Box';
+import Box from '../../elements/Box';
 import { ColorType } from '../../types';
 
 const CardBody = styled.div`

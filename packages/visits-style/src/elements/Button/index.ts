@@ -45,7 +45,7 @@ function setColor({ theme, color, outline, disabled }: Props) {
     `;
   }
 
-  const target = theme[color] || color;
+  const target = theme.color[color] || color;
   const invertColor = findColorInvert(theme, target);
   if (outline) {
     return css`
@@ -96,7 +96,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   full?: boolean;
 }
 
-const Button = styled.button<ButtonProps>`
+export default styled.button<ButtonProps>`
   position: relative;
   outline: none;
   appearance: none;
@@ -121,6 +121,3 @@ const Button = styled.button<ButtonProps>`
   ${({ size }) => setSize('font-size', size)}
   ${({ full }) => full ? 'width: 100%;' : ''}
 `;
-Button.displayName = 'Button';
-
-export default Button;

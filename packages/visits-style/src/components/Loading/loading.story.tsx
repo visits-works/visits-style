@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import LoadingBar from './Bar';
 import Spinner from './Spinner';
 
-import Button from '../Button';
+import Button from '../../elements/Button';
 
 class BarDemo extends React.Component<any, { loading: boolean }> {
   state = { loading: false };

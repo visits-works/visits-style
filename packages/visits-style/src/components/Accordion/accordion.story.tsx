@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean } from '@storybook/addon-knobs';
 import Collapse from '.';
-import Box from '../Box';
+import Box from '../../elements/Box';
 
 class Default extends PureComponent {
   state = { show: false };

@@ -3,12 +3,11 @@ import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType } from '../../types';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   /** 色指定 */
   color?: ColorType;
   /** borderを非表示する */
   borderless?: boolean;
-  style?: any;
 }
 
 function setColor({ color, theme }: any) {
@@ -19,7 +18,7 @@ function setColor({ color, theme }: any) {
   return css`background-color: ${target}; color: ${invertColor};`;
 }
 
-const Box = styled.div<Props>`
+export default styled.div<Props>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -33,6 +32,3 @@ const Box = styled.div<Props>`
 
   ${setColor}
 `;
-Box.displayName = 'Box';
-
-export default Box;

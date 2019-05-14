@@ -1,13 +1,24 @@
 import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
-import Select from './Select';
+import Select from '.';
+
+const options = [
+  { id: 1, name: 'options1' },
+  { id: 2, name: 'options2' },
+];
 
 storiesOf('forms|Select', module)
   .add('default', () => (
     <div style={{ width: '350px' }}>
       <Select
         placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
-        options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]}
+        options={options}
+      />
+      <br />
+      <Select
+        placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
+        options={options}
+        disabled
       />
     </div>
   ))
@@ -15,9 +26,15 @@ storiesOf('forms|Select', module)
     <div style={{ width: '350px' }}>
       <Select
         placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
-        options={[ { id: 1, name: 'options1' }, { id: 2, name: 'options2' } ]}
+        options={options}
         outline
+      />
+      <br />
+      <Select
+        placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
+        options={options}
+        outline
+        disabled
       />
     </div>
   ));
-

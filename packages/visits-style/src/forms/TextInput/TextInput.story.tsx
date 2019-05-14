@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
-import TextInput from './TextInput';
+import TextInput from '.';
 
 storiesOf('forms|TextInput', module)
   .add('default', () => (

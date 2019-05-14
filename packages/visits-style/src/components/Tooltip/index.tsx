@@ -1,11 +1,88 @@
-import React, { createRef, RefObject, PureComponent } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { ColorType, CSSType } from '../../types';
+
+interface TooltipProps {
+  /** 吹き出しとして表示したい内容 */
+  label: any;
+  /** マウスオーバーの対象になるelement */
+  children: any;
+  /** 吹き出しの背景色の指定 */
+  color?: ColorType;
+  /** 表示される場所 */
+  position?: 'top' | 'left' | 'right' | 'bottom';
+}
+
+export default function Tooltip({ children, position, label, ...rest }: TooltipProps) {
+  const parent = useRef<HTMLDivElement | null>(null);
+  const tooltip = useRef<HTMLDivElement | null>(null);
+
+  const [show, setShow] = useState(false);
+  const [tooltipStyle, setStyle] = useState({});
+
+  const openTooltip = useCallback(() => {
+    if (show || !parent.current || !tooltip.current) return;
+
+    const parentRect = parent.current.getBoundingClientRect();
+    const rect = tooltip.current.getBoundingClientRect();
+    const left = parentRect.width + 8;
+    const top = parentRect.height + 8;
+    const width = (parentRect.width - rect.width) >> 1;
+    const height = (parentRect.height - rect.height) >> 1;
+
+    switch (position) {
+      case 'top': {
+        setStyle({ bottom: `${top}px`, left: `${width}px` });
+        break;
+      }
+      case 'left': {
+        setStyle({ right: `${left}px`, top: `${height}px` });
+        break;
+      }
+      case 'right': {
+        setStyle({ left: `${left}px`, top: `${height}px` });
+        break;
+      }
+      default: {
+        setStyle({ top: `${top}px`, left: `${width}px` });
+        break;
+      }
+    }
+    setShow(true);
+  // eslint-disable-next-line
+  }, [position]);
+
+  const closeTooltip = useCallback(() => setShow(false), []);
+
+  return (
+    <Wrapper
+      ref={parent}
+      onMouseOver={openTooltip}
+      onFocus={openTooltip}
+      onMouseOut={closeTooltip}
+      onBlur={closeTooltip}
+      {...rest}
+    >
+      {children}
+      <TooltipWrapper
+        ref={tooltip}
+        show={show}
+        role="tooltip"
+        style={tooltipStyle}
+      >
+        {label}
+      </TooltipWrapper>
+    </Wrapper>
+  );
+}
+Tooltip.defaultProps = {
+  position: 'bottom',
+  color: 'dark',
+};
 
 const Wrapper = styled.div<{ css?: CSSType }>`
   position: relative;
   display: inline-block;
-  ${({ css }) => css || ''}
 `;
 
 const TooltipWrapper = styled.div<{ show?: boolean }>`
@@ -35,97 +112,3 @@ const TooltipWrapper = styled.div<{ show?: boolean }>`
     visibility: visible;
   `}
 `;
-
-interface TooltipProps {
-  /** 吹き出しとして表示したい内容 */
-  label: any;
-  /** マウスオーバーの対象になるelement */
-  children: any;
-  /** 吹き出しの背景色の指定 */
-  color?: ColorType;
-  /** 表示される場所 */
-  position?: 'top' | 'left' | 'right' | 'bottom';
-  /** カスタムCSS定義 */
-  css?: CSSType;
-}
-
-interface State {
-  show: boolean;
-  style: any;
-}
-
-export default class Tooltip extends PureComponent<TooltipProps, State> {
-  static defaultProps = {
-    position: 'bottom',
-    color: 'dark',
-  };
-
-  state = {
-    show: false,
-    style: {},
-  };
-
-  openTooltip = () => {
-    if (this.state.show || !this.element.current || !this.tooltip.current) return;
-
-    const parentRect = this.element.current.getBoundingClientRect();
-    const rect = this.tooltip.current.getBoundingClientRect();
-    const left = parentRect.width + 8;
-    const top = parentRect.height + 8;
-    const width = (parentRect.width - rect.width) >> 1;
-    const height = (parentRect.height - rect.height) >> 1;
-    let style = {};
-
-    switch (this.props.position) {
-      case 'top': {
-        style = { bottom: `${top}px`, left: `${width}px` };
-        break;
-      }
-      case 'left': {
-        style = { right: `${left}px`, top: `${height}px` };
-        break;
-      }
-      case 'right': {
-        style = { left: `${left}px`, top: `${height}px` };
-        break;
-      }
-      default: {
-        style = { top: `${top}px`, left: `${width}px`  };
-        break;
-      }
-    }
-
-    this.setState({ style, show: true });
-  }
-
-  closeTooltip = () => {
-    if (this.state.show) this.setState({ show: false });
-  }
-
-  element: RefObject<HTMLDivElement> = createRef();
-  tooltip: RefObject<HTMLDivElement> = createRef();
-
-  render() {
-    const { label, children, ...rest } = this.props;
-    const { show, style } = this.state;
-    return (
-      <Wrapper
-        ref={this.element}
-        onMouseOver={this.openTooltip}
-        onMouseOut={this.closeTooltip}
-        {...rest}
-      >
-        {children}
-        <TooltipWrapper
-          ref={this.tooltip}
-          show={show}
-          role="tooltip"
-          style={style}
-        >
-          {label}
-        </TooltipWrapper>
-      </Wrapper>
-    );
-  }
-}
-

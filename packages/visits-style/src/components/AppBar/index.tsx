@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
-import transparentize from 'polished/lib/color/transparentize';
+import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';

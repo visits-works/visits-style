@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { CSSType } from '../../types';
+import { CSSType } from '../types';
 
 const Wrapper = styled.div<{ required?: boolean, css?: CSSType }>`
   display: block;

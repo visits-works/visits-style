@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import Box, { Props as BoxProps } from '../Box';
+import Box, { Props as BoxProps } from '../../elements/Box';
 import { CSSType } from '../../types';
 
 interface Props extends BoxProps {

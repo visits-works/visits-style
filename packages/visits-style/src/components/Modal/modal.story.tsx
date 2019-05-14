@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Modal from '.';
-import Button from '../Button';
+import Button from '../../elements/Button';
 
 const CloseButton: any = {
   position: 'absolute',

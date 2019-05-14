@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, boolean } from '@storybook/addon-knobs';
 import Toast from '.';
-import Button from '../Button';
+import Button from '../../elements/Button';
 
 class ToastDemo extends Component<{ position: string, fixed: boolean }> {
   state = { list: [], position: 'top-left' };

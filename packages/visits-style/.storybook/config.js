@@ -7,7 +7,7 @@ import { withOptions } from '@storybook/addon-options';
 import { withKnobs } from '@storybook/addon-knobs';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
-import theme from '../src/theme/default';
+import theme from '../src/theme';
 import css from '../src/styles/normalize';
 
 const GlobalStyle = createGlobalStyle`
@@ -68,7 +68,7 @@ addDecorator(story => (
 addDecorator(withKnobs);
 
 function loadStories() {
-  const req = require.context('../src/components', true, /\.story\.tsx$/);
+  const req = require.context('../src', true, /\.story\.tsx$/);
   req.keys().forEach(filename => req(filename));
 }
 

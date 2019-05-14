@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import Container from '../Grid/Container';
+import Container from '../../elements/Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType, ThemeType, SizeType } from '../../types';
 

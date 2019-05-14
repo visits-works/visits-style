@@ -11,7 +11,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   anchorColor?: string;
 }
 
-export default function Switch({ className, height, showLabel, background, anchorColor, ...rest }: Props) {
+export default function Switch({
+  className, height, showLabel, background, anchorColor,
+  ...rest
+}: Props) {
   const id = useRef(`switch_${rest.name}`);
 
   return (

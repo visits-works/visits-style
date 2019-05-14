@@ -2,7 +2,7 @@ import React, { PureComponent, InputHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
-import HelpMessage from './HelpMessage';
+import HelpMessage from '../HelpMessage';
 
 const rightIcon = css`
   right: 0.375em;

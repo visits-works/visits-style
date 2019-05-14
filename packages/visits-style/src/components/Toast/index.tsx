@@ -4,7 +4,7 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import styled from 'styled-components';
 
-import Box from '../Box';
+import Box from '../../elements/Box';
 import { ColorType } from '../../types';
 
 type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';

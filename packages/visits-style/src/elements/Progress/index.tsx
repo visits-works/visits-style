@@ -1,7 +1,7 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import setSize from '../../utils/setSize';
-import { ColorType, SizeType, CSSType } from '../../types';
+import { ColorType, SizeType } from '../../types';
 
 interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   /** 現状の進捗 */
@@ -14,26 +14,43 @@ interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   height?: string;
   /** バーの色 */
   color?: ColorType;
-  /** カスタムCSS定義 */
-  css?: CSSType;
 }
+
+export default function Progress({ value, max, ...rest }: ProgressProps) {
+  const percent = useMemo(() => Math.round((value / max) * 100), [value, max]);
+  return (
+    <Wrapper {...rest}>
+      <div
+        role="progressbar"
+        className={value !== max ? 'in-progress' : undefined}
+        style={{ width: `${percent > 100 ? 100 : percent}%` }}
+      />
+    </Wrapper>
+  );
+}
+Progress.defaultProps = {
+  color: 'primary',
+};
 
 const Wrapper = styled.div<ProgressProps>`
   position: relative;
   display: block;
   width: 100%;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.radius};
   background-color: ${({ theme }) => theme.background};
 
-  ${({ size }) => setSize('height', size)}
-  ${({ size, height }) => !size && height ? `height: ${height};` : ''}
+  ${({ size, height }) => height || setSize('height', size)}
 
   & > div[role="progressbar"] {
     position: relative;
     height: 100%;
-    border-radius: 4px;
-    ${({ value, max }) => (value === max) ? '' : 'border-bottom-right-radius: 0; border-top-right-radius: 0;'}
+    border-radius: ${({ theme }) => theme.radius};
     background-color: ${({ color, theme }) => (theme[color!] || color)};
+
+    &.in-progress {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
 
     will-change: width;
 
@@ -42,22 +59,4 @@ const Wrapper = styled.div<ProgressProps>`
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     z-index: 1;
   }
-  ${({ css }) => (css || '')}
 `;
-
-
-export default class Progress extends PureComponent<ProgressProps> {
-  static defaultProps = {
-    color: 'primary',
-  }
-
-  render () {
-    const { value, max } = this.props;
-    const percent = Math.round((value/max) * 100);
-    return (
-      <Wrapper {...this.props}>
-        <div role="progressbar" style={{ width: `${percent > 100 ? 100 : percent}%` }} ></div>
-      </Wrapper>
-    );
-  }
-};
