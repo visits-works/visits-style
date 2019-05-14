@@ -12,4 +12,22 @@ storiesOf('forms|Switch', module)
     <div>
       <Switch name="test1" value={1} showLabel />
     </div>
+  ))
+  .add('custom', () => (
+    <div>
+      <Switch
+        name="test1"
+        value={1}
+        showLabel
+        background="linear-gradient(19.76deg, #3DA3ED 18.61%, rgba(62, 69, 233, 0.8) 112.01%)"
+      />
+      <br />
+      <Switch
+        name="test2"
+        value={1}
+        showLabel
+        anchorColor="red"
+        background="linear-gradient(19.76deg, #3DA3ED 18.61%, rgba(62, 69, 233, 0.8) 112.01%)"
+      />
+    </div>
   ));

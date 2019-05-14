@@ -3,15 +3,25 @@ import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  height?: string;
+  /** trueの場合にON/OFFのラベルを表示します */
   showLabel?: boolean;
+  /** ONの時に、色を指定します。 */
+  background?: string;
+  /** 丸の色を設定します。 */
+  anchorColor?: string;
 }
 
-export default function Switch({ className, height, showLabel, ...rest }: Props) {
+export default function Switch({ className, height, showLabel, background, anchorColor, ...rest }: Props) {
   const id = useRef(`switch_${rest.name}`);
 
   return (
-    <Wrapper className={className} height={height} showLabel={showLabel}>
+    <Wrapper
+      className={className}
+      height={height}
+      showLabel={showLabel}
+      background={background}
+      anchorColor={anchorColor}
+    >
       <input id={id.current} type="checkbox" {...rest} />
       <label htmlFor={id.current} />
     </Wrapper>
@@ -37,7 +47,7 @@ const labelStyle = css`
   }
 `;
 
-const Wrapper = styled.span<{ showLabel?: boolean }>`
+const Wrapper = styled.span<{ showLabel?: boolean, background?: string, anchorColor?: string }>`
   display: inline-block;
   cursor: pointer;
   line-height: 1.25;
@@ -68,7 +78,7 @@ const Wrapper = styled.span<{ showLabel?: boolean }>`
       width: 1.375rem;
       height: 1.375rem;
       border-radius: 100%;
-      background: white;
+      background: ${({ theme, anchorColor }) => anchorColor || theme.white};
       content: '';
       text-align: right;
       border: 1px solid ${({ theme }) => theme.border};
@@ -79,7 +89,7 @@ const Wrapper = styled.span<{ showLabel?: boolean }>`
   }
 
   input:checked ~ label {
-    background: ${({ theme }) => theme.primary};
+    background: ${({ theme, background }) => (background || theme.primary)};
     box-shadow: inset 0 0.25rem 0.25rem rgba(0,0,0,0.15);
     &:after {
       left: calc(100% - 1.75rem);
