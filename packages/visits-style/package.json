@@ -18,7 +18,8 @@
     "react-transition-group": "^4.0.1"
   },
   "scripts": {
-    "build": "yarn clean && rollup -c && cp ./package.json ./build/package.json",
+    "watch": "tsdx watch",
+    "build": "tsdx build && cp ./package.json ./dist/package.json",
     "lint": "eslint --ext .tsx,.ts src",
     "test": "jest test --env=jsdom",
     "compile": "tsc -d --emitDeclarationOnly --outDir ./build",
@@ -83,6 +84,7 @@
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.21.0",
     "styled-components": "^4.2.0",
+    "tsdx": "^0.5.9",
     "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   },

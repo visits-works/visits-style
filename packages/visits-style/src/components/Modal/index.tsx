@@ -16,10 +16,6 @@ const Wrapper = styled.div`
   z-index: 9997;
   overflow-y: auto;
   overflow-x: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   background-color: ${({ shadowColor }) => shadowColor || 'transparent'};
 
   .v-modal-body {
@@ -52,8 +48,6 @@ const Wrapper = styled.div`
 interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ヘッダーのタイトル文言 */
   title?: any;
-  /** 1~12のモーダルサイズ */
-  size?: ColSizeType;
   /** trueの場合、モーダルを表示します。 */
   show?: boolean;
   /** モーダルのbodyに入れる内容 */
@@ -75,11 +69,22 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Modal({
-  show, size, title, children, footer, color, onClick, external, ...rest
+  show, title, children, footer,
+  color, shadowColor, closeModal, external,
+  className, closeOnOverlay,
+  ...rest
 }: Props) {
+  if (!show) return null;
+
   return (
-    <Wrapper role="dialog" aria-modal="true" {...rest}>
-      <Box color={color}>
+    <Wrapper
+      role="dialog"
+      aria-modal="true"
+      shadowColor={shadowColor}
+      className={className}
+      onClick={closeOnOverlay ? closeModal : undefined}
+    >
+      <Box color={color} {...rest}>
         {title && title}
         {children}
         {footer && footer}
@@ -88,6 +93,10 @@ export default function Modal({
     </Wrapper>
   );
 }
+Modal.defaultProps = {
+  shadowColor: 'rgba(10,10,10,0.86)',
+  color: 'white',
+};
 
 // export default class Modal extends PureComponent<Props> {
 //   static defaultProps = {

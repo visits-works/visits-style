@@ -4,6 +4,7 @@ import { boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Modal from '.';
 import Button from '../../elements/Button';
+import TextButton from '../../elements/Button/TextButton';
 
 const CloseButton: any = {
   position: 'absolute',
@@ -14,36 +15,62 @@ const CloseButton: any = {
 
 storiesOf('components|Modal', module)
   .add('default', () => (
-    <Modal
-      title={(
-        <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-          <h3>Modal Title</h3>
-          <a style={CloseButton}>X</a>
-        </header>
-      )}
-      // @ts-ignore
-      size={number('size', 4)}
-      closeModal={action('close')}
-      footer={(
-        <Button color="primary">Save changes</Button>
-      )}
-      style={{ padding: '1rem' }}
-      show={boolean('show', true)}
-      closeOnOverlay={boolean('close with overlay click', true)}
-    >
-      Modal body text goes here.
-    </Modal>
+    <div>
+      <div>
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+      </div>
+      <Modal
+        title={(
+          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+            <h3>Modal Title</h3>
+            <TextButton style={CloseButton}>X</TextButton>
+          </header>
+        )}
+        closeModal={action('close')}
+        footer={(
+          <Button color="primary">Save changes</Button>
+        )}
+        style={{ padding: '1rem' }}
+        show={boolean('show', true)}
+        closeOnOverlay={boolean('close with overlay click', true)}
+      >
+        Modal body text goes here.
+      </Modal>
+      <div>
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+      </div>
+    </div>
   ))
   .add('onScroll', () => (
     <Modal
       title={(
         <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
           <h3>Modal Title</h3>
-          <a style={CloseButton}>X</a>
+          <TextButton style={CloseButton}>X</TextButton>
         </header>
       )}
-      // @ts-ignore
-      size={number('size', 4)}
       closeModal={action('close')}
       footer={(
         <Button color="primary">Save changes</Button>
