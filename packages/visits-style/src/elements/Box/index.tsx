@@ -24,7 +24,7 @@ export default styled.div<Props>`
   flex-direction: column;
   ${({ borderless, theme }) => (borderless ? '' : `border: 1px solid ${theme.border};`)}
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  border-radius: 3px;
+  border-radius: ${({ theme }) => theme.radius};
   width: 100%;
 
   min-width: 0;

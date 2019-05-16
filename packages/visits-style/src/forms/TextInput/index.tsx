@@ -1,8 +1,42 @@
-import React, { PureComponent, InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from '../HelpMessage';
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  placeholder?: string;
+  /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
+  type: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
+  /** エラーの発生時の表示テキスト */
+  error?: string | any;
+  /** 捕捉テキスト */
+  help?: string | any;
+  /** ボックス系のデザインでする */
+  outline?: boolean;
+  /** 左側のアイコン */
+  leftIcon?: any;
+  /** 右側のアイコン */
+  rightIcon?: any;
+}
+
+export default function TextInput({
+  className, outline, error, style, help, leftIcon, rightIcon, ...rest
+}: Props) {
+  return (
+    <Wrapper className={className} outline={outline} error={error} style={style}>
+      {leftIcon && (<Icon>{leftIcon}</Icon>)}
+      {rightIcon && (<Icon right>{rightIcon}</Icon>)}
+      <input {...rest} />
+      <HelpMessage help={help} error={error} />
+    </Wrapper>
+  );
+}
+TextInput.defaultProps = {
+  type: 'text',
+  value: '',
+  maxLength: 255,
+};
 
 const rightIcon = css`
   right: 0.375em;
@@ -90,42 +124,3 @@ const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
     }
   }
 `;
-
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  placeholder?: string;
-  /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
-  type: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
-  /** エラーの発生時の表示テキスト */
-  error?: string | any;
-  /** 捕捉テキスト */
-  help?: string | any;
-  /** ボックス系のデザインでする */
-  outline?: boolean;
-  /** 左側のアイコン */
-  leftIcon?: any;
-  /** 右側のアイコン */
-  rightIcon?: any;
-}
-
-export default class TextInput extends PureComponent<Props> {
-  static defaultProps = {
-    type: 'text',
-    value: '',
-    maxLength: 255,
-    onChange: () => {},
-  };
-
-  render() {
-    const {
-      className, outline, error, help, leftIcon, rightIcon, style, ...rest
-    } = this.props;
-    return (
-      <Wrapper className={className} outline={outline} error={error} style={style}>
-        {leftIcon && (<Icon>{leftIcon}</Icon>)}
-        {rightIcon && (<Icon right>{rightIcon}</Icon>)}
-        <input {...rest} />
-        {HelpMessage(help, error)}
-      </Wrapper>
-    );
-  }
-}

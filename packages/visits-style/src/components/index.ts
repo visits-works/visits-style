@@ -2,9 +2,6 @@
 // form
 export * from '../forms';
 
-// icons
-export * from './Icons';
-
 // components
 export { default as Accordion } from './Accordion';
 export { default as AppBar } from './AppBar';

@@ -5,17 +5,13 @@ interface MsgProps {
   error?: boolean;
 }
 
-const Message = styled.span<MsgProps>`
+const Message = styled.small<MsgProps>`
   font-size: 0.8rem;
-  color: ${({ error, theme }) => error ? theme.danger : theme.textLight};
+  color: ${({ error, theme }) => (error ? theme.danger : theme.textLight)};
 `;
 
-// @ts-ignore
-export default function HelpMessage(help?: string, error?: string) {
-  if (error) {
-    return (<Message error>{error}</Message>);
-  }
-  if (help) {
-    return (<Message>{help}</Message>);
-  }
+export default function HelpMessage({ help, error }: { help?: string, error?: string }) {
+  if (error) return (<Message error>{error}</Message>);
+  if (help) return (<Message>{help}</Message>);
+  return null;
 }

@@ -1,26 +1,26 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
-import { createPortal } from 'react-dom';
-import CSSTransition from 'react-transition-group/CSSTransition';
+import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import Box from '../../elements/Box';
-import Col from '../../elements/Grid/Col';
-import { ColorType, ColSizeType, CSSType } from '../../types';
+import { ColorType, ColSizeType } from '../../types';
 
-const ESC_KEY = 27;
+// const ESC_KEY = 27;
 
-const Wrapper = styled.div<{ css?: CSSType, shadowColor?: string }>`
+const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: 9997;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0.75rem;
+  background-color: ${({ shadowColor }) => shadowColor || 'transparent'};
 
   .v-modal-body {
     z-index: 9999;
@@ -47,17 +47,6 @@ const Wrapper = styled.div<{ css?: CSSType, shadowColor?: string }>`
     opacity: 0.01;
     transform: scale(0.8);
   }
-
-  .v-modal-shadow {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background-color: ${({ shadowColor }) => shadowColor || 'transparent'};
-  }
-
-  ${({ css }) => css || {}}
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -83,71 +72,84 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   shadowColor?: string;
   /** モーダル外に表示するElements */
   external?: any;
-  /** カスタムCSS定義 */
-  css?: CSSType;
 }
 
-export default class Modal extends PureComponent<Props> {
-  static defaultProps = {
-    show: false,
-    color: 'white',
-    size: 6,
-    shadowColor: 'rgba(10,10,10,.86)',
-  };
-
-  componentWillUnmount() {
-    if (this.element) {
-      document.body.removeChild(this.element);
-    }
-  }
-
-  onKeyDown = (e: any) => {
-    if (this.props.closeOnEsc && e.keyCode === ESC_KEY && this.props.closeModal) {
-      this.props.closeModal();
-    }
-  }
-
-  onClickOverlay = () => {
-    if (this.props.closeOnOverlay && this.props.closeModal) {
-      this.props.closeModal();
-    }
-  }
-
-  element?: HTMLDivElement;
-  shouldClose: boolean | null = null;
-
-  render(): React.ReactPortal | null {
-    if (typeof document !== "undefined" && !this.element) {
-      this.element = document.createElement('div');
-      document.body.appendChild(this.element);
-    }
-
-    if (this.element) {
-      const {
-        show, size, title, children, footer, color, onClick, ...rest
-      } = this.props;
-
-      return createPortal((
-        <CSSTransition
-          classNames="fade"
-          timeout={200}
-          in={show}
-          unmountOnExit
-        >
-          <Wrapper role="document" {...rest}>
-            <Col className="v-modal-body" size={size} auto role="dialog">
-              <Box color={color}>
-                {title ? title : null}
-                {children}
-                {footer ? footer : null}
-              </Box>
-            </Col>
-            {this.props.external}
-            <div className="v-modal-shadow" onClick={this.onClickOverlay} />
-          </Wrapper>
-        </CSSTransition>
-      ), this.element);
-    }
-    return null;
-  }
+export default function Modal({
+  show, size, title, children, footer, color, onClick, external, ...rest
+}: Props) {
+  return (
+    <Wrapper role="dialog" aria-modal="true" {...rest}>
+      <Box color={color}>
+        {title && title}
+        {children}
+        {footer && footer}
+      </Box>
+      {external}
+    </Wrapper>
+  );
 }
+
+// export default class Modal extends PureComponent<Props> {
+//   static defaultProps = {
+//     show: false,
+//     color: 'white',
+//     size: 6,
+//     shadowColor: 'rgba(10,10,10,.86)',
+//   };
+
+//   componentWillUnmount() {
+//     if (this.element) {
+//       document.body.removeChild(this.element);
+//     }
+//   }
+
+//   onKeyDown = (e: any) => {
+//     if (this.props.closeOnEsc && e.keyCode === ESC_KEY && this.props.closeModal) {
+//       this.props.closeModal();
+//     }
+//   }
+
+//   onClickOverlay = () => {
+//     if (this.props.closeOnOverlay && this.props.closeModal) {
+//       this.props.closeModal();
+//     }
+//   }
+
+//   element?: HTMLDivElement;
+//   shouldClose: boolean | null = null;
+
+//   render(): React.ReactPortal | null {
+//     if (typeof document !== "undefined" && !this.element) {
+//       this.element = document.createElement('div');
+//       document.body.appendChild(this.element);
+//     }
+
+//     if (this.element) {
+//       const {
+//         show, size, title, children, footer, color, onClick, ...rest
+//       } = this.props;
+
+//       return createPortal((
+//         <CSSTransition
+//           classNames="fade"
+//           timeout={200}
+//           in={show}
+//           unmountOnExit
+//         >
+//           <Wrapper role="document" {...rest}>
+//             <Col className="v-modal-body" size={size} auto role="dialog">
+//               <Box color={color}>
+//                 {title ? title : null}
+//                 {children}
+//                 {footer ? footer : null}
+//               </Box>
+//             </Col>
+//             {this.props.external}
+//             <div className="v-modal-shadow" onClick={this.onClickOverlay} />
+//           </Wrapper>
+//         </CSSTransition>
+//       ), this.element);
+//     }
+//     return null;
+//   }
+// }

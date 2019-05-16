@@ -1,6 +1,22 @@
-import React, { Component, InputHTMLAttributes } from 'react';
+import React, { useRef, InputHTMLAttributes } from 'react';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  children?: any;
+  checked?: boolean;
+}
+
+export default function Checkbox({ className, children, ...rest }: Props) {
+  const id = useRef(`checkbox_${rest.name}`);
+
+  return (
+    <Wrapper className={className}>
+      <input type="checkbox" id={id.current} {...rest} />
+      <label htmlFor={id.current}>{children}</label>
+    </Wrapper>
+  );
+}
 
 const Wrapper = styled.span`
   display: block;
@@ -84,29 +100,3 @@ const Wrapper = styled.span`
     }
   }
 `;
-
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  children?: any;
-  checked?: boolean;
-}
-
-export default class Checkbox extends Component<Props> {
-  static defaultProps = {
-    name: null,
-    children: null,
-    checked: false,
-    onChange: () => {},
-  };
-
-  id = `checkbox_${this.props.name}`;
-
-  render() {
-    const { className, children, ...rest } = this.props;
-    return (
-      <Wrapper className={className} >
-        <input type="checkbox" id={this.id} {...rest} />
-        <label htmlFor={this.id}>{children}</label>
-      </Wrapper>
-    );
-  }
-}

@@ -43,7 +43,7 @@ export default function Select({
         {placeholder && (<option value="">{placeholder}</option>)}
         {list}
       </select>
-      {HelpMessage(help, error)}
+      <HelpMessage help={help} error={error} />
     </InputWrapper>
   );
 }

@@ -16,7 +16,7 @@ export default function Textarea({ className, help, error, style, ...rest }: Pro
   return (
     <Wrapper className={className} error={!!error} style={style}>
       <textarea {...rest} />
-      {HelpMessage(help, error)}
+      <HelpMessage help={help} error={error} />
     </Wrapper>
   );
 }

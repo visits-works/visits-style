@@ -1,7 +1,5 @@
-import React, { Component, PureComponent } from 'react';
+import React, { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import CSSTransition from 'react-transition-group/CSSTransition';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
 import styled from 'styled-components';
 
 import Box from '../../elements/Box';
@@ -53,51 +51,43 @@ const Wrapper = styled(Box)`
   }
 `;
 
-export class ToastItem extends PureComponent<ToastProps> {
-  static defaultProps = {
-    duration: 5000,
-  };
+// function setPosition(position: string, isFixed?: boolean) {
+//   // tslint:disable-next-line
+//   const base = `position: ${isFixed ? 'fixed' : 'absolute'}; z-index: 9999; display: flex; flex-direction: column; `;
+//   switch (position) {
+//     case 'bottom': {
+//       return `${base} bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
+//     }
+//     case 'bottom-left': {
+//       return `${base} bottom: 1rem; left: 1rem; align-item: flex-start;`;
+//     }
+//     case 'bottom-right': {
+//       return `${base} bottom: 1rem; right: 1rem; align-item: flex-end;`;
+//     }
+//     case 'top': {
+//       return `${base} top: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
+//     }
+//     case 'top-left': {
+//       return `${base} top: 1rem; left: 1rem; align-item: flex-start;`;
+//     }
+//     case 'top-right':
+//     default: {
+//       return `${base} top: 1rem; right: 1rem; align-item: flex-end;`;
+//     }
+//   }
+// }
 
-  componentDidMount() {
-    if (this.props.duration !== null) {
-      setTimeout(this.props.clear, this.props.duration);
-    }
-  }
+function ToastItem({ color, message, duration, clear }: ToastProps) {
+  useEffect(() => {
+    const timeout = setTimeout(clear, duration);
+    return () => clearTimeout(timeout);
+  }, [clear, duration]);
 
-  render() {
-    const { message, color } = this.props;
-    return (
-      <Wrapper borderless color={color}>
-        {message}
-      </Wrapper>
-    );
-  }
-}
-
-function setPosition(position: string, isFixed?: boolean) {
-  // tslint:disable-next-line
-  const base = `position: ${isFixed ? 'fixed' : 'absolute'}; z-index: 9999; display: flex; flex-direction: column; `;
-  switch (position) {
-    case 'bottom': {
-      return `${base} bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
-    }
-    case 'bottom-left': {
-      return `${base} bottom: 1rem; left: 1rem; align-item: flex-start;`;
-    }
-    case 'bottom-right': {
-      return `${base} bottom: 1rem; right: 1rem; align-item: flex-end;`;
-    }
-    case 'top': {
-      return `${base} top: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
-    }
-    case 'top-left': {
-      return `${base} top: 1rem; left: 1rem; align-item: flex-start;`;
-    }
-    case 'top-right':
-    default: {
-      return `${base} top: 1rem; right: 1rem; align-item: flex-end;`;
-    }
-  }
+  return (
+    <Wrapper borderless color={color}>
+      {message}
+    </Wrapper>
+  );
 }
 
 interface ContainerProps {
@@ -111,71 +101,20 @@ interface ContainerProps {
   fixed?: boolean;
 }
 
-export default class ToastContainer extends Component<ContainerProps> {
-  static defaultProps = {
-    toasts: [],
-    position: 'top-right',
-    fixed: false,
-  };
+export default function Toast({ toasts, clear }: ContainerProps) {
+  const element = useRef(document.createElement('div'));
+  const clearItem = useCallback((id: string) => () => clear(id), [clear]);
 
-  shouldComponentUpdate(props: ContainerProps) {
-    return props.toasts.length !== this.props.toasts.length ||
-      props.position !== this.props.position;
-  }
+  useLayoutEffect(() => {
+    document.body.appendChild(element.current);
+    return () => {
+      document.body.removeChild(element.current);
+    };
+  }, []);
 
-  componentDidUpdate(props: ContainerProps) {
-    if (
-      this.element &&
-      (props.position !== this.props.position || props.fixed !== this.props.fixed)
-    ) {
-      this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.element) document.body.removeChild(this.element);
-  }
-
-  clear = (id: string) => () => {
-    this.props.clear(id);
-  }
-
-  renderToast = () => {
-    const { toasts } = this.props;
-    return (
-      <TransitionGroup component={null}>
-        {toasts.map(props => (
-          <CSSTransition
-            key={props.id}
-            timeout={250}
-            classNames="move"
-            unmountOnExit
-          >
-            <ToastItem
-              key={props.id}
-              {...props}
-              clear={this.clear(props.id)}
-            />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
-    );
-  }
-
-  element?: HTMLDivElement;
-
-  render(): React.ReactPortal | null {
-    if (typeof document !== 'undefined' && !this.element) {
-      this.element = document.createElement('div');
-      this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
-      document.body.appendChild(this.element);
-    }
-
-
-    if (this.element) {
-      return createPortal(this.renderToast(), this.element);
-    }
-    return null;
-  }
+  return createPortal((
+    toasts.map(props => (
+      <ToastItem key={props.id} {...props} clear={clearItem(props.id)} />
+    ))
+  ), element.current);
 }
-

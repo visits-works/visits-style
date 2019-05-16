@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, PureComponent } from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import darken from 'polished/lib/color/darken';
 import findColorInvert from '../../utils/findColorInvert';
@@ -8,7 +8,6 @@ interface WrapperProps {
   color?: ColorType;
   addonColor?: ColorType;
   close: boolean;
-  css?: CSSType;
 }
 
 function getColor(theme: ThemeType, color?: ColorType) {
@@ -105,8 +104,6 @@ const Wrapper = styled.div<WrapperProps>`
       }
     ` : '')}
   }
-
-  ${({ css }) => css || ''}
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -118,25 +115,13 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   onClick?: () => void;
   /** 色の指定 */
   color?: ColorType;
-  /** カスタムCSS定義 */
-  css?: CSSType;
 }
 
-export default class Tag extends PureComponent<Props> {
-  static defaultProps = {
-    children: null,
-    onClose: null,
-    onClick: null,
-    color: null,
-  };
-
-  render() {
-    const { children, onClose, ...rest } = this.props;
-    return (
-      <Wrapper close={onClose !== null} {...rest}>
-        {children}
-        {onClose && (<a tabIndex={0} role="link" onClick={onClose}>&nbsp;</a>)}
-      </Wrapper>
-    );
-  }
+export default function Tag({ children, onClose, ...rest }: Props) {
+  return (
+    <Wrapper close={onClose !== null} {...rest}>
+      {children}
+      {onClose && (<a tabIndex={0} role="link" onClick={onClose}>&nbsp;</a>)}
+    </Wrapper>
+  );
 }
