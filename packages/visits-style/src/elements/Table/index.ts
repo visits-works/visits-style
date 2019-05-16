@@ -18,14 +18,12 @@ interface Props {
   full?: boolean;
   headerStyle?: any;
   bordered?: boolean;
-  borderless?: boolean;
   striped?: boolean;
   hover?: boolean;
 }
 
 const Table = styled.table<Props>`
-  display: block;
-  ${({ full }) => full ? css`width: 100%;` : ''}
+  ${({ full }) => (full ? css`width: 100%;` : undefined)}
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
@@ -36,22 +34,22 @@ const Table = styled.table<Props>`
   td, th {
     vertical-align: top;
     padding: 0.75rem;
-    ${({ theme, bordered }) => bordered ? css`
+    ${({ theme, bordered }) => (bordered ? css`
       border: 1px solid ${theme.border};
-    ` : ''}
+    ` : undefined)}
     border-width: 0 0 1px;
   }
 
   th { white-space: nowrap; }
 
-  ${({ striped }) => striped ? stripedStyle : ''}
-  ${({ hover }) => hover ? hoverStyle : ''}
+  ${({ striped }) => (striped ? stripedStyle : undefined)}
+  ${({ hover }) => (hover ? hoverStyle : undefined)}
 
-  ${({ headerStyle }) => headerStyle ? css`
+  ${({ headerStyle }) => (headerStyle ? css`
     th {
       ${headerStyle}
     }
-  ` : ''}
+  ` : undefined)}
 `;
 
 export default Table;
