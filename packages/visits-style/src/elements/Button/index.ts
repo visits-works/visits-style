@@ -33,18 +33,6 @@ function setColor({ theme, color, outline, disabled }: Props) {
       }
     `;
   }
-  if (color === 'text') {
-    return css`
-      background-color: transparent;
-      border-color: transparent;
-      color: ${theme.text};
-
-      &:hover{
-        text-decoration: underline;
-      }
-    `;
-  }
-
   const target = theme[color] || color;
   const invertColor = findColorInvert(theme, target);
   if (outline) {
@@ -58,7 +46,7 @@ function setColor({ theme, color, outline, disabled }: Props) {
         color: ${invertColor};
       }
 
-      &:focus {
+      &:focus:not(:active) {
         ${boxShadow('0.2rem', target, 0.2)}
       }
     `;
@@ -72,14 +60,14 @@ function setColor({ theme, color, outline, disabled }: Props) {
 
     &:hover {
       color: ${invertColor};
-      background-color: ${darken(0.025, target)};
-    }
-
-    &:active {
       background-color: ${darken(0.05, target)};
     }
 
-    &:focus {
+    &:active {
+      background-color: ${darken(0.085, target)};
+    }
+
+    &:focus:not(:active) {
       ${boxShadow('0.2rem', target, 0.2)}
     }
   `;
@@ -92,8 +80,6 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   size?: SizeType;
   /** 背景が透明なボタンでする */
   outline?: boolean;
-  /** 全体幅のボタンで設定 */
-  full?: boolean;
 }
 
 export default styled.button<ButtonProps>`
@@ -109,15 +95,18 @@ export default styled.button<ButtonProps>`
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.radius};
   padding: 0.375em 0.75em;
   line-height: 1.5;
 
-  transition-property: background-color, color, box-shadow;
+  transition-property: background-color, color, box-shadow, transform;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
 
+  &:active {
+    transform: scale(0.95);
+  }
+
   ${setColor}
   ${({ size }) => setSize('font-size', size)}
-  ${({ full }) => full ? 'width: 100%;' : ''}
 `;

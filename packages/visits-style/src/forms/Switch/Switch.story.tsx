@@ -1,12 +1,17 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { boolean, text } from '@storybook/addon-knobs';
 import Switch from '.';
 
 storiesOf('forms|Switch', module)
   .add('default', () => (
-    <div>
-      <Switch name="test1" value={1} />
-    </div>
+    <Switch
+      name="test1"
+      value={1}
+      showLabel={boolean('showLabel', false)}
+      background={text('background', '')}
+      anchorColor={text('anchorColor', '')}
+    />
   ))
   .add('label on', () => (
     <div>

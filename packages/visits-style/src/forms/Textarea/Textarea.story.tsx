@@ -1,16 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
-import Radio from '.';
+import Textarea from '.';
 
-storiesOf('forms|Radio', module)
+storiesOf('forms|Textarea', module)
   .add('default', () => (
-    <Radio
+    <Textarea
       name="test1"
-      value={1}
-      checked={boolean('checked', false)}
+      value={text('value', 'hello world')}
+      error={text('error', '')}
+      help={text('help', '')}
       disabled={boolean('disabled', false)}
-    >
-      {text('children', 'hello world')}
-    </Radio>
+    />
   ));

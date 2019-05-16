@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { CSSType } from '../types';
+import { CSSType } from '../../types';
 
 const Wrapper = styled.div<{ required?: boolean, css?: CSSType }>`
   display: block;
@@ -14,8 +14,6 @@ const Wrapper = styled.div<{ required?: boolean, css?: CSSType }>`
       margin-left: 0.325rem;
     }
   ` : {}}
-
-  ${({ css }) => css || {}}
 `;
 
 const Label = styled.label`
@@ -30,7 +28,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   required?: boolean;
   htmlFor?: string;
-  css?: CSSType;
 }
 
 export default class Field extends PureComponent<Props> {
