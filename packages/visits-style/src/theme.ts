@@ -12,6 +12,7 @@ const theme: ThemeType = {
     fullhd: '1344px',
   },
   radius: '4px',
+  animationTimeout: 200,
 
   primary: '#37B151',
   link: '#578ba9',
@@ -46,6 +47,7 @@ const theme: ThemeType = {
   borderActive: '#4a4a4a',
 
   placeholder: '#7a7a7a',
+  backdrop: 'rgba(10,10,10,0.25)',
   responsive: true,
 };
 

@@ -99,13 +99,9 @@ export default styled.button<ButtonProps>`
   padding: 0.375em 0.75em;
   line-height: 1.5;
 
-  transition-property: background-color, color, box-shadow, transform;
+  transition-property: background-color, color, box-shadow;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
-
-  &:active {
-    transform: scale(0.95);
-  }
 
   ${setColor}
   ${({ size }) => setSize('font-size', size)}
