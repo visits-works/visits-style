@@ -18,8 +18,7 @@
     "react-transition-group": "^4.0.1"
   },
   "scripts": {
-    "watch": "tsdx watch",
-    "build": "tsdx build && cp ./package.json ./dist/package.json",
+    "build": "rollup -c && cp ./package.json ./build/package.json",
     "lint": "eslint --ext .tsx,.ts src",
     "test": "jest test --env=jsdom",
     "compile": "tsc -d --emitDeclarationOnly --outDir ./build",

@@ -22,7 +22,7 @@ interface Props {
   hover?: boolean;
 }
 
-const Table = styled.table<Props>`
+export default styled.table<Props>`
   ${({ full }) => (full ? css`width: 100%;` : undefined)}
   max-width: 100%;
   margin-bottom: 1rem;
@@ -51,5 +51,3 @@ const Table = styled.table<Props>`
     }
   ` : undefined)}
 `;
-
-export default Table;

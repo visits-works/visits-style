@@ -7,7 +7,7 @@ import HelpMessage from '../HelpMessage';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
-  type: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
+  type?: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
   /** エラーの発生時の表示テキスト */
   error?: string | any;
   /** 捕捉テキスト */
@@ -21,22 +21,17 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function TextInput({
-  className, outline, error, style, help, leftIcon, rightIcon, ...rest
+  className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255, ...rest
 }: Props) {
   return (
     <Wrapper className={className} outline={outline} error={error} style={style}>
       {leftIcon && (<Icon>{leftIcon}</Icon>)}
       {rightIcon && (<Icon right>{rightIcon}</Icon>)}
-      <input {...rest} />
+      <input type={type} maxLength={maxLength} {...rest} />
       <HelpMessage help={help} error={error} />
     </Wrapper>
   );
 }
-TextInput.defaultProps = {
-  type: 'text',
-  value: '',
-  maxLength: 255,
-};
 
 const rightIcon = css`
   right: 0.375em;

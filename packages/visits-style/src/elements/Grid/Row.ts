@@ -1,6 +1,5 @@
-import styled, { css } from 'styled-components';
-import Col from './Col';
-import { mediaFullHD, mediaTablet } from '../../utils/media';
+import styled from 'styled-components';
+import { mediaTablet } from '../../utils/media';
 
 export default styled.div`
   display: flex;

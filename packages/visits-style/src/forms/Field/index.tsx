@@ -1,19 +1,18 @@
-import React, { PureComponent, ReactNode, HTMLAttributes } from 'react';
+import React, { ReactNode, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { CSSType } from '../../types';
 
-const Wrapper = styled.div<{ required?: boolean, css?: CSSType }>`
+const Wrapper = styled.div<{ required?: boolean }>`
   display: block;
   &:not(:last-child) {
     margin-bottom: 0.75rem;
   }
-  ${({ required, theme }) => required ? css`
+  ${({ required, theme }) => (required ? css`
     label::after {
       content: '*';
       color: ${theme.primary};
       margin-left: 0.325rem;
     }
-  ` : {}}
+  ` : undefined)}
 `;
 
 const Label = styled.label`
@@ -30,14 +29,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   htmlFor?: string;
 }
 
-export default class Field extends PureComponent<Props> {
-  render() {
-    const { label, children, htmlFor, ...rest } = this.props;
-    return (
-      <Wrapper {...rest}>
-        {label && (<Label htmlFor={htmlFor}>{label}</Label>)}
-        {children}
-      </Wrapper>
-    );
-  }
+export default function Field({ label, children, htmlFor, ...rest }: Props) {
+  return (
+    <Wrapper {...rest}>
+      {label && (<Label htmlFor={htmlFor}>{label}</Label>)}
+      {children}
+    </Wrapper>
+  );
 }

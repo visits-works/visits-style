@@ -65,7 +65,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Card({
-  image, title, children, horizontal, footer, color, style, ...rest
+  image, title, children, horizontal, footer, color, style = {}, ...rest
 }: Props) {
   const header = useMemo(() => {
     if (image && !horizontal) return (<CardImage><img src={image} alt="" /></CardImage>);
@@ -89,9 +89,6 @@ export default function Card({
     </Box>
   );
 }
-Card.defaultProps = {
-  style: {},
-};
 
 // export default class Card extends PureComponent<Props> {
 //   renderHeader = () => {

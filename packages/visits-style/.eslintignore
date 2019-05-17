@@ -3,3 +3,5 @@ node_modules/*
 **/__test__/**
 *.story.tsx
 *.test.tsx
+build/*
+dist/*

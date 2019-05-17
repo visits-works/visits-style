@@ -41,16 +41,9 @@ function setResponsive({ fluid }: Props): any {
     }
   `;
 }
-
-const Container = styled.div<Props>`
+export default styled.div<Props>`
   position: relative;
   width: 100%;
 
   ${setResponsive}
 `;
-Container.displayName = 'Container';
-Container.defaultProps = {
-  fluid: false,
-};
-
-export default Container;

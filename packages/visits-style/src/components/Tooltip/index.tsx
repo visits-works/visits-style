@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import { ColorType, CSSType } from '../../types';
+import { ColorType } from '../../types';
 
 interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
@@ -13,7 +13,7 @@ interface TooltipProps {
   position?: 'top' | 'left' | 'right' | 'bottom';
 }
 
-export default function Tooltip({ children, position, label, ...rest }: TooltipProps) {
+export default function Tooltip({ children, position = 'bottom', label, color, ...rest }: TooltipProps) {
   const parent = useRef<HTMLDivElement | null>(null);
   const tooltip = useRef<HTMLDivElement | null>(null);
 
@@ -68,6 +68,7 @@ export default function Tooltip({ children, position, label, ...rest }: TooltipP
         ref={tooltip}
         show={show}
         role="tooltip"
+        color={color}
         style={tooltipStyle}
       >
         {label}
@@ -75,17 +76,13 @@ export default function Tooltip({ children, position, label, ...rest }: TooltipP
     </Wrapper>
   );
 }
-Tooltip.defaultProps = {
-  position: 'bottom',
-  color: 'dark',
-};
 
-const Wrapper = styled.div<{ css?: CSSType }>`
+const Wrapper = styled.div`
   position: relative;
   display: inline-block;
 `;
 
-const TooltipWrapper = styled.div<{ show?: boolean }>`
+const TooltipWrapper = styled.div<{ show?: boolean, color?: ColorType }>`
   position: absolute;
   clear: both;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -105,6 +102,8 @@ const TooltipWrapper = styled.div<{ show?: boolean }>`
   transition-property: transform, opacity, visibility;
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  background-color: ${({ color, theme }) => theme[color] || 'white'};
 
   ${({ show }) => show && css`
     transform: scale(1);

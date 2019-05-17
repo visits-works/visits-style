@@ -20,10 +20,6 @@ export default function Textarea({ className, help, error, style, ...rest }: Pro
     </Wrapper>
   );
 }
-Textarea.defaltProps = {
-  col: 2,
-  row: 5,
-};
 
 const Wrapper = styled.span<{ error?: boolean }>`
   display: block;

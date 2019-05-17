@@ -29,6 +29,6 @@
   },
   "exclude": [
     "**/__test__/**",
-    "**.story.tsx"
+    "**/**.story.tsx"
   ]
 }

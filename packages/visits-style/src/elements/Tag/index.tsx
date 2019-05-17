@@ -1,6 +1,8 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
+import TextButton from '../Button/TextButton';
+import Close from '../Icons/Close';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType, ThemeType } from '../../types';
 
@@ -13,6 +15,25 @@ interface WrapperProps {
 function getColor(theme: ThemeType, color?: ColorType) {
   return (!color || color === 'light') ? theme.background : theme[color];
 }
+
+const closeCss = css`
+  padding-right: 0;
+
+  ${TextButton} {
+    color: inherit;
+    height: 100%;
+    margin-left: 0.25rem;
+
+    svg {
+      width: 50%;
+      height: 50%;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.15);
+    }
+  }
+`;
 
 const Wrapper = styled.div<WrapperProps>`
   display: inline-flex;
@@ -52,7 +73,7 @@ const Wrapper = styled.div<WrapperProps>`
     margin-right: 0.5rem;
   }
 
-  a, span {
+  span {
     position: relative;
     display: inline-flex;
     flex-grow: 0;
@@ -73,34 +94,9 @@ const Wrapper = styled.div<WrapperProps>`
     &:focus {
       outline: none;
     }
-
-    ${props => (props.close ? css`
-      &:before, &:after {
-        background-color: currentColor;
-        content: "";
-        display: block;
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%) rotate(45deg);
-        transform-origin: center center;
-      }
-
-      &:before {
-        height: 1px;
-        width: 50%;
-      }
-
-      &:after {
-        height: 50%;
-        width: 1px;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    ` : '')}
   }
+
+  ${({ close }) => (close ? closeCss : undefined)}
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -120,7 +116,7 @@ export default function Tag({ children, onClose, ...rest }: Props) {
   return (
     <Wrapper close={!!onClose} {...rest}>
       {children}
-      {onClose && (<a tabIndex={0} role="link" onClick={onClose}>&nbsp;</a>)}
+      {onClose && (<TextButton onClick={onClose}><Close /></TextButton>)}
     </Wrapper>
   );
 }

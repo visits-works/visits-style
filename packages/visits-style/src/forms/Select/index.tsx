@@ -22,7 +22,7 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export default function Select({
-  options, placeholder, render, help, error, className, inputSize, outline,
+  options = [], placeholder, render, help, error, className, inputSize, outline,
   ...rest
 }: Props) {
   const list = useMemo(() => options.map(item => (
@@ -47,9 +47,6 @@ export default function Select({
     </InputWrapper>
   );
 }
-Select.defaultProps = {
-  options: [],
-};
 
 const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: boolean }>`
   position: relative;

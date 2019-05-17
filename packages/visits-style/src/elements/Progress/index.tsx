@@ -16,10 +16,10 @@ interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   color?: ColorType;
 }
 
-export default function Progress({ value, max, ...rest }: ProgressProps) {
+export default function Progress({ value, max, color = 'primary', ...rest }: ProgressProps) {
   const percent = useMemo(() => Math.round((value / max) * 100), [value, max]);
   return (
-    <Wrapper {...rest}>
+    <Wrapper color={color} {...rest}>
       <div
         role="progressbar"
         className={value !== max ? 'in-progress' : undefined}
@@ -28,9 +28,6 @@ export default function Progress({ value, max, ...rest }: ProgressProps) {
     </Wrapper>
   );
 }
-Progress.defaultProps = {
-  color: 'primary',
-};
 
 const Wrapper = styled.div<ProgressProps>`
   position: relative;

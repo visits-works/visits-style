@@ -7,17 +7,17 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   show: boolean;
   timeout?: number;
 }
-export default function Accordion({ header, show, children, timeout, ...rest }: Props) {
+export default function Accordion({ header, show, children, timeout = 300, ...rest }: Props) {
   return (
     <div {...rest}>
       {header}
       <Transition
-        timeout={timeout!}
+        timeout={timeout}
         in={show}
         unmountOnExit
       >
         {state => (
-          <AnimatedContent className={state} timeout={timeout!}>
+          <AnimatedContent className={state} timeout={timeout}>
             {children}
           </AnimatedContent>
         )}
@@ -25,9 +25,6 @@ export default function Accordion({ header, show, children, timeout, ...rest }: 
     </div>
   );
 }
-Accordion.defaultProps = {
-  timeout: 300,
-};
 
 const AnimatedContent = styled.div`
   transform-origin: top;

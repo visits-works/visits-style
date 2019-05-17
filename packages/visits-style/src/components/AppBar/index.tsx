@@ -71,9 +71,11 @@ function setColor(
 }
 
 const NavBar = styled.header<Props>`
-  position: ${
-    ({ fixed, sticky }) => (!(sticky || fixed) ? 'relative' : (fixed ? 'fixed' : 'sticky'))
-  };
+  position: ${({ fixed, sticky }) => {
+    if (sticky) return 'sticky';
+    if (fixed) return 'fixed';
+    return 'relative';
+  }};
   display: flex;
   top: -1px;
   min-height: 3.25rem;
@@ -95,7 +97,7 @@ const NavBar = styled.header<Props>`
   a { color: inherit; }
 
   ${mediaTablet} {
-    padding: ${({ fluid }) => fluid ? '0 0.5rem' : '0 3%'};
+    padding: ${({ fluid }) => (fluid ? '0 0.5rem' : '0 3%')};
   }
 `;
 

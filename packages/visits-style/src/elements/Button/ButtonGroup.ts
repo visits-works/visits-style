@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '.';
 
-const ButtonGroup = styled.div`
+export default styled.div`
   display: inline-block;
 
   &:not(:last-child) {
@@ -27,6 +27,3 @@ const ButtonGroup = styled.div`
     }
   }
 `;
-ButtonGroup.displayName = 'ButtonGroup';
-
-export default ButtonGroup;

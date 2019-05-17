@@ -67,8 +67,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Modal({
-  show, children, timeout,
-  color, closeModal, external,
+  show, children, timeout = 200,
+  color = 'white', closeModal, external,
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
@@ -95,7 +95,3 @@ export default function Modal({
     </Transition>
   );
 }
-Modal.defaultProps = {
-  color: 'white',
-  timeout: 200,
-};
