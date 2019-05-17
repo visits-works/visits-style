@@ -19,7 +19,12 @@ storiesOf('elements|Icons', module)
     <Wrapper>
       {Object.keys(Icons).map((name) => {
         const Icon = Icons[name];
-        return <li><Icon /><small>{name}</small></li>;
+        return (
+          <li key={name}>
+            <Icon />
+            <small>{name}</small>
+          </li>
+        );
       })}
     </Wrapper>
   ));

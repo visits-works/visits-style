@@ -65,6 +65,10 @@ class ToastDemo extends Component<{ position: string, fixed: boolean }> {
 
 const positionList = ['top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
 
+// function ToastDemo() {
+
+// }
+
 storiesOf('components|Toast', module)
   .add('default', () => (
     <ToastDemo

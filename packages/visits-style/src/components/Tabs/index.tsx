@@ -11,7 +11,7 @@ const Wrapper = styled.nav`
   .tab-content {
     position: relative;
     display: flex;
-    ${({ align }) => align ? '' : 'flex-grow: 1;'}
+    ${({ align }) => (align ? '' : 'flex-grow: 1;')}
     align-items: center;
     justify-content: center;
     overflow: hidden;

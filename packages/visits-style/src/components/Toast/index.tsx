@@ -80,7 +80,9 @@ const Wrapper = styled(Box)`
 function ToastItem({ color, message, duration, clear }: ToastProps) {
   useEffect(() => {
     const timeout = setTimeout(clear, duration);
-    return () => clearTimeout(timeout);
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
   }, [clear, duration]);
 
   return (
@@ -116,8 +118,30 @@ export default function Toast({ toasts, clear }: ContainerProps) {
   if (!element.current) return null;
 
   return createPortal((
-    toasts.map(props => (
-      <ToastItem key={props.id} {...props} clear={clearItem(props.id)} />
-    ))
+    <Container>
+      {toasts.map(props => (
+        <ToastItem key={props.id} {...props} clear={clearItem(props.id)} />
+      ))}
+    </Container>
   ), element.current);
 }
+
+const Container = styled.div<ContainerProps>`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+
+  ${({ position }) => {
+    switch (position) {
+      case 'bottom': {
+        return { bottom: '1rem', left: '50%', alignItem: 'center', transform: 'translateX(-50%)' };
+      }
+
+      case 'top-right':
+      default: {
+        return { top: '1rem', right: '1rem', alignItem: 'flex-end' };
+      }
+    }
+  }}
+`;
