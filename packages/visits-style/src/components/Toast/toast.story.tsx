@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, boolean } from '@storybook/addon-knobs';
 import Toast from '.';
-import Button from '../Button';
+import Button from '../../elements/Button';
 
 class ToastDemo extends Component<{ position: string, fixed: boolean }> {
   state = { list: [], position: 'top-left' };
@@ -22,10 +22,11 @@ class ToastDemo extends Component<{ position: string, fixed: boolean }> {
       list.push({
         id, color,
         message: <span>looooooooooooooooooooooooooooooong list number: {list.length}</span>,
+        duration: 2000,
       });
     } else {
       // @ts-ignore
-      list.push({ id, color, message: `list number: ${list.length}` });
+      list.push({ id, color, message: `list number: ${list.length}`, clearOnClick: true, duration: 3000 });
     }
     this.setState({ list });
   }
@@ -64,6 +65,10 @@ class ToastDemo extends Component<{ position: string, fixed: boolean }> {
 }
 
 const positionList = ['top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
+
+// function ToastDemo() {
+
+// }
 
 storiesOf('components|Toast', module)
   .add('default', () => (

@@ -1,9 +1,8 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import Box, { Props as BoxProps } from '../Box';
-import { CSSType } from '../../types';
+import Box from '../../elements/Box';
 
-interface Props extends BoxProps {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
   label: React.ReactNode;
   /** 内容のリスト */
@@ -14,7 +13,7 @@ interface Props extends BoxProps {
   position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 }
 
-export default function Popover({ position, label, children, ...rest }: Props) {
+export default function Popover({ position, label, children, color = 'white', ...rest }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
   const tooltip = useRef<HTMLDivElement | null>(null);
 
@@ -80,6 +79,7 @@ export default function Popover({ position, label, children, ...rest }: Props) {
         role="tooltip"
         ref={tooltip}
         style={tooltipStyle}
+        color={color}
         {...rest}
       >
         {children}
@@ -88,11 +88,7 @@ export default function Popover({ position, label, children, ...rest }: Props) {
   );
 }
 
-Popover.defaultProps = {
-  color: 'white',
-};
-
-const Wrapper = styled.div<{ css?: CSSType }>`
+const Wrapper = styled.div`
   display: block;
   outline: none;
   color: inherit;

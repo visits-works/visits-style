@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Modal from '.';
-import Button from '../Button';
+import Button from '../../elements/Button';
+import TextButton from '../../elements/Button/TextButton';
 
 const CloseButton: any = {
   position: 'absolute',
@@ -14,76 +15,104 @@ const CloseButton: any = {
 
 storiesOf('components|Modal', module)
   .add('default', () => (
-    <Modal
-      title={(
+    <div>
+      <div>
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+      </div>
+      <Modal
+        closeModal={action('close')}
+        style={{ padding: '1rem' }}
+        show={boolean('show', true)}
+        timeout={number('timeout', 200)}
+        closeOnOverlay={boolean('close with overlay click', true)}
+      >
         <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
           <h3>Modal Title</h3>
-          <a style={CloseButton}>X</a>
+          <TextButton style={CloseButton}>X</TextButton>
         </header>
-      )}
-      // @ts-ignore
-      size={number('size', 4)}
-      closeModal={action('close')}
-      footer={(
-        <Button color="primary">Save changes</Button>
-      )}
-      style={{ padding: '1rem' }}
-      show={boolean('show', true)}
-      closeOnOverlay={boolean('close with overlay click', true)}
-    >
-      Modal body text goes here.
-    </Modal>
+        <section>
+          Modal body text goes here.
+        </section>
+        <footer>
+          <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+        </footer>
+      </Modal>
+      <div>
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+        awoginawoginwaeg'<br />
+      </div>
+    </div>
   ))
   .add('onScroll', () => (
     <Modal
-      title={(
-        <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-          <h3>Modal Title</h3>
-          <a style={CloseButton}>X</a>
-        </header>
-      )}
-      // @ts-ignore
-      size={number('size', 4)}
       closeModal={action('close')}
-      footer={(
-        <Button color="primary">Save changes</Button>
-      )}
       style={{ padding: '1rem' }}
       show={boolean('show', true)}
+      timeout={number('timeout', 200)}
       closeOnOverlay={boolean('close with overlay click', true)}
     >
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
-      Modal body text goes here.<br />
+      <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+        <h3>Modal Title</h3>
+        <TextButton style={CloseButton}>X</TextButton>
+      </header>
+      <section>
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+        Modal body text goes here.<br />
+      </section>
+      <footer>
+        <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+      </footer>
     </Modal>
   ));
 

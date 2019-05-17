@@ -1,64 +1,53 @@
 import React, { HTMLAttributes } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  show: boolean;
   header: any;
+  show: boolean;
+  timeout?: number;
 }
-
-export default function Accordion({ header, show, children, ...rest }: Props) {
+export default function Accordion({ header, show, children, timeout = 300, ...rest }: Props) {
   return (
-    <Wrapper {...rest}>
+    <div {...rest}>
       {header}
-      <CSSTransition
-        classNames={{
-          enter: 'collapsed',
-          enterActive: 'collapsing',
-          exit: 'expanded',
-          exitActive: 'expanding',
-        }}
-        timeout={300}
+      <Transition
+        timeout={timeout}
         in={show}
         unmountOnExit
       >
-        <div className="__content">
-          {children}
-        </div>
-      </CSSTransition>
-    </Wrapper>
+        {state => (
+          <AnimatedContent className={state} timeout={timeout}>
+            {children}
+          </AnimatedContent>
+        )}
+      </Transition>
+    </div>
   );
 }
 
-const Wrapper = styled.div`
-  & > .__content {
-    transform-origin: top;
-    will-change: transform, max-height;
-    transition-property: transform, max-height;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-    height: auto;
-    overflow: hidden;
-    max-height: auto;
+const AnimatedContent = styled.div`
+  transform-origin: top;
+  will-change: transform, max-height;
+  transition-property: transform, max-height;
+  transition-duration: ${({ timeout }) => timeout}ms;
+  transition-timing-function: ease-in-out;
+  height: auto;
+  overflow: hidden;
+  max-height: auto;
 
-    &.collapsed {
-      max-height: 0;
-      transform: scaleY(0);
-    }
+  &.entering {
+    max-height: 0;
+    transform: scaleY(0);
+  }
 
-    &.collapsing {
-      max-height: 15rem;
-      transform: scaleY(1);
-    }
+  &.entered {
+    max-height: 15rem;
+    transform: scaleY(1);
+  }
 
-    &.expanded {
-      max-height: 15rem;
-      transform: scaleY(1);
-    }
-
-    &.expanding {
-      max-height: 0px;
-      transform: scaleY(0);
-    }
+  &.exiting {
+    max-height: 0px;
+    transform: scaleY(0);
   }
 `;

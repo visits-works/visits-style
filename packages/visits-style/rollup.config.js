@@ -51,10 +51,7 @@ export default {
   ],
   plugins: [
     resolve({
-      mainFields: [
-        'module',
-        'main',
-      ].filter(Boolean),
+      mainFields: ['module', 'main'],
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
     commonjs({

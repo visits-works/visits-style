@@ -1,15 +1,15 @@
-import React, { Component, PureComponent } from 'react';
-import { createPortal } from 'react-dom';
-import CSSTransition from 'react-transition-group/CSSTransition';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
+import React, { useEffect, HTMLAttributes, useCallback } from 'react';
+// import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import { Transition } from 'react-transition-group';
 
-import Box from '../Box';
+import Close from '../../elements/Icons/Close';
+import Box from '../../elements/Box';
 import { ColorType } from '../../types';
 
 type PositionType = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right';
 
-interface ToastType {
+interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   /** 認識ID */
   id: string;
   /** 表示する内容 */
@@ -17,14 +17,13 @@ interface ToastType {
   /** 背景の色 */
   color?: ColorType;
   /** 表示される時間 nullの場合は自動で閉じられません */
-  duration?: number | null;
-}
-
-interface ToastProps extends ToastType {
-  clear: () => void;
+  duration: number | null;
+  /** 押したら閉じられる */
+  clearOnClick?: boolean;
 }
 
 const Wrapper = styled(Box)`
+  position: relative;
   padding: 0.375em 0.75em;
   max-width: 100%;
   margin-bottom: 1rem;
@@ -35,147 +34,141 @@ const Wrapper = styled(Box)`
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-duration: 250ms;
 
-  &.move-enter {
+  &.entering {
     opacity: 0.01;
     transform: scale(0.8);
   }
-  &.move-enter-active {
+  &.entered {
     opacity: 1;
     transform: scale(1);
   }
-  &.move-exit {
-    opacity: 1;
-    transform: scale(1);
-  }
-  &.move-exit-active {
+  &.exiting {
     opacity: 0.01;
     transform: scale(0.8);
+  }
+
+  ${({ clear }) => (clear ? { paddingRight: '2.25rem' } : undefined)}
+`;
+
+const ClearButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  width: 2rem;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &:hover {
+    background: rgba(0,0,0,0.15);
   }
 `;
 
-export class ToastItem extends PureComponent<ToastProps> {
-  static defaultProps = {
-    duration: 5000,
-  };
+function ToastItem(
+  {
+    color, message, duration = 5000, clear, clearOnClick, id, ...rest
+  }: ToastProps & { clear: (id: string) => void },
+) {
+  const onClear = useCallback(() => clear(id), [clear, id]);
 
-  componentDidMount() {
-    if (this.props.duration !== null) {
-      setTimeout(this.props.clear, this.props.duration);
-    }
-  }
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    if (duration) timeout = setTimeout(onClear, duration);
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  // eslint-disable-next-line
+  }, []);
 
-  render() {
-    const { message, color } = this.props;
-    return (
-      <Wrapper borderless color={color}>
-        {message}
-      </Wrapper>
-    );
-  }
+  return (
+    <Transition
+      timeout={250}
+      in
+      unmountOnExit
+    >
+      {state => (
+        <Wrapper className={state} borderless color={color} clear={clearOnClick} {...rest}>
+          {message}
+          {clearOnClick && <ClearButton onClick={onClear}><Close /></ClearButton>}
+        </Wrapper>
+      )}
+    </Transition>
+  );
 }
 
-function setPosition(position: string, isFixed?: boolean) {
-  // tslint:disable-next-line
-  const base = `position: ${isFixed ? 'fixed' : 'absolute'}; z-index: 9999; display: flex; flex-direction: column; `;
-  switch (position) {
-    case 'bottom': {
-      return `${base} bottom: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
-    }
-    case 'bottom-left': {
-      return `${base} bottom: 1rem; left: 1rem; align-item: flex-start;`;
-    }
-    case 'bottom-right': {
-      return `${base} bottom: 1rem; right: 1rem; align-item: flex-end;`;
-    }
-    case 'top': {
-      return `${base} top: 1rem; left: 50%; align-item: center; transform: translateX(-50%);`;
-    }
-    case 'top-left': {
-      return `${base} top: 1rem; left: 1rem; align-item: flex-start;`;
-    }
-    case 'top-right':
-    default: {
-      return `${base} top: 1rem; right: 1rem; align-item: flex-end;`;
-    }
-  }
-}
-
-interface ContainerProps {
+interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   /** 表示するToastのリスト */
-  toasts: ToastType[];
+  toasts: ToastProps[];
   /** toastを消すタイミングのコールバック */
   clear: (id: string) => void;
   /** top, top-right, top-left, bottom, bottom-right, bottom-left */
   position?: PositionType;
+  /** margin */
+  margin?: string;
   /** スクロールしても固定として表示する */
   fixed?: boolean;
 }
 
-export default class ToastContainer extends Component<ContainerProps> {
-  static defaultProps = {
-    toasts: [],
-    position: 'top-right',
-    fixed: false,
-  };
+export default function Toast({ toasts, clear, fixed, style, margin = '1rem', ...rest }: ContainerProps) {
+  // const element = useRef<HTMLDivElement | null>(null);
 
-  shouldComponentUpdate(props: ContainerProps) {
-    return props.toasts.length !== this.props.toasts.length ||
-      props.position !== this.props.position;
-  }
+  // useLayoutEffect(() => {
+  //   if (!element.current) element.current = document.createElement('div');
+  //   document.body.appendChild(element.current);
+  //   return () => {
+  //     if (element.current) document.body.removeChild(element.current);
+  //   };
+  // }, []);
 
-  componentDidUpdate(props: ContainerProps) {
-    if (
-      this.element &&
-      (props.position !== this.props.position || props.fixed !== this.props.fixed)
-    ) {
-      this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.element) document.body.removeChild(this.element);
-  }
-
-  clear = (id: string) => () => {
-    this.props.clear(id);
-  }
-
-  renderToast = () => {
-    const { toasts } = this.props;
-    return (
-      <TransitionGroup component={null}>
-        {toasts.map(props => (
-          <CSSTransition
-            key={props.id}
-            timeout={250}
-            classNames="move"
-            unmountOnExit
-          >
-            <ToastItem
-              key={props.id}
-              {...props}
-              clear={this.clear(props.id)}
-            />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
-    );
-  }
-
-  element?: HTMLDivElement;
-
-  render(): React.ReactPortal | null {
-    if (typeof document !== 'undefined' && !this.element) {
-      this.element = document.createElement('div');
-      this.element.style.cssText = setPosition(this.props.position!, this.props.fixed);
-      document.body.appendChild(this.element);
-    }
-
-
-    if (this.element) {
-      return createPortal(this.renderToast(), this.element);
-    }
-    return null;
-  }
+  return (
+    <Container
+      {...rest}
+      margin={margin}
+      style={{ position: fixed ? 'fixed' : 'absolute', ...style }}
+    >
+      {toasts.map(props => (
+        <ToastItem
+          {...props}
+          key={props.id}
+          clear={clear}
+        />
+      ))}
+    </Container>
+  );
 }
 
+const Container = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+
+  ${({ position, margin }) => {
+    switch (position) {
+      case 'bottom': {
+        return { bottom: margin, left: '50%', alignItems: 'center', transform: 'translateX(-50%)' };
+      }
+      case 'bottom-left': {
+        return { bottom: margin, left: margin, alignItems: 'flex-start' };
+      }
+      case 'bottom-right': {
+        return { bottom: margin, right: margin, alignItems: 'flex-end' };
+      }
+      case 'top': {
+        return { top: margin, left: '50%', alignItems: 'center', transform: 'translateX(-50%)' };
+      }
+      case 'top-right':
+      default: {
+        return { top: margin, right: margin, alignItems: 'flex-end' };
+      }
+    }
+  }}
+`;

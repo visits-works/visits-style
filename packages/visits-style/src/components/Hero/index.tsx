@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import Container from '../Grid/Container';
+import Container from '../../elements/Grid/Container';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType, ThemeType, SizeType } from '../../types';
 
@@ -17,46 +17,13 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   header?: React.ReactElement<any>;
 }
 
-function setColor({ color, theme }: { color?: ColorType, theme: ThemeType }) {
-  if (!color) return '';
-
-  const target = theme[color] || color;
-  const invertColor = findColorInvert(theme, target);
-  return css`background-color: ${target}; color: ${invertColor};`;
-}
-
-function setSize({ size }: { size?: SizeType | 'full', theme: ThemeType }) {
-  if (!size || size === 'small') return '';
-
-  switch (size) {
-    case 'medium' :
-      return css`padding-bottom: 9rem; padding-top: 9rem;`;
-    case 'large' :
-      return css`padding-bottom: 18rem; padding-top: 18rem;`;
-    case 'full' :
-      return css`
-        min-height: 100vh;
-
-        ${Body} {
-          align-items: center;
-          display: flex;
-        }
-      `;
-    default:
-      return '';
-  }
-}
-
-interface BodyProps {
-  center?: boolean;
-}
-
 const Body = styled.div<BodyProps>`
   flex-grow: 1;
   flex-shrink: 0;
+  width: 100%;
   padding: 3rem 1.5rem;
 
-  ${({ center }) => center ? 'text-align: center;' : ''}
+  ${({ center }) => (center ? 'text-align: center;' : '')}
 
   h1 {
     font-size: 2rem;
@@ -79,6 +46,39 @@ const Body = styled.div<BodyProps>`
   }
 `;
 
+function setColor({ color, theme }: { color?: ColorType, theme: ThemeType }) {
+  if (!color) return '';
+
+  const target = theme[color] || color;
+  const invertColor = findColorInvert(theme, target);
+  return css`background-color: ${target}; color: ${invertColor};`;
+}
+
+function setSize({ size }: { size?: SizeType | 'full', theme: ThemeType }) {
+  if (!size || size === 'small') return '';
+
+  switch (size) {
+    case 'medium':
+      return css`padding-bottom: 9rem; padding-top: 9rem;`;
+    case 'large':
+      return css`padding-bottom: 18rem; padding-top: 18rem;`;
+    case 'full':
+      return css`
+        min-height: 100vh;
+        ${Body} {
+          align-items: center;
+          display: flex;
+        }
+      `;
+    default:
+      return '';
+  }
+}
+
+interface BodyProps {
+  center?: boolean;
+}
+
 interface WrapperProps {
   color?: ColorType;
   size?: SizeType | 'full';
@@ -89,6 +89,7 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
   ${setColor}
   ${setSize}
 
@@ -97,7 +98,7 @@ const Wrapper = styled.div<WrapperProps>`
     color: inherit;
   }
 
-  header+${Body} {
+  header + ${Body} {
     margin-top: 3.25rem;
     margin-bottom: 3.25rem;
   }
