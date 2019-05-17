@@ -5,7 +5,6 @@ export * from '../forms';
 // components
 export { default as Accordion } from './Accordion';
 export { default as AppBar } from './AppBar';
-export { default as Tag } from './Tag';
 export { default as Hero } from './Hero';
 export { default as Tooltip } from './Tooltip';
 export * from './SideMenu';

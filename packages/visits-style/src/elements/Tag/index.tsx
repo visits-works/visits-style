@@ -1,8 +1,8 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import darken from 'polished/lib/color/darken';
+import { darken } from 'polished';
 import findColorInvert from '../../utils/findColorInvert';
-import { ColorType, ThemeType, CSSType } from '../../types';
+import { ColorType, ThemeType } from '../../types';
 
 interface WrapperProps {
   color?: ColorType;
@@ -14,42 +14,39 @@ function getColor(theme: ThemeType, color?: ColorType) {
   return (!color || color === 'light') ? theme.background : theme[color];
 }
 
-function setColor({ theme, color, addonColor }:
-    { theme: ThemeType, color?: ColorType, addonColor?: ColorType }) {
-  const target = getColor(theme, color);
-  const invertColor = findColorInvert(theme, target);
-
-  const subColor = addonColor ? getColor(theme, addonColor) : darken(0.05, target);
-
-  return css`
-    color: ${invertColor};
-    background-color: ${target};
-
-    a, span {
-      color: ${invertColor};
-      background-color: ${subColor};
-    }
-
-    a:hover {
-      background-color: ${darken(0.05, subColor)};
-    }
-  `;
-}
-
 const Wrapper = styled.div<WrapperProps>`
   display: inline-flex;
   font-size: 0.75rem;
   cursor: default;
-  padding: 0 .5rem;
-  height: 2em;
+  padding: 0 0.5rem;
+  height: 1.5rem;
   user-select: none;
-  border-radius: 3px;
+  border-radius: ${({ theme, round }) => (round ? '50rem' : theme.radius)};
   justify-content: center;
   align-items: center;
   white-space: nowrap;
   line-height: 1.5;
 
-  ${setColor}
+  ${({ color, theme, addonColor }) => {
+    const target = getColor(theme, color);
+    const invertColor = findColorInvert(theme, target);
+
+    const subColor = addonColor ? getColor(theme, addonColor) : darken(0.05, target);
+
+    return css`
+      color: ${invertColor};
+      background-color: ${target};
+
+      a, span {
+        color: ${invertColor};
+        background-color: ${subColor};
+      }
+
+      a:hover {
+        background-color: ${darken(0.05, subColor)};
+      }
+    `;
+  }}
 
   &:not(:last-child) {
     margin-right: 0.5rem;
@@ -69,8 +66,8 @@ const Wrapper = styled.div<WrapperProps>`
     align-items: center;
 
     &:last-child {
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
+      border-top-right-radius: ${({ theme }) => theme.radius};
+      border-bottom-right-radius: ${({ theme }) => theme.radius};
     }
 
     &:focus {
@@ -115,11 +112,13 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   onClick?: () => void;
   /** 色の指定 */
   color?: ColorType;
+  /** 丸くする */
+  round?: boolean;
 }
 
 export default function Tag({ children, onClose, ...rest }: Props) {
   return (
-    <Wrapper close={onClose !== null} {...rest}>
+    <Wrapper close={!!onClose} {...rest}>
       {children}
       {onClose && (<a tabIndex={0} role="link" onClick={onClose}>&nbsp;</a>)}
     </Wrapper>
