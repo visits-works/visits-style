@@ -5,10 +5,8 @@ import { ColorType, ThemeType } from '../../types';
 interface Props extends HTMLAttributes<HTMLDivElement>{
   /** 色の指定 */
   color?: ColorType;
-  /** 横幅 */
-  width?: string;
-  /** 縦幅 */
-  height?: string;
+  /** サイズ */
+  size?: string;
   /** spinnerの太さ */
   borderSize?: string;
 }
@@ -34,8 +32,8 @@ const spin = keyframes`
 
 const Spinner = styled.div<Props>`
   display: inline-block;
-  width: ${({ width }) => width ? width : '100%'};
-  height: ${({ height }) => height ? height : '100%'};
+  width: ${({ size }) => (size || '100%')};
+  height: ${({ size }) => (size || '100%')};
   margin: 0;
   padding: 0;
   position: relative;
@@ -54,9 +52,8 @@ const Spinner = styled.div<Props>`
     position: absolute;
   }
 `;
-Spinner.displayName = 'Spinner';
 Spinner.defaultProps = {
   borderSize: '2px',
-}
+};
 
 export default Spinner;

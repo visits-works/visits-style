@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useLayoutEffect, useEffect } from 'react';
+import React, { useCallback, useRef, useLayoutEffect, useEffect, HTMLAttributes } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -90,7 +90,7 @@ function ToastItem({ color, message, duration, clear }: ToastProps) {
   );
 }
 
-interface ContainerProps {
+interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   /** 表示するToastのリスト */
   toasts: ToastType[];
   /** toastを消すタイミングのコールバック */
@@ -102,15 +102,18 @@ interface ContainerProps {
 }
 
 export default function Toast({ toasts, clear }: ContainerProps) {
-  const element = useRef(document.createElement('div'));
+  const element = useRef<HTMLDivElement | null>(null);
   const clearItem = useCallback((id: string) => () => clear(id), [clear]);
 
   useLayoutEffect(() => {
+    if (!element.current) element.current = document.createElement('div');
     document.body.appendChild(element.current);
     return () => {
-      document.body.removeChild(element.current);
+      if (element.current) document.body.removeChild(element.current);
     };
   }, []);
+
+  if (!element.current) return null;
 
   return createPortal((
     toasts.map(props => (

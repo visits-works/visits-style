@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useEffect } from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 import Box from '../../elements/Box';
