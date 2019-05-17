@@ -11,3 +11,4 @@ export { default as IconRefresh } from './Refresh';
 export { default as IconPlus } from './Plus';
 export { default as IconChevronDown } from './ChevronDown';
 export { default as IconCamera } from './Camera';
+export { default as IconShare } from './Share';
