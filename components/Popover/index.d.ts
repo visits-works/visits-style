@@ -1,7 +1,5 @@
-import React, { PureComponent, RefObject } from 'react';
-import { Props as BoxProps } from '../Box';
-import { CSSType } from '../../types';
-interface Props extends BoxProps {
+import React, { HTMLAttributes } from 'react';
+interface Props extends HTMLAttributes<HTMLDivElement> {
     /** ボタンの内容 */
     label: React.ReactNode;
     /** 内容のリスト */
@@ -10,26 +8,6 @@ interface Props extends BoxProps {
     right?: boolean;
     /** 吹き出しが表示される場所 */
     position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
-    /** カスタムCSS定義 */
-    css?: CSSType;
 }
-interface State {
-    show: boolean;
-    style: any;
-}
-export default class Popover extends PureComponent<Props, State> {
-    static defaultProps: {
-        color: string;
-        style: {};
-    };
-    state: {
-        show: boolean;
-        style: {};
-    };
-    openDropdown: () => void;
-    closeDropdown: () => void;
-    tooltip: RefObject<HTMLDivElement>;
-    wrapper: RefObject<HTMLDivElement>;
-    render(): JSX.Element;
-}
+export default function Popover({ position, label, children, color, ...rest }: Props): JSX.Element;
 export {};

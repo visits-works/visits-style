@@ -1,5 +1,5 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
-import { ColorType, CSSType } from '../../types';
+import React, { HTMLAttributes } from 'react';
+import { ColorType } from '../../types';
 interface Props extends HTMLAttributes<HTMLDivElement> {
     /** background色 */
     color?: ColorType;
@@ -15,25 +15,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     backdrop?: boolean;
     /** childrenに定義するElementの並び順を指定します。未定義は自動並び */
     align?: 'left' | 'right';
-    /** カスタムCSS定義 */
-    css?: CSSType;
 }
-declare type State = {
-    show: boolean;
-};
-export default class AppBar extends PureComponent<Props, State> {
-    static defaultProps: {
-        color: null;
-        brand: null;
-        fixed: boolean;
-        sticky: boolean;
-        fluid: boolean;
-        backdrop: boolean;
-    };
-    state: {
-        show: boolean;
-    };
-    toggleMenu: () => void;
-    render(): JSX.Element;
-}
+export default function AppBar({ children, align, brand, ...rest }: Props): JSX.Element;
 export {};

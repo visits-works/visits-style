@@ -1,3 +1,3 @@
 export default function setAlign({ align }: {
     align?: 'left' | 'right' | 'center';
-}): "center" | "space-evenly" | "flex-end" | "flex-start";
+}): "center" | "flex-start" | "flex-end" | "space-evenly";

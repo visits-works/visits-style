@@ -1,10 +1,19 @@
-import { BaseThemedCssFunction } from 'styled-components';
 export declare type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' | 'warning' | 'danger' | 'dark' | 'text' | string;
 export declare type SizeType = 'small' | 'medium' | 'large';
 export declare type ColSizeType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export declare type AlignType = 'left' | 'right' | 'center';
-export declare type CSSType = ReturnType<BaseThemedCssFunction<ThemeType | any>> | string;
 export interface ThemeType {
+    fontSize: string;
+    fontFamily: string;
+    gutter: number;
+    smallGutter: number;
+    media: {
+        mobile: string;
+        tablet: string;
+        desktop: string;
+        fullhd: string;
+    };
+    radius: string;
     primary: string;
     link: string;
     info: string;
@@ -22,15 +31,6 @@ export interface ThemeType {
     border: string;
     borderHover: string;
     borderActive: string;
-    fontSize: string;
-    fontFamily: string;
     responsive: boolean;
-    gutter: number;
-    smallGutter: number;
-    mobile: number;
-    tablet: number;
-    desktop: number;
-    fullhd: number;
-    radius: number;
     [key: string]: string | number | boolean | any;
 }

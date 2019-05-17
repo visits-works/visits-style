@@ -30,7 +30,7 @@ export default class Tabs extends Component<Props> {
         start: number;
         current: null;
     };
-    shouldComponentUpdate(props: Props, state: State): boolean;
+    shouldComponentUpdate(_: Props, state: State): boolean;
     onNext: () => void;
     onPrev: () => void;
     getIndicatorPosition: () => React.CSSProperties | undefined;

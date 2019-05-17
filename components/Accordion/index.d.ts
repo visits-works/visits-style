@@ -1,9 +1,8 @@
 import { HTMLAttributes } from 'react';
-import { CSSType } from '../../types';
 interface Props extends HTMLAttributes<HTMLDivElement> {
-    show: boolean;
     header: any;
-    css?: CSSType;
+    show: boolean;
+    timeout?: number;
 }
-export default function Accordion({ header, show, children, ...rest }: Props): JSX.Element;
+export default function Accordion({ header, show, children, timeout, ...rest }: Props): JSX.Element;
 export {};

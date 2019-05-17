@@ -1,6 +1,6 @@
-import { PureComponent } from 'react';
+import { HTMLAttributes } from 'react';
 import { ColorType } from '../../types';
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
     /** レスポンシブなイメージを追加する */
     image?: string;
     /** タイトル */
@@ -13,13 +13,6 @@ interface Props {
     footer?: any;
     /** 色の指定 */
     color?: ColorType;
-    /** ヘッダを */
-    headerOnTop?: boolean;
-    /** カスタinline style */
-    style?: any;
 }
-export default class Card extends PureComponent<Props> {
-    renderHeader: () => JSX.Element | null;
-    render(): JSX.Element;
-}
+export default function Card({ image, title, children, horizontal, footer, color, style, ...rest }: Props): JSX.Element;
 export {};
