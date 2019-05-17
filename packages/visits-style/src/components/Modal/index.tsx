@@ -6,15 +6,18 @@ import { ColorType } from '../../types';
 
 // const ESC_KEY = 27;
 
-const Wrapper = styled.div`
+const Shadow = styled.div`
   position: fixed;
-  display: flex;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 100%;
+`;
+
+const Wrapper = styled(Shadow)`
+  display: flex;
   z-index: 9997;
   overflow-y: auto;
   overflow-x: hidden;
@@ -25,6 +28,7 @@ const Wrapper = styled.div`
 const AnimatedBox = styled(Box)`
   width: auto;
   margin: auto;
+  z-index: 100;
 
   will-change: transform, opacity;
   transition-property: transform, opacity;
@@ -84,12 +88,12 @@ export default function Modal({
           role="dialog"
           aria-modal="true"
           className={className}
-          onClick={closeOnOverlay ? closeModal : undefined}
         >
-          <AnimatedBox className={state} color={color} {...rest} role="document">
+          <AnimatedBox className={state} color={color} borderless {...rest} role="document">
             {children}
           </AnimatedBox>
           {external}
+          <Shadow onClick={closeOnOverlay ? closeModal : undefined} style={{ zIndex: -1 }} />
         </Wrapper>
       )}
     </Transition>
