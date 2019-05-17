@@ -51,7 +51,7 @@
     "@types/storybook__addon-actions": "^3.4.2",
     "@types/storybook__addon-knobs": "^5.0.0",
     "@types/storybook__react": "^4.0.1",
-    "@types/styled-components": "^4.1.14",
+    "@types/styled-components": "^4.1.15",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "babel-eslint": "^10.0.1",

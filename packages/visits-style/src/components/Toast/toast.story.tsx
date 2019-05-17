@@ -22,10 +22,11 @@ class ToastDemo extends Component<{ position: string, fixed: boolean }> {
       list.push({
         id, color,
         message: <span>looooooooooooooooooooooooooooooong list number: {list.length}</span>,
+        duration: 2000,
       });
     } else {
       // @ts-ignore
-      list.push({ id, color, message: `list number: ${list.length}` });
+      list.push({ id, color, message: `list number: ${list.length}`, clearOnClick: true, duration: 3000 });
     }
     this.setState({ list });
   }
