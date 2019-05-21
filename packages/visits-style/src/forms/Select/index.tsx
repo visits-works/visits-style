@@ -27,8 +27,8 @@ export default function Select({
 }: Props) {
   const list = useMemo(() => options.map(item => (
     typeof item === 'string'
-      ? (<option value={item}>{render ? render(item) : item}</option>)
-      : (<option value={item.id}>{render ? render(item.name) : item.name}</option>)
+      ? (<option key={item} value={item}>{render ? render(item) : item}</option>)
+      : (<option key={item.id} value={item.id}>{render ? render(item.name) : item.name}</option>)
   )), [options, render]);
 
   return (
@@ -63,7 +63,7 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
     height: 100%;
     background-color: transparent;
     padding: ${({ theme }) => theme.formPadding};
-    padding-right: 1.35em;
+    padding-right: 1.65rem;
     text-align: left;
     color: inherit;
 
@@ -107,7 +107,7 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
 
   svg {
     position: absolute;
-    right: 0.325rem;
+    right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
     color: ${({ theme }) => theme.border};
@@ -121,6 +121,9 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
     select {
       ${disabledColor(theme)}
       border-style: dashed;
+    }
+    svg {
+      display: none;
     }
   ` : undefined)}
 `;
