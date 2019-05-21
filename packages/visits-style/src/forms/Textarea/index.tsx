@@ -1,5 +1,5 @@
 import React, { TextareaHTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
 import disabledColor from '../../utils/disabledColor';
@@ -14,7 +14,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 
 export default function Textarea({ className, help, error, style, ...rest }: Props) {
   return (
-    <Wrapper className={className} error={!!error} style={style}>
+    <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
       <textarea {...rest} />
       <HelpMessage help={help} error={error} />
     </Wrapper>
@@ -69,4 +69,13 @@ const Wrapper = styled.span<{ error?: boolean }>`
       border-color: ${({ theme }) => theme.borderHover};
     }
   }
+
+${({ disabled, theme }) => (disabled
+    ? css`
+      textarea {
+        ${disabledColor(theme)}
+        border-style: dashed;
+      }
+    `
+    : undefined)}
 `;

@@ -1,6 +1,7 @@
 import React, { useRef, InputHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
+import disabledColor from '../../utils/disabledColor';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   /** trueの場合にON/OFFのラベルを表示します */
@@ -24,6 +25,7 @@ export default function Switch({
       showLabel={showLabel}
       background={background}
       anchorColor={anchorColor}
+      disabled={rest.disabled}
     >
       <input id={id.current} type="checkbox" {...rest} />
       <label htmlFor={id.current} />
@@ -101,4 +103,21 @@ const Wrapper = styled.span<{ showLabel?: boolean, background?: string, anchorCo
   }
 
   ${({ showLabel }) => (showLabel ? labelStyle : undefined)}
+  ${({ disabled, theme }) => (disabled
+    ? css`
+      cursor: default;
+
+      label {
+        ${disabledColor(theme)}
+
+        &:after {
+          background: ${theme.disabled};
+        }
+      }
+
+      input:checked ~ label {
+        background: ${theme.grey};
+      }
+    `
+    : undefined)}
 `;

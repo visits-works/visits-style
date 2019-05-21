@@ -1,8 +1,8 @@
 import { css } from 'styled-components';
 import { transparentize } from 'polished';
-import { ThemeType, CSSType } from '../types';
+import { ThemeType } from '../types';
 
-export default function disabledColor(theme: ThemeType): CSSType {
+export default function disabledColor(theme: ThemeType) {
   const textColor = transparentize(0.15, theme.textDark);
   const backColor = transparentize(0.55, theme.border);
   return css`

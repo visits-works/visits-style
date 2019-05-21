@@ -12,7 +12,7 @@ const theme: ThemeType = {
     fullhd: '1344px',
   },
   radius: '4px',
-  animationTimeout: 200,
+  formPadding: '0.75rem 0.625rem',
 
   primary: '#37B151',
   link: '#578ba9',

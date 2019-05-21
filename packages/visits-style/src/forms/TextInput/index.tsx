@@ -24,7 +24,7 @@ export default function TextInput({
   className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255, ...rest
 }: Props) {
   return (
-    <Wrapper className={className} outline={outline} error={error} style={style}>
+    <Wrapper className={className} outline={outline} error={error} style={style} disabled={rest.disabled}>
       {leftIcon && (<Icon>{leftIcon}</Icon>)}
       {rightIcon && (<Icon right>{rightIcon}</Icon>)}
       <input type={type} maxLength={maxLength} {...rest} />
@@ -77,12 +77,11 @@ const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
     text-align: left;
     color: inherit;
 
-    padding: 0.375em 0.625em;
-    border: none;
-    ${({ outline, theme, error }) => outline ?
-      `border: 1px solid ${error ? theme.danger : theme.border}; border-radius: 4px;` :
-      `border-bottom: 1px solid ${error ? theme.danger : theme.border}; border-radius: 0;`
-    }
+    padding: ${({ theme }) => theme.formPadding};
+    border: 1px solid ${({ error, theme }) => (error ? theme.danger : theme.border)};
+    ${({ outline, theme }) => (outline
+    ? { borderRadius: theme.radius }
+    : { borderRadius: 0, borderWidth: 0, borderBottomWidth: '1px' })}
     ${setSize('font-size')}
 
     transition-property: box-shadow;
@@ -91,14 +90,9 @@ const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
 
     &:focus {
       border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
-      ${({ theme, outline, error }) => outline ?
-        `box-shadow: 0 0 0 0.1em ${error ? theme.danger : theme.primary};` :
-        `box-shadow: 0 0.1em ${error ? theme.danger : theme.primary};`
-      }
-    }
-
-    &:disabled, [disabled], &:readonly {
-      ${({ theme }) => disabledColor(theme)}
+      box-shadow: ${({ theme, outline, error }) => (outline
+    ? `0 0 0 0.1em ${(error ? theme.danger : theme.primary)}`
+    : `0 0 0.1em ${(error ? theme.danger : theme.primary)}`)};
     }
 
     &:disabled, [disabled] {
@@ -118,4 +112,13 @@ const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
       color: ${({ theme }) => theme.borderHover};
     }
   }
+
+  ${({ disabled, theme }) => (disabled
+    ? css`
+      input {
+        ${disabledColor(theme)}
+        border-style: dashed;
+      }
+    `
+    : undefined)}
 `;

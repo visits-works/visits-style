@@ -9,6 +9,8 @@ storiesOf('forms|Switch', module)
       name="test1"
       value={1}
       showLabel={boolean('showLabel', false)}
+      checked={boolean('checked', false)}
+      disabled={boolean('disabled', false)}
       background={text('background', '')}
       anchorColor={text('anchorColor', '')}
     />

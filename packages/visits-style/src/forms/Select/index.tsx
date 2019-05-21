@@ -1,10 +1,10 @@
 import React, { SelectHTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import arrow from '../../utils/arrow';
 import setSize from '../../utils/setSize';
 import HelpMessage from '../HelpMessage';
 import { SizeType } from '../../types';
 import disabledColor from '../../utils/disabledColor';
+import IconArrowDown from '../../elements/Icons/ArrowDown';
 
 type ItemType =
   | { id: string | number; name: string; [key: string]: any }
@@ -43,6 +43,7 @@ export default function Select({
         {placeholder && (<option value="">{placeholder}</option>)}
         {list}
       </select>
+      <IconArrowDown />
       <HelpMessage help={help} error={error} />
     </InputWrapper>
   );
@@ -61,21 +62,21 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
     width: 100%;
     height: 100%;
     background-color: transparent;
-    padding: 0.375em 0.625em;
+    padding: ${({ theme }) => theme.formPadding};
     padding-right: 1.35em;
     text-align: left;
     color: inherit;
 
     ${({ size }) => setSize('font-size', size)}
 
-    border: none;
-    ${({ outline, theme, error }) => (
+    border: 1px solid ${({ error, theme }) => (error ? theme.danger : theme.border)};
+    ${({ outline, theme }) => (
     outline ? css`
-        border: 1px solid ${error ? theme.danger : theme.border};
-        border-radius: 4px;
+        border-radius: ${theme.radius};
       ` : css`
-        border-bottom: 1px solid ${error ? theme.danger : theme.border};
+        border-width: 0;
         border-radius: 0;
+        border-bottom-width: 1px;
       `)}
 
     will-change: box-shadow;
@@ -99,19 +100,27 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
       text-shadow: 0 0 0 #000;
     }
 
-    &:disabled, &[disabled], &:readonly {
-      ${({ theme }) => disabledColor(theme)}
-    }
-
     &:invalid {
       color: ${({ theme }) => theme.placeholder};
     }
   }
 
-  &::after {
-    ${({ theme }) => arrow(theme.border)}
-    top: 1.25em;
-    right: 0.625em;
-    z-index: 4;
+  svg {
+    position: absolute;
+    right: 0.325rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: ${({ theme }) => theme.border};
   }
+
+  select:hover + svg {
+    color: ${({ theme }) => theme.borderHover};
+  }
+
+  ${({ disabled, theme }) => (disabled ? css`
+    select {
+      ${disabledColor(theme)}
+      border-style: dashed;
+    }
+  ` : undefined)}
 `;
