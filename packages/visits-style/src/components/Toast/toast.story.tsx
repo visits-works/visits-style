@@ -31,6 +31,15 @@ class ToastDemo extends Component<{ position: string, fixed: boolean }> {
     this.setState({ list });
   }
 
+  addCloseButton = () => {
+    const colorList = ['warning', 'danger', 'info', 'primary', 'success'];
+    const list = this.state.list.slice();
+    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
+    const id = `_${Math.random().toString(36).substr(2, 9)}`;
+    list.push({ id, color, message: `list number: ${list.length}`, clearOnClick: true, duration: null });
+    this.setState({ list });
+  }
+
   clearToast = (id: string) => {
     const list = this.state.list.filter((item: any) => item.id !== id);
     this.setState({ list });
@@ -49,7 +58,8 @@ class ToastDemo extends Component<{ position: string, fixed: boolean }> {
     const { position, fixed } = this.props;
     return (
       <div>
-        <Button color="info" onClick={this.addToast}>Toast!</Button>
+        <Button color="primary" onClick={this.addToast}>Toast!(with timeout)</Button>
+        <Button color="info" onClick={this.addCloseButton}>Toast!(without timeout)</Button>
         <Button color="danger" onClick={this.clearAll}>Clear All</Button>
         <Toast
           toasts={list}
