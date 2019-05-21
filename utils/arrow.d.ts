@@ -1,2 +1,1 @@
-import { CSSType } from '../types';
-export default function Arrow(color: string): CSSType;
+export default function Arrow(color: string): import("styled-components").FlattenSimpleInterpolation;

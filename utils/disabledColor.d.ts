@@ -1,2 +1,2 @@
-import { ThemeType, CSSType } from '../types';
-export default function disabledColor(theme: ThemeType): CSSType;
+import { ThemeType } from '../types';
+export default function disabledColor(theme: ThemeType): import("styled-components").FlattenSimpleInterpolation;

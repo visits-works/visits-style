@@ -2,7 +2,7 @@
   "name": "visits-style",
   "author": "@nukbal",
   "repository": "https://github.com/visits-works/visits-style",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "private": true,
   "main": "visits-style.cjs.js",
   "module": "visits-style.es.js",
@@ -14,7 +14,7 @@
     "styled-components": ">=4.2.0"
   },
   "dependencies": {
-    "polished": "^3.3.0",
+    "polished": "^3.3.2",
     "react-transition-group": "^4.0.1"
   },
   "scripts": {
@@ -83,7 +83,7 @@
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.21.0",
     "styled-components": "^4.2.0",
-    "tsdx": "^0.5.9",
+    "tsdx": "^0.5.11",
     "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   },

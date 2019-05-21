@@ -1,2 +1,1 @@
-import { CSSType } from '../types';
-export default function hamburger(size: string): CSSType;
+export default function hamburger(size: string): import("styled-components").FlattenSimpleInterpolation;
