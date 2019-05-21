@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
-import { CSSType } from '../types';
 
-export default function hamburger(size: string): CSSType {
+export default function hamburger(size: string) {
   return css`
     display: block;
     position: relative;
