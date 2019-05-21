@@ -1,84 +1,59 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, boolean } from '@storybook/addon-knobs';
+import faker from 'faker';
 import Toast from '.';
 import Button from '../../elements/Button';
-
-class ToastDemo extends Component<{ position: string, fixed: boolean }> {
-  state = { list: [], position: 'top-left' };
-
-  shouldComponentUpdate(_, state) {
-    return state.list.length !== this.state.list.length ||
-      state.position !== this.state.position;
-  }
-
-  addToast = () => {
-    const colorList = ['warning', 'danger', 'info', 'primary', 'success'];
-    const list = this.state.list.slice();
-    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
-    const id = `_${Math.random().toString(36).substr(2, 9)}`;
-    if (list.length % 2) {
-      // @ts-ignore
-      list.push({
-        id, color,
-        message: <span>looooooooooooooooooooooooooooooong list number: {list.length}</span>,
-        duration: 2000,
-      });
-    } else {
-      // @ts-ignore
-      list.push({ id, color, message: `list number: ${list.length}`, clearOnClick: true, duration: 3000 });
-    }
-    this.setState({ list });
-  }
-
-  addCloseButton = () => {
-    const colorList = ['warning', 'danger', 'info', 'primary', 'success'];
-    const list = this.state.list.slice();
-    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
-    const id = `_${Math.random().toString(36).substr(2, 9)}`;
-    list.push({ id, color, message: `list number: ${list.length}`, clearOnClick: true, duration: null });
-    this.setState({ list });
-  }
-
-  clearToast = (id: string) => {
-    const list = this.state.list.filter((item: any) => item.id !== id);
-    this.setState({ list });
-  }
-
-  clearAll = () => {
-    this.setState({ list: [] });
-  }
-
-  onSelect = (e: any) => {
-    this.setState({ position: e.target.value });
-  }
-
-  render() {
-    const { list } = this.state;
-    const { position, fixed } = this.props;
-    return (
-      <div>
-        <Button color="primary" onClick={this.addToast}>Toast!(with timeout)</Button>
-        <Button color="info" onClick={this.addCloseButton}>Toast!(without timeout)</Button>
-        <Button color="danger" onClick={this.clearAll}>Clear All</Button>
-        <Toast
-          toasts={list}
-          clear={this.clearToast}
-          // @ts-ignore
-          position={position}
-          fixed={fixed}
-        />
-        <div style={{ paddingBottom: '100vh' }} />
-      </div>
-    );
-  }
-}
+import Field from '../../forms/Field';
+import Checkbox from '../../forms/Checkbox';
+import TextInput from '../../forms/TextInput';
 
 const positionList = ['top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
+const colorList = ['warning', 'danger', 'info', 'primary', 'success'];
 
-// function ToastDemo() {
+function ToastDemo({ fixed, position }: any) {
+  const [list, setList] = useState([]);
+  const [duration, setDuration] = useState<number | null>(2000);
+  const [showButton, setShowbutton] = useState(false);
+  const addToast = useCallback(() => {
+    const newList = list.slice();
+    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
+    const id = `_${Math.random().toString(36).substr(2, 9)}`;
+    newList.push({ id, color, message: faker.lorem.sentence(), duration, clearOnClick: showButton });
+    setList(newList);
+  }, [duration, showButton, list]);
+  const clearToast = useCallback((id: string) => {
+    setList(l => l.filter(item => item.id !== id));
+  }, []);
+  const clearAll = useCallback(() => setList([]), []);
+  const onDurationChange = useCallback(({ target }: any) => {
+    if (!target.value) {
+      setDuration(null);
+    } else {
+      setDuration(parseInt(target.value, 10));
+    }
+  }, []);
+  const clickButton = useCallback(() => setShowbutton(b => !b), []);
 
-// }
+  return (
+    <div>
+      <Checkbox checked={showButton} onChange={clickButton}>ボタン表示</Checkbox>
+      <br />
+      <Field label="タイムアウト(空欄はタイムアウトなし)">
+        <TextInput value={duration || ''} onChange={onDurationChange} outline />
+      </Field>
+      <br />
+      <Button color="primary" onClick={addToast}>Toast!</Button>
+      <Button color="danger" onClick={clearAll}>Clear All</Button>
+      <Toast
+        toasts={list}
+        clear={clearToast}
+        position={position}
+        fixed={fixed}
+      />
+    </div>
+  );
+}
 
 storiesOf('components|Toast', module)
   .add('default', () => (
