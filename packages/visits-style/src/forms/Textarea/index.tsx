@@ -37,7 +37,7 @@ const Wrapper = styled.span<{ error?: boolean }>`
     text-align: left;
     color: inherit;
 
-    border-radius: 4px;
+    border-radius: ${({ theme }) => theme.radius};
     border: 1px solid ${({ theme, error }) => (error ? theme.danger : theme.border)};
 
     transition-property: box-shadow;
