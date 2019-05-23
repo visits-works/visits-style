@@ -16,13 +16,16 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   outline?: boolean;
   error?: string | any;
   help?: string | any;
+  /** selectのサイズ */
   inputSize?: SizeType;
+  /** optionのカスタムrender */
   render?: (label: string) => any;
-  disabled?: boolean;
+  /** placehoderを選択可能にする */
+  optional?: boolean;
 }
 
 export default function Select({
-  options = [], placeholder, render, help, error, className, inputSize, outline,
+  options = [], placeholder, render, help, error, className, inputSize, outline, optional,
   ...rest
 }: Props) {
   const list = useMemo(() => options.map(item => (
@@ -40,7 +43,7 @@ export default function Select({
       disabled={rest.disabled}
     >
       <select {...rest}>
-        {placeholder && (<option value="">{placeholder}</option>)}
+        {placeholder && (<option value="" disabled={!optional}>{placeholder}</option>)}
         {list}
       </select>
       <IconArrowDown />
@@ -90,6 +93,9 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
 
     &:focus {
       border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
+      box-shadow: ${({ theme, outline, error }) => (outline
+    ? `0 0 0 0.1em ${(error ? theme.danger : theme.primary)}`
+    : `0 0.1em ${(error ? theme.danger : theme.primary)}`)};
     }
 
     &::-ms-expand {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import TextInput from '.';
 
 storiesOf('forms|TextInput', module)
@@ -11,6 +12,7 @@ storiesOf('forms|TextInput', module)
       placeholder={text('placeholder', 'placeholder...')}
       outline={boolean('outline', false)}
       disabled={boolean('disabled', false)}
+      onChange={action('onChange')}
     />
   ))
   .add('outline', () => (
@@ -19,4 +21,3 @@ storiesOf('forms|TextInput', module)
       <TextInput outline name="test1" placeholder="blah blah" />
     </div>
   ));
-

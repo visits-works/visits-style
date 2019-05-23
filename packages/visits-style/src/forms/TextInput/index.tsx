@@ -24,7 +24,13 @@ export default function TextInput({
   className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255, ...rest
 }: Props) {
   return (
-    <Wrapper className={className} outline={outline} error={error} style={style} disabled={rest.disabled}>
+    <Wrapper
+      className={className}
+      outline={outline}
+      error={error}
+      style={style}
+      disabled={rest.disabled}
+    >
       {leftIcon && (<Icon>{leftIcon}</Icon>)}
       {rightIcon && (<Icon right>{rightIcon}</Icon>)}
       <input type={type} maxLength={maxLength} {...rest} />
@@ -92,7 +98,7 @@ const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
       border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
       box-shadow: ${({ theme, outline, error }) => (outline
     ? `0 0 0 0.1em ${(error ? theme.danger : theme.primary)}`
-    : `0 0 0.1em ${(error ? theme.danger : theme.primary)}`)};
+    : `0 0.1em ${(error ? theme.danger : theme.primary)}`)};
     }
 
     &:disabled, [disabled] {

@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { boolean, text } from '@storybook/addon-knobs';
 import Select from '.';
 
 const options = [
@@ -13,12 +14,9 @@ storiesOf('forms|Select', module)
       <Select
         placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
         options={options}
-      />
-      <br />
-      <Select
-        placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
-        options={options}
-        disabled
+        optional={boolean('optional', false)}
+        disabled={boolean('disabled', false)}
+        outline={boolean('outline', false)}
       />
     </div>
   ))

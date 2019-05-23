@@ -11,8 +11,6 @@ export default function ChevronDown(props: SVGAttributes<SVGSVGElement>) {
       {...props}
     >
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
         d="M10.6 0L6 4.6L1.4 0L0 1.4L6 7.4L12 1.4L10.6 0Z"
         fill="currentColor"
       />
