@@ -11,9 +11,12 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
     outline?: boolean;
     error?: string | any;
     help?: string | any;
+    /** selectのサイズ */
     inputSize?: SizeType;
+    /** optionのカスタムrender */
     render?: (label: string) => any;
-    disabled?: boolean;
+    /** placehoderを選択可能にする */
+    optional?: boolean;
 }
-export default function Select({ options, placeholder, render, help, error, className, inputSize, outline, ...rest }: Props): JSX.Element;
+export default function Select({ options, placeholder, render, help, error, className, inputSize, outline, optional, ...rest }: Props): JSX.Element;
 export {};

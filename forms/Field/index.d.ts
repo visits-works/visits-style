@@ -5,5 +5,5 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     required?: boolean;
     htmlFor?: string;
 }
-export default function Field({ label, children, htmlFor, ...rest }: Props): JSX.Element;
+export default function Field({ label, children, htmlFor, required, ...rest }: Props): JSX.Element;
 export {};
