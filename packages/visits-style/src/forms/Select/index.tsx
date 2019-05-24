@@ -66,7 +66,7 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
     height: 100%;
     background-color: transparent;
     padding: ${({ theme }) => theme.formPadding};
-    padding-right: 1.65rem;
+    padding-right: 1.85rem;
     text-align: left;
     color: inherit;
 
@@ -113,7 +113,7 @@ const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: b
 
   svg {
     position: absolute;
-    right: 0.5rem;
+    right: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
     color: ${({ theme }) => theme.border};

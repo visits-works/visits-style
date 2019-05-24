@@ -1,25 +1,23 @@
 import React, { ReactNode, HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Wrapper = styled.div<{ required?: boolean }>`
   display: block;
-  &:not(:last-child) {
-    margin-bottom: 0.75rem;
-  }
-  ${({ required, theme }) => (required ? css`
-    label::after {
-      content: '*';
-      color: ${theme.primary};
-      margin-left: 0.325rem;
-    }
-  ` : undefined)}
+  margin: 1.5rem 0;
 `;
 
-const Label = styled.label`
-  color: ${({ theme }) => theme.textStrong};
+const Label = styled.h5`
   display: block;
   font-size: 1rem;
-  margin-bottom: 0.325rem;
+  font-weight: normal;
+  margin-bottom: 0.625rem;
+  text-align: left;
+  color: ${({ theme }) => theme.textStrong};
+
+  & > i {
+    color: ${({ theme }) => theme.primary};
+    margin-left: 0.325rem;
+  }
 `;
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -29,10 +27,15 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   htmlFor?: string;
 }
 
-export default function Field({ label, children, htmlFor, ...rest }: Props) {
+export default function Field({ label, children, htmlFor, required, ...rest }: Props) {
   return (
     <Wrapper {...rest}>
-      {label && (<Label htmlFor={htmlFor}>{label}</Label>)}
+      {label && (
+        <Label htmlFor={htmlFor}>
+          {label}
+          {required && (<i>*</i>)}
+        </Label>
+      )}
       {children}
     </Wrapper>
   );
