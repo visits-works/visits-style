@@ -29,7 +29,7 @@ export default function Popover({
   const [tooltipStyle, setStyle] = useState({});
 
   const handleFocus = useCallback(() => {
-    if (show || !parent.current || !tooltip.current || disabled) return;
+    if (show || !parent.current || !tooltip.current || !!disabled) return;
     const parentRect = parent.current.getBoundingClientRect();
     const tooltipRect = tooltip.current.getBoundingClientRect();
 
@@ -68,7 +68,7 @@ export default function Popover({
     }
     if (onOpen) onOpen();
     setShow(true);
-  }, [show, position, onOpen]);
+  }, [show, position, onOpen, disabled]);
 
   const handleBlur = useCallback(() => {
     if (onClose) onClose();
@@ -80,8 +80,7 @@ export default function Popover({
       tabIndex={0}
       role="button"
       ref={parent}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onClick={handleFocus}
     >
       {label}
       <Tooltip
@@ -94,6 +93,7 @@ export default function Popover({
       >
         {children}
       </Tooltip>
+      {show && (<Shadow onClick={handleBlur} />)}
     </Wrapper>
   );
 }
@@ -135,4 +135,15 @@ const Tooltip = styled(Box)<{ show?: boolean }>`
     opacity: 1;
     visibility: visible;
   `}
+`;
+
+const Shadow = styled.div`
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 `;
