@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, HTMLAttributes } from 'react';
+import React, { useState, useCallback, useRef, HTMLAttributes, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Box from '../../elements/Box';
 
@@ -27,6 +27,10 @@ export default function Popover({
 
   const [show, setShow] = useState(false);
   const [tooltipStyle, setStyle] = useState({});
+
+  useEffect(() => {
+    if (show && disabled) setShow(false);
+  }, [show, disabled]);
 
   const handleFocus = useCallback(() => {
     if (show || !parent.current || !tooltip.current || !!disabled) return;
