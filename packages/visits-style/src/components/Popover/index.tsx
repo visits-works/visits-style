@@ -11,17 +11,25 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   right?: boolean;
   /** 吹き出しが表示される場所 */
   position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+  /** 閉じた場合のコールバック */
+  onClose?: () => void;
+  /** 開けた場合のコールバック */
+  onOpen?: () => void;
+  /** コンテンツを出さない */
+  disabled?: boolean;
 }
 
-export default function Popover({ position, label, children, color = 'white', ...rest }: Props) {
+export default function Popover({
+  position, label, children, color = 'white', onOpen, onClose, disabled, ...rest
+}: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
   const tooltip = useRef<HTMLDivElement | null>(null);
 
   const [show, setShow] = useState(false);
   const [tooltipStyle, setStyle] = useState({});
 
-  const onOpen = useCallback(() => {
-    if (show || !parent.current || !tooltip.current) return;
+  const handleFocus = useCallback(() => {
+    if (show || !parent.current || !tooltip.current || disabled) return;
     const parentRect = parent.current.getBoundingClientRect();
     const tooltipRect = tooltip.current.getBoundingClientRect();
 
@@ -58,20 +66,22 @@ export default function Popover({ position, label, children, color = 'white', ..
         break;
       }
     }
+    if (onOpen) onOpen();
     setShow(true);
-  }, [show, position]);
+  }, [show, position, onOpen]);
 
-  const onClose = useCallback(() => {
+  const handleBlur = useCallback(() => {
+    if (onClose) onClose();
     if (show) setShow(false);
-  }, [show]);
+  }, [show, onClose]);
 
   return (
     <Wrapper
       tabIndex={0}
       role="button"
       ref={parent}
-      onFocus={onOpen}
-      onBlur={onClose}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       {label}
       <Tooltip
