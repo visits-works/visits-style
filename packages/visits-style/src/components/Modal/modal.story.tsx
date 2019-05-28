@@ -39,7 +39,7 @@ storiesOf('components|Modal', module)
       >
         <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
           <h3>Modal Title</h3>
-          <TextButton style={CloseButton}>X</TextButton>
+          <TextButton style={CloseButton} pure>X</TextButton>
         </header>
         <section>
           Modal body text goes here.
@@ -74,7 +74,7 @@ storiesOf('components|Modal', module)
     >
       <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
         <h3>Modal Title</h3>
-        <TextButton style={CloseButton}>X</TextButton>
+        <TextButton style={CloseButton} pure>X</TextButton>
       </header>
       <section>
         Modal body text goes here.<br />

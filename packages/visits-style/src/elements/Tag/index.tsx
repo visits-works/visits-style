@@ -73,27 +73,10 @@ const Wrapper = styled.div<WrapperProps>`
     margin-right: 0.5rem;
   }
 
-  span {
-    position: relative;
-    display: inline-flex;
-    flex-grow: 0;
-    flex-shrink: 0;
-    min-width: 1.5rem;
-    height: 100%;
-    margin-right: -0.5rem;
-    margin-left: 0.5rem;
-    padding: 0 .5rem;
-    justify-content: center;
-    align-items: center;
-
-    &:last-child {
-      border-top-right-radius: ${({ theme }) => theme.radius};
-      border-bottom-right-radius: ${({ theme }) => theme.radius};
-    }
-
-    &:focus {
-      outline: none;
-    }
+  ${TextButton} {
+    border-radius: 0;
+    border-top-right-radius: ${({ theme, round }) => (round ? '50rem' : theme.radius)};
+    border-bottom-right-radius: ${({ theme, round }) => (round ? '50rem' : theme.radius)};
   }
 
   ${({ close }) => (close ? closeCss : undefined)}
@@ -116,7 +99,7 @@ export default function Tag({ children, onClose, ...rest }: Props) {
   return (
     <Wrapper close={!!onClose} {...rest}>
       {children}
-      {onClose && (<TextButton onClick={onClose}><Close /></TextButton>)}
+      {onClose && (<TextButton onClick={onClose} pure><Close /></TextButton>)}
     </Wrapper>
   );
 }

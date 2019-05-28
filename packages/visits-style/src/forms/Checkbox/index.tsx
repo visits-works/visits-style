@@ -64,6 +64,8 @@ const Shape = styled.div`
 
   svg {
     opacity: 0;
+    stroke-width: 0.1em;
+    stroke: currentColor;
   }
 
   &.checked {
