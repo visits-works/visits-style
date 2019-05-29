@@ -20,7 +20,6 @@ function setColor({ theme, color, outline, disabled }: Props) {
   }
   if (!color) {
     return css`
-      background-color: ${theme.white};
       border-color: ${theme.border};
       color: ${theme.text};
 
