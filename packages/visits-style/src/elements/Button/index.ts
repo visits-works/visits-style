@@ -93,6 +93,7 @@ export default styled.button<ButtonProps>`
   justify-content: center;
   vertical-align: middle;
   user-select: none;
+  background: transparent;
   border: 1px solid transparent;
   border-radius: ${({ theme }) => theme.radius};
   padding: 0.375em 0.75em;
