@@ -1776,7 +1776,7 @@ var TextButton = /*#__PURE__*/
 styled__default.button.withConfig({
   displayName: "TextButton",
   componentId: "sc-14wzat7-0"
-})(["background-color:transparent;border:none;cursor:pointer;display:inline;margin:0;border-radius:", ";padding:", ";line-height:1.5;color:", ";", " &:hover,&:focus{", " ", "}&:focus,&:active{outline:none;}&:active{", "}"], function (_ref) {
+})(["background-color:transparent;border:none;cursor:pointer;display:inline;margin:0;border-radius:", ";padding:", ";line-height:1.5;color:", ";", " &:hover,&:focus{", " ", "}&:focus,&:active{outline:none;}&:active{", "}", ""], function (_ref) {
   var theme = _ref.theme;
   return theme.radius;
 }, function (_ref2) {
@@ -1808,6 +1808,10 @@ styled__default.button.withConfig({
   return pure ? undefined : {
     background: polished.transparentize(0.8, theme[color] || theme.text)
   };
+}, function (_ref8) {
+  var disabled = _ref8.disabled,
+      theme = _ref8.theme;
+  return disabled ? styled.css(["color:", ";cursor:default;&:hover{background:transparent;text-decoration:none;}"], polished.transparentize(0.75, theme.textDark)) : undefined;
 });
 
 var ButtonGroup = /*#__PURE__*/
