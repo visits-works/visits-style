@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';
@@ -35,4 +35,13 @@ export default styled.button<Props>`
   &:active {
     ${({ pure, theme, color }) => (pure ? undefined : { background: transparentize(0.8, theme[color] || theme.text) })}
   }
+
+  ${({ disabled, theme }) => (disabled ? css`
+    color: ${transparentize(0.75, theme.textDark)};
+    cursor: default;
+    &:hover {
+      background: transparent;
+      text-decoration: none;
+    }
+  ` : undefined)}
 `;

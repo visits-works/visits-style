@@ -29,6 +29,7 @@ storiesOf('elements|TextButton', module)
       size={select('size', sizeList, '')}
       pure={boolean('pure', false)}
       underline={boolean('underline', false)}
+      disabled={boolean('disabled', false)}
     >
       {text('children', 'Hello World')}
     </Button>

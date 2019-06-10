@@ -28,6 +28,7 @@ storiesOf('elements|Button', module)
       color={select('color', colorList, '')}
       size={select('size', sizeList, '')}
       outline={boolean('outline', false)}
+      disabled={boolean('disabled', false)}
     >
       {text('children', 'Hello World')}
     </Button>
