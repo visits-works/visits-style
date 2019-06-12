@@ -45,8 +45,12 @@ function setColor({ theme, color, outline, disabled }: Props) {
         color: ${invertColor};
       }
 
+      &:active {
+        background-color: ${darken(0.1, target)};
+      }
+
       &:focus:not(:active) {
-        ${boxShadow('0.2rem', target, 0.2)}
+        ${boxShadow('0.1rem', target, 0.5)}
       }
     `;
   }
@@ -63,11 +67,11 @@ function setColor({ theme, color, outline, disabled }: Props) {
     }
 
     &:active {
-      background-color: ${darken(0.085, target)};
+      background-color: ${darken(0.1, target)};
     }
 
     &:focus:not(:active) {
-      ${boxShadow('0.2rem', target, 0.2)}
+      ${boxShadow('0.1rem', target, 0.5)}
     }
   `;
 }
@@ -98,10 +102,6 @@ export default styled.button<ButtonProps>`
   border-radius: ${({ theme }) => theme.radius};
   padding: 0.375em 0.75em;
   line-height: 1.5;
-
-  transition-property: background-color, color, box-shadow;
-  transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
 
   ${setColor}
   ${({ size }) => setSize('font-size', size)}
