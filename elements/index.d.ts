@@ -10,5 +10,6 @@ export { default as ButtonGroup } from './Button/ButtonGroup';
 export { default as Table } from './Table';
 export { default as Box } from './Box';
 export { default as Progress } from './Progress';
+export { default as Divider } from './Divider';
 export { default as Tag } from './Tag';
 export * from './Icons';

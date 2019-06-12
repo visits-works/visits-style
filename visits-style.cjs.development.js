@@ -43,12 +43,6 @@ function _objectSpread(target) {
   return target;
 }
 
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -85,6 +79,44 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
 var Wrapper =
 /*#__PURE__*/
 styled__default.div.withConfig({
@@ -96,19 +128,19 @@ var Label =
 styled__default.h5.withConfig({
   displayName: "Field__Label",
   componentId: "sc-1ayqhds-1"
-})(["display:block;font-size:1rem;font-weight:normal;margin-bottom:0.625rem;text-align:left;color:", ";& > i{color:", ";margin-left:0.325rem;}"], function (_ref2) {
-  var theme = _ref2.theme;
+})(["display:block;font-size:1rem;font-weight:normal;margin-bottom:0.625rem;text-align:left;color:", ";& > i{color:", ";margin-left:0.325rem;}"], function (_ref) {
+  var theme = _ref.theme;
   return theme.textStrong;
-}, function (_ref3) {
-  var theme = _ref3.theme;
+}, function (_ref2) {
+  var theme = _ref2.theme;
   return theme.primary;
 });
-function Field(_ref) {
-  var label = _ref.label,
-      children = _ref.children,
-      htmlFor = _ref.htmlFor,
-      required = _ref.required,
-      rest = _objectWithoutProperties(_ref, ["label", "children", "htmlFor", "required"]);
+function Field(_ref3) {
+  var label = _ref3.label,
+      children = _ref3.children,
+      htmlFor = _ref3.htmlFor,
+      required = _ref3.required,
+      rest = _objectWithoutProperties(_ref3, ["label", "children", "htmlFor", "required"]);
 
   return React__default.createElement(Wrapper, Object.assign({}, rest), label && React__default.createElement(Label, {
     htmlFor: htmlFor
@@ -142,43 +174,43 @@ function Arrow(color) {
 function setSize(name, size) {
   switch (size) {
     case 'small':
-      return name + ": 0.75rem;";
+      return "".concat(name, ": 0.75rem;");
 
     case 'medium':
-      return name + ": 1.25rem;";
+      return "".concat(name, ": 1.25rem;");
 
     case 'large':
-      return name + ": 1.5rem;";
+      return "".concat(name, ": 1.5rem;");
 
     default:
-      return name + ": 1rem;";
+      return "".concat(name, ": 1rem;");
   }
 }
 
 function mediaMobile(_ref) {
   var theme = _ref.theme;
   if (!theme.responsive) return '@media (max-width: 0)';
-  return "@media screen and (max-width: " + theme.media.mobile + ")";
+  return "@media screen and (max-width: ".concat(theme.media.mobile, ")");
 }
 function mediaTablet(_ref2) {
   var theme = _ref2.theme;
   if (!theme.responsive) return '@media (max-width: 0)';
-  return "@media screen and (max-width: " + theme.media.tablet + ")";
+  return "@media screen and (max-width: ".concat(theme.media.tablet, ")");
 }
 function mediaDesktop(_ref3) {
   var theme = _ref3.theme;
   if (!theme.responsive) return '@media (max-width: 0)';
-  return "@media screen and (max-width: " + theme.media.desktop + ")";
+  return "@media screen and (max-width: ".concat(theme.media.desktop, ")");
 }
 function mediaFullHD(_ref4) {
   var theme = _ref4.theme;
   if (!theme.responsive) return '@media (max-width: 0)';
-  return "@media screen and (max-width: " + theme.media.fullhd + ")";
+  return "@media screen and (max-width: ".concat(theme.media.fullhd, ")");
 }
 function mediaUntilFullHD(_ref5) {
   var theme = _ref5.theme;
   if (!theme.responsive) return '@media (max-width: 0)';
-  return "@media (min-width: " + theme.media.fullhd + ")";
+  return "@media (min-width: ".concat(theme.media.fullhd, ")");
 }
 
 function disabledColor(theme) {
@@ -287,7 +319,7 @@ setSize('font-size'), function (_ref7) {
   var theme = _ref8.theme,
       outline = _ref8.outline,
       error = _ref8.error;
-  return outline ? "0 0 0 0.1em " + (error ? theme.danger : theme.primary) : "0 0.1em " + (error ? theme.danger : theme.primary);
+  return outline ? "0 0 0 0.1em ".concat(error ? theme.danger : theme.primary) : "0 0.1em ".concat(error ? theme.danger : theme.primary);
 }, function (_ref9) {
   var theme = _ref9.theme;
   return theme.placeholder;
@@ -377,7 +409,7 @@ function Checkbox(_ref) {
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["className", "children"]);
 
-  var id = "checkbox_" + rest.name + "_" + rest.value;
+  var id = "checkbox_".concat(rest.name, "_").concat(rest.value);
   var innerClass = React.useMemo(function () {
     var arr = [];
     if (rest.checked) arr.push('checked');
@@ -525,7 +557,7 @@ styled__default.span.withConfig({
   var theme = _ref8.theme,
       outline = _ref8.outline,
       error = _ref8.error;
-  return outline ? "0 0 0 0.1em " + (error ? theme.danger : theme.primary) : "0 0.1em " + (error ? theme.danger : theme.primary);
+  return outline ? "0 0 0 0.1em ".concat(error ? theme.danger : theme.primary) : "0 0.1em ".concat(error ? theme.danger : theme.primary);
 }, function (_ref9) {
   var theme = _ref9.theme;
   return theme.placeholder;
@@ -547,7 +579,7 @@ function Radio(_ref) {
       children = _ref.children,
       rest = _objectWithoutProperties(_ref, ["className", "style", "children"]);
 
-  var id = "radio_" + rest.name + "_" + rest.value;
+  var id = "radio_".concat(rest.name, "_").concat(rest.value);
   var innerClass = React.useMemo(function () {
     var arr = [];
     if (rest.checked) arr.push('checked');
@@ -608,7 +640,7 @@ function Switch(_ref) {
       anchorColor = _ref.anchorColor,
       rest = _objectWithoutProperties(_ref, ["className", "height", "showLabel", "background", "anchorColor"]);
 
-  var id = React.useRef("switch_" + rest.name);
+  var id = React.useRef("switch_".concat(rest.name));
   return React__default.createElement(Wrapper$5, {
     className: className,
     height: height,
@@ -714,8 +746,9 @@ function AppBar(_ref) {
       rest = _objectWithoutProperties(_ref, ["children", "align", "brand"]);
 
   var _useState = React.useState(false),
-      show = _useState[0],
-      setShow = _useState[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      show = _useState2[0],
+      setShow = _useState2[1];
 
   var toggleMenu = React.useCallback(function () {
     return setShow(!show);
@@ -779,7 +812,7 @@ styled__default.div.withConfig({
   componentId: "t8gqca-2"
 })(["display:flex;flex-direction:row;justify-content:space-between;align-items:center;flex-basis:auto;flex-grow:1;height:100%;& > ul{display:flex;flex-direction:row;list-style:none;flex-grow:1;flex-basis:100%;height:inherit;align-items:center;justify-content:", ";li{padding:0.85rem;}}& > div,& > span,& > form{display:flex;", "}", "{width:100%;flex-direction:column;align-items:flex-start;height:auto;padding-bottom:0.5rem;&:not(.active){display:none;}& > ul{flex-direction:column;align-items:flex-start;width:100%;flex-basis:auto;li{padding:.5rem 0;}}& > div,& > span,& > form{padding:.5rem 0;width:100%;}}"], setAlign, function (_ref6) {
   var color = _ref6.color;
-  return color ? "color: " + color + ";" : '';
+  return color ? "color: ".concat(color, ";") : '';
 }, mediaMobile);
 
 function setResponsive(_ref) {
@@ -815,22 +848,22 @@ var Body =
 styled__default.div.withConfig({
   displayName: "Hero__Body",
   componentId: "sc-12m9apf-0"
-})(["flex-grow:1;flex-shrink:0;width:100%;padding:3rem 1.5rem;", " h1{font-size:2rem;font-weight:600;line-height:1.125;&:not(:last-child){margin-bottom:1.5rem;}}h2{font-size:1.25rem;font-weight:400;line-height:1.25;}h1+h2{margin-top:-1.25rem;}"], function (_ref2) {
-  var center = _ref2.center;
+})(["flex-grow:1;flex-shrink:0;width:100%;padding:3rem 1.5rem;", " h1{font-size:2rem;font-weight:600;line-height:1.125;&:not(:last-child){margin-bottom:1.5rem;}}h2{font-size:1.25rem;font-weight:400;line-height:1.25;}h1+h2{margin-top:-1.25rem;}"], function (_ref) {
+  var center = _ref.center;
   return center ? 'text-align: center;' : '';
 });
 
-function setColor$1(_ref3) {
-  var color = _ref3.color,
-      theme = _ref3.theme;
+function setColor$1(_ref2) {
+  var color = _ref2.color,
+      theme = _ref2.theme;
   if (!color) return '';
   var target = theme[color] || color;
   var invertColor = findColorInvert(theme, target);
   return styled.css(["background-color:", ";color:", ";"], target, invertColor);
 }
 
-function setSize$1(_ref4) {
-  var size = _ref4.size;
+function setSize$1(_ref3) {
+  var size = _ref3.size;
   if (!size || size === 'small') return '';
 
   switch (size) {
@@ -854,13 +887,13 @@ styled__default.div.withConfig({
   displayName: "Hero__Wrapper",
   componentId: "sc-12m9apf-1"
 })(["align-items:stretch;display:flex;flex-direction:column;justify-content:space-between;width:100%;", " ", " header{background-color:inherit;color:inherit;}header + ", "{margin-top:3.25rem;margin-bottom:3.25rem;}"], setColor$1, setSize$1, Body);
-function Hero(_ref) {
-  var children = _ref.children,
-      color = _ref.color,
-      size = _ref.size,
-      center = _ref.center,
-      header = _ref.header,
-      rest = _objectWithoutProperties(_ref, ["children", "color", "size", "center", "header"]);
+function Hero(_ref4) {
+  var children = _ref4.children,
+      color = _ref4.color,
+      size = _ref4.size,
+      center = _ref4.center,
+      header = _ref4.header,
+      rest = _objectWithoutProperties(_ref4, ["children", "color", "size", "center", "header"]);
 
   return React__default.createElement(Wrapper$6, Object.assign({
     color: color,
@@ -882,12 +915,14 @@ function Tooltip(_ref) {
   var tooltip = React.useRef(null);
 
   var _useState = React.useState(false),
-      show = _useState[0],
-      setShow = _useState[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      show = _useState2[0],
+      setShow = _useState2[1];
 
-  var _useState2 = React.useState({}),
-      tooltipStyle = _useState2[0],
-      setStyle = _useState2[1];
+  var _useState3 = React.useState({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tooltipStyle = _useState4[0],
+      setStyle = _useState4[1];
 
   var openTooltip = React.useCallback(function () {
     if (show || !parent.current || !tooltip.current) return;
@@ -902,8 +937,8 @@ function Tooltip(_ref) {
       case 'top':
         {
           setStyle({
-            bottom: top + "px",
-            left: width + "px"
+            bottom: "".concat(top, "px"),
+            left: "".concat(width, "px")
           });
           break;
         }
@@ -911,8 +946,8 @@ function Tooltip(_ref) {
       case 'left':
         {
           setStyle({
-            right: left + "px",
-            top: height + "px"
+            right: "".concat(left, "px"),
+            top: "".concat(height, "px")
           });
           break;
         }
@@ -920,8 +955,8 @@ function Tooltip(_ref) {
       case 'right':
         {
           setStyle({
-            left: left + "px",
-            top: height + "px"
+            left: "".concat(left, "px"),
+            top: "".concat(height, "px")
           });
           break;
         }
@@ -929,8 +964,8 @@ function Tooltip(_ref) {
       default:
         {
           setStyle({
-            top: top + "px",
-            left: width + "px"
+            top: "".concat(top, "px"),
+            left: "".concat(width, "px")
           });
           break;
         }
@@ -982,7 +1017,7 @@ styled__default.div.withConfig({
 })(["position:relative;display:flex;flex-direction:column;border:", ";border-radius:", ";width:100%;min-width:0;word-wrap:break-word;", ""], function (_ref) {
   var borderless = _ref.borderless,
       theme = _ref.theme;
-  return borderless ? 'none' : "1px solid " + theme.border;
+  return borderless ? 'none' : "1px solid ".concat(theme.border);
 }, function (_ref2) {
   var theme = _ref2.theme;
   return theme.radius;
@@ -1009,8 +1044,8 @@ var CardHeader =
 styled__default.header.withConfig({
   displayName: "Card__CardHeader",
   componentId: "sc-1xqn2rf-1"
-})(["display:flex;padding:0.5rem 1.5rem;min-height:3.5rem;border-bottom:1px solid ", ";align-items:center;justify-content:space-between;"], function (_ref2) {
-  var theme = _ref2.theme;
+})(["display:flex;padding:0.5rem 1.5rem;min-height:3.5rem;border-bottom:1px solid ", ";align-items:center;justify-content:space-between;"], function (_ref) {
+  var theme = _ref.theme;
   return theme.border;
 });
 var CardFooter =
@@ -1018,8 +1053,8 @@ var CardFooter =
 styled__default.footer.withConfig({
   displayName: "Card__CardFooter",
   componentId: "sc-1xqn2rf-2"
-})(["display:flex;padding:0.5rem 1.5rem;min-height:3.5rem;border-top:1px solid ", ";align-items:center;justify-content:space-between;"], function (_ref3) {
-  var theme = _ref3.theme;
+})(["display:flex;padding:0.5rem 1.5rem;min-height:3.5rem;border-top:1px solid ", ";align-items:center;justify-content:space-between;"], function (_ref2) {
+  var theme = _ref2.theme;
   return theme.border;
 });
 var CardImage =
@@ -1033,22 +1068,22 @@ var CardImageHorizontal =
 styled__default.a.withConfig({
   displayName: "Card__CardImageHorizontal",
   componentId: "sc-1xqn2rf-4"
-})(["flex:0 0 30%;min-width:5rem;width:30%;border-top-left-radius:3px;border-bottom-left-radius:3px;background:no-repeat center/cover;", ""], function (_ref4) {
-  var url = _ref4.url;
+})(["flex:0 0 30%;min-width:5rem;width:30%;border-top-left-radius:3px;border-bottom-left-radius:3px;background:no-repeat center/cover;", ""], function (_ref3) {
+  var url = _ref3.url;
   return url ? {
-    backgroundImage: "url(" + url + ")"
+    backgroundImage: "url(".concat(url, ")")
   } : undefined;
 });
-function Card(_ref) {
-  var image = _ref.image,
-      title = _ref.title,
-      children = _ref.children,
-      horizontal = _ref.horizontal,
-      footer = _ref.footer,
-      color = _ref.color,
-      _ref$style = _ref.style,
-      style = _ref$style === void 0 ? {} : _ref$style,
-      rest = _objectWithoutProperties(_ref, ["image", "title", "children", "horizontal", "footer", "color", "style"]);
+function Card(_ref4) {
+  var image = _ref4.image,
+      title = _ref4.title,
+      children = _ref4.children,
+      horizontal = _ref4.horizontal,
+      footer = _ref4.footer,
+      color = _ref4.color,
+      _ref4$style = _ref4.style,
+      style = _ref4$style === void 0 ? {} : _ref4$style,
+      rest = _objectWithoutProperties(_ref4, ["image", "title", "children", "horizontal", "footer", "color", "style"]);
 
   var header = React.useMemo(function () {
     if (image && !horizontal) return React__default.createElement(CardImage, null, React__default.createElement("img", {
@@ -1110,12 +1145,14 @@ function Popover(_ref) {
   var tooltip = React.useRef(null);
 
   var _useState = React.useState(false),
-      show = _useState[0],
-      setShow = _useState[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      show = _useState2[0],
+      setShow = _useState2[1];
 
-  var _useState2 = React.useState({}),
-      tooltipStyle = _useState2[0],
-      setStyle = _useState2[1];
+  var _useState3 = React.useState({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tooltipStyle = _useState4[0],
+      setStyle = _useState4[1];
 
   React.useEffect(function () {
     if (show && disabled) setShow(false);
@@ -1129,7 +1166,7 @@ function Popover(_ref) {
       case 'top-left':
         {
           setStyle({
-            bottom: parentRect.height + 8 + "px",
+            bottom: "".concat(parentRect.height + 8, "px"),
             left: 0
           });
           break;
@@ -1138,7 +1175,7 @@ function Popover(_ref) {
       case 'top-right':
         {
           setStyle({
-            bottom: parentRect.height + 8 + "px",
+            bottom: "".concat(parentRect.height + 8, "px"),
             right: 0
           });
           break;
@@ -1147,8 +1184,8 @@ function Popover(_ref) {
       case 'top':
         {
           setStyle({
-            bottom: parentRect.height + 8 + "px",
-            left: (parentRect.width - tooltipRect.width >> 1) + "px"
+            bottom: "".concat(parentRect.height + 8, "px"),
+            left: "".concat(parentRect.width - tooltipRect.width >> 1, "px")
           });
           break;
         }
@@ -1156,7 +1193,7 @@ function Popover(_ref) {
       case 'bottom-right':
         {
           setStyle({
-            top: parentRect.height + 8 + "px",
+            top: "".concat(parentRect.height + 8, "px"),
             right: 0
           });
           break;
@@ -1165,8 +1202,8 @@ function Popover(_ref) {
       case 'bottom':
         {
           setStyle({
-            top: parentRect.height + 8 + "px",
-            left: (parentRect.width - tooltipRect.width >> 1) + "px"
+            top: "".concat(parentRect.height + 8, "px"),
+            left: "".concat(parentRect.width - tooltipRect.width >> 1, "px")
           });
           break;
         }
@@ -1175,7 +1212,7 @@ function Popover(_ref) {
       default:
         {
           setStyle({
-            top: parentRect.height + 8 + "px",
+            top: "".concat(parentRect.height + 8, "px"),
             left: 0
           });
           break;
@@ -1237,8 +1274,8 @@ var Wrapper$9 =
 styled__default(Shadow$1).withConfig({
   displayName: "Modal__Wrapper",
   componentId: "pb7lhx-1"
-})(["display:flex;z-index:9997;overflow-y:auto;overflow-x:hidden;background-color:", ";padding:0.85rem;"], function (_ref2) {
-  var theme = _ref2.theme;
+})(["display:flex;flex-direction:column;align-items:center;z-index:9997;overflow-y:auto;overflow-x:hidden;background-color:", ";padding:0.85rem;"], function (_ref) {
+  var theme = _ref.theme;
   return theme.backdrop;
 });
 var AnimatedBox =
@@ -1246,20 +1283,20 @@ var AnimatedBox =
 styled__default(Box).withConfig({
   displayName: "Modal__AnimatedBox",
   componentId: "pb7lhx-2"
-})(["width:auto;margin:auto;z-index:100;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;&.entering{opacity:0.01;transform:scale(0.8);}&.entered{opacity:1;transform:scale(1);}&.exiting{opacity:0.01;transform:scale(0.8);}"]);
-function Modal(_ref) {
-  var show = _ref.show,
-      children = _ref.children,
-      _ref$timeout = _ref.timeout,
-      timeout = _ref$timeout === void 0 ? 200 : _ref$timeout,
-      _ref$color = _ref.color,
-      color = _ref$color === void 0 ? 'white' : _ref$color,
-      closeModal = _ref.closeModal,
-      external = _ref.external,
-      className = _ref.className,
-      closeOnOverlay = _ref.closeOnOverlay,
-      closeOnEsc = _ref.closeOnEsc,
-      rest = _objectWithoutProperties(_ref, ["show", "children", "timeout", "color", "closeModal", "external", "className", "closeOnOverlay", "closeOnEsc"]);
+})(["width:auto;margin:auto;flex-grow:0;flex-shrink:0;flex-basis:auto;z-index:100;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;&.entering,&.entered{opacity:1;transform:scale(1);}&.exiting,&.exited{opacity:0;transform:scale(0.8);}"]);
+function Modal(_ref2) {
+  var show = _ref2.show,
+      children = _ref2.children,
+      _ref2$timeout = _ref2.timeout,
+      timeout = _ref2$timeout === void 0 ? 200 : _ref2$timeout,
+      _ref2$color = _ref2.color,
+      color = _ref2$color === void 0 ? 'white' : _ref2$color,
+      closeModal = _ref2.closeModal,
+      external = _ref2.external,
+      className = _ref2.className,
+      closeOnOverlay = _ref2.closeOnOverlay,
+      closeOnEsc = _ref2.closeOnEsc,
+      rest = _objectWithoutProperties(_ref2, ["show", "children", "timeout", "color", "closeModal", "external", "className", "closeOnOverlay", "closeOnEsc"]);
 
   return React__default.createElement(reactTransitionGroup.Transition, {
     "in": show,
@@ -1271,18 +1308,15 @@ function Modal(_ref) {
       role: "dialog",
       "aria-modal": "true",
       className: className
-    }, React__default.createElement(AnimatedBox, Object.assign({
+    }, React__default.createElement(Shadow$1, {
+      onClick: closeOnOverlay ? closeModal : undefined
+    }), React__default.createElement(AnimatedBox, Object.assign({
       className: state,
       color: color,
       borderless: true
     }, rest, {
       role: "document"
-    }), children), external, React__default.createElement(Shadow$1, {
-      onClick: closeOnOverlay ? closeModal : undefined,
-      style: {
-        zIndex: -1
-      }
-    }));
+    }), children), external);
   });
 }
 
@@ -1322,8 +1356,8 @@ var Wrapper$a =
 styled__default(Box).withConfig({
   displayName: "Toast__Wrapper",
   componentId: "sc-8192b2-0"
-})(["position:relative;padding:0.375em 0.75em;max-width:100%;margin-bottom:1rem;z-index:9999;width:fit-content;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:250ms;&.entering{opacity:0.01;transform:scale(0.8);}&.entered{opacity:1;transform:scale(1);}&.exiting{opacity:0.01;transform:scale(0.8);}", ""], function (_ref3) {
-  var clear = _ref3.clear;
+})(["position:relative;padding:0.375em 0.75em;max-width:100%;margin-bottom:1rem;z-index:9999;width:fit-content;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:250ms;&.entering{opacity:0.01;transform:scale(0.8);}&.entered{opacity:1;transform:scale(1);}&.exiting{opacity:0.01;transform:scale(0.8);}", ""], function (_ref) {
+  var clear = _ref.clear;
   return clear ? {
     paddingRight: '2.25rem'
   } : undefined;
@@ -1335,15 +1369,15 @@ styled__default.button.withConfig({
   componentId: "sc-8192b2-1"
 })(["position:absolute;top:0;right:0;bottom:0;margin:0;padding:0;border:none;background:transparent;color:inherit;cursor:pointer;width:2rem;svg{width:1rem;height:1rem;}&:hover{background:rgba(0,0,0,0.15);}"]);
 
-function ToastItem(_ref) {
-  var color = _ref.color,
-      message = _ref.message,
-      _ref$duration = _ref.duration,
-      duration = _ref$duration === void 0 ? 5000 : _ref$duration,
-      clear = _ref.clear,
-      clearOnClick = _ref.clearOnClick,
-      id = _ref.id,
-      rest = _objectWithoutProperties(_ref, ["color", "message", "duration", "clear", "clearOnClick", "id"]);
+function ToastItem(_ref2) {
+  var color = _ref2.color,
+      message = _ref2.message,
+      _ref2$duration = _ref2.duration,
+      duration = _ref2$duration === void 0 ? 5000 : _ref2$duration,
+      clear = _ref2.clear,
+      clearOnClick = _ref2.clearOnClick,
+      id = _ref2.id,
+      rest = _objectWithoutProperties(_ref2, ["color", "message", "duration", "clear", "clearOnClick", "id"]);
 
   var onClear = React.useCallback(function () {
     return clear(id);
@@ -1371,14 +1405,14 @@ function ToastItem(_ref) {
   });
 }
 
-function Toast(_ref2) {
-  var toasts = _ref2.toasts,
-      clear = _ref2.clear,
-      fixed = _ref2.fixed,
-      style = _ref2.style,
-      _ref2$margin = _ref2.margin,
-      margin = _ref2$margin === void 0 ? '1rem' : _ref2$margin,
-      rest = _objectWithoutProperties(_ref2, ["toasts", "clear", "fixed", "style", "margin"]);
+function Toast(_ref3) {
+  var toasts = _ref3.toasts,
+      clear = _ref3.clear,
+      fixed = _ref3.fixed,
+      style = _ref3.style,
+      _ref3$margin = _ref3.margin,
+      margin = _ref3$margin === void 0 ? '1rem' : _ref3$margin,
+      rest = _objectWithoutProperties(_ref3, ["toasts", "clear", "fixed", "style", "margin"]);
 
   // const element = useRef<HTMLDivElement | null>(null);
   // useLayoutEffect(() => {
@@ -1458,192 +1492,6 @@ styled__default.div.withConfig({
       }
   }
 });
-
-function setColor$2(_ref) {
-  var theme = _ref.theme,
-      color = _ref.color,
-      outline = _ref.outline,
-      disabled = _ref.disabled;
-
-  if (disabled) {
-    return disabledColor(theme);
-  }
-
-  if (!color) {
-    return styled.css(["border-color:", ";color:", ";&:hover{border-color:", ";}&:active{border-color:", ";}"], theme.border, theme.text, theme.borderHover, theme.borderActive);
-  }
-
-  var target = theme[color] || color;
-  var invertColor = findColorInvert(theme, target);
-
-  if (outline) {
-    return styled.css(["background-color:transparent;border-color:", ";color:", ";&:hover{background-color:", ";color:", ";}&:focus:not(:active){", "}"], target, target, target, invertColor, boxShadow('0.2rem', target, 0.2));
-  }
-
-  return styled.css(["background-color:", ";border-color:transparent;color:", ";box-shadow:none;&:hover{color:", ";background-color:", ";}&:active{background-color:", ";}&:focus:not(:active){", "}"], target, invertColor, invertColor, polished.darken(0.05, target), polished.darken(0.085, target), boxShadow('0.2rem', target, 0.2));
-}
-
-var Button = /*#__PURE__*/
-styled__default.button.withConfig({
-  displayName: "Button",
-  componentId: "f6cc58-0"
-})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-block;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;vertical-align:middle;user-select:none;background:transparent;border:1px solid transparent;border-radius:", ";padding:0.375em 0.75em;line-height:1.5;transition-property:background-color,color,box-shadow;transition-duration:150ms;transition-timing-function:ease-in-out;", " ", ""], function (_ref2) {
-  var theme = _ref2.theme;
-  return theme.radius;
-}, setColor$2, function (_ref3) {
-  var size = _ref3.size;
-  return setSize('font-size', size);
-});
-
-var Wrapper$b =
-/*#__PURE__*/
-styled__default.nav.withConfig({
-  displayName: "Tabs__Wrapper",
-  componentId: "sc-1qmwdm1-0"
-})(["display:flex;justify-content:", ";.tab-content{position:relative;display:flex;", " align-items:center;justify-content:center;overflow:hidden;}"], setAlign, function (_ref) {
-  var align = _ref.align;
-  return align ? '' : 'flex-grow: 1;';
-});
-var TabItem =
-/*#__PURE__*/
-styled__default.div.withConfig({
-  displayName: "Tabs__TabItem",
-  componentId: "sc-1qmwdm1-1"
-})(["display:block;flex-grow:1;cursor:pointer;a{display:flex;color:", ";justify-content:center;align-items:center;vertical-align:top;padding:0.375em 0.75em;border-bottom:2px solid transparent;transition-property:background-color;transition-duration:150ms;transition-timing-function:ease-in-out;&:hover{background-color:rgba(0,0,0,0.03);}}"], function (_ref2) {
-  var theme = _ref2.theme;
-  return theme.text;
-});
-
-function setColor$3(_ref3) {
-  var theme = _ref3.theme,
-      color = _ref3.color;
-  return !color ? theme.background : theme[color];
-}
-
-var Indicator =
-/*#__PURE__*/
-styled__default.div.withConfig({
-  displayName: "Tabs__Indicator",
-  componentId: "sc-1qmwdm1-2"
-})(["position:absolute;bottom:0;left:0;background-color:", ";height:2px;visibility:hidden;transform-origin:left;will-change:transform;transition-property:transform;transition-duration:200ms;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);"], setColor$3);
-
-var Tabs =
-/*#__PURE__*/
-function (_Component) {
-  _inheritsLoose(Tabs, _Component);
-
-  function Tabs() {
-    var _this;
-
-    _this = _Component.apply(this, arguments) || this;
-    _this.state = {
-      start: 0,
-      current: null
-    };
-
-    _this.onNext = function () {
-      var threshold = _this.props.maxItems;
-      var value = _this.state.start + threshold;
-      var count = React.Children.count(_this.props.children);
-
-      if (value < count) {
-        _this.setState({
-          start: value
-        });
-      }
-    };
-
-    _this.onPrev = function () {
-      if (_this.state.start === 0) return;
-      var threshold = _this.props.maxItems;
-      var value = _this.state.start - threshold;
-
-      _this.setState({
-        start: value < 0 ? 0 : value
-      });
-    };
-
-    _this.getIndicatorPosition = function () {
-      var current = _this.state.current;
-      var _this$props = _this.props,
-          children = _this$props.children,
-          maxItems = _this$props.maxItems;
-      if (current === null || current === undefined) return undefined;
-      if (!children || !children.length) return undefined;
-      var total = children.length > maxItems ? maxItems : children.length;
-      var value = current * 100 + '%';
-      return {
-        visibility: 'visible',
-        width: Math.round(100 / total) + "%",
-        transform: "translateX(" + value + ")"
-      };
-    }; // TODO: make tab scrollable via arrow icons
-
-
-    _this.renderChildren = function (child, index) {
-      if (_this.state.start > index) return null;
-      if (_this.state.start + index >= _this.props.maxItems) return null;
-      if (typeof child === 'string' || typeof child === 'number') return null;
-      return React__default.createElement(TabItem, Object.assign({}, child.props, {
-        align: _this.props.align
-      }));
-    };
-
-    return _this;
-  }
-
-  Tabs.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    var activeIndex;
-
-    for (var i = 0, len = props.children.length; i < len; i += 1) {
-      var child = props.children[i];
-
-      if (child.props.active) {
-        activeIndex = i;
-        break;
-      }
-    }
-
-    return _objectSpread({}, state, {
-      current: activeIndex
-    });
-  };
-
-  var _proto = Tabs.prototype;
-
-  _proto.shouldComponentUpdate = function shouldComponentUpdate(_, state) {
-    return this.state.start !== state.start || this.state.current !== state.current;
-  };
-
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        children = _this$props2.children,
-        align = _this$props2.align,
-        color = _this$props2.color,
-        maxItems = _this$props2.maxItems;
-    var start = this.state.start;
-    var total = children ? children.length : 0;
-    var style = this.getIndicatorPosition();
-    return React__default.createElement(Wrapper$b, {
-      align: align
-    }, start > maxItems && React__default.createElement(Button, {
-      color: "text"
-    }, '<'), React__default.createElement("div", {
-      className: "tab-content"
-    }, React.Children.map(children, this.renderChildren), React__default.createElement(Indicator, {
-      color: color,
-      style: style
-    })), total > maxItems && start > maxItems && React__default.createElement(Button, {
-      color: "text"
-    }, '>'));
-  };
-
-  return Tabs;
-}(React.Component);
-Tabs.defaultProps = {
-  maxItems: 5
-};
-Tabs.Item = TabItem;
 
 function getColor(_ref) {
   var theme = _ref.theme,
@@ -1772,6 +1620,42 @@ styled__default.span.withConfig({
   return theme.radius;
 });
 
+function setColor$2(_ref) {
+  var theme = _ref.theme,
+      color = _ref.color,
+      outline = _ref.outline,
+      disabled = _ref.disabled;
+
+  if (disabled) {
+    return disabledColor(theme);
+  }
+
+  if (!color) {
+    return styled.css(["border-color:", ";color:", ";&:hover{border-color:", ";}&:active{border-color:", ";}"], theme.border, theme.text, theme.borderHover, theme.borderActive);
+  }
+
+  var target = theme[color] || color;
+  var invertColor = findColorInvert(theme, target);
+
+  if (outline) {
+    return styled.css(["background-color:transparent;border-color:", ";color:", ";&:hover{background-color:", ";color:", ";}&:active{background-color:", ";}&:focus:not(:active){", "}"], target, target, target, invertColor, polished.darken(0.1, target), boxShadow('0.1rem', target, 0.5));
+  }
+
+  return styled.css(["background-color:", ";border-color:transparent;color:", ";box-shadow:none;&:hover{color:", ";background-color:", ";}&:active{background-color:", ";}&:focus:not(:active){", "}"], target, invertColor, invertColor, polished.darken(0.05, target), polished.darken(0.1, target), boxShadow('0.1rem', target, 0.5));
+}
+
+var Button = /*#__PURE__*/
+styled__default.button.withConfig({
+  displayName: "Button",
+  componentId: "f6cc58-0"
+})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-block;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;vertical-align:middle;user-select:none;background:transparent;border:1px solid transparent;border-radius:", ";padding:0.375em 0.75em;line-height:1.5;", " ", ""], function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.radius;
+}, setColor$2, function (_ref3) {
+  var size = _ref3.size;
+  return setSize('font-size', size);
+});
+
 var TextButton = /*#__PURE__*/
 styled__default.button.withConfig({
   displayName: "TextButton",
@@ -1858,17 +1742,17 @@ function Progress(_ref) {
   var percent = React.useMemo(function () {
     return Math.round(value / max * 100);
   }, [value, max]);
-  return React__default.createElement(Wrapper$c, Object.assign({
+  return React__default.createElement(Wrapper$b, Object.assign({
     color: color
   }, rest), React__default.createElement("div", {
     role: "progressbar",
     className: value !== max ? 'in-progress' : undefined,
     style: {
-      width: (percent > 100 ? 100 : percent) + "%"
+      width: "".concat(percent > 100 ? 100 : percent, "%")
     }
   }));
 }
-var Wrapper$c =
+var Wrapper$b =
 /*#__PURE__*/
 styled__default.div.withConfig({
   displayName: "Progress__Wrapper",
@@ -1892,6 +1776,15 @@ styled__default.div.withConfig({
   return theme[color] || color;
 });
 
+var index$3 = /*#__PURE__*/
+styled__default.hr.withConfig({
+  displayName: "Divider",
+  componentId: "sc-13lwfus-0"
+})(["border:none;height:1px;margin:0;flex-shrink:0;background-color:", ";"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.border;
+});
+
 function getColor$1(theme, color) {
   return !color || color === 'light' ? theme.background : theme[color];
 }
@@ -1899,41 +1792,41 @@ function getColor$1(theme, color) {
 var closeCss =
 /*#__PURE__*/
 styled.css(["padding-right:0;", "{color:inherit;height:100%;margin-left:0.25rem;svg{width:50%;height:50%;}&:hover{background-color:rgba(0,0,0,0.15);}}"], TextButton);
-var Wrapper$d =
+var Wrapper$c =
 /*#__PURE__*/
 styled__default.div.withConfig({
   displayName: "Tag__Wrapper",
   componentId: "sc-10pvl04-0"
-})(["display:inline-flex;font-size:0.75rem;cursor:default;padding:0 0.5rem;height:1.5rem;user-select:none;border-radius:", ";justify-content:center;align-items:center;white-space:nowrap;line-height:1.5;", " &:not(:last-child){margin-right:0.5rem;}", "{border-radius:0;border-top-right-radius:", ";border-bottom-right-radius:", ";}", ""], function (_ref2) {
-  var theme = _ref2.theme,
-      round = _ref2.round;
+})(["display:inline-flex;font-size:0.75rem;cursor:default;padding:0 0.5rem;height:1.5rem;user-select:none;border-radius:", ";justify-content:center;align-items:center;white-space:nowrap;line-height:1.5;", " &:not(:last-child){margin-right:0.5rem;}", "{border-radius:0;border-top-right-radius:", ";border-bottom-right-radius:", ";}", ""], function (_ref) {
+  var theme = _ref.theme,
+      round = _ref.round;
   return round ? '50rem' : theme.radius;
-}, function (_ref3) {
-  var color = _ref3.color,
-      theme = _ref3.theme,
-      addonColor = _ref3.addonColor;
+}, function (_ref2) {
+  var color = _ref2.color,
+      theme = _ref2.theme,
+      addonColor = _ref2.addonColor;
   var target = getColor$1(theme, color);
   var invertColor = findColorInvert(theme, target);
   var subColor = addonColor ? getColor$1(theme, addonColor) : polished.darken(0.05, target);
   return styled.css(["color:", ";background-color:", ";a,span{color:", ";background-color:", ";}a:hover{background-color:", ";}"], invertColor, target, invertColor, subColor, polished.darken(0.05, subColor));
-}, TextButton, function (_ref4) {
+}, TextButton, function (_ref3) {
+  var theme = _ref3.theme,
+      round = _ref3.round;
+  return round ? '50rem' : theme.radius;
+}, function (_ref4) {
   var theme = _ref4.theme,
       round = _ref4.round;
   return round ? '50rem' : theme.radius;
 }, function (_ref5) {
-  var theme = _ref5.theme,
-      round = _ref5.round;
-  return round ? '50rem' : theme.radius;
-}, function (_ref6) {
-  var close = _ref6.close;
+  var close = _ref5.close;
   return close ? closeCss : undefined;
 });
-function Tag(_ref) {
-  var children = _ref.children,
-      onClose = _ref.onClose,
-      rest = _objectWithoutProperties(_ref, ["children", "onClose"]);
+function Tag(_ref6) {
+  var children = _ref6.children,
+      onClose = _ref6.onClose,
+      rest = _objectWithoutProperties(_ref6, ["children", "onClose"]);
 
-  return React__default.createElement(Wrapper$d, Object.assign({
+  return React__default.createElement(Wrapper$c, Object.assign({
     close: !!onClose
   }, rest), children, onClose && React__default.createElement(TextButton, {
     onClick: onClose,
@@ -2195,51 +2088,6 @@ function Plus(props) {
   }));
 }
 
-function Camera(props) {
-  return React__default.createElement("svg", Object.assign({
-    width: "24",
-    height: "20",
-    viewBox: "0 0 24 20",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, props), React__default.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M8.16795 0.4453C8.35342 0.167101 8.66565 0 9 0H15C15.3344 0 15.6466 0.167101 15.8321 0.4453L17.5352 3H21C21.7957 3 22.5587 3.31607 23.1213 3.87868C23.6839 4.44129 24 5.20435 24 6V17C24 17.7957 23.6839 18.5587 23.1213 19.1213C22.5587 19.6839 21.7957 20 21 20H3C2.20435 20 1.44129 19.6839 0.87868 19.1213C0.316071 18.5587 0 17.7957 0 17V6C0 5.20435 0.316071 4.44129 0.87868 3.87868C1.44129 3.31607 2.20435 3 3 3H6.46482L8.16795 0.4453ZM9.53518 2L7.83205 4.5547C7.64658 4.8329 7.33435 5 7 5H3C2.73478 5 2.48043 5.10536 2.29289 5.29289C2.10536 5.48043 2 5.73478 2 6V17C2 17.2652 2.10536 17.5196 2.29289 17.7071C2.48043 17.8946 2.73478 18 3 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17V6C22 5.73478 21.8946 5.48043 21.7071 5.29289C21.5196 5.10536 21.2652 5 21 5H17C16.6656 5 16.3534 4.8329 16.1679 4.5547L14.4648 2H9.53518Z",
-    fill: "currentColor"
-  }), React__default.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M12 8C10.3431 8 9 9.34315 9 11C9 12.6569 10.3431 14 12 14C13.6569 14 15 12.6569 15 11C15 9.34315 13.6569 8 12 8ZM7 11C7 8.23858 9.23858 6 12 6C14.7614 6 17 8.23858 17 11C17 13.7614 14.7614 16 12 16C9.23858 16 7 13.7614 7 11Z",
-    fill: "currentColor"
-  }));
-}
-
-function Share(props) {
-  return React__default.createElement("svg", Object.assign({
-    width: "15",
-    height: "16",
-    viewBox: "0 0 15 16",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, props), React__default.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M2.25 3.83627C2.05109 3.83627 1.86032 3.91711 1.71967 4.061C1.57902 4.20489 1.5 4.40004 1.5 4.60353V13.0433C1.5 13.2468 1.57902 13.442 1.71967 13.5859C1.86032 13.7297 2.05109 13.8106 2.25 13.8106H10.5C10.6989 13.8106 10.8897 13.7297 11.0303 13.5859C11.171 13.442 11.25 13.2468 11.25 13.0433V8.4398C11.25 8.01606 11.5858 7.67255 12 7.67255C12.4142 7.67255 12.75 8.01606 12.75 8.4398V13.0433C12.75 13.6538 12.5129 14.2393 12.091 14.6709C11.669 15.1026 11.0967 15.3451 10.5 15.3451H2.25C1.65326 15.3451 1.08097 15.1026 0.65901 14.6709C0.237053 14.2393 0 13.6538 0 13.0433V4.60353C0 3.99306 0.237053 3.4076 0.65901 2.97593C1.08097 2.54427 1.65326 2.30176 2.25 2.30176H6.75C7.16421 2.30176 7.5 2.64528 7.5 3.06902C7.5 3.49276 7.16421 3.83627 6.75 3.83627H2.25Z",
-    fill: "currentColor"
-  }), React__default.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M9 0.767255C9 0.343512 9.33579 1.1433e-08 9.75 1.1433e-08H14.25C14.6642 1.1433e-08 15 0.343512 15 0.767255V5.37078C15 5.79453 14.6642 6.13804 14.25 6.13804C13.8358 6.13804 13.5 5.79453 13.5 5.37078V1.53451H9.75C9.33579 1.53451 9 1.191 9 0.767255Z",
-    fill: "currentColor"
-  }), React__default.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M14.7803 0.224724C15.0732 0.524355 15.0732 1.01015 14.7803 1.30979L6.53033 9.74959C6.23744 10.0492 5.76256 10.0492 5.46967 9.74959C5.17678 9.44995 5.17678 8.96416 5.46967 8.66453L13.7197 0.224724C14.0126 -0.0749079 14.4874 -0.0749079 14.7803 0.224724Z",
-    fill: "currentColor"
-  }));
-}
-
 // grid & layout
 
 var theme = {
@@ -2310,11 +2158,11 @@ exports.Checkbox = Checkbox;
 exports.Col = Col;
 exports.Container = Container;
 exports.Content = index;
+exports.Divider = index$3;
 exports.Field = Field;
 exports.Hero = Hero;
 exports.IconApproved = Approved$1;
 exports.IconArrowDown = ChevronDown;
-exports.IconCamera = Camera;
 exports.IconChevronLeftRound = ChevronLeftRound;
 exports.IconChevronRightRound = ChevronRightRound;
 exports.IconClose = Close;
@@ -2323,7 +2171,6 @@ exports.IconPencil = Pencil;
 exports.IconPencilSimple = PencilSimple;
 exports.IconPlus = Plus;
 exports.IconRefresh = Refresh;
-exports.IconShare = Share;
 exports.IconUser = User;
 exports.Modal = Modal;
 exports.Placeholder = index$1;
@@ -2335,7 +2182,6 @@ exports.Select = Select;
 exports.Spinner = Spinner;
 exports.Switch = Switch;
 exports.Table = index$2;
-exports.Tabs = Tabs;
 exports.Tag = Tag;
 exports.TextButton = TextButton;
 exports.TextInput = TextInput;
