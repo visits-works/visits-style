@@ -10,5 +10,3 @@ export { default as IconClose } from './Close';
 export { default as IconRefresh } from './Refresh';
 export { default as IconPlus } from './Plus';
 export { default as IconArrowDown } from './ArrowDown';
-export { default as IconCamera } from './Camera';
-export { default as IconShare } from './Share';
