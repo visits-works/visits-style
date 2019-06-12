@@ -18,6 +18,8 @@ const Shadow = styled.div`
 
 const Wrapper = styled(Shadow)`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 9997;
   overflow-y: auto;
   overflow-x: hidden;
@@ -28,6 +30,9 @@ const Wrapper = styled(Shadow)`
 const AnimatedBox = styled(Box)`
   width: auto;
   margin: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
   z-index: 100;
 
   will-change: transform, opacity;
@@ -35,18 +40,13 @@ const AnimatedBox = styled(Box)`
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-duration: 200ms;
 
-  &.entering {
-    opacity: 0.01;
-    transform: scale(0.8);
-  }
-
-  &.entered {
+  &.entering, &.entered {
     opacity: 1;
     transform: scale(1);
   }
 
-  &.exiting {
-    opacity: 0.01;
+  &.exiting, &.exited {
+    opacity: 0;
     transform: scale(0.8);
   }
 `;
@@ -89,11 +89,11 @@ export default function Modal({
           aria-modal="true"
           className={className}
         >
+          <Shadow onClick={closeOnOverlay ? closeModal : undefined} />
           <AnimatedBox className={state} color={color} borderless {...rest} role="document">
             {children}
           </AnimatedBox>
           {external}
-          <Shadow onClick={closeOnOverlay ? closeModal : undefined} style={{ zIndex: -1 }} />
         </Wrapper>
       )}
     </Transition>
