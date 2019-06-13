@@ -35,11 +35,13 @@ export default function AppBar({ children, align, brand, ...rest }: Props) {
     >
       <nav>
         {brand}
-        <Burger className={show ? 'active' : undefined} onClick={toggleMenu}>
-          <span />
-          <span />
-          <span />
-        </Burger>
+        {children && (
+          <Burger className={show ? 'active' : undefined} onClick={toggleMenu}>
+            <span />
+            <span />
+            <span />
+          </Burger>
+        )}
         <NavContent className={show ? 'active' : undefined} align={align}>
           {children}
         </NavContent>

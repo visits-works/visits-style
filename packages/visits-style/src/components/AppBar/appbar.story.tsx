@@ -41,4 +41,7 @@ storiesOf('components|AppBar', module)
   .add('test', () => (
     <Test />
   ))
+  .add('without children', () => (
+    <AppBar color="light" brand="Hello" />
+  ))
 
