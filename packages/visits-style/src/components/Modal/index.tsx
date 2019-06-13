@@ -40,12 +40,15 @@ const AnimatedBox = styled(Box)`
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-duration: 200ms;
 
-  &.entering, &.entered {
+  opacity: 0;
+  transform: scale(0.8);
+
+  &.entered {
     opacity: 1;
     transform: scale(1);
   }
 
-  &.exiting, &.exited {
+  &.entering, &.exiting, &.exited {
     opacity: 0;
     transform: scale(0.8);
   }
