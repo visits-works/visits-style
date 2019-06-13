@@ -1283,7 +1283,7 @@ var AnimatedBox =
 styled__default(Box).withConfig({
   displayName: "Modal__AnimatedBox",
   componentId: "pb7lhx-2"
-})(["width:auto;margin:auto;flex-grow:0;flex-shrink:0;flex-basis:auto;z-index:100;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;&.entering,&.entered{opacity:1;transform:scale(1);}&.exiting,&.exited{opacity:0;transform:scale(0.8);}"]);
+})(["width:auto;margin:auto;flex-grow:0;flex-shrink:0;flex-basis:auto;z-index:100;will-change:transform,opacity;transition-property:transform,opacity;transition-timing-function:cubic-bezier(0.645,0.045,0.355,1);transition-duration:200ms;opacity:0;transform:scale(0.8);&.entered{opacity:1;transform:scale(1);}&.entering,&.exiting,&.exited{opacity:0;transform:scale(0.8);}"]);
 function Modal(_ref2) {
   var show = _ref2.show,
       children = _ref2.children,
