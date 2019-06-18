@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, text, boolean } from '@storybook/addon-knobs';
 import Button from '.';
+import Approved from '../Icons/Approved';
 import ButtonGroup from './ButtonGroup';
 
 const colorList = [
@@ -29,8 +30,22 @@ storiesOf('elements|Button', module)
       size={select('size', sizeList, '')}
       outline={boolean('outline', false)}
       disabled={boolean('disabled', false)}
+      round={boolean('round', false)}
+      icon={boolean('icon', false)}
     >
       {text('children', 'Hello World')}
+    </Button>
+  ))
+  .add('icon', () => (
+    <Button
+      color={select('color', colorList, '')}
+      size={select('size', sizeList, '')}
+      outline={boolean('outline', false)}
+      disabled={boolean('disabled', false)}
+      round={boolean('round', false)}
+      icon={boolean('icon', false)}
+    >
+      <Approved />
     </Button>
   ))
   .add('multiple buttons', () => (

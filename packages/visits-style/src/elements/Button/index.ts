@@ -83,6 +83,10 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   size?: SizeType;
   /** 背景が透明なボタンでする */
   outline?: boolean;
+  /** 丸いボタンで表示する */
+  round?: boolean;
+  /** アイコン専用のボタンとしてデザインを適用する */
+  icon?: boolean;
 }
 
 export default styled.button<ButtonProps>`
@@ -99,8 +103,8 @@ export default styled.button<ButtonProps>`
   user-select: none;
   background: transparent;
   border: 1px solid transparent;
-  border-radius: ${({ theme }) => theme.radius};
-  padding: 0.375em 0.75em;
+  border-radius: ${({ round, theme }) => (round ? '2456189px' : theme.radius)};
+  padding: ${({ icon }) => (icon ? '0.375em' : '0.375em 0.75em')};
   line-height: 1.5;
 
   ${setColor}
