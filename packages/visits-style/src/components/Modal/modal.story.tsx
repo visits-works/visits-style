@@ -16,20 +16,6 @@ const CloseButton: any = {
 storiesOf('components|Modal', module)
   .add('default', () => (
     <div>
-      <div>
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-      </div>
       <Modal
         closeModal={action('close')}
         style={{ padding: '1rem' }}
@@ -48,20 +34,7 @@ storiesOf('components|Modal', module)
           <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
         </footer>
       </Modal>
-      <div>
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-        awoginawoginwaeg'<br />
-      </div>
+      <div style={{ background: 'red', height: '120vh', width: '50px' }} />
     </div>
   ))
   .add('onScroll', () => (
@@ -114,5 +87,46 @@ storiesOf('components|Modal', module)
         <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
       </footer>
     </Modal>
+  ))
+  .add('nested', () => (
+    <div>
+      <div style={{ background: 'red', height: '120vh', width: '50px' }} />
+      <Modal
+        closeModal={action('close')}
+        style={{ padding: '1rem' }}
+        show={boolean('show', true)}
+        timeout={number('timeout', 200)}
+        closeOnOverlay={boolean('close with overlay click', true)}
+      >
+        <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+          <h3>Modal Title</h3>
+          <TextButton style={CloseButton} pure>X</TextButton>
+        </header>
+        <section>
+          Modal body text goes here.
+        </section>
+        <footer>
+          <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+        </footer>
+      </Modal>
+      <Modal
+        closeModal={action('nest-close')}
+        style={{ padding: '1rem' }}
+        show={boolean('nest-show', true)}
+        timeout={number('timeout', 200)}
+        closeOnOverlay={boolean('close with overlay click (nested)', true)}
+      >
+        <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+          <h3>Modal Title</h3>
+          <TextButton style={CloseButton} pure>X</TextButton>
+        </header>
+        <section>
+          Nested Modal body text goes here.
+          <div style={{ height: '95vh', color: 'blue', width: '50px' }} />
+        </section>
+        <footer>
+          <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+        </footer>
+      </Modal>
+    </div>
   ));
-

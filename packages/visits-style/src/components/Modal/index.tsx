@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useEffect } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 import Box from '../../elements/Box';
@@ -79,6 +79,13 @@ export default function Modal({
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflowY = 'hidden';
+    } else if (document.querySelectorAll('[aria-modal]').length <= 1) {
+      document.body.style.overflowY = 'auto';
+    }
+  }, [show]);
   return (
     <Transition
       in={show}
