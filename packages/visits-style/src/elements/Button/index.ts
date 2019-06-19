@@ -85,7 +85,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   outline?: boolean;
   /** 丸いボタンで表示する */
   round?: boolean;
-  /** アイコン専用のボタンとしてデザインを適用する */
+  /** アイコンボタンとしてpaddingを同じにする */
   icon?: boolean;
 }
 
