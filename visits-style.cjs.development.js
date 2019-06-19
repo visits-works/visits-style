@@ -755,7 +755,7 @@ function AppBar(_ref) {
   }, [show]);
   return React__default.createElement(NavBar, Object.assign({
     role: "navigation"
-  }, rest), React__default.createElement("nav", null, brand, React__default.createElement(Burger, {
+  }, rest), React__default.createElement("nav", null, brand, children && React__default.createElement(Burger, {
     className: show ? 'active' : undefined,
     onClick: toggleMenu
   }, React__default.createElement("span", null), React__default.createElement("span", null), React__default.createElement("span", null)), React__default.createElement(NavContent, {
@@ -1298,6 +1298,13 @@ function Modal(_ref2) {
       closeOnEsc = _ref2.closeOnEsc,
       rest = _objectWithoutProperties(_ref2, ["show", "children", "timeout", "color", "closeModal", "external", "className", "closeOnOverlay", "closeOnEsc"]);
 
+  React.useEffect(function () {
+    if (show) {
+      document.body.style.overflowY = 'hidden';
+    } else if (document.querySelectorAll('[aria-modal]').length <= 1) {
+      document.body.style.overflowY = 'auto';
+    }
+  }, [show]);
   return React__default.createElement(reactTransitionGroup.Transition, {
     "in": show,
     timeout: timeout,
@@ -1648,11 +1655,15 @@ var Button = /*#__PURE__*/
 styled__default.button.withConfig({
   displayName: "Button",
   componentId: "f6cc58-0"
-})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-block;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;vertical-align:middle;user-select:none;background:transparent;border:1px solid transparent;border-radius:", ";padding:0.375em 0.75em;line-height:1.5;", " ", ""], function (_ref2) {
-  var theme = _ref2.theme;
-  return theme.radius;
-}, setColor$2, function (_ref3) {
-  var size = _ref3.size;
+})(["position:relative;outline:none;appearance:none;box-sizing:border-box;display:inline-block;text-align:center;white-space:nowrap;cursor:pointer;justify-content:center;vertical-align:middle;user-select:none;background:transparent;border:1px solid transparent;border-radius:", ";padding:", ";line-height:1.5;", " ", ""], function (_ref2) {
+  var round = _ref2.round,
+      theme = _ref2.theme;
+  return round ? '2456189px' : theme.radius;
+}, function (_ref3) {
+  var icon = _ref3.icon;
+  return icon ? '0.375em' : '0.375em 0.75em';
+}, setColor$2, function (_ref4) {
+  var size = _ref4.size;
   return setSize('font-size', size);
 });
 
@@ -1661,11 +1672,15 @@ styled__default.button.withConfig({
   displayName: "TextButton",
   componentId: "sc-14wzat7-0"
 })(["background-color:transparent;border:none;cursor:pointer;display:inline;margin:0;border-radius:", ";padding:", ";line-height:1.5;color:", ";", " &:hover,&:focus{", " ", "}&:focus,&:active{outline:none;}&:active{", "}", ""], function (_ref) {
-  var theme = _ref.theme;
-  return theme.radius;
+  var round = _ref.round,
+      theme = _ref.theme;
+  return round ? '2456189px' : theme.radius;
 }, function (_ref2) {
-  var pure = _ref2.pure;
-  return pure ? '0' : '0.375em 0.75em';
+  var pure = _ref2.pure,
+      icon = _ref2.icon;
+  if (pure) return '0';
+  if (icon) return '0.375em';
+  return '0.375em 0.75em';
 }, function (_ref3) {
   var color = _ref3.color,
       theme = _ref3.theme;

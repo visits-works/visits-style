@@ -2,7 +2,7 @@
   "name": "visits-style",
   "author": "@nukbal",
   "repository": "https://github.com/visits-works/visits-style",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "private": true,
   "main": "index.js",
   "module": "visits-style.es.production.js",
