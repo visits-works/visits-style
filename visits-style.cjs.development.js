@@ -824,16 +824,16 @@ function setResponsive(_ref) {
 
   return styled.css(["margin-right:auto;margin-left:auto;", "{max-width:", "px;}", "{max-width:", "px;}", "{max-width:", "px;}", "{max-width:", "px;}"], mediaFullHD, function (_ref2) {
     var theme = _ref2.theme;
-    return theme.fullhd - 2 * theme.gutter;
+    return theme.media.fullhd - 2 * theme.gutter;
   }, mediaDesktop, function (_ref3) {
     var theme = _ref3.theme;
-    return theme.desktop - 2 * theme.gutter;
+    return theme.media.desktop - 2 * theme.gutter;
   }, mediaTablet, function (_ref4) {
     var theme = _ref4.theme;
-    return theme.tablet - 2 * theme.smallGutter;
+    return theme.media.tablet - 2 * theme.smallGutter;
   }, mediaMobile, function (_ref5) {
     var theme = _ref5.theme;
-    return theme.mobile - 2 * theme.smallGutter;
+    return theme.media.mobile - 2 * theme.smallGutter;
   });
 }
 
