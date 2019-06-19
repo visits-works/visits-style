@@ -822,19 +822,7 @@ function setResponsive(_ref) {
     return styled.css(["", "{padding-right:0.75rem;padding-left:0.75rem;}", "{padding-right:0.75rem;padding-left:0.75rem;}", "{padding-right:0.5rem;padding-left:0.5rem;}"], mediaFullHD, mediaDesktop, mediaMobile);
   }
 
-  return styled.css(["margin-right:auto;margin-left:auto;", "{max-width:", "px;}", "{max-width:", "px;}", "{max-width:", "px;}", "{max-width:", "px;}"], mediaFullHD, function (_ref2) {
-    var theme = _ref2.theme;
-    return theme.media.fullhd - 2 * theme.gutter;
-  }, mediaDesktop, function (_ref3) {
-    var theme = _ref3.theme;
-    return theme.media.desktop - 2 * theme.gutter;
-  }, mediaTablet, function (_ref4) {
-    var theme = _ref4.theme;
-    return theme.media.tablet - 2 * theme.smallGutter;
-  }, mediaMobile, function (_ref5) {
-    var theme = _ref5.theme;
-    return theme.media.mobile - 2 * theme.smallGutter;
-  });
+  return styled.css(["margin-right:auto;margin-left:auto;"]);
 }
 
 var Container = /*#__PURE__*/
