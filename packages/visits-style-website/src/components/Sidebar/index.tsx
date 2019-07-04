@@ -1,10 +1,7 @@
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
-// @ts-ignore
-import { Col, SideMenu, MenuList } from '@components';
-// @ts-ignore
-import { mediaTablet } from '@utils';
+import { Col, mediaTablet } from 'visits-style';
 import { convertTitleToId } from '../H2';
 
 const Wrapper = styled(Col)`
@@ -90,12 +87,8 @@ export default function Sidebar({ current }: any) {
     const menuList = allMdx.edges
       .filter(({ node }: any) => node.fields.slug.indexOf(target) > -1);
     return (
-      <Wrapper narrow>
-        <SideMenu>
-          <MenuList>
-            {menuList.map(renderMenuItem)}
-          </MenuList>
-        </SideMenu>
+      <Wrapper>
+        {menuList.map(renderMenuItem)}
       </Wrapper>
     );
   }

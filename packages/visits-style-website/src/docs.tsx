@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
@@ -6,7 +6,7 @@ import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/tag';
-import { Container } from '@components';
+import { Container } from 'visits-style';
 
 import components from './components';
 
@@ -25,7 +25,7 @@ const Desc = styled.p`
 `;
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  query($id: String!, $import: String) {
     site {
       siteMetadata {
         title
@@ -48,10 +48,23 @@ export const pageQuery = graphql`
         }
       }
     }
+    file(fields: {component: {eq: $import}}) {
+      fields {
+        component
+        meta {
+          props {
+            name
+            description
+            required
+            type
+          }
+        }
+      }
+    }
   }
 `;
 
-function renderDoc(mdx, title, description) {
+function renderDoc(mdx: any, title: string, description?: string) {
   if (mdx.parent.relativePath === 'index.mdx') {
     return (
       <Fragment>
@@ -79,26 +92,21 @@ function renderDoc(mdx, title, description) {
   );
 }
 
+export default function MDXRuntime({ data }: any) {
+  const {
+    mdx,
+    site: {
+      siteMetadata: { title, description }
+    }
+  } = data;
+  const current = mdx.parent.relativePath;
+  console.log(data);
 
-export default class MDXRuntime extends Component {
-  render() {
-    // @ts-ignore
-    const { data } = this.props;
-    const {
-      mdx,
-      site: {
-        siteMetadata: { title, description }
-      }
-    } = data;
-
-    // @ts-ignore
-    const current = mdx.parent.relativePath;
-    return (
-      <Layout current={current}>
-        <MDXProvider components={components}>
-          {renderDoc(mdx, title, description)}
-        </MDXProvider>
-      </Layout>
-    );
-  }
+  return (
+    <Layout current={current}>
+      <MDXProvider components={components}>
+        {renderDoc(mdx, title, description)}
+      </MDXProvider>
+    </Layout>
+  );
 }

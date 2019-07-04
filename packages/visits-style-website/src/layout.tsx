@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
-import defaultTheme from '@theme/default';
-import { Row, Col, Container } from '@components';
+import { Row, Col, Container, defaultTheme } from 'visits-style';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';

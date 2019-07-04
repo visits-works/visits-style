@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { withLive } from 'react-live';
-import { IoIosPhonePortrait, IoMdDesktop, IoMdTabletPortrait } from 'react-icons/io';
 
 // @ts-ignore
-import { ButtonGroup, Button } from '@components';
-
-import { mediaMobile } from '@utils/media';
+import { ButtonGroup, Button, mediaMobile } from 'visits-style';
 
 // const compileES5 = (
 //   code,
@@ -69,21 +66,21 @@ class Preview extends PureComponent<any, State> {
             color="info"
             outline={width !== '100%'}
           >
-            <IoMdDesktop />
+            a
           </Button>
           <Button
             onClick={this.setIpadSize}
             color="info"
             outline={width !== '768px'}
           >
-            <IoMdTabletPortrait />
+            b
           </Button>
           <Button
             onClick={this.setIphoneSize}
             color="info"
             outline={width !== '375px'}
           >
-            <IoIosPhonePortrait />
+            c
           </Button>
         </Menu>
         <Playground width={width}>

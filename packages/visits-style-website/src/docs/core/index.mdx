@@ -11,7 +11,7 @@ menu: true
 
 ```jsx
 import { ThemeProvider } from 'styled-components';
-import theme from 'visits-style/theme/light';
+import { defaultTheme as theme } from 'visits-style';
 
 export default function App() {
   return (
@@ -29,8 +29,7 @@ export default function App() {
 ```jsx
 import React, { Fragment } from 'react';
 // デフォルトグローバル定義のcss
-import normalize from 'visits-style/stlyes/normalize';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, normalizeStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}

@@ -10,11 +10,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "baseUrl": ".",
-    "paths": {
-      "@components": ["../visits-style/components"],
-      "@theme": ["../visits-style/theme"],
-      "@styles": ["../visits-style/styles"],
-    },
   },
   "exclude": [
     "./gulpfile.js",

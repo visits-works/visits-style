@@ -1,13 +1,11 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 // @ts-ignore
-import { Table } from '@components';
-// @ts-ignore
-import * as all from '@components';
+import { Table } from 'visits-style';
 
 const pageQuery = graphql`
 {
-  allFile(filter: { sourceInstanceName: { eq: "components" } }) {
+  allFile(filter: {ext: {eq: ".tsx"}}) {
     edges {
       node {
         fields {
@@ -18,7 +16,6 @@ const pageQuery = graphql`
               description
               required
               type
-              defaultValue
             }
           }
         }
@@ -46,6 +43,7 @@ export default function PropsTable({ name }: { name: string }) {
     const nodes = allFile.edges;
     let target = null;
     for (let i = 0, len = nodes.length; i < len; i++) {
+      if (!nodes[i].node.fields) continue;
       const node = findNode(nodes[i].node.fields.meta, name);
       if (node) {
         target = node;

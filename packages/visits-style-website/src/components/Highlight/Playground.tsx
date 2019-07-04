@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { LiveProvider, LiveError, withLive } from "react-live";
-import { FiInfo, FiThumbsUp } from 'react-icons/fi';
 
 import Editor from './Highlight';
 import Preview from './Preview';
@@ -11,7 +10,7 @@ import Logo from '../Logo';
 import ImgUrl from '../../../assets/sample.png';
 
 // @ts-ignore
-import * as all from '@components';
+import * as all from 'visits-style';
 
 interface Props {
   children: string;
@@ -49,7 +48,7 @@ function LiveEditor({ live }: any) {
 }
 
 const TextEditor = withLive(LiveEditor);
-const scope = { ...all, Logo, ImgUrl, FiInfo, FiThumbsUp };
+const scope = { ...all, Logo, ImgUrl };
 
 export default class Playground extends Component<Props> {
   shouldComponentUpdate(props: Props) {

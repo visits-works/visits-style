@@ -14,7 +14,7 @@ const parseConfig = {
 };
 
 const parse = parser.withCustomConfig(path.resolve(__dirname, '../visits-style/tsconfig.json'), parseConfig).parse;
-const url = path.resolve(__dirname, '../visits-style/src/components/AppBar/index.tsx');
+const url = path.resolve(__dirname, '../visits-style/dist/components/AppBar/index.d.ts');
 
 function parsePropsItem({ name, description, required, type, defaultValue }) {
   if (name.indexOf('aria-') > -1) return;
@@ -27,7 +27,7 @@ function parseMeta(meta) {
   let res = [];
   if (meta && meta.length > 0) {
     res = meta.map((item) => {
-      const props = Object.keys(item.props).map(keys => parsePropsItem(item.props[keys])).filter(a => a);
+      const props = Object.keys(item.props).map(keys => parsePropsItem(item.props[keys])).filter(Boolean);
       return { name: item.displayName, props };
     });
   }

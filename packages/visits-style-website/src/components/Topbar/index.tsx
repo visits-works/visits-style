@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { css } from 'styled-components';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import AppBar from '@components/AppBar';
+import { AppBar } from 'visits-style';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||

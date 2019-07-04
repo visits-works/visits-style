@@ -11,32 +11,39 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: "docs",
-        path: `${__dirname}/content/`
+        name: `pages`,
+        path: `${__dirname}/src/docs`
       }
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "components",
-        path: `${__dirname}/../visits-style/src/components/`
+        name: "types",
+        path: `${__dirname}/node_modules/visits-style`,
+        ignore: [
+          '**/*.js',
+          '**/*.tsx',
+          '**/*.json',
+          '**/*.map',
+          '**/*.test.d.ts',
+          '**/visits-style/index.d.ts',
+          '**/utils/**',
+          '**/visits-style/types.d.ts',
+          '**/visits-style/theme.d.ts',
+          '**/components/index.d.ts',
+          '**/elements/index.d.ts',
+          '**/forms/index.d.ts',
+          '**/styles/normalize.d.ts',
+          '**/Icons/**',
+        ],
       }
     },
     {
       resolve: 'gatsby-mdx',
       options: {
-        extensions: ['.md', '.mdx'],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1035,
-              sizeByPixelDensity: true
-            }
-          }
-        ]
+        extensions: ['.mdx'],
       }
     },
   ]

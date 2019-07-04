@@ -9,32 +9,30 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(`
         {
           allMdx {
-            edges {
-              node {
-                id
-                fields {
-                  slug
-                }
-                code {
-                  scope
-                }
+            nodes {
+              id
+              fields {
+                slug
+              }
+              frontmatter {
+                import
               }
             }
           }
         }
       `).then(result => {
         if (result.errors) {
-          console.log(result.errors); // eslint-disable-line no-console
           reject(result.errors);
         }
 
         // Create pages.
-        result.data.allMdx.edges.forEach(({ node }) => {
+        result.data.allMdx.nodes.forEach(({ fields, id, frontmatter }) => {
           createPage({
-            path: node.fields.slug ? node.fields.slug : "/",
-            component: path.resolve("./src/docs.tsx"),
+            path: fields.slug ? fields.slug : '/',
+            component: path.resolve(__dirname, './src/docs.tsx'),
             context: {
-              id: node.id
+              id,
+              import : frontmatter.import,
             }
           });
         });
@@ -48,16 +46,11 @@ exports.onCreateWebpackConfig = ({ actions, loaders }) => {
     resolve: {
       modules: [
         path.resolve(__dirname, "src"),
-        path.resolve(__dirname, "../visits-style/src"),
         "node_modules",
       ],
       alias: {
-        '@components': path.resolve(__dirname, "../visits-style/src/components"),
         '_components': path.resolve(__dirname, "./src/components"),
         '_assets': path.resolve(__dirname, "./src/assets"),
-        '@utils': path.resolve(__dirname, "../visits-style/src/utils"),
-        '@styles': path.resolve(__dirname, "../visits-style/src/styles"),
-        '@theme': path.resolve(__dirname, "../visits-style/src/theme"),
       }
     },
     module: {
@@ -92,8 +85,13 @@ const parse = docgen.withDefaultConfig(parseConfig).parse;
 
 function parsePropsItem({ name, description, required, type, defaultValue }) {
   if (name.indexOf('aria-') > -1) return;
-  const res = { name, description, required, type: type.name };
-  res.defaultValue = defaultValue ? defaultValue.value : defaultValue;
+  const res = {
+    name,
+    description,
+    required,
+    type: type.name,
+    defaultValue: defaultValue ? defaultValue.value : defaultValue,
+  };
   return res;
 }
 
@@ -124,8 +122,20 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node,
       value: `/${value}`
     });
-  } else if (node.internal.type === 'File' && node.sourceInstanceName === 'components') {
+  } else if (node.internal.type === 'File' && node.sourceInstanceName === 'types') {
     const value = parseMeta(parse(node.absolutePath));
+    let name = '';
+    if (node.relativePath.indexOf('index.d.ts') > -1) {
+      const str = node.relativePath.split('/');
+      name = str[1];
+    } else {
+      name = node.relativePath.substring(0, node.relativePath.indexOf('/')).replace('.d.ts', '');
+    }
+    createNodeField({
+      name: 'component',
+      node,
+      value: name,
+    });
     createNodeField({
       name: 'meta',
       node,

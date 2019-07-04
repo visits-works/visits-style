@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import normalize from '@styles/normalize';
+import { normalizeStyle } from 'visits-style';
 
 export default createGlobalStyle`
-  ${normalize}
+  ${normalizeStyle}
 
   html {
     font-weight: 400;
@@ -17,8 +17,8 @@ export default createGlobalStyle`
   body {
     overflow-y: auto;
     position: relative;
-    background-color: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }: any) => theme.background};
+    color: ${({ theme }: any) => theme.text};
 
     #___gatsby {
       height: 100%;

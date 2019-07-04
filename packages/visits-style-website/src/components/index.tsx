@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-// @ts-ignore
-import { Table, Tag } from '@components';
+import { Table, Tag } from 'visits-style';
 import Highlight from './Highlight';
 import H2 from './H2';
 

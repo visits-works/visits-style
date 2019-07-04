@@ -26,7 +26,7 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
   );
 }
 
-const AnimatedContent = styled.div`
+const AnimatedContent = styled.div<{ timeout: number }>`
   transform-origin: top;
   will-change: transform, max-height;
   transition-property: transform, max-height;
