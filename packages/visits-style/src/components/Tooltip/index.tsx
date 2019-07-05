@@ -1,5 +1,6 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import { Transition } from 'react-transition-group';
 import { ColorType } from '../../types';
 
 interface TooltipProps {
@@ -15,16 +16,23 @@ interface TooltipProps {
 
 export default function Tooltip({ children, position = 'bottom', label, color, ...rest }: TooltipProps) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const tooltip = useRef<HTMLDivElement | null>(null);
+  const size = useRef(0);
 
   const [show, setShow] = useState(false);
   const [tooltipStyle, setStyle] = useState({});
 
-  const openTooltip = useCallback(() => {
-    if (show || !parent.current || !tooltip.current) return;
+  const openTooltip = () => setShow(true);
+  const closeTooltip = () => {
+    setShow(false);
+    size.current = 0;
+  }
+
+  const refCallback = (elem: HTMLDivElement) => {
+    if (size.current > 0 || !parent.current || !elem) return;
+    size.current = elem.offsetWidth;
 
     const parentRect = parent.current.getBoundingClientRect();
-    const rect = tooltip.current.getBoundingClientRect();
+    const rect = elem.getBoundingClientRect();
     const left = parentRect.width + 8;
     const top = parentRect.height + 8;
     const width = (parentRect.width - rect.width) >> 1;
@@ -48,11 +56,7 @@ export default function Tooltip({ children, position = 'bottom', label, color, .
         break;
       }
     }
-    setShow(true);
-  // eslint-disable-next-line
-  }, [position]);
-
-  const closeTooltip = useCallback(() => setShow(false), []);
+  };
 
   return (
     <Wrapper
@@ -64,15 +68,24 @@ export default function Tooltip({ children, position = 'bottom', label, color, .
       {...rest}
     >
       {children}
-      <TooltipWrapper
-        ref={tooltip}
-        show={show}
-        role="tooltip"
-        color={color}
-        style={tooltipStyle}
+      <Transition
+        in={show}
+        timeout={250}
+        unmountOnExit
       >
-        {label}
-      </TooltipWrapper>
+        {state => (
+          <TooltipWrapper
+            className={state}
+            ref={refCallback}
+            show={show}
+            role="tooltip"
+            color={color}
+            style={tooltipStyle}
+          >
+            {label}
+          </TooltipWrapper>
+        )}
+      </Transition>
     </Wrapper>
   );
 }

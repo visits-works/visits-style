@@ -3,6 +3,7 @@ import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
+  /** ボタンなどの表示するラベル */
   header: any;
   show: boolean;
   timeout?: number;

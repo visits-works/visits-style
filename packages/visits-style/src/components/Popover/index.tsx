@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useRef, HTMLAttributes, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState, useRef, HTMLAttributes, useEffect } from 'react';
+import styled from 'styled-components';
+import { Transition } from 'react-transition-group';
 import Box from '../../elements/Box';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -7,6 +8,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   label: React.ReactNode;
   /** 内容のリスト */
   children?: React.ReactNode | React.ReactNode;
+  /** 吹き出しの背景色 */
+  color?: string;
   /** 右の基準でリストを表示する */
   right?: boolean;
   /** 吹き出しが表示される場所 */
@@ -23,7 +26,7 @@ export default function Popover({
   position, label, children, color = 'white', onOpen, onClose, disabled, ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const tooltip = useRef<HTMLDivElement | null>(null);
+  const size = useRef(0);
 
   const [show, setShow] = useState(false);
   const [tooltipStyle, setStyle] = useState({});
@@ -32,10 +35,24 @@ export default function Popover({
     if (show && disabled) setShow(false);
   }, [show, disabled]);
 
-  const handleFocus = useCallback(() => {
-    if (show || !parent.current || !tooltip.current || !!disabled) return;
+  const handleFocus = () => {
+    if (show || !!disabled) return;
+    if (onOpen) onOpen();
+    setShow(true);
+  };
+
+  const handleBlur = () => {
+    if (!show) return;
+    if (onClose) onClose();
+    setShow(false);
+    size.current = 0;
+  };
+
+  const refCallback = (elem: HTMLElement) => {
+    if (size.current > 0 || !parent.current || !elem || !show) return;
+    const width = elem.offsetWidth;
     const parentRect = parent.current.getBoundingClientRect();
-    const tooltipRect = tooltip.current.getBoundingClientRect();
+    size.current = width;
 
     switch (position) {
       case 'top-left': {
@@ -49,7 +66,7 @@ export default function Popover({
       case 'top': {
         setStyle({
           bottom: `${parentRect.height + 8}px`,
-          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
+          left: `${(parentRect.width - width) >> 1}px`,
         });
         break;
       }
@@ -60,7 +77,7 @@ export default function Popover({
       case 'bottom': {
         setStyle({
           top: `${parentRect.height + 8}px`,
-          left: `${(parentRect.width - tooltipRect.width) >> 1}px`,
+          left: `${(parentRect.width - width) >> 1}px`,
         });
         break;
       }
@@ -70,34 +87,35 @@ export default function Popover({
         break;
       }
     }
-    if (onOpen) onOpen();
-    setShow(true);
-  }, [show, position, onOpen, disabled]);
-
-  const handleBlur = useCallback(() => {
-    if (onClose) onClose();
-    if (show) setShow(false);
-  }, [show, onClose]);
+  }
 
   return (
     <Wrapper
       tabIndex={0}
       role="button"
-      ref={parent}
       onClick={handleFocus}
+      onBlur={handleBlur}
+      ref={parent}
     >
       {label}
-      <Tooltip
-        show={show}
-        role="tooltip"
-        ref={tooltip}
-        style={tooltipStyle}
-        color={color}
-        {...rest}
+      <Transition
+        in={show}
+        timeout={250}
+        unmountOnExit
       >
-        {children}
-      </Tooltip>
-      {show && (<Shadow onClick={handleBlur} />)}
+        {state => (
+          <Tooltip
+            className={state}
+            role="tooltip"
+            ref={refCallback}
+            style={tooltipStyle}
+            color={color}
+            {...rest}
+          >
+            {children}
+          </Tooltip>
+        )}
+      </Transition>
     </Wrapper>
   );
 }
@@ -114,40 +132,29 @@ const Wrapper = styled.div`
   }
 `;
 
-const Tooltip = styled(Box)<{ show?: boolean }>`
+const Tooltip = styled(Box)`
   position: absolute;
   display: flex;
   clear: both;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  z-index: 9999;
   padding: 0.5rem 0;
   width: auto;
   height: auto;
   cursor: auto;
 
-  will-change: transform, opacity, visibility;
-  transform: scale(0.8);
-  opacity: 0;
-  visibility: hidden;
+  will-change: transform, opacity;
 
-  transition-property: transform, opacity, visibility;
+  transition-property: transform, opacity;
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
-  ${({ show }) => show && css`
+  &.entering, &.exiting, &.exited {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  &.entered {
     transform: scale(1);
     opacity: 1;
-    visibility: visible;
-  `}
-`;
-
-const Shadow = styled.div`
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+  }
 `;

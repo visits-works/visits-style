@@ -3,11 +3,11 @@
   "author": "@nukbal",
   "repository": "https://github.com/visits-works/visits-style",
   "version": "1.0.0-alpha.3",
-  "private": true,
   "main": "index.js",
   "module": "visits-style.esm.js",
   "jsnext:main": "visits-style.esm.js",
   "typings": "index.d.ts",
+  "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.6",
     "react-dom": ">=16.8.6",
