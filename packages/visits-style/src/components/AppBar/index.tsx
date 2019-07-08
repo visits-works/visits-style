@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
@@ -26,7 +26,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export default function AppBar({ children, align, brand, ...rest }: Props) {
   const [show, setShow] = useState(false);
-  const toggleMenu = useCallback(() => setShow(!show), [show]);
+  const toggleMenu = () => setShow(!show);
 
   return (
     <NavBar

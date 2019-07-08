@@ -15,16 +15,20 @@ const positionList = [
 
 storiesOf('components|Popover', module)
   .add('default', () => (
-    <Popover
-      label="show"
-      // @ts-ignore
-      position={select('position', positionList, 'bottom-right')}
-      onOpen={action('onOpen')}
-      onClose={action('onClose')}
-      disabled={boolean('disabled', false)}
-    >
-      <a onClick={() => { alert('world!') }}>hello</a>
-      <p>blah blah iaweuhfauwehguiawehgawueghawegauweghuaiweg</p>
-    </Popover>
+    <>
+      <div style={{ width: '50px', height: '80vh' }} />
+      <Popover
+        label="show"
+        // @ts-ignore
+        position={select('position', positionList, 'bottom-right')}
+        onOpen={action('onOpen')}
+        onClose={action('onClose')}
+        disabled={boolean('disabled', false)}
+      >
+        <a onClick={() => { alert('world!') }}>hello</a>
+        <p>blah blah iaweuhfauwehguiawehgawueghawegauweghuaiweg</p>
+      </Popover>
+      <div style={{ width: '50px', height: '80vh' }} />
+    </>
   ));
 

@@ -1,6 +1,7 @@
-import React, { HTMLAttributes, useEffect } from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
+import useScrollFix from '../../hooks/useScrollFix';
 import Box from '../../elements/Box';
 import { ColorType } from '../../types';
 
@@ -79,13 +80,7 @@ export default function Modal({
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
-  useEffect(() => {
-    if (show) {
-      document.body.style.overflowY = 'hidden';
-    } else if (document.querySelectorAll('[aria-modal]').length <= 1) {
-      document.body.style.overflowY = 'auto';
-    }
-  }, [show]);
+  useScrollFix(show);
   return (
     <Transition
       in={show}
