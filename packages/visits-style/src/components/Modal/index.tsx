@@ -1,7 +1,9 @@
 import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
+import { createPortal } from 'react-dom';
 import useScrollFix from '../../hooks/useScrollFix';
+import useDiv from '../../hooks/useDiv';
 import Box from '../../elements/Box';
 import { ColorType } from '../../types';
 
@@ -80,15 +82,20 @@ export default function Modal({
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
+  const [dom, onExited] = useDiv(!!show, 'presentation');
   useScrollFix(show);
+
+  if (!dom.current) return null;
+
   return (
     <Transition
       in={show}
       timeout={timeout!}
+      onExited={onExited}
       unmountOnExit
       mountOnEnter
     >
-      {state => (
+      {state => createPortal((
         <Wrapper
           role="dialog"
           aria-modal="true"
@@ -100,7 +107,7 @@ export default function Modal({
           </AnimatedBox>
           {external}
         </Wrapper>
-      )}
+      ), dom.current!)}
     </Transition>
   );
 }

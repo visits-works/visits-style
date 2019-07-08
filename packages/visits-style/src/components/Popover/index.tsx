@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 import Box from '../../elements/Box';
+import useDiv from '../../hooks/useDiv';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
@@ -27,33 +28,15 @@ export default function Popover({
   position, label, children, color = 'white', onOpen, onClose, disabled, className = '', ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const dom = useRef<HTMLDivElement | null>(null);
   const size = useRef(0);
 
   const [show, setShow] = useState(false);
   const [tooltipStyle, setStyle] = useState({});
-
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      dom.current = document.createElement('div');
-      dom.current.setAttribute('role', 'tooltip');
-    }
-  }, []);
+  const [dom, onExited] = useDiv(show, 'tooltip');
 
   useEffect(() => {
     if (show && disabled) setShow(false);
   }, [show, disabled]);
-
-  useEffect(() => {
-    let mounted = false;
-    if (show) {
-      document.body.appendChild(dom.current!);
-      mounted = true;
-    }
-    return () => {
-      if (mounted) document.body.removeChild(dom.current!);
-    };
-  }, [show]);
 
   const handleFocus = () => {
     if (show || !!disabled) return;
@@ -130,6 +113,7 @@ export default function Popover({
       <Transition
         in={show}
         timeout={250}
+        onExited={onExited}
         unmountOnExit
       >
         {state => createPortal((
@@ -170,7 +154,7 @@ const Tooltip = styled(Box)`
   width: auto;
   height: auto;
   cursor: auto;
-  z-index: 100;
+  z-index: 40;
 
   will-change: transform, opacity;
 
@@ -191,7 +175,7 @@ const Tooltip = styled(Box)`
 
 const Shadow = styled.div`
   position: fixed;
-  z-index: 98;
+  z-index: 38;
   top: 0;
   left: 0;
   right: 0;
