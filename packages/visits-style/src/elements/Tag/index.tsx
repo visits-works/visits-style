@@ -10,6 +10,7 @@ interface WrapperProps {
   color?: ColorType;
   addonColor?: ColorType;
   close: boolean;
+  round?: boolean;
 }
 
 function getColor(theme: ThemeType, color?: ColorType) {

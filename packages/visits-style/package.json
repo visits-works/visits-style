@@ -18,7 +18,7 @@
     "react-transition-group": "^4.1.1"
   },
   "scripts": {
-    "build": "tsdx build && cp ./package.json ./dist/package.json",
+    "build": "tsdx build && cp ./package.json ./dist/package.json && cp ../../LICENSE ./dist/LICENSE",
     "lint": "eslint --ext .tsx,.ts src",
     "test": "jest test --env=jsdom",
     "develop": "cd ../visits-style-website && yarn start",
@@ -42,9 +42,9 @@
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
     "@types/jest": "^24.0.12",
-    "@types/react": "^16.8.17",
+    "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
-    "@types/react-transition-group": "^2.9.1",
+    "@types/react-transition-group": "^2.9.2",
     "@types/storybook__addon-actions": "^3.4.3",
     "@types/storybook__addon-knobs": "^5.0.1",
     "@types/storybook__react": "^4.0.2",
@@ -74,7 +74,7 @@
     "react-dom": "^16.8.6",
     "styled-components": "^4.3.2",
     "tsdx": "^0.7.2",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "jest": {
     "verbose": true,

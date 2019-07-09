@@ -52,7 +52,7 @@ export default function Select({
   );
 }
 
-const InputWrapper = styled.span<{ size?: SizeType, error?: boolean, outline?: boolean }>`
+const InputWrapper = styled.span<{ size: Props["inputSize"], error?: boolean, outline?: boolean, disabled?: boolean }>`
   position: relative;
   display: block;
 

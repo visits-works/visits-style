@@ -67,7 +67,7 @@ const Icon = styled.span<{ right?: boolean }>`
   }
 `;
 
-const Wrapper = styled.span<{ outline?: boolean, error?: any }>`
+const Wrapper = styled.span<{ outline?: boolean, error?: any, disabled?: boolean }>`
   position: relative;
   display: block;
 

@@ -37,7 +37,9 @@ export default styled.button<Props>`
 
   &:hover, &:focus {
     ${({ underline }) => (underline ? { textDecoration: 'underline' } : undefined)}
-    ${({ pure, theme, color }) => (pure ? undefined : { background: transparentize(0.9, theme[color] || theme.text) })}
+    ${({ pure, theme, color }) => (
+      pure ? undefined : { background: transparentize(0.9, color ? (theme[color] || theme.text) : theme.text) }
+    )}
   }
 
   &:focus, &:active {
@@ -45,7 +47,9 @@ export default styled.button<Props>`
   }
 
   &:active {
-    ${({ pure, theme, color }) => (pure ? undefined : { background: transparentize(0.8, theme[color] || theme.text) })}
+    ${({ pure, theme, color }) => (
+      pure ? undefined : { background: transparentize(0.8, color ? (theme[color] || theme.text) : theme.text) }
+    )}
   }
 
   ${({ disabled, theme }) => (disabled ? css`

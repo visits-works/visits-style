@@ -24,14 +24,13 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   children: ReactNode;
   required?: boolean;
-  htmlFor?: string;
 }
 
-export default function Field({ label, children, htmlFor, required, ...rest }: Props) {
+export default function Field({ label, children, required, ...rest }: Props) {
   return (
     <Wrapper {...rest}>
       {label && (
-        <Label htmlFor={htmlFor}>
+        <Label>
           {label}
           {required && (<i>*</i>)}
         </Label>

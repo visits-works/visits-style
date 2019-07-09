@@ -21,7 +21,7 @@ export default function Textarea({ className, help, error, style, ...rest }: Pro
   );
 }
 
-const Wrapper = styled.span<{ error?: boolean }>`
+const Wrapper = styled.span<{ error?: boolean, disabled?: boolean }>`
   display: block;
   position: relative;
 

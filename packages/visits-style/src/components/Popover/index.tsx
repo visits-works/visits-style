@@ -51,7 +51,7 @@ export default function Popover({
     size.current = 0;
   };
 
-  const refCallback = (elem: HTMLElement) => {
+  const refCallback = (elem: HTMLElement | null) => {
     if (size.current > 0 || !parent.current || !elem || !show) return;
     const width = elem.offsetWidth;
     const height = elem.offsetHeight;
@@ -61,9 +61,16 @@ export default function Popover({
     let right = left + parentRect.width - width;
     size.current = width;
 
-    if (parent.current.offsetParent && parent.current.offsetParent.tagName !== 'BODY') {
+    let target = parent.current;
+    while(true) {
       // @ts-ignore
-      right += parent.current.offsetParent.offsetLeft;
+      target = target.offsetParent;
+      if (target && target.tagName !== 'BODY') {
+        // @ts-ignore
+        right += target.offsetLeft;
+      } else {
+        break;
+      }
     }
 
     switch (position) {

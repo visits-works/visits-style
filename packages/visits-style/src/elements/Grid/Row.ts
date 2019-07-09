@@ -1,7 +1,8 @@
+import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { mediaTablet } from '../../utils/media';
 
-export default styled.div`
+export default styled.div<HTMLAttributes<HTMLDivElement>>`
   display: flex;
   flex: 0 1 auto;
   flex-direction: row;

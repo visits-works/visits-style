@@ -13,7 +13,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function Switch({
-  className, height, showLabel, background, anchorColor,
+  className, showLabel, background, anchorColor,
   ...rest
 }: Props) {
   const id = useRef(`switch_${rest.name}`);
@@ -21,7 +21,6 @@ export default function Switch({
   return (
     <Wrapper
       className={className}
-      height={height}
       showLabel={showLabel}
       background={background}
       anchorColor={anchorColor}
@@ -52,7 +51,7 @@ const labelStyle = css`
   }
 `;
 
-const Wrapper = styled.span<{ showLabel?: boolean, background?: string, anchorColor?: string }>`
+const Wrapper = styled.span<{ showLabel?: boolean, background?: string, anchorColor?: string, disabled?: boolean }>`
   display: inline-block;
   cursor: pointer;
   line-height: 1.25;

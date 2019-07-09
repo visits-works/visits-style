@@ -22,7 +22,7 @@ interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   clearOnClick?: boolean;
 }
 
-const Wrapper = styled(Box)`
+const Wrapper = styled(Box)<{ clear?: boolean }>`
   position: relative;
   padding: 0.375em 0.75em;
   max-width: 100%;
@@ -118,7 +118,9 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   fixed?: boolean;
 }
 
-export default function Toast({ toasts, clear, fixed, style, margin = '1rem', ...rest }: ContainerProps) {
+export default function Toast(
+  { toasts, clear, fixed, style, margin = '1rem', position, ...rest }: ContainerProps,
+) {
   // const element = useRef<HTMLDivElement | null>(null);
 
   // useLayoutEffect(() => {
@@ -132,8 +134,9 @@ export default function Toast({ toasts, clear, fixed, style, margin = '1rem', ..
   return (
     <Container
       {...rest}
+      position={position}
       margin={margin}
-      style={{ position: fixed ? 'fixed' : 'absolute', ...style }}
+      style={{ position: (fixed ? 'fixed' : 'absolute'), ...style }}
     >
       {toasts.map(props => (
         <ToastItem
@@ -146,7 +149,7 @@ export default function Toast({ toasts, clear, fixed, style, margin = '1rem', ..
   );
 }
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<{ position: ContainerProps["position"], margin: ContainerProps["margin"] }>`
   display: flex;
   flex-direction: column;
   z-index: 9999;

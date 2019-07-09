@@ -27,7 +27,7 @@ export default function Tooltip({ children, position = 'bottom', label, color, .
     size.current = 0;
   }
 
-  const refCallback = (elem: HTMLDivElement) => {
+  const refCallback = (elem: HTMLDivElement | null) => {
     if (size.current > 0 || !parent.current || !elem) return;
     size.current = elem.offsetWidth;
 
@@ -116,7 +116,7 @@ const TooltipWrapper = styled.div<{ show?: boolean, color?: ColorType }>`
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
-  background-color: ${({ color, theme }) => theme[color] || 'white'};
+  background-color: ${({ color, theme }) => color ? (theme[color] || 'white') : 'white'};
 
   ${({ show }) => show && css`
     transform: scale(1);

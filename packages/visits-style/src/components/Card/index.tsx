@@ -74,7 +74,7 @@ export default function Card({
     return null;
   }, [image, title, horizontal]);
 
-  const styles = useMemo(
+  const styles: any = useMemo(
     () => ({ flexDirection: horizontal ? 'row' : 'column', ...style }),
     [style, horizontal],
   );
