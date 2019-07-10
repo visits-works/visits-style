@@ -56,18 +56,19 @@ export default function Popover({
     const width = elem.offsetWidth;
     const height = elem.offsetHeight;
     const parentRect = parent.current.getBoundingClientRect();
-    const top = parent.current.offsetTop;
     const left = parent.current.offsetLeft;
-    let right = left + parentRect.width - width;
+    let top = 0;
+    let right = parentRect.width - width;
     size.current = width;
 
     let target: HTMLDivElement | Element | null = parent.current;
     while(target !== null) {
       // @ts-ignore
-      if (!isNaN(target.offsetLeft)) {
-        // @ts-ignore
-        right += target.offsetLeft;
-      }
+      const offLeft = target.offsetLeft;
+      // @ts-ignore
+      const offTop = target.offsetTop;
+      if (!isNaN(offLeft)) right += offLeft;
+      if (!isNaN(offTop)) top += offTop;
       // @ts-ignore
       target = target.offsetParent;
     }
