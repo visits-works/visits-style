@@ -6,20 +6,39 @@ import { convertTitleToId } from '../H2';
 
 const Wrapper = styled(Col)`
   position: sticky;
-  width: 240px;
-  flex: 0 240px;
-  padding: 1.5rem !important;
+  padding: 0;
   background-color: ${({ theme }) => theme.background};
-  overflow-y: auto;
+  flex-direction: column;
   top: 3.25rem;
-  height: calc(100vh - 3.25rem);
+  padding: 0.85rem;
+
+  ul {
+    padding-left: 1.5rem;
+  }
+
+  li {
+    display: block;
+    list-style-type: none;
+    a {
+      color: ${({ theme }) => theme.text};
+      cursor: pointer;
+      padding: 0.325rem 0.625rem;
+    }
+  }
 
   ${mediaTablet} {
     position: relative;
-    overflow-y: hidden;
+    flex-direction: row;
+    flex-wrap: unset;
     top: 0;
     width: 100%;
-    flex: 1;
+    max-width: 100%;
+    overflow-x: auto;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+    }
   }
 `;
 
@@ -87,7 +106,7 @@ export default function Sidebar({ current }: any) {
     const menuList = allMdx.edges
       .filter(({ node }: any) => node.fields.slug.indexOf(target) > -1);
     return (
-      <Wrapper>
+      <Wrapper as="ul" size={2} auto>
         {menuList.map(renderMenuItem)}
       </Wrapper>
     );

@@ -1,6 +1,7 @@
 ---
 title: Toast
 description: 通知などのためのトーストです
+import: Toast
 ---
 
 ## Imports
@@ -15,63 +16,44 @@ import { Toast } from 'visits-style';
 ## Demo
 
 ```jsx live
-class ToastDemo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { list: [], position: 'top-left' };
+function ToastDemo() {
+  const [list, setList] = React.useState([]);
+  const [position, setPosition] = React.useState('top-left');
 
-    this.addToast = this.addToast.bind(this);
-    this.clearToast = this.clearToast.bind(this);
-    this.clearAll = this.clearAll.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-  }
-
-  addToast() {
+  const addToast = () => {
     const colorList= ['warning', 'danger', 'info', 'primary', 'success'];
-    const list = this.state.list.slice();
+    const lst = list.slice();
     const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
     const id = '_' + Math.random().toString(36).substr(2, 9);
     if (list.length % 2) {
-      list.push({ id: id, color: color, message: <span>{'looooooooooooooooooooooooooooooong list number: ' + list.length}</span> });
+      lst.push({ id: id, color: color, message: <span>{'looooooooooooooooooooooooooooooong list number: ' + lst.length}</span> });
     } else {
-      list.push({ id: id, color: color, message: 'list number: ' + list.length });
+      lst.push({ id: id, color: color, message: 'list number: ' + lst.length });
     }
-    this.setState({ list: list });
-  }
+    setList(lst);
+  };
 
-  clearToast(id) {
-    const list = this.state.list.filter(item => item.id !== id);
-    this.setState({ list: list });
-  }
+  const clearToast = (id) => setList(list.filter(item => item.id !== id));
+  const clearAll = () => setList([]);
+  const onSelect = (e) => setPosition(e.target.value);
 
-  clearAll() {
-    this.setState({ list: [] });
-  }
-
-  onSelect(e) {
-    this.setState({ position: e.target.value });
-  }
-
-  render() {
-    const positionList = ['top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
-    const { list, position } = this.state;
-    return (
-      <div>
-        <div style={{ width: '150px' }}>
-          <Select
-            name="position"
-            value={position}
-            options={positionList}
-            onChange={this.onSelect}
-            outline
-          />
-        </div>
-        <br />
-        <Button color="info" onClick={this.addToast}>Toast!</Button>
-        <Button color="danger" onClick={this.clearAll}>Clear All</Button>
-        <Toast toasts={list} clear={this.clearToast} position={position} />
+  const positionList = ['top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
+  return (
+    <div>
+      <div style={{ width: '150px' }}>
+        <Select
+          name="position"
+          value={position}
+          options={positionList}
+          onChange={onSelect}
+          outline
+        />
       </div>
-    );
-  }
+      <br />
+      <Button color="info" onClick={addToast}>Toast!</Button>
+      <Button color="danger" onClick={clearAll}>Clear All</Button>
+      <Toast toasts={list} clear={clearToast} position={position} />
+    </div>
+  );
 }
 ```

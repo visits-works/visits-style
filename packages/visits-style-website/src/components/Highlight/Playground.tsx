@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { LiveProvider, LiveError, withLive } from "react-live";
-
+import { LiveProvider, LiveError, withLive } from 'react-live';
+import { Language } from 'prism-react-renderer';
 import Editor from './Highlight';
-import Preview from './Preview';
-
 import Logo from '../Logo';
 // @ts-ignore
 import ImgUrl from '../../../assets/sample.png';
-
 // @ts-ignore
 import * as all from 'visits-style';
 
 interface Props {
   children: string;
+  lang?: Language;
 }
 
-const LiveWrapper = styled.div`
+const LiveWrapper = styled(LiveProvider)`
   max-width: 100%;
   padding: 0;
   margin-top: 0.75rem;
@@ -56,14 +54,12 @@ export default class Playground extends Component<Props> {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, lang } = this.props;
+    const code = children.trim();
     return (
-      <LiveWrapper>
-        <LiveProvider code={children} scope={scope} mountStylesheet={false}>
-          <Preview />
-          <LiveError />
-          <TextEditor />
-        </LiveProvider>
+      <LiveWrapper code={code} scope={scope} language={lang}>
+        <LiveError />
+        <TextEditor />
       </LiveWrapper>
     );
   }

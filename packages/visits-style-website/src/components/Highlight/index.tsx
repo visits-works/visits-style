@@ -14,10 +14,11 @@ interface Props {
   live?: boolean;
 }
 
-export default function Highlight({ children, live, ...rest }: Props) {
+export default function Highlight({ children, live, className }: Props) {
   const content = getChildren(children);
+  const lang: any = className ? className.replace('language-', '') : undefined;
   if (live) {
-    return <Playground {...rest} >{content}</Playground>;
+    return <Playground lang={lang} >{content}</Playground>;
   }
-  return <HighlightCode>{content}</HighlightCode>
+  return <HighlightCode lang={lang}>{content}</HighlightCode>
 }

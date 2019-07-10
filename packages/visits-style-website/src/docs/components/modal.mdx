@@ -1,8 +1,8 @@
 ---
 title: Modal
 description: モーダル
+import: Modal
 ---
-
 
 ## Imports
 ```javascript
@@ -12,60 +12,45 @@ import { Modal } from 'visits-style';
 ## Basic usage
 
 ```jsx live
-class ModalTest extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { show: false };
+function ModalTest() {
+  const [show, setShow] = React.useState(false);
+  const showModal = () => setShow(true);
+  const closeModal = () => setShow(true);
 
-    this.showModal = this.showModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+  const CloseButton = {
+    position: 'absolute',
+    padding: '0.75rem',
+    top: 0,
+    right: 0,
+  };
+  const title = (
+    <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+      <h3>Modal Title</h3>
+      <a style={CloseButton} onClick={this.closeModal}>X</a>
+    </header>
+  );
+  const footer = (
+    <footer style={{ width: '100%', textAlign: 'center', padding: '0.325rem' }}>
+      <Button style={{ width: '40%' }} onClick={this.closeModal}>close</Button>
+      <Button style={{ width: '40%' }} color="primary">Save changes</Button>
+    </footer>
+  );
 
-  showModal() {
-    this.setState({ show: true });
-  }
-
-  closeModal() {
-    this.setState({ show: false });
-  }
-
-  render() {
-    const CloseButton = {
-      position: 'absolute',
-      padding: '0.75rem',
-      top: 0,
-      right: 0,
-    };
-    const title = (
-      <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-        <h3>Modal Title</h3>
-        <a style={CloseButton} onClick={this.closeModal}>X</a>
-      </header>
-    );
-    const footer = (
-      <footer style={{ width: '100%', textAlign: 'center', padding: '0.325rem' }}>
-        <Button style={{ width: '40%' }} onClick={this.closeModal}>close</Button>
-        <Button style={{ width: '40%' }} color="primary">Save changes</Button>
-      </footer>
-    );
-    return (
-      <div>
-        <Button onClick={this.showModal}>Show Modal</Button>
-        <Modal
-          title={title}
-          show={this.state.show}
-          closeModal={this.closeModal}
-          size={4}
-          footer={footer}
-          style={{ padding: '1rem' }}
-          closeOnOverlay
-        >
-          Modal body text goes here.
-        </Modal>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Button onClick={showModal}>Show Modal</Button>
+      <Modal
+        title={title}
+        show={show}
+        closeModal={closeModal}
+        size={4}
+        footer={footer}
+        style={{ padding: '1rem' }}
+        closeOnOverlay
+      >
+        Modal body text goes here.
+      </Modal>
+    </div>
+  );
 }
 ```
-
-## Props

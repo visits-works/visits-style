@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { Row, Col, Container, defaultTheme } from 'visits-style';
+import styled, { ThemeProvider } from 'styled-components';
+import { Row, Col, Container, defaultTheme, mediaMobile } from 'visits-style';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -11,6 +11,14 @@ const theme = {
   ...defaultTheme,
 };
 
+const Main = styled(Container).attrs({ as: 'main' })`
+  margin: 0;
+  margin-top: 3.25rem;
+  ${mediaMobile} {
+    margin-top: 2.625rem;
+  }
+`;
+
 
 export default function Layout({ children, current }: any) {
   return (
@@ -18,14 +26,14 @@ export default function Layout({ children, current }: any) {
       <Fragment>
         <GlobalStyle />
         <Topbar current={current} />
-        <Container as="main" style={{ margin: 0, marginTop: '3.25rem' }} fluid>
-          <Row style={{ margin: 0 }}>
+        <Main fluid>
+          <Row>
             {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
-            <Col size={10} auto style={{ flex: 1, backgroundColor: 'white' }}>
+            <Col size={current !== 'index.mdx' ? 10 : 12} auto style={{ backgroundColor: 'white' }}>
               {children}
             </Col>
           </Row>
-        </Container>
+        </Main>
         <Footer />
       </Fragment>
     </ThemeProvider>

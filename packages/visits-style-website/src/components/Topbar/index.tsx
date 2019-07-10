@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import { AppBar } from 'visits-style';
+import { AppBar, mediaMobile } from 'visits-style';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||
@@ -32,16 +32,25 @@ query {
 `;
 
 const Logo = (
-<Link to="/">
-  <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Visits-style</h2>
-</Link>
+  <Link to="/">
+    <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Visits-style</h2>
+  </Link>
 );
 
-const customCss = css`
+const Header = styled(AppBar)`
+  z-index: 100;
   a {
     transition: color 150ms ease-in-out;
     &:hover {
       color: ${({ theme }) => theme.primary};
+    }
+  }
+
+  ${mediaMobile} {
+    min-height: 2.625rem;
+    nav > button {
+      height: 2.625rem;
+      width: 2.625rem;
     }
   }
 `;
@@ -66,17 +75,15 @@ export default function Topbar({ current }: { current: string }) {
   }
 
   return (
-    <AppBar
+    <Header
       brand={Logo}
       color="dark"
-      style={{ zIndex: 100 }}
-      css={customCss}
       fixed
     >
       <StaticQuery
         query={pageQuery}
         render={renderMenu}
       />
-    </AppBar>
+    </Header>
   );
 }

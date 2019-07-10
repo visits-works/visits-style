@@ -1,16 +1,25 @@
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
 // @ts-ignore
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 // @ts-ignore
-import { MDXProvider } from '@mdx-js/tag';
-import { Container } from 'visits-style';
+import { MDXProvider } from '@mdx-js/react';
+import { Container, mediaMobile, defaultTheme, Row, Col } from 'visits-style';
+import Topbar from './components/Topbar';
+import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 import components from './components';
 
 import Layout from './layout';
+import PropsTable from './components/Props';
+import GlobalStyle from './globalStyle';
+
+const theme = {
+  ...defaultTheme,
+};
 
 const Header = styled.h1`
   font-size: 2.75rem;
@@ -22,6 +31,14 @@ const Desc = styled.p`
   font-size: 0.8rem;
   color: ${({ theme }) => theme.textLight};
   margin-bottom: 2rem;
+`;
+
+const Main = styled(Container).attrs({ as: 'main' })`
+  margin: 0;
+  margin-top: 3.25rem;
+  ${mediaMobile} {
+    margin-top: 2.625rem;
+  }
 `;
 
 export const pageQuery = graphql`
@@ -64,8 +81,17 @@ export const pageQuery = graphql`
   }
 `;
 
-function renderDoc(mdx: any, title: string, description?: string) {
-  if (mdx.parent.relativePath === 'index.mdx') {
+function renderDoc(data: any) {
+  const {
+    mdx,
+    site: {
+      siteMetadata: { title, description }
+    },
+    file,
+  } = data;
+  const current = mdx.parent.relativePath;
+
+  if (current === 'index.mdx') {
     return (
       <Fragment>
         <Helmet>
@@ -86,6 +112,7 @@ function renderDoc(mdx: any, title: string, description?: string) {
       <Container>
         {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
         {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
+        {file.fields && <PropsTable fields={file.fields} />}
         <MDXRenderer>{mdx.code.body}</MDXRenderer>
       </Container>
     </Fragment>
@@ -93,20 +120,27 @@ function renderDoc(mdx: any, title: string, description?: string) {
 }
 
 export default function MDXRuntime({ data }: any) {
-  const {
-    mdx,
-    site: {
-      siteMetadata: { title, description }
-    }
-  } = data;
-  const current = mdx.parent.relativePath;
-  console.log(data);
+  const current = data.mdx.parent.relativePath;
 
   return (
     <Layout current={current}>
-      <MDXProvider components={components}>
-        {renderDoc(mdx, title, description)}
-      </MDXProvider>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <GlobalStyle />
+        <Topbar current={current} />
+        <Main fluid>
+          <Row>
+            {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
+            <Col size={current !== 'index.mdx' ? 10 : 12} auto style={{ backgroundColor: 'white' }}>
+              <MDXProvider components={components}>
+                {renderDoc(data)}
+              </MDXProvider>
+            </Col>
+          </Row>
+        </Main>
+        <Footer />
+      </Fragment>
+    </ThemeProvider>
     </Layout>
   );
 }

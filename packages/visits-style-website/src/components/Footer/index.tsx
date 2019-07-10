@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mediaMobile } from 'visits-style';
 import Logo from '../Logo';
 
 const Wrapper = styled.footer`
@@ -19,6 +20,10 @@ const Wrapper = styled.footer`
       color: ${({ theme }) => theme.textLight};
     }
   }
+
+  ${mediaMobile} {
+    padding: 0.85rem;
+  }
 `;
 
 const currentYear = new Date().getFullYear();
@@ -26,8 +31,8 @@ const currentYear = new Date().getFullYear();
 export default function Footer() {
   return (
     <Wrapper>
-      <a href="https://visits.world" target="_blank"><Logo /></a>
-      <div>Copyright ©{currentYear} Visits Technologies.</div>
+      <a href="https://visits.world" target="_blank" rel="noopener noreferrer"><Logo /></a>
+      <div>©{currentYear} VISITS Technologies Inc.</div>
     </Wrapper>
   );
 }

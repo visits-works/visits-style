@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-live';
+import { Language } from 'prism-react-renderer';
 import { HighlightStyle } from './styles';
 
 interface Props {
@@ -8,41 +9,32 @@ interface Props {
   live?: boolean;
   onChange?: (code: string) => void;
   onError?: (e: any) => void;
+  lang?: Language;
 }
-
-interface State {
-  code: string;
+export default function HighlightCode({ live, children, onChange, lang }: Props) {
+  const handleChange = (value: string) => {
+    if (onChange) onChange(value);
+  };
+  const code = children.trim();
+  return (
+    <Wrapper
+      code={code}
+      // @ts-ignore
+      onChange={handleChange}
+      disabled={!live}
+      language={lang}
+      noInline
+    />
+  );
 }
 
 const Wrapper = styled(Editor)`
   ${HighlightStyle}
   margin-bottom: 0.725rem;
-
-  &[contenteditable] {
-    max-height: 300px;
-    overflow-y: auto;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    outline: none;
-  }
+  margin-left: -0.725rem;
+  margin-right: -0.725rem;
+  max-height: 300px;
+  overflow-y: auto;
+  outline: none;
 `;
-
-export default class HighlightCode extends Component<Props, State> {
-  static defaultProps = {
-    live: false,
-  }
-
-  onChange = (code: string) => {
-    if (this.props.onChange) {
-      this.props.onChange(code);
-    }
-  }
-
-  render() {
-    const { children, live } = this.props;
-    return (
-      <Wrapper code={children} onChange={this.onChange} contentEditable={live} />
-    );
-  }
-}
 

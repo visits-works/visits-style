@@ -1,9 +1,9 @@
-
+import { Fragment } from 'react';
 import { Hero, Button } from 'visits-style';
 import { Link } from 'gatsby';
 import Highlight from '_components/Highlight';
 
-<div style={{ margin: '-1rem -1.5rem' }}>
+<Fragment>
   <Hero color="dark" center>
     <h1>Visits-style</h1>
     <div>
@@ -16,16 +16,13 @@ import Highlight from '_components/Highlight';
     </div>
   </Hero>
 
-  <section style={{ padding: '1rem', background: '#f7f7f7' }}>
-  </section>
-
   <section style={{ padding: '1rem', background: 'white' }}>
     <h1 style={{ textAlign: 'center' }}>Installation</h1>
     <h2 style={{ textAlign: 'center', margin: '2rem 0' }}>1. visits-styleを追加します</h2>
     <Highlight className="language-bash">
       {
-        'npm install --save github:visits-works/visits-style#master styled-components react react-dom\n' +
-        'yarn add github:visits-works/visits-style#master styled-components react react-dom'
+        'npm install --save styled-components react react-dom visits-style\n' +
+        'yarn add styled-components react react-dom visits-style'
       }
     </Highlight>
     <h2 style={{ textAlign: 'center', margin: '2rem 0' }}>2. themeの適用でvisits-styleを使う</h2>
@@ -48,4 +45,4 @@ import Highlight from '_components/Highlight';
       }
     </Highlight>
   </section>
-</div>
+</Fragment>
