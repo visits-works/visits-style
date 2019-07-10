@@ -122,13 +122,7 @@ const Burger = styled.button`
   }
 `;
 
-interface ContentProps {
-  color?: ColorType;
-  show?: boolean;
-  align?: 'left' | 'right';
-}
-
-const NavContent = styled.div<ContentProps>`
+const NavContent = styled.div<Pick<Props, 'color'|'align'> & { show?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -37,7 +37,7 @@ export default function Select({
   return (
     <InputWrapper
       className={className}
-      size={inputSize}
+      inputSize={inputSize}
       outline={outline}
       error={!!error}
       disabled={rest.disabled}
@@ -52,7 +52,7 @@ export default function Select({
   );
 }
 
-const InputWrapper = styled.span<{ size: Props["inputSize"], error?: boolean, outline?: boolean, disabled?: boolean }>`
+const InputWrapper = styled.span<Pick<Props, 'inputSize'|'outline'> & { error: boolean, disabled?: boolean }>`
   position: relative;
   display: block;
 
@@ -70,7 +70,7 @@ const InputWrapper = styled.span<{ size: Props["inputSize"], error?: boolean, ou
     text-align: left;
     color: inherit;
 
-    ${({ size }) => setSize('font-size', size)}
+    ${({ inputSize }) => setSize('font-size', inputSize)}
 
     border: 1px solid ${({ error, theme }) => (error ? theme.danger : theme.border)};
     ${({ outline, theme }) => (

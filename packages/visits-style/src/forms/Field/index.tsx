@@ -1,7 +1,7 @@
 import React, { ReactNode, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div<{ required?: boolean }>`
+const Wrapper = styled.div`
   display: block;
   margin: 1.5rem 0;
 `;

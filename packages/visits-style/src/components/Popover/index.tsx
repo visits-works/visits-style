@@ -61,16 +61,15 @@ export default function Popover({
     let right = left + parentRect.width - width;
     size.current = width;
 
-    let target = parent.current;
-    while(true) {
+    let target: HTMLDivElement | Element | null = parent.current;
+    while(target !== null) {
       // @ts-ignore
-      target = target.offsetParent;
-      if (target && target.tagName !== 'BODY') {
+      if (!isNaN(target.offsetLeft)) {
         // @ts-ignore
         right += target.offsetLeft;
-      } else {
-        break;
       }
+      // @ts-ignore
+      target = target.offsetParent;
     }
 
     switch (position) {

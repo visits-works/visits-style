@@ -95,7 +95,7 @@ const Wrapper = styled.div`
   display: inline-block;
 `;
 
-const TooltipWrapper = styled.div<{ show?: boolean, color?: ColorType }>`
+const TooltipWrapper = styled.div<Pick<TooltipProps, 'color'> & { show?: boolean }>`
   position: absolute;
   clear: both;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

@@ -1,17 +1,9 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { darken } from 'polished';
 import TextButton from '../Button/TextButton';
 import Close from '../Icons/Close';
 import findColorInvert from '../../utils/findColorInvert';
 import { ColorType, ThemeType } from '../../types';
-
-interface WrapperProps {
-  color?: ColorType;
-  addonColor?: ColorType;
-  close: boolean;
-  round?: boolean;
-}
 
 function getColor(theme: ThemeType, color?: ColorType) {
   return (!color || color === 'light') ? theme.background : theme[color];
@@ -36,7 +28,7 @@ const closeCss = css`
   }
 `;
 
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled.div<Pick<Props, 'color'|'round'> & { close: boolean; }>`
   display: inline-flex;
   font-size: 0.75rem;
   cursor: default;
@@ -49,11 +41,9 @@ const Wrapper = styled.div<WrapperProps>`
   white-space: nowrap;
   line-height: 1.5;
 
-  ${({ color, theme, addonColor }) => {
+  ${({ color, theme }) => {
     const target = getColor(theme, color);
     const invertColor = findColorInvert(theme, target);
-
-    const subColor = addonColor ? getColor(theme, addonColor) : darken(0.05, target);
 
     return css`
       color: ${invertColor};
@@ -61,11 +51,6 @@ const Wrapper = styled.div<WrapperProps>`
 
       a, span {
         color: ${invertColor};
-        background-color: ${subColor};
-      }
-
-      a:hover {
-        background-color: ${darken(0.05, subColor)};
       }
     `;
   }}
