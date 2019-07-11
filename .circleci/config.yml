@@ -4,7 +4,6 @@ defaults: &defaults
   docker:
     - image: circleci/node:10
 
-
 jobs:
   checkout_code:
     <<: *defaults
@@ -42,6 +41,8 @@ workflows:
             branches:
               ignore: /.*/
       - deploy:
+          requires:
+            - checkout_code
           filters:
             tags:
               only: /^v.*/
