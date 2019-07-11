@@ -3,35 +3,47 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/node:10
-  filters:
-    branches:
-      ignore: /.*/
-    tags:
-      only: /^v[0-9]+(\.[0-9]+)*$/
 
-publish:
-  jobs:
-    checkout_code:
-      <<: *defaults
-      steps:
-        - checkout
-        - restore_cache:
-            key: yarn-cache-{{ checksum "yarn.lock" }}
-        - run: cd ~/repo/packages/visits-style && yarn
-        - save_cache:
-            key: yarn-cache-{{ checksum "yarn.lock" }}
-            paths:
-              - ./node_modules
-        - persist_to_workspace:
-            root: ~/repo
-            paths: .
-    deploy:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/repo
-        - run:
-            name: Authenticate with registry
-            command: echo "//registry.npmjs.org/:_authToken=${npm_TOKEN}" > ~/repo/packages/visits-style/.npmrc
-        - run: cd ~/repo/packages/visits-style && yarn build
-        - run: npm publish ~/repo/packages/visits-style/dist --new-version ${VERSION}
+
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache-{{ checksum "yarn.lock" }}
+      - run: cd ~/repo/packages/visits-style && yarn
+      - save_cache:
+          key: yarn-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=${npm_TOKEN}" > ~/repo/packages/visits-style/.npmrc
+      - run: cd ~/repo/packages/visits-style && yarn build
+      - run: npm publish ~/repo/packages/visits-style/dist --new-version ${VERSION}
+
+workflows:
+  version: 2
+  publish:
+    jobs:
+      - checkout_code:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - deploy:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
