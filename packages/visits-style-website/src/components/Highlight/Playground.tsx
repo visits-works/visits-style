@@ -8,6 +8,7 @@ import Logo from '../Logo';
 import ImgUrl from '../../../assets/sample.png';
 // @ts-ignore
 import * as all from 'visits-style';
+import Preview from './Preview';
 
 interface Props {
   children: string;
@@ -58,6 +59,7 @@ export default class Playground extends Component<Props> {
     const code = children.trim();
     return (
       <LiveWrapper code={code} scope={scope} language={lang}>
+        <Preview />
         <LiveError />
         <TextEditor />
       </LiveWrapper>

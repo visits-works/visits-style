@@ -12,8 +12,6 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 
 import components from './components';
-
-import Layout from './layout';
 import PropsTable from './components/Props';
 import GlobalStyle from './globalStyle';
 
@@ -123,7 +121,6 @@ export default function MDXRuntime({ data }: any) {
   const current = data.mdx.parent.relativePath;
 
   return (
-    <Layout current={current}>
     <ThemeProvider theme={theme}>
       <Fragment>
         <GlobalStyle />
@@ -141,6 +138,5 @@ export default function MDXRuntime({ data }: any) {
         <Footer />
       </Fragment>
     </ThemeProvider>
-    </Layout>
   );
 }

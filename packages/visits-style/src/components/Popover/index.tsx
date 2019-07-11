@@ -56,9 +56,8 @@ export default function Popover({
     const width = elem.offsetWidth;
     const height = elem.offsetHeight;
     const parentRect = parent.current.getBoundingClientRect();
-    const left = parent.current.offsetLeft;
+    let left = 0;
     let top = 0;
-    let right = parentRect.width - width;
     size.current = width;
 
     let target: HTMLDivElement | Element | null = parent.current;
@@ -67,7 +66,7 @@ export default function Popover({
       const offLeft = target.offsetLeft;
       // @ts-ignore
       const offTop = target.offsetTop;
-      if (!isNaN(offLeft)) right += offLeft;
+      if (!isNaN(offLeft)) left += offLeft;
       if (!isNaN(offTop)) top += offTop;
       // @ts-ignore
       target = target.offsetParent;
@@ -79,24 +78,24 @@ export default function Popover({
         break;
       }
       case 'top-right': {
-        setStyle({ top: `${top - 8 - height}px`, left: right });
+        setStyle({ top: `${top - 8 - height}px`, left: left - width + parentRect.width });
         break;
       }
       case 'top': {
         setStyle({
           top: `${top - 8 - height}px`,
-          left: `${left - (width >> 1)}px`,
+          left: `${left - ((width - parentRect.width) >> 1)}px`,
         });
         break;
       }
       case 'bottom-right': {
-        setStyle({ top: `${top + parentRect.height + 8}px`, left: right });
+        setStyle({ top: `${top + parentRect.height + 8}px`, left: left - width + parentRect.width });
         break;
       }
       case 'bottom': {
         setStyle({
           top: `${top + parentRect.height + 8}px`,
-          left: `${left - (width >> 1)}px`,
+          left: `${left - ((width - parentRect.width) >> 1)}px`,
         });
         break;
       }
