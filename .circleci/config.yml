@@ -24,11 +24,12 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
+      - run: cd ~/repo/packages/visits-style && yarn build
+      - run: cd ~/repo/packages/visits-style/dist
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=${npm_TOKEN}" > ~/repo/packages/visits-style/.npmrc
-      - run: cd ~/repo/packages/visits-style && yarn build
-      - run: npm publish ~/repo/packages/visits-style/dist --new-version ${VERSION}
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/repo/packages/visits-style/dist/.npmrc
+      - run: npm publish
 
 workflows:
   version: 2
