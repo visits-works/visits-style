@@ -31,7 +31,7 @@ const Desc = styled.p`
   margin-bottom: 2rem;
 `;
 
-const Main = styled(Container).attrs({ as: 'main' })`
+const Main = styled(Row).attrs({ as: 'main' })`
   margin: 0;
   margin-top: 3.25rem;
   min-height: calc(100vh - 8.25rem);
@@ -120,21 +120,25 @@ function renderDoc(data: any) {
 
 export default function MDXRuntime({ data }: any) {
   const current = data.mdx.parent.relativePath;
-
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
         <GlobalStyle />
         <Topbar current={current} />
-        <Main fluid>
-          <Row>
-            {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
-            <Col size={current !== 'index.mdx' ? 10 : 12} auto style={{ backgroundColor: 'white' }}>
-              <MDXProvider components={components}>
-                {renderDoc(data)}
-              </MDXProvider>
-            </Col>
-          </Row>
+        <Main>
+          {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
+          <Col
+            size={current !== 'index.mdx' ? 10 : 12}
+            style={{
+              backgroundColor: 'white',
+              padding: current !== 'index.mdx' ? undefined : 0,
+            }}
+            auto
+          >
+            <MDXProvider components={components}>
+              {renderDoc(data)}
+            </MDXProvider>
+          </Col>
         </Main>
         <Footer />
       </Fragment>
