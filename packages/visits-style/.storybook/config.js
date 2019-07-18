@@ -45,7 +45,7 @@ addDecorator(
   })
 );
 
-const containerStyle: any = {
+const containerStyle = {
   padding: '3rem',
   display: 'flex',
   flexDirection: 'column',

@@ -28,15 +28,10 @@ export default function Popover({
   position, label, children, color = 'white', onOpen, onClose, disabled, className = '', ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const size = useRef(0);
+  const rect = useRef({ left: 0, top:0, width: 0, height: 0 });
 
   const [show, setShow] = useState(false);
-  const [tooltipStyle, setStyle] = useState({});
   const [dom, onExited] = useDiv(show, 'tooltip');
-
-  useEffect(() => {
-    if (show && disabled) setShow(false);
-  }, [show, disabled]);
 
   const handleFocus = () => {
     if (show || !!disabled) return;
@@ -48,60 +43,69 @@ export default function Popover({
     if (!show) return;
     if (onClose) onClose();
     setShow(false);
-    size.current = 0;
   };
 
-  const refCallback = (elem: HTMLElement | null) => {
-    if (size.current > 0 || !parent.current || !elem || !show) return;
-    const width = elem.offsetWidth;
-    const height = elem.offsetHeight;
-    const parentRect = parent.current.getBoundingClientRect();
-    let left = 0;
-    let top = 0;
-    size.current = width;
+  useEffect(() => {
+    if (show && disabled) handleBlur();
+  }, [show, disabled]);
 
-    let target: HTMLDivElement | Element | null = parent.current;
-    while(target !== null) {
-      // @ts-ignore
-      const offLeft = target.offsetLeft;
-      // @ts-ignore
-      const offTop = target.offsetTop;
-      if (!isNaN(offLeft)) left += offLeft;
-      if (!isNaN(offTop)) top += offTop;
-      // @ts-ignore
-      target = target.offsetParent;
+  const refCallback = (elem: HTMLElement | null) => {
+    if (!parent.current || !elem || !show) return;
+    const width = elem.offsetWidth || rect.current.width;
+    const height = elem.offsetHeight || rect.current.height;
+    const parentRect = parent.current.getBoundingClientRect();
+    let _left = rect.current.left;
+    let _top = rect.current.top;
+
+    rect.current.width = width;
+    rect.current.height = height;
+
+    if (_left === 0 || _top === 0) {
+      let target: HTMLDivElement | Element | null = parent.current;
+      while(target !== null) {
+        // @ts-ignore
+        const offLeft = target.offsetLeft;
+        // @ts-ignore
+        const offTop = target.offsetTop;
+        if (!isNaN(offLeft)) _left += offLeft;
+        if (!isNaN(offTop)) _top += offTop;
+        // @ts-ignore
+        target = target.offsetParent;
+      }
+      rect.current.left = _left;
+      rect.current.top = _top;
     }
 
     switch (position) {
       case 'top-left': {
-        setStyle({ top: `${top - 8 - height}px`, left });
+        elem.style.top = `${_top - 8 - height}px`;
+        elem.style.left = `${_left}px`;
         break;
       }
       case 'top-right': {
-        setStyle({ top: `${top - 8 - height}px`, left: left - width + parentRect.width });
+        elem.style.top = `${_top - 8 - height}px`;
+        elem.style.left = `${_left - width + parentRect.width}px`;
         break;
       }
       case 'top': {
-        setStyle({
-          top: `${top - 8 - height}px`,
-          left: `${left - ((width - parentRect.width) >> 1)}px`,
-        });
+        elem.style.top = `${_top - 8 - height}px`;
+        elem.style.left = `${_left - ((width - parentRect.width) >> 1)}px`;
         break;
       }
       case 'bottom-right': {
-        setStyle({ top: `${top + parentRect.height + 8}px`, left: left - width + parentRect.width });
+        elem.style.top = `${_top + parentRect.height + 8}px`;
+        elem.style.left = `${_left - width + parentRect.width}px`;
         break;
       }
       case 'bottom': {
-        setStyle({
-          top: `${top + parentRect.height + 8}px`,
-          left: `${left - ((width - parentRect.width) >> 1)}px`,
-        });
+        elem.style.top = `${_top + parentRect.height + 8}px`;
+        elem.style.left = `${_left - ((width - parentRect.width) >> 1)}px`;
         break;
       }
       // bottom-left
       default: {
-        setStyle({ top: `${top + parentRect.height + 8}px`, left });
+        elem.style.top = `${_top + parentRect.height + 8}px`;
+        elem.style.left = `${_left}px`;
         break;
       }
     }
@@ -124,10 +128,9 @@ export default function Popover({
       >
         {state => createPortal((
           <Tooltip
-            className={[state, className].join(' ')}
+            className={[className, state].join(' ').trim()}
             role="document"
             ref={refCallback}
-            style={tooltipStyle}
             color={color}
             {...rest}
           >

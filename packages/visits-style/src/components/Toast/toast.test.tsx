@@ -1,6 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import Toast, { ToastItem } from './index';
+import { ThemeProvider } from 'styled-components';
+import { render } from '@testing-library/react';
+import theme from '../../theme';
+import Toast from './index';
 
 jest.useFakeTimers();
 
@@ -11,10 +13,12 @@ describe('Toast', () => {
     onClear.mockReset();
   });
 
-  it('dom created when mount the container', () => {
-    // @ts-ignore
-    const Component = shallow<Toast>(<Toast toasts={[]} clear={onClear} />);
-    expect(Component.instance().element).toBeTruthy();
+  it('rendered', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Toast toasts={[]} clear={onClear} />
+      </ThemeProvider>
+    );
   });
 
   it('render items properly', () => {
@@ -23,17 +27,23 @@ describe('Toast', () => {
       { id: '2', message: 'test2' },
       { id: '3', message: 'test3' },
     ];
-    // @ts-ignore
-    const Component = shallow<Toast>(<Toast toasts={data} clear={onClear} />);
-    expect(Component.find(ToastItem)).toHaveLength(3);
+    const { getAllByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Toast toasts={data} clear={onClear} />
+      </ThemeProvider>
+    );
+    expect(getAllByTestId('toast-item')).toHaveLength(3);
   });
 
-  it('each items disappeared automatically', () => {
+  it('onClear called automatically after duration time', () => {
     const data = [
       { id: '1', message: 'test1' },
     ];
-    // @ts-ignore
-    const Component = mount<Toast>(<Toast toasts={data} clear={onClear} />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Toast toasts={data} clear={onClear} />
+      </ThemeProvider>
+    );
     jest.advanceTimersByTime(5000);
     expect(onClear).toBeCalledWith('1');
   });

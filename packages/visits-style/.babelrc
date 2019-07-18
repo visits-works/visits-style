@@ -12,7 +12,6 @@
     "@babel/plugin-proposal-class-properties",
     "@babel/proposal-object-rest-spread",
     "annotate-pure-calls",
-    "dev-expression",
     ["transform-rename-import", { "replacements": { "original": "lodash", "replacement": "lodash-es" } }],
   ]
 }

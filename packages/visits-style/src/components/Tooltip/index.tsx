@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-transition-group';
 import { ColorType } from '../../types';
 
-interface TooltipProps {
+interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /** 吹き出しとして表示したい内容 */
   label: any;
   /** マウスオーバーの対象になるelement */
@@ -14,45 +14,52 @@ interface TooltipProps {
   position?: 'top' | 'left' | 'right' | 'bottom';
 }
 
-export default function Tooltip({ children, position = 'bottom', label, color, ...rest }: TooltipProps) {
+export default function Tooltip({ children, position = 'bottom', label, color, className = '', ...rest }: TooltipProps) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const size = useRef(0);
+  const rect = useRef({ width: 0, height: 0 });
 
   const [show, setShow] = useState(false);
-  const [tooltipStyle, setStyle] = useState({});
 
   const openTooltip = () => setShow(true);
-  const closeTooltip = () => {
-    setShow(false);
-    size.current = 0;
-  }
+  const closeTooltip = () => setShow(false);
 
   const refCallback = (elem: HTMLDivElement | null) => {
-    if (size.current > 0 || !parent.current || !elem) return;
-    size.current = elem.offsetWidth;
+    if (!parent.current || !elem || !show) return;
 
     const parentRect = parent.current.getBoundingClientRect();
-    const rect = elem.getBoundingClientRect();
     const left = parentRect.width + 8;
     const top = parentRect.height + 8;
-    const width = (parentRect.width - rect.width) >> 1;
-    const height = (parentRect.height - rect.height) >> 1;
+    const width = elem.offsetWidth || rect.current.width;
+    const height = elem.offsetHeight || rect.current.height;
+
+    rect.current.width = width;
+    rect.current.height = height;
+
+    elem.style.bottom = null;
+    elem.style.left = null;
+    elem.style.right = null;
+    elem.style.top = null;
 
     switch (position) {
       case 'top': {
-        setStyle({ bottom: `${top}px`, left: `${width}px` });
+        elem.style.bottom = `${top}px`;
+        elem.style.left = `${(parentRect.width - width) >> 1}px`;
         break;
       }
       case 'left': {
-        setStyle({ right: `${left}px`, top: `${height}px` });
+        elem.style.top = `${(parentRect.height - height) >> 1}px`;
+        elem.style.right = `${left}px`;
         break;
       }
       case 'right': {
-        setStyle({ left: `${left}px`, top: `${height}px` });
+        elem.style.top = `${(parentRect.height - height) >> 1}px`;
+        elem.style.left = `${left}px`;
         break;
       }
+      // bottom
       default: {
-        setStyle({ top: `${top}px`, left: `${width}px` });
+        elem.style.top = `${top}px`;
+        elem.style.left = `${(parentRect.width - width) >> 1}px`;
         break;
       }
     }
@@ -75,12 +82,11 @@ export default function Tooltip({ children, position = 'bottom', label, color, .
       >
         {state => (
           <TooltipWrapper
-            className={state}
+            className={[className, state].join(' ').trim()}
             ref={refCallback}
             show={show}
             role="tooltip"
             color={color}
-            style={tooltipStyle}
           >
             {label}
           </TooltipWrapper>

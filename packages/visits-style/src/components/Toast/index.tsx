@@ -17,7 +17,7 @@ interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   /** 背景の色 */
   color?: ColorType;
   /** 表示される時間 nullの場合は自動で閉じられません */
-  duration: number | null;
+  duration?: number | null;
   /** 押したら閉じられる */
   clearOnClick?: boolean;
 }
@@ -96,7 +96,14 @@ function ToastItem(
       unmountOnExit
     >
       {state => (
-        <Wrapper className={state} borderless color={color} clear={clearOnClick} {...rest}>
+        <Wrapper 
+          className={state}
+          color={color}
+          clear={clearOnClick}
+          data-testid="toast-item"
+          borderless
+          {...rest}
+        >
           {message}
           {clearOnClick && <ClearButton onClick={onClear}><Close /></ClearButton>}
         </Wrapper>

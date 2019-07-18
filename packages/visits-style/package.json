@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "polished": "^3.4.1",
-    "react-transition-group": "^4.1.1"
+    "react-transition-group": "^4.2.1"
   },
   "scripts": {
     "build": "tsdx build && cp ./package.json ./dist/package.json && cp ../../LICENSE ./dist/LICENSE && cp ../../README.md ./dist/README.md",
     "lint": "eslint --ext .tsx,.ts src",
-    "test": "jest test --env=jsdom",
+    "test": "tsdx test",
     "develop": "cd ../visits-style-website && yarn start",
     "deploy": "yarn build",
     "clean": "rm -rf ./dist",
@@ -29,11 +29,11 @@
     "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e storybook"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.4",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@storybook/addon-actions": "^5.1.9",
@@ -41,7 +41,9 @@
     "@storybook/addon-options": "^5.1.9",
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
-    "@types/jest": "^24.0.12",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^8.0.5",
+    "@types/jest": "^24.0.15",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "@types/react-transition-group": "^2.9.2",
@@ -55,7 +57,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "babel-plugin-polished": "^1.1.0",
-    "babel-plugin-styled-components": "^1.10.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-transform-rename-import": "^2.3.0",
     "babel-preset-react-app": "^9.0.0",
     "eslint": "^5.16.0",
@@ -80,12 +82,6 @@
     "verbose": true,
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
@@ -96,7 +92,7 @@
       "js"
     ],
     "setupFiles": [
-      "./jest.setup.js"
+      "<rootDir>/src/setupTest.ts"
     ]
   }
 }
