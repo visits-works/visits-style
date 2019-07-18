@@ -22,14 +22,21 @@ export default function App() {
 }
 ```
 
-## グローバルCSSの定義
+## グローバルCSS
 
-以下の定義方法として、対応してください。
+`visits-style`は他のブラウザも同じスタイルが適用できるように
+
+[minireset.css](https://github.com/jgthms/minireset.css)の力で小さいサイズとして提供できました。
+
+グローバルの設定はあくまで任意なので、別の設定方法があるプロジェクトは対応不要です。
+
+### 注意点
+- 未適用の場合、デフォルトのフォントサイズ、フォント定義は適用されません。
 
 ```jsx
 import React, { Fragment } from 'react';
-// デフォルトグローバル定義のcss
-import { createGlobalStyle, normalizeStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import { normalizeStyle } from 'visits-style';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}

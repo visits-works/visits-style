@@ -5,24 +5,27 @@ import Logo from '../Logo';
 
 const Wrapper = styled.footer`
   display: flex;
+  flex-direction: column;
+  text-align: center;
   align-items: center;
-  justify-content: space-between;
-  background-color: ${({ theme }) => theme.dark};
+  justify-content: center;
+  background-color: ${({ theme }) => theme.greyLighter};
   color: ${({ theme }) => theme.white};
-  padding: 1.25rem 2.5rem;
+  height: 5rem;
+  opacity: 0.85;
 
-  a {
-    color: inherit;
-    will-change: color;
-    transition: color 150ms ease-in-out;
-
-    &:hover {
-      color: ${({ theme }) => theme.textLight};
-    }
+  a, div {
+    color: ${({ theme }) => theme.textLight};
   }
 
-  ${mediaMobile} {
-    padding: 0.85rem;
+  a {
+    will-change: color;
+    transition: color 150ms ease-in-out;
+    margin-bottom: 0.5rem;
+
+    &:hover {
+      color: ${({ theme }) => theme.blackTer};
+    }
   }
 `;
 

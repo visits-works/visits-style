@@ -11,19 +11,16 @@ export const isActive = (route: string) => (match: any, location: any) =>
 const pageQuery = graphql`
 query {
   allMdx (filter:{ frontmatter : { menu: { eq: true } } }) {
-    edges {
-      node {
-        id
-        frontmatter {
-          title
-        }
-        fields {
-          slug
-        }
-        parent {
-          ... on File {
-            relativePath
-          }
+    nodes {
+      frontmatter {
+        title
+      }
+      fields {
+        slug
+      }
+      parent {
+        ... on File {
+          relativePath
         }
       }
     }
@@ -41,7 +38,7 @@ const Header = styled(AppBar)`
   z-index: 100;
   a {
     transition: color 150ms ease-in-out;
-    &:hover {
+    &:hover, &.active {
       color: ${({ theme }) => theme.primary};
     }
   }
@@ -57,13 +54,13 @@ const Header = styled(AppBar)`
 
 export default function Topbar({ current }: { current: string }) {
   function renderMenu({ allMdx }: any) {
-    const list = allMdx.edges.map(({ node }: any) => node)
+    const list = allMdx.nodes
       .sort((a: any, b: any) => a.frontmatter.title > b.frontmatter.title);
     const MenuList = list.map((node: any) => {
       return (
-        <li key={node.id}>
+        <li key={node.fields.slug}>
           <Link
-            className={node.parent.relativePath === current ? 'active' : ''}
+            className={node.fields.slug === current ? 'active' : ''}
             to={node.fields.slug}
           >
             {node.frontmatter.title}
@@ -78,6 +75,7 @@ export default function Topbar({ current }: { current: string }) {
     <Header
       brand={Logo}
       color="dark"
+      align="right"
       fixed
     >
       <StaticQuery

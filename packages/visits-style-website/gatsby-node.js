@@ -1,4 +1,3 @@
-const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
 const path = require("path");
 const docgen = require('react-docgen-typescript');
 

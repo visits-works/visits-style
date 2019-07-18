@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-live';
 import { Language } from 'prism-react-renderer';
-import { HighlightStyle } from './styles';
 
 interface Props {
   children: string;
@@ -17,24 +16,33 @@ export default function HighlightCode({ live, children, onChange, lang }: Props)
   };
   const code = children.trim();
   return (
-    <Wrapper
-      code={code}
-      // @ts-ignore
-      onChange={handleChange}
-      disabled={!live}
-      language={lang}
-      noInline
-    />
+    <Container>
+      <Editor
+        code={code}
+        // @ts-ignore
+        onChange={handleChange}
+        disabled={!live}
+        language={lang}
+      />
+    </Container>
   );
 }
 
-const Wrapper = styled(Editor)`
-  ${HighlightStyle}
+const Container = styled.div`
   margin-bottom: 0.725rem;
   margin-left: -0.725rem;
   margin-right: -0.725rem;
+  max-width: 100%;
   max-height: 300px;
-  overflow-y: auto;
+  overflow: auto;
   outline: none;
+  background-color: rgb(40, 44, 52);
+  color: rgb(255, 255, 255);
+
+  textarea {
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 

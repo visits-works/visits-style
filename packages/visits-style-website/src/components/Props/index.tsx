@@ -14,14 +14,18 @@ const FlexTable = styled(Table)`
   th, td {
     display: block;
     flex: 0 100px;
+    width: 100px;
+    word-wrap: break-word;
 
     &:nth-child(5) {
       flex: 6;
+      width: auto;
     }
   }
 
   ${mediaMobile} {
     th, td {
+      width: auto;
       &:nth-child(5) {
         flex: 0 100%;
       }

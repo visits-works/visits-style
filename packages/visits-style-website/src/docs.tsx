@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
 // @ts-ignore
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/react';
 import { Container, mediaMobile, defaultTheme, Row, Col } from 'visits-style';
@@ -34,6 +34,7 @@ const Desc = styled.p`
 const Main = styled(Container).attrs({ as: 'main' })`
   margin: 0;
   margin-top: 3.25rem;
+  min-height: calc(100vh - 8.25rem);
   ${mediaMobile} {
     margin-top: 2.625rem;
   }
@@ -53,9 +54,10 @@ export const pageQuery = graphql`
         title
         description
       }
-      code {
-        body
+      fields {
+        slug
       }
+      body
       tableOfContents
       parent {
         ... on File {
@@ -87,16 +89,15 @@ function renderDoc(data: any) {
     },
     file,
   } = data;
-  const current = mdx.parent.relativePath;
 
-  if (current === 'index.mdx') {
+  if (mdx.parent.relativePath === 'index.mdx') {
     return (
       <Fragment>
         <Helmet>
           <title>{title}</title>
           <meta name="description" content={description} />
         </Helmet>
-        <MDXRenderer>{mdx.code.body}</MDXRenderer>
+        <MDXRenderer>{mdx.body}</MDXRenderer>
       </Fragment>
     );
   }
@@ -111,7 +112,7 @@ function renderDoc(data: any) {
         {mdx.frontmatter.title ? (<Header>{mdx.frontmatter.title}</Header>) : null}
         {mdx.frontmatter.description ? (<Desc>{mdx.frontmatter.description}</Desc>) : null}
         {file.fields && <PropsTable fields={file.fields} />}
-        <MDXRenderer>{mdx.code.body}</MDXRenderer>
+        <MDXRenderer>{mdx.body}</MDXRenderer>
       </Container>
     </Fragment>
   );

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const prismColors = {
+export const prismColors = {
   char: '#D8DEE9',
   comment: '#B2B2B2',
   keyword: '#c5a5c5',

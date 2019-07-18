@@ -19,21 +19,29 @@ const Wrapper = styled(Col)`
   li {
     display: block;
     list-style-type: none;
+    padding: 0.625rem 0.325rem;
+
     a {
       color: ${({ theme }) => theme.text};
       cursor: pointer;
       padding: 0.325rem 0.625rem;
+
+      &:hover {
+        opacity: 0.625;
+      }
     }
   }
 
   ${mediaTablet} {
     position: relative;
     flex-direction: row;
-    flex-wrap: unset;
+    flex-wrap: nowrap;
     top: 0;
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
+    flex-basis: 100%;
+    max-width: 100%;
 
     ul {
       display: flex;
@@ -47,22 +55,20 @@ const pageQuery = graphql`
     allMdx(
       sort: { fields: [fields___slug], order: ASC }
     ) {
-      edges {
-        node {
-          headings {
-            value
-            depth
-          }
-          frontmatter {
-            title
-          }
-          fields {
-            slug
-          }
-          parent {
-            ... on File {
-              relativePath
-            }
+      nodes {
+        headings {
+          value
+          depth
+        }
+        frontmatter {
+          title
+        }
+        fields {
+          slug
+        }
+        parent {
+          ... on File {
+            relativePath
           }
         }
       }
@@ -78,7 +84,7 @@ export default function Sidebar({ current }: any) {
     target = target.substr(0, target.indexOf('/'));
   }
 
-  function renderMenuItem({ node }: any) {
+  function renderMenuItem(node: any) {
     const headings = node.headings ? node.headings.filter((item: any) => item.depth === 2) : null;
     const isActive = node.parent.relativePath === current;
     return (
@@ -103,8 +109,8 @@ export default function Sidebar({ current }: any) {
   }
 
   function renderSideBar({ allMdx }: any) {
-    const menuList = allMdx.edges
-      .filter(({ node }: any) => node.fields.slug.indexOf(target) > -1);
+    const menuList = allMdx.nodes
+      .filter((node: any) => node.fields.slug.indexOf(target) > -1);
     return (
       <Wrapper as="ul" size={2} auto>
         {menuList.map(renderMenuItem)}

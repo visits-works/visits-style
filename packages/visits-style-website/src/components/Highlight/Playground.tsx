@@ -5,10 +5,9 @@ import { Language } from 'prism-react-renderer';
 import Editor from './Highlight';
 import Logo from '../Logo';
 // @ts-ignore
-import ImgUrl from '../../../assets/sample.png';
-// @ts-ignore
 import * as all from 'visits-style';
 import Preview from './Preview';
+import { prismColors } from './styles';
 
 interface Props {
   children: string;
@@ -40,14 +39,14 @@ const LiveWrapper = styled(LiveProvider)`
 
 function LiveEditor({ live }: any) {
   return (
-    <Editor onChange={live.onChange} live>
+    <Editor onChange={live.onChange} live lang={live.language}>
       {live.code}
     </Editor>
   );
 }
 
 const TextEditor = withLive(LiveEditor);
-const scope = { ...all, Logo, ImgUrl };
+const scope = { ...all, Logo };
 
 export default class Playground extends Component<Props> {
   shouldComponentUpdate(props: Props) {
@@ -58,7 +57,7 @@ export default class Playground extends Component<Props> {
     const { children, lang } = this.props;
     const code = children.trim();
     return (
-      <LiveWrapper code={code} scope={scope} language={lang}>
+      <LiveWrapper code={code} scope={scope} language={lang} theme={prismColors}>
         <Preview />
         <LiveError />
         <TextEditor />

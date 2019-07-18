@@ -1,0 +1,31 @@
+---
+title: Overriding
+description: カスタムスタイルの定義方
+---
+
+`visits-style`は各プロジェクトが自由にデザインを進めるようにサポートしてます。
+
+`styled-components`の力で、コンポーネントのスタイルのオーバーライドができます。
+
+```jsx
+// components/Button.js
+import styled from 'styled-components';
+import { Button } from 'visits-style';
+
+export default styled(Button)`
+  box-shadow: rgba(0,0,0,0.25);
+  &:hover {
+    background-color: ${({ theme }) => theme.dark};
+  }
+`;
+```
+```jsx
+// pages/SomePage.jsx
+import React from 'react';
+import Button from '../components/Button';
+
+function SomePage() {
+  // 既存のpropsはそのまま使えます。
+  return <Button color="primary">Hello!</Button>
+}
+```
