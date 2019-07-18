@@ -19,8 +19,16 @@ storiesOf('elements|Tag', module)
     <Tag
       color={select('color', colorList, '')}
       round={boolean('round', false)}
-      onClose={() => null}
     >
       {text('children', 'Hello World!')}
     </Tag>
-  ));
+  ))
+  .add('with close button', () => (
+    <Tag
+      color={select('color', colorList, '')}
+      round={boolean('round', false)}
+      onClose={() => alert('clicked!')}
+    >
+      {text('children', 'Hello World!')}
+    </Tag>
+  ))

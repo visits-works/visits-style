@@ -10,16 +10,20 @@ function getColor(theme: ThemeType, color?: ColorType) {
 }
 
 const closeCss = css`
-  padding-right: 0;
+  padding-right: 1.5rem;
 
   ${TextButton} {
+    display: block;
+    position: absolute;
     color: inherit;
-    height: 100%;
-    margin-left: 0.25rem;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 0.25rem;
 
     svg {
-      width: 50%;
-      height: 50%;
+      width: 0.75rem;
+      height: 0.75rem;
     }
 
     &:hover {
@@ -30,16 +34,14 @@ const closeCss = css`
 
 const Wrapper = styled.div<Pick<Props, 'color'|'round'> & { close: boolean; }>`
   display: inline-flex;
+  position: relative;
   font-size: 0.75rem;
   cursor: default;
-  padding: 0 0.5rem;
-  height: 1.5rem;
-  user-select: none;
-  border-radius: ${({ theme, round }) => (round ? '50rem' : theme.radius)};
-  justify-content: center;
+  padding: 0.185rem 0.5rem;
   align-items: center;
+  height: 1.5rem;
+  border-radius: ${({ theme, round }) => (round ? '50rem' : theme.radius)};
   white-space: nowrap;
-  line-height: 1.5;
 
   ${({ color, theme }) => {
     const target = getColor(theme, color);
