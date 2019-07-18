@@ -2,7 +2,7 @@
   "name": "visits-style",
   "author": "@nukbal",
   "repository": "https://github.com/visits-works/visits-style",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "main": "index.js",
   "module": "visits-style.esm.js",
   "jsnext:main": "visits-style.esm.js",
