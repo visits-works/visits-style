@@ -31,7 +31,7 @@ jobs:
       - run: cd ~/repo/packages/visits-style/dist && npm publish
       - persist_to_workspace:
           root: ~/repo
-          paths: ~/repo
+          paths: .
   doc:
     <<: *defaults
     steps:
