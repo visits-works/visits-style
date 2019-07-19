@@ -1,19 +1,19 @@
 import { Fragment } from 'react';
-import { Button } from 'visits-style';
+import { Button, Container } from 'visits-style';
 import { Link } from 'gatsby';
 import Highlight from '_components/Highlight';
+import Hero from '_components/Hero';
 
-<Fragment>
+<Container>
+  <Hero />
   <section style={{ padding: '1rem', margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-    <h1 style={{ textAlign: 'center' }}>Installation</h1>
-    <h2 style={{ textAlign: 'center', margin: '2rem 0' }}>1. visits-styleを追加します</h2>
+    <h1 style={{ textAlign: 'center' }}>インストール</h1>
     <Highlight className="language-bash">
       {
         'npm install --save styled-components react react-dom visits-style\n' +
         'yarn add styled-components react react-dom visits-style'
       }
     </Highlight>
-    <h2 style={{ textAlign: 'center', margin: '2rem 0' }}>2. themeの適用でvisits-styleを使う</h2>
     <Highlight className="language-typescript">
       {
         "import React, { Fragment } from 'react';\n" +
@@ -33,4 +33,4 @@ import Highlight from '_components/Highlight';
       }
     </Highlight>
   </section>
-</Fragment>
+</Container>

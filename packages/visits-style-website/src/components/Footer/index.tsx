@@ -4,21 +4,19 @@ import { mediaMobile } from 'visits-style';
 import Logo from '../Logo';
 
 const Wrapper = styled.footer`
-  display: flex;
-  flex-direction: column;
   text-align: center;
-  align-items: center;
-  justify-content: center;
   background-color: ${({ theme }) => theme.greyLighter};
   color: ${({ theme }) => theme.white};
-  height: 5rem;
+  height: 5.5rem;
+  padding: 1.25rem 0;
   opacity: 0.85;
 
-  a, div {
+  a, p {
     color: ${({ theme }) => theme.textLight};
   }
 
   a {
+    display: inline-block;
     will-change: color;
     transition: color 150ms ease-in-out;
     margin-bottom: 0.5rem;
@@ -26,6 +24,9 @@ const Wrapper = styled.footer`
     &:hover {
       color: ${({ theme }) => theme.blackTer};
     }
+  }
+  p {
+    font-size: 0.95rem;
   }
 `;
 
@@ -35,7 +36,7 @@ export default function Footer() {
   return (
     <Wrapper>
       <a href="https://visits.world" target="_blank" rel="noopener noreferrer"><Logo /></a>
-      <div>©{currentYear} VISITS Technologies Inc.</div>
+      <p>©{currentYear} VISITS Technologies Inc.</p>
     </Wrapper>
   );
 }

@@ -32,9 +32,9 @@ const Desc = styled.p`
 `;
 
 const Main = styled(Row).attrs({ as: 'main' })`
-  margin: 0;
   margin-top: 3.25rem;
-  min-height: calc(100vh - 8.25rem);
+  padding-top: 0;
+  min-height: calc(100vh - 7.5rem);
   ${mediaMobile} {
     margin-top: 2.625rem;
   }

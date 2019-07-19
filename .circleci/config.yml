@@ -29,6 +29,28 @@ jobs:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/packages/visits-style/dist/.npmrc
       - run: cd ~/repo/packages/visits-style/dist && npm publish
+      - persist_to_workspace:
+          root: ~/repo
+          paths: ~/repo
+  doc:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: yarn install
+          command: cd ~/repo/packages/visits-style-website && yarn
+      - run:
+          name: deploy
+          command: cd ~/repo/packages/visits-style-website && yarn deploy
+  storybook:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: deploy
+          command: cd ~/repo/packages/visits-style && yarn storybook:deploy
 
 workflows:
   version: 2
@@ -48,3 +70,9 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
+      - doc:
+          requires:
+            - deploy
+      - storybook:
+          requires:
+            - doc
