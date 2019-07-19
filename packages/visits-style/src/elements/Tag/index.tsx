@@ -40,6 +40,7 @@ const Wrapper = styled.div<Pick<Props, 'color'|'round'> & { close: boolean; }>`
   cursor: default;
   padding: 0.325rem 0.5rem;
   align-items: center;
+  justify-content: center;
   height: 1.5rem;
   border-radius: ${({ theme, round }) => (round ? '50rem' : theme.radius)};
   white-space: nowrap;
