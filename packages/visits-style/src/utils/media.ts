@@ -26,5 +26,5 @@ export function mediaFullHD({ theme }: Props) {
 
 export function mediaUntilFullHD({ theme }: Props) {
   if (!theme.responsive) return '@media (max-width: 0)';
-  return `@media (min-width: ${theme.media.fullhd})`;
+  return `@media screen and (min-width: ${theme.media.fullhd})`;
 }

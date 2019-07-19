@@ -1,23 +1,21 @@
 import styled, { css } from 'styled-components';
-import { mediaFullHD, mediaDesktop, mediaMobile } from '../../utils/media';
+import { mediaUntilFullHD, mediaDesktop, mediaMobile, mediaTablet } from '../../utils/media';
 
 interface Props {
   /**  */
   fluid?: boolean;
 }
 
+function setGap(width: string, gap: number) {
+  return parseInt(width.replace('px', ''), 10) - (2 * gap);
+}
+
 function setResponsive({ fluid }: Props): any {
   if (fluid) {
     return css`
-      ${mediaFullHD} {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
-      }
-      ${mediaDesktop} {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
-      }
-      ${mediaMobile} {
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+      ${mediaTablet} {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
       }
@@ -27,6 +25,19 @@ function setResponsive({ fluid }: Props): any {
   return css`
     margin-right: auto;
     margin-left: auto;
+
+    ${mediaUntilFullHD} {
+      max-width: ${({ theme }) => setGap(theme.media.fullhd, theme.gutter)}px;
+    }
+    ${mediaDesktop} {
+      max-width: ${({ theme }) => setGap(theme.media.desktop, theme.gutter)}px;
+    }
+    ${mediaTablet} {
+      max-width: ${({ theme }) => setGap(theme.media.tablet, theme.smallGutter)}px;
+    }
+    ${mediaMobile} {
+      max-width: ${({ theme }) => setGap(theme.media.mobile, theme.smallGutter)}px;
+    }
   `;
 }
 export default styled.div<Props>`
