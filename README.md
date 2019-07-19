@@ -37,5 +37,3 @@ reactDOM.render(App, document.getElementById('root'));
 
 - [ドキュメント](https://visits-works.github.io/visits-style/)
 - [storybook](https://visits-works.github.io/visits-style/storybook)
-
-github Pagesのurlは公開されるので、注意してください
