@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useState, useRef, HTMLAttributes, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Transition } from 'react-transition-group';
 import Box from '../../elements/Box';
 import useDiv from '../../hooks/useDiv';
@@ -23,6 +23,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   onOpen?: () => void;
   /** コンテンツを出さない */
   disabled?: boolean;
+  /** コンテナーdivのカスタムスタイル定義 */
+  containerStyle?: ReturnType<typeof css>;
 }
 
 export default function Popover({
@@ -143,7 +145,7 @@ export default function Popover({
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<Pick<Props, 'containerStyle'>>`
   display: block;
   outline: none;
   color: inherit;
@@ -153,6 +155,8 @@ const Wrapper = styled.div`
     color: inherit;
     text-decoration: none;
   }
+
+  ${({ containerStyle }) => containerStyle}
 `;
 
 const Tooltip = styled(Box)`

@@ -13,9 +13,13 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   color?: ColorType;
   /** 表示される場所 */
   position?: 'top' | 'left' | 'right' | 'bottom';
+  /** 吹き出しのコンテナーdivのカスタムスタイル定義 */
+  containerStyle?: ReturnType<typeof css>;
 }
 
-export default function Tooltip({ children, position = 'bottom', label, color, ...rest }: TooltipProps) {
+export default function Tooltip({
+  children, position = 'bottom', label, color, className = '', ...rest
+}: TooltipProps) {
   const parent = useRef<HTMLDivElement | null>(null);
   const rect = useRef({ width: 0, height: 0 });
 
@@ -83,7 +87,7 @@ export default function Tooltip({ children, position = 'bottom', label, color, .
       >
         {state => (
           <TooltipWrapper
-            className={state}
+            className={[className, state].join(' ').trim()}
             ref={refCallback}
             show={show}
             role="tooltip"
@@ -97,9 +101,10 @@ export default function Tooltip({ children, position = 'bottom', label, color, .
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<Pick<TooltipProps, 'containerStyle'>>`
   position: relative;
   display: inline-block;
+  ${({ containerStyle }) => containerStyle}
 `;
 
 const TooltipWrapper = styled.div<Pick<TooltipProps, 'color'> & { show?: boolean }>`
