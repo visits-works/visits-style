@@ -17,10 +17,6 @@
   },
   "rules": {
     "jsx-a11y/href-no-hash" : "off",
-    "jsx-a11y/anchor-is-valid": [ "error", {
-      "components": [ "Link" ],
-      "specialLink": ["to"]
-    }],
     "jsx-a11y/label-has-for": [2, {"required": { "some": ["nesting", "id"] }}],
     "jsx-a11y/label-has-associated-control": "off",
     "react/no-unused-prop-types": "off",

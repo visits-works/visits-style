@@ -5,6 +5,7 @@ import React, { StrictMode } from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withOptions } from '@storybook/addon-options';
 import { withKnobs } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import theme from '../src/theme';
@@ -44,6 +45,7 @@ addDecorator(
     },
   })
 );
+addDecorator(withA11y);
 
 const containerStyle = {
   padding: '3rem',

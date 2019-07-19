@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-transition-group';
@@ -14,7 +15,7 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   position?: 'top' | 'left' | 'right' | 'bottom';
 }
 
-export default function Tooltip({ children, position = 'bottom', label, color, className = '', ...rest }: TooltipProps) {
+export default function Tooltip({ children, position = 'bottom', label, color, ...rest }: TooltipProps) {
   const parent = useRef<HTMLDivElement | null>(null);
   const rect = useRef({ width: 0, height: 0 });
 
@@ -82,7 +83,7 @@ export default function Tooltip({ children, position = 'bottom', label, color, c
       >
         {state => (
           <TooltipWrapper
-            className={[className, state].join(' ').trim()}
+            className={state}
             ref={refCallback}
             show={show}
             role="tooltip"
@@ -122,7 +123,7 @@ const TooltipWrapper = styled.div<Pick<TooltipProps, 'color'> & { show?: boolean
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
-  background-color: ${({ color, theme }) => color ? (theme[color] || 'white') : 'white'};
+  background-color: ${({ color, theme }) => (color ? (theme[color] || 'white') : 'white')};
 
   ${({ show }) => show && css`
     transform: scale(1);

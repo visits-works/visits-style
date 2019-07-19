@@ -1,34 +1,30 @@
 {
-  "include": ["src", "types"],
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "importHelpers": true,
-    "declaration": true,
-    "sourceMap": true,
-    "rootDir": "./src",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
     "moduleResolution": "node",
-    "baseUrl": "./src",
-    "paths": {
-      "*": ["src/*", "node_modules/*"]
-    },
-    "jsx": "react",
-    "esModuleInterop": true
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "downlevelIteration": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "jsx": "preserve"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
-    "**/__test__/**",
-    "**/**.story.tsx"
+    "**/**.story.tsx",
+    "**/**.test.tsx",
+    "**/setupTest.ts"
   ]
 }

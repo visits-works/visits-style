@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useRef, HTMLAttributes, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
@@ -28,7 +29,7 @@ export default function Popover({
   position, label, children, color = 'white', onOpen, onClose, disabled, className = '', ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const rect = useRef({ left: 0, top:0, width: 0, height: 0 });
+  const rect = useRef({ left: 0, top: 0, width: 0, height: 0 });
 
   const [show, setShow] = useState(false);
   const [dom, onExited] = useDiv(show, 'tooltip');
@@ -47,6 +48,7 @@ export default function Popover({
 
   useEffect(() => {
     if (show && disabled) handleBlur();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show, disabled]);
 
   const refCallback = (elem: HTMLElement | null) => {
@@ -54,62 +56,61 @@ export default function Popover({
     const width = elem.offsetWidth || rect.current.width;
     const height = elem.offsetHeight || rect.current.height;
     const parentRect = parent.current.getBoundingClientRect();
-    let _left = rect.current.left;
-    let _top = rect.current.top;
+    let { left, top } = rect.current;
 
     rect.current.width = width;
     rect.current.height = height;
 
-    if (_left === 0 || _top === 0) {
+    if (left === 0 || top === 0) {
       let target: HTMLDivElement | Element | null = parent.current;
-      while(target !== null) {
+      while (target !== null) {
         // @ts-ignore
         const offLeft = target.offsetLeft;
         // @ts-ignore
         const offTop = target.offsetTop;
-        if (!isNaN(offLeft)) _left += offLeft;
-        if (!isNaN(offTop)) _top += offTop;
+        if (offLeft) left += offLeft;
+        if (offTop) top += offTop;
         // @ts-ignore
         target = target.offsetParent;
       }
-      rect.current.left = _left;
-      rect.current.top = _top;
+      rect.current.left = left;
+      rect.current.top = top;
     }
 
     switch (position) {
       case 'top-left': {
-        elem.style.top = `${_top - 8 - height}px`;
-        elem.style.left = `${_left}px`;
+        elem.style.top = `${top - 8 - height}px`;
+        elem.style.left = `${left}px`;
         break;
       }
       case 'top-right': {
-        elem.style.top = `${_top - 8 - height}px`;
-        elem.style.left = `${_left - width + parentRect.width}px`;
+        elem.style.top = `${top - 8 - height}px`;
+        elem.style.left = `${left - width + parentRect.width}px`;
         break;
       }
       case 'top': {
-        elem.style.top = `${_top - 8 - height}px`;
-        elem.style.left = `${_left - ((width - parentRect.width) >> 1)}px`;
+        elem.style.top = `${top - 8 - height}px`;
+        elem.style.left = `${left - ((width - parentRect.width) >> 1)}px`;
         break;
       }
       case 'bottom-right': {
-        elem.style.top = `${_top + parentRect.height + 8}px`;
-        elem.style.left = `${_left - width + parentRect.width}px`;
+        elem.style.top = `${top + parentRect.height + 8}px`;
+        elem.style.left = `${left - width + parentRect.width}px`;
         break;
       }
       case 'bottom': {
-        elem.style.top = `${_top + parentRect.height + 8}px`;
-        elem.style.left = `${_left - ((width - parentRect.width) >> 1)}px`;
+        elem.style.top = `${top + parentRect.height + 8}px`;
+        elem.style.left = `${left - ((width - parentRect.width) >> 1)}px`;
         break;
       }
       // bottom-left
       default: {
-        elem.style.top = `${_top + parentRect.height + 8}px`;
-        elem.style.left = `${_left}px`;
+        elem.style.top = `${top + parentRect.height + 8}px`;
+        elem.style.left = `${left}px`;
         break;
       }
     }
-  }
+  };
 
   return (
     <Wrapper
@@ -126,7 +127,7 @@ export default function Popover({
         onExited={onExited}
         unmountOnExit
       >
-        {state => createPortal((
+        {state => dom && createPortal((
           <Tooltip
             className={[className, state].join(' ').trim()}
             role="document"
@@ -136,7 +137,7 @@ export default function Popover({
           >
             {children}
           </Tooltip>
-        ), dom.current!)}
+        ), dom)}
       </Transition>
     </Wrapper>
   );

@@ -85,7 +85,7 @@ export default function Modal({
   const [dom, onExited] = useDiv(!!show, 'presentation');
   useScrollFix(show);
 
-  if (!dom.current) return null;
+  if (!dom) return null;
 
   return (
     <Transition
@@ -107,7 +107,7 @@ export default function Modal({
           </AnimatedBox>
           {external}
         </Wrapper>
-      ), dom.current!)}
+      ), dom)}
     </Transition>
   );
 }

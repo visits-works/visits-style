@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState, MutableRefObject } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-export default function useDiv(show: boolean, role?: string): [MutableRefObject<HTMLDivElement | null>, () => void] {
+export default function useDiv(show: boolean, role?: string): [HTMLDivElement | null, () => void] {
   const div = useRef<HTMLDivElement | null>(null);
   const mounted = useRef(false);
   const hack = useState(0);
@@ -18,7 +18,7 @@ export default function useDiv(show: boolean, role?: string): [MutableRefObject<
       if (role) div.current.setAttribute('role', role);
     }
     return onExited;
-  }, []);
+  }, [role]);
 
   useEffect(() => {
     if (show) {
@@ -26,7 +26,7 @@ export default function useDiv(show: boolean, role?: string): [MutableRefObject<
       mounted.current = true;
       hack[1](1);
     }
-  }, [show]);
+  }, [hack, show]);
 
-  return [div, onExited];
+  return [div.current, onExited];
 }

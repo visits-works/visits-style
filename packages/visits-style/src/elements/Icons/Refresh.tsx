@@ -1,5 +1,5 @@
 /* tslint:disable max-line-length */
-import React, { SVGAttributes } from "react";
+import React, { SVGAttributes } from 'react';
 
 export default function Refresh(props: SVGAttributes<SVGSVGElement>) {
   return (

@@ -96,7 +96,7 @@ function ToastItem(
       unmountOnExit
     >
       {state => (
-        <Wrapper 
+        <Wrapper
           className={state}
           color={color}
           clear={clearOnClick}
@@ -156,7 +156,7 @@ export default function Toast(
   );
 }
 
-const Container = styled.div<{ position: ContainerProps["position"], margin: ContainerProps["margin"] }>`
+const Container = styled.div<{ position: ContainerProps['position'], margin: ContainerProps['margin'] }>`
   display: flex;
   flex-direction: column;
   z-index: 9999;
