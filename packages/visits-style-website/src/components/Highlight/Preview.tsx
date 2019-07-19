@@ -17,7 +17,10 @@ const PreviewWrapper = styled.div`
 const Playground = styled.div`
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #1e1e1e;
+  border: 1px solid ${({ theme }) => theme.border};
+  border-radius: ${({ theme }) => theme.radius};
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   margin: 0 auto;
 `;
 

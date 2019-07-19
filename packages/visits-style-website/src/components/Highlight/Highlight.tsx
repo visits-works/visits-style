@@ -30,8 +30,6 @@ export default function HighlightCode({ live, children, onChange, lang }: Props)
 
 const Container = styled.div`
   margin-bottom: 0.725rem;
-  margin-left: -0.725rem;
-  margin-right: -0.725rem;
   max-width: calc(100% + 1.5rem);
   max-height: 300px;
   overflow: auto;
