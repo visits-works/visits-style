@@ -13,5 +13,12 @@
     "@babel/proposal-object-rest-spread",
     "annotate-pure-calls",
     ["transform-rename-import", { "replacements": { "original": "lodash", "replacement": "lodash-es" } }],
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "@babel/transform-modules-commonjs"
+      ]
+    }
+  }
 }
