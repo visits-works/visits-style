@@ -28,7 +28,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Popover({
-  position, label, children, color = 'white', onOpen, onClose, disabled, className = '', ...rest
+  position, label, children, color = 'background', onOpen, onClose, disabled, className = '', ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
   const rect = useRef({ left: 0, top: 0, width: 0, height: 0 });
