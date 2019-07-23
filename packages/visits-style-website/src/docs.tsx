@@ -118,10 +118,9 @@ function renderDoc(data: any) {
 
 export default function MDXRuntime({ data }: any) {
   const [isDark, setDarkMode] = useState(() => {
-    const val = window.localStorage.getItem('darkTheme');
-    if (val) return JSON.parse(val);
-
-    if (!val && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
+      const val = window.localStorage.getItem('darkTheme');
+      if (val) return JSON.parse(val);
       const md = window.matchMedia('(prefers-color-scheme: dark)');
       return md.matches;
     }
