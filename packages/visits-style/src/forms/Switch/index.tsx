@@ -10,19 +10,24 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   background?: string;
   /** 丸の色を設定します。 */
   anchorColor?: string;
+  /** ONになるときのラベル */
+  onLabel?: string;
+  /** OFFになるときのラベル */
+  offLabel?: string;
 }
 
 export default function Switch({
-  className, showLabel, background, anchorColor, ...rest
+  className, showLabel, background, anchorColor, onLabel = 'ON', offLabel = 'OFF', ...rest
 }: Props) {
   const id = useRef(`switch_${rest.name}`);
-
   return (
     <Wrapper
       className={className}
       showLabel={showLabel}
       background={background}
       anchorColor={anchorColor}
+      onLabel={onLabel}
+      offLabel={offLabel}
       disabled={rest.disabled}
     >
       <input id={id.current} type="checkbox" {...rest} />
@@ -35,22 +40,23 @@ const labelStyle = css`
   label:before {
     position: absolute;
     display: block;
-    content: 'OFF';
-    top: 0.45rem;
+    content: '${({ offLabel }: any) => offLabel}';
+    top: 0.5rem;
     right: 0.6875rem;
-    font-size: 0.75rem;
+    font-size: 0.825rem;
+    line-height: 0.825rem;
     color: ${({ theme }: any) => theme.textLight};
   }
 
   input:checked ~ label:before {
-    content: 'ON';
+    content: '${({ onLabel }: any) => onLabel}';
     right: unset;
     left: 0.6875rem;
     color: ${({ theme }: any) => findColorInvert(theme, theme.primary)};
   }
 `;
 
-const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'> & { disabled?: boolean }>`
+const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'onLabel'|'offLabel'> & { disabled?: boolean }>`
   display: inline-block;
   cursor: pointer;
   line-height: 1.25;

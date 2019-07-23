@@ -13,6 +13,8 @@ storiesOf('forms|Switch', module)
       disabled={boolean('disabled', false)}
       background={text('background', '')}
       anchorColor={text('anchorColor', '')}
+      onLabel={text('onLabel', 'ON')}
+      offLabel={text('offLabel', 'OFF')}
     />
   ))
   .add('label on', () => (
