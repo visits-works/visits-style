@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
@@ -14,10 +14,8 @@ import Footer from './components/Footer';
 import components from './components';
 import PropsTable from './components/Props';
 import GlobalStyle from './globalStyle';
-
-const theme = {
-  ...defaultTheme,
-};
+import darkTheme from './darkTheme';
+import lightTheme from './lightTheme';
 
 const Header = styled.h1`
   font-size: 2.75rem;
@@ -119,18 +117,33 @@ function renderDoc(data: any) {
 }
 
 export default function MDXRuntime({ data }: any) {
+  const [isDark, setDarkMode] = useState(() => {
+    const val = window.localStorage.getItem('darkTheme');
+    if (val) return JSON.parse(val);
+
+    if (!val && typeof window !== 'undefined') {
+      const md = window.matchMedia('(prefers-color-scheme: dark)');
+      return md.matches;
+    }
+    return false;
+  });
+
+  const toggleTheme = () => {
+    window.localStorage.setItem('darkTheme', String(!isDark));
+    setDarkMode(!isDark);
+  };
+
   const current = data.mdx.parent.relativePath;
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <Fragment>
         <GlobalStyle />
-        <Topbar current={current} />
+        <Topbar current={current} toggleTheme={toggleTheme} isDark={isDark} />
         <Main>
           {current !== 'index.mdx' ? (<Sidebar current={current} />) : null}
           <Col
             size={current !== 'index.mdx' ? 10 : 12}
             style={{
-              backgroundColor: 'white',
               padding: current !== 'index.mdx' ? undefined : 0,
             }}
             auto

@@ -56,7 +56,7 @@ const labelStyle = css`
   }
 `;
 
-const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'onLabel'|'offLabel'> & { disabled?: boolean }>`
+const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'onLabel'|'offLabel'|'disabled'>>`
   display: inline-block;
   cursor: pointer;
   line-height: 1.25;

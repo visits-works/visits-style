@@ -11,7 +11,7 @@ import { withLive } from 'react-live';
 
 const PreviewWrapper = styled.div`
   min-height: 3.25rem;
-  background: white;
+  background: ${({ theme }) => theme.previewBackground};
 `;
 
 const Playground = styled.div`

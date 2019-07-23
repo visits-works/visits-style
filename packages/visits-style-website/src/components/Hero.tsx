@@ -7,7 +7,7 @@ const Container = styled.div`
   padding: 2.85rem 0;
   border-bottom: 1px solid ${({ theme }) => theme.border};
 
-  h1, desc, footer {
+  h1, summary, footer {
     display: block;
     text-align: center;
     margin-bottom: 1rem;
@@ -22,9 +22,9 @@ export default function Hero() {
   return (
     <Container>
       <h1>Visits-style</h1>
-      <desc>
+      <summary>
         VISITS Technologiesのreactデザインコンポーネント
-      </desc>
+      </summary>
       <footer>
         <Link to="/core">
           <Button color="primary">Get Started</Button>

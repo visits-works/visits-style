@@ -1,7 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import { AppBar, mediaMobile } from 'visits-style';
+import { AppBar, mediaMobile, TextButton } from 'visits-style';
+import { IoIosMoon, IoIosSunny } from 'react-icons/io';
 
 export const isActive = (route: string) => (match: any, location: any) =>
   (match && match.url === location.pathname) ||
@@ -43,6 +44,10 @@ const Header = styled(AppBar)`
     }
   }
 
+  button {
+    color: inherit;
+  }
+
   ${mediaMobile} {
     min-height: 2.625rem;
     nav > button {
@@ -52,7 +57,7 @@ const Header = styled(AppBar)`
   }
 `;
 
-export default function Topbar({ current }: { current: string }) {
+export default function Topbar({ current, toggleTheme, isDark }: { current: string; toggleTheme: () => void; isDark: boolean; }) {
   function renderMenu({ allMdx }: any) {
     const list = allMdx.nodes
       .sort((a: any, b: any) => a.frontmatter.title > b.frontmatter.title);
@@ -68,7 +73,7 @@ export default function Topbar({ current }: { current: string }) {
         </li>
       );
     })
-    return (<ul>{MenuList}</ul>);
+    return MenuList;
   }
 
   return (
@@ -78,10 +83,17 @@ export default function Topbar({ current }: { current: string }) {
       align="right"
       fixed
     >
-      <StaticQuery
-        query={pageQuery}
-        render={renderMenu}
-      />
+      <ul>
+        <StaticQuery
+          query={pageQuery}
+          render={renderMenu}
+        />
+        <li>
+          <TextButton onClick={toggleTheme} icon round>
+            {isDark ? <IoIosMoon /> : <IoIosSunny />}
+          </TextButton>
+        </li>
+      </ul>
     </Header>
   );
 }

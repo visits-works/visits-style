@@ -5,7 +5,7 @@ import Logo from '../Logo';
 
 const Wrapper = styled.footer`
   text-align: center;
-  background-color: ${({ theme }) => theme.greyLighter};
+  background-color: ${({ theme }) => theme.footer};
   color: ${({ theme }) => theme.white};
   height: 5.5rem;
   padding: 1.25rem 0;

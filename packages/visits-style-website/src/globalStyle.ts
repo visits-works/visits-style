@@ -31,4 +31,8 @@ export default createGlobalStyle`
       }
     }
   }
+
+  input, textarea {
+    background: transparent;
+  }
 `;
