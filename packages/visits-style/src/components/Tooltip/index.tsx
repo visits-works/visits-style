@@ -128,7 +128,7 @@ const TooltipWrapper = styled.div<Pick<TooltipProps, 'color'> & { show?: boolean
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
-  background-color: ${({ color, theme }) => (color ? (theme[color] || 'white') : 'white')};
+  background-color: ${({ color, theme }) => (color ? (theme[color] || theme.background) : theme.background)};
 
   ${({ show }) => show && css`
     transform: scale(1);
