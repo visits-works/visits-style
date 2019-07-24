@@ -13,6 +13,10 @@ npm install --save react react-dom styled-components visits-style
 yarn add react react-dom styled-components visits-style
 ```
 
+## Dependencies
+- React, React-dom(^16.8.6)
+- styled-components(^4.2.0)
+
 ## Example
 
 ```javascript
