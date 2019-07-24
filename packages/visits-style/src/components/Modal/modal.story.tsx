@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Modal from '.';
 import Button from '../../elements/Button';
 import TextButton from '../../elements/Button/TextButton';
+import TextInput from '../../forms/TextInput';
 
 const CloseButton: any = {
   position: 'absolute',
@@ -129,4 +130,20 @@ storiesOf('components|Modal', module)
         </footer>
       </Modal>
     </div>
-  ));
+  ))
+  .add('with input', () => (
+    <Test />
+  ))
+
+  function Test() {
+    const [text, setText] = useState('');
+    const onChange = (e) => setText(e.target.value);
+    return (
+      <Modal
+        closeModal={() => null}
+        show
+      >
+        <TextInput value={text} onChange={onChange} />
+      </Modal>
+    );
+  }

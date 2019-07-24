@@ -24,9 +24,9 @@ export default function useDiv(show: boolean, role?: string): [HTMLDivElement | 
     if (show) {
       document.body.appendChild(div.current!);
       mounted.current = true;
-      hack[1](1);
+      hack[1](v => v + 1);
     }
-  }, [hack, show]);
+  }, [show]);
 
   return [div.current, onExited];
 }
