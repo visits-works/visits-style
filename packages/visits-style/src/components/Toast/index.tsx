@@ -16,7 +16,10 @@ interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   message?: React.ReactNode;
   /** 背景の色 */
   color?: ColorType;
-  /** 表示される時間 nullの場合は自動で閉じられません */
+  /**
+   * 表示される時間 nullの場合は自動で閉じられません
+   * @default 5000
+   */
   duration?: number | null;
   /** 押したら閉じられる */
   clearOnClick?: boolean;
@@ -117,9 +120,16 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   toasts: ToastProps[];
   /** toastを消すタイミングのコールバック */
   clear: (id: string) => void;
-  /** top, top-right, top-left, bottom, bottom-right, bottom-left */
+  /**
+   * toastの表示される場所の指定
+   * top, top-right, top-left, bottom, bottom-right, bottom-left
+   * @default 'top-right'
+   */
   position?: PositionType;
-  /** margin */
+  /**
+   * margin
+   * @default '1rem'
+   */
   margin?: string;
   /** スクロールしても固定として表示する */
   fixed?: boolean;

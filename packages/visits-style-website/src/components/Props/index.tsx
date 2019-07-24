@@ -53,7 +53,7 @@ export default function PropsTable({ fields }: any) {
             <td>{item.name}</td>
             <td>{item.type}</td>
             <td>{`${item.required}`}</td>
-            <td>{item.defaultValue || 'なし'}</td>
+            <td>{item.defaultValue || ''}</td>
             <td>{item.description}</td>
           </tr>
         ))}

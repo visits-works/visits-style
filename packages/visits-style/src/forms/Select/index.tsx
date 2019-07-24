@@ -14,7 +14,9 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
   options: ItemType[];
   outline?: boolean;
+  /** エラーの発生時の表示テキスト */
   error?: string | any;
+  /** 捕捉テキスト */
   help?: string | any;
   /** selectのサイズ */
   inputSize?: SizeType;

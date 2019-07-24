@@ -89,31 +89,3 @@ export default function Card({
     </Box>
   );
 }
-
-// export default class Card extends PureComponent<Props> {
-//   renderHeader = () => {
-//     const { image, title, horizontal } = this.props;
-
-//     if (image && !horizontal) return (<CardImage><img src={image} /></CardImage>);
-//     if (image && horizontal) return (<CardImageHorizontal url={image} />);
-//     if (title && !horizontal) return (<CardHeader><h3>{title}</h3></CardHeader>);
-
-//     return null;
-//   }
-
-//   render() {
-//     const { children, horizontal, footer, color } = this.props;
-
-//     const header = this.renderHeader();
-//     const wrapperStyle = horizontal ? horizontalStyle : undefined;
-//     return (
-//       <Box style={wrapperStyle} color={color}>
-//         {header}
-//         <CardBody>
-//           {children}
-//         </CardBody>
-//         {footer && (<CardFooter>{React.Children.only(footer)}</CardFooter>)}
-//       </Box>
-//     );
-//   }
-// }

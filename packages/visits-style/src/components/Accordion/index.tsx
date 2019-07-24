@@ -6,6 +6,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンなどの表示するラベル */
   header: any;
   show: boolean;
+  /**
+   * アニメーションの時間
+   * @default 300
+   */
   timeout?: number;
 }
 export default function Accordion({ header, show, children, timeout = 300, ...rest }: Props) {

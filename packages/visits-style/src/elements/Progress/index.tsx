@@ -12,7 +12,10 @@ interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   size?: SizeType;
   /** sizeを使わないときの縦幅を指定する */
   height?: string;
-  /** バーの色 */
+  /**
+   * バーの色
+   * @default 'primary'
+   */
   color?: ColorType;
 }
 

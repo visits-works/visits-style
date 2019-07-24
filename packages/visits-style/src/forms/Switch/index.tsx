@@ -10,9 +10,15 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   background?: string;
   /** 丸の色を設定します。 */
   anchorColor?: string;
-  /** ONになるときのラベル */
+  /**
+   * ONになるときのラベル
+   * @default 'ON'
+   */
   onLabel?: string;
-  /** OFFになるときのラベル */
+  /**
+   * OFFになるときのラベル
+   * @default 'OFF'
+   */
   offLabel?: string;
 }
 

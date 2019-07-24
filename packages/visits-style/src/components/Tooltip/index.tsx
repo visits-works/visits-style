@@ -11,7 +11,10 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: any;
   /** 吹き出しの背景色の指定 */
   color?: ColorType;
-  /** 表示される場所 */
+  /**
+   * 表示される場所
+   * @default 'bottom'
+   */
   position?: 'top' | 'left' | 'right' | 'bottom';
   /** 吹き出しのコンテナーdivのカスタムスタイル定義 */
   containerStyle?: ReturnType<typeof css>;

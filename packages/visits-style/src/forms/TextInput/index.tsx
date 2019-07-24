@@ -6,7 +6,10 @@ import HelpMessage from '../HelpMessage';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
-  /** 'text' | 'number' | 'password' | 'email' | 'tel' | 'search' */
+  /**
+   * 'text' | 'number' | 'password' | 'email' | 'tel' | 'search'
+   * @default 'text'
+   */
   type?: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
   /** エラーの発生時の表示テキスト */
   error?: string | any;

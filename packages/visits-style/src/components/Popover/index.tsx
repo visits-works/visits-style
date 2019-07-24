@@ -11,11 +11,17 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   label: React.ReactNode;
   /** 内容のリスト */
   children?: React.ReactNode | React.ReactNode;
-  /** 吹き出しの背景色 */
+  /**
+   * 吹き出しの背景色
+   * @default 'background'
+   */
   color?: string;
   /** 右の基準でリストを表示する */
   right?: boolean;
-  /** 吹き出しが表示される場所 */
+  /**
+   * 吹き出しが表示される場所
+   * @default 'bottom-left'
+   */
   position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
   /** 閉じた場合のコールバック */
   onClose?: () => void;
