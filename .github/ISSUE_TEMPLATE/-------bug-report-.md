@@ -21,7 +21,8 @@ assignees: ''
 
 ### 環境
 
-- React　バージョン： 
-- ブラウザ　　　　  ： 
-- OS　　　　　　   ：
-- visits-style　　　：
+- React　バージョン   ： 
+- styled-components： 
+- ブラウザ　　　　     ： 
+- OS　　　　　　      ：
+- visits-style　　    　：
