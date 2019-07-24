@@ -61,8 +61,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
   show?: boolean;
   /** モーダルのbodyに入れる内容 */
-  children?: any;
-  /** モーダルのbackground色 */
+  children?: React.ReactNode;
+  /** 
+   * モーダルのbackground色
+   * @default 'background'
+   */
   color?: ColorType;
   /** モーダルを閉じる処理 */
   closeModal: () => void;
@@ -70,15 +73,18 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   closeOnOverlay?: boolean;
   /** escボタンでクローズ */
   closeOnEsc?: boolean;
-  /** モーダルの表示・非表示のアニメーション速度 */
+  /**
+   * モーダルの表示・非表示のアニメーション速度
+   * @default 200
+   */
   timeout?: number;
   /** モーダル外に表示するElements */
-  external?: any;
+  external?: React.ReactNode;
 }
 
 export default function Modal({
   show, children, timeout = 200,
-  color = 'white', closeModal, external,
+  color = 'background', closeModal, external,
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {

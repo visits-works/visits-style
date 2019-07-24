@@ -35,6 +35,7 @@ const FlexTable = styled(Table)`
 
 export default function PropsTable({ fields }: any) {
   if (!fields || !fields.meta.length) return null;
+  console.log(fields);
   return (
     <FlexTable striped>
       <thead>

@@ -82,14 +82,14 @@ const parseConfig = {
 };
 const parse = docgen.withDefaultConfig(parseConfig).parse;
 
-function parsePropsItem({ name, description, required, type, defaultValue }) {
+function parsePropsItem({ name, description, required, type, defaultValue, ...rest }) {
   if (name.indexOf('aria-') > -1) return;
   const res = {
     name,
     description,
     required,
     type: type.name,
-    defaultValue: defaultValue ? defaultValue.value : defaultValue,
+    defaultValue: (defaultValue ? defaultValue.value : null),
   };
   return res;
 }

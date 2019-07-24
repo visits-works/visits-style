@@ -11,7 +11,7 @@ export const isActive = (route: string) => (match: any, location: any) =>
 
 const pageQuery = graphql`
 query {
-  allMdx (filter:{ frontmatter : { menu: { eq: true } } }) {
+  allMdx (filter: {frontmatter: {menu: {eq: true}}}, sort: {fields: frontmatter___order}) {
     nodes {
       frontmatter {
         title
@@ -57,10 +57,11 @@ const Header = styled(AppBar)`
   }
 `;
 
-export default function Topbar({ current, toggleTheme, isDark }: { current: string; toggleTheme: () => void; isDark: boolean; }) {
+export default function Topbar(
+  { current, toggleTheme, isDark }: { current: string; toggleTheme: () => void; isDark: boolean; },
+) {
   function renderMenu({ allMdx }: any) {
-    const list = allMdx.nodes
-      .sort((a: any, b: any) => a.frontmatter.title > b.frontmatter.title);
+    const list = allMdx.nodes;
     const MenuList = list.map((node: any) => {
       return (
         <li key={node.fields.slug}>

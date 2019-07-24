@@ -29,10 +29,10 @@ export default function Hero() {
         <Link to="/core">
           <Button color="primary">Get Started</Button>
         </Link>
-        <a href="https://github.com/visits-works/visits-style" target="_blank">
+        <a href="https://github.com/visits-works/visits-style" target="_blank" rel="noopener noreferrer">
           <Button color="primary">Github</Button>
         </a>
-        <a href="https://visits-works.github.io/visits-style/storybook" target="_blank">
+        <a href="https://visits-works.github.io/visits-style/storybook" target="_blank" rel="noopener noreferrer">
           <Button color="primary">試してみる</Button>
         </a>
       </footer>

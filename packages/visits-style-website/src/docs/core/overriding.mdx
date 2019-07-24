@@ -29,3 +29,20 @@ function SomePage() {
   return <Button color="primary">Hello!</Button>
 }
 ```
+
+### 例外
+`Popover`, `Tooltip`はオーバーライド先がコンポーネントの中身（アクション後に表示される領域）なので、
+
+コンテナーのCSS定義をオーバーライドしたい場合は、各コンポーネントの`containerStyle`で定義してください
+```jsx
+import { css } from 'styled-components';
+import { Popover } from 'visits-style';
+
+const containerStyle = css`
+  // PopoverのコンテナーのCSS定義
+`;
+
+export default function SomePopover(props) {
+  return <Popover {...props} containerStyle={containerStyle} />
+}
+```
