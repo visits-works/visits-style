@@ -48,7 +48,7 @@
     "@types/react-helmet": "^5.0.7",
     "@types/react-icons": "^2.2.6",
     "@types/react-transition-group": "^2.0.14",
-    "@types/styled-components": "^4.1.16",
+    "@types/styled-components": "^4.1.18",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^24.8.0",
     "babel-plugin-polished": "^1.1.0",

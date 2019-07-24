@@ -121,14 +121,20 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node,
       value: `/${value}`
     });
-  } else if (node.internal.type === 'File' && node.sourceInstanceName === 'types') {
+  } else if (
+    node.internal.type === 'File'
+    && node.sourceInstanceName === 'types'
+    && node.relativePath.indexOf('.d.ts') !== -1
+  ) {
     const value = parseMeta(parse(node.absolutePath));
     let name = '';
     if (node.relativePath.indexOf('index.d.ts') > -1) {
       const str = node.relativePath.split('/');
       name = str[1];
     } else {
-      name = node.relativePath.substring(0, node.relativePath.indexOf('/')).replace('.d.ts', '');
+      name = node.relativePath
+        .substring(node.relativePath.lastIndexOf('/') + 1, node.relativePath.length)
+        .replace('.d.ts', '');
     }
     createNodeField({
       name: 'component',
