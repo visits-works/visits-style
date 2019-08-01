@@ -35,6 +35,16 @@ storiesOf('components|Popover', module)
   .add('with input', () => (
     <Test />
   ))
+  .add('with absolute parent', () => (
+    <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+      <Test2 />
+      <Test2 />
+      <Test2 />
+      <Test2 />
+      <Test2 />
+      <Test2 />
+    </div>
+  ));
 
   function Test() {
     const [text, setText] = useState('');
@@ -45,6 +55,29 @@ storiesOf('components|Popover', module)
       >
         <TextInput value={text} onChange={onChange} />
       </Popover>
+    );
+  }
+
+  function Test2() {
+    const [show, setShow] = useState(false);
+    return (
+      <div
+        onPointerOver={() => setShow(true)}
+        onPointerLeave={() => setShow(false)}
+        style={{ position: 'relative', width: '40vw', height: '20vh', background: '#eee', marginBottom: 3 }}
+      >
+        {show && (
+          <div style={{ position: 'absolute', right: 12, bottom: 0, transform: 'translateY(100%)', zIndex: 10 }}>
+            <Popover
+              label={<button>button!</button>}
+              // @ts-ignore
+              position={select('position', positionList, 'bottom-right')}
+            >
+              hello world!
+            </Popover>
+          </div>
+        )}
+      </div>
     );
   }
 

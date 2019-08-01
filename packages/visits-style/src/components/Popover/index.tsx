@@ -69,20 +69,11 @@ export default function Popover({
     rect.current.width = width;
     rect.current.height = height;
 
-    if (left === 0 || top === 0) {
-      let target: HTMLDivElement | Element | null = parent.current;
-      while (target !== null) {
-        // @ts-ignore
-        const offLeft = target.offsetLeft;
-        // @ts-ignore
-        const offTop = target.offsetTop;
-        if (offLeft) left += offLeft;
-        if (offTop) top += offTop;
-        // @ts-ignore
-        target = target.offsetParent;
-      }
-      rect.current.left = left;
-      rect.current.top = top;
+    left += parentRect.left;
+    top += parentRect.top;
+
+    if (window.scrollY) {
+      top += window.scrollY;
     }
 
     switch (position) {
@@ -128,25 +119,31 @@ export default function Popover({
       ref={parent}
     >
       {label}
-      {show && (<Shadow onClick={handleBlur} />)}
-      <Transition
-        in={show}
-        timeout={250}
-        onExited={onExited}
-        unmountOnExit
-      >
-        {state => dom && createPortal((
-          <Tooltip
-            className={[className, state].join(' ').trim()}
-            role="document"
-            ref={refCallback}
-            color={color}
-            {...rest}
+      {dom && (
+        createPortal((
+          <Transition
+            in={show}
+            timeout={250}
+            onExited={onExited}
+            unmountOnExit
           >
-            {children}
-          </Tooltip>
-        ), dom)}
-      </Transition>
+            {state => (
+              <>
+                <Tooltip
+                  className={[className, state].join(' ').trim()}
+                  role="document"
+                  ref={refCallback}
+                  color={color}
+                  {...rest}
+                >
+                  {children}
+                </Tooltip>
+                {show && (<Shadow onClick={handleBlur} />)}
+              </>
+            )}
+          </Transition>
+        ), dom)
+      )}
     </Wrapper>
   );
 }
