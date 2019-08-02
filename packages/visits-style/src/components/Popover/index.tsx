@@ -37,7 +37,6 @@ export default function Popover({
   position, label, children, color = 'background', onOpen, onClose, disabled, className = '', ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const rect = useRef({ left: 0, top: 0, width: 0, height: 0 });
 
   const [show, setShow] = useState(false);
   const [dom, onExited] = useDiv(show, 'tooltip');
@@ -61,16 +60,11 @@ export default function Popover({
 
   const refCallback = (elem: HTMLElement | null) => {
     if (!parent.current || !elem || !show) return;
-    const width = elem.offsetWidth || rect.current.width;
-    const height = elem.offsetHeight || rect.current.height;
     const parentRect = parent.current.getBoundingClientRect();
-    let { left, top } = rect.current;
-
-    rect.current.width = width;
-    rect.current.height = height;
-
-    left += parentRect.left;
-    top += parentRect.top;
+    const width = elem.offsetWidth;
+    const height = elem.offsetHeight;
+    let left = parentRect.left;
+    let top = parentRect.top;
 
     if (window.scrollY) {
       top += window.scrollY;
