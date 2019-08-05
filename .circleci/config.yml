@@ -73,6 +73,16 @@ workflows:
       - doc:
           requires:
             - deploy
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - storybook:
           requires:
             - doc
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
