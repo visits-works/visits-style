@@ -37,7 +37,6 @@ export default function Popover({
   position, label, children, color = 'background', onOpen, onClose, disabled, className = '', ...rest
 }: Props) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const rect = useRef({ left: 0, top: 0, width: 0, height: 0 });
 
   const [show, setShow] = useState(false);
   const [dom, onExited] = useDiv(show, 'tooltip');
@@ -61,28 +60,14 @@ export default function Popover({
 
   const refCallback = (elem: HTMLElement | null) => {
     if (!parent.current || !elem || !show) return;
-    const width = elem.offsetWidth || rect.current.width;
-    const height = elem.offsetHeight || rect.current.height;
     const parentRect = parent.current.getBoundingClientRect();
-    let { left, top } = rect.current;
+    const width = elem.offsetWidth;
+    const height = elem.offsetHeight;
+    let left = parentRect.left;
+    let top = parentRect.top;
 
-    rect.current.width = width;
-    rect.current.height = height;
-
-    if (left === 0 || top === 0) {
-      let target: HTMLDivElement | Element | null = parent.current;
-      while (target !== null) {
-        // @ts-ignore
-        const offLeft = target.offsetLeft;
-        // @ts-ignore
-        const offTop = target.offsetTop;
-        if (offLeft) left += offLeft;
-        if (offTop) top += offTop;
-        // @ts-ignore
-        target = target.offsetParent;
-      }
-      rect.current.left = left;
-      rect.current.top = top;
+    if (window.scrollY) {
+      top += window.scrollY;
     }
 
     switch (position) {
@@ -128,25 +113,31 @@ export default function Popover({
       ref={parent}
     >
       {label}
-      {show && (<Shadow onClick={handleBlur} />)}
-      <Transition
-        in={show}
-        timeout={250}
-        onExited={onExited}
-        unmountOnExit
-      >
-        {state => dom && createPortal((
-          <Tooltip
-            className={[className, state].join(' ').trim()}
-            role="document"
-            ref={refCallback}
-            color={color}
-            {...rest}
+      {dom && (
+        createPortal((
+          <Transition
+            in={show}
+            timeout={250}
+            onExited={onExited}
+            unmountOnExit
           >
-            {children}
-          </Tooltip>
-        ), dom)}
-      </Transition>
+            {state => (
+              <>
+                <Tooltip
+                  className={[className, state].join(' ').trim()}
+                  role="document"
+                  ref={refCallback}
+                  color={color}
+                  {...rest}
+                >
+                  {children}
+                </Tooltip>
+                {show && (<Shadow onClick={handleBlur} />)}
+              </>
+            )}
+          </Transition>
+        ), dom)
+      )}
     </Wrapper>
   );
 }
