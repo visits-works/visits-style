@@ -1,3 +1,4 @@
+const path = require('path');
 
 module.exports = {
   siteMetadata: {
@@ -21,21 +22,24 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "types",
-        path: `${__dirname}/node_modules/visits-style`,
+        path: path.resolve(__dirname, '../visits-style/src'),
         ignore: [
           '**/*.js',
-          '**/*.tsx',
           '**/*.json',
           '**/*.map',
-          '**/*.test.d.ts',
-          '**/visits-style/index.d.ts',
+          '**/setupTest.ts',
+          '**/*.test.tsx',
+          '**/*.test.ts',
+          '**/*.story.tsx',
+          '**/visits-style/index.ts',
           '**/utils/**',
-          '**/visits-style/types.d.ts',
-          '**/visits-style/theme.d.ts',
-          '**/components/index.d.ts',
-          '**/elements/index.d.ts',
-          '**/forms/index.d.ts',
-          '**/styles/normalize.d.ts',
+          '**/hooks/**',
+          '**/visits-style/types.ts',
+          '**/visits-style/theme.ts',
+          '**/components/index.ts',
+          '**/elements/index.ts',
+          '**/forms/index.ts',
+          '**/styles/normalize.ts',
           '**/Icons/**',
         ],
       }

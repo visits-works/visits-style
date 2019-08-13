@@ -70,28 +70,34 @@ exports.onCreateWebpackConfig = ({ actions, loaders }) => {
 };
 
 const parseConfig = {
-  propFilter: {
-    skipPropsWithoutDoc: true,
-  },
-  componentNameResolver: (exp, source) => {
-    if (exp.getName() === 'StyledComponentClass') {
-      const res = docgen.getDefaultExportForFile(source);
-      return res;
+  propFilter: (prop) => {
+    if (
+      prop.name === 'as'
+      || prop.name === 'ref'
+      || prop.name === 'theme'
+    ) {
+      return false;
     }
+    if (prop.parent == null) {
+      return true;
+    }
+    return (
+      prop.parent.fileName.indexOf('node_modules/@types/react') < 0
+      && prop.parent.fileName.indexOf('node_modules/@types/styled-components') < 0
+    );
   },
+  componentNameResolver: (exp, source) => exp.getName() === 'StyledComponentClass' && getDefaultExportForFile(source),
 };
 const parse = docgen.withDefaultConfig(parseConfig).parse;
 
-function parsePropsItem({ name, description, required, type, defaultValue, ...rest }) {
-  if (name.indexOf('aria-') > -1) return;
-  const res = {
+function parsePropsItem({ name, description, required, type, defaultValue }) {
+  return {
     name,
     description,
     required,
     type: type.name,
     defaultValue: (defaultValue ? defaultValue.value : null),
   };
-  return res;
 }
 
 function parseMeta(meta) {
@@ -124,17 +130,20 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   } else if (
     node.internal.type === 'File'
     && node.sourceInstanceName === 'types'
-    && node.relativePath.indexOf('.d.ts') !== -1
   ) {
     const value = parseMeta(parse(node.absolutePath));
     let name = '';
-    if (node.relativePath.indexOf('index.d.ts') > -1) {
+    if (
+      node.relativePath.indexOf('index.tsx') > -1
+      || node.relativePath.indexOf('index.ts') > -1
+    ) {
       const str = node.relativePath.split('/');
       name = str[1];
     } else {
       name = node.relativePath
         .substring(node.relativePath.lastIndexOf('/') + 1, node.relativePath.length)
-        .replace('.d.ts', '');
+        .replace('.tsx', '')
+        .replace('.ts', '');
     }
     createNodeField({
       name: 'component',
