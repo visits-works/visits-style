@@ -88,7 +88,7 @@ export default function Tooltip({
         timeout={250}
         unmountOnExit
       >
-        {state => (
+        {(state) => (
           <TooltipWrapper
             className={[className, state].join(' ').trim()}
             ref={refCallback}

@@ -98,7 +98,7 @@ function ToastItem(
       in
       unmountOnExit
     >
-      {state => (
+      {(state) => (
         <Wrapper
           className={state}
           color={color}
@@ -155,7 +155,7 @@ export default function Toast(
       margin={margin}
       style={{ position: (fixed ? 'fixed' : 'absolute'), ...style }}
     >
-      {toasts.map(props => (
+      {toasts.map((props) => (
         <ToastItem
           {...props}
           key={props.id}

@@ -3,7 +3,8 @@ import { useRef, useEffect, useState } from 'react';
 export default function useDiv(show: boolean, role?: string): [HTMLDivElement | null, () => void] {
   const div = useRef<HTMLDivElement | null>(null);
   const mounted = useRef(false);
-  const hack = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setHack] = useState(0);
 
   const onExited = () => {
     if (mounted.current) {
@@ -24,7 +25,7 @@ export default function useDiv(show: boolean, role?: string): [HTMLDivElement | 
     if (show) {
       document.body.appendChild(div.current!);
       mounted.current = true;
-      hack[1](v => v + 1);
+      setHack(1);
     }
   }, [show]);
 

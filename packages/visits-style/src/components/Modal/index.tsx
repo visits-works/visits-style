@@ -62,7 +62,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   show?: boolean;
   /** モーダルのbodyに入れる内容 */
   children?: React.ReactNode;
-  /** 
+  /**
    * モーダルのbackground色
    * @default 'background'
    */
@@ -101,7 +101,7 @@ export default function Modal({
       unmountOnExit
       mountOnEnter
     >
-      {state => createPortal((
+      {(state) => createPortal((
         <Wrapper
           role="dialog"
           aria-modal="true"

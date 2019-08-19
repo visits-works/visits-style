@@ -32,7 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               id,
               import : frontmatter.import,
-            }
+            },
           });
         });
       })
@@ -44,29 +44,30 @@ exports.onCreateWebpackConfig = ({ actions, loaders }) => {
   actions.setWebpackConfig({
     resolve: {
       modules: [
-        path.resolve(__dirname, "src"),
-        "node_modules",
+        path.resolve(__dirname, "./src"),
+        path.resolve(__dirname, '../visits-style/src'),
+        path.resolve(__dirname, './node_modules'),
       ],
       alias: {
         '_components': path.resolve(__dirname, "./src/components"),
         '_assets': path.resolve(__dirname, "./src/assets"),
+        'visits-style': path.resolve(__dirname, '../visits-style/src'),
       }
     },
     module: {
       rules: [
         {
-          test: /\.js$/,
-          exclude: modulePath =>
-            /node_modules/.test(modulePath) &&
-            // whitelist specific es6 module
-            !/node_modules\/@mdx-js\/tag/.test(modulePath),
-          use: loaders.js(),
+          test: /\.(js|ts|tsx)$/,
+          include: [
+            path.resolve(__dirname, 'src'),
+            path.resolve(__dirname, '../visits-style/src'),
+          ],
+          exclude: /node_modules/,
+          loader: loaders.js(),
         },
       ],
     },
-
   });
-
 };
 
 const parseConfig = {

@@ -10,13 +10,12 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "baseUrl": ".",
+    "paths": {
+      "visits-style": ["../visits-style/src"]
+    }
   },
   "exclude": [
-    "./gulpfile.js",
-    "./jest.setup.js",
-    "./doczrc.js",
     "./node_modules/**",
-    "./doc_theme",
     "build",
     "lib",
     "jest",

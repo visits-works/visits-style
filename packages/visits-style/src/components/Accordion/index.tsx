@@ -21,7 +21,7 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
         in={show}
         unmountOnExit
       >
-        {state => (
+        {(state) => (
           <AnimatedContent className={state} timeout={timeout}>
             {children}
           </AnimatedContent>

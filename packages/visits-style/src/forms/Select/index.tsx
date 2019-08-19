@@ -30,7 +30,7 @@ export default function Select({
   options = [], placeholder, render, help, error, className, inputSize, outline, optional,
   ...rest
 }: Props) {
-  const list = useMemo(() => options.map(item => (
+  const list = useMemo(() => options.map((item) => (
     typeof item === 'string'
       ? (<option key={item} value={item}>{render ? render(item) : item}</option>)
       : (<option key={item.id} value={item.id}>{render ? render(item.name) : item.name}</option>)

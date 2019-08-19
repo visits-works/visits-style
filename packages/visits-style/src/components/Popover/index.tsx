@@ -63,8 +63,8 @@ export default function Popover({
     const parentRect = parent.current.getBoundingClientRect();
     const width = elem.offsetWidth;
     const height = elem.offsetHeight;
-    let left = parentRect.left;
-    let top = parentRect.top;
+    const { left } = parentRect;
+    let { top } = parentRect;
 
     if (window.scrollY) {
       top += window.scrollY;
@@ -121,7 +121,7 @@ export default function Popover({
             onExited={onExited}
             unmountOnExit
           >
-            {state => (
+            {(state) => (
               <>
                 <Tooltip
                   className={[className, state].join(' ').trim()}

@@ -27,6 +27,7 @@ export default function Progress(
     <Wrapper color={color} {...rest}>
       <div
         role="progressbar"
+        aria-label="progress"
         className={value !== max ? 'in-progress' : undefined}
         style={{ width: `${percent > 100 ? 100 : percent}%` }}
       />
