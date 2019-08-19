@@ -21,6 +21,7 @@
     "build": "tsdx build && cp ./package.json ./dist/package.json && cp ../../LICENSE ./dist/LICENSE && cp ../../README.md ./dist/README.md",
     "lint": "tsdx lint src",
     "test": "tsdx test",
+    "test:ci": "tsdx test --ci --coverage --runInBand",
     "clean": "rm -rf ./dist",
     "start": "start-storybook -p 9000",
     "storybook:build": "build-storybook -c .storybook -o .out",
@@ -79,14 +80,15 @@
   "jest": {
     "testURL": "http://localhost",
     "testMatch": [
-      "<rootDir>/**/*.(spec|test).{ts,tsx}"
+      "<rootDir>/**/*.test.{ts,tsx}"
     ],
     "transform": {
-      "^.+\\.(js|ts|tsx)?$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.(js|ts|tsx)?$": "babel-jest"
     },
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTest.ts"
     ],
+    "rootDir": ".",
     "collectCoverageFrom": [
       "src/**/**.{ts,tsx}",
       "!src/**/**.story.tsx",

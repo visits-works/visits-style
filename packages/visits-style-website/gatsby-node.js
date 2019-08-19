@@ -46,7 +46,7 @@ exports.onCreateWebpackConfig = ({ actions, loaders }) => {
       modules: [
         path.resolve(__dirname, "./src"),
         path.resolve(__dirname, '../visits-style/src'),
-        path.resolve(__dirname, './node_modules'),
+        'node_modules',
       ],
       alias: {
         '_components': path.resolve(__dirname, "./src/components"),

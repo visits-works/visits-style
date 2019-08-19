@@ -18,7 +18,7 @@ describe('Toast', () => {
     render(
       <ThemeProvider theme={theme}>
         <Toast toasts={[]} clear={onClear} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   });
 
