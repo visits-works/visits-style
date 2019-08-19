@@ -1,11 +1,7 @@
 {
   "extends": [
-    "react-app",
-    "airbnb"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
+    "airbnb",
+    "react-app"
   ],
   "settings": {
     "import/resolver": {
@@ -16,9 +12,8 @@
     }
   },
   "rules": {
-    "jsx-a11y/href-no-hash" : "off",
     "jsx-a11y/label-has-for": [2, {"required": { "some": ["nesting", "id"] }}],
-    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" } ],
     "react/no-unused-prop-types": "off",
     "no-bitwise": "off",
     "object-curly-newline": "off",
@@ -26,6 +21,8 @@
     "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "prettier/prettier": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

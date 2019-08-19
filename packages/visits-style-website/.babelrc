@@ -1,28 +1,9 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "loose": true,
-        "modules": false,
-        "useBuiltIns": "usage",
-        "shippedProposals": true,
-        "targets": {
-          "browsers": [">0.25%", "not dead"]
-        }
-      }
-    ],
-    [
-      "@babel/preset-react",
-      {
-        "useBuiltIns": true,
-        "pragma": "React.createElement"
-      }
-    ],
-    "@babel/preset-typescript"
+    "react-app"
   ],
   "plugins": [
-    "styled-components",
+    ["styled-components", { "pure": true }],
     "polished",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-class-properties",
