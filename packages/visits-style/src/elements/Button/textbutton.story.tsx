@@ -1,9 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, text, boolean } from '@storybook/addon-knobs';
 import Approved from '../Icons/Approved';
 import Button from './TextButton';
 import ButtonGroup from './ButtonGroup';
+import { SizeType } from '../../types';
 
 const colorList = [
   '',
@@ -27,7 +29,7 @@ storiesOf('elements|TextButton', module)
   .add('default', () => (
     <Button
       color={select('color', colorList, '')}
-      size={select('size', sizeList, '')}
+      size={select('size', sizeList, '') as SizeType}
       pure={boolean('pure', false)}
       underline={boolean('underline', false)}
       disabled={boolean('disabled', false)}
@@ -38,7 +40,7 @@ storiesOf('elements|TextButton', module)
   .add('icon', () => (
     <Button
       color={select('color', colorList, '')}
-      size={select('size', sizeList, '')}
+      size={select('size', sizeList, '') as SizeType}
       pure={boolean('pure', false)}
       underline={boolean('underline', false)}
       disabled={boolean('disabled', false)}

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useCallback, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, boolean } from '@storybook/addon-knobs';
@@ -19,11 +20,13 @@ function ToastDemo({ fixed, position }: any) {
     const newList = list.slice();
     const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
     const id = `_${Math.random().toString(36).substr(2, 9)}`;
-    newList.push({ id, color, message: faker.lorem.sentence(), duration, clearOnClick: showButton });
+    newList.push({
+      id, color, message: faker.lorem.sentence(), duration, clearOnClick: showButton,
+    });
     setList(newList);
   }, [duration, showButton, list]);
   const clearToast = useCallback((id: string) => {
-    setList(l => l.filter(item => item.id !== id));
+    setList((l) => l.filter((item) => item.id !== id));
   }, []);
   const clearAll = useCallback(() => setList([]), []);
   const onDurationChange = useCallback(({ target }: any) => {
@@ -33,7 +36,7 @@ function ToastDemo({ fixed, position }: any) {
       setDuration(parseInt(target.value, 10));
     }
   }, []);
-  const clickButton = useCallback(() => setShowbutton(b => !b), []);
+  const clickButton = useCallback(() => setShowbutton((b) => !b), []);
 
   return (
     <div>

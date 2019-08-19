@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { render, fireEvent } from '@testing-library/react';
@@ -9,11 +10,11 @@ describe('Popover', () => {
     const { getByText } = render(
       <ThemeProvider theme={theme}>
         <Popover
-          label={<button>show</button>}
+          label={<button type="button">show</button>}
         >
           Popover Content
         </Popover>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     fireEvent.click(getByText('show'));
     getByText('Popover Content');

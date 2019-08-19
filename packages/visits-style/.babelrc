@@ -7,7 +7,6 @@
   ],
   "plugins": [
     ["babel-plugin-styled-components", { "pure": true }],
-    "polished",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-class-properties",
     "@babel/proposal-object-rest-spread",
@@ -15,6 +14,11 @@
     ["transform-rename-import", { "replacements": { "original": "lodash", "replacement": "lodash-es" } }],
   ],
   "env": {
+    "production": {
+      "plugins": [
+        "polished"
+      ],
+    },
     "test": {
       "plugins": [
         "@babel/transform-modules-commonjs"

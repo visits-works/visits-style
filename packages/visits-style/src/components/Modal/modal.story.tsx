@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies, react/jsx-one-expression-per-line */
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, number } from '@storybook/addon-knobs';
@@ -133,17 +134,17 @@ storiesOf('components|Modal', module)
   ))
   .add('with input', () => (
     <Test />
-  ))
+  ));
 
-  function Test() {
-    const [text, setText] = useState('');
-    const onChange = (e) => setText(e.target.value);
-    return (
-      <Modal
-        closeModal={() => null}
-        show
-      >
-        <TextInput value={text} onChange={onChange} />
-      </Modal>
-    );
-  }
+function Test() {
+  const [text, setText] = useState('');
+  const onChange = (e) => setText(e.target.value);
+  return (
+    <Modal
+      closeModal={() => null}
+      show
+    >
+      <TextInput value={text} onChange={onChange} />
+    </Modal>
+  );
+}

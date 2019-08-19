@@ -1,6 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, select, text, button } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import Tag from '.';
 
 const colorList = [
@@ -31,4 +32,4 @@ storiesOf('elements|Tag', module)
     >
       {text('children', 'Hello World!')}
     </Tag>
-  ))
+  ));

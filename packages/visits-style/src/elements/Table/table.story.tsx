@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, select } from '@storybook/addon-knobs';
 import Table from '.';
+import { SizeType } from '../../types';
 
 const sizeList = [
   '',
@@ -13,7 +15,7 @@ const sizeList = [
 storiesOf('elements|Table', module)
   .add('default', () => (
     <Table
-      size={select('size', sizeList, '')}
+      size={select('size', sizeList, '') as SizeType}
       full={boolean('full', false)}
       bordered={boolean('bordered', false)}
       striped={boolean('striped', false)}
@@ -44,5 +46,4 @@ storiesOf('elements|Table', module)
         </tr>
       </tbody>
     </Table>
-  ))
-
+  ));
