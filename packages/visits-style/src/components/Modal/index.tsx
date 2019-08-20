@@ -107,7 +107,7 @@ export default function Modal({
           aria-modal="true"
           className={className}
         >
-          <Shadow onClick={closeOnOverlay ? closeModal : undefined} />
+          <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />
           <AnimatedBox className={state} color={color} borderless {...rest} role="document">
             {children}
           </AnimatedBox>
