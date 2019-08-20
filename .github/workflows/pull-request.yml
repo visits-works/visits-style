@@ -1,0 +1,16 @@
+name: Run test for pull request
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn workspace visits-style lint
+    - run: yarn workspace visits-style test:ci
