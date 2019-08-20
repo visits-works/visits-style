@@ -32,8 +32,8 @@ export default function Switch({
       showLabel={showLabel}
       background={background}
       anchorColor={anchorColor}
-      onLabel={onLabel}
-      offLabel={offLabel}
+      labelTextOn={onLabel}
+      labelTextOff={offLabel}
       disabled={rest.disabled}
     >
       <input id={id} type="checkbox" {...rest} />
@@ -62,7 +62,7 @@ const labelStyle = css`
   }
 `;
 
-const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'onLabel'|'offLabel'|'disabled'>>`
+const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'disabled'> & { labelTextOn: string; labelTextOff: string }>`
   display: inline-block;
   cursor: pointer;
   line-height: 1.25;
