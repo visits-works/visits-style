@@ -23,7 +23,7 @@ describe('Modal', () => {
 
   it('modal does not rendered when show props is false', () => {
     const onClose = jest.fn();
-    const { queryByText, baseElement } = render(
+    const { queryByText, queryByRole } = render(
       <ThemeProvider theme={theme}>
         <Modal
           closeModal={onClose}
@@ -37,7 +37,7 @@ describe('Modal', () => {
     // content does not exists
     expect(queryByText('Modal Content here')).toBeNull();
     // wrapper div does not exists
-    expect(baseElement.querySelector('div[role="dialog"]')).toBeNull();
+    expect(queryByRole('dialog')).toBeNull();
   });
 
   it('closeModal is called by clicking overlay when "closeOnOverlay" is enabled', () => {
@@ -72,4 +72,21 @@ describe('Modal', () => {
     fireEvent.click(getByTestId('vs-modal-overlay'));
     expect(onClose).not.toBeCalled();
   });
+
+  it('external rendered outside of modal document', () => {
+    const onClose = jest.fn();
+    const { getByTestId, getByRole } = render(
+      <ThemeProvider theme={theme}>
+        <Modal
+          closeModal={onClose}
+          external={<div data-testid="modal-external">external contents</div>}
+          show
+        >
+          Modal Content here
+        </Modal>
+      </ThemeProvider>,
+    );
+    expect(getByRole('document').contains(getByTestId('modal-external'))).toBeFalsy();
+    expect(getByRole('dialog').contains(getByTestId('modal-external'))).toBeTruthy();
+  })
 });
