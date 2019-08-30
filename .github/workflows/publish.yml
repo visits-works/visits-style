@@ -27,8 +27,7 @@ jobs:
       - run: yarn install
       - run: yarn workspace visits-style build
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ./packages/visits-style/dist/.npmrc
-      - run: cd ./packages/visits-style/dist
-      - run: npm publish
+      - run: cd ./packages/visits-style/dist && npm publish
   # document:
   #   name: update document
   #   runs-on: ubuntu-latest
