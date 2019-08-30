@@ -1,0 +1,45 @@
+name: Run test for pull request
+on:
+  tags:
+    - v*
+jobs:
+  test:
+    name: run lint and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: yarn install
+      - run: yarn workspace visits-style lint
+      - run: yarn workspace visits-style test:ci
+  publish:
+    name: publish to npm
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: yarn install
+      - run: yarn build
+      - run: cd /home/runner/work/visits-style/visits-style/packages/visits-style/dist
+      - uses: actions/npm@master
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.npm_token }}
+        with:
+          args: publish
+  document:
+    name: update document
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: yarn install
+      - run: yarn workspace visits-style-website deploy
+      - run: yarn workspace visits-style storybook:deploy
