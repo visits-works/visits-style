@@ -12,6 +12,7 @@ type ItemType =
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
+  /** { id: string | number, name: string, ...rest } | string */
   options: ItemType[];
   outline?: boolean;
   /** エラーの発生時の表示テキスト */

@@ -21,7 +21,7 @@
     "build": "tsdx build && cp ./package.json ./dist/package.json && cp ../../LICENSE ./dist/LICENSE && cp ../../README.md ./dist/README.md",
     "lint": "tsdx lint src",
     "test": "tsdx test",
-    "test:ci": "tsdx test --ci --coverage --runInBand",
+    "test:ci": "tsdx test --ci --coverage",
     "clean": "rm -rf ./dist",
     "start": "start-storybook -p 9000",
     "storybook:build": "build-storybook -c .storybook -o .out",
