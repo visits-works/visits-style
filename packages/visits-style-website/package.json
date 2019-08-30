@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "CHOKIDAR_USEPOLLING=1 gatsby develop",
-    "build": "rm -rf ./public && gatsby build",
+    "build": "gatsby build",
     "deploy": "yarn build --prefix-paths && gh-pages -d public",
     "type-check": "tsc --noEmit"
   },

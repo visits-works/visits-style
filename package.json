@@ -1,4 +1,7 @@
 {
   "private": true,
-  "workspaces": ["packages/*"]
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build_doc": "yarn workspace visits-style storybook:build && yarn workspace visits-style-website build"
+  }
 }

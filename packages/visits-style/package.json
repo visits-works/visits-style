@@ -22,7 +22,6 @@
     "lint": "tsdx lint src",
     "test": "tsdx test",
     "test:ci": "tsdx test --ci --coverage",
-    "clean": "rm -rf ./dist",
     "start": "start-storybook -p 9000",
     "storybook:build": "build-storybook -c .storybook -o .out",
     "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e storybook"
