@@ -39,6 +39,7 @@ export default function Popover({
   const parent = useRef<HTMLDivElement | null>(null);
 
   const [show, setShow] = useState(false);
+  const cache = useRef({ width: 0, height: 0 });
   const [dom, onExited] = useDiv(show, 'tooltip');
 
   const handleFocus = () => {
@@ -61,14 +62,17 @@ export default function Popover({
   const refCallback = (elem: HTMLElement | null) => {
     if (!parent.current || !elem || !show) return;
     const parentRect = parent.current.getBoundingClientRect();
-    const width = elem.offsetWidth;
-    const height = elem.offsetHeight;
+    const width = elem.offsetWidth || cache.current.width;
+    const height = elem.offsetHeight || cache.current.height;
     const { left } = parentRect;
     let { top } = parentRect;
 
     if (window.scrollY) {
       top += window.scrollY;
     }
+
+    if (width) cache.current.width = width;
+    if (height) cache.current.height = height;
 
     switch (position) {
       case 'top-left': {
