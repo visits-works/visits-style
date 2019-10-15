@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 export default function useScrollFix(show?: boolean) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (show) {
       document.body.style.overflowY = 'hidden';
       return () => {

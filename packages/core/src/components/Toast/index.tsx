@@ -1,8 +1,9 @@
 import React, { useEffect, HTMLAttributes, useCallback } from 'react';
-// import { createPortal } from 'react-dom';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { Transition } from 'react-transition-group';
+import { Transition, TransitionGroup } from 'react-transition-group';
 
+import useDiv from '../../hooks/useDiv';
 import Close from '../../elements/Icons/Close';
 import Box from '../../elements/Box';
 import { ColorType } from '../../types';
@@ -84,34 +85,24 @@ function ToastItem(
   const onClear = useCallback(() => clear(id), [clear, id]);
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-    if (duration) timeout = setTimeout(onClear, duration);
-    return () => {
-      if (timeout) clearTimeout(timeout);
-    };
-  // eslint-disable-next-line
-  }, []);
+    if (duration) {
+      const timeout = setTimeout(onClear, duration);
+      return () => clearTimeout(timeout);
+    }
+    return undefined;
+  }, [onClear, duration]);
 
   return (
-    <Transition
-      timeout={250}
-      in
-      unmountOnExit
+    <Wrapper
+      color={color}
+      clear={clearOnClick}
+      data-testid="toast-item"
+      borderless
+      {...rest}
     >
-      {(state) => (
-        <Wrapper
-          className={state}
-          color={color}
-          clear={clearOnClick}
-          data-testid="toast-item"
-          borderless
-          {...rest}
-        >
-          {message}
-          {clearOnClick && <ClearButton onClick={onClear}><Close /></ClearButton>}
-        </Wrapper>
-      )}
-    </Transition>
+      {message}
+      {clearOnClick && <ClearButton onClick={onClear}><Close /></ClearButton>}
+    </Wrapper>
   );
 }
 
@@ -138,41 +129,39 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
 export default function Toast(
   { toasts, clear, fixed, style, margin = '1rem', position, ...rest }: ContainerProps,
 ) {
-  // const element = useRef<HTMLDivElement | null>(null);
+  const [dom] = useDiv(true);
 
-  // useLayoutEffect(() => {
-  //   if (!element.current) element.current = document.createElement('div');
-  //   document.body.appendChild(element.current);
-  //   return () => {
-  //     if (element.current) document.body.removeChild(element.current);
-  //   };
-  // }, []);
-
-  return (
+  return dom && createPortal((
     <Container
       {...rest}
-      position={position}
+      pos={position}
       margin={margin}
       style={{ position: (fixed ? 'fixed' : 'absolute'), ...style }}
     >
-      {toasts.map((props) => (
-        <ToastItem
-          {...props}
-          key={props.id}
-          clear={clear}
-        />
-      ))}
+      <TransitionGroup component={null}>
+        {toasts.map((props) => (
+          <Transition key={props.id} timeout={250} in unmountOnExit>
+            {(state) => (
+              <ToastItem
+                {...props}
+                className={state}
+                key={props.id}
+                clear={clear}
+              />
+            )}
+          </Transition>
+        ))}
+      </TransitionGroup>
     </Container>
-  );
+  ), dom);
 }
 
-const Container = styled.div<{ position: ContainerProps['position'], margin: ContainerProps['margin'] }>`
+const Container = styled.div<{ pos: ContainerProps['position'], margin: ContainerProps['margin'] }>`
   display: flex;
   flex-direction: column;
-  z-index: 9999;
 
-  ${({ position, margin }) => {
-    switch (position) {
+  ${({ pos, margin }) => {
+    switch (pos) {
       case 'bottom': {
         return { bottom: margin, left: '50%', alignItems: 'center', transform: 'translateX(-50%)' };
       }
@@ -185,9 +174,11 @@ const Container = styled.div<{ position: ContainerProps['position'], margin: Con
       case 'top': {
         return { top: margin, left: '50%', alignItems: 'center', transform: 'translateX(-50%)' };
       }
-      case 'top-right':
-      default: {
+      case 'top-right': {
         return { top: margin, right: margin, alignItems: 'flex-end' };
+      }
+      default: {
+        return { top: margin, left: margin, alignItems: 'flex-start' };
       }
     }
   }}

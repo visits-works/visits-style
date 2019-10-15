@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 
 export default function useDiv(show: boolean, role?: string): [HTMLDivElement | null, () => void] {
   const div = useRef<HTMLDivElement | null>(null);
@@ -13,7 +13,7 @@ export default function useDiv(show: boolean, role?: string): [HTMLDivElement | 
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof document !== 'undefined') {
       div.current = document.createElement('div');
       if (role) div.current.setAttribute('role', role);
@@ -21,7 +21,7 @@ export default function useDiv(show: boolean, role?: string): [HTMLDivElement | 
     return onExited;
   }, [role]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (show) {
       document.body.appendChild(div.current!);
       mounted.current = true;

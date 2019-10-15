@@ -16,6 +16,7 @@ function ToastDemo({ fixed, position }: any) {
   const [list, setList] = useState([]);
   const [duration, setDuration] = useState<number | null>(2000);
   const [showButton, setShowbutton] = useState(false);
+
   const addToast = useCallback(() => {
     const newList = list.slice();
     const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
@@ -25,10 +26,13 @@ function ToastDemo({ fixed, position }: any) {
     });
     setList(newList);
   }, [duration, showButton, list]);
+
   const clearToast = useCallback((id: string) => {
     setList((l) => l.filter((item) => item.id !== id));
   }, []);
+
   const clearAll = useCallback(() => setList([]), []);
+
   const onDurationChange = useCallback(({ target }: any) => {
     if (!target.value) {
       setDuration(null);
@@ -36,6 +40,7 @@ function ToastDemo({ fixed, position }: any) {
       setDuration(parseInt(target.value, 10));
     }
   }, []);
+
   const clickButton = useCallback(() => setShowbutton((b) => !b), []);
 
   return (
