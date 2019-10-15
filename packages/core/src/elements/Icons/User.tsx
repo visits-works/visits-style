@@ -3,7 +3,7 @@ import React, { SVGAttributes } from 'react';
 
 export default function User(props: SVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" {...props}>
       <g fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="15" cy="15" r="15" stroke="none" />
         <circle cx="15" cy="15" r="14" />

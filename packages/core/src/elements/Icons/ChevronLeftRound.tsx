@@ -3,7 +3,7 @@ import React, { SVGAttributes } from 'react';
 
 export default function ChevronLeftRound(props: SVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" {...props}>
       <g fill="none">
         <path d="M15 29c-3.74 0-7.255-1.456-9.9-4.1A13.908 13.908 0 011 15c0-3.74 1.456-7.255 4.1-9.9A13.908 13.908 0 0115 1c3.74 0 7.255 1.456 9.9 4.1A13.908 13.908 0 0129 15c0 3.74-1.456 7.255-4.1 9.9A13.908 13.908 0 0115 29z" />
         <path
