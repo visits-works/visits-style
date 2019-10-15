@@ -58,17 +58,15 @@ export const pageQuery = graphql`
         }
       }
     }
-    file(fields: {component: {eq: $import}}) {
+    file(fields: {name: {eq: $import}}) {
       fields {
-        component
-        meta {
-          props {
-            name
-            description
-            required
-            type
-            defaultValue
-          }
+        name
+        props {
+          name
+          description
+          required
+          type
+          defaultValue
         }
       }
     }

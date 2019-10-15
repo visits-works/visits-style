@@ -8,8 +8,8 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
-import theme from '../src/theme';
-import css from '../src/styles/normalize';
+import theme from '../packages/core/src/theme';
+import css from '../packages/core/src/styles/normalize';
 
 const GlobalStyle = createGlobalStyle`
   ${css}
@@ -55,22 +55,20 @@ const containerStyle = {
 }
 
 addDecorator(story => (
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <>
-        <GlobalStyle  />
-        <div style={containerStyle}>
-          {story()}
-        </div>
-      </>
-    </ThemeProvider>
-  </StrictMode>
+  <ThemeProvider theme={theme}>
+    <>
+      <GlobalStyle  />
+      <div style={containerStyle}>
+        {story()}
+      </div>
+    </>
+  </ThemeProvider>
 ));
 
 addDecorator(withKnobs);
 
 function loadStories() {
-  const req = require.context('../src', true, /\.story\.tsx$/);
+  const req = require.context('../packages', true, /\.story\.tsx$/);
   req.keys().forEach(filename => req(filename));
 }
 

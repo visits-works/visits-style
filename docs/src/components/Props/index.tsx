@@ -34,7 +34,9 @@ const FlexTable = styled(Table)`
 `;
 
 export default function PropsTable({ fields }: any) {
-  if (!fields || !fields.meta.length) return null;
+  if (!fields || !fields.props.length) return null;
+  if(!fields.props[0].length) return null;
+
   return (
     <FlexTable striped>
       <thead>
@@ -47,7 +49,7 @@ export default function PropsTable({ fields }: any) {
         </tr>
       </thead>
       <tbody>
-        {fields.meta[0].props.map((item: any) => (
+        {fields.props[0].map((item: any) => (
           <tr key={item.name}>
             <td>{item.name}</td>
             <td>{item.type}</td>

@@ -11,8 +11,7 @@ bundle_report.html
 
 # production
 /build
-/lib
-/dist
+dist
 
 # misc
 /tmp

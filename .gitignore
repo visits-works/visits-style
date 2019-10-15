@@ -4,6 +4,7 @@
 /build
 /lib
 node_modules
+.out
 
 # misc
 /tmp

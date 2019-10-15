@@ -1,0 +1,9 @@
+{
+  "presets": [
+    ["react-app", { "flow": false, "typescript": true }]
+  ],
+  "plugins": [
+    ["styled-components", { "pure": true }],
+    "polished"
+  ]
+}

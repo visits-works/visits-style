@@ -22,7 +22,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "types",
-        path: path.resolve(__dirname, '../visits-style/src'),
+        path: path.resolve(__dirname, '../packages/core/src'),
         ignore: [
           '**/*.js',
           '**/*.json',

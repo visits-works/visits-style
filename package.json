@@ -1,7 +1,28 @@
 {
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*",
+    "docs"
+  ],
   "scripts": {
-    "build_doc": "yarn workspace visits-style storybook:build && yarn workspace visits-style-website build"
+    "build_doc": "yarn storybook:build && yarn workspace visits-style-website build",
+    "start": "start-storybook -p 9000",
+    "storybook:build": "build-storybook -c .storybook -o .out",
+    "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@storybook/addon-a11y": "^5.2.4",
+    "@storybook/addon-actions": "^5.2.4",
+    "@storybook/addon-knobs": "^5.2.4",
+    "@storybook/addon-options": "^5.2.4",
+    "@storybook/addons": "^5.2.4",
+    "@storybook/react": "^5.2.4",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-test-renderer": "^16.10.2",
+    "styled-components": "^4.4.0",
+    "babel-loader": "^8.0.6",
+    "typescript": "^3.6.4"
   }
 }

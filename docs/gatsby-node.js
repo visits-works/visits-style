@@ -45,13 +45,13 @@ exports.onCreateWebpackConfig = ({ actions, loaders }) => {
     resolve: {
       modules: [
         path.resolve(__dirname, "./src"),
-        path.resolve(__dirname, '../visits-style/src'),
+        path.resolve(__dirname, '../packages/core/src'),
         'node_modules',
       ],
       alias: {
         '_components': path.resolve(__dirname, "./src/components"),
         '_assets': path.resolve(__dirname, "./src/assets"),
-        'visits-style': path.resolve(__dirname, '../visits-style/src'),
+        'visits-style': path.resolve(__dirname, '../packages/core/src'),
       }
     },
     module: {
@@ -60,7 +60,7 @@ exports.onCreateWebpackConfig = ({ actions, loaders }) => {
           test: /\.(js|ts|tsx)$/,
           include: [
             path.resolve(__dirname, 'src'),
-            path.resolve(__dirname, '../visits-style/src'),
+            path.resolve(__dirname, '../packages/core/src'),
           ],
           exclude: /node_modules/,
           loader: loaders.js(),
@@ -97,7 +97,7 @@ function parsePropsItem({ name, description, required, type, defaultValue }) {
     description,
     required,
     type: type.name,
-    defaultValue: (defaultValue ? defaultValue.value : null),
+    defaultValue: (defaultValue ? String(defaultValue.value) : null),
   };
 }
 
@@ -106,7 +106,7 @@ function parseMeta(meta) {
   if (meta && meta.length > 0) {
     res = meta.map((item) => {
       const props = Object.keys(item.props).map(keys => parsePropsItem(item.props[keys])).filter(a => a);
-      return { name: item.displayName, props };
+      return props;
     });
   }
   return res;
@@ -147,12 +147,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         .replace('.ts', '');
     }
     createNodeField({
-      name: 'component',
+      name: 'name',
       node,
       value: name,
     });
     createNodeField({
-      name: 'meta',
+      name: 'props',
       node,
       value,
     });
