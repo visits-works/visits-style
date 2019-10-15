@@ -24,8 +24,6 @@
     "test:ci": "tsdx test --ci --coverage"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
-    "@babel/plugin-transform-typescript": "^7.6.3",
     "@testing-library/jest-dom": "^4.1.2",
     "@testing-library/react": "^9.3.0",
     "@types/jest": "^24.0.17",

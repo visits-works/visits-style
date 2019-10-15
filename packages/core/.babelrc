@@ -21,13 +21,15 @@
         "useLayoutEffect",
         "useDebugValue"
       ]
-    }],
-    "polished"
+    }]
   ],
   "env": {
+    "production": {
+      "plugins": ["polished"]
+    },
     "test": {
-      "plugins": [
-        "@babel/transform-modules-commonjs"
+      "presets": [
+        ["@babel/preset-env", { "modules": "commonjs" }]
       ]
     }
   }
