@@ -39,7 +39,7 @@
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-airbnb-base": "14.0.0",
     "faker": "^4.1.0",
-    "tsdx": "^0.9.3",
+    "tsdx": "^0.10.5",
     "typescript": "^3.6.3"
   },
   "jest": {
