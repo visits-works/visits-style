@@ -1,7 +1,7 @@
 import { ThemeType } from './types';
 
 const theme: ThemeType = {
-  fontFamily: 'ヒラギノ角ゴシック,"ヒラギノ角ゴ ProN W3",メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif',
+  fontFamily: '-apple-system BlinkMacSystemFont, Meiryo, system-ui, sans-serif',
   fontSize: '16px',
   gutter: 24,
   smallGutter: 16,
