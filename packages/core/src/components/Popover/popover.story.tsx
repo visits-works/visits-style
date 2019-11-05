@@ -68,7 +68,7 @@ function Test2() {
       style={{ position: 'relative', width: '40vw', height: '20vh', background: '#eee', marginBottom: 3 }}
     >
       {show && (
-        <div style={{ position: 'absolute', right: 12, bottom: 0, transform: 'translateY(100%)', zIndex: 10 }}>
+        <div style={{ position: 'absolute', right: 4, top: 0, transform: 'translateY(100%)', zIndex: 10 }}>
           <Popover
             label={<button type="button">button!</button>}
             // @ts-ignore
