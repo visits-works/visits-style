@@ -88,7 +88,7 @@ export default function Modal({
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
-  const [dom, onExited] = useDiv(!!show, 'presentation');
+  const [dom, onExited] = useDiv(!!show, { role: 'presentation', 'aria-modal': 'true' });
   useScrollFix(show);
 
   if (!dom) return null;
@@ -104,7 +104,6 @@ export default function Modal({
       {(state) => createPortal((
         <Wrapper
           role="dialog"
-          aria-modal="true"
           className={className}
         >
           <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />

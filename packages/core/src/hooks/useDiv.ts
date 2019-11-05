@@ -1,33 +1,48 @@
-import { useRef, useLayoutEffect, useState } from 'react';
+import { useRef, AriaAttributes } from 'react';
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import useForceUpdate from './useForceUpdate';
 
-export default function useDiv(show: boolean, role?: string): [HTMLDivElement | null, () => void] {
+interface Attributes extends AriaAttributes {
+  role?: string;
+  lang?: string;
+  class?: string;
+  hidden?: boolean;
+  id?: string;
+  tabIndex?: number;
+  title?: string;
+}
+
+export default function useDiv(
+  show: boolean, attrs?: Attributes,
+): [HTMLDivElement | null, () => void] {
   const div = useRef<HTMLDivElement | null>(null);
   const mounted = useRef(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setHack] = useState(0);
+  const update = useForceUpdate();
 
   const onExited = () => {
-    if (mounted.current) {
-      document.body.removeChild(div.current!);
+    if (mounted.current && div.current) {
+      document.body.removeChild(div.current);
       mounted.current = false;
     }
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (typeof document !== 'undefined') {
       div.current = document.createElement('div');
-      if (role) div.current.setAttribute('role', role);
+      if (attrs) {
+        Object.keys(attrs).map((key) => div.current!.setAttribute(key, String(attrs[key])));
+      }
     }
     return onExited;
-  }, [role]);
+  }, [attrs]);
 
-  useLayoutEffect(() => {
-    if (show) {
-      document.body.appendChild(div.current!);
+  useIsomorphicLayoutEffect(() => {
+    if (typeof document !== 'undefined' && show && div.current) {
+      document.body.appendChild(div.current);
       mounted.current = true;
-      setHack(1);
+      update();
     }
-  }, [show]);
+  }, [show, update]);
 
   return [div.current, onExited];
 }

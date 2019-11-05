@@ -40,7 +40,7 @@ export default function Popover({
 
   const [show, setShow] = useState(false);
   const cache = useRef({ width: 0, height: 0 });
-  const [dom, onExited] = useDiv(show, 'tooltip');
+  const [dom, onExited] = useDiv(show, { role: 'tooltip' });
 
   const handleFocus = () => {
     if (show || !!disabled) return;
