@@ -1,6 +1,7 @@
-import { useRef, AriaAttributes } from 'react';
+import { useRef, useCallback, AriaAttributes } from 'react';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useForceUpdate from './useForceUpdate';
+import isClient from '../utils/isClient';
 
 interface Attributes extends AriaAttributes {
   role?: string;
@@ -19,25 +20,28 @@ export default function useDiv(
   const mounted = useRef(false);
   const update = useForceUpdate();
 
-  const onExited = () => {
+  const onExited = useCallback(() => {
     if (mounted.current && div.current) {
       document.body.removeChild(div.current);
       mounted.current = false;
     }
-  };
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
-    if (typeof document !== 'undefined') {
-      div.current = document.createElement('div');
+    if (isClient && !div.current) {
+      const elem = document.createElement('div');
       if (attrs) {
-        Object.keys(attrs).map((key) => div.current!.setAttribute(key, String(attrs[key])));
+        // @ts-ignore
+        Object.keys(attrs).map((key) => elem.setAttribute(key, String(attrs[key])));
       }
+      div.current = elem;
     }
     return onExited;
-  }, [attrs]);
+  // TODO: useLayoutEffect is triggered twice when attrs is in the deps
+  }, [onExited]);
 
   useIsomorphicLayoutEffect(() => {
-    if (typeof document !== 'undefined' && show && div.current) {
+    if (isClient && show && div.current) {
       document.body.appendChild(div.current);
       mounted.current = true;
       update();

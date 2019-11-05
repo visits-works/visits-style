@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useRef, HTMLAttributes, useEffect } from 'react';
+import React, { useState, useCallback, useRef, HTMLAttributes, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-transition-group';
@@ -48,16 +48,15 @@ export default function Popover({
     setShow(true);
   };
 
-  const handleBlur = () => {
+  const handleBlur = useCallback(() => {
     if (!show) return;
     if (onClose) onClose();
     setShow(false);
-  };
+  }, [onClose, show]);
 
   useEffect(() => {
     if (show && disabled) handleBlur();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show, disabled]);
+  }, [show, disabled, handleBlur]);
 
   const refCallback = (elem: HTMLElement | null) => {
     if (!parent.current || !elem || !show) return;

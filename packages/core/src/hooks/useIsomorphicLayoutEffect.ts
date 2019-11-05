@@ -1,10 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react';
-
-const isClient = (
-  typeof window !== 'undefined'
-  && typeof window.document !== 'undefined'
-  && typeof window.document.createElement !== 'undefined'
-);
+import isClient from '../utils/isClient';
 
 const useIsomorphicLayoutEffect = isClient ? useLayoutEffect : useEffect;
 
