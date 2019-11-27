@@ -12,6 +12,10 @@ export default styled.div`
     margin: 0;
     border-radius: 0;
 
+    &:hover {
+      z-index: 1;
+    }
+
     &:first-child {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
