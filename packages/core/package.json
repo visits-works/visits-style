@@ -36,10 +36,15 @@
     "babel-plugin-polished": "^1.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "babel-preset-react-app": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.17.0",
     "faker": "^4.1.0",
-    "tsdx": "^0.10.5",
+    "tsdx": "^0.11.0",
     "typescript": "^3.6.3"
   },
   "jest": {
