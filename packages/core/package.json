@@ -22,7 +22,7 @@
     "build": "NODE_ENV=production tsdx build && cp ./package.json ./dist/package.json && cp ../../LICENSE ./dist/LICENSE && cp ./README.md ./dist/README.md",
     "lint": "tsdx lint src",
     "test": "tsdx test",
-    "test:ci": "tsdx test --ci --coverage"
+    "test:ci": "CI=true tsdx test --coverage"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
