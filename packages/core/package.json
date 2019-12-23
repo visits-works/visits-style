@@ -1,6 +1,7 @@
 {
   "name": "visits-style",
-  "repository": "https://github.com/visits-works/visits-style/tree/master/packages/core",
+  "repository": "https://github.com/visits-works/visits-style",
+  "homepage": "https://github.com/visits-works/visits-style",
   "version": "1.0.0",
   "main": "index.js",
   "module": "visits-style.esm.js",
