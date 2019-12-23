@@ -43,9 +43,13 @@ export default function Tooltip({
     rect.current.width = width;
     rect.current.height = height;
 
+    // @ts-ignore
     elem.style.bottom = null;
+    // @ts-ignore
     elem.style.left = null;
+    // @ts-ignore
     elem.style.right = null;
+    // @ts-ignore
     elem.style.top = null;
 
     switch (position) {

@@ -1,4 +1,4 @@
-import React, { TextareaHTMLAttributes } from 'react';
+import React, { TextareaHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
@@ -12,14 +12,17 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   help?: string | any;
 }
 
-export default function Textarea({ className, help, error, style, ...rest }: Props) {
+function Textarea({
+  className, help, error, style, innerRef, ...rest
+}: Props & { innerRef: React.Ref<any> }) {
   return (
     <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
-      <textarea {...rest} />
+      <textarea {...rest} ref={innerRef} />
       <HelpMessage help={help} error={error} />
     </Wrapper>
   );
 }
+export default forwardRef<any, Props>((props, ref) => <Textarea {...props} innerRef={ref} />);
 
 const Wrapper = styled.span<{ error?: boolean, disabled?: boolean }>`
   display: block;

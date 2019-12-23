@@ -1,4 +1,4 @@
-import React, { SelectHTMLAttributes, useMemo } from 'react';
+import React, { SelectHTMLAttributes, useMemo, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import setSize from '../../utils/setSize';
 import HelpMessage from '../HelpMessage';
@@ -27,10 +27,10 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   optional?: boolean;
 }
 
-export default function Select({
+function Select({
   options = [], placeholder, render, help, error, className, inputSize, outline, optional,
-  ...rest
-}: Props) {
+  innerRef, ...rest
+}: Props & { innerRef: React.Ref<any> }) {
   const list = useMemo(() => options.map((item) => (
     typeof item === 'string'
       ? (<option key={item} value={item}>{render ? render(item) : item}</option>)
@@ -45,7 +45,7 @@ export default function Select({
       error={!!error}
       disabled={rest.disabled}
     >
-      <select {...rest}>
+      <select {...rest} ref={innerRef}>
         {placeholder && (<option value="" disabled={!optional}>{placeholder}</option>)}
         {list}
       </select>
@@ -54,6 +54,7 @@ export default function Select({
     </InputWrapper>
   );
 }
+export default forwardRef<any, Props>((props, ref) => <Select {...props} innerRef={ref} />);
 
 const InputWrapper = styled.span<Pick<Props, 'inputSize'|'outline'> & { error: boolean, disabled?: boolean }>`
   position: relative;

@@ -1,4 +1,4 @@
-import React, { useMemo, InputHTMLAttributes } from 'react';
+import React, { useMemo, InputHTMLAttributes, forwardRef } from 'react';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 
@@ -26,7 +26,9 @@ function Approved() {
   );
 }
 
-export default function Checkbox({ className, children, ...rest }: Props) {
+function Checkbox({
+  className, children, innerRef, ...rest
+}: Props & { innerRef: React.Ref<any> }) {
   const id = `checkbox_${rest.name}_${rest.value}`;
   const innerClass = useMemo(() => {
     const arr = [];
@@ -37,7 +39,7 @@ export default function Checkbox({ className, children, ...rest }: Props) {
 
   return (
     <Wrapper className={className}>
-      <input type="checkbox" id={id} {...rest} />
+      <input type="checkbox" id={id} {...rest} ref={innerRef} />
       <label htmlFor={id}>
         <Shape className={innerClass}>
           <Approved />
@@ -47,6 +49,8 @@ export default function Checkbox({ className, children, ...rest }: Props) {
     </Wrapper>
   );
 }
+
+export default forwardRef<any, Props>((props, ref) => <Checkbox {...props} innerRef={ref} />);
 
 const Shape = styled.div`
   display: inline-flex;

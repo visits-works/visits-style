@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import disabledColor from '../../utils/disabledColor';
@@ -22,9 +22,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   offLabel?: string;
 }
 
-export default function Switch({
-  className, showLabel, background, anchorColor, onLabel = 'ON', offLabel = 'OFF', ...rest
-}: Props) {
+function Switch({
+  className, showLabel, background, anchorColor,
+  onLabel = 'ON', offLabel = 'OFF', innerRef, ...rest
+}: Props & { innerRef: React.Ref<any> }) {
   const id = `switch_${rest.name}`;
   return (
     <Wrapper
@@ -36,11 +37,12 @@ export default function Switch({
       labelTextOff={offLabel}
       disabled={rest.disabled}
     >
-      <input id={id} type="checkbox" {...rest} />
+      <input id={id} type="checkbox" {...rest} ref={innerRef} />
       <label htmlFor={id} aria-label={id} />
     </Wrapper>
   );
 }
+export default forwardRef<any, Props>((props, ref) => <Switch {...props} innerRef={ref} />);
 
 const labelStyle = css`
   label:before {

@@ -1,4 +1,4 @@
-import React, { useMemo, InputHTMLAttributes } from 'react';
+import React, { useMemo, InputHTMLAttributes, forwardRef } from 'react';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 
@@ -8,7 +8,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean;
 }
 
-export default function Radio({ className, style, children, ...rest }: Props) {
+function Radio({
+  className, style, children, innerRef, ...rest
+}: Props & { innerRef: React.Ref<any> }) {
   const id = `radio_${rest.name}_${rest.value}`;
   const innerClass = useMemo(() => {
     const arr = [];
@@ -25,10 +27,11 @@ export default function Radio({ className, style, children, ...rest }: Props) {
         </Shape>
         {children}
       </label>
-      <input id={id} type="radio" {...rest} />
+      <input id={id} type="radio" {...rest} ref={innerRef} />
     </Wrapper>
   );
 }
+export default forwardRef<any, Props>((props, ref) => <Radio {...props} innerRef={ref} />);
 
 const Shape = styled.div`
   display: inline-flex;

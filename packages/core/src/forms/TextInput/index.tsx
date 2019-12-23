@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
@@ -23,9 +23,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   rightIcon?: any;
 }
 
-export default function TextInput({
-  className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255, ...rest
-}: Props) {
+function TextInput({
+  className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255,
+  innerRef, ...rest
+}: Props & { innerRef: React.Ref<any> }) {
   return (
     <Wrapper
       className={className}
@@ -36,11 +37,12 @@ export default function TextInput({
     >
       {leftIcon && (<Icon>{leftIcon}</Icon>)}
       {rightIcon && (<Icon right>{rightIcon}</Icon>)}
-      <input type={type} maxLength={maxLength} {...rest} />
+      <input type={type} maxLength={maxLength} ref={innerRef} {...rest} />
       <HelpMessage help={help} error={error} />
     </Wrapper>
   );
 }
+export default forwardRef<any, Props>((props, ref) => <TextInput {...props} innerRef={ref} />);
 
 const rightIcon = css`
   right: 0.375em;
