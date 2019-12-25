@@ -105,7 +105,7 @@ export default styled.button<ButtonProps>`
   border: 1px solid transparent;
   border-radius: ${({ round, theme }) => (round ? '2456189px' : theme.radius)};
   padding: ${({ icon }) => (icon ? '0.375em' : '0.375em 0.75em')};
-  line-height: 1.5;
+  line-height: ${({ icon }) => (icon ? 1 : 1.5)};
 
   ${setColor}
   ${({ size }) => setSize('font-size', size)}

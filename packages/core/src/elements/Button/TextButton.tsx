@@ -31,7 +31,7 @@ export default styled.button<Props>`
     if (icon) return '0.375em';
     return '0.375em 0.75em';
   }};
-  line-height: 1.5;
+  line-height: ${({ icon }) => (icon ? 1 : 1.5)};
   color: ${({ color, theme }) => (color ? theme[color] : theme.text)};
   ${({ size }) => setSize('font-size', size)}
 
