@@ -62,6 +62,7 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
       clearTimeout(timeoutId);
     };
   }, [show, timeout]);
+  const opacity = height > 0 ? 1 : 0;
 
   return (
     <div {...rest}>
@@ -71,7 +72,7 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
         timeout={timeout}
         aria-hidden={!show}
         ref={ref}
-        style={{ height }}
+        style={{ height, opacity }}
       >
         {children}
       </AnimatedContent>
@@ -83,7 +84,7 @@ const AnimatedContent = styled.div<{ timeout: number }>`
   will-change: opacity, height, transform;
   transition-property: opacity, height, transform;
   transition-duration: ${({ timeout }) => timeout}ms;
-  transition-timing-function: ease-in-out, ease, ease-in-out;
+  transition-timing-function: ease-in-out;
 
   &.exited {
     display: none;
@@ -92,7 +93,6 @@ const AnimatedContent = styled.div<{ timeout: number }>`
 
   &.exited, &.entering, &.exiting {
     overflow: hidden;
-    opacity: 0;
   }
 
   &.exiting, &.entering {
@@ -104,7 +104,6 @@ const AnimatedContent = styled.div<{ timeout: number }>`
   }
 
   &.entered {
-    opacity: 1;
     visibility: visible;
   }
 `;
