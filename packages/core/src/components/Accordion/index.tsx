@@ -37,7 +37,8 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
           ref.current.style.display = 'block';
           prevHeight.current = ref.current.offsetHeight;
           ref.current.style.display = '';
-          setHeight(0);
+          setHeight(show ? prevHeight.current : 0);
+          if (show) setClassName('entered');
         }
       });
       return () => cancelAnimationFrame(frameId);
