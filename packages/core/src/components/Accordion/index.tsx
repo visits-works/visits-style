@@ -1,5 +1,4 @@
-import React, { HTMLAttributes } from 'react';
-import { Transition } from 'react-transition-group';
+import React, { HTMLAttributes, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -12,47 +11,100 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
    */
   timeout?: number;
 }
+
 export default function Accordion({ header, show, children, timeout = 300, ...rest }: Props) {
+  const [height, setHeight] = useState<number | 'auto'>('auto');
+  const [className, setClassName] = useState('exited');
+  const ref = useRef<HTMLDivElement | null>(null);
+  const prevHeight = useRef<number>(0);
+  const init = useRef(true);
+
+  useEffect(() => {
+    if (
+      height !== 0
+      && height !== 'auto'
+      && height !== prevHeight.current
+    ) {
+      prevHeight.current = height;
+    }
+  }, [height]);
+
+  useEffect(() => {
+    if (init.current) {
+      init.current = false;
+      const frameId = requestAnimationFrame(() => {
+        if (ref.current) {
+          ref.current.style.display = 'block';
+          prevHeight.current = ref.current.offsetHeight;
+          ref.current.style.display = '';
+          setHeight(0);
+        }
+      });
+      return () => cancelAnimationFrame(frameId);
+    }
+
+    setClassName(show ? 'entering' : 'exiting');
+    const frameIds = [] as number[];
+    frameIds[0] = requestAnimationFrame(() => {
+      frameIds[1] = requestAnimationFrame(() => {
+        setHeight((h) => {
+          if (!show) return 0;
+          if (!ref.current) return h;
+          if (ref.current.offsetHeight > 0) return ref.current.offsetHeight;
+          return prevHeight.current;
+        });
+      });
+    });
+    const timeoutId = setTimeout(() => setClassName(show ? 'entered' : 'exited'), timeout);
+
+    return () => {
+      frameIds.forEach(cancelAnimationFrame);
+      clearTimeout(timeoutId);
+    };
+  }, [show, timeout]);
+
   return (
     <div {...rest}>
       {header}
-      <Transition
+      <AnimatedContent
+        className={className}
         timeout={timeout}
-        in={show}
-        unmountOnExit
+        aria-hidden={!show}
+        ref={ref}
+        style={{ height }}
       >
-        {(state) => (
-          <AnimatedContent className={state} timeout={timeout}>
-            {children}
-          </AnimatedContent>
-        )}
-      </Transition>
+        {children}
+      </AnimatedContent>
     </div>
   );
 }
 
 const AnimatedContent = styled.div<{ timeout: number }>`
-  transform-origin: top;
-  will-change: transform, max-height;
-  transition-property: transform, max-height;
+  will-change: opacity, height, transform;
+  transition-property: opacity, height, transform;
   transition-duration: ${({ timeout }) => timeout}ms;
-  transition-timing-function: ease-in-out;
-  height: auto;
-  overflow: hidden;
-  max-height: auto;
+  transition-timing-function: ease-in-out, ease, ease-in-out;
 
-  &.entering {
-    max-height: 0;
-    transform: scaleY(0);
+  &.exited {
+    display: none;
+    visibility: hidden;
   }
 
-  &.entered {
-    max-height: 15rem;
-    transform: scaleY(1);
+  &.exited, &.entering, &.exiting {
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  &.exiting, &.entering {
+    visibility: visible;
   }
 
   &.exiting {
-    max-height: 0px;
-    transform: scaleY(0);
+    transform: translateY(-0.625rem);
+  }
+
+  &.entered {
+    opacity: 1;
+    visibility: visible;
   }
 `;
