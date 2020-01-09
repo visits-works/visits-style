@@ -105,6 +105,7 @@ const AnimatedContent = styled.div<{ timeout: number }>`
   }
 
   &.entered {
+    height: auto !important;
     visibility: visible;
   }
 `;
