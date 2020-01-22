@@ -1,6 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useReducer } from 'react';
 
 export default function useForceUpdate() {
-  const [, setState] = useState(0);
-  return useCallback(() => setState((c) => c + 1), []);
+  return useReducer((c) => c + 1, 0)[1];
 }
