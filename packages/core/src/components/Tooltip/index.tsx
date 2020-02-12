@@ -15,7 +15,7 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * 表示される場所
    * @default 'bottom'
    */
-  position?: 'top' | 'left' | 'right' | 'bottom';
+  position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'left' | 'right';
   /** 吹き出しのコンテナーdivのカスタムスタイル定義 */
   containerStyle?: ReturnType<typeof css>;
 }
@@ -53,6 +53,16 @@ export default function Tooltip({
     elem.style.top = null;
 
     switch (position) {
+      case 'top-left': {
+        elem.style.bottom = `${top}px`;
+        elem.style.left = '0px';
+        break;
+      }
+      case 'top-right': {
+        elem.style.bottom = `${top}px`;
+        elem.style.right = '0px';
+        break;
+      }
       case 'top': {
         elem.style.bottom = `${top}px`;
         elem.style.left = `${(parentRect.width - width) >> 1}px`;
@@ -66,6 +76,16 @@ export default function Tooltip({
       case 'right': {
         elem.style.top = `${(parentRect.height - height) >> 1}px`;
         elem.style.left = `${left}px`;
+        break;
+      }
+      case 'bottom-right': {
+        elem.style.top = `${top}px`;
+        elem.style.right = '0px';
+        break;
+      }
+      case 'bottom-left': {
+        elem.style.top = `${top}px`;
+        elem.style.left = '0px';
         break;
       }
       // bottom
