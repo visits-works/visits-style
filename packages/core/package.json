@@ -2,13 +2,16 @@
   "name": "visits-style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
-  "version": "1.0.4",
-  "main": "index.js",
-  "module": "visits-style.esm.js",
-  "jsnext:main": "visits-style.esm.js",
-  "typings": "index.d.ts",
+  "version": "1.1.0",
+  "main": "dist/index.js",
+  "module": "dist/visits-style.esm.js",
+  "jsnext:main": "dist/visits-style.esm.js",
+  "typings": "dist/index.d.ts",
   "license": "Apache-2.0",
   "sideEffects": false,
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": ">=16.8.6",
     "react-dom": ">=16.8.6",
@@ -19,7 +22,7 @@
     "react-transition-group": "^4.3.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production tsdx build && cp ./package.json ./dist/package.json && cp ../../LICENSE ./dist/LICENSE && cp ./README.md ./dist/README.md",
+    "build": "NODE_ENV=production tsdx build",
     "lint": "tsdx lint src",
     "test": "tsdx test",
     "test:ci": "CI=true tsdx test --coverage"
