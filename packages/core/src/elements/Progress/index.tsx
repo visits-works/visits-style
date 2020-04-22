@@ -22,7 +22,7 @@ interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
 export default function Progress(
   { value, max, color = 'primary', ...rest }: ProgressProps,
 ) {
-  const percent = useMemo(() => Math.round((value / max) * 100), [value, max]);
+  const percent = useMemo(() => (value ? Math.round((value / max) * 100) : 0), [value, max]);
   return (
     <Wrapper color={color} {...rest}>
       <div

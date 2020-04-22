@@ -13,4 +13,13 @@ describe('Progress', () => {
       </ThemeProvider>
     );
   });
+
+  it('progressBar should have 0 length when max/value both zero', () => {
+    const { getByLabelText } = render(
+      <ThemeProvider theme={theme}>
+        <Progress value={0} max={0} />
+      </ThemeProvider>
+    );
+    expect(getByLabelText('progress')).toHaveStyle({ width: '0%' });
+  });
 });
