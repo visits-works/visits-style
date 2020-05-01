@@ -3,6 +3,11 @@
     "airbnb",
     "react-app"
   ],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "settings": {
     "import/resolver": {
         "node": {
@@ -15,6 +20,7 @@
     "jsx-a11y/label-has-for": [2, {"required": { "some": ["nesting", "id"] }}],
     "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" } ],
     "import/extensions": "off",
+    "consistent-return": "off",
     "react/no-unused-prop-types": "off",
     "no-bitwise": "off",
     "object-curly-newline": "off",

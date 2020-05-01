@@ -1,18 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import { select, boolean, text } from '@storybook/addon-knobs';
+import { select, boolean, text, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Popover from '.';
 import TextInput from '../../forms/TextInput';
 
 const positionList = [
+  'auto',
   'top',
-  'top-left',
-  'top-right',
+  'left',
+  'right',
   'bottom',
-  'bottom-left',
-  'bottom-right',
+  'top-start',
+  'top-end',
+  'bottom-start',
+  'bottom-end',
 ];
 
 storiesOf('components|Popover', module)
@@ -22,9 +25,10 @@ storiesOf('components|Popover', module)
       <Popover
         label={<button type="button">show</button>}
         // @ts-ignore
-        position={select('position', positionList, 'bottom-right')}
+        position={select('position', positionList, 'bottom-end')}
         onOpen={action('onOpen')}
         onClose={action('onClose')}
+        offset={object('offset', { x: 0, y: 6 })}
         disabled={boolean('disabled', false)}
       >
         <button type="button" onClick={() => { alert('world!'); }}>hello</button>
@@ -72,7 +76,7 @@ function Test2() {
           <Popover
             label={<button type="button">button!</button>}
             // @ts-ignore
-            position={select('position', positionList, 'bottom-right')}
+            position={select('position', positionList, 'bottom-end')}
           >
             hello world!
           </Popover>

@@ -1,165 +1,96 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useRef, HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
-import { Transition } from 'react-transition-group';
+import React, { Children, cloneElement, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { Placement } from '@popperjs/core';
+
+import Portal from '../Portal';
+import usePopper from '../../hooks/usePopper';
 import { ColorType } from '../../types';
 
-interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
+interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
   label: any;
   /** マウスオーバーの対象になるelement */
-  children: any;
+  children: React.ReactElement;
   /** 吹き出しの背景色の指定 */
   color?: ColorType;
   /**
    * 表示される場所
    * @default 'bottom'
    */
-  position?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'left' | 'right';
-  /** 吹き出しのコンテナーdivのカスタムスタイル定義 */
-  containerStyle?: ReturnType<typeof css>;
+  position?: Placement;
+
+  /**
+   * ツールチップが表示される間隔, 単位はpx
+   * @default '{ x: 0, y: 6 }'
+   */
+  offset?: { x: number; y: number; };
+
+  className?: string;
 }
 
 export default function Tooltip({
-  children, position = 'bottom', label, color, className = '', ...rest
+  children, position = 'bottom',
+  label, color, className = '',
+  offset = { x: 0, y: 6 },
 }: TooltipProps) {
   const parent = useRef<HTMLDivElement | null>(null);
-  const rect = useRef({ width: 0, height: 0 });
+  const tooltip = useRef<HTMLDivElement | null>(null);
+  const [open, setOpen] = useState(false);
 
-  const [show, setShow] = useState(false);
+  const [openPopper, closePopper] = usePopper(
+    parent,
+    tooltip,
+    {
+      placement: position,
+      offset,
+    },
+  );
 
-  const openTooltip = () => setShow(true);
-  const closeTooltip = () => setShow(false);
+  const handleOpen = () => {
+    setOpen(true);
+    requestAnimationFrame(openPopper);
+  };
 
-  const refCallback = (elem: HTMLDivElement | null) => {
-    if (!parent.current || !elem || !show) return;
-
-    const parentRect = parent.current.getBoundingClientRect();
-    const left = parentRect.width + 8;
-    const top = parentRect.height + 8;
-    const width = elem.offsetWidth || rect.current.width;
-    const height = elem.offsetHeight || rect.current.height;
-
-    rect.current.width = width;
-    rect.current.height = height;
-
-    // @ts-ignore
-    elem.style.bottom = null;
-    // @ts-ignore
-    elem.style.left = null;
-    // @ts-ignore
-    elem.style.right = null;
-    // @ts-ignore
-    elem.style.top = null;
-
-    switch (position) {
-      case 'top-left': {
-        elem.style.bottom = `${top}px`;
-        elem.style.left = '0px';
-        break;
-      }
-      case 'top-right': {
-        elem.style.bottom = `${top}px`;
-        elem.style.right = '0px';
-        break;
-      }
-      case 'top': {
-        elem.style.bottom = `${top}px`;
-        elem.style.left = `${(parentRect.width - width) >> 1}px`;
-        break;
-      }
-      case 'left': {
-        elem.style.top = `${(parentRect.height - height) >> 1}px`;
-        elem.style.right = `${left}px`;
-        break;
-      }
-      case 'right': {
-        elem.style.top = `${(parentRect.height - height) >> 1}px`;
-        elem.style.left = `${left}px`;
-        break;
-      }
-      case 'bottom-right': {
-        elem.style.top = `${top}px`;
-        elem.style.right = '0px';
-        break;
-      }
-      case 'bottom-left': {
-        elem.style.top = `${top}px`;
-        elem.style.left = '0px';
-        break;
-      }
-      // bottom
-      default: {
-        elem.style.top = `${top}px`;
-        elem.style.left = `${(parentRect.width - width) >> 1}px`;
-        break;
-      }
-    }
+  const handleClose = () => {
+    setOpen(false);
+    closePopper();
   };
 
   return (
-    <Wrapper
-      ref={parent}
-      onMouseOver={openTooltip}
-      onFocus={openTooltip}
-      onMouseOut={closeTooltip}
-      onBlur={closeTooltip}
-      {...rest}
-    >
-      {children}
-      <Transition
-        in={show}
-        timeout={250}
-        unmountOnExit
-      >
-        {(state) => (
+    <>
+      {cloneElement(Children.only(children), {
+        ref: parent,
+        onMouseEnter: handleOpen,
+        onMouseLeave: handleClose,
+        onFocus: handleOpen,
+        onBlur: handleClose,
+      })}
+      {open && (
+        <Portal>
           <TooltipWrapper
-            className={[className, state].join(' ').trim()}
-            ref={refCallback}
-            show={show}
+            className={className}
+            ref={tooltip}
             role="tooltip"
             color={color}
           >
             {label}
           </TooltipWrapper>
-        )}
-      </Transition>
-    </Wrapper>
+        </Portal>
+      )}
+    </>
   );
 }
 
-const Wrapper = styled.div<Pick<TooltipProps, 'containerStyle'>>`
-  position: relative;
-  display: inline-block;
-  ${({ containerStyle }) => containerStyle}
-`;
-
 const TooltipWrapper = styled.div<Pick<TooltipProps, 'color'> & { show?: boolean }>`
-  position: absolute;
-  clear: both;
+  position: relative;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   z-index: 9999;
   padding: 0.375rem 0.625rem;
   cursor: default;
-  width: auto;
   white-space: pre;
   font-size: 0.85rem;
   z-index: 9999;
 
-  transform: scale(0.8);
-  opacity: 0;
-  visibility: hidden;
-
-  will-change: transform, opacity, visibility;
-  transition-property: transform, opacity, visibility;
-  transition-duration: 100ms;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-
   background-color: ${({ color, theme }) => (color ? (theme[color] || theme.background) : theme.background)};
-
-  ${({ show }) => show && css`
-    transform: scale(1);
-    opacity: 1;
-    visibility: visible;
-  `}
 `;
