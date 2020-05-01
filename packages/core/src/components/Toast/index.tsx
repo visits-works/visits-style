@@ -1,5 +1,4 @@
 import React, { useEffect, HTMLAttributes, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
