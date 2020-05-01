@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
-import useDiv from '../../hooks/useDiv';
+import Portal from '../Portal';
 import Close from '../../elements/Icons/Close';
 import Box from '../../elements/Box';
 import { ColorType } from '../../types';
@@ -129,31 +129,31 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
 export default function Toast(
   { toasts, clear, fixed, style, margin = '1rem', position, ...rest }: ContainerProps,
 ) {
-  const [dom] = useDiv(true);
-
-  return dom && createPortal((
-    <Container
-      {...rest}
-      pos={position}
-      margin={margin}
-      style={{ position: (fixed ? 'fixed' : 'absolute'), ...style }}
-    >
-      <TransitionGroup component={null}>
-        {toasts.map((props) => (
-          <Transition key={props.id} timeout={250} in unmountOnExit>
-            {(state) => (
-              <ToastItem
-                {...props}
-                className={state}
-                key={props.id}
-                clear={clear}
-              />
-            )}
-          </Transition>
-        ))}
-      </TransitionGroup>
-    </Container>
-  ), dom);
+  return (
+    <Portal>
+      <Container
+        {...rest}
+        pos={position}
+        margin={margin}
+        style={{ position: (fixed ? 'fixed' : 'absolute'), ...style }}
+      >
+        <TransitionGroup component={null}>
+          {toasts.map((props) => (
+            <Transition key={props.id} timeout={250} in unmountOnExit>
+              {(state) => (
+                <ToastItem
+                  {...props}
+                  className={state}
+                  key={props.id}
+                  clear={clear}
+                />
+              )}
+            </Transition>
+          ))}
+        </TransitionGroup>
+      </Container>
+    </Portal>
+  );
 }
 
 const Container = styled.div<{ pos: ContainerProps['position'], margin: ContainerProps['margin'] }>`

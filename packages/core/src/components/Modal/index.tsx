@@ -1,10 +1,9 @@
 import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
-import { createPortal } from 'react-dom';
 import useScrollFix from '../../hooks/useScrollFix';
-import useDiv from '../../hooks/useDiv';
 import Box from '../../elements/Box';
+import Portal from '../Portal';
 import { ColorType } from '../../types';
 
 // const ESC_KEY = 27;
@@ -88,31 +87,30 @@ export default function Modal({
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
-  const [dom, onExited] = useDiv(!!show, { role: 'presentation', 'aria-modal': 'true' });
   useScrollFix(show);
-
-  if (!dom) return null;
-
   return (
-    <Transition
-      in={show}
-      timeout={timeout!}
-      onExited={onExited}
-      unmountOnExit
-      mountOnEnter
-    >
-      {(state) => createPortal((
-        <Wrapper
-          role="dialog"
-          className={className}
+    <Portal>
+      <div aria-modal="true">
+        <Transition
+          in={show}
+          timeout={timeout!}
+          unmountOnExit
+          mountOnEnter
         >
-          <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />
-          <AnimatedBox className={state} color={color} borderless {...rest} role="document">
-            {children}
-          </AnimatedBox>
-          {external}
-        </Wrapper>
-      ), dom)}
-    </Transition>
+          {(state) => (
+            <Wrapper
+              role="dialog"
+              className={className}
+            >
+              <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />
+              <AnimatedBox className={state} color={color} borderless {...rest} role="document">
+                {children}
+              </AnimatedBox>
+              {external}
+            </Wrapper>
+          )}
+        </Transition>
+      </div>
+    </Portal>
   );
 }

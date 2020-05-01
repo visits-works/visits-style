@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 import React, { useState, useCallback, useRef, HTMLAttributes, useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-transition-group';
+
+import Portal from '../Portal';
 import Box from '../../elements/Box';
-import useDiv from '../../hooks/useDiv';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
@@ -40,7 +40,6 @@ export default function Popover({
 
   const [show, setShow] = useState(false);
   const cache = useRef({ width: 0, height: 0 });
-  const [dom, onExited] = useDiv(show, { role: 'tooltip' });
 
   const handleFocus = () => {
     if (show || !!disabled) return;
@@ -116,31 +115,28 @@ export default function Popover({
       ref={parent}
     >
       {label}
-      {dom && (
-        createPortal((
-          <Transition
-            in={show}
-            timeout={250}
-            onExited={onExited}
-            unmountOnExit
-          >
-            {(state) => (
-              <>
-                <Tooltip
-                  className={[className, state].join(' ').trim()}
-                  role="document"
-                  ref={refCallback}
-                  color={color}
-                  {...rest}
-                >
-                  {children}
-                </Tooltip>
-                {show && (<Shadow onClick={handleBlur} />)}
-              </>
-            )}
-          </Transition>
-        ), dom)
-      )}
+      <Portal>
+        <Transition
+          in={show}
+          timeout={250}
+          unmountOnExit
+        >
+          {(state) => (
+            <>
+              <Tooltip
+                className={[className, state].join(' ').trim()}
+                role="tooltip"
+                ref={refCallback}
+                color={color}
+                {...rest}
+              >
+                {children}
+              </Tooltip>
+              {show && (<Shadow onClick={handleBlur} />)}
+            </>
+          )}
+        </Transition>
+      </Portal>
     </Wrapper>
   );
 }

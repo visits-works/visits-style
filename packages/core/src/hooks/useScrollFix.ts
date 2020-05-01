@@ -1,12 +1,17 @@
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import { useLayoutEffect } from 'react';
+let fixedNum = 0;
 
 export default function useScrollFix(show?: boolean) {
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (show) {
       document.body.style.overflowY = 'hidden';
+      fixedNum += 1;
       return () => {
-        if (document.querySelectorAll('[aria-modal]').length <= 1) {
+        if (fixedNum <= 1) {
           document.body.style.overflowY = 'auto';
+          fixedNum = 0;
+        } else {
+          fixedNum -= 1;
         }
       };
     }
