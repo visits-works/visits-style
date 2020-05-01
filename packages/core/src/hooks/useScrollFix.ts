@@ -1,9 +1,9 @@
-import { useLayoutEffect } from 'react';
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 let fixedNum = 0;
 
 export default function useScrollFix(show?: boolean) {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (show) {
       document.body.style.overflowY = 'hidden';
       fixedNum += 1;

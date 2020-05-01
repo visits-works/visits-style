@@ -1,5 +1,7 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +12,7 @@ interface Props {
 const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) => {
   const [mountNode, setMountNode] = useState<Element | null>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (disabled) return;
     setMountNode(container || document.body);
   }, [container, disabled]);
