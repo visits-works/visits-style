@@ -9,12 +9,13 @@ import { Placement } from '@popperjs/core';
 import Portal from '../Portal';
 import Box from '../../elements/Box';
 import usePopper from '../../hooks/usePopper';
+import wrapEvent from '../../utils/wrapEvent';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
   label: React.ReactElement;
   /** 内容のリスト */
-  children?: React.ReactNode | React.ReactNode;
+  children?: React.ReactNode;
   /**
    * 吹き出しの背景色
    * @default 'background'
@@ -96,7 +97,7 @@ const Popover = forwardRef(({
         ref: parent,
         tabIndex: 0,
         role: 'button',
-        onClick: handleFocus,
+        onClick: wrapEvent(label, 'onClick', handleFocus),
         disabled,
       })}
       {open && (

@@ -6,6 +6,7 @@ import { Placement } from '@popperjs/core';
 import Portal from '../Portal';
 import usePopper from '../../hooks/usePopper';
 import { ColorType } from '../../types';
+import wrapEvent from '../../utils/wrapEvent';
 
 interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
@@ -63,10 +64,10 @@ export default function Tooltip({
     <>
       {cloneElement(Children.only(child), {
         ref: parent,
-        onMouseEnter: handleOpen,
-        onMouseLeave: handleClose,
-        onFocus: handleOpen,
-        onBlur: handleClose,
+        onMouseEnter: wrapEvent(child, 'onMouseEnter', handleOpen),
+        onMouseLeave: wrapEvent(child, 'onMouseLeave', handleClose),
+        onFocus: wrapEvent(child, 'onFocus', handleOpen),
+        onBlur: wrapEvent(child, 'onBlur', handleClose),
       })}
       {open && (
         <Portal>
