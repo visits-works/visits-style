@@ -13,8 +13,21 @@ const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) 
   const [mountNode, setMountNode] = useState<Element | null>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (disabled) return;
-    setMountNode(container || document.body);
+    if (disabled) {
+      setMountNode(null);
+      return;
+    }
+    if (!container) {
+      let dom = document.getElementById('visits-style-portals');
+      if (!dom) {
+        dom = document.createElement('div');
+        dom.id = 'visits-style-portals';
+        document.body.appendChild(dom);
+      }
+      setMountNode(dom);
+      return;
+    }
+    setMountNode(container);
   }, [container, disabled]);
 
   return mountNode ? createPortal(children, mountNode) : mountNode;
