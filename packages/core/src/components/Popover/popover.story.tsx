@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { storiesOf } from '@storybook/react';
 import { select, boolean, text, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import Popover from '.';
+import Popover, { PopoverRef } from '.';
 import TextInput from '../../forms/TextInput';
 
 const positionList = [
@@ -49,7 +49,24 @@ storiesOf('components|Popover', module)
       <Test2 />
       <Test2 />
     </div>
-  ));
+  ))
+  .add('programatically handle', () => {
+    const ref = useRef<PopoverRef | null>(null);
+    return (
+      <>
+        <button type="button" onClick={() => ref.current && ref.current.open()}>open</button>
+        <Popover
+          ref={ref}
+          label={<span>show</span>}
+        >
+          <p>hello world!</p>
+          <button type="button" onClick={() => ref.current && ref.current.close()}>
+            close me!
+          </button>
+        </Popover>
+      </>
+    );
+  });
 
 function Test() {
   const [txt, setText] = useState('');

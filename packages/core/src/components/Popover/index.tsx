@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, {
   Children, cloneElement, useState, useRef, HTMLAttributes, useEffect,
+  forwardRef, useImperativeHandle,
 } from 'react';
 import styled from 'styled-components';
 import { Placement } from '@popperjs/core';
@@ -41,12 +42,17 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-export default function Popover({
+export interface PopoverRef {
+  open: () => void;
+  close: () => void;
+}
+
+const Popover = forwardRef(({
   position, label, children, color = 'background',
   onOpen, onClose, disabled, className = '',
   offset = { x: 0, y: 6 },
   ...rest
-}: Props) {
+}: Props, ref: React.Ref<PopoverRef>) => {
   const parent = useRef<HTMLDivElement | null>(null);
   const popover = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
@@ -79,6 +85,11 @@ export default function Popover({
     }
   }, [disabled, open, closePopper]);
 
+  useImperativeHandle(ref, () => ({
+    open: handleFocus,
+    close: handleBlur,
+  }));
+
   return (
     <>
       {cloneElement(Children.only(label), {
@@ -104,7 +115,10 @@ export default function Popover({
       )}
     </>
   );
-}
+});
+Popover.displayName = 'Popover';
+
+export default Popover;
 
 const Tooltip = styled(Box)`
   display: flex;
