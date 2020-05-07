@@ -57,9 +57,11 @@ export default function Tooltip({
     closePopper();
   };
 
+  const child = typeof children === 'string' ? <span>{children}</span> : children;
+
   return (
     <>
-      {cloneElement(Children.only(children), {
+      {cloneElement(Children.only(child), {
         ref: parent,
         onMouseEnter: handleOpen,
         onMouseLeave: handleClose,

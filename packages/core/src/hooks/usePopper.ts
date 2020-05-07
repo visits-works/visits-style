@@ -5,17 +5,10 @@ import {
   Instance,
   Placement,
   PositioningStrategy,
+  createPopper,
 } from '@popperjs/core';
-import { popperGenerator, defaultModifiers } from '@popperjs/core/lib/popper-lite';
-import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow';
-import offset from '@popperjs/core/lib/modifiers/offset';
-import arrow from '@popperjs/core/lib/modifiers/arrow';
 
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
-
-const createPopper = popperGenerator({
-  defaultModifiers: [...defaultModifiers, preventOverflow, offset, arrow],
-});
 
 interface Options {
   placement?: Placement;
