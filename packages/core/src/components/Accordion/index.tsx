@@ -1,5 +1,7 @@
-import React, { HTMLAttributes, useState, useRef, useEffect } from 'react';
+import React, { HTMLAttributes, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+
+import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンなどの表示するラベル */
@@ -13,67 +15,86 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Accordion({ header, show, children, timeout = 300, ...rest }: Props) {
-  const [height, setHeight] = useState<number | 'auto'>('auto');
-  const [className, setClassName] = useState('exited');
   const ref = useRef<HTMLDivElement | null>(null);
   const prevHeight = useRef<number>(0);
+  const timeoutRef = useRef<number>(0);
   const init = useRef(true);
 
-  useEffect(() => {
-    if (
-      height !== 0
-      && height !== 'auto'
-      && height !== prevHeight.current
-    ) {
-      prevHeight.current = height;
-    }
-  }, [height]);
+  useEffect(() => { timeoutRef.current = timeout; }, [timeout]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    if (!ref.current) return;
+    ref.current.style.overflow = 'hidden';
+    ref.current.style.opacity = '1';
+
     if (init.current) {
       init.current = false;
-      const frameId = requestAnimationFrame(() => {
-        if (ref.current) {
-          ref.current.style.display = 'block';
-          prevHeight.current = ref.current.offsetHeight;
-          ref.current.style.display = '';
-          setHeight(show ? prevHeight.current : 0);
-          if (show) setClassName('entered');
-        }
-      });
-      return () => cancelAnimationFrame(frameId);
+      ref.current.style.height = show ? 'auto' : '0px';
+      if (show) {
+        // cache prev calculated height after 1 frame draw
+        requestAnimationFrame(() => {
+          if (ref.current) {
+            prevHeight.current = ref.current.offsetHeight;
+          }
+        });
+      } else {
+        // explicitly calculate auto height
+        requestAnimationFrame(() => {
+          if (ref.current) {
+            ref.current.style.height = 'auto';
+            prevHeight.current = ref.current.offsetHeight;
+            ref.current.style.height = '0px';
+          }
+        });
+        ref.current.style.opacity = '0';
+      }
+      return;
     }
 
-    setClassName(show ? 'entering' : 'exiting');
+    if (!show) {
+      ref.current.style.height = `${prevHeight.current}px`;
+    }
+
     const frameIds = [] as number[];
     frameIds[0] = requestAnimationFrame(() => {
       frameIds[1] = requestAnimationFrame(() => {
-        setHeight((h) => {
-          if (!show) return 0;
-          if (!ref.current) return h;
-          if (ref.current.offsetHeight > 0) return ref.current.offsetHeight;
-          return prevHeight.current;
-        });
+        if (!ref.current) return;
+        ref.current.style.height = `${show ? prevHeight.current : 0}px`;
+        ref.current.style.opacity = show ? '1' : '0';
       });
     });
-    const timeoutId = setTimeout(() => setClassName(show ? 'entered' : 'exited'), timeout);
+
+    const timeoutId = setTimeout(() => {
+      if (!ref.current) return;
+      if (show) {
+        ref.current.style.height = 'auto';
+        ref.current.style.overflow = '';
+        ref.current.style.opacity = '';
+
+        // cache prev calculated height after 1 frame draw
+        requestAnimationFrame(() => {
+          if (ref.current) {
+            prevHeight.current = ref.current.offsetHeight;
+          }
+        });
+      } else {
+        ref.current.style.height = '0px';
+      }
+    }, timeoutRef.current);
 
     return () => {
       frameIds.forEach(cancelAnimationFrame);
       clearTimeout(timeoutId);
     };
-  }, [show, timeout]);
-  const opacity = height > 0 ? 1 : 0;
+  }, [show]);
 
   return (
     <div {...rest}>
       {header}
       <AnimatedContent
-        className={className}
-        timeout={timeout}
         aria-hidden={!show}
         ref={ref}
-        style={{ height, opacity }}
+        style={{ transitionDuration: `${timeout}ms` }}
       >
         {children}
       </AnimatedContent>
@@ -81,31 +102,8 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
   );
 }
 
-const AnimatedContent = styled.div<{ timeout: number }>`
+const AnimatedContent = styled.div`
   will-change: opacity, height, transform;
   transition-property: opacity, height, transform;
-  transition-duration: ${({ timeout }) => timeout}ms;
   transition-timing-function: ease-in-out;
-
-  &.exited {
-    display: none;
-    visibility: hidden;
-  }
-
-  &.exited, &.entering, &.exiting {
-    overflow: hidden;
-  }
-
-  &.exiting, &.entering {
-    visibility: visible;
-  }
-
-  &.exiting {
-    transform: translateY(-0.625rem);
-  }
-
-  &.entered {
-    height: auto !important;
-    visibility: visible;
-  }
 `;

@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import Collapse from '.';
 
-function Fancy() {
-  const [show, setShow] = useState(false);
+function Fancy({ length = 6, defaultShow = false }: any) {
+  const [show, setShow] = useState(defaultShow);
   const onClick = () => setShow((s) => !s);
   return (
     <Collapse
@@ -12,12 +12,9 @@ function Fancy() {
       show={show}
       style={{ width: '100%' }}
     >
-      <div>Hello world!</div>
-      <div>Hello world!</div>
-      <div>Hello world!</div>
-      <div>Hello world!</div>
-      <div>Hello world!</div>
-      <div>Hello world!</div>
+      {Array.from({ length })
+        // eslint-disable-next-line react/no-array-index-key
+        .map((_, i) => <div key={i}>Hello world!</div>)}
     </Collapse>
   );
 }
@@ -27,7 +24,10 @@ storiesOf('components|Accordion', module)
   .add('multiple', () => (
     <>
       <Fancy />
-      <Fancy />
-      <Fancy />
+      <Fancy length={20} />
+      <Fancy length={4} />
     </>
+  ))
+  .add('show true initial', () => (
+    <Fancy length={15} defaultShow />
   ));
