@@ -26,6 +26,7 @@ jobs:
           node-version: '10.x'
       - run: yarn install
       - run: yarn workspace visits-style build
+      - run: cp ./LICENSE ./packages/core
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ./packages/core/.npmrc
       - run: cd ./packages/core && npm publish
   # document:
