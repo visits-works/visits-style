@@ -90,27 +90,25 @@ export default function Modal({
   useScrollFix(show);
   return (
     <Portal>
-      <div aria-modal="true">
-        <Transition
-          in={show}
-          timeout={timeout!}
-          unmountOnExit
-          mountOnEnter
-        >
-          {(state) => (
-            <Wrapper
-              role="dialog"
-              className={className}
-            >
-              <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />
-              <AnimatedBox className={state} color={color} borderless {...rest} role="document">
-                {children}
-              </AnimatedBox>
-              {external}
-            </Wrapper>
-          )}
-        </Transition>
-      </div>
+      <Transition
+        in={show}
+        timeout={timeout!}
+        unmountOnExit
+        mountOnEnter
+      >
+        {(state) => (
+          <Wrapper
+            role="dialog"
+            className={className}
+          >
+            <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />
+            <AnimatedBox className={state} color={color} borderless {...rest} role="document">
+              {children}
+            </AnimatedBox>
+            {external}
+          </Wrapper>
+        )}
+      </Transition>
     </Portal>
   );
 }
