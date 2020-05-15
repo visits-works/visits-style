@@ -63,13 +63,14 @@ export default function usePopper(
       return;
     }
 
+    const refEl = (
+      // @ts-ignore
+      'current' in referenceElement ? referenceElement.current : referenceElement
+    );
     // @ts-ignore
-    const refEl = referenceElement.current || referenceElement;
-    // @ts-ignore
-    const pEl = popperElement.current || popperElement;
+    const pEl = 'current' in popperElement ? popperElement.current : popperElement;
 
     if (refEl === null || pEl === null) return;
-    if (instance.current !== null) return;
 
     instance.current = createPopper(
       refEl,

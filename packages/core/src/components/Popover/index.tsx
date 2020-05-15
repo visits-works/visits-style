@@ -74,15 +74,15 @@ const Popover = forwardRef(({
   };
 
   const handleBlur = () => {
-    setOpen(false);
     closePopper();
+    setOpen(false);
     if (onClose) onClose();
   };
 
   useEffect(() => {
     if (disabled && open) {
-      setOpen(false);
       closePopper();
+      setOpen(false);
     }
   }, [disabled, open, closePopper]);
 
@@ -111,7 +111,7 @@ const Popover = forwardRef(({
           >
             {children}
           </Tooltip>
-          <Shadow onClick={handleBlur} />
+          <Shadow onClick={handleBlur} data-testid="visits-style-shadow" />
         </Portal>
       )}
     </>
