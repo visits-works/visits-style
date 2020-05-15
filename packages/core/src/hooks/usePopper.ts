@@ -54,6 +54,11 @@ export default function usePopper(
   }, []);
 
   const open = useCallback(() => {
+    if (instance.current) {
+      instance.current.destroy();
+      instance.current = null;
+    }
+
     if (referenceElement == null || popperElement == null) {
       return;
     }
