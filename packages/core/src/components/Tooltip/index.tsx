@@ -10,7 +10,7 @@ import wrapEvent from '../../utils/wrapEvent';
 
 interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
-  label: any;
+  label: React.ReactNode;
   /** マウスオーバーの対象になるelement */
   children: React.ReactElement;
   /** 吹き出しの背景色の指定 */
