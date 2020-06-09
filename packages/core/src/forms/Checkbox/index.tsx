@@ -1,10 +1,15 @@
-import React, { useMemo, InputHTMLAttributes, forwardRef } from 'react';
+import React, {
+  useMemo, InputHTMLAttributes, forwardRef, useRef, useImperativeHandle,
+} from 'react';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
+
+import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   children?: any;
   checked?: boolean;
+  indeterminate?: boolean;
 }
 
 function Approved() {
@@ -15,42 +20,62 @@ function Approved() {
       height="30"
       viewBox="0 0 30 30"
     >
-      <g transform="translate(-80 -215)">
-        <path
-          d="M8.925,15.871,5.047,11.886,3.41,13.41,9,19,20.562,7.467l-1.7-1.595Z"
-          transform="translate(82.59 217.595)"
-          fill="currentColor"
-        />
-      </g>
+      <path d="M11.5 18.5l-3.9-4L6 16l5.6 5.6 11.6-11.5-1.7-1.6z" fill="currentColor" />
     </svg>
   );
 }
 
-function Checkbox({
-  className, children, innerRef, ...rest
-}: Props & { innerRef: React.Ref<any> }) {
-  const id = `checkbox_${rest.name}_${rest.value}`;
-  const innerClass = useMemo(() => {
-    const arr = [];
-    if (rest.checked) arr.push('checked');
-    if (rest.disabled) arr.push('disabled');
-    return arr.join(' ');
-  }, [rest.checked, rest.disabled]);
-
+function Indeterminate() {
   return (
-    <Wrapper className={className}>
-      <input type="checkbox" id={id} {...rest} ref={innerRef} />
-      <label htmlFor={id}>
-        <Shape className={innerClass}>
-          <Approved />
-        </Shape>
-        {children}
-      </label>
-    </Wrapper>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+    >
+      <rect width="20" height="4" y="13" x="4.5" fill="currentColor" stroke="none" rx="2" />
+    </svg>
   );
 }
 
-export default forwardRef<any, Props>((props, ref) => <Checkbox {...props} innerRef={ref} />);
+const Checkbox = forwardRef<HTMLInputElement| null, Props>(
+  // eslint-disable-next-line react/prop-types
+  ({ className, children, indeterminate, ...rest }, ref) => {
+    const innerRef = useRef<HTMLInputElement>(null);
+    const id = `checkbox_${rest.name}_${rest.value}`;
+    const innerClass = useMemo(() => {
+      const arr = [];
+      if (rest.checked || indeterminate) arr.push('checked');
+      if (rest.disabled) arr.push('disabled');
+      return arr.join(' ');
+    }, [rest.checked, rest.disabled, indeterminate]);
+
+    useImperativeHandle(ref, () => innerRef.current);
+
+    useIsomorphicLayoutEffect(() => {
+      if (innerRef.current) {
+        // @ts-ignore
+        innerRef.current.indeterminate = indeterminate;
+      }
+    }, [indeterminate]);
+
+    return (
+      <Wrapper className={className}>
+        <input type="checkbox" id={id} {...rest} ref={innerRef} />
+        <label htmlFor={id}>
+          <Shape className={innerClass}>
+            {indeterminate ? <Indeterminate /> : <Approved />}
+          </Shape>
+          {children}
+        </label>
+      </Wrapper>
+    );
+  },
+);
+
+Checkbox.displayName = 'Checkbox';
+
+export default Checkbox;
 
 const Shape = styled.div`
   display: inline-flex;
@@ -75,12 +100,12 @@ const Shape = styled.div`
   &.checked {
     border-color: ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.white};
     svg {
       opacity: 1;
-      color: ${({ theme }) => theme.white};
     }
 
-    &.disabled svg {
+    &.disabled {
       color: ${({ theme }) => transparentize(0.15, theme.textDark)};
     }
   }
@@ -109,18 +134,6 @@ const Wrapper = styled.span`
 
   input {
     display: none;
-
-    &:indeterminate + label {
-      &:before {
-        border-color: ${({ theme }) => theme.primary};
-        background: ${({ theme }) => theme.primary};
-      }
-      &:after {
-        border-color: ${({ theme }) => theme.white};
-        border-left-style: none;
-      }
-    }
-
     &:disabled + label {
       color: ${({ theme }) => transparentize(0.25, theme.textDark)};
     }
