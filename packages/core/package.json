@@ -18,9 +18,9 @@
     "styled-components": ">=4.2.0"
   },
   "dependencies": {
-    "polished": "^3.5.2",
-    "@popperjs/core": "^2.4.0",
-    "react-transition-group": "^4.3.0"
+    "polished": "^3.6.4",
+    "@popperjs/core": "^2.4.1",
+    "react-transition-group": "^4.4.1"
   },
   "scripts": {
     "build": "NODE_ENV=production tsdx build",
