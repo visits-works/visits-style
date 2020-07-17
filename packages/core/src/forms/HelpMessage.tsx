@@ -10,8 +10,14 @@ const Message = styled.small<MsgProps>`
   color: ${({ error, theme }) => (error ? theme.danger : theme.textLight)};
 `;
 
-export default function HelpMessage({ help, error }: { help?: string, error?: string }) {
-  if (error) return (<Message error>{error}</Message>);
+interface Props {
+  help?: string;
+  error?: string;
+  noErrorMessage?: boolean;
+}
+
+export default function HelpMessage({ help, error, noErrorMessage }: Props) {
+  if (error && !noErrorMessage) return (<Message error>{error}</Message>);
   if (help) return (<Message>{help}</Message>);
   return null;
 }

@@ -21,11 +21,13 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: any;
   /** 右側のアイコン */
   rightIcon?: any;
+  /** エラーが発生しても、エラーメッセージを出さないようにする */
+  noErrorMessage?: boolean;
 }
 
 function TextInput({
   className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255,
-  innerRef, ...rest
+  noErrorMessage, innerRef, ...rest
 }: Props & { innerRef: React.Ref<any> }) {
   return (
     <Wrapper
@@ -38,7 +40,7 @@ function TextInput({
       {leftIcon && (<Icon>{leftIcon}</Icon>)}
       {rightIcon && (<Icon right>{rightIcon}</Icon>)}
       <input type={type} maxLength={maxLength} ref={innerRef} {...rest} />
-      <HelpMessage help={help} error={error} />
+      <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </Wrapper>
   );
 }

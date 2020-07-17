@@ -25,11 +25,13 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   render?: (label: string) => any;
   /** placehoderを選択可能にする */
   optional?: boolean;
+  /** エラーが発生しても、エラーメッセージを出さないようにする */
+  noErrorMessage?: boolean;
 }
 
 function Select({
   options = [], placeholder, render, help, error, className, inputSize, outline, optional,
-  innerRef, ...rest
+  noErrorMessage, innerRef, ...rest
 }: Props & { innerRef: React.Ref<any> }) {
   const list = useMemo(() => options.map((item) => (
     typeof item === 'string'
@@ -50,7 +52,7 @@ function Select({
         {list}
       </select>
       <IconArrowDown />
-      <HelpMessage help={help} error={error} />
+      <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </InputWrapper>
   );
 }

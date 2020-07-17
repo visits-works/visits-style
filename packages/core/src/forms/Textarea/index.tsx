@@ -10,15 +10,17 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string | any;
   /** 捕捉テキスト */
   help?: string | any;
+  /** エラーが発生しても、エラーメッセージを出さないようにする */
+  noErrorMessage?: boolean;
 }
 
 function Textarea({
-  className, help, error, style, innerRef, ...rest
+  className, help, error, style, innerRef, noErrorMessage, ...rest
 }: Props & { innerRef: React.Ref<any> }) {
   return (
     <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
       <textarea {...rest} ref={innerRef} />
-      <HelpMessage help={help} error={error} />
+      <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </Wrapper>
   );
 }
