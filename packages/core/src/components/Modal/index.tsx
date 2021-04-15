@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { useRef, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 import useScrollFix from '../../hooks/useScrollFix';
@@ -87,12 +87,14 @@ export default function Modal({
   className, closeOnOverlay, closeOnEsc,
   ...rest
 }: Props) {
+  const ref = useRef<HTMLDivElement | null>(null);
   useScrollFix(show);
   return (
     <Portal>
       <Transition
         in={show}
         timeout={timeout!}
+        nodeRef={ref}
         unmountOnExit
         mountOnEnter
       >
@@ -100,6 +102,7 @@ export default function Modal({
           <Wrapper
             role="dialog"
             className={className}
+            ref={ref}
           >
             <Shadow onClick={closeOnOverlay ? closeModal : undefined} data-testid="vs-modal-overlay" />
             <AnimatedBox className={state} color={color} borderless {...rest} role="document">

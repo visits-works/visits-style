@@ -1,4 +1,4 @@
-import React, { useEffect, HTMLAttributes, useCallback } from 'react';
+import React, { useEffect, HTMLAttributes, useCallback, useRef, forwardRef, Ref } from 'react';
 import styled from 'styled-components';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
@@ -76,10 +76,15 @@ const ClearButton = styled.button`
   }
 `;
 
+interface ToasstItemProps extends ToastProps {
+  clear: (id: string) => void,
+  innerRef: Ref<any>
+}
+
 function ToastItem(
   {
-    color, message, duration = 5000, clear, clearOnClick, id, ...rest
-  }: ToastProps & { clear: (id: string) => void },
+    color, message, duration = 5000, clear, clearOnClick, id, innerRef, ...rest
+  }: ToasstItemProps,
 ) {
   const onClear = useCallback(() => clear(id), [clear, id]);
 
@@ -96,6 +101,7 @@ function ToastItem(
       color={color}
       clear={clearOnClick}
       data-testid="toast-item"
+      ref={innerRef}
       borderless
       {...rest}
     >
@@ -104,6 +110,10 @@ function ToastItem(
     </Wrapper>
   );
 }
+
+const ToastItemForwardRef = forwardRef<any, Omit<ToasstItemProps, 'innerRef'>>(
+  (props, ref) => <ToastItem {...props} innerRef={ref} />,
+);
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   /** 表示するToastのリスト */
@@ -137,18 +147,23 @@ export default function Toast(
         style={{ position: (fixed ? 'fixed' : 'absolute'), ...style }}
       >
         <TransitionGroup component={null}>
-          {toasts.map((props) => (
-            <Transition key={props.id} timeout={250} in unmountOnExit>
-              {(state) => (
-                <ToastItem
-                  {...props}
-                  className={state}
-                  key={props.id}
-                  clear={clear}
-                />
-              )}
-            </Transition>
-          ))}
+          {toasts.map((props) => {
+            const ref = useRef();
+
+            return (
+              <Transition key={props.id} timeout={250} nodeRef={ref} in unmountOnExit>
+                {(state) => (
+                  <ToastItemForwardRef
+                    {...props}
+                    className={state}
+                    key={props.id}
+                    clear={clear}
+                    ref={ref}
+                  />
+                )}
+              </Transition>
+            );
+          })}
         </TransitionGroup>
       </Container>
     </Portal>
