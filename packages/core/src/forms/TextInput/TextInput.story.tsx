@@ -5,7 +5,7 @@ import { boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import TextInput from '.';
 
-storiesOf('forms|TextInput', module)
+storiesOf('forms/TextInput', module)
   .add('default', () => (
     <TextInput
       name="test1"

@@ -19,7 +19,7 @@ function Fancy({ length = 6, defaultShow = false }: any) {
   );
 }
 
-storiesOf('components|Accordion', module)
+storiesOf('components/Accordion', module)
   .add('default', () => <Fancy />)
   .add('multiple', () => (
     <>

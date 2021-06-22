@@ -7,9 +7,6 @@ import css from '../packages/core/src/styles/normalize';
 export const parameters = {
   name: 'visits-style',
   url: 'https://github.com/visits-works/visits-style',
-  hierarchySeparator: /\/|\./,
-  hierarchyRootSeparator: /\|/,
-  layout: 'centered',
 };
 
 const GlobalStyle = createGlobalStyle`

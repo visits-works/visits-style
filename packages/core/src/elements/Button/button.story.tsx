@@ -25,7 +25,7 @@ const sizeList = [
   'large',
 ];
 
-storiesOf('elements|Button', module)
+storiesOf('elements/Button', module)
   .add('default', () => (
     <Button
       color={select('color', colorList, '')}

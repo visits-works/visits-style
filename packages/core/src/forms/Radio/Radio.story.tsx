@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Field from '../Field';
 import Radio from '.';
 
-storiesOf('forms|Radio', module)
+storiesOf('forms/Radio', module)
   .add('default', () => (
     <Radio
       name="test1"

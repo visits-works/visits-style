@@ -15,7 +15,7 @@ const colorList = [
   'dark',
 ];
 
-storiesOf('components|Spinner', module)
+storiesOf('components/Spinner', module)
   .add('default', () => (
     <Spinner color={select('color', colorList, 'primary')} size={text('size', '5rem')} />
   ));

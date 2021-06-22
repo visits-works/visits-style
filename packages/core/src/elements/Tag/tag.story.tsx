@@ -15,7 +15,7 @@ const colorList = [
   'dark',
 ];
 
-storiesOf('elements|Tag', module)
+storiesOf('elements/Tag', module)
   .add('default', () => (
     <Tag
       color={select('color', colorList, '')}

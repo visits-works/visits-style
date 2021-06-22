@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import Switch from '.';
 
-storiesOf('forms|Switch', module)
+storiesOf('forms/Switch', module)
   .add('default', () => (
     <Switch
       name="test1"

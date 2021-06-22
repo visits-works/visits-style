@@ -25,7 +25,7 @@ const sizeList = [
   'large',
 ];
 
-storiesOf('elements|TextButton', module)
+storiesOf('elements/TextButton', module)
   .add('default', () => (
     <Button
       color={select('color', colorList, '')}

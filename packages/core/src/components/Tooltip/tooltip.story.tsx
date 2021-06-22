@@ -17,7 +17,7 @@ const positionList = [
 ];
 
 
-storiesOf('components|Tooltip', module)
+storiesOf('components/Tooltip', module)
   .add('default', () => (
     <Tooltip
       label="Hello!!!"

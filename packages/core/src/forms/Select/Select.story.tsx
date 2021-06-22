@@ -9,7 +9,7 @@ const options = [
   { id: 2, name: 'options2' },
 ];
 
-storiesOf('forms|Select', module)
+storiesOf('forms/Select', module)
   .add('default', () => (
     <div style={{ width: '350px' }}>
       <Select

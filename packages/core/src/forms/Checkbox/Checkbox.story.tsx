@@ -7,7 +7,7 @@ import Checkbox from '.';
 
 const noop = () => {};
 
-storiesOf('forms|Checkbox', module)
+storiesOf('forms/Checkbox', module)
   .add('default', () => (
     <Checkbox
       name="test1"

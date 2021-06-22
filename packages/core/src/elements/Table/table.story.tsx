@@ -12,7 +12,7 @@ const sizeList = [
   'large',
 ];
 
-storiesOf('elements|Table', module)
+storiesOf('elements/Table', module)
   .add('default', () => (
     <Table
       size={select('size', sizeList, '') as SizeType}
