@@ -1,4 +1,3 @@
-
 export type ColorType = 'light' | 'primary' | 'info' | 'link' | 'success' |
 'warning' | 'danger' | 'dark' | 'text' | string;
 

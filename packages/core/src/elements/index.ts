@@ -3,7 +3,6 @@ export { default as Container } from './Grid/Container';
 export { default as Row } from './Grid/Row';
 export { default as Col } from './Grid/Col';
 
-
 // common
 export { default as Content } from './Content';
 export { default as Placeholder } from './Placeholder';

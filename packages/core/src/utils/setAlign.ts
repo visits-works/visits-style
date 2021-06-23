@@ -1,4 +1,3 @@
-
 export default function setAlign({ align }: { align?: 'left' | 'right' | 'center' }) {
   switch (align) {
     case 'left':
