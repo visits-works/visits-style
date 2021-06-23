@@ -49,7 +49,8 @@ export interface PopoverRef {
 }
 
 function stopPropagation(e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) {
-  e?.stopPropagation();
+  if (!e) return;
+  e.stopPropagation();
 }
 
 const Popover = forwardRef(({
