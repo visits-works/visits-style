@@ -79,7 +79,7 @@ storiesOf('components|Popover', module)
             <p>hello world</p>
           </Popover>
         </button>
-        {clicked ? <div>oh no! you parent click event triggerd!</div> : null}
+        {clicked ? <div>oh no! your parent click event is triggered!</div> : null}
       </>
     );
   });
