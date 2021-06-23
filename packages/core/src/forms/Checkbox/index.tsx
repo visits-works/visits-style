@@ -39,7 +39,6 @@ function Indeterminate() {
 }
 
 const Checkbox = forwardRef<HTMLInputElement| null, Props>(
-  // eslint-disable-next-line react/prop-types
   ({ className, children, indeterminate, ...rest }, ref) => {
     const innerRef = useRef<HTMLInputElement>(null);
     const id = `checkbox_${rest.name}_${rest.value}`;
@@ -50,6 +49,7 @@ const Checkbox = forwardRef<HTMLInputElement| null, Props>(
       return arr.join(' ');
     }, [rest.checked, rest.disabled, indeterminate]);
 
+    // @ts-ignore
     useImperativeHandle(ref, () => innerRef.current);
 
     useIsomorphicLayoutEffect(() => {
