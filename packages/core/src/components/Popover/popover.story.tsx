@@ -66,22 +66,6 @@ storiesOf('components/Popover', module)
         </Popover>
       </>
     );
-  })
-  .add('clickable parent', () => {
-    const [clicked, setClicked] = useState(false);
-    return (
-      <>
-        <button onClick={() => setClicked(!clicked)}>
-          <span>parent button contents</span><br />
-          <Popover
-            label={<button>click me</button>}
-          >
-            <p>hello world</p>
-          </Popover>
-        </button>
-        {clicked ? <div>oh no! you parent click event triggerd!</div> : null}
-      </>
-    );
   });
 
 function Test() {
