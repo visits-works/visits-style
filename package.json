@@ -10,6 +10,9 @@
     "storybook:build": "build-storybook -c .storybook -o .out",
     "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e storybook"
   },
+  "resolutions": {
+    "shelljs": "^0.8.4"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@storybook/addon-a11y": "^6.2.9",
