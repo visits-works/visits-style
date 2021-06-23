@@ -48,6 +48,10 @@ export interface PopoverRef {
   close: () => void;
 }
 
+function stopPropagation(e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) {
+  e?.stopPropagation();
+}
+
 const Popover = forwardRef(({
   position, label, children, color = 'background',
   onOpen, onClose, disabled, className = '',
@@ -67,13 +71,15 @@ const Popover = forwardRef(({
     },
   );
 
-  const handleFocus = () => {
+  const handleFocus = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    stopPropagation(e);
     setOpen(true);
     requestAnimationFrame(openPopper);
     if (onOpen) onOpen();
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+    stopPropagation(e);
     closePopper();
     setOpen(false);
     if (onClose) onClose();
@@ -107,6 +113,7 @@ const Popover = forwardRef(({
             className={className}
             ref={popover}
             color={color}
+            onClick={stopPropagation}
             {...rest}
           >
             {children}
