@@ -39,7 +39,6 @@ export default function usePopper(
     options.offset,
   ]);
 
-
   useIsomorphicLayoutEffect(() => {
     if (instance.current) {
       instance.current.setOptions(popperOptions);

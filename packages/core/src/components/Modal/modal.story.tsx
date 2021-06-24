@@ -15,7 +15,7 @@ const CloseButton: any = {
   right: 0,
 };
 
-storiesOf('components|Modal', module)
+storiesOf('components/Modal', module)
   .add('default', () => (
     <div>
       <Modal

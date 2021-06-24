@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, no-unused-expressions */
 import React, {
   Children, cloneElement, useState, useRef, HTMLAttributes, useEffect,
   forwardRef, useImperativeHandle,

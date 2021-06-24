@@ -18,7 +18,7 @@ const positionList = [
   'bottom-end',
 ];
 
-storiesOf('components|Popover', module)
+storiesOf('components/Popover', module)
   .add('default', () => (
     <>
       <div style={{ width: '50px', height: '80vh' }} />

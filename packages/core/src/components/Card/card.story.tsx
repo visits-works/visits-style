@@ -15,7 +15,7 @@ const colorList = [
   'dark',
 ];
 
-storiesOf('components|Card', module)
+storiesOf('components/Card', module)
   .add('default', () => (
     <Card
       color={select('color', colorList, '')}

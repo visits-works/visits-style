@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Content from '.';
 
-storiesOf('elements|Content', module)
+storiesOf('elements/Content', module)
   .add('default', () => (
     <Content>
       <h1>Hello World!</h1>

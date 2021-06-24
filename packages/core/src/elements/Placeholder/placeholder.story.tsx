@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Placeholder from '.';
 
-storiesOf('elements|Placeholder', module)
+storiesOf('elements/Placeholder', module)
   .add('default', () => (
     <>
       <Placeholder />

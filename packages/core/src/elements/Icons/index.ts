@@ -1,4 +1,3 @@
-
 export { default as IconApproved } from './Approved';
 export { default as IconChevronLeftRound } from './ChevronLeftRound';
 export { default as IconChevronRightRound } from './ChevronRightRound';

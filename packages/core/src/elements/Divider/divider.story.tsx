@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import Divider from '.';
 
-storiesOf('elements|Divider', module)
+storiesOf('elements/Divider', module)
   .add('default', () => (
     <div style={{ width: '300px' }}>
       Content

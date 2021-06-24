@@ -26,7 +26,7 @@ function Test() {
   );
 }
 
-storiesOf('components|AppBar', module)
+storiesOf('components/AppBar', module)
   .add('default', () => (
     <AppBar color="light" brand="Hello">
       <ul>

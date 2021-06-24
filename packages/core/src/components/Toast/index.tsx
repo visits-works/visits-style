@@ -76,10 +76,14 @@ const ClearButton = styled.button`
   }
 `;
 
+interface ToastItemProps extends ToastProps {
+  clear: (id: string) => void;
+}
+
 function ToastItem(
   {
     color, message, duration = 5000, clear, clearOnClick, id, ...rest
-  }: ToastProps & { clear: (id: string) => void },
+  }: ToastItemProps,
 ) {
   const onClear = useCallback(() => clear(id), [clear, id]);
 

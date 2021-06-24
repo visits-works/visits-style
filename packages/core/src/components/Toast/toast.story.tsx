@@ -63,7 +63,7 @@ function ToastDemo({ fixed, position }: any) {
   );
 }
 
-storiesOf('components|Toast', module)
+storiesOf('components/Toast', module)
   .add('default', () => (
     <ToastDemo
       position={select('position', positionList, 'top-left')}

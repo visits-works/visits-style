@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import Textarea from '.';
 
-storiesOf('forms|Textarea', module)
+storiesOf('forms/Textarea', module)
   .add('default', () => (
     <Textarea
       name="test1"

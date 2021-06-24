@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, text } from '@storybook/addon-knobs';
 import Box from '.';
 
-storiesOf('elements|Box', module)
+storiesOf('elements/Box', module)
   .add('default', () => (
     <Box
       borderless={boolean('borderless', false)}

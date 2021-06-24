@@ -10,11 +10,20 @@ jobs:
   test:
     name: run lint and test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '12', '14' ]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v2.1.0
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ matrix.node }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node }}-yarn-
       - run: yarn install
       - run: yarn workspace visits-style lint
       - run: yarn workspace visits-style test:ci

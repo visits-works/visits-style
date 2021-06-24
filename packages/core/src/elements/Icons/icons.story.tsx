@@ -15,7 +15,7 @@ const Wrapper = styled.ul`
   }
 `;
 
-storiesOf('elements|Icons', module)
+storiesOf('elements/Icons', module)
   .add('default', () => (
     <Wrapper>
       {Object.keys(Icons).map((name) => {
