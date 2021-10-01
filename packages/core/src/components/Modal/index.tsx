@@ -79,12 +79,14 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   timeout?: number;
   /** モーダル外に表示するElements */
   external?: React.ReactNode;
+  /** モーダルのtransition exitが完了した時に発火されるcallback */
+  onTransitionExited?: () => void;
 }
 
 export default function Modal({
   show, children, timeout = 200,
   color = 'background', closeModal, external,
-  className, closeOnOverlay, closeOnEsc,
+  className, closeOnOverlay, closeOnEsc, onTransitionExited,
   ...rest
 }: Props) {
   useScrollFix(show);
@@ -93,6 +95,7 @@ export default function Modal({
       <Transition
         in={show}
         timeout={timeout!}
+        onExited={onTransitionExited}
         unmountOnExit
         mountOnEnter
       >
