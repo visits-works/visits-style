@@ -2,10 +2,10 @@ name: Run test for pull request
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   test:
     name: run lint and test
