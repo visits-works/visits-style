@@ -1,14 +1,15 @@
 /* eslint-disable no-param-reassign, no-unused-expressions */
 import React, {
-  Children, cloneElement, useState, useRef, HTMLAttributes, useEffect,
+  Children, cloneElement, useState, HTMLAttributes, useEffect,
   forwardRef, useImperativeHandle,
 } from 'react';
 import styled from 'styled-components';
-import { Placement } from '@popperjs/core';
+import { useFloating, shift, offset as offsetUi, flip, autoUpdate } from '@floating-ui/react-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Placement } from '@floating-ui/core';
 
 import Portal from '../Portal';
 import Box from '../../elements/Box';
-import usePopper from '../../hooks/usePopper';
 import wrapEvent from '../../utils/wrapEvent';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -59,39 +60,34 @@ const Popover = forwardRef(({
   offset = { x: 0, y: 6 },
   ...rest
 }: Props, ref: React.Ref<PopoverRef>) => {
-  const parent = useRef<HTMLDivElement | null>(null);
-  const popover = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
-
-  const [openPopper, closePopper] = usePopper(
-    parent,
-    popover,
-    {
-      placement: position,
-      offset,
-    },
-  );
+  const { reference, floating, strategy, x, y } = useFloating({
+    placement: position,
+    middleware: [
+      shift(),
+      flip(),
+      offsetUi({ mainAxis: offset.y, crossAxis: offset.x }),
+    ],
+    whileElementsMounted: autoUpdate,
+  });
 
   const handleFocus = (e?: React.MouseEvent<HTMLButtonElement>) => {
     stopPropagation(e);
     setOpen(true);
-    requestAnimationFrame(openPopper);
     if (onOpen) onOpen();
   };
 
   const handleBlur = (e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     stopPropagation(e);
-    closePopper();
     setOpen(false);
     if (onClose) onClose();
   };
 
   useEffect(() => {
     if (disabled && open) {
-      closePopper();
       setOpen(false);
     }
-  }, [disabled, open, closePopper]);
+  }, [disabled, open]);
 
   useImperativeHandle(ref, () => ({
     open: handleFocus,
@@ -101,7 +97,7 @@ const Popover = forwardRef(({
   return (
     <>
       {cloneElement(Children.only(label), {
-        ref: parent,
+        ref: reference,
         tabIndex: 0,
         role: 'button',
         onClick: wrapEvent(label, 'onClick', handleFocus),
@@ -112,9 +108,14 @@ const Popover = forwardRef(({
           <Tooltip
             role="tooltip"
             className={className}
-            ref={popover}
+            ref={floating}
             color={color}
             onClick={stopPropagation}
+            style={{
+              position: strategy,
+              top: y || 0,
+              left: x || 0,
+            }}
             {...rest}
           >
             {children}
