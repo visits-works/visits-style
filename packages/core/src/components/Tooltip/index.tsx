@@ -1,10 +1,10 @@
-/* eslint-disable no-param-reassign */
-import React, { Children, cloneElement, useRef, useState } from 'react';
+import React, { Children, cloneElement, useState } from 'react';
 import styled from 'styled-components';
-import { Placement } from '@popperjs/core';
+import { useFloating, shift, offset as offsetUi, flip, autoUpdate } from '@floating-ui/react-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Placement } from '@floating-ui/core';
 
 import Portal from '../Portal';
-import usePopper from '../../hooks/usePopper';
 import { ColorType } from '../../types';
 import wrapEvent from '../../utils/wrapEvent';
 
@@ -35,27 +35,23 @@ export default function Tooltip({
   label, color, className = '',
   offset = { x: 0, y: 6 },
 }: TooltipProps) {
-  const parent = useRef<HTMLDivElement | null>(null);
-  const tooltip = useRef<HTMLDivElement | null>(null);
+  const { reference, floating, strategy, x, y } = useFloating({
+    placement: position,
+    middleware: [
+      shift(),
+      flip(),
+      offsetUi({ mainAxis: offset.y, crossAxis: offset.x }),
+    ],
+    whileElementsMounted: autoUpdate,
+  });
   const [open, setOpen] = useState(false);
-
-  const [openPopper, closePopper] = usePopper(
-    parent,
-    tooltip,
-    {
-      placement: position,
-      offset,
-    },
-  );
 
   const handleOpen = () => {
     setOpen(true);
-    requestAnimationFrame(openPopper);
   };
 
   const handleClose = () => {
     setOpen(false);
-    closePopper();
   };
 
   const child = typeof children === 'string' ? <span>{children}</span> : children;
@@ -63,7 +59,7 @@ export default function Tooltip({
   return (
     <>
       {cloneElement(Children.only(child), {
-        ref: parent,
+        ref: reference,
         onMouseEnter: wrapEvent(child, 'onMouseEnter', handleOpen),
         onMouseLeave: wrapEvent(child, 'onMouseLeave', handleClose),
         onFocus: wrapEvent(child, 'onFocus', handleOpen),
@@ -73,9 +69,14 @@ export default function Tooltip({
         <Portal>
           <TooltipWrapper
             className={className}
-            ref={tooltip}
+            ref={floating}
             role="tooltip"
             color={color}
+            style={{
+              position: strategy,
+              top: y || 0,
+              left: x || 0,
+            }}
           >
             {label}
           </TooltipWrapper>
