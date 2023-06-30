@@ -5,16 +5,15 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import {
-  useFloating, useInteractions, useClick, useDismiss,
-  shift, offset as offsetUi, flip, FloatingFocusManager, autoUpdate,
+  useFloating, useInteractions, useClick,
+  shift, offset as offsetUi, flip, FloatingFocusManager, FloatingOverlay, autoUpdate,
 } from '@floating-ui/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Placement } from '@floating-ui/core';
+import type { Placement } from '@floating-ui/core';
 
 import Portal from '../Portal';
 import Box from '../../elements/Box';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
   label: React.ReactElement;
   /** 内容のリスト */
@@ -49,7 +48,7 @@ export interface PopoverRef {
   close: () => void;
 }
 
-function stopPropagation(e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) {
+function stopPropagation(e?: React.MouseEvent<Element>) {
   if (!e) return;
   e.stopPropagation();
 }
@@ -98,33 +97,31 @@ const Popover = forwardRef(({
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
     useClick(context),
-    useDismiss(context),
   ]);
   
   return (
     <>
       {cloneElement(Children.only(label), {
         ref: refs.setReference,
-        // @ts-ignore
-        ...getReferenceProps({ tabIndex: 0, role: 'button', onClick: handleFocus, disabled }),
+        ...getReferenceProps({ tabIndex: 0, role: 'button', disabled, onClick: stopPropagation }),
       })}
-      {open ? (
-        <Portal>
-          <FloatingFocusManager context={context} modal={false} visuallyHiddenDismiss>
-            <Tooltip
-              role="tooltip"
-              ref={refs.setFloating}
-              color={color}
-              // @ts-ignore
-              style={floatingStyles}
-              // @ts-ignore
-              {...getFloatingProps({ ...rest, onClick: stopPropagation, className })}
-            >
-              {children}
-            </Tooltip>
-          </FloatingFocusManager>
-        </Portal>
-      ) : null}
+      <Portal>
+        {open ? (
+          <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur}>
+            <FloatingFocusManager context={context} modal={false}>
+              <Tooltip
+                role="tooltip"
+                ref={refs.setFloating}
+                color={color}
+                style={floatingStyles}
+                {...getFloatingProps({ ...rest, className })}
+              >
+                {children}
+              </Tooltip>
+            </FloatingFocusManager>
+          </FloatingOverlay>
+        ) : null}
+      </Portal>
     </>
   );
 });

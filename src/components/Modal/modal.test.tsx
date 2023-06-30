@@ -1,14 +1,14 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import theme from '../../theme';
 
 import Modal from '.';
 
 describe('Modal', () => {
   it('render modal', () => {
-    const onClose = jest.fn();
-    const { getByText } = render(
+    const onClose = vi.fn();
+    render(
       <ThemeProvider theme={theme}>
         <Modal
           closeModal={onClose}
@@ -18,12 +18,12 @@ describe('Modal', () => {
         </Modal>
       </ThemeProvider>,
     );
-    getByText('Modal Content here');
+    screen.getByText('Modal Content here');
   });
 
   it('modal does not rendered when show props is false', () => {
-    const onClose = jest.fn();
-    const { queryByText, queryByRole } = render(
+    const onClose = vi.fn();
+    render(
       <ThemeProvider theme={theme}>
         <Modal
           closeModal={onClose}
@@ -35,14 +35,14 @@ describe('Modal', () => {
     );
 
     // content does not exists
-    expect(queryByText('Modal Content here')).toBeNull();
+    expect(screen.queryByText('Modal Content here')).toBeNull();
     // wrapper div does not exists
-    expect(queryByRole('dialog')).toBeNull();
+    expect(screen.queryByRole('dialog')).toBeNull();
   });
 
   it('closeModal is called by clicking overlay when "closeOnOverlay" is enabled', () => {
-    const onClose = jest.fn();
-    const { getByTestId } = render(
+    const onClose = vi.fn();
+    render(
       <ThemeProvider theme={theme}>
         <Modal
           closeModal={onClose}
@@ -53,13 +53,13 @@ describe('Modal', () => {
         </Modal>
       </ThemeProvider>,
     );
-    fireEvent.click(getByTestId('vs-modal-overlay'));
+    fireEvent.click(screen.getByTestId('vs-modal-overlay'));
     expect(onClose).toBeCalled();
   });
 
   it('closeModal is not called by clicking overlay when "closeOnOverlay" is disabled', () => {
-    const onClose = jest.fn();
-    const { getByTestId } = render(
+    const onClose = vi.fn();
+    render(
       <ThemeProvider theme={theme}>
         <Modal
           closeModal={onClose}
@@ -69,12 +69,34 @@ describe('Modal', () => {
         </Modal>
       </ThemeProvider>,
     );
-    fireEvent.click(getByTestId('vs-modal-overlay'));
+    fireEvent.click(screen.getByTestId('vs-modal-overlay'));
     expect(onClose).not.toBeCalled();
   });
 
+  it('closeModal is called on pressing Escape Key when "closeOnEsc is enabled', () => {
+    const onClose = vi.fn();
+    render(
+      <ThemeProvider theme={theme}>
+        <Modal
+          closeModal={onClose}
+          show
+        >
+          Modal Content here
+        </Modal>
+      </ThemeProvider>,
+    );
+
+    fireEvent.keyDown(screen.getByRole('document'), {
+      key: "Escape",
+      code: "Escape",
+      keyCode: 27,
+      charCode: 27
+    });
+    expect(onClose).toBeCalled();
+  });
+
   it('external rendered outside of modal document', () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     const { getByTestId, getByRole } = render(
       <ThemeProvider theme={theme}>
         <Modal
@@ -86,7 +108,7 @@ describe('Modal', () => {
         </Modal>
       </ThemeProvider>,
     );
-    expect(getByRole('document').contains(getByTestId('modal-external'))).toBeFalsy();
-    expect(getByRole('dialog').contains(getByTestId('modal-external'))).toBeTruthy();
+    expect(screen.getByRole('document').contains(screen.getByTestId('modal-external'))).toBeFalsy();
+    expect(screen.getByRole('dialog').contains(screen.getByTestId('modal-external'))).toBeTruthy();
   })
 });

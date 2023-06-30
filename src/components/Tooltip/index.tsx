@@ -1,15 +1,15 @@
 import React, { Children, cloneElement, useState } from 'react';
 import styled from 'styled-components';
 import {
-  useFloating, useInteractions, useHover,
-  shift, offset as offsetUi, flip,
+  useFloating, useInteractions, useHover, useClientPoint,
+  shift, offset as offsetUi, flip, FloatingFocusManager,
 } from '@floating-ui/react';
 import type { Placement } from '@floating-ui/core';
 
 import Portal from '../Portal';
 import { ColorType } from '../../types';
 
-interface TooltipProps {
+export interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
   label: React.ReactNode;
   /** マウスオーバーの対象になるelement */
@@ -27,8 +27,8 @@ interface TooltipProps {
    * @default '{ x: 0, y: 6 }'
    */
   offset?: { x: number; y: number; };
-  /** 吹き出し対象のelementではなく、マウス位置を基盤で表示する */
-  mouseOnly?: boolean;
+  /** 吹き出し表示座標を対象のElementではなくマウスカーソルにする */
+  clientPoint?: boolean;
 
   className?: string;
 }
@@ -36,7 +36,7 @@ interface TooltipProps {
 export default function Tooltip({
   children, position = 'bottom',
   label, color, className = '',
-  offset = { x: 0, y: 6 }, mouseOnly,
+  offset = { x: 0, y: 6 }, clientPoint,
 }: TooltipProps) {
   const [open, setOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
@@ -52,6 +52,7 @@ export default function Tooltip({
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
     useHover(context),
+    useClientPoint(context, { enabled: clientPoint }),
   ]);
 
   const child = typeof children === 'string' ? <span>{children}</span> : children;
@@ -60,23 +61,24 @@ export default function Tooltip({
     <>
       {cloneElement(Children.only(child), {
         ref: refs.setReference,
-        ...getReferenceProps({  }),
+        ...getReferenceProps(),
       })}
-      {open ? (
-        <Portal>
-          <TooltipWrapper
-            className={className}
-            ref={refs.setFloating}
-            role="tooltip"
-            $color={color}
-            // @ts-ignore
-            style={floatingStyles}
-            {...getFloatingProps()}
-          >
-            {label}
-          </TooltipWrapper>
-        </Portal>
-      ) : null}
+      <Portal>
+        {open ? (
+          <FloatingFocusManager context={context} modal={false}>
+            <TooltipWrapper
+              className={className}
+              ref={refs.setFloating}
+              role="tooltip"
+              $color={color}
+              style={floatingStyles}
+              {...getFloatingProps()}
+            >
+              {label}
+            </TooltipWrapper>
+          </FloatingFocusManager>
+        ) : null}
+      </Portal>
     </>
   );
 }
@@ -92,4 +94,8 @@ const TooltipWrapper = styled.div<{ $color: TooltipProps['color']; }>`
   z-index: 9999;
 
   background-color: ${({ $color, theme }) => ($color ? (theme[$color] || theme.background) : theme.background)};
+
+  &:focus {
+    outline: none;
+  }
 `;

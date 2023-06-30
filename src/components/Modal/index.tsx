@@ -1,9 +1,8 @@
-import React, { HTMLAttributes, useEffect, useRef } from 'react';
+import React, { HTMLAttributes, useEffect, useRef, MouseEvent } from 'react';
 import styled from 'styled-components';
 import {
   useFloating,
   useDismiss,
-  useRole,
   useInteractions,
   useTransitionStyles,
   FloatingFocusManager,
@@ -53,11 +52,9 @@ export default function Modal({
   const { refs, context } = useFloating({ open: show, onOpenChange: closeModal });
 
   const { getFloatingProps } = useInteractions([
-    useRole(context),
     useDismiss(context, {
-      enabled: closeOnOverlay || closeOnEsc,
-      outsidePressEvent: 'mousedown',
-      outsidePress: closeOnOverlay,
+      enabled: closeOnEsc,
+      outsidePress: false,
       escapeKey: closeOnEsc,
     }),
   ]);
@@ -78,18 +75,20 @@ export default function Modal({
     exitRef.current?.();
   }, [isMounted]);
 
+  const handleOverlayClose = (e: MouseEvent<HTMLDivElement>) => {
+    if (!closeOnOverlay) return;
+    closeModal?.();
+  };
+
   exitRef.current = onExited;
 
   return (
     <Portal>
       {isMounted ? (
-        <Overlay lockScroll data-testid="vs-modal-overlay">
+        <Overlay lockScroll data-testid="vs-modal-overlay" onClick={handleOverlayClose}>
           <FloatingFocusManager context={context}>
-            <Wrapper ref={refs.setFloating} style={{ ...styles }}>
-              <Box
-                color={color}
-                {...getFloatingProps(rest)}
-              >
+            <Wrapper ref={refs.setFloating} role="dialog" style={{ ...styles }}>
+              <Box role="document" color={color} {...getFloatingProps(rest)}>
                 {children}
               </Box>
               {external}

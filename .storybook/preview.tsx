@@ -23,10 +23,10 @@ export default {
   },
   decorators: [(Story) => (
     <ThemeProvider theme={theme}>
-      <>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', minHeight: '65vh' }}>
         <GlobalStyle />
         <Story />
-      </>
+      </div>
     </ThemeProvider>
   )],
 } as Preview;

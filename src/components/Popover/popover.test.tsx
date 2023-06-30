@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, fireEvent, cleanup, screen } from '@testing-library/react';
 import theme from '../../theme';
 import Popover from './index';
 
@@ -9,7 +9,7 @@ describe('Popover', () => {
   beforeEach(cleanup);
 
   it('render', () => {
-    const { getByText } = render(
+    render(
       <ThemeProvider theme={theme}>
         <Popover
           label={<button type="button">show</button>}
@@ -18,12 +18,12 @@ describe('Popover', () => {
         </Popover>
       </ThemeProvider>,
     );
-    fireEvent.click(getByText('show'));
-    getByText('Popover Content');
+    fireEvent.click(screen.getByText('show'));
+    screen.getByText('Popover Content');
   });
 
   it('close on click outer', () => {
-    const { getByText, queryByText, getByTestId } = render(
+    render(
       <ThemeProvider theme={theme}>
         <Popover
           label={<button type="button">show</button>}
@@ -32,9 +32,9 @@ describe('Popover', () => {
         </Popover>
       </ThemeProvider>,
     );
-    fireEvent.click(getByText('show'));
-    fireEvent.click(getByTestId('visits-style-shadow'));
-    expect(queryByText('Popover Content')).toBeNull();
+    fireEvent.click(screen.getByText('show'));
+    fireEvent.click(screen.getByTestId('visits-style-shadow'));
+    expect(screen.queryByText('Popover Content')).toBeNull();
   });
 
   it('close on disabled', () => {
@@ -58,9 +58,9 @@ describe('Popover', () => {
         </ThemeProvider>
       );
     }
-    const { getByText, getByTestId, queryByTestId } = render(<Test />);
-    fireEvent.click(getByText('show'));
-    fireEvent.click(getByTestId('disable'));
-    expect(queryByTestId('disable')).toBeNull();
+    render(<Test />);
+    fireEvent.click(screen.getByText('show'));
+    fireEvent.click(screen.getByTestId('disable'));
+    expect(screen.queryByTestId('disable')).toBeNull();
   });
 });

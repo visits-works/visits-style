@@ -1,21 +1,24 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import theme from '../../theme';
 import Tooltip from './index';
 
 describe('Tooltip', () => {
   it('render', () => {
-    const { getByText } = render(
+    render(
       <ThemeProvider theme={theme}>
         <Tooltip
           label="Tooltip Content"
         >
-          show
+          <span>show</span>
         </Tooltip>
       </ThemeProvider>
     );
-    fireEvent.mouseOver(getByText('show'));
-    getByText('Tooltip Content');
+
+    expect(screen.queryByText('Tooltip Content')).toBeNull();
+
+    fireEvent.mouseOver(screen.getByText('show'));
+    screen.getByText('Tooltip Content');
   });
 });

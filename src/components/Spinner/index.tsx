@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { ColorType, ThemeType } from '../../types';
 
-interface Props extends HTMLAttributes<HTMLDivElement>{
+export interface Props extends HTMLAttributes<HTMLDivElement>{
   /** 色の指定 */
   color?: ColorType;
   /** サイズ */

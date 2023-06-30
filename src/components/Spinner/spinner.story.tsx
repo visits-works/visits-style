@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import Spinner from '.';
+import Spinner, { Props } from '.';
 
 const colorList = [
   '',
@@ -16,24 +16,19 @@ const colorList = [
 
 const meta = {
   title: 'components/Spinner',
-  // @ts-ignore
   component: Spinner,
   tags: ['autodocs'],
   argTypes: {
     color: { defaultValue: 'primary' },
+    size: { defaultValue: '5rem' },
   },
-} satisfies Meta<typeof Spinner>;
+  parameters: {
+    color: { values: colorList },
+  },
+} satisfies Meta<Props>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const tooltip: Story = {
-  args: {
-    color: 'primary',
-    size: '5rem',
-  },
-  parameters: {
-    color: { values: colorList },
-  },
-};
+export const base: Story = {};

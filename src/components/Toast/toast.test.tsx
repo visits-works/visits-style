@@ -5,10 +5,10 @@ import { render } from '@testing-library/react';
 import theme from '../../theme';
 import Toast from './index';
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe('Toast', () => {
-  const onClear = jest.fn();
+  const onClear = vi.fn();
 
   beforeEach(() => {
     onClear.mockReset();
@@ -45,7 +45,7 @@ describe('Toast', () => {
         <Toast toasts={data} clear={onClear} />
       </ThemeProvider>
     );
-    jest.advanceTimersByTime(5000);
+    vi.advanceTimersByTime(5000);
     expect(onClear).toBeCalledWith('1');
   });
 });

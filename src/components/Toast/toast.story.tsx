@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useCallback, useState } from 'react';
-import { storiesOf } from '@storybook/react';
-import { select, boolean } from '@storybook/addon-knobs';
-import faker from 'faker';
+import type { Meta, StoryObj } from '@storybook/react';
+
 import Toast from '.';
+import type { ToastType } from './types';
+
 import Button from '../../elements/Button';
 import Field from '../../forms/Field';
 import Checkbox from '../../forms/Checkbox';
@@ -13,7 +14,7 @@ const positionList = ['top', 'top-left', 'top-right', 'bottom', 'bottom-left', '
 const colorList = ['warning', 'danger', 'info', 'primary', 'success'];
 
 function ToastDemo({ fixed, position }: any) {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<ToastType[]>([]);
   const [duration, setDuration] = useState<number | null>(2000);
   const [showButton, setShowbutton] = useState(false);
 
@@ -22,7 +23,7 @@ function ToastDemo({ fixed, position }: any) {
     const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
     const id = `_${Math.random().toString(36).substring(2, 9)}`;
     newList.push({
-      id, color, message: faker.lorem.sentence(),
+      id, color, message: `ID: ${id}`,
       duration, clearOnClick: showButton,
     });
     setList(newList);
@@ -64,10 +65,39 @@ function ToastDemo({ fixed, position }: any) {
   );
 }
 
-storiesOf('components/Toast', module)
-  .add('default', () => (
-    <ToastDemo
-      position={select('position', positionList, 'top-left')}
-      fixed={boolean('fixed', false)}
-    />
-  ));
+const meta = {
+  title: 'components/Toast',
+  component: Toast,
+  tags: ['autodocs'],
+  argTypes: {
+    
+  },
+  parameters: {
+    controls: {
+      position: positionList,
+    },
+  },
+} satisfies Meta<typeof Toast>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  render: (args) => <ToastDemo {...args} />,
+  argTypes: {
+    fixed: { defaultValue: true, type: 'boolean' },
+    position: { defaultValue: 'top-left', type: 'string' },
+  },
+  args: {
+  },
+};
+
+
+// storiesOf('components/Toast', module)
+//   .add('default', () => (
+//     <ToastDemo
+//       position={select('position', positionList, 'top-left')}
+//       fixed={boolean('fixed', false)}
+//     />
+//   ));

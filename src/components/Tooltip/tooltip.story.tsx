@@ -7,7 +7,10 @@ const meta = {
   title: 'components/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    clientPoint: { defaultValue: false },
+    children: { control: false },
+  },
 } satisfies Meta<typeof Tooltip>;
 
 export default meta;
