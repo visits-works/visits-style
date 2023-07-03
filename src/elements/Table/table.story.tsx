@@ -1,9 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { boolean, select } from '@storybook/addon-knobs';
-import Table from '.';
-import { SizeType } from '../../types';
+import type { Meta, StoryObj } from '@storybook/react';
+import Table, { Props } from '.';
 
 const sizeList = [
   '',
@@ -12,15 +10,25 @@ const sizeList = [
   'large',
 ];
 
-storiesOf('elements/Table', module)
-  .add('default', () => (
-    <Table
-      size={select('size', sizeList, '') as SizeType}
-      full={boolean('full', false)}
-      bordered={boolean('bordered', false)}
-      striped={boolean('striped', false)}
-      hover={boolean('hover', false)}
-    >
+const meta = {
+  title: 'elements/Table',
+  component: Table,
+  tags: ['autodocs'],
+  argTypes: {},
+  parameters: {
+    control: {
+      size: sizeList,
+    },
+  },
+} satisfies Meta<Props>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  render: (args) => (
+    <Table {...args}>
       <thead>
         <tr>
           <th>head 1</th>
@@ -46,4 +54,5 @@ storiesOf('elements/Table', module)
         </tr>
       </tbody>
     </Table>
-  ));
+  ),
+};

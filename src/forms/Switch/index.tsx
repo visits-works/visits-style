@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import disabledColor from '../../utils/disabledColor';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   /** trueの場合にON/OFFのラベルを表示します */
   showLabel?: boolean;
   /** ONの時に、色を指定します。 */

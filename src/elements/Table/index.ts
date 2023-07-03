@@ -13,7 +13,7 @@ const hoverStyle = css`
   }
 `;
 
-interface Props {
+export interface Props {
   size?: SizeType;
   full?: boolean;
   headerStyle?: any;

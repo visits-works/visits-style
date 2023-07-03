@@ -2,7 +2,7 @@ import React, { useMemo, InputHTMLAttributes, forwardRef } from 'react';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value: string | number;
   children?: any;
   checked?: boolean;

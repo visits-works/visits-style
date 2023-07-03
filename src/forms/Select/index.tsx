@@ -10,7 +10,7 @@ type ItemType =
   | { id: string | number; name: string; [key: string]: any }
   | string;
 
-interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
   /** { id: string | number, name: string, ...rest } | string */
   options: ItemType[];

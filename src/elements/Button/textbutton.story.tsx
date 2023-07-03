@@ -1,11 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { select, text, boolean } from '@storybook/addon-knobs';
+import type { Meta, StoryObj } from '@storybook/react';
+import Button, { Props } from './TextButton';
 import Approved from '../Icons/Approved';
-import Button from './TextButton';
 import ButtonGroup from './ButtonGroup';
-import { SizeType } from '../../types';
 
 const colorList = [
   '',
@@ -25,42 +24,48 @@ const sizeList = [
   'large',
 ];
 
-storiesOf('elements/TextButton', module)
-  .add('default', () => (
-    <Button
-      color={select('color', colorList, '')}
-      size={select('size', sizeList, '') as SizeType}
-      pure={boolean('pure', false)}
-      underline={boolean('underline', false)}
-      disabled={boolean('disabled', false)}
-    >
-      {text('children', 'Hello World')}
-    </Button>
-  ))
-  .add('icon', () => (
-    <Button
-      color={select('color', colorList, '')}
-      size={select('size', sizeList, '') as SizeType}
-      pure={boolean('pure', false)}
-      underline={boolean('underline', false)}
-      disabled={boolean('disabled', false)}
-      round={boolean('round', false)}
-      icon={boolean('icon', false)}
-    >
-      <Approved />
-    </Button>
-  ))
-  .add('multiple buttons', () => (
+const meta = {
+  title: 'elements/TextButton',
+  component: Button,
+  tags: ['autodocs'],
+  parameters: {
+    control: {
+      color: colorList,
+      size: sizeList,
+    },
+  },
+} satisfies Meta<Props>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  args: {
+    children: 'Hello wolrd',
+  },
+};
+
+export const icon: Story = {
+  render: (args) => <Button {...args}><Approved /></Button>
+};
+
+export const multiple: Story = {
+  render: () => (
     <div>
       <Button>button 1</Button>
       <Button>ボタン 2</Button>
       <Button>BUTTON 3</Button>
     </div>
-  ))
-  .add('ButtonGroup', () => (
+  ),
+};
+
+export const buttonGroup: Story = {
+  render: () => (
     <ButtonGroup>
       <Button>button 1</Button>
       <Button>ボタン 2</Button>
       <Button>BUTTON 3</Button>
     </ButtonGroup>
-  ));
+  ),
+};

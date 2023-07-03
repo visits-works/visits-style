@@ -4,7 +4,7 @@ import { transparentize } from 'polished';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';
 
-interface Props extends HTMLAttributes<HTMLButtonElement> {
+export interface Props extends HTMLAttributes<HTMLButtonElement> {
   /** ボタンの色 */
   color?: ColorType;
   /** ボタンのサイズ */

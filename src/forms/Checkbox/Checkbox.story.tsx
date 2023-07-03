@@ -1,33 +1,34 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { boolean, text } from '@storybook/addon-knobs';
+import type { Meta, StoryObj } from '@storybook/react';
 import Field from '../Field';
-import Checkbox from '.';
+import Checkbox, { Props } from '.';
 
 const noop = () => {};
 
-storiesOf('forms/Checkbox', module)
-  .add('default', () => (
-    <Checkbox
-      name="test1"
-      value={1}
-      onChange={noop}
-      checked={boolean('checked', false)}
-      disabled={boolean('disabled', false)}
-      indeterminate={boolean('indeterminate', false)}
-    >
-      {text('children', 'hello world')}
-    </Checkbox>
-  ))
-  .add('with Field', () => (
+const meta = {
+  title: 'forms/Checkbox',
+  component: Checkbox,
+  tags: ['autodocs'],
+} satisfies Meta<Props>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  args: {
+    name: 'test1', value: 1, onChange: noop, checked: false,
+  },
+};
+
+export const withField: Story = {
+  render: (args) => (
     <Field label="test-label" required>
-      <Checkbox
-        name="test1"
-        value={1}
-        disabled={boolean('disabled', false)}
-      >
-        {text('children', 'hello world')}
-      </Checkbox>
+      <Checkbox {...args} />
     </Field>
-  ));
+  ),
+  args: {
+    name: 'test1', value: 1, onChange: noop, checked: false,
+  },
+};

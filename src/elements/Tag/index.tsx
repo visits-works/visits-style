@@ -72,7 +72,7 @@ const Wrapper = styled.div<Pick<Props, 'color'|'round'> & { close: boolean; }>`
   ${({ close }) => (close ? closeCss : undefined)}
 `;
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** タグの内容 */
   children: any;
   /** Xボタンの追加＋クリック時のイベントハンドラー */

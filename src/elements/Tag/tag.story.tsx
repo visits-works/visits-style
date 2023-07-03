@@ -1,8 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import Tag from '.';
+import type { Meta, StoryObj } from '@storybook/react';
+import Tag, { Props } from '.';
 
 const colorList = [
   '',
@@ -15,21 +14,27 @@ const colorList = [
   'dark',
 ];
 
-storiesOf('elements/Tag', module)
-  .add('default', () => (
-    <Tag
-      color={select('color', colorList, '')}
-      round={boolean('round', false)}
-    >
-      {text('children', 'Hello World!')}
-    </Tag>
-  ))
-  .add('with close button', () => (
-    <Tag
-      color={select('color', colorList, '')}
-      round={boolean('round', false)}
-      onClose={() => alert('clicked!')}
-    >
-      {text('children', 'Hello World!')}
-    </Tag>
-  ));
+const meta = {
+  title: 'elements/Tag',
+  component: Tag,
+  tags: ['autodocs'],
+  argTypes: {},
+  parameters: {
+    control: {
+      color: colorList,
+    },
+  },
+} satisfies Meta<Props>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  args: { children: 'Hello world!', round: false, onClose: undefined },
+};
+
+export const close: Story = {
+  name: 'with close button',
+  args: { children: 'Hello world!', round: false, onClose: () => alert('close!') },
+};

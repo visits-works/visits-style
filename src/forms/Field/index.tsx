@@ -20,7 +20,7 @@ const Label = styled.h5`
   }
 `;
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   children: ReactNode;
   required?: boolean;

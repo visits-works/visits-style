@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { render } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import theme from '../../theme';
 import Toast from './index';
 
-vi.useFakeTimers();
+vi.useFakeTimers({ shouldAdvanceTime: true, shouldClearNativeTimers: true });
 
 describe('Toast', () => {
   const onClear = vi.fn();
@@ -28,15 +28,15 @@ describe('Toast', () => {
       { id: '2', message: 'test2' },
       { id: '3', message: 'test3' },
     ];
-    const { getAllByTestId } = render(
+    render(
       <ThemeProvider theme={theme}>
         <Toast toasts={data} clear={onClear} />
       </ThemeProvider>
     );
-    expect(getAllByTestId('toast-item')).toHaveLength(3);
+    expect(screen.getAllByTestId('vs-toast-item')).toHaveLength(3);
   });
 
-  it('onClear called automatically after duration time', () => {
+  it('onClear called automatically after duration time', async () => {
     const data = [
       { id: '1', message: 'test1' },
     ];
@@ -45,7 +45,7 @@ describe('Toast', () => {
         <Toast toasts={data} clear={onClear} />
       </ThemeProvider>
     );
-    vi.advanceTimersByTime(5000);
-    expect(onClear).toBeCalledWith('1');
+    act(() => vi.advanceTimersByTime(5000));
+    await waitFor(() => expect(onClear).toBeCalledWith('1'));
   });
 });

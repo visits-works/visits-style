@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { mediaTablet, mediaDesktop, mediaMobile } from '../../utils/media';
 import { ColSizeType } from '../../types';
 
-interface ColProps {
+export interface ColProps {
   /** 1-12のサイズ */
   size?: ColSizeType;
   /** 1-12の左のoffset */

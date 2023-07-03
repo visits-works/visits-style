@@ -20,6 +20,7 @@ describe('Progress', () => {
         <Progress value={0} max={0} />
       </ThemeProvider>
     );
+    // @ts-ignore
     expect(getByLabelText('progress')).toHaveStyle({ width: '0%' });
   });
 });

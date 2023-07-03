@@ -5,7 +5,7 @@ import setSize from '../../utils/setSize';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from '../HelpMessage';
 
-interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** エラーの発生時の表示テキスト */
   error?: string | any;
   /** 捕捉テキスト */

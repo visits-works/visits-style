@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンなどの表示するラベル */
   header: any;
   show: boolean;

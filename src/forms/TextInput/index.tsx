@@ -4,7 +4,7 @@ import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from '../HelpMessage';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   /**
    * 'text' | 'number' | 'password' | 'email' | 'tel' | 'search'

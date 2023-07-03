@@ -1,39 +1,29 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { boolean } from '@storybook/addon-knobs';
-import Select from '.';
+import type { Meta, StoryObj } from '@storybook/react';
+import Select, { Props } from '.';
 
 const options = [
   { id: 1, name: 'options1' },
   { id: 2, name: 'options2' },
 ];
 
-storiesOf('forms/Select', module)
-  .add('default', () => (
-    <div style={{ width: '350px' }}>
-      <Select
-        placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
-        options={options}
-        optional={boolean('optional', false)}
-        disabled={boolean('disabled', false)}
-        outline={boolean('outline', false)}
-      />
-    </div>
-  ))
-  .add('outline', () => (
-    <div style={{ width: '350px' }}>
-      <Select
-        placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
-        options={options}
-        outline
-      />
-      <br />
-      <Select
-        placeholder="Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug"
-        options={options}
-        outline
-        disabled
-      />
-    </div>
-  ));
+const meta = {
+  title: 'forms/Select',
+  component: Select,
+  tags: ['autodocs'],
+  argTypes: {
+    options: { controls: false },
+  },
+} satisfies Meta<Props>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  args: {
+    options,
+    placeholder: 'Select!!12312iuehwfaiuewhfguiahwegivwegiuvhawiuoegoauwegouawegnoawegnvaowegnaug',
+  },
+};

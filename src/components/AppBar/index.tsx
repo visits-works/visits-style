@@ -7,7 +7,7 @@ import setAlign from '../../utils/setAlign';
 import { mediaTablet, mediaMobile } from '../../utils/media';
 import { ColorType, ThemeType } from '../../types';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** background色 */
   color?: ColorType;
   /** ロゴのイメージ、プロジェクト名など */

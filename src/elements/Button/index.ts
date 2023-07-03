@@ -76,7 +76,7 @@ function setColor({ theme, color, outline, disabled }: Props) {
   `;
 }
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** ボタンの色 */
   color?: ColorType;
   /** ボタンのサイズ */

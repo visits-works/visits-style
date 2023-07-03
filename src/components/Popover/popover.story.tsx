@@ -46,6 +46,8 @@ export const base: Story = {
       </Popover>
     </div>
   ),
+  // @ts-ignore
+  args: {},
 };
 
 export const autoPlacement: Story = {
@@ -64,18 +66,22 @@ export const autoPlacement: Story = {
       <div style={{ width: '50px', height: '80vh' }} />
     </>
   ),
+  // @ts-ignore
+  args: {},
 };
 
 export const withInput: Story = {
   render: (args) => {
     const [txt, setText] = useState('');
-    const onChange = (e) => setText(e.target.value);
+    const onChange = (e: any) => setText(e.target.value);
     return (
       <Popover {...args} label={<button type="button">show</button>}>
         <TextInput value={txt} onChange={onChange} />
       </Popover>
     );
   },
+  // @ts-ignore
+  args: {},
 };
 
 export const absoluteParent: Story = {
@@ -90,6 +96,8 @@ export const absoluteParent: Story = {
       <Test {...args} />
     </div>
   ),
+  // @ts-ignore
+  args: {},
 };
 
 export const program: Story = {
@@ -112,6 +120,8 @@ export const program: Story = {
       </>
     );
   },
+  // @ts-ignore
+  args: {},
 };
 
 export const case5: Story = {
@@ -130,6 +140,8 @@ export const case5: Story = {
       </>
     );
   },
+  // @ts-ignore
+  args: {},
 };
 
 function Test(props: any) {

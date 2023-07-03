@@ -21,5 +21,7 @@ export const tooltip: Story = {
   args: {
     label: 'Hello!!!',
     children: <span>Hello world</span>,
+    clientPoint: false,
+    offset: { x: 0, y: 6 },
   },
 };

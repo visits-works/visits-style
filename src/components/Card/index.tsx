@@ -49,7 +49,7 @@ const CardImageHorizontal = styled.a<{ url?: string }>`
   ${({ url }) => (url ? { backgroundImage: `url(${url})` } : undefined)}
 `;
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** レスポンシブなイメージを追加する */
   image?: string;
   /** タイトル */

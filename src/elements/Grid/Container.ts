@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { mediaUntilFullHD, mediaDesktop, mediaMobile, mediaTablet } from '../../utils/media';
 
-interface Props {
+export interface Props {
   /**  */
   fluid?: boolean;
 }

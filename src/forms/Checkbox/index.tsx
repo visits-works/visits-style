@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   children?: any;
   checked?: boolean;
   indeterminate?: boolean;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';
 
-interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
+export interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   /** 現状の進捗 */
   value: number;
   /** 進捗の最大値 */

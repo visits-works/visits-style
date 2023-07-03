@@ -13,7 +13,7 @@ import Box from '../../elements/Box';
 import Portal from '../Portal';
 import { ColorType } from '../../types';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
   show?: boolean;
   /** モーダルのbodyに入れる内容 */

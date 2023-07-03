@@ -7,7 +7,7 @@ import TextInput from '.';
 
 describe('TextInput', () => {
   it('rendered without error', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <TextInput name="test" onChange={onChange} value="test" placeholder="placeholder" />

@@ -7,7 +7,7 @@ import { Field, Checkbox, Radio, Select, Switch, Textarea, TextInput } from '..'
 
 describe('Form Field', () => {
   it('field with Checkbox', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Field label="test label">
@@ -18,7 +18,7 @@ describe('Form Field', () => {
   });
 
   it('field with Radio', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Field label="test label">
@@ -29,7 +29,7 @@ describe('Form Field', () => {
   });
 
   it('field with Select', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Field label="test label">
@@ -49,7 +49,7 @@ describe('Form Field', () => {
   });
 
   it('field with Switch', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Field label="test label">
@@ -60,7 +60,7 @@ describe('Form Field', () => {
   });
 
   it('field with Textarea', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Field label="test label">
@@ -71,7 +71,7 @@ describe('Form Field', () => {
   });
 
   it('field with TextInput', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Field label="test label">

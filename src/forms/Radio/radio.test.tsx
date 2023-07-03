@@ -7,7 +7,7 @@ import Radio from '.';
 
 describe('Radio', () => {
   it('rendered without error', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <div>

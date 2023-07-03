@@ -20,10 +20,10 @@ function ToastDemo({ fixed, position }: any) {
 
   const addToast = useCallback(() => {
     const newList = list.slice();
-    const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))];
+    // const color = colorList[Math.floor(Math.random() * Math.floor(colorList.length))] as ColorType;
     const id = `_${Math.random().toString(36).substring(2, 9)}`;
     newList.push({
-      id, color, message: `ID: ${id}`,
+      id, message: `ID: ${id}`,
       duration, clearOnClick: showButton,
     });
     setList(newList);
@@ -73,7 +73,7 @@ const meta = {
     
   },
   parameters: {
-    controls: {
+    control: {
       position: positionList,
     },
   },
@@ -89,15 +89,6 @@ export const base: Story = {
     fixed: { defaultValue: true, type: 'boolean' },
     position: { defaultValue: 'top-left', type: 'string' },
   },
-  args: {
-  },
+  // @ts-ignore
+  args: {},
 };
-
-
-// storiesOf('components/Toast', module)
-//   .add('default', () => (
-//     <ToastDemo
-//       position={select('position', positionList, 'top-left')}
-//       fixed={boolean('fixed', false)}
-//     />
-//   ));

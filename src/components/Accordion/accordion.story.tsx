@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Accordion from '.';
 
 function Fancy({ length = 6, defaultShow = false }: any) {
-  const [show, setShow] = useState(defaultShow);
+  const [show, setShow] = useState<boolean>(defaultShow);
   const onClick = () => setShow((s) => !s);
   return (
     <Accordion

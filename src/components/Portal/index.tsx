@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
-interface Props {
+export interface Props {
   children: React.ReactNode;
   container?: HTMLElement;
   disabled?: boolean;

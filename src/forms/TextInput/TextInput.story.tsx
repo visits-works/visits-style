@@ -1,24 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { boolean, text } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
-import TextInput from '.';
+import type { Meta, StoryObj } from '@storybook/react';
+import TextInput, { Props } from '.';
 
-storiesOf('forms/TextInput', module)
-  .add('default', () => (
-    <TextInput
-      name="test1"
-      value={text('value', 'test value')}
-      placeholder={text('placeholder', 'placeholder...')}
-      outline={boolean('outline', false)}
-      disabled={boolean('disabled', false)}
-      onChange={action('onChange')}
-    />
-  ))
-  .add('outline', () => (
-    <div>
-      <TextInput outline name="test1" value="test value" />
-      <TextInput outline name="test1" placeholder="blah blah" />
-    </div>
-  ));
+const meta = {
+  title: 'forms/TextInput',
+  component: TextInput,
+  tags: ['autodocs'],
+  argTypes: {},
+} satisfies Meta<Props>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  args: { name: 'test1', value: 'test value', placeholder: 'placeholder...', outline: false },
+};

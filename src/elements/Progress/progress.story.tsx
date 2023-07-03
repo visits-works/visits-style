@@ -1,9 +1,19 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies *//* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import Progress from '.';
+import type { Meta, StoryObj } from '@storybook/react';
+import Progress, { ProgressProps } from '.';
 
-storiesOf('elements/Progress', module)
-  .add('default', () => (
-    <Progress value={20} max={100} />
-  ));
+const meta = {
+  title: 'elements/Progress',
+  component: Progress,
+  tags: ['autodocs'],
+  argTypes: {},
+} satisfies Meta<ProgressProps>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const base: Story = {
+  args: { value: 20, max: 100 },
+};
