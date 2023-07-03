@@ -8328,6 +8328,15 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
+rollup-plugin-pure@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-pure/-/rollup-plugin-pure-0.1.1.tgz#630e76452abcc78d0c13e31f72173a9d91fa01da"
+  integrity sha512-LjQ4q4jKB6yzedRa3DxQzo6T2CW+WJWmzn8gkgmaNDtBFsL1nm7LIyvxKEROauuorYIk6QnWxWSRb09G9Z5CGg==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.2"
+    magic-string "^0.30.0"
+    strip-literal "^1.0.1"
+
 rollup@*, "rollup@^2.25.0 || ^3.3.0", rollup@^3.21.0:
   version "3.25.3"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.25.3.tgz#f9a8986f0f244bcfde2208da91ba46b8fd252551"
@@ -9319,10 +9328,10 @@ vite-node@0.32.2:
     picocolors "^1.0.0"
     vite "^3.0.0 || ^4.0.0"
 
-vite-plugin-dts@^3.0.0-beta.3:
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/vite-plugin-dts/-/vite-plugin-dts-3.0.0-beta.3.tgz#8aa53354c9134cb8e6b4d7a153c526aceba087d6"
-  integrity sha512-01cyoNH4811NW1ITde+RDvkU4w7EBap54/Rj0CDb7Ayu0SfwPy5OvJtR2NZZA2fqnXDX9y5NeaS1hzzHpJ2tVQ==
+vite-plugin-dts@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-dts/-/vite-plugin-dts-3.0.2.tgz#5b96d69261a4ed32bc0a2bd75e224e21c2f5a2a5"
+  integrity sha512-NcBOWlP94B79uB8gR2Y3h8Go7nDozqpD8GYkPZ7zTmg4xG8H2H5ituSht8aL4jYMCPwKH0cmqMRtRa2lrsDa9A==
   dependencies:
     "@microsoft/api-extractor" "^7.36.0"
     "@rollup/pluginutils" "^5.0.2"

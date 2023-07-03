@@ -1,9 +1,11 @@
 /// <reference types="vitest" />
+import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import type { UserConfig } from 'vitest';
+import { PluginPure } from 'rollup-plugin-pure';
 
 import * as pkg from './package.json';
 
@@ -16,33 +18,42 @@ const testConfig = {
 
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          ['babel-plugin-styled-components', { pure: true }],
-        ],
-      },
-    }),
+    react({ babel: { plugins: [['babel-plugin-styled-components', { pure: true }]] } }),
     dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }),
   ],
   build: {
+    sourcemap: true,
     lib: {
-      // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/index.ts'),
       name: pkg.name,
-      fileName: (format) => `${pkg.name}.${format}.js`,
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [...Object.keys(pkg.peerDependencies)],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'styled-components': 'styled',
+      external: [
+        ...Object.keys(pkg.peerDependencies),
+        ...Object.keys(pkg.dependencies),
+      ],
+      plugins: [
+        PluginPure({
+          functions: ['defineComponent'],
+          include: [/(?<!im)pure\.js$/],
+        }),
+        {
+          name: 'postbuild-shrink-package-json',
+          closeBundle: () => {
+            if (!process.env.CI) return console.log('skip modify package.json');
+
+            const publishPkg = JSON.parse(JSON.stringify(pkg));
+            delete publishPkg.devDependencies;
+            delete publishPkg.resolutions;
+            delete publishPkg.scripts;
+            
+            writeFileSync(resolve(__dirname, '../package.json'), JSON.stringify(publishPkg, null, 2));
+          },
         },
-      },
+      ],
     },
-    minify: false,
   },
   // これがdev環境に入った場合、babel/runtimeのエラーが発生してしまうので、test環境のみ有効にする
   // @ts-ignore
