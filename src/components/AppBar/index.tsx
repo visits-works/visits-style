@@ -50,17 +50,19 @@ export default function AppBar({ children, align, brand, ...rest }: Props) {
   );
 }
 
-function setColor(
-  { color, theme, backdrop }: { color?: ColorType, theme: ThemeType, backdrop?: boolean },
-) {
+function setColor({
+  color, theme, backdrop,
+}: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
   const backgroundColor = color ? theme[color] : 'transparent';
   const textColor = findColorInvert(
-    theme, backgroundColor === 'transparent' ? theme.background : backgroundColor,
+    theme,
+    backgroundColor === 'transparent' ? theme.background : backgroundColor,
   );
 
   if (backdrop) {
     const backColor = transparentize(
-      0.2, (backgroundColor === 'transparent' ? theme.white : backgroundColor),
+      0.2,
+      (backgroundColor === 'transparent' ? theme.white : backgroundColor),
     );
 
     return css`

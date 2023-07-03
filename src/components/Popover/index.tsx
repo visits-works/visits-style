@@ -98,7 +98,7 @@ const Popover = forwardRef(({
   const { getFloatingProps, getReferenceProps } = useInteractions([
     useClick(context, { enabled: !disabled }),
   ]);
-  
+
   return (
     <>
       {cloneElement(Children.only(label), {
@@ -137,13 +137,4 @@ const Tooltip = styled(Box)`
   height: auto;
   cursor: auto;
   z-index: 40;
-`;
-
-const Shadow = styled.div`
-  position: fixed;
-  z-index: 38;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 `;

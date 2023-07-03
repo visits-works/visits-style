@@ -1,6 +1,3 @@
-import type { HTMLAttributes } from 'react';
-import type { Placement } from '@floating-ui/react';
-
 export interface ToastType {
   /** 認識ID */
   id: string;
@@ -29,7 +26,7 @@ export interface ToastContainerProps {
   clear: (id: string) => void;
   /**
    * toastの表示される場所の指定
-   * 
+   * \
    * top, top-right, top-left, bottom, bottom-right, bottom-left
    * @default 'top-left'
    */
@@ -42,4 +39,3 @@ export interface ToastContainerProps {
   /** スクロールしても固定として表示する */
   fixed?: boolean;
 }
-

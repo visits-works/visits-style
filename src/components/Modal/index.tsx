@@ -5,7 +5,6 @@ import {
   useDismiss,
   useInteractions,
   useTransitionStyles,
-  FloatingFocusManager,
   FloatingOverlay,
   useId,
 } from '@floating-ui/react';
@@ -35,9 +34,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 200
    */
   timeout?: number;
-  /** 
+  /**
    * モーダル外に表示するElements
-   * 
+   * \
    * もしclick eventがある場合はstopPropagationをしないとモーダルが閉じられます。
    */
   external?: React.ReactNode;

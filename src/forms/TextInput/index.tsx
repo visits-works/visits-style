@@ -28,22 +28,20 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const TextInput = forwardRef<HTMLInputElement, Props>(({
   className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255,
   noErrorMessage, ...rest
-}, ref) => {
-  return (
-    <Wrapper
-      className={className}
-      outline={outline}
-      error={error}
-      style={style}
-      disabled={rest.disabled}
-    >
-      {leftIcon && (<Icon>{leftIcon}</Icon>)}
-      {rightIcon && (<Icon right>{rightIcon}</Icon>)}
-      <input type={type} maxLength={maxLength} ref={ref} {...rest} />
-      <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
-    </Wrapper>
-  );
-});
+}, ref) => (
+  <Wrapper
+    className={className}
+    outline={outline}
+    error={error}
+    style={style}
+    disabled={rest.disabled}
+  >
+    {leftIcon && (<Icon>{leftIcon}</Icon>)}
+    {rightIcon && (<Icon right>{rightIcon}</Icon>)}
+    <input type={type} maxLength={maxLength} ref={ref} {...rest} />
+    <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
+  </Wrapper>
+));
 TextInput.displayName = 'TextInput';
 
 export default TextInput;

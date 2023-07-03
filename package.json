@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production vite build",
-    "lint": "eslint lint src && tsc --noEmit",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && tsc --noEmit",
     "test": "vitest",
     "test:ci": "CI=true vitest",
     "build_doc": "yarn storybook:build && yarn workspace visits-style-website build",

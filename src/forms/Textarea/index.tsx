@@ -14,14 +14,14 @@ export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   noErrorMessage?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, Props>(({ className, help, error, style, noErrorMessage, ...rest }, ref) => {
-  return (
-    <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
-      <textarea {...rest} ref={ref} />
-      <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
-    </Wrapper>
-  );
-});
+const Textarea = forwardRef<HTMLTextAreaElement, Props>(({
+  className, help, error, style, noErrorMessage, ...rest
+}, ref) => (
+  <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
+    <textarea {...rest} ref={ref} />
+    <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
+  </Wrapper>
+));
 Textarea.displayName = 'Textarea';
 
 export default Textarea;
