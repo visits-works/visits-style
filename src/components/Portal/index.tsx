@@ -30,7 +30,7 @@ const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) 
     setMountNode(container);
   }, [container, disabled]);
 
-  return mountNode ? createPortal(children, mountNode) : mountNode;
+  return mountNode ? createPortal(children, mountNode) : null;
 });
 Portal.displayName = 'Portal';
 

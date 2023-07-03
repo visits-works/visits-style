@@ -25,10 +25,10 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   noErrorMessage?: boolean;
 }
 
-function TextInput({
+const TextInput = forwardRef<HTMLInputElement, Props>(({
   className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255,
-  noErrorMessage, innerRef, ...rest
-}: Props & { innerRef: React.Ref<any> }) {
+  noErrorMessage, ...rest
+}, ref) => {
   return (
     <Wrapper
       className={className}
@@ -39,12 +39,14 @@ function TextInput({
     >
       {leftIcon && (<Icon>{leftIcon}</Icon>)}
       {rightIcon && (<Icon right>{rightIcon}</Icon>)}
-      <input type={type} maxLength={maxLength} ref={innerRef} {...rest} />
+      <input type={type} maxLength={maxLength} ref={ref} {...rest} />
       <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </Wrapper>
   );
-}
-export default forwardRef<any, Props>((props, ref) => <TextInput {...props} innerRef={ref} />);
+});
+TextInput.displayName = 'TextInput';
+
+export default TextInput;
 
 const rightIcon = css`
   right: 0.375em;

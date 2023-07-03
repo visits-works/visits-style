@@ -11,6 +11,13 @@ const meta = {
     clientPoint: { defaultValue: false },
     children: { control: false },
   },
+  args: {
+    label: 'Hello!!!',
+    children: <span>Hello world</span>,
+    clientPoint: false,
+    offset: { x: 0, y: 6 },
+    disabled: false,
+  },
 } satisfies Meta<typeof Tooltip>;
 
 export default meta;
@@ -23,5 +30,6 @@ export const tooltip: Story = {
     children: <span>Hello world</span>,
     clientPoint: false,
     offset: { x: 0, y: 6 },
+    disabled: false,
   },
 };

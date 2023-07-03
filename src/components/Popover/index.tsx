@@ -96,7 +96,7 @@ const Popover = forwardRef(({
   }));
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
-    useClick(context),
+    useClick(context, { enabled: !disabled }),
   ]);
   
   return (
@@ -114,7 +114,7 @@ const Popover = forwardRef(({
                 ref={refs.setFloating}
                 color={color}
                 style={floatingStyles}
-                {...getFloatingProps({ ...rest, className })}
+                {...getFloatingProps({ ...rest, className, onClick: stopPropagation })}
               >
                 {children}
               </Tooltip>

@@ -7,6 +7,7 @@ import {
   useTransitionStyles,
   FloatingFocusManager,
   FloatingOverlay,
+  useId,
 } from '@floating-ui/react';
 
 import Box from '../../elements/Box';
@@ -34,10 +35,19 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 200
    */
   timeout?: number;
-  /** モーダル外に表示するElements */
+  /** 
+   * モーダル外に表示するElements
+   * 
+   * もしclick eventがある場合はstopPropagationをしないとモーダルが閉じられます。
+   */
   external?: React.ReactNode;
   /** モーダルのtransition exitが完了した時に発火されるcallback */
   onExited?: () => void;
+}
+
+function stopPropagation(e?: React.MouseEvent<Element>) {
+  if (!e) return;
+  e.stopPropagation();
 }
 
 export default function Modal({
@@ -48,8 +58,9 @@ export default function Modal({
 }: Props) {
   const exitRef = useRef(onExited);
   const isTransMountedRef = useRef(false);
+  const id = useId();
 
-  const { refs, context } = useFloating({ open: show, onOpenChange: closeModal });
+  const { refs, context } = useFloating({ open: show, onOpenChange: closeModal, nodeId: id });
 
   const { getFloatingProps } = useInteractions([
     useDismiss(context, {
@@ -86,14 +97,12 @@ export default function Modal({
     <Portal>
       {isMounted ? (
         <Overlay lockScroll data-testid="vs-modal-overlay" onClick={handleOverlayClose}>
-          <FloatingFocusManager context={context}>
-            <Wrapper ref={refs.setFloating} role="dialog" style={{ ...styles }}>
-              <Box role="document" color={color} {...getFloatingProps(rest)}>
-                {children}
-              </Box>
-              {external}
-            </Wrapper>
-          </FloatingFocusManager>
+          <Wrapper ref={refs.setFloating} role="dialog" style={styles} onClick={stopPropagation}>
+            <Box role="document" color={color} {...getFloatingProps(rest)}>
+              {children}
+            </Box>
+            {external}
+          </Wrapper>
         </Overlay>
       ) : null}
     </Portal>
@@ -115,4 +124,5 @@ const Wrapper = styled.div`
   will-change: transform, opacity;
   transform-origin: center top;
   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 9999;
 `;

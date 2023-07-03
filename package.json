@@ -3,15 +3,23 @@
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
   "version": "1.4.0",
-  "main": "dist/visits-style.js",
-  "module": "dist/visits-style.mjs",
-  "jsnext:main": "dist/visits-style.mjs",
-  "typings": "dist/index.d.ts",
+  "main": "./dist/visits-style.cjs.js",
+  "module": "./dist/visits-style.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/visits-style.es.js",
+      "require": "./dist/visits-style.cjs.js"
+    }
+  },
   "license": "Apache-2.0",
   "sideEffects": false,
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=16"
+  },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
@@ -69,32 +77,5 @@
     "vite": "^4.3.9",
     "vite-plugin-dts": "^3.0.0-beta.3",
     "vitest": "^0.32.2"
-  },
-  "jest": {
-    "testURL": "http://localhost",
-    "testMatch": [
-      "<rootDir>/**/*.test.{ts,tsx}"
-    ],
-    "transform": {
-      "^.+\\.(js|ts|tsx)?$": "babel-jest"
-    },
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTest.ts"
-    ],
-    "rootDir": ".",
-    "collectCoverageFrom": [
-      "src/**/**.{ts,tsx}",
-      "!src/**/**.story.tsx",
-      "!src/styles/*.ts",
-      "!src/index.ts",
-      "!src/elements/index.ts",
-      "!src/forms/index.ts",
-      "!src/components/index.ts"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
   }
 }

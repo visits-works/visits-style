@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 import styled from 'styled-components';
-import { useFloating, offset } from '@floating-ui/react';
 
 import ToastItem from './ToastItem';
 import type { ToastContainerProps } from './types';
 
 import Portal from '../Portal';
 
-export default function Toast({ toasts, clear, fixed, margin = 16, position }: ToastContainerProps) {
-  const { refs, floatingStyles } = useFloating({
-    open: true,
-    placement: position,
-    strategy: fixed ? 'fixed' : 'absolute',
-    middleware: [
-      offset(margin),
-    ],
-  });
+export default function Toast({ toasts, clear, fixed, margin = '16px', position = 'top-left' }: ToastContainerProps) {
+  const style = useMemo<CSSProperties>(() => {
+    const base = { position: fixed ? 'fixed' : 'absolute' } as CSSProperties;
+    if (position.indexOf('top') > -1) {
+      base.top = margin;
+    } else if (position.indexOf('bottom') > -1) {
+      base.bottom = margin;
+    }
+
+    if (position.indexOf('left') > -1) {
+      base.left = margin;
+      base.alignItems = 'flex-start';
+    } else if (position.indexOf('right') > -1) {
+      base.right = margin;
+      base.alignItems = 'flex-end';
+    } else {
+      base.left = '50%';
+      base.alignItems = 'center';
+      base.transform = 'translateX(-50%)';
+    }
+
+    return base;
+  }, [fixed, margin, position]);
 
   return (
     <Portal>
-      <ToastList ref={refs.setFloating} style={floatingStyles}>
+      <ToastList style={style}>
         {toasts.map((props) => (
           <ToastItem
             {...props}
@@ -37,6 +50,7 @@ const ToastList = styled.ul`
   flex-direction: column;
   z-index: 9999;
   pointer-events: none;
+  overflow: hidden;
 
   li + li {
     margin-top: 1rem;

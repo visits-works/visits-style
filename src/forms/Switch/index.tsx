@@ -22,10 +22,10 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   offLabel?: string;
 }
 
-function Switch({
+const Switch = forwardRef<HTMLInputElement, Props>(({
   className, showLabel, background, anchorColor,
-  onLabel = 'ON', offLabel = 'OFF', innerRef, ...rest
-}: Props & { innerRef: React.Ref<any> }) {
+  onLabel = 'ON', offLabel = 'OFF', ...rest
+}, ref) => {
   const id = `switch_${rest.name}`;
   return (
     <Wrapper
@@ -37,12 +37,14 @@ function Switch({
       labelTextOff={offLabel}
       disabled={rest.disabled}
     >
-      <input id={id} type="checkbox" {...rest} ref={innerRef} />
+      <input id={id} type="checkbox" {...rest} ref={ref} />
       <label htmlFor={id} aria-label={id} />
     </Wrapper>
   );
-}
-export default forwardRef<any, Props>((props, ref) => <Switch {...props} innerRef={ref} />);
+});
+Switch.displayName = 'Switch';
+
+export default Switch;
 
 const labelStyle = css`
   label:before {

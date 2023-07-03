@@ -14,17 +14,17 @@ export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   noErrorMessage?: boolean;
 }
 
-function Textarea({
-  className, help, error, style, innerRef, noErrorMessage, ...rest
-}: Props & { innerRef: React.Ref<any> }) {
+const Textarea = forwardRef<HTMLTextAreaElement, Props>(({ className, help, error, style, noErrorMessage, ...rest }, ref) => {
   return (
     <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
-      <textarea {...rest} ref={innerRef} />
+      <textarea {...rest} ref={ref} />
       <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </Wrapper>
   );
-}
-export default forwardRef<any, Props>((props, ref) => <Textarea {...props} innerRef={ref} />);
+});
+Textarea.displayName = 'Textarea';
+
+export default Textarea;
 
 const Wrapper = styled.span<{ error?: boolean, disabled?: boolean }>`
   display: block;

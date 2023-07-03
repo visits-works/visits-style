@@ -20,4 +20,18 @@ describe('Tooltip', () => {
     fireEvent.mouseEnter(screen.getByText('show'));
     screen.getByText('Tooltip Content');
   });
+
+  it('tooltip does not show on disabled', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Tooltip label="Tooltip Content" disabled>
+          <span>show</span>
+        </Tooltip>
+      </ThemeProvider>
+    );
+    expect(screen.queryByText('Tooltip Content')).toBeNull();
+
+    fireEvent.mouseEnter(screen.getByText('show'));
+    expect(screen.queryByText('Tooltip Content')).toBeNull();
+  });
 });

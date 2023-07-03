@@ -6,6 +6,7 @@ import Modal from '.';
 import Button from '../../elements/Button';
 import TextButton from '../../elements/Button/TextButton';
 import TextInput from '../../forms/TextInput';
+import Close from '../../elements/Icons/Close';
 
 const colorList = [
   '',
@@ -54,7 +55,7 @@ export const base: Story = {
         <Modal {...rest} show={showModal} closeModal={toggle}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggle}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             Modal body text goes here.
@@ -78,7 +79,7 @@ export const onScroll: Story = {
         <Modal {...args} show={showModal} closeModal={toggle}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggle}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             {Array.from({ length: 100 }).map((_, i) => (
@@ -106,7 +107,7 @@ export const nested: Story = {
         <Modal {...args} show={parent} closeModal={toggleParent}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggleParent}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggleParent}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             Modal body text goes here.
@@ -118,7 +119,7 @@ export const nested: Story = {
         <Modal {...args} show={child} closeModal={toggleChild}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggleChild}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggleChild}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             Nested Modal body text goes here.
@@ -143,7 +144,7 @@ export const input: Story = {
         <Modal {...rest} show={showModal} closeModal={toggle}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggle}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             Modal body text goes here.
@@ -162,13 +163,18 @@ export const external: Story = {
   render: (args) => {
     const [showModal, setShow] = useState(false);
     const toggle = () => setShow((prev) => !prev);
+    const handleExternal = (e: any) => {
+      e.stopPropagation();
+      alert('outside');
+    };
+
     return (
       <>
         <button onClick={toggle}>show modal</button>
-        <Modal {...args} show={showModal} closeModal={toggle} external={<button onClick={() => alert('outside')}>outside!</button>}>
+        <Modal {...args} show={showModal} closeModal={toggle} external={<button onClick={handleExternal}>outside!</button>}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggle}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             Modal body text goes here.
@@ -199,7 +205,7 @@ export const onExit: Story = {
         <Modal {...args} show={showModal} closeModal={toggle} onExited={() => setText('モーダルを開く')}>
           <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
             <h3>Modal Title</h3>
-            <TextButton style={CloseButton} pure onClick={toggle}>X</TextButton>
+            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
           </header>
           <section>
             Modal body text goes here.

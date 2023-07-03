@@ -29,6 +29,8 @@ export interface TooltipProps {
   offset?: { x: number; y: number; };
   /** 吹き出し表示座標を対象のElementではなくマウスカーソルにする */
   clientPoint?: boolean;
+  /** 吹き出しを出さない */
+  disabled?: boolean;
 
   className?: string;
 }
@@ -36,7 +38,7 @@ export interface TooltipProps {
 export default function Tooltip({
   children, position = 'bottom',
   label, color, className = '',
-  offset = { x: 0, y: 6 }, clientPoint,
+  offset = { x: 0, y: 6 }, clientPoint, disabled,
 }: TooltipProps) {
   const [open, setOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
@@ -51,7 +53,7 @@ export default function Tooltip({
   });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
-    useHover(context),
+    useHover(context, { enabled: !disabled }),
     useClientPoint(context, { enabled: clientPoint }),
   ]);
 

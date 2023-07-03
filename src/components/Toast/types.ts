@@ -20,22 +20,25 @@ export interface ToastItemProps extends ToastType {
   clear: (id: string) => void;
 }
 
-export interface ToastContainerProps extends HTMLAttributes<HTMLDivElement> {
+export type ToastContainerPositionType = 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left';
+
+export interface ToastContainerProps {
   /** 表示するToastのリスト */
   toasts: ToastType[];
   /** toastを消すタイミングのコールバック */
   clear: (id: string) => void;
   /**
    * toastの表示される場所の指定
+   * 
    * top, top-right, top-left, bottom, bottom-right, bottom-left
-   * @default 'top-start'
+   * @default 'top-left'
    */
-  position?: Placement;
+  position?: ToastContainerPositionType;
   /**
    * margin 単位はpx
-   * @default '16'
+   * @default '16px'
    */
-  margin?: number;
+  margin?: string;
   /** スクロールしても固定として表示する */
   fixed?: boolean;
 }
