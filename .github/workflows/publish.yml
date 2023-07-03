@@ -29,6 +29,7 @@ jobs:
           node-version: '16'
       - run: yarn install
       - run: yarn build
+      - run: node ./scripts/publish.js
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > .npmrc
       - run: npm publish
   document:
