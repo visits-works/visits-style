@@ -30,11 +30,17 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/index.ts'),
       name: pkg.name,
-      formats: ['es', 'cjs'],
       fileName: (format) => `${pkg.name}.${format}.js`,
     },
     rollupOptions: {
       external: [...Object.keys(pkg.peerDependencies)],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'styled-components': 'styled',
+        },
+      },
     },
     minify: false,
   },

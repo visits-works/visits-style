@@ -3,13 +3,13 @@
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
   "version": "1.4.0",
-  "main": "./dist/visits-style.cjs.js",
+  "main": "./dist/visits-style.umd.js",
   "module": "./dist/visits-style.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/visits-style.es.js",
-      "require": "./dist/visits-style.cjs.js"
+      "require": "./dist/visits-style.umd.js"
     }
   },
   "license": "Apache-2.0",
