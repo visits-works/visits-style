@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts';
 import type { UserConfig } from 'vitest';
 import { PluginPure } from 'rollup-plugin-pure';
 
-import * as pkg from './package.json';
+import pkg from './package.json';
 
 const testConfig = {
   globals: true,
@@ -49,7 +49,7 @@ export default defineConfig({
             delete publishPkg.resolutions;
             delete publishPkg.scripts;
             
-            writeFileSync(resolve(__dirname, '../package.json'), JSON.stringify(publishPkg, null, 2));
+            writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
           },
         },
       ],
