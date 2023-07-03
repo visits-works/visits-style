@@ -16,8 +16,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: yarn install
-      - run: yarn workspace visits-style lint
-      - run: yarn workspace visits-style test:ci
+      - run: yarn lint
+      - run: yarn test:ci
   publish:
     name: publish to npm
     runs-on: ubuntu-latest
@@ -28,10 +28,9 @@ jobs:
         with:
           node-version: '16'
       - run: yarn install
-      - run: yarn workspace visits-style build
-      - run: cp ./LICENSE ./packages/core
-      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ./packages/core/.npmrc
-      - run: cd ./packages/core && npm publish
+      - run: yarn build
+      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > .npmrc
+      - run: npm publish
   document:
     name: update document
     runs-on: ubuntu-latest
@@ -42,4 +41,4 @@ jobs:
         with:
           node-version: '16'
       - run: yarn install
-      - run: yarn workspace visits-style storybook:deploy
+      - run: yarn storybook:deploy
