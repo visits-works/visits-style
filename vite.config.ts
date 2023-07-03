@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /// <reference types="vitest" />
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
@@ -6,6 +7,7 @@ import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import type { UserConfig } from 'vitest';
 import { PluginPure } from 'rollup-plugin-pure';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
 import pkg from './package.json';
 
@@ -22,7 +24,7 @@ export default defineConfig({
     dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }),
   ],
   build: {
-    sourcemap: true,
+    minify: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: pkg.name,
@@ -35,6 +37,7 @@ export default defineConfig({
         ...Object.keys(pkg.dependencies),
       ],
       plugins: [
+        peerDepsExternal(),
         PluginPure({
           functions: ['defineComponent'],
           include: [/(?<!im)pure\.js$/],
@@ -42,13 +45,14 @@ export default defineConfig({
         {
           name: 'postbuild-shrink-package-json',
           closeBundle: () => {
+            // eslint-disable-next-line no-console
             if (!process.env.CI) return console.log('skip modify package.json');
 
             const publishPkg = JSON.parse(JSON.stringify(pkg));
             delete publishPkg.devDependencies;
             delete publishPkg.resolutions;
             delete publishPkg.scripts;
-            
+
             writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
           },
         },
