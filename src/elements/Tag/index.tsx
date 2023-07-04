@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import { styled, css } from 'styled-components';
 import TextButton from '../Button/TextButton';
 import Close from '../Icons/Close';
 import findColorInvert from '../../utils/findColorInvert';
@@ -33,7 +33,15 @@ const closeCss = css`
   }
 `;
 
-const Wrapper = styled.div<Pick<Props, 'color'|'round'> & { close: boolean; }>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'color'
+    && name !== 'round'
+    && name !== 'close'
+  );
+}
+
+const Wrapper = styled.div.withConfig({ shouldForwardProp })<Pick<Props, 'color'|'round'> & { close: boolean; }>`
   display: inline-flex;
   position: relative;
   font-size: 0.75rem;
@@ -46,8 +54,8 @@ const Wrapper = styled.div<Pick<Props, 'color'|'round'> & { close: boolean; }>`
   white-space: nowrap;
 
   ${({ color, theme }) => {
-    const target = getColor(theme, color);
-    const invertColor = findColorInvert(theme, target);
+    const target = getColor(theme as ThemeType, color);
+    const invertColor = findColorInvert(theme as ThemeType, target);
 
     return css`
       color: ${invertColor};

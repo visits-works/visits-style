@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import { styled, css } from 'styled-components';
 import { transparentize } from 'polished';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';
@@ -19,7 +19,18 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
   icon?: boolean;
 }
 
-export default styled.button<Props>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'color'
+    && name !== 'size'
+    && name !== 'pure'
+    && name !== 'underline'
+    && name !== 'round'
+    && name !== 'icon'
+  );
+}
+
+export default styled.button.withConfig({ shouldForwardProp })<Props>`
   background-color: transparent;
   border: none;
   cursor: pointer;

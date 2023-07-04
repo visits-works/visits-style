@@ -1,9 +1,11 @@
-import React, { TextareaHTMLAttributes, forwardRef } from 'react';
-import styled, { css } from 'styled-components';
+import React, { TextareaHTMLAttributes, HTMLAttributes, forwardRef } from 'react';
+import { styled, css } from 'styled-components';
+
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from '../HelpMessage';
+import type { ThemeType } from '../../types';
 
 export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** エラーの発生時の表示テキスト */
@@ -17,16 +19,33 @@ export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const Textarea = forwardRef<HTMLTextAreaElement, Props>(({
   className, help, error, style, noErrorMessage, ...rest
 }, ref) => (
-  <Wrapper className={className} error={!!error} style={style} disabled={rest.disabled}>
+  <InputWrapper
+    className={className}
+    error={Boolean(error)}
+    style={style}
+    disabled={Boolean(rest.disabled)}
+  >
     <textarea {...rest} ref={ref} />
     <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
-  </Wrapper>
+  </InputWrapper>
 ));
 Textarea.displayName = 'Textarea';
 
 export default Textarea;
 
-const Wrapper = styled.span<{ error?: boolean, disabled?: boolean }>`
+interface InputWrapperProps extends HTMLAttributes<HTMLSpanElement> {
+  error?: boolean;
+  disabled?: boolean;
+}
+
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'error'
+    && name !== 'disabled'
+  );
+}
+
+const InputWrapper = styled.span.withConfig({ shouldForwardProp })<InputWrapperProps>`
   display: block;
   position: relative;
 
@@ -57,7 +76,7 @@ const Wrapper = styled.span<{ error?: boolean, disabled?: boolean }>`
     }
 
     &:disabled, [disabled], &:readonly {
-      ${({ theme }) => disabledColor(theme)}
+      ${({ theme }) => disabledColor(theme as ThemeType)}
     }
 
     &:disabled, [disabled] {
@@ -78,7 +97,7 @@ const Wrapper = styled.span<{ error?: boolean, disabled?: boolean }>`
 ${({ disabled, theme }) => (disabled
     ? css`
       textarea {
-        ${disabledColor(theme)}
+        ${disabledColor(theme as ThemeType)}
         border-style: dashed;
       }
     `

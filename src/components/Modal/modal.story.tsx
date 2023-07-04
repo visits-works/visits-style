@@ -4,21 +4,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Modal from '.';
 import Button from '../../elements/Button';
+import Box from '../../elements/Box';
 import TextButton from '../../elements/Button/TextButton';
 import TextInput from '../../forms/TextInput';
 import Close from '../../elements/Icons/Close';
-
-const colorList = [
-  '',
-  'primary',
-  'info',
-  'link',
-  'success',
-  'warning',
-  'danger',
-  'dark',
-  'backgroud',
-];
 
 const CloseButton: any = {
   position: 'absolute',
@@ -36,9 +25,7 @@ const meta = {
     show: { control: false },
     children: { control: false },
     closeModal: { control: false },
-    external: { control: false },
   },
-  parameters: { controls: { color: colorList } },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -53,16 +40,18 @@ export const base: Story = {
       <>
         <button onClick={toggle}>show modal</button>
         <Modal {...rest} show={showModal} closeModal={toggle}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            Modal body text goes here.
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
-          </footer>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              Modal body text goes here.
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+            </footer>
+          </Box>
         </Modal>
       </>
     );
@@ -77,18 +66,20 @@ export const onScroll: Story = {
       <>
         <button onClick={toggle}>show modal</button>
         <Modal {...args} show={showModal} closeModal={toggle}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            {Array.from({ length: 100 }).map((_, i) => (
-              <p key={i}>Modal body text goes here.</p>
-            ))}
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
-          </footer>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              {Array.from({ length: 100 }).map((_, i) => (
+                <p key={i}>Modal body text goes here.</p>
+              ))}
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+            </footer>
+          </Box>
         </Modal>
       </>
     )
@@ -105,29 +96,33 @@ export const nested: Story = {
       <div>
         <button onClick={toggleParent}>show modal</button>
         <Modal {...args} show={parent} closeModal={toggleParent}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggleParent}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            Modal body text goes here.
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }} onClick={toggleChild}>Show Child</Button>
-          </footer>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggleParent}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              Modal body text goes here.
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }} onClick={toggleChild}>Show Child</Button>
+            </footer>
+          </Box>
         </Modal>
         <Modal {...args} show={child} closeModal={toggleChild}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggleChild}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            Nested Modal body text goes here.
-            <div style={{ height: '95vh', color: 'blue', width: '50px' }} />
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
-          </footer>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggleChild}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              Nested Modal body text goes here.
+              <div style={{ height: '95vh', color: 'blue', width: '50px' }} />
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+            </footer>
+          </Box>
         </Modal>
       </div>
     );
@@ -142,17 +137,19 @@ export const input: Story = {
       <>
         <button onClick={toggle}>show modal</button>
         <Modal {...rest} show={showModal} closeModal={toggle}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            Modal body text goes here.
-            <TextInput />
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
-          </footer>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              Modal body text goes here.
+              <TextInput />
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+            </footer>
+          </Box>
         </Modal>
       </>
     );
@@ -171,18 +168,21 @@ export const external: Story = {
     return (
       <>
         <button onClick={toggle}>show modal</button>
-        <Modal {...args} show={showModal} closeModal={toggle} external={<button onClick={handleExternal}>outside!</button>}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            Modal body text goes here.
-            <TextInput />
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
-          </footer>
+        <Modal {...args} show={showModal} closeModal={toggle}>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              Modal body text goes here.
+              <TextInput />
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+            </footer>
+          </Box>
+          <button onClick={handleExternal}>outside!</button>
         </Modal>
       </>
     );
@@ -203,16 +203,18 @@ export const onExit: Story = {
       <>
         <button onClick={toggle}>{text}</button>
         <Modal {...args} show={showModal} closeModal={toggle} onExited={() => setText('モーダルを開く')}>
-          <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
-            <h3>Modal Title</h3>
-            <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
-          </header>
-          <section>
-            Modal body text goes here.
-          </section>
-          <footer>
-            <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
-          </footer>
+          <Box color="background">
+            <header style={{ padding: '0.75rem 0.325rem', textAlign: 'center' }}>
+              <h3>Modal Title</h3>
+              <TextButton style={CloseButton} onClick={toggle}><Close width="12" height="12" /></TextButton>
+            </header>
+            <section>
+              Modal body text goes here.
+            </section>
+            <footer>
+              <Button color="primary" style={{ width: '100%' }}>Save changes</Button>
+            </footer>
+          </Box>
         </Modal>
       </>
     );

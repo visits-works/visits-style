@@ -2,7 +2,7 @@
   "name": "visits-style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
-  "version": "1.4.0",
+  "version": "1.4.0-1",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -24,7 +24,7 @@
   "peerDependencies": {
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0",
-    "styled-components": ">=5.0.0"
+    "styled-components": ">=6.0.2"
   },
   "dependencies": {
     "@floating-ui/react": "^0.24.3",
@@ -34,13 +34,9 @@
     "build": "vite build",
     "lint": "eslint 'src/**/*.{ts,tsx}' && tsc --noEmit",
     "test": "vitest",
-    "start": "storybook dev -p 9000",
-    "storybook:build": "storybook build -c .storybook -o .out",
-    "storybook:deploy": "yarn storybook:build && gh-pages -d .out -e storybook"
-  },
-  "resolutions": {
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6"
+    "start": "STORYBOOK=true storybook dev -p 9000",
+    "storybook:build": "STORYBOOK=true storybook build -c .storybook -o .out --disable-telemetry",
+    "storybook:deploy": "yarn storybook:build && gh-pages -d .out"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.25",
@@ -55,8 +51,6 @@
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@types/react-transition-group": "^4.4.6",
-    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-react": "^4.0.1",
@@ -72,11 +66,12 @@
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
     "storybook": "^7.0.25",
-    "styled-components": "5.3.10",
+    "styled-components": "^6.0.2",
     "typescript": "^5.1.6",
     "vite": "^4.4.0-beta.4",
     "vite-plugin-dts": "^3.0.3",
     "vite-plugin-externalize-deps": "^0.7.0",
+    "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.32.4"
   }
 }

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import { styled, type ExecutionContext, css } from 'styled-components';
 import { HTMLAttributes } from 'react';
 import { darken } from 'polished';
 import findColorInvert from '../../utils/findColorInvert';
@@ -7,16 +7,15 @@ import setSize from '../../utils/setSize';
 import disabledColor from '../../utils/disabledColor';
 import { ColorType, ThemeType, SizeType } from '../../types';
 
-interface Props {
-  theme: ThemeType;
+interface ButtonSetColorConfig extends ExecutionContext {
   color?: ColorType;
   outline?: boolean;
   disabled?: boolean;
 }
 
-function setColor({ theme, color, outline, disabled }: Props) {
+function setColor({ theme, color, outline, disabled }: ButtonSetColorConfig) {
   if (disabled) {
-    return disabledColor(theme);
+    return disabledColor(theme as ThemeType);
   }
   if (!color) {
     return css`
@@ -33,7 +32,7 @@ function setColor({ theme, color, outline, disabled }: Props) {
     `;
   }
   const target = theme[color] || color;
-  const invertColor = findColorInvert(theme, target);
+  const invertColor = findColorInvert(theme as ThemeType, target);
   if (outline) {
     return css`
       background-color: transparent;
@@ -89,7 +88,17 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   icon?: boolean;
 }
 
-export default styled.button<ButtonProps>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'color'
+    && name !== 'size'
+    && name !== 'outline'
+    && name !== 'round'
+    && name !== 'icon'
+  );
+}
+
+export default styled.button.withConfig({ shouldForwardProp })<ButtonProps>`
   position: relative;
   outline: none;
   appearance: none;

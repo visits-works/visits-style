@@ -2,11 +2,12 @@
 /// <reference types="vitest" />
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
-import { defineConfig } from 'vite';
+import { PluginOption, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import type { UserConfig } from 'vitest';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 import pkg from './package.json';
 
@@ -17,15 +18,19 @@ const testConfig = {
   setupFiles: ['./src/setupTest.ts'],
 } as UserConfig;
 
+const isStorybook = process.env.STORYBOOK;
+
 export default defineConfig({
   plugins: [
     react({ babel: { plugins: [['babel-plugin-styled-components', { pure: true }]] } }),
-    externalizeDeps(),
+    viteTsconfigPaths(),
+    !isStorybook ? externalizeDeps() : undefined,
     // @ts-ignore
-    dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }),
-  ],
+    !isStorybook ? dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }) : undefined,
+  ].filter(Boolean) as PluginOption[],
   build: {
-    minify: false,
+    minify: !!isStorybook,
+    target: 'esnext',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: pkg.name,
@@ -33,10 +38,8 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [
-        ...Object.keys(pkg.peerDependencies),
-        ...Object.keys(pkg.dependencies),
-      ],
+      // 全ての外部ライブラリは外す
+      external: (id) => !id.startsWith('.') && !id.startsWith('/'),
       plugins: [
         {
           name: 'postbuild-shrink-package-json',
@@ -53,6 +56,11 @@ export default defineConfig({
           },
         },
       ],
+      // https://github.com/styled-components/styled-components/issues/3700
+      // https://github.com/styled-components/styled-components/issues/3956
+      output: {
+        interop: 'compat',
+      },
     },
   },
   // これがdev環境に入った場合、babel/runtimeのエラーが発生してしまうので、test環境のみ有効にする

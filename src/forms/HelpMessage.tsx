@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 interface MsgProps {
   error?: boolean;
 }
 
-const Message = styled.small<MsgProps>`
+const Message = styled.small.withConfig({ shouldForwardProp: (name) => (name !== 'error') })<MsgProps>`
   font-size: 0.8rem;
   color: ${({ error, theme }) => (error ? theme.danger : theme.textLight)};
 `;

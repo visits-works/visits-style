@@ -10,17 +10,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default {
-  parameters: {
-    name: 'visits-style',
-    url: 'https://github.com/visits-works/visits-style',
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-  },
   decorators: [(Story) => (
     <ThemeProvider theme={theme}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', minHeight: '65vh' }}>

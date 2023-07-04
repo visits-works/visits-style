@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { mediaTablet } from '../../utils/media';
 
 export default styled.div<HTMLAttributes<HTMLDivElement>>`

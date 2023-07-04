@@ -1,6 +1,8 @@
 import { HTMLAttributes } from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import { ColorType, ThemeType } from '../../types';
+import { styled, css, keyframes } from 'styled-components';
+import type { ExecutionContext } from 'styled-components/dist/types';
+
+import { ColorType } from '../../types';
 
 export interface Props extends HTMLAttributes<HTMLDivElement>{
   /** 色の指定 */
@@ -11,7 +13,11 @@ export interface Props extends HTMLAttributes<HTMLDivElement>{
   borderSize?: string;
 }
 
-function getColor({ theme, color }: { theme: ThemeType, color?: ColorType }) {
+interface SpinnerGetColorConfig extends ExecutionContext {
+  color?: ColorType;
+}
+
+function getColor({ theme, color }: SpinnerGetColorConfig) {
   const value = (!color || color === 'light') ? theme.background : theme[color];
 
   return css`
@@ -30,7 +36,15 @@ const spin = keyframes`
   }
 `;
 
-const Spinner = styled.div<Props>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'color'
+    && name !== 'size'
+    && name !== 'borderSize'
+  );
+}
+
+const Spinner = styled.div.withConfig({ shouldForwardProp })<Props>`
   display: inline-block;
   width: ${({ size }) => (size || '100%')};
   height: ${({ size }) => (size || '100%')};

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import { styled, keyframes } from 'styled-components';
 
 const setAnimation = ({ theme }: any) => keyframes`
   0% { background-color: ${theme.greyLighter}; }
