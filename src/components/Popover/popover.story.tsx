@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Popover, { PopoverRef } from '.';
+import Tooltip from '../Tooltip';
 import TextInput from '../../forms/TextInput';
 
 const positionList = [
@@ -144,6 +145,19 @@ export const case5: Story = {
       </>
     );
   },
+  // @ts-ignore
+  args: {},
+};
+
+export const tooltip: Story = {
+  name: 'popover with tooltip',
+  render: (args) => (
+    <Popover {...args} label={<button>click me</button>}>
+      <Tooltip label="tooltip!">
+        <p>hello world</p>
+      </Tooltip>
+    </Popover>
+  ),
   // @ts-ignore
   args: {},
 };

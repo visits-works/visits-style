@@ -5,13 +5,14 @@ import React, {
 } from 'react';
 import { styled } from 'styled-components';
 import {
-  useFloating, useInteractions, useClick,
-  shift, offset as offsetUi, flip, FloatingFocusManager, FloatingOverlay, autoUpdate,
+  useFloating, useInteractions, useClick, useId,
+  shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate,
 } from '@floating-ui/react';
 import type { Placement } from '@floating-ui/core';
 
 import Portal from '../Portal';
 import Box from '../../elements/Box';
+import stopPropagation from '../../utils/stopPropagation';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
@@ -48,18 +49,15 @@ export interface PopoverRef {
   close: () => void;
 }
 
-function stopPropagation(e?: React.MouseEvent<Element>) {
-  if (!e) return;
-  e.stopPropagation();
-}
-
 const Popover = forwardRef(({
   position, label, children, color = 'background',
   onOpen, onClose, disabled, offset = { x: 0, y: 6 },
   ...rest
 }: Props, ref: React.Ref<PopoverRef>) => {
   const [open, setOpen] = useState(false);
+  const nodeId = useId();
   const { refs, floatingStyles, context } = useFloating({
+    nodeId,
     placement: position,
     middleware: [
       shift(),
@@ -107,17 +105,15 @@ const Popover = forwardRef(({
       <Portal>
         {open ? (
           <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex: 9996 }}>
-            <FloatingFocusManager context={context} modal={false}>
-              <Tooltip
-                role="tooltip"
-                ref={refs.setFloating}
-                color={color}
-                style={floatingStyles}
-                {...getFloatingProps({ ...rest, onClick: stopPropagation })}
-              >
-                {children}
-              </Tooltip>
-            </FloatingFocusManager>
+            <Tooltip
+              role="tooltip"
+              ref={refs.setFloating}
+              color={color}
+              style={floatingStyles}
+              {...getFloatingProps({ ...rest, onClick: stopPropagation })}
+            >
+              {children}
+            </Tooltip>
           </FloatingOverlay>
         ) : null}
       </Portal>

@@ -2,7 +2,7 @@ import React, { Children, cloneElement, useState } from 'react';
 import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useHover, useClientPoint,
-  shift, offset as offsetUi, flip, FloatingFocusManager,
+  shift, offset as offsetUi, flip, useId,
 } from '@floating-ui/react';
 import type { Placement } from '@floating-ui/core';
 
@@ -41,7 +41,9 @@ export default function Tooltip({
   offset = { x: 0, y: 6 }, clientPoint = false, disabled,
 }: TooltipProps) {
   const [open, setOpen] = useState(false);
+  const nodeId = useId();
   const { refs, floatingStyles, context } = useFloating({
+    nodeId,
     open,
     placement: position,
     middleware: [
@@ -67,18 +69,16 @@ export default function Tooltip({
       })}
       <Portal>
         {open ? (
-          <FloatingFocusManager context={context} modal={false}>
-            <TooltipWrapper
-              className={className}
-              ref={refs.setFloating}
-              role="tooltip"
-              $color={color}
-              style={floatingStyles}
-              {...getFloatingProps()}
-            >
-              {label}
-            </TooltipWrapper>
-          </FloatingFocusManager>
+          <TooltipWrapper
+            className={className}
+            ref={refs.setFloating}
+            role="tooltip"
+            $color={color}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            {label}
+          </TooltipWrapper>
         ) : null}
       </Portal>
     </>
