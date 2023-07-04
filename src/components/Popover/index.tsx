@@ -55,8 +55,7 @@ function stopPropagation(e?: React.MouseEvent<Element>) {
 
 const Popover = forwardRef(({
   position, label, children, color = 'background',
-  onOpen, onClose, disabled, className = '',
-  offset = { x: 0, y: 6 },
+  onOpen, onClose, disabled, offset = { x: 0, y: 6 },
   ...rest
 }: Props, ref: React.Ref<PopoverRef>) => {
   const [open, setOpen] = useState(false);
@@ -107,14 +106,14 @@ const Popover = forwardRef(({
       })}
       <Portal>
         {open ? (
-          <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur}>
+          <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex: 9996 }}>
             <FloatingFocusManager context={context} modal={false}>
               <Tooltip
                 role="tooltip"
                 ref={refs.setFloating}
                 color={color}
                 style={floatingStyles}
-                {...getFloatingProps({ ...rest, className, onClick: stopPropagation })}
+                {...getFloatingProps({ ...rest, onClick: stopPropagation })}
               >
                 {children}
               </Tooltip>
@@ -136,5 +135,5 @@ const Tooltip = styled(Box)`
   width: auto;
   height: auto;
   cursor: auto;
-  z-index: 40;
+  z-index: 20;
 `;

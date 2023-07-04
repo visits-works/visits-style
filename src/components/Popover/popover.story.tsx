@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Popover, { PopoverRef } from '.';
@@ -104,6 +104,10 @@ export const program: Story = {
   name: 'programatically handle',
   render: (args) => {
     const ref = useRef<PopoverRef | null>(null);
+    useEffect(() => {
+      ref.current?.open();
+    }, []);
+
     return (
       <>
         <button type="button" onClick={() => ref.current?.open()}>open</button>

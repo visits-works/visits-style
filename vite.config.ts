@@ -6,8 +6,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import type { UserConfig } from 'vitest';
-import { PluginPure } from 'rollup-plugin-pure';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import { externalizeDeps } from 'vite-plugin-externalize-deps';
 
 import pkg from './package.json';
 
@@ -21,6 +20,8 @@ const testConfig = {
 export default defineConfig({
   plugins: [
     react({ babel: { plugins: [['babel-plugin-styled-components', { pure: true }]] } }),
+    externalizeDeps(),
+    // @ts-ignore
     dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }),
   ],
   build: {
@@ -37,11 +38,6 @@ export default defineConfig({
         ...Object.keys(pkg.dependencies),
       ],
       plugins: [
-        peerDepsExternal(),
-        PluginPure({
-          functions: ['defineComponent'],
-          include: [/(?<!im)pure\.js$/],
-        }),
         {
           name: 'postbuild-shrink-package-json',
           closeBundle: () => {
@@ -52,6 +48,7 @@ export default defineConfig({
             delete publishPkg.devDependencies;
             delete publishPkg.resolutions;
             delete publishPkg.scripts;
+            delete publishPkg.dependencies;
 
             writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
           },
