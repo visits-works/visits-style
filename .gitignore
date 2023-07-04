@@ -5,6 +5,7 @@
 /lib
 node_modules
 .out
+dist
 
 # misc
 /tmp
