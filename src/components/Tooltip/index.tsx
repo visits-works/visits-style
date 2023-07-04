@@ -38,7 +38,7 @@ export interface TooltipProps {
 export default function Tooltip({
   children, position = 'bottom',
   label, color, className = '',
-  offset = { x: 0, y: 6 }, clientPoint, disabled,
+  offset = { x: 0, y: 6 }, clientPoint = false, disabled,
 }: TooltipProps) {
   const [open, setOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
