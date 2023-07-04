@@ -1,8 +1,10 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
+
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';
 import HelpMessage from '../HelpMessage';
+import type { ThemeType } from '../../types';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -128,7 +130,7 @@ const Wrapper = styled.span<{ outline?: boolean, error?: any, disabled?: boolean
   ${({ disabled, theme }) => (disabled
     ? css`
       input {
-        ${disabledColor(theme)}
+        ${disabledColor(theme as ThemeType)}
         border-style: dashed;
       }
     `

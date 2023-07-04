@@ -2,7 +2,7 @@ import React, { SelectHTMLAttributes, useMemo, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import setSize from '../../utils/setSize';
 import HelpMessage from '../HelpMessage';
-import { SizeType } from '../../types';
+import { SizeType, ThemeType } from '../../types';
 import disabledColor from '../../utils/disabledColor';
 import IconArrowDown from '../../elements/Icons/ArrowDown';
 
@@ -58,7 +58,21 @@ function Select({
 }
 export default forwardRef<any, Props>((props, ref) => <Select {...props} innerRef={ref} />);
 
-const InputWrapper = styled.span<Pick<Props, 'inputSize'|'outline'> & { error: boolean, disabled?: boolean }>`
+interface InputWrapperProps extends Pick<Props, 'inputSize' | 'outline'> {
+  error: boolean;
+  disabled?: boolean;
+}
+
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'error'
+    && name !== 'disabled'
+    && name !== 'inputSize'
+    && name !== 'outline'
+  );
+}
+
+const InputWrapper = styled.span.withConfig({ shouldForwardProp })<InputWrapperProps>`
   position: relative;
   display: block;
 
@@ -131,7 +145,7 @@ const InputWrapper = styled.span<Pick<Props, 'inputSize'|'outline'> & { error: b
 
   ${({ disabled, theme }) => (disabled ? css`
     select {
-      ${disabledColor(theme)}
+      ${disabledColor(theme as ThemeType)}
       border-style: dashed;
     }
     svg {

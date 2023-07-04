@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
 import disabledColor from '../../utils/disabledColor';
+import type { ThemeType } from '../../types';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   /** trueの場合にON/OFFのラベルを表示します */
@@ -28,7 +29,7 @@ const Switch = forwardRef<HTMLInputElement, Props>(({
 }, ref) => {
   const id = `switch_${rest.name}`;
   return (
-    <Wrapper
+    <InputWrapper
       className={className}
       showLabel={showLabel}
       background={background}
@@ -39,7 +40,7 @@ const Switch = forwardRef<HTMLInputElement, Props>(({
     >
       <input id={id} type="checkbox" {...rest} ref={ref} />
       <label htmlFor={id} aria-label={id} />
-    </Wrapper>
+    </InputWrapper>
   );
 });
 Switch.displayName = 'Switch';
@@ -66,7 +67,22 @@ const labelStyle = css`
   }
 `;
 
-const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'disabled'> & { labelTextOn: string; labelTextOff: string }>`
+interface InputWrapperProps extends Pick<Props, 'anchorColor'|'background'|'showLabel'|'disabled'> {
+  labelTextOn: string;
+  labelTextOff: string;
+}
+
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'labelTextOn'
+    && name !== 'labelTextOff'
+    && name !== 'anchorColor'
+    && name !== 'background'
+    && name !== 'showLabel'
+  );
+}
+
+const InputWrapper = styled.span.withConfig({ shouldForwardProp })<InputWrapperProps>`
   display: inline-block;
   cursor: pointer;
   line-height: 1.25;
@@ -122,7 +138,7 @@ const Wrapper = styled.span<Pick<Props, 'anchorColor'|'background'|'showLabel'|'
       cursor: default;
 
       label {
-        ${disabledColor(theme)}
+        ${disabledColor(theme as ThemeType)}
 
         &:after {
           background: ${theme.disabled};

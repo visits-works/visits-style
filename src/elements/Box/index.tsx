@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import findColorInvert from '../../utils/findColorInvert';
-import { ColorType } from '../../types';
+import { ColorType, ThemeType } from '../../types';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** 色指定 */
@@ -10,7 +10,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   borderless?: boolean;
 }
 
-export default styled.div<Props>`
+export default styled.div.withConfig({ shouldForwardProp: (name) => (name !== 'color' && name !== 'borderless') })<Props>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@ export default styled.div<Props>`
   ${(({ color, theme }) => {
     if (!color) return undefined;
     const target = theme[color] || color;
-    const invertColor = findColorInvert(theme, target);
+    const invertColor = findColorInvert(theme as ThemeType, target);
     return {
       backgroundColor: target,
       color: invertColor,

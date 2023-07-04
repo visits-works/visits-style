@@ -1,6 +1,8 @@
 import React, { HTMLAttributes, useState } from 'react';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
+import type { Interpolation, ExecutionContext } from 'styled-components/dist/types';
+
 import findColorInvert from '../../utils/findColorInvert';
 import hambuger from '../../utils/hambuger';
 import setAlign from '../../utils/setAlign';
@@ -50,12 +52,15 @@ export default function AppBar({ children, align, brand, ...rest }: Props) {
   );
 }
 
-function setColor({
-  color, theme, backdrop,
-}: { color?: ColorType, theme: ThemeType, backdrop?: boolean }) {
+interface AppBarSetColorConfig extends ExecutionContext {
+  color?: ColorType;
+  backdrop?: boolean;
+}
+
+function setColor({ color, theme, backdrop }: AppBarSetColorConfig): Interpolation<object> {
   const backgroundColor = color ? theme[color] : 'transparent';
   const textColor = findColorInvert(
-    theme,
+    theme as ThemeType,
     backgroundColor === 'transparent' ? theme.background : backgroundColor,
   );
 

@@ -43,7 +43,7 @@ export const base: Story = {
   args: {
     children: 'Hello wolrd',
     color: '',
-    size: '',
+    size: 'medium',
     outline: false,
     round: false,
     icon: false,
@@ -55,7 +55,7 @@ export const icon: Story = {
   args: {
     children: 'Hello wolrd',
     color: '',
-    size: '',
+    size: 'medium',
     outline: false,
     round: false,
     icon: false,

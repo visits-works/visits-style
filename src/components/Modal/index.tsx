@@ -11,18 +11,12 @@ import {
 
 import Box from '../../elements/Box';
 import Portal from '../Portal';
-import { ColorType } from '../../types';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
   show?: boolean;
   /** モーダルのbodyに入れる内容 */
   children?: React.ReactNode;
-  /**
-   * モーダルのbackground色
-   * @default 'background'
-   */
-  color?: ColorType;
   /** モーダルを閉じる処理 */
   closeModal: () => void;
   /** オーバーレイのクリックでモーダルクローズ */
@@ -34,14 +28,13 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 200
    */
   timeout?: number;
-  /**
-   * モーダル外に表示するElements
-   * \
-   * もしclick eventがある場合はstopPropagationをしないとモーダルが閉じられます。
-   */
-  external?: React.ReactNode;
   /** モーダルのtransition exitが完了した時に発火されるcallback */
   onExited?: () => void;
+  /**
+   * モーダルの背景からのpaddingを指定します。
+   * @default '0.85rem'
+   */
+  padding?: string;
 }
 
 function stopPropagation(e?: React.MouseEvent<Element>) {
@@ -50,9 +43,8 @@ function stopPropagation(e?: React.MouseEvent<Element>) {
 }
 
 export default function Modal({
-  show, children, timeout = 200,
-  color = 'background', closeModal, external,
-  closeOnOverlay, closeOnEsc, onExited,
+  show, children, timeout = 200, padding = '0.85rem',
+  closeModal, closeOnOverlay, closeOnEsc, onExited,
   ...rest
 }: Props) {
   const exitRef = useRef(onExited);
@@ -95,18 +87,17 @@ export default function Modal({
   return (
     <Portal>
       {isMounted ? (
-        <Overlay lockScroll data-testid="vs-modal-overlay" onClick={handleOverlayClose}>
-          <Wrapper ref={refs.setFloating} role="dialog" style={styles} onClick={stopPropagation}>
-            <Box role="document" color={color} {...getFloatingProps(rest)}>
-              {children}
-            </Box>
-            {external}
+        <Overlay lockScroll data-testid="vs-modal-overlay" onClick={handleOverlayClose} style={{ padding }}>
+          <Wrapper ref={refs.setFloating} role="dialog" {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}>
+            {children}
           </Wrapper>
         </Overlay>
       ) : null}
     </Portal>
   );
 }
+
+export const ModalContent = Box;
 
 const Overlay = styled(FloatingOverlay)`  
   display: flex;
@@ -115,7 +106,6 @@ const Overlay = styled(FloatingOverlay)`
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.backdrop};
-  padding: 0.85rem;
   z-index: 9997;
 `;
 
