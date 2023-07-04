@@ -45,7 +45,7 @@ export default defineConfig({
           name: 'postbuild-shrink-package-json',
           closeBundle: () => {
             // eslint-disable-next-line no-console
-            // if (!process.env.CI) return console.log('skip modify package.json');
+            if (!process.env.CI) return console.log('skip modify package.json');
 
             const publishPkg = JSON.parse(JSON.stringify(pkg));
             delete publishPkg.devDependencies;
@@ -62,7 +62,6 @@ export default defineConfig({
         interop: 'compat',
       },
     },
-    ssr: false,
   },
   // これがdev環境に入った場合、babel/runtimeのエラーが発生してしまうので、test環境のみ有効にする
   // @ts-ignore
