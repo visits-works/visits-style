@@ -26,4 +26,4 @@ jobs:
             ${{ runner.os }}-${{ matrix.node }}-yarn-
       - run: yarn install
       - run: yarn lint
-      - run: yarn test:ci
+      - run: yarn test
