@@ -7,6 +7,7 @@ import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import type { UserConfig } from 'vitest';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 import pkg from './package.json';
 
@@ -21,13 +22,15 @@ const isStorybook = process.env.STORYBOOK;
 
 export default defineConfig({
   plugins: [
-    react({ babel: { plugins: [['babel-plugin-styled-components', { pure: true }]] } }),
+    react(),
+    viteTsconfigPaths(),
     !isStorybook ? externalizeDeps() : undefined,
     // @ts-ignore
     !isStorybook ? dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }) : undefined,
   ].filter(Boolean) as PluginOption[],
   build: {
     minify: !!isStorybook,
+    target: 'esnext',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: pkg.name,
@@ -35,10 +38,8 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [
-        ...Object.keys(pkg.peerDependencies),
-        ...Object.keys(pkg.dependencies),
-      ],
+      // 全ての外部ライブラリは外す
+      external: (id) => !id.startsWith('.') && !id.startsWith('/'),
       plugins: [
         {
           name: 'postbuild-shrink-package-json',
