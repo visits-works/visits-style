@@ -1,0 +1,15 @@
+import{j as a}from"./jsx-runtime-94f6e698.js";import{s as h,n as f}from"./styled-components.browser.esm-cceca312.js";import{T as s}from"./TextButton-3e00eaef.js";import{C}from"./Close-c5c379c5.js";import{f as F}from"./findColorInvert-a3844e22.js";import"./index-8db94870.js";import"./_commonjsHelpers-042e6b4d.js";import"./polished.esm-d58a66c9.js";import"./setSize-000c66a5.js";function y(r,e){return!e||e==="light"?r.background:r[e]}const b=f(["padding-right:1.625rem;","{display:flex;position:absolute;align-items:center;color:inherit;top:0;right:0;bottom:0;padding:0 0.35rem;svg{width:0.625rem;height:0.625rem;}&:hover{background-color:rgba(0,0,0,0.15);}}"],s);function w(r){return r!=="color"&&r!=="round"&&r!=="close"}const v=h.div.withConfig({shouldForwardProp:w}).withConfig({displayName:"Tag__Wrapper",componentId:"sc-10pvl04-0"})(["display:inline-flex;position:relative;font-size:0.75rem;cursor:default;padding:0.325rem 0.5rem;align-items:center;justify-content:center;height:1.5rem;border-radius:",";white-space:nowrap;"," &:not(:last-child){margin-right:0.5rem;}","{border-radius:0;border-top-right-radius:",";border-bottom-right-radius:",";}",""],({theme:r,round:e})=>e?"50rem":r.radius,({color:r,theme:e})=>{const o=y(e,r),i=F(e,o);return f(["color:",";background-color:",";a,span{color:",";}"],i,o,i)},s,({theme:r,round:e})=>e?"50rem":r.radius,({theme:r,round:e})=>e?"50rem":r.radius,({close:r})=>r?b:void 0);function u({children:r,onClose:e,...o}){return a.jsxs(v,{close:!!e,...o,children:[r,e&&a.jsx(s,{onClick:e,pure:!0,children:a.jsx(C,{})})]})}try{u.displayName="Tag",u.__docgenInfo={description:"",displayName:"Tag",props:{children:{defaultValue:null,description:"タグの内容",name:"children",required:!0,type:{name:"any"}},onClose:{defaultValue:null,description:"Xボタンの追加＋クリック時のイベントハンドラー",name:"onClose",required:!1,type:{name:"(() => void)"}},onClick:{defaultValue:null,description:"クリック時のイベントハンドラー",name:"onClick",required:!1,type:{name:"(() => void)"}},color:{defaultValue:null,description:"色の指定",name:"color",required:!1,type:{name:"string"}},round:{defaultValue:null,description:"丸くする",name:"round",required:!1,type:{name:"boolean"}}}}}catch{}const E=["","primary","info","link","success","warning","danger","dark"],D={title:"elements/Tag",component:u,tags:["autodocs"],argTypes:{},parameters:{control:{color:E}}},n={args:{children:"Hello world!",round:!1,onClose:void 0}},t={name:"with close button",args:{children:"Hello world!",round:!1,onClose:()=>alert("close!")}};var l,d,c;n.parameters={...n.parameters,docs:{...(l=n.parameters)==null?void 0:l.docs,source:{originalSource:`{
+  args: {
+    children: 'Hello world!',
+    round: false,
+    onClose: undefined
+  }
+}`,...(c=(d=n.parameters)==null?void 0:d.docs)==null?void 0:c.source}}};var p,m,g;t.parameters={...t.parameters,docs:{...(p=t.parameters)==null?void 0:p.docs,source:{originalSource:`{
+  name: 'with close button',
+  args: {
+    children: 'Hello world!',
+    round: false,
+    onClose: () => alert('close!')
+  }
+}`,...(g=(m=t.parameters)==null?void 0:m.docs)==null?void 0:g.source}}};export{n as base,t as close,D as default};
+//# sourceMappingURL=tag.story-3ba72261.js.map
