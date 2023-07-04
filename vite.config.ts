@@ -48,7 +48,6 @@ export default defineConfig({
             delete publishPkg.devDependencies;
             delete publishPkg.resolutions;
             delete publishPkg.scripts;
-            delete publishPkg.dependencies;
 
             writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
           },
