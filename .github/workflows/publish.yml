@@ -31,14 +31,14 @@ jobs:
       - run: yarn build
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > .npmrc
       - run: npm publish
-  document:
-    name: update document
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - run: yarn install
-      - run: yarn storybook:deploy
+  # document:
+  #   name: update document
+  #   runs-on: ubuntu-latest
+  #   needs: test
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
+  #     - run: yarn install
+  #     - run: yarn storybook:deploy
