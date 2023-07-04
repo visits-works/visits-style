@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import { styled,  css, keyframes } from 'styled-components';
+import { styled, css, keyframes } from 'styled-components';
 import type { ExecutionContext } from 'styled-components/dist/types';
 
 import { ColorType } from '../../types';

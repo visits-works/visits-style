@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
-import { styled,  css } from 'styled-components';
+import { styled, css } from 'styled-components';
 
 import { setSize } from '../../utils';
 import disabledColor from '../../utils/disabledColor';

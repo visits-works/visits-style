@@ -1,4 +1,4 @@
-import { styled,  css } from 'styled-components';
+import { styled, css } from 'styled-components';
 import { mediaUntilFullHD, mediaDesktop, mediaMobile, mediaTablet } from '../../utils/media';
 
 export interface Props {
