@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import { styled,  css } from 'styled-components';
 import TextButton from '../Button/TextButton';
 import Close from '../Icons/Close';
 import findColorInvert from '../../utils/findColorInvert';

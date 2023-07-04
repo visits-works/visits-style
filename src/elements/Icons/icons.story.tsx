@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import * as Icons from '.';
 

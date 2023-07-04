@@ -22,7 +22,7 @@ const isStorybook = process.env.STORYBOOK;
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({ babel: { plugins: [['babel-plugin-styled-components', { pure: true }]] } }),
     viteTsconfigPaths(),
     !isStorybook ? externalizeDeps() : undefined,
     // @ts-ignore
@@ -45,7 +45,7 @@ export default defineConfig({
           name: 'postbuild-shrink-package-json',
           closeBundle: () => {
             // eslint-disable-next-line no-console
-            if (!process.env.CI) return console.log('skip modify package.json');
+            // if (!process.env.CI) return console.log('skip modify package.json');
 
             const publishPkg = JSON.parse(JSON.stringify(pkg));
             delete publishPkg.devDependencies;
@@ -56,11 +56,13 @@ export default defineConfig({
           },
         },
       ],
+      // https://github.com/styled-components/styled-components/issues/3700
       // https://github.com/styled-components/styled-components/issues/3956
       output: {
-        interop: 'auto',
+        interop: 'compat',
       },
     },
+    ssr: false,
   },
   // これがdev環境に入った場合、babel/runtimeのエラーが発生してしまうので、test環境のみ有効にする
   // @ts-ignore

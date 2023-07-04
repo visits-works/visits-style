@@ -3,7 +3,7 @@ import React, {
   Children, cloneElement, useState, HTMLAttributes, useEffect,
   forwardRef, useImperativeHandle,
 } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useClick,
   shift, offset as offsetUi, flip, FloatingFocusManager, FloatingOverlay, autoUpdate,

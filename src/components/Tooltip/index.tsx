@@ -1,5 +1,5 @@
 import React, { Children, cloneElement, useState } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useHover, useClientPoint,
   shift, offset as offsetUi, flip, FloatingFocusManager,

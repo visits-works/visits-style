@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { useFloating, useTransitionStyles } from '@floating-ui/react';
 
 import type { ToastItemProps } from './types';

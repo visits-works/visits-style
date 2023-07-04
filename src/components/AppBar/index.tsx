@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useState } from 'react';
 import { transparentize } from 'polished';
-import styled, { css } from 'styled-components';
+import { styled,  css } from 'styled-components';
 import type { Interpolation, ExecutionContext } from 'styled-components/dist/types';
 
 import findColorInvert from '../../utils/findColorInvert';

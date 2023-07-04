@@ -1,6 +1,6 @@
 import React, { useMemo, InputHTMLAttributes, forwardRef } from 'react';
 import { transparentize } from 'polished';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value: string | number;

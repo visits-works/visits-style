@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import { styled,  css } from 'styled-components';
 import { transparentize } from 'polished';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';

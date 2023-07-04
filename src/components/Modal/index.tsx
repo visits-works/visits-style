@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useRef, MouseEvent } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import {
   useFloating,
   useDismiss,

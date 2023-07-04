@@ -2,7 +2,7 @@ import React, {
   useMemo, InputHTMLAttributes, forwardRef, useRef, useImperativeHandle,
 } from 'react';
 import { transparentize } from 'polished';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 

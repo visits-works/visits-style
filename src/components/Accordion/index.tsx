@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 

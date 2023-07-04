@@ -1,5 +1,5 @@
 import React, { CSSProperties, useMemo } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import ToastItem from './ToastItem';
 import type { ToastContainerProps } from './types';

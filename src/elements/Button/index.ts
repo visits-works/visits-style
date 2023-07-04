@@ -1,4 +1,4 @@
-import styled, { type ExecutionContext, css } from 'styled-components';
+import { styled,  type ExecutionContext, css } from 'styled-components';
 import { HTMLAttributes } from 'react';
 import { darken } from 'polished';
 import findColorInvert from '../../utils/findColorInvert';

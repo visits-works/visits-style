@@ -1,5 +1,5 @@
 import React, { TextareaHTMLAttributes, HTMLAttributes, forwardRef } from 'react';
-import styled, { css } from 'styled-components';
+import { styled,  css } from 'styled-components';
 
 import boxShadow from '../../utils/boxShadow';
 import setSize from '../../utils/setSize';

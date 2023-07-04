@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useMemo } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';
 
