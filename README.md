@@ -20,8 +20,8 @@ yarn add react react-dom styled-components visits-style
 ```
 
 ## Dependencies
-- React, React-dom(^18.0.0)
-- styled-components(^5.0.0)
+- React, React-dom(^18.2.0)
+- styled-components(^6.0.2)
 
 ## Example
 
@@ -47,4 +47,4 @@ root.render(<App />);
 
 ## Docs
 
-- [ドキュメント](https://visits-works.github.io/visits-style/storybook)
+- [ドキュメント](https://visits-works.github.io/visits-style)

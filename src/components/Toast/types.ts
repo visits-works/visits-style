@@ -36,6 +36,11 @@ export interface ToastContainerProps {
    * @default '16px'
    */
   margin?: string;
+  /**
+   * toast間の間隔
+   * @default '16px'
+   */
+  space?: string;
   /** スクロールしても固定として表示する */
   fixed?: boolean;
 }

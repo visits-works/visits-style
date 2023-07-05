@@ -52,11 +52,8 @@ export const base: Story = {
     const clearAll = useCallback(() => setList([]), []);
   
     const onDurationChange = useCallback(({ target }: any) => {
-      if (!target.value) {
-        setDuration(null);
-      } else {
-        setDuration(parseInt(target.value, 10));
-      }
+      const num = target.value ? parseInt(target.value, 10) : null;
+      setDuration(num ? num : null);
     }, []);
 
     return (

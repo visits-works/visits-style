@@ -3,15 +3,19 @@ import { ThemeProvider } from 'styled-components';
 import { render } from '@testing-library/react';
 import theme from '../../theme';
 
-import Textarea from '.';
+import Textarea, { Props } from '.';
 
 describe('Textarea', () => {
   it('rendered without error', () => {
-    const onChange = vi.fn();
-    render(
-      <ThemeProvider theme={theme}>
-        <Textarea name="test" onChange={onChange} value="test" placeholder="placeholder" />
-      </ThemeProvider>
-    );
+    renderInput({});
   });
 });
+
+function renderInput(props: Props) {
+  render(
+    <ThemeProvider theme={theme}>
+      <Textarea {...props} />
+    </ThemeProvider>
+  );
+}
+

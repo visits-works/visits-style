@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { styled } from 'styled-components';
 
 interface MsgProps {
@@ -11,8 +11,8 @@ const Message = styled.small.withConfig({ shouldForwardProp: (name) => (name !==
 `;
 
 interface Props {
-  help?: string;
-  error?: string;
+  help?: ReactNode;
+  error?: ReactNode;
   noErrorMessage?: boolean;
 }
 

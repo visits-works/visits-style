@@ -32,7 +32,7 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > .npmrc
       - run: npm publish
   # document:
-  #   name: update document
+  #   name: deploy document
   #   runs-on: ubuntu-latest
   #   needs: test
   #   steps:
@@ -41,4 +41,9 @@ jobs:
   #       with:
   #         node-version: '16'
   #     - run: yarn install
-  #     - run: yarn storybook:deploy
+  #     - run: yarn storybook:build
+  #     - name: Deploy
+  #       uses: peaceiris/actions-gh-pages@v3
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: ./.out

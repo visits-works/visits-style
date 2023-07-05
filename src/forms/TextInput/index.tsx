@@ -13,9 +13,9 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
    */
   type?: 'text' | 'number' | 'password' | 'email' | 'tel' | 'search';
   /** エラーの発生時の表示テキスト */
-  error?: string;
+  error?: React.ReactNode;
   /** 捕捉テキスト */
-  help?: string;
+  help?: React.ReactNode;
   /** ボックス系のデザインでする */
   outline?: boolean;
   /** 左側のアイコン */
@@ -33,12 +33,12 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
   <Wrapper
     className={className}
     outline={outline}
-    error={error}
+    error={!!error}
     style={style}
     disabled={rest.disabled}
   >
     {leftIcon && (<Icon>{leftIcon}</Icon>)}
-    {rightIcon && (<Icon right>{rightIcon}</Icon>)}
+    {rightIcon && (<Icon $right>{rightIcon}</Icon>)}
     <input type={type} maxLength={maxLength} ref={ref} {...rest} />
     <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
   </Wrapper>
@@ -61,13 +61,13 @@ const leftIcon = css`
   }
 `;
 
-const Icon = styled.span<{ right?: boolean }>`
+const Icon = styled.span<{ $right?: boolean }>`
   position: absolute;
   top: 0.375em;
   bottom: 0;
   z-index: 1;
   color: ${({ theme }) => theme.border};
-  ${({ right }) => (right ? rightIcon : leftIcon)}
+  ${({ $right }) => ($right ? rightIcon : leftIcon)}
 
   svg, img {
     height: 1em;
@@ -75,7 +75,15 @@ const Icon = styled.span<{ right?: boolean }>`
   }
 `;
 
-const Wrapper = styled.span<{ outline?: boolean, error?: any, disabled?: boolean }>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'outline'
+    && name !== 'error'
+    && name !== 'disabled'
+  );
+}
+
+const Wrapper = styled.span.withConfig({ shouldForwardProp })<{ outline?: boolean; error?: boolean; disabled?: boolean; }>`
   position: relative;
   display: block;
 

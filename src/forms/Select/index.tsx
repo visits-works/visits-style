@@ -1,4 +1,4 @@
-import React, { SelectHTMLAttributes, useMemo, forwardRef } from 'react';
+import React, { SelectHTMLAttributes, useMemo, forwardRef, ReactNode } from 'react';
 import { styled, css } from 'styled-components';
 import setSize from '../../utils/setSize';
 import HelpMessage from '../HelpMessage';
@@ -16,9 +16,9 @@ export interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   options: ItemType[];
   outline?: boolean;
   /** エラーの発生時の表示テキスト */
-  error?: string | any;
+  error?: ReactNode;
   /** 捕捉テキスト */
-  help?: string | any;
+  help?: ReactNode;
   /** selectのサイズ */
   inputSize?: SizeType;
   /** optionのカスタムrender */
@@ -29,10 +29,10 @@ export interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   noErrorMessage?: boolean;
 }
 
-function Select({
+const Select = forwardRef<HTMLSelectElement, Props>(({
   options = [], placeholder, render, help, error, className, inputSize, outline, optional,
-  noErrorMessage, innerRef, ...rest
-}: Props & { innerRef: React.Ref<any> }) {
+  noErrorMessage, ...rest
+}, ref) => {
   const list = useMemo(() => options.map((item) => (
     typeof item === 'string'
       ? (<option key={item} value={item}>{render ? render(item) : item}</option>)
@@ -47,7 +47,7 @@ function Select({
       error={!!error}
       disabled={rest.disabled}
     >
-      <select {...rest} ref={innerRef}>
+      <select {...rest} ref={ref}>
         {placeholder && (<option value="" disabled={!optional}>{placeholder}</option>)}
         {list}
       </select>
@@ -55,8 +55,10 @@ function Select({
       <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </InputWrapper>
   );
-}
-export default forwardRef<any, Props>((props, ref) => <Select {...props} innerRef={ref} />);
+});
+Select.displayName = 'Select';
+
+export default Select;
 
 interface InputWrapperProps extends Pick<Props, 'inputSize' | 'outline'> {
   error: boolean;

@@ -6,7 +6,7 @@ import type { ToastContainerProps } from './types';
 
 import Portal from '../Portal';
 
-export default function Toast({ toasts, clear, fixed, margin = '16px', position = 'top-left' }: ToastContainerProps) {
+export default function Toast({ toasts, clear, fixed, margin = '16px', position = 'top-left', space = '16px' }: ToastContainerProps) {
   const style = useMemo<CSSProperties>(() => {
     const base = { position: fixed ? 'fixed' : 'absolute' } as CSSProperties;
     if (position.indexOf('top') > -1) {
@@ -32,7 +32,7 @@ export default function Toast({ toasts, clear, fixed, margin = '16px', position 
 
   return (
     <Portal>
-      <ToastList style={style}>
+      <ToastList style={style} $space={space}>
         {toasts.map((props) => (
           <ToastItem
             {...props}
@@ -45,7 +45,7 @@ export default function Toast({ toasts, clear, fixed, margin = '16px', position 
   );
 }
 
-const ToastList = styled.ul`
+const ToastList = styled.ul<{ $space: string; }>`
   display: flex;
   flex-direction: column;
   z-index: 9999;
@@ -53,6 +53,6 @@ const ToastList = styled.ul`
   overflow: hidden;
 
   li + li {
-    margin-top: 1rem;
+    margin-top: ${({ $space }) => $space};
   }
 `;

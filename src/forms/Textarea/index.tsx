@@ -9,9 +9,9 @@ import type { ThemeType } from '../../types';
 
 export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** エラーの発生時の表示テキスト */
-  error?: string | any;
+  error?: React.ReactNode;
   /** 捕捉テキスト */
-  help?: string | any;
+  help?: React.ReactNode;
   /** エラーが発生しても、エラーメッセージを出さないようにする */
   noErrorMessage?: boolean;
 }

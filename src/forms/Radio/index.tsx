@@ -8,9 +8,9 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean;
 }
 
-function Radio({
-  className, style, children, innerRef, ...rest
-}: Props & { innerRef: React.Ref<any> }) {
+const Radio = forwardRef<HTMLInputElement, Props>(({
+  className, style, children, ...rest
+}, ref) => {
   const id = `radio_${rest.name}_${rest.value}`;
   const innerClass = useMemo(() => {
     const arr = [];
@@ -27,11 +27,13 @@ function Radio({
         </Shape>
         {children}
       </label>
-      <input id={id} type="radio" {...rest} ref={innerRef} />
+      <input id={id} type="radio" {...rest} ref={ref} />
     </Wrapper>
   );
-}
-export default forwardRef<any, Props>((props, ref) => <Radio {...props} innerRef={ref} />);
+});
+Radio.displayName = 'Radio';
+
+export default Radio;
 
 const Shape = styled.div`
   display: inline-flex;

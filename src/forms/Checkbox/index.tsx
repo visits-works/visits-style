@@ -7,7 +7,7 @@ import { styled } from 'styled-components';
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  children?: any;
+  children?: React.ReactNode;
   checked?: boolean;
   indeterminate?: boolean;
 }
@@ -38,7 +38,7 @@ function Indeterminate() {
   );
 }
 
-const Checkbox = forwardRef<HTMLInputElement| null, Props>(
+const Checkbox = forwardRef<HTMLInputElement, Props>(
   ({ className, children, indeterminate, ...rest }, ref) => {
     const innerRef = useRef<HTMLInputElement>(null);
     const id = `checkbox_${rest.name}_${rest.value ?? 'none'}`;
@@ -49,13 +49,11 @@ const Checkbox = forwardRef<HTMLInputElement| null, Props>(
       return arr.join(' ');
     }, [rest.checked, rest.disabled, indeterminate]);
 
-    // @ts-ignore
-    useImperativeHandle(ref, () => innerRef.current);
+    useImperativeHandle(ref, () => innerRef.current!);
 
     useIsomorphicLayoutEffect(() => {
       if (innerRef.current) {
-        // @ts-ignore
-        innerRef.current.indeterminate = indeterminate;
+        innerRef.current.indeterminate = indeterminate || false;
       }
     }, [indeterminate]);
 

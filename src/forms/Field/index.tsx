@@ -29,12 +29,12 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 export default function Field({ label, children, required, ...rest }: Props) {
   return (
     <Wrapper {...rest}>
-      {label && (
+      {label ? (
         <Label>
           {label}
           {required && (<i>*</i>)}
         </Label>
-      )}
+      ) : null}
       {children}
     </Wrapper>
   );
