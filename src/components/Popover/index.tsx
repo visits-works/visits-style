@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign, no-unused-expressions */
 import React, {
-  Children, cloneElement, useState, HTMLAttributes, useEffect,
-  forwardRef, useImperativeHandle,
+  Children, cloneElement, useState, HTMLAttributes, useEffect, useRef,
+  forwardRef, useImperativeHandle, useCallback,
 } from 'react';
 import { styled } from 'styled-components';
 import {
@@ -56,6 +56,9 @@ const Popover = forwardRef(({
 }: Props, ref: React.Ref<PopoverRef>) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
+  const openRef = useRef(onOpen);
+  const closeRef = useRef(onClose);
+
   const { refs, floatingStyles, context } = useFloating({
     nodeId,
     placement: position,
@@ -69,17 +72,15 @@ const Popover = forwardRef(({
     whileElementsMounted: autoUpdate,
   });
 
-  const handleFocus = (e?: React.MouseEvent<HTMLButtonElement>) => {
+  const handleFocus = useCallback((e?: React.MouseEvent<HTMLButtonElement>) => {
     stopPropagation(e);
     setOpen(true);
-    if (onOpen) onOpen();
-  };
+  }, []);
 
-  const handleBlur = (e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  const handleBlur = useCallback((e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     stopPropagation(e);
     setOpen(false);
-    if (onClose) onClose();
-  };
+  }, []);
 
   useEffect(() => {
     if (disabled && open) {
@@ -87,14 +88,23 @@ const Popover = forwardRef(({
     }
   }, [disabled, open]);
 
+  useEffect(() => {
+    if (!open) return;
+    openRef.current?.();
+    return () => closeRef.current?.();
+  }, [open]);
+
   useImperativeHandle(ref, () => ({
     open: handleFocus,
     close: handleBlur,
-  }));
+  }), [handleFocus, handleBlur]);
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
     useClick(context, { enabled: !disabled }),
   ]);
+
+  openRef.current = onOpen;
+  closeRef.current = onClose;
 
   return (
     <>

@@ -63,4 +63,31 @@ describe('Popover', () => {
     fireEvent.click(screen.getByTestId('disable'));
     expect(screen.queryByTestId('disable')).toBeNull();
   });
+
+  it('onOpen/onClose callback works', () => {
+    const open = vi.fn();
+    const close = vi.fn();
+    render(
+      <ThemeProvider theme={theme}>
+        <Popover
+          label={<button type="button">show</button>}
+          onOpen={open}
+          onClose={close}
+        >
+          Popover Content
+        </Popover>
+      </ThemeProvider>,
+    );
+    expect(open).not.toBeCalled();
+
+    fireEvent.click(screen.getByText('show'));
+    expect(open).toBeCalled();
+    expect(close).not.toBeCalled();
+
+    fireEvent.click(screen.getByTestId('visits-style-shadow'));
+    expect(close).toBeCalled();
+
+    expect(open).toBeCalledTimes(1);
+    expect(close).toBeCalledTimes(1);
+  });
 });
