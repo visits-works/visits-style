@@ -35,6 +35,11 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default '0.85rem'
    */
   padding?: string;
+  /**
+   * モーダルの縦並びを設定します。
+   * @default 'center'
+   */
+  verticalAlign?: 'start' | 'center' | 'end';
 }
 
 function stopPropagation(e?: React.MouseEvent<Element>) {
@@ -43,7 +48,7 @@ function stopPropagation(e?: React.MouseEvent<Element>) {
 }
 
 export default function Modal({
-  show, children, timeout = 200, padding = '0.85rem',
+  show, children, timeout = 200, padding = '0.85rem', verticalAlign = 'center',
   closeModal, closeOnOverlay, closeOnEsc, onExited,
   ...rest
 }: Props) {
@@ -87,7 +92,13 @@ export default function Modal({
   return (
     <Portal>
       {isMounted ? (
-        <Overlay lockScroll data-testid="vs-modal-overlay" onClick={handleOverlayClose} style={{ padding }}>
+        <Overlay
+          lockScroll
+          data-testid="vs-modal-overlay"
+          onClick={handleOverlayClose}
+          style={{ padding }}
+          $verticalAlign={verticalAlign}
+        >
           <Wrapper ref={refs.setFloating} role="dialog" {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}>
             {children}
           </Wrapper>
@@ -99,11 +110,19 @@ export default function Modal({
 
 export const ModalContent = Box;
 
-const Overlay = styled(FloatingOverlay)`  
+const Overlay = styled(FloatingOverlay)<{ $verticalAlign?: Props['verticalAlign'] }>`  
   display: flex;
   display: grid;
-  place-items: center;
-  align-items: center;
+  place-items: ${({ $verticalAlign }) => {
+    if ($verticalAlign === 'start') return 'flex-start';
+    if ($verticalAlign === 'end') return 'flex-end';
+    return 'center';
+  }};
+  align-items: ${({ $verticalAlign }) => {
+    if ($verticalAlign === 'start') return 'flex-start';
+    if ($verticalAlign === 'end') return 'flex-end';
+    return 'center';
+  }};
   justify-content: center;
   background: ${({ theme }) => theme.backdrop};
   z-index: 9997;
