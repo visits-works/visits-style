@@ -49,7 +49,6 @@ const ToastList = styled.ul<{ $space: string; }>`
   display: flex;
   flex-direction: column;
   z-index: 9999;
-  pointer-events: none;
   overflow: hidden;
 
   li + li {
