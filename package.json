@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.25.0",
+    "eslint-config-react-app": "^7.0.1",
     "polished": "^4.2.2"
   },
   "scripts": {
@@ -37,6 +38,10 @@
     "start": "STORYBOOK=true storybook dev -p 9000",
     "storybook:build": "STORYBOOK=true storybook build -c .storybook -o .out --disable-telemetry",
     "storybook:deploy": "yarn storybook:build && gh-pages -d .out"
+  },
+  "resolutions": {
+    "@typescript-eslint/eslint-plugin": "5.60.1",
+    "@typescript-eslint/parser": "5.60.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.25",
@@ -51,13 +56,12 @@
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
+    "@typescript-eslint/eslint-plugin": "5.60.1",
+    "@typescript-eslint/parser": "5.60.1",
     "@vitejs/plugin-react": "^4.0.1",
     "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^8.43.0",
+    "eslint": "8.43.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-storybook": "^0.6.12",
     "gh-pages": "^5.0.0",
     "jsdom": "^22.1.0",
