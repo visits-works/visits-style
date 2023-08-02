@@ -1,10 +1,10 @@
-import { HTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { styled, css } from 'styled-components';
 import { transparentize } from 'polished';
 import setSize from '../../utils/setSize';
 import { ColorType, SizeType } from '../../types';
 
-export interface Props extends HTMLAttributes<HTMLButtonElement> {
+export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** ボタンの色 */
   color?: ColorType;
   /** ボタンのサイズ */

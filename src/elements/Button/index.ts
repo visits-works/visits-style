@@ -1,5 +1,5 @@
 import { styled, type ExecutionContext, css } from 'styled-components';
-import { HTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { darken } from 'polished';
 import findColorInvert from '../../utils/findColorInvert';
 import boxShadow from '../../utils/boxShadow';
@@ -75,7 +75,7 @@ function setColor({ theme, color, outline, disabled }: ButtonSetColorConfig) {
   `;
 }
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** ボタンの色 */
   color?: ColorType;
   /** ボタンのサイズ */
