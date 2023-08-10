@@ -18,6 +18,8 @@ const positionList = [
   'bottom-end',
 ];
 
+function noop() {}
+
 const meta = {
   title: 'components/Popover',
   component: Popover,
@@ -158,6 +160,23 @@ export const tooltip: Story = {
       </Tooltip>
     </Popover>
   ),
+  // @ts-ignore
+  args: {},
+};
+
+export const manualClose: Story = {
+  name: 'popover close manually',
+  render: (args) => {
+    const ref = useRef<PopoverRef>(null);
+    return (
+      <Popover ref={ref} {...args} label={<button>click me</button>} onManualClose={noop}>
+        <p>hello world</p>
+        <button type="button" onClick={() => ref.current?.close()}>
+          close!
+        </button>
+      </Popover>
+    );
+  },
   // @ts-ignore
   args: {},
 };

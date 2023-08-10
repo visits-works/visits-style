@@ -40,6 +40,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   /** 開けた場合のコールバック */
   onOpen?: () => void;
+  /** popoverを閉じる処理を手動に設定します */
+  onManualClose?: () => void;
   /** コンテンツを出さない */
   disabled?: boolean;
 }
@@ -51,7 +53,7 @@ export interface PopoverRef {
 
 const Popover = forwardRef(({
   position, label, children, color = 'background',
-  onOpen, onClose, disabled, offset = { x: 0, y: 6 },
+  onOpen, onClose, disabled, offset = { x: 0, y: 6 }, onManualClose,
   ...rest
 }: Props, ref: React.Ref<PopoverRef>) => {
   const [open, setOpen] = useState(false);
@@ -72,15 +74,11 @@ const Popover = forwardRef(({
     whileElementsMounted: autoUpdate,
   });
 
-  const handleFocus = useCallback((e?: React.MouseEvent<HTMLButtonElement>) => {
-    stopPropagation(e);
-    setOpen(true);
-  }, []);
-
   const handleBlur = useCallback((e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     stopPropagation(e);
+    if (onManualClose) return onManualClose();
     setOpen(false);
-  }, []);
+  }, [onManualClose]);
 
   useEffect(() => {
     if (disabled && open) {
@@ -95,9 +93,9 @@ const Popover = forwardRef(({
   }, [open]);
 
   useImperativeHandle(ref, () => ({
-    open: handleFocus,
-    close: handleBlur,
-  }), [handleFocus, handleBlur]);
+    open: () => setOpen(true),
+    close: () => setOpen(false),
+  }), []);
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
     useClick(context, { enabled: !disabled }),
