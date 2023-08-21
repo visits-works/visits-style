@@ -22,7 +22,18 @@ export interface Props {
   hover?: boolean;
 }
 
-export default styled.table<Props>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'size'
+    && name !== 'full'
+    && name !== 'headerStyle'
+    && name !== 'bordered'
+    && name !== 'striped'
+    && name !== 'hover'
+  );
+}
+
+export default styled.table.withConfig({ shouldForwardProp })<Props>`
   ${({ full }) => (full ? css`width: 100%;` : undefined)}
   max-width: 100%;
   margin-bottom: 1rem;

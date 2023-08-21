@@ -20,11 +20,11 @@ export interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
 }
 
 export default function Progress(
-  { value, max, color = 'primary', ...rest }: ProgressProps,
+  { value, max, color = 'primary', height, size, ...rest }: ProgressProps,
 ) {
   const percent = useMemo(() => (value ? Math.round((value / max) * 100) : 0), [value, max]);
   return (
-    <Wrapper color={color} {...rest}>
+    <Wrapper $color={color} $height={height} $size={size} {...rest}>
       <div
         role="progressbar"
         aria-label="progress"
@@ -35,20 +35,20 @@ export default function Progress(
   );
 }
 
-const Wrapper = styled.div<Pick<ProgressProps, 'size'|'height'>>`
+const Wrapper = styled.div<{ $height?: string; $size?: SizeType; $color?: ColorType; }>`
   position: relative;
   display: block;
   width: 100%;
   border-radius: ${({ theme }) => theme.radius};
   background-color: ${({ theme }) => theme.background};
 
-  ${({ size, height }) => height || setSize('height', size)}
+  ${({ $size, $height }) => $height || setSize('height', $size)}
 
   & > div[role="progressbar"] {
     position: relative;
     height: 100%;
     border-radius: ${({ theme }) => theme.radius};
-    background-color: ${({ color, theme }) => (theme[color!] || color)};
+    background-color: ${({ $color, theme }) => (theme[$color!] || $color)};
 
     &.in-progress {
       border-bottom-right-radius: 0;

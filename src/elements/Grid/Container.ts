@@ -40,7 +40,7 @@ function setResponsive({ fluid }: Props): any {
     }
   `;
 }
-export default styled.div<Props>`
+export default styled.div.withConfig({ shouldForwardProp: (name) => name !== 'fluid' })<Props>`
   position: relative;
   width: 100%;
 

@@ -43,7 +43,15 @@ function setAutoSize({ size, auto }: ColProps) {
   `;
 }
 
-const Col = styled.div<ColProps>`
+function shouldForwardProp(name: string) {
+  return (
+    name !== 'size'
+    && name !== 'offset'
+    && name !== 'auto'
+  );
+}
+
+const Col = styled.div.withConfig({ shouldForwardProp })<ColProps>`
   display: flex;
   flex: 0 0 auto;
   flex-direction: row;
