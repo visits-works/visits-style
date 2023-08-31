@@ -44,6 +44,11 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   onManualClose?: () => void;
   /** コンテンツを出さない */
   disabled?: boolean;
+  /**
+   * zIndexを指定する
+   * @default 9996
+  */
+  zIndex?: number;
 }
 
 export interface PopoverRef {
@@ -54,7 +59,7 @@ export interface PopoverRef {
 const Popover = forwardRef(({
   position, label, children, color = 'background',
   onOpen, onClose, disabled, offset = { x: 0, y: 6 }, onManualClose,
-  ...rest
+  zIndex = 9996, ...rest
 }: Props, ref: React.Ref<PopoverRef>) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
@@ -112,7 +117,7 @@ const Popover = forwardRef(({
       })}
       <Portal>
         {open ? (
-          <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex: 9996 }}>
+          <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex }}>
             <Tooltip
               role="tooltip"
               ref={refs.setFloating}
