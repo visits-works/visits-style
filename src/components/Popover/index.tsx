@@ -116,7 +116,7 @@ const Popover = forwardRef(({
         ...getReferenceProps({ tabIndex: 0, role: 'button', disabled, onClick: stopPropagation }),
       })}
       <Portal>
-        {open ? (
+        {open && !disabled ? (
           <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex }}>
             <Tooltip
               role="tooltip"

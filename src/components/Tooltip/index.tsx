@@ -68,7 +68,7 @@ export default function Tooltip({
         ...getReferenceProps(),
       })}
       <Portal>
-        {open ? (
+        {open && !disabled ? (
           <TooltipWrapper
             className={className}
             ref={refs.setFloating}
