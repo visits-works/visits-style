@@ -1,13 +1,20 @@
-import React, { Children, cloneElement, useState } from 'react';
+import React, { Children, cloneElement, useImperativeHandle, useState, forwardRef, MutableRefObject } from 'react';
 import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useHover, useClientPoint,
   shift, offset as offsetUi, flip, useId,
 } from '@floating-ui/react';
-import type { Placement } from '@floating-ui/core';
+import type { Placement, ReferenceElement } from '@floating-ui/core';
 
 import Portal from '../Portal';
 import { ColorType } from '../../types';
+
+export interface TooltipRef {
+  floating: MutableRefObject<HTMLElement | null>;
+  reference: MutableRefObject<ReferenceElement | null>;
+  open: () => void;
+  close: () => void;
+}
 
 export interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
@@ -35,11 +42,11 @@ export interface TooltipProps {
   className?: string;
 }
 
-export default function Tooltip({
+const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
   children, position = 'bottom',
   label, color, className = '',
   offset = { x: 0, y: 6 }, clientPoint = false, disabled,
-}: TooltipProps) {
+}, ref) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
   const { refs, floatingStyles, context } = useFloating({
@@ -58,6 +65,13 @@ export default function Tooltip({
     useHover(context, { enabled: !disabled }),
     useClientPoint(context, { enabled: clientPoint }),
   ]);
+
+  useImperativeHandle(ref, () => ({
+    floating: refs.floating,
+    reference: refs.reference,
+    open: () => setOpen(true),
+    close: () => setOpen(false),
+  }));
 
   const child = typeof children === 'string' ? <span>{children}</span> : children;
 
@@ -83,7 +97,9 @@ export default function Tooltip({
       </Portal>
     </>
   );
-}
+});
+
+export default Tooltip;
 
 const TooltipWrapper = styled.div<{ $color: TooltipProps['color']; }>`
   position: relative;
