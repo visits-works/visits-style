@@ -27,11 +27,13 @@ export interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   optional?: boolean;
   /** エラーが発生しても、エラーメッセージを出さないようにする */
   noErrorMessage?: boolean;
+  /** 矢印をカスタムしたい場合 */
+  arrow?: ReactNode;
 }
 
 const Select = forwardRef<HTMLSelectElement, Props>(({
   options = [], placeholder, render, help, error, className, inputSize, outline, optional,
-  noErrorMessage, ...rest
+  noErrorMessage, arrow, ...rest
 }, ref) => {
   const list = useMemo(() => options.map((item) => (
     typeof item === 'string'
@@ -51,7 +53,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(({
         {placeholder && (<option value="" disabled={!optional}>{placeholder}</option>)}
         {list}
       </select>
-      <IconArrowDown />
+      {arrow || <IconArrowDown />}
       <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
     </InputWrapper>
   );
