@@ -7,17 +7,14 @@ jobs:
   test:
     name: run lint and test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ '16', 'latest' ]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node }}
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn test
+          bun-version: latest
+      - run: bun install
+      - run: bun run lint
+      - run: bun run test
   publish:
     name: publish to npm
     runs-on: ubuntu-latest
