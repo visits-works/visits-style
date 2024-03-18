@@ -40,8 +40,8 @@
     "storybook:deploy": "yarn storybook:build && gh-pages -d .out"
   },
   "resolutions": {
-    "@typescript-eslint/eslint-plugin": "5.60.1",
-    "@typescript-eslint/parser": "5.60.1"
+    "@typescript-eslint/eslint-plugin": "7.2.0",
+    "@typescript-eslint/parser": "7.2.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.0.0",
@@ -56,11 +56,11 @@
     "@testing-library/react": "^14.2.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "5.60.1",
-    "@typescript-eslint/parser": "5.60.1",
+    "@typescript-eslint/eslint-plugin": "7.2.0",
+    "@typescript-eslint/parser": "7.2.0",
     "@vitejs/plugin-react": "^4.0.1",
     "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "8.43.0",
+    "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-storybook": "^0.8.0",
     "gh-pages": "^5.0.0",
@@ -71,7 +71,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "storybook": "^8.0.0",
     "styled-components": "^6.0.5",
-    "typescript": "^5.1.6",
+    "typescript": "^5.4.2",
     "vite": "^5.1.6",
     "vite-plugin-dts": "^3.7.3",
     "vite-plugin-externalize-deps": "^0.8.0",
