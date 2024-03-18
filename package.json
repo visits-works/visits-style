@@ -27,9 +27,9 @@
     "styled-components": ">=6.0.5"
   },
   "dependencies": {
-    "@floating-ui/react": "^0.26.6",
+    "@floating-ui/react": "^0.26.9",
     "eslint-config-react-app": "^7.0.1",
-    "polished": "^4.2.2"
+    "polished": "^4.3.1"
   },
   "scripts": {
     "build": "vite build",
@@ -44,13 +44,13 @@
     "@typescript-eslint/parser": "5.60.1"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.0.25",
-    "@storybook/addon-interactions": "^7.0.25",
-    "@storybook/addon-links": "^7.0.25",
-    "@storybook/addons": "^7.0.25",
-    "@storybook/blocks": "^7.0.25",
-    "@storybook/react": "^7.0.25",
-    "@storybook/react-vite": "^7.0.25",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/addons": "^7.6.17",
+    "@storybook/blocks": "^8.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/react-vite": "^8.0.0",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -69,10 +69,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
-    "storybook": "^7.0.25",
+    "storybook": "^8.0.0",
     "styled-components": "^6.0.5",
     "typescript": "^5.1.6",
-    "vite": "^4.4.0-beta.4",
+    "vite": "^5.1.6",
     "vite-plugin-dts": "^3.0.3",
     "vite-plugin-externalize-deps": "^0.7.0",
     "vite-tsconfig-paths": "^4.2.0",

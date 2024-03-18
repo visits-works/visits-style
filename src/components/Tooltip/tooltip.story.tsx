@@ -33,3 +33,15 @@ export const tooltip: Story = {
     disabled: false,
   },
 };
+
+export const absolute: Story = {
+  render: () => {
+    return (
+      <div style={{ height: '120vh' }}>
+        <Tooltip label="Hello!!!">
+          <button style={{ position: 'fixed', top: '50px' }}>Hello world</button>
+        </Tooltip>
+      </div>
+    );
+  },
+};

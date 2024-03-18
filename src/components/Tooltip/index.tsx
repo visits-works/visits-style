@@ -2,7 +2,7 @@ import React, { Children, cloneElement, useImperativeHandle, useState, forwardRe
 import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useHover, useClientPoint,
-  shift, offset as offsetUi, flip, useId,
+  shift, offset as offsetUi, flip, useId, autoUpdate,
 } from '@floating-ui/react';
 import type { Placement, ReferenceElement } from '@floating-ui/core';
 
@@ -58,6 +58,7 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
       flip(),
       offsetUi({ mainAxis: offset.y, crossAxis: offset.x }),
     ],
+    whileElementsMounted: disabled ? undefined : autoUpdate,
     onOpenChange: setOpen,
   });
 
