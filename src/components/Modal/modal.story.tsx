@@ -32,6 +32,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+// @ts-ignore
 export const base: Story = {
   render: ({ show, ...rest }) => {
     const [showModal, setShow] = useState(show);
@@ -58,6 +59,7 @@ export const base: Story = {
   },
 };
 
+// @ts-ignore
 export const onScroll: Story = {
   render: (args) => {
     const [showModal, setShow] = useState(false);
@@ -86,6 +88,7 @@ export const onScroll: Story = {
   },
 };
 
+// @ts-ignore
 export const nested: Story = {
   render: (args) => {
     const [parent, showParent] = useState(false);
@@ -129,6 +132,7 @@ export const nested: Story = {
   },
 };
 
+// @ts-ignore
 export const input: Story = {
   render: ({ show, ...rest }) => {
     const [showModal, setShow] = useState(show);
@@ -156,6 +160,7 @@ export const input: Story = {
   },
 };
 
+// @ts-ignore
 export const external: Story = {
   render: (args) => {
     const [showModal, setShow] = useState(false);
@@ -219,5 +224,6 @@ export const onExit: Story = {
       </>
     );
   },
+  // @ts-ignore
   args: { timeout: 500 },
 };

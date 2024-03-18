@@ -13,7 +13,7 @@ import pkg from './package.json';
 
 const testConfig = {
   globals: true,
-  environment: 'jsdom',
+  environment: 'happy-dom',
   include: ['./src/**/**.test.{ts,tsx}'],
   setupFiles: ['./src/setupTest.ts'],
 } as UserConfig;
