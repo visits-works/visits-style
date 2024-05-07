@@ -37,9 +37,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   offset?: { x: number; y: number; };
 
   /** 閉じた場合のコールバック */
-  onClose?: () => void;
+  onClose?: (e?: Event) => void;
   /** 開けた場合のコールバック */
-  onOpen?: () => void;
+  onOpen?: (e?: Event) => void;
   /** popoverを閉じる処理を手動に設定します */
   onManualClose?: () => void;
   /** コンテンツを出さない */
@@ -75,11 +75,18 @@ const Popover = forwardRef(({
       offsetUi({ mainAxis: offset.y, crossAxis: offset.x }),
     ],
     open,
-    onOpenChange: setOpen,
+    onOpenChange: (value, e) => {
+      if (value) {
+        openRef.current?.(e);
+      } else {
+        closeRef.current?.(e);
+      }
+      setOpen(value);
+    },
     whileElementsMounted: autoUpdate,
   });
 
-  const handleBlur = useCallback((e?: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  const handleBlur = useCallback((e?: React.MouseEvent<HTMLElement>) => {
     stopPropagation(e);
     if (onManualClose) return onManualClose();
     setOpen(false);
@@ -90,12 +97,6 @@ const Popover = forwardRef(({
       setOpen(false);
     }
   }, [disabled, open]);
-
-  useEffect(() => {
-    if (!open) return;
-    openRef.current?.();
-    return () => closeRef.current?.();
-  }, [open]);
 
   useImperativeHandle(ref, () => ({
     open: () => setOpen(true),
@@ -111,10 +112,13 @@ const Popover = forwardRef(({
 
   return (
     <>
-      {cloneElement(Children.only(label), {
+      {cloneElement(Children.only(label), getReferenceProps({
         ref: refs.setReference,
-        ...getReferenceProps({ tabIndex: 0, role: 'button', disabled, onClick: stopPropagation }),
-      })}
+        tabIndex: 0,
+        role: 'button',
+        disabled,
+        onClick: stopPropagation,
+      }))}
       <Portal>
         {open && !disabled ? (
           <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex }}>

@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
   args: {
-    name: 'test1', value: 1, onChange: noop, checked: false,
+    name: 'test1', value: 1, onChange: noop, checked: false, disabled: false,
   },
 };
 
@@ -29,6 +29,6 @@ export const withField: Story = {
     </Field>
   ),
   args: {
-    name: 'test1', value: 1, onChange: noop, checked: false,
+    name: 'test1', value: 1, onChange: noop, checked: false, disabled: false,
   },
 };
