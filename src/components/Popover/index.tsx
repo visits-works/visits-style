@@ -7,6 +7,7 @@ import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useClick, useId,
   shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate,
+  type ReferenceType,
 } from '@floating-ui/react';
 import type { Placement } from '@floating-ui/core';
 
@@ -37,9 +38,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   offset?: { x: number; y: number; };
 
   /** 閉じた場合のコールバック */
-  onClose?: (e?: Event) => void;
+  onClose?: (ref?: ReferenceType | null, float?: HTMLElement | null) => void;
   /** 開けた場合のコールバック */
-  onOpen?: (e?: Event) => void;
+  onOpen?: (ref?: ReferenceType | null, float?: HTMLElement | null) => void;
   /** popoverを閉じる処理を手動に設定します */
   onManualClose?: () => void;
   /** コンテンツを出さない */
@@ -75,11 +76,11 @@ const Popover = forwardRef(({
       offsetUi({ mainAxis: offset.y, crossAxis: offset.x }),
     ],
     open,
-    onOpenChange: (value, e) => {
+    onOpenChange: (value) => {
       if (value) {
-        openRef.current?.(e);
+        openRef.current?.(refs.reference.current, refs.floating.current);
       } else {
-        closeRef.current?.(e);
+        closeRef.current?.(refs.reference.current, refs.floating.current);
       }
       setOpen(value);
     },
@@ -89,7 +90,10 @@ const Popover = forwardRef(({
   const handleBlur = useCallback((e?: React.MouseEvent<HTMLElement>) => {
     stopPropagation(e);
     if (onManualClose) return onManualClose();
+
     setOpen(false);
+    closeRef.current?.(refs.reference.current, refs.floating.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onManualClose]);
 
   useEffect(() => {
@@ -99,8 +103,15 @@ const Popover = forwardRef(({
   }, [disabled, open]);
 
   useImperativeHandle(ref, () => ({
-    open: () => setOpen(true),
-    close: () => setOpen(false),
+    open: () => {
+      setOpen(true);
+      openRef.current?.(refs.reference.current, refs.floating.current);
+    },
+    close: () => {
+      setOpen(false);
+      closeRef.current?.(refs.reference.current, refs.floating.current);
+    },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), []);
 
   const { getFloatingProps, getReferenceProps } = useInteractions([

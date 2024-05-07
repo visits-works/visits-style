@@ -43,7 +43,7 @@ type Story = StoryObj<typeof meta>;
 export const base: Story = {
   render: (args) => (
     <div style={{ textAlign: 'center' }}>
-      <Popover {...args} label={<button ref={console.log} type="button">show</button>}>
+      <Popover {...args} label={<button type="button">show</button>}>
         <button type="button" onClick={() => { alert('world!'); }}>hello</button>
         <p>hello world</p>
       </Popover>
@@ -190,9 +190,8 @@ export const autoWidth: Story = {
         {...args}
         label={<button style={{ width: '250px' }}>click me</button>}
         onOpen={(e) => {
-          if (!e?.target) return;
-          const elem = e.target as HTMLElement;
-          setWidth(elem.getBoundingClientRect().width);
+          if (!e) return;
+          setWidth(e.getBoundingClientRect().width);
         }}
       >
         <p style={{ width }}>hello world</p>

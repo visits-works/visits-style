@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { render, fireEvent, cleanup, screen } from '@testing-library/react';
 import theme from '../../theme';
-import Popover from './index';
+import Popover, { PopoverRef } from './index';
 
 describe('Popover', () => {
   beforeEach(cleanup);
@@ -38,6 +38,7 @@ describe('Popover', () => {
   });
 
   it('close on disabled', () => {
+    const close = vi.fn();
     function Test() {
       const [disable, setDisable] = useState(false);
       return (
@@ -45,6 +46,7 @@ describe('Popover', () => {
           <Popover
             label={<button type="button">show</button>}
             disabled={disable}
+            onClose={close}
           >
             Popover Content
             <button
@@ -62,6 +64,7 @@ describe('Popover', () => {
     fireEvent.click(screen.getByText('show'));
     fireEvent.click(screen.getByTestId('disable'));
     expect(screen.queryByTestId('disable')).toBeNull();
+    expect(close).not.toHaveBeenCalled();
   });
 
   it('onOpen/onClose callback works', () => {
@@ -78,16 +81,51 @@ describe('Popover', () => {
         </Popover>
       </ThemeProvider>,
     );
-    expect(open).not.toBeCalled();
+    expect(open).not.toHaveBeenCalled();
 
     fireEvent.click(screen.getByText('show'));
-    expect(open).toBeCalled();
-    expect(close).not.toBeCalled();
+    expect(open).toHaveBeenCalled();
+    expect(close).not.toHaveBeenCalled();
 
     fireEvent.click(screen.getByTestId('visits-style-shadow'));
-    expect(close).toBeCalled();
+    expect(close).toHaveBeenCalled();
 
-    expect(open).toBeCalledTimes(1);
-    expect(close).toBeCalledTimes(1);
+    expect(open).toHaveBeenCalledTimes(1);
+    expect(close).toHaveBeenCalledTimes(1);
+  });
+
+  it('onOpen/onClose callback works on manual close', () => {
+    const open = vi.fn();
+    const close = vi.fn();
+
+    function Manual() {
+      const ref = useRef<PopoverRef>(null);
+      return (
+        <ThemeProvider theme={theme}>
+          <Popover
+            ref={ref}
+            label={<button type="button">show</button>}
+            onOpen={open}
+            onClose={close}
+          >
+            Popover Content
+            <button onClick={() => ref.current?.close()}>close</button>
+          </Popover>
+          <button onClick={() => ref.current?.open()}>manual open</button>
+        </ThemeProvider>
+      );
+    }
+    render(<Manual />);
+    expect(open).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'manual open' }));
+    expect(open).toHaveBeenCalled();
+    expect(close).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'close' }));
+    expect(close).toHaveBeenCalled();
+
+    expect(open).toHaveBeenCalledTimes(1);
+    expect(close).toHaveBeenCalledTimes(1);
   });
 });
