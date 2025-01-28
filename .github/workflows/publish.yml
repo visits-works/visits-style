@@ -27,7 +27,7 @@ jobs:
       - run: bun install
       - run: bun run build
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > .npmrc
-      - run: npm publish
+      - run: bun publish
   # document:
   #   name: deploy document
   #   runs-on: ubuntu-latest

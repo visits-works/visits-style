@@ -1,14 +1,4 @@
 import React, { ReactNode } from 'react';
-import { styled } from 'styled-components';
-
-interface MsgProps {
-  error?: boolean;
-}
-
-const Message = styled.small.withConfig({ shouldForwardProp: (name) => (name !== 'error') })<MsgProps>`
-  font-size: 0.8rem;
-  color: ${({ error, theme }) => (error ? theme.danger : theme.textLight)};
-`;
 
 interface Props {
   help?: ReactNode;
@@ -17,7 +7,7 @@ interface Props {
 }
 
 export default function HelpMessage({ help, error, noErrorMessage }: Props) {
-  if (error && !noErrorMessage) return (<Message error>{error}</Message>);
-  if (help) return (<Message>{help}</Message>);
+  if (error && !noErrorMessage) return (<small className="text-xs text-danger">{error}</small>);
+  if (help) return (<small className="text-xs">{help}</small>);
   return null;
 }

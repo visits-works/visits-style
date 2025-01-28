@@ -1,10 +1,6 @@
-import React, { InputHTMLAttributes, forwardRef } from 'react';
-import { styled, css } from 'styled-components';
+import React, { type InputHTMLAttributes } from 'react';
 
-import { setSize } from '../../utils';
-import disabledColor from '../../utils/disabledColor';
 import HelpMessage from '../HelpMessage';
-import type { ThemeType } from '../../types';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -26,121 +22,118 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   noErrorMessage?: boolean;
 }
 
-const TextInput = forwardRef<HTMLInputElement, Props>(({
+export default function TextInput({
   className, outline, error, style, help, leftIcon, rightIcon, type = 'text', maxLength = 255,
-  noErrorMessage, ...rest
-}, ref) => (
-  <Wrapper
-    className={className}
-    outline={outline}
-    error={!!error}
-    style={style}
-    disabled={rest.disabled}
-  >
-    {leftIcon && (<Icon>{leftIcon}</Icon>)}
-    {rightIcon && (<Icon $right>{rightIcon}</Icon>)}
-    <input type={type} maxLength={maxLength} ref={ref} {...rest} />
-    <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
-  </Wrapper>
-));
-TextInput.displayName = 'TextInput';
-
-export default TextInput;
-
-const rightIcon = css`
-  right: 0.375em;
-  & ~ input {
-    padding-right: 1.555em !important;
-  }
-`;
-
-const leftIcon = css`
-  left: 0.375em;
-  & ~ input {
-    padding-left: 1.55em !important;
-  }
-`;
-
-const Icon = styled.span<{ $right?: boolean }>`
-  position: absolute;
-  top: 0.375em;
-  bottom: 0;
-  z-index: 1;
-  color: ${({ theme }) => theme.border};
-  ${({ $right }) => ($right ? rightIcon : leftIcon)}
-
-  svg, img {
-    height: 1em;
-    width: 1em;
-  }
-`;
-
-function shouldForwardProp(name: string) {
+  noErrorMessage, ref, ...rest
+}: Props) {
   return (
-    name !== 'outline'
-    && name !== 'error'
-    && name !== 'disabled'
+    <span
+      className={className}
+      style={style}
+      aria-disabled={rest.disabled}
+    >
+      {leftIcon && (<Icon>{leftIcon}</Icon>)}
+      {rightIcon && (<Icon $right>{rightIcon}</Icon>)}
+      <input type={type} maxLength={maxLength} ref={ref} {...rest} />
+      <HelpMessage help={help} error={error} noErrorMessage={noErrorMessage} />
+    </span>
   );
 }
 
-const Wrapper = styled.span.withConfig({ shouldForwardProp })<{ outline?: boolean; error?: boolean; disabled?: boolean; }>`
-  position: relative;
-  display: block;
+// const rightIcon = css`
+//   right: 0.375em;
+//   & ~ input {
+//     padding-right: 1.555em !important;
+//   }
+// `;
 
-  input {
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: block;
-    outline: none;
-    box-shadow: none;
-    appearance: none;
-    text-align: left;
-    color: inherit;
+// const leftIcon = css`
+//   left: 0.375em;
+//   & ~ input {
+//     padding-left: 1.55em !important;
+//   }
+// `;
 
-    padding: ${({ theme }) => theme.formPadding};
-    border: 1px solid ${({ error, theme }) => (error ? theme.danger : theme.border)};
-    ${({ outline, theme }) => (outline
-    ? { borderRadius: theme.radius }
-    : { borderRadius: 0, borderWidth: 0, borderBottomWidth: '1px' })}
-    ${setSize('font-size')}
+// const Icon = styled.span<{ $right?: boolean }>`
+//   position: absolute;
+//   top: 0.375em;
+//   bottom: 0;
+//   z-index: 1;
+//   color: ${({ theme }) => theme.border};
+//   ${({ $right }) => ($right ? rightIcon : leftIcon)}
 
-    transition-property: box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-in-out;
+//   svg, img {
+//     height: 1em;
+//     width: 1em;
+//   }
+// `;
 
-    &:focus {
-      border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
-      box-shadow: ${({ theme, outline, error }) => (outline
-    ? `0 0 0 0.1em ${(error ? theme.danger : theme.primary)}`
-    : `0 0.1em ${(error ? theme.danger : theme.primary)}`)};
-    }
+// function shouldForwardProp(name: string) {
+//   return (
+//     name !== 'outline'
+//     && name !== 'error'
+//     && name !== 'disabled'
+//   );
+// }
 
-    &:disabled, [disabled] {
-      resize: none;
-    }
+// const Wrapper = styled.span.withConfig({ shouldForwardProp })<{ outline?: boolean; error?: boolean; disabled?: boolean; }>`
+//   position: relative;
+//   display: block;
 
-    &::placeholder {
-      color: ${({ theme }) => theme.placeholder};
-    }
-  }
+//   input {
+//     max-width: 100%;
+//     width: 100%;
+//     height: 100%;
+//     position: relative;
+//     display: block;
+//     outline: none;
+//     box-shadow: none;
+//     appearance: none;
+//     text-align: left;
+//     color: inherit;
 
-  &:hover {
-    input:not(:disabled):not(:focus):not(:active) {
-      border-color: ${({ theme }) => theme.borderHover};
-    }
-    ${Icon} {
-      color: ${({ theme }) => theme.borderHover};
-    }
-  }
+//     padding: ${({ theme }) => theme.formPadding};
+//     border: 1px solid ${({ error, theme }) => (error ? theme.danger : theme.border)};
+//     ${({ outline, theme }) => (outline
+//     ? { borderRadius: theme.radius }
+//     : { borderRadius: 0, borderWidth: 0, borderBottomWidth: '1px' })}
+//     ${setSize('font-size')}
 
-  ${({ disabled, theme }) => (disabled
-    ? css`
-      input {
-        ${disabledColor(theme as ThemeType)}
-        border-style: dashed;
-      }
-    `
-    : undefined)}
-`;
+//     transition-property: box-shadow;
+//     transition-duration: 150ms;
+//     transition-timing-function: ease-in-out;
+
+//     &:focus {
+//       border-color: ${({ error, theme }) => (error ? theme.danger : theme.primary)};
+//       box-shadow: ${({ theme, outline, error }) => (outline
+//     ? `0 0 0 0.1em ${(error ? theme.danger : theme.primary)}`
+//     : `0 0.1em ${(error ? theme.danger : theme.primary)}`)};
+//     }
+
+//     &:disabled, [disabled] {
+//       resize: none;
+//     }
+
+//     &::placeholder {
+//       color: ${({ theme }) => theme.placeholder};
+//     }
+//   }
+
+//   &:hover {
+//     input:not(:disabled):not(:focus):not(:active) {
+//       border-color: ${({ theme }) => theme.borderHover};
+//     }
+//     ${Icon} {
+//       color: ${({ theme }) => theme.borderHover};
+//     }
+//   }
+
+//   ${({ disabled, theme }) => (disabled
+//     ? css`
+//       input {
+//         ${disabledColor(theme as ThemeType)}
+//         border-style: dashed;
+//       }
+//     `
+//     : undefined)}
+// `;

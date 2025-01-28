@@ -1,7 +1,6 @@
 import { HTMLAttributes } from 'react';
-import { styled } from 'styled-components';
-import findColorInvert from '../../utils/findColorInvert';
-import { ColorType, ThemeType } from '../../types';
+
+import type { ColorType } from '../../types';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** 色指定 */
@@ -10,24 +9,6 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   borderless?: boolean;
 }
 
-export default styled.div.withConfig({ shouldForwardProp: (name) => (name !== 'color' && name !== 'borderless') })<Props>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border: ${({ borderless, theme }) => (borderless ? 'none' : `1px solid ${theme.border}`)};
-  border-radius: ${({ theme }) => theme.radius};
-  width: 100%;
-
-  min-width: 0;
-  word-wrap: break-word;
-
-  ${(({ color, theme }) => {
-    if (!color) return undefined;
-    const target = theme[color] || color;
-    const invertColor = findColorInvert(theme as ThemeType, target);
-    return {
-      backgroundColor: target,
-      color: invertColor,
-    };
-  })}
-`;
+export default function Box({ className, color, borderless, ...props }: Props) {
+  return <div className="container relative flex flex-col rounded-md break-words" {...props} />;
+}

@@ -1,7 +1,4 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { render, fireEvent, screen } from '@testing-library/react';
-import theme from '../../theme';
 
 import Modal, { Props } from '.';
 import Box from '../../elements/Box';
@@ -69,10 +66,8 @@ describe('Modal', () => {
 
 function renderModal(props: Props) {
   render(
-    <ThemeProvider theme={theme}>
-      <Modal {...props}>
-        <Box>Modal Content here</Box>
-      </Modal>
-    </ThemeProvider>,
+    <Modal {...props}>
+      <Box>Modal Content here</Box>
+    </Modal>,
   );
 }

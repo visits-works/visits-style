@@ -1,5 +1,4 @@
 import React, { HTMLAttributes, useRef, useEffect } from 'react';
-import { styled } from 'styled-components';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
@@ -91,19 +90,15 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
   return (
     <div {...rest}>
       {header}
-      <AnimatedContent
+      <div
+        className="transition ease-in-out"
+        role="region"
         aria-hidden={!show}
         ref={ref}
         style={{ transitionDuration: `${timeout}ms` }}
       >
         {children}
-      </AnimatedContent>
+      </div>
     </div>
   );
 }
-
-const AnimatedContent = styled.div`
-  will-change: opacity, height, transform;
-  transition-property: opacity, height, transform;
-  transition-timing-function: ease-in-out;
-`;

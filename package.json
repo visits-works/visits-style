@@ -2,7 +2,7 @@
   "name": "visits-style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
-  "version": "1.4.15",
+  "version": "2.0.0",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -19,63 +19,55 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "peerDependencies": {
-    "react": ">=18.2.0",
-    "react-dom": ">=18.2.0",
-    "styled-components": ">=6.0.5"
+    "react": ">=19",
+    "react-dom": ">=19",
+    "tailwindcss": ">=4"
   },
   "dependencies": {
-    "@floating-ui/react": "^0.26.13",
-    "eslint-config-react-app": "^7.0.1",
-    "polished": "^4.3.1"
+    "@floating-ui/react": ">=0.27.3",
+    "clsx": ">=2.1.1",
+    "polished": ">=4.3.1"
   },
   "scripts": {
-    "build": "vite build",
+    "build": "tsup",
     "lint": "eslint 'src/**/*.{ts,tsx}' && tsc --noEmit",
     "test": "vitest",
     "start": "STORYBOOK=true storybook dev -p 9000",
     "storybook:build": "STORYBOOK=true storybook build -c .storybook -o .out --disable-telemetry",
-    "storybook:deploy": "yarn storybook:build && gh-pages -d .out"
-  },
-  "resolutions": {
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0"
+    "storybook:deploy": "bun storybook:build && gh-pages -d .out"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.0.0",
-    "@storybook/addon-interactions": "^8.0.0",
-    "@storybook/addon-links": "^8.0.0",
-    "@storybook/addons": "^7.6.17",
-    "@storybook/blocks": "^8.0.0",
-    "@storybook/react": "^8.0.0",
-    "@storybook/react-vite": "^8.0.0",
+    "@storybook/addon-essentials": "^8.5.1",
+    "@storybook/addon-interactions": "^8.5.1",
+    "@storybook/addon-links": "^8.5.1",
+    "@storybook/blocks": "^8.5.1",
+    "@storybook/react": "^8.5.1",
+    "@storybook/react-vite": "^8.5.1",
     "@storybook/testing-library": "^0.2.2",
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^14.2.1",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0",
-    "@vitejs/plugin-react": "^4.0.1",
-    "babel-plugin-styled-components": "^2.1.4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
     "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-plugin-storybook": "^0.8.0",
-    "gh-pages": "^5.0.0",
-    "happy-dom": "^13.9.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "eslint-plugin-storybook": "^0.11.2",
+    "eslint-config-react-app": "^7.0.1",
+    "gh-pages": "^6.3.0",
+    "happy-dom": "^16.7.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "resize-observer-polyfill": "^1.5.1",
-    "storybook": "^8.0.0",
-    "styled-components": "^6.0.5",
-    "typescript": "^5.4.2",
-    "vite": "^5.1.6",
-    "vite-plugin-dts": "^3.7.3",
-    "vite-plugin-externalize-deps": "^0.8.0",
-    "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.4.0"
+    "storybook": "^8.5.1",
+    "tailwindcss": "^4.0.0",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.11",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.4"
   }
 }

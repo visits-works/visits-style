@@ -1,5 +1,4 @@
 import React, { HTMLAttributes, useEffect, useRef, MouseEvent } from 'react';
-import { styled } from 'styled-components';
 import {
   useFloating,
   useDismiss,
@@ -92,17 +91,22 @@ export default function Modal({
   return (
     <Portal>
       {isMounted ? (
-        <Overlay
-          lockScroll
+        <FloatingOverlay
+          className="flex grid"
           data-testid="vs-modal-overlay"
           onClick={handleOverlayClose}
           style={{ padding }}
-          $verticalAlign={verticalAlign}
+          lockScroll
         >
-          <Wrapper ref={refs.setFloating} role="dialog" {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}>
+          <div
+            className="transition ease-in-out"
+            ref={refs.setFloating}
+            role="dialog"
+            {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}
+          >
             {children}
-          </Wrapper>
-        </Overlay>
+          </div>
+        </FloatingOverlay>
       ) : null}
     </Portal>
   );
@@ -110,27 +114,27 @@ export default function Modal({
 
 export const ModalContent = Box;
 
-const Overlay = styled(FloatingOverlay)<{ $verticalAlign?: Props['verticalAlign'] }>`  
-  display: flex;
-  display: grid;
-  place-items: ${({ $verticalAlign }) => {
-    if ($verticalAlign === 'start') return 'flex-start';
-    if ($verticalAlign === 'end') return 'flex-end';
-    return 'center';
-  }};
-  align-items: ${({ $verticalAlign }) => {
-    if ($verticalAlign === 'start') return 'flex-start';
-    if ($verticalAlign === 'end') return 'flex-end';
-    return 'center';
-  }};
-  justify-content: center;
-  background: ${({ theme }) => theme.backdrop};
-  z-index: 9997;
-`;
+// const Overlay = styled(FloatingOverlay)<{ $verticalAlign?: Props['verticalAlign'] }>`  
+//   display: flex;
+//   display: grid;
+//   place-items: ${({ $verticalAlign }) => {
+//     if ($verticalAlign === 'start') return 'flex-start';
+//     if ($verticalAlign === 'end') return 'flex-end';
+//     return 'center';
+//   }};
+//   align-items: ${({ $verticalAlign }) => {
+//     if ($verticalAlign === 'start') return 'flex-start';
+//     if ($verticalAlign === 'end') return 'flex-end';
+//     return 'center';
+//   }};
+//   justify-content: center;
+//   background: ${({ theme }) => theme.backdrop};
+//   z-index: 9997;
+// `;
 
-const Wrapper = styled.div`
-  will-change: transform, opacity;
-  transform-origin: center top;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-  z-index: 9999;
-`;
+// const Wrapper = styled.div`
+//   will-change: transform, opacity;
+//   transform-origin: center top;
+//   transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+//   z-index: 9999;
+// `;
