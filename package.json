@@ -2,7 +2,7 @@
   "name": "visits-style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
-  "version": "1.4.15",
+  "version": "1.4.16",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -18,17 +18,13 @@
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=18"
-  },
   "peerDependencies": {
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0",
     "styled-components": ">=6.0.5"
   },
   "dependencies": {
-    "@floating-ui/react": "^0.26.13",
-    "eslint-config-react-app": "^7.0.1",
+    "@floating-ui/react": "^0.27.3",
     "polished": "^4.3.1"
   },
   "scripts": {
@@ -61,6 +57,7 @@
     "@vitejs/plugin-react": "^4.0.1",
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "8.57.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-storybook": "^0.8.0",
     "gh-pages": "^5.0.0",
