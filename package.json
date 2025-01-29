@@ -1,5 +1,5 @@
 {
-  "name": "visits-style",
+  "name": "@visits/style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
   "version": "2.0.0",
@@ -18,35 +18,33 @@
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=20"
-  },
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19",
     "tailwindcss": ">=4"
   },
   "dependencies": {
-    "@floating-ui/react": ">=0.27.3",
-    "clsx": ">=2.1.1",
-    "polished": ">=4.3.1"
+    "@floating-ui/react": "^0.27.3",
+    "clsx": "^2.1.1",
+    "polished": "^4.3.1"
   },
   "scripts": {
     "build": "tsup",
     "lint": "eslint 'src/**/*.{ts,tsx}' && tsc --noEmit",
     "test": "vitest",
-    "start": "STORYBOOK=true storybook dev -p 9000",
+    "dev": "STORYBOOK=true storybook dev -p 9000",
     "storybook:build": "STORYBOOK=true storybook build -c .storybook -o .out --disable-telemetry",
     "storybook:deploy": "bun storybook:build && gh-pages -d .out"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.5.1",
-    "@storybook/addon-interactions": "^8.5.1",
-    "@storybook/addon-links": "^8.5.1",
-    "@storybook/blocks": "^8.5.1",
-    "@storybook/react": "^8.5.1",
-    "@storybook/react-vite": "^8.5.1",
+    "@storybook/addon-essentials": "^8.5.2",
+    "@storybook/addon-interactions": "^8.5.2",
+    "@storybook/addon-links": "^8.5.2",
+    "@storybook/blocks": "^8.5.2",
+    "@storybook/react": "^8.5.2",
+    "@storybook/react-vite": "^8.5.2",
     "@storybook/testing-library": "^0.2.2",
+    "@tailwindcss/vite": "^4.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -55,14 +53,13 @@
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-plugin-storybook": "^0.11.2",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-storybook": "^0.11.2",
     "gh-pages": "^6.3.0",
     "happy-dom": "^16.7.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resize-observer-polyfill": "^1.5.1",
-    "storybook": "^8.5.1",
+    "storybook": "^8.5.2",
     "tailwindcss": "^4.0.0",
     "tsup": "^8.3.6",
     "typescript": "^5.7.2",

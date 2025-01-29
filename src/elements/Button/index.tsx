@@ -1,123 +1,35 @@
-import type { ButtonHTMLAttributes } from 'react';
-// import findColorInvert from '../../utils/findColorInvert';
-// import boxShadow from '../../utils/boxShadow';
-// import setSize from '../../utils/setSize';
-// import disabledColor from '../../utils/disabledColor';
-import type { ColorType, SizeType } from '../../types';
+import { useMemo, createElement, type ButtonHTMLAttributes } from 'react';
+import clsx from 'clsx';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** ボタンの色 */
-  color?: ColorType;
-  /** ボタンのサイズ */
-  size?: SizeType;
-  /** 背景が透明なボタンでする */
-  outline?: boolean;
-  /** 丸いボタンで表示する */
-  round?: boolean;
-  /** アイコンボタンとしてpaddingを同じにする */
-  icon?: boolean;
+interface InnerButtonProps {
+  variant?: 'primary' | 'link' | 'outline' | 'ghost' | 'danger';
+  size?: 'icon';
 }
 
-export default function Button({ color, size, outline, round, icon, ...rest }: ButtonProps) {
-  return <button className="relative inline-block" {...rest} />;
+export type ButtonProps = InnerButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
+
+export function varientButton({ variant, size }: InnerButtonProps) {
+  return clsx(
+    'inline-flex items-center justify-center whitespace-nowrap transition-colors rounded-md cursor-pointer',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+    'disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-auto',
+    {
+      'bg-primary text-inverted hover:bg-primary-fore': !variant || variant === 'primary',
+      'bg-danger text-inverted hover:bg-danger-fore': variant === 'danger',
+      'hover:bg-accent': variant === 'ghost',
+      'hover:underline': variant === 'link',
+      'border border-input hover:bg-accent': variant === 'outline',
+    },
+    {
+      'px-2 py-1': !size,
+      'p-2': size === 'icon',
+    },
+  );
 }
 
-// interface ButtonSetColorConfig extends ExecutionContext {
-//   color?: ColorType;
-//   outline?: boolean;
-//   disabled?: boolean;
-// }
-
-// function setColor({ theme, color, outline, disabled }: ButtonSetColorConfig) {
-//   if (disabled) {
-//     return disabledColor(theme as ThemeType);
-//   }
-//   if (!color) {
-//     return css`
-//       border-color: ${theme.border};
-//       color: ${theme.text};
-
-//       &:hover {
-//         border-color: ${theme.borderHover};
-//       }
-
-//       &:active {
-//         border-color: ${theme.borderActive};
-//       }
-//     `;
-//   }
-//   const target = theme[color] || color;
-//   const invertColor = findColorInvert(theme as ThemeType, target);
-//   if (outline) {
-//     return css`
-//       background-color: transparent;
-//       border-color: ${target};
-//       color: ${target};
-
-//       &:hover {
-//         background-color: ${target};
-//         color: ${invertColor};
-//       }
-
-//       &:active {
-//         background-color: ${darken(0.1, target)};
-//       }
-
-//       &:focus:not(:active) {
-//         ${boxShadow('0.1rem', target, 0.5)}
-//       }
-//     `;
-//   }
-
-//   return css`
-//     background-color: ${target};
-//     border-color: transparent;
-//     color: ${invertColor};
-//     box-shadow: none;
-
-//     &:hover {
-//       color: ${invertColor};
-//       background-color: ${darken(0.05, target)};
-//     }
-
-//     &:active {
-//       background-color: ${darken(0.1, target)};
-//     }
-
-//     &:focus:not(:active) {
-//       ${boxShadow('0.1rem', target, 0.5)}
-//     }
-//   `;
-// }
-
-// function shouldForwardProp(name: string) {
-//   return (
-//     name !== 'color'
-//     && name !== 'size'
-//     && name !== 'outline'
-//     && name !== 'round'
-//     && name !== 'icon'
-//   );
-// }
-
-// export default styled.button.withConfig({ shouldForwardProp })<ButtonProps>`
-//   position: relative;
-//   outline: none;
-//   appearance: none;
-//   box-sizing: border-box;
-//   display: inline-block;
-//   text-align: center;
-//   white-space: nowrap;
-//   cursor: pointer;
-//   justify-content: center;
-//   vertical-align: middle;
-//   user-select: none;
-//   background: transparent;
-//   border: 1px solid transparent;
-//   border-radius: ${({ round, theme }) => (round ? '2456189px' : theme.radius)};
-//   padding: ${({ icon }) => (icon ? '0.375em' : '0.375em 0.75em')};
-//   line-height: ${({ icon }) => (icon ? 1 : 1.5)};
-
-//   ${setColor}
-//   ${({ size }) => setSize('font-size', size)}
-// `;
+export default function Button({ size, variant, className, ...rest }: ButtonProps) {
+  const buttonClass = useMemo(() => (
+    clsx(varientButton({ size, variant }), className)
+  ), [size, variant, className]);
+  return createElement('button', { className: buttonClass, ...rest });
+}

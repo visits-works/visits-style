@@ -9,14 +9,11 @@ export interface Props {
   disabled?: boolean;
 }
 
-const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) => {
+export default function Portal({ children, container, disabled }: Props) {
   const [mountNode, setMountNode] = useState<Element | null>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (disabled) {
-      setMountNode(null);
-      return;
-    }
+    if (disabled) return setMountNode(null);
     if (!container) {
       let dom = document.getElementById('visits-style-portals');
       if (!dom) {
@@ -24,14 +21,10 @@ const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) 
         dom.id = 'visits-style-portals';
         document.body.appendChild(dom);
       }
-      setMountNode(dom);
-      return;
+      return setMountNode(dom);
     }
     setMountNode(container);
   }, [container, disabled]);
 
   return mountNode ? createPortal(children, mountNode) : null;
-});
-Portal.displayName = 'Portal';
-
-export default Portal;
+}

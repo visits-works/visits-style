@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+@theme {
+  --default-font-family: -apple-system BlinkMacSystemFont, Meiryo, system-ui, sans-serif;
+  --color-primary: #37B151;
+  --color-primary-fore: #76d58b;
+  --color-info: #209CEE;
+  --color-info-fore: #59b5f3;
+  --color-warn: #F2B541;
+  --color-danger: #ee1114;
+  --color-danger-fore: #F3575A;
+
+  /* utility colors */
+  --color-background: #FFFFFF;
+  --color-accent: #F4F4F5;
+  --color-input: #E4E4E7;
+  --color-ring: #E4E4E7;
+
+  /* text */
+  --color-inverted: #FAFAFA;
+
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+}

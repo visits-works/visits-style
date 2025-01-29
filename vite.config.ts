@@ -2,6 +2,7 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwind from '@tailwindcss/vite';
 import type { UserConfig } from 'vitest/node';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 
@@ -13,8 +14,6 @@ const testConfig = {
 } as UserConfig;
 
 export default defineConfig({
-  plugins: [react(), viteTsconfigPaths()],
-  // これがdev環境に入った場合、babel/runtimeのエラーが発生してしまうので、test環境のみ有効にする
-  // @ts-ignore
+  plugins: [react(), tailwind(), viteTsconfigPaths()],
   test: process.env.NODE_ENV === 'test' ? testConfig : undefined,
 });
