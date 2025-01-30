@@ -1,24 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
-import { styled } from 'styled-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import * as Icons from '.';
-
-const Wrapper = styled.ul`
-  display: grid;
-  gap: 0.85rem;
-  grid-template-columns: repeat(4, 1fr);
-
-  li {
-    text-align: center;
-    small {
-      display: block;
-      margin-top: 0.5em;
-    }
-
-    margin: 0.5rem;
-  }
-`;
 
 const meta = {
   title: 'elements/Icons',
@@ -33,17 +14,17 @@ type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
   render: () => (
-    <Wrapper>
+    <ul className="grid gap-2 gap-y-6" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
       {Object.keys(Icons).map((name) => {
         // @ts-ignore
         const Icon = Icons[name];
         return (
-          <li key={name}>
+          <li key={name} className="flex justify-center items-center flex-col">
             <Icon width={24} height={24} />
-            <small>{name}</small>
+            <small className="mt-2">{name}</small>
           </li>
         );
       })}
-    </Wrapper>
+    </ul>
   ),
 };

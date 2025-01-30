@@ -1,12 +1,18 @@
-import React, { CSSProperties, useMemo } from 'react';
-import { styled } from 'styled-components';
+import { type CSSProperties, useMemo, useState, startTransition } from 'react';
+import clsx from 'clsx';
+
+import useIsomorphicLayoutEffect from 'hooks/useIsomorphicLayoutEffect';
 
 import ToastItem from './ToastItem';
-import type { ToastContainerProps } from './types';
+import ToastFloat from './ToastFloat';
+import type { ToastConfig, ToasterProps } from './types';
 
 import Portal from '../Portal';
+import observer from './observer';
 
-export default function Toast({ toasts, clear, fixed, margin = '16px', position = 'top-left', space = '16px' }: ToastContainerProps) {
+export default function Toast({
+  className, fixed, margin = 16, position = 'top-left', stack, max,
+}: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
     const base = { position: fixed ? 'fixed' : 'absolute' } as CSSProperties;
     if (position.indexOf('top') > -1) {
@@ -26,32 +32,40 @@ export default function Toast({ toasts, clear, fixed, margin = '16px', position 
       base.alignItems = 'center';
       base.transform = 'translateX(-50%)';
     }
-
     return base;
   }, [fixed, margin, position]);
 
+  const name = useMemo(() => clsx(
+    'flex flex-col z-40 overflow-hidden',
+    className,
+  ), [className, stack]);
+
+  const isInvertedOrder = useMemo(() => position?.startsWith('bottom') || false, [position]);
+
+  const [toasts, setToast] = useState<ToastConfig[]>([]);
+  useIsomorphicLayoutEffect(() => observer.subscribe(() => {
+    startTransition(() => setToast(observer.getSnapShot()));
+  }), []);
+
+  const size = toasts.length;
+
   return (
     <Portal>
-      <ToastList style={style} $space={space}>
-        {toasts.map((props) => (
-          <ToastItem
-            {...props}
-            key={props.id}
-            clear={clear}
-          />
+      <ol className={name} style={style} aria-live="polite">
+        {toasts.map(({ id, className, duration, ...props }, i) => (
+          <ToastFloat
+            key={id}
+            id={id}
+            index={size - i}
+            className={className}
+            duration={duration}
+            inverted={isInvertedOrder}
+            max={max}
+          >
+            <ToastItem id={id} {...props} />
+          </ToastFloat>
         ))}
-      </ToastList>
+      </ol>
     </Portal>
   );
 }
-
-const ToastList = styled.ul<{ $space: string; }>`
-  display: flex;
-  flex-direction: column;
-  z-index: 9999;
-  overflow: hidden;
-
-  li + li {
-    margin-top: ${({ $space }) => $space};
-  }
-`;
