@@ -1,10 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Popover, { PopoverRef } from '.';
 import Tooltip from '../Tooltip';
-import TextInput from '../../forms/TextInput';
+import Button from '../../elements/Button';
+import TextInput from '../../forms/Input';
 
 const positionList = [
   'auto',
@@ -40,53 +40,51 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const Label = <Button variant="outline" type="button">show</Button>;
+
+// @ts-expect-error
 export const base: Story = {
   render: (args) => (
     <div style={{ textAlign: 'center' }}>
-      <Popover {...args} label={<button type="button">show</button>}>
-        <button type="button" onClick={() => { alert('world!'); }}>hello</button>
+      <Popover {...args} label={Label}>
+        <Button type="button" onClick={() => { alert('world!'); }}>hello</Button>
         <p>hello world</p>
       </Popover>
     </div>
   ),
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const autoPlacement: Story = {
   name: 'auto placement on scroll',
   render: (args) => (
     <>
       <div style={{ width: '50px', height: '80vh' }} />
       <div style={{ textAlign: 'center' }}>
-        <Popover {...args} label={<button type="button">show</button>}>
-          <div style={{ padding: 50 }}>
-            <button type="button" onClick={() => { alert('world!'); }}>hello</button>
-            <p>hello world</p>
-          </div>
+        <Popover {...args} style={{ padding: 50 }} label={Label}>
+          <button type="button" onClick={() => { alert('world!'); }}>hello</button>
+          <p>hello world</p>
         </Popover>
       </div>
       <div style={{ width: '50px', height: '80vh' }} />
     </>
   ),
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const withInput: Story = {
   render: (args) => {
     const [txt, setText] = useState('');
     const onChange = (e: any) => setText(e.target.value);
     return (
-      <Popover {...args} label={<button type="button">show</button>}>
+      <Popover {...args} label={Label}>
         <TextInput value={txt} onChange={onChange} />
       </Popover>
     );
   },
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const absoluteParent: Story = {
   name: 'reference button with absolute position',
   render: (args) => (
@@ -99,10 +97,9 @@ export const absoluteParent: Story = {
       <Test {...args} />
     </div>
   ),
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const program: Story = {
   name: 'programatically handle',
   render: (args) => {
@@ -110,66 +107,62 @@ export const program: Story = {
     useEffect(() => {
       ref.current?.open();
     }, []);
-
     return (
       <>
-        <button type="button" onClick={() => ref.current?.open()}>open</button>
+        <Button variant="link" type="button" onClick={() => ref.current?.open()}>open</Button>
         <Popover
           {...args}
           ref={ref}
           label={<span>show</span>}
         >
           <p>hello world!</p>
-          <button type="button" onClick={() => ref.current?.close()}>
+          <Button variant="link" type="button" onClick={() => ref.current?.close()}>
             close me!
-          </button>
+          </Button>
         </Popover>
       </>
     );
   },
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const case5: Story = {
   name: 'clickable parent',
   render: (args) => {
     const [clicked, setClicked] = useState(false);
     return (
       <>
-        <button onClick={() => setClicked(!clicked)}>
+        <a className="hover:underline" onClick={() => setClicked(!clicked)}>
           <span>parent button contents</span><br />
-          <Popover {...args} label={<button>click me</button>}>
+          <Popover {...args} label={Label}>
             <p>hello world</p>
           </Popover>
-        </button>
+        </a>
         {clicked ? <div>oh no! your parent click event is triggered!</div> : null}
       </>
     );
   },
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const tooltip: Story = {
   name: 'popover with tooltip',
   render: (args) => (
-    <Popover {...args} label={<button>click me</button>}>
+    <Popover {...args} label={Label}>
       <Tooltip label="tooltip!">
         <p>hello world</p>
       </Tooltip>
     </Popover>
   ),
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const manualClose: Story = {
   name: 'popover close manually',
   render: (args) => {
     const ref = useRef<PopoverRef>(null);
     return (
-      <Popover ref={ref} {...args} label={<button>click me</button>} onManualClose={noop}>
+      <Popover ref={ref} {...args} label={Label} onManualClose={noop}>
         <p>hello world</p>
         <button type="button" onClick={() => ref.current?.close()}>
           close!
@@ -177,10 +170,9 @@ export const manualClose: Story = {
       </Popover>
     );
   },
-  // @ts-ignore
-  args: {},
 };
 
+// @ts-expect-error
 export const autoWidth: Story = {
   name: 'auth width',
   render: (args) => {
@@ -188,7 +180,7 @@ export const autoWidth: Story = {
     return (
       <Popover
         {...args}
-        label={<button style={{ width: '250px' }}>click me</button>}
+        label={<Button variant="outline" style={{ width: '250px' }}>click me</Button>}
         onOpen={(e) => {
           if (!e) return;
           setWidth(e.getBoundingClientRect().width);
@@ -198,8 +190,6 @@ export const autoWidth: Story = {
       </Popover>
     );
   },
-  // @ts-ignore
-  args: {},
 };
 
 function Test(props: any) {
@@ -212,7 +202,7 @@ function Test(props: any) {
     >
       {show && (
         <div style={{ position: 'absolute', right: 4, top: 0, transform: 'translateY(100%)', zIndex: 10 }}>
-          <Popover {...props} label={<button type="button">button!</button>}>
+          <Popover {...props} label={<Button variant="ghost" type="button">button!</Button>}>
             hello world!
           </Popover>
         </div>

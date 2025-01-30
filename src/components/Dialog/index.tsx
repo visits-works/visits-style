@@ -1,16 +1,9 @@
-import React, { type HTMLAttributes, useEffect, useRef, MouseEvent, useMemo, forwardRef, useCallback } from 'react';
-import {
-  useFloating,
-  useDismiss,
-  useInteractions,
-  useTransitionStyles,
-  FloatingOverlay,
-  useId,
-} from '@floating-ui/react';
+import React, { type HTMLAttributes, useEffect, useRef, useMemo, forwardRef, useCallback } from 'react';
+import { useFloating, useDismiss, useInteractions, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
 import clsx from 'clsx';
-import { Button } from 'elements';
 
 import Portal from '../Portal';
+import stopPropagation from '../../utils/stopPropagation';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
@@ -23,7 +16,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   closeOnEsc?: boolean;
   /**
    * モーダルの表示・非表示のアニメーション速度
-   * @default 200
+   * @default 150
    */
   timeout?: number;
   /**
@@ -47,13 +40,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   verticalAlign?: 'start' | 'center' | 'end';
 }
 
-function stopPropagation(e?: React.MouseEvent<Element>) {
-  if (!e) return;
-  e.stopPropagation();
-}
-
 export default function Dialog({
-  open, children, timeout = 200, padding = '0.85rem', verticalAlign = 'center',
+  open, children, timeout = 150, padding = '0.85rem', verticalAlign = 'center',
   closeOnOverlay, closeOnEsc, onExited, className, onOpenChange, size,
   ...rest
 }: Props) {
@@ -73,10 +61,7 @@ export default function Dialog({
 
   const { isMounted, styles } = useTransitionStyles(context, {
     duration: timeout,
-    initial: {
-      opacity: 0,
-      transform: 'scale(0.8)',
-    },
+    initial: { opacity: 0, transform: 'scale(0.8)' },
   });
 
   useEffect(() => {
@@ -94,8 +79,8 @@ export default function Dialog({
 
   exitRef.current = onExited;
 
-  const overlayClass = useMemo(() => clsx('grid bg-black/60 z-40', {
-    'place-items-start': verticalAlign === 'start',
+  const overlayClass = useMemo(() => clsx('grid bg-black/60 z-40 justify-items-center', {
+    'place-items-start items-start': verticalAlign === 'start',
     'place-items-end': verticalAlign === 'end',
     'place-items-center': verticalAlign === 'center' || !verticalAlign,
   }), [verticalAlign]);

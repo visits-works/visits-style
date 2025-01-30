@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 @theme {
   --default-font-family: -apple-system BlinkMacSystemFont, Meiryo, system-ui, sans-serif;
   --color-primary: #37B151;
@@ -14,9 +12,11 @@
   --color-background: #FFFFFF;
   --color-accent: #F4F4F5;
   --color-input: #E4E4E7;
+  --color-input-fore: #BBBBC3;
   --color-ring: #E4E4E7;
 
   /* text */
+  --color-text: #4A4A4A;
   --color-inverted: #FAFAFA;
 
   --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);

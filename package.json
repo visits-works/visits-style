@@ -15,9 +15,7 @@
   },
   "license": "Apache-2.0",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19",

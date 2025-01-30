@@ -13,7 +13,6 @@ export default function Portal({ children, container, disabled }: Props) {
   const [mountNode, setMountNode] = useState<Element | null>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (disabled) return setMountNode(null);
     if (!container) {
       let dom = document.getElementById('visits-style-portals');
       if (!dom) {
@@ -24,7 +23,8 @@ export default function Portal({ children, container, disabled }: Props) {
       return setMountNode(dom);
     }
     setMountNode(container);
-  }, [container, disabled]);
+  }, [container]);
 
-  return mountNode ? createPortal(children, mountNode) : null;
+  if (disabled || !mountNode) return null;
+  return createPortal(children, mountNode);
 }

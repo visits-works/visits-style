@@ -1,73 +1,59 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import event from '@testing-library/user-event';
 
 import Modal, { Props } from '.';
-import Box from '../../elements/Box';
 
-describe('Modal', () => {
-  it('render modal', () => {
-    renderModal({ closeModal: vi.fn(), show: true });
+describe('Dialog', () => {
+  it('render dialog', () => {
+    renderDialog({ onOpenChange: vi.fn(), open: true });
 
-    screen.getByText('Modal Content here');
+    expect(screen.getByRole('dialog')).toHaveTextContent('Dialog Content here');
   });
 
-  it('modal does not rendered when show props is false', () => {
-    renderModal({ closeModal: vi.fn(), show: false });
+  it('dialog does not rendered when show props is false', () => {
+    renderDialog({ onOpenChange: vi.fn(), open: false });
 
     // content does not exists
-    expect(screen.queryByText('Modal Content here')).toBeNull();
+    expect(screen.queryByText('Dialog Content here')).toBeNull();
     // role=dialog div does not exists
     expect(screen.queryByRole('dialog')).toBeNull();
     // overlay does not exists
-    expect(screen.queryByTestId('vs-modal-overlay')).toBeNull();
+    expect(screen.queryByTestId('vs-dialog-overlay')).toBeNull();
   });
 
-  it('closeModal is called by clicking overlay when "closeOnOverlay" is enabled', () => {
+  it('onOpenChange is called by clicking overlay when "closeOnOverlay" is enabled', async () => {
     const onClose = vi.fn();
-    renderModal({ closeModal: onClose, show: true, closeOnOverlay: true });
+    renderDialog({ onOpenChange: onClose, open: true, closeOnOverlay: true });
 
-    fireEvent.click(screen.getByTestId('vs-modal-overlay'));
+    await event.click(screen.getByTestId('vs-dialog-overlay'));
     expect(onClose).toBeCalled();
   });
 
-  it('closeModal is not called by clicking overlay when "closeOnOverlay" is disabled', () => {
+  it('onOpenChange is not called by clicking overlay when "closeOnOverlay" is disabled', async () => {
     const onClose = vi.fn();
-    renderModal({ closeModal: onClose, show: true });
+    renderDialog({ onOpenChange: onClose, open: true });
 
-    fireEvent.click(screen.getByTestId('vs-modal-overlay'));
+    await event.click(screen.getByTestId('vs-dialog-overlay'));
     expect(onClose).not.toBeCalled();
   });
 
-  it('closeModal is called on pressing Escape Key when "closeOnEsc is enabled', () => {
+  it('onOpenChange is called on pressing Escape Key when "closeOnEsc is enabled', async () => {
     const onClose = vi.fn();
-    renderModal({ closeModal: onClose, show: true, closeOnEsc: true });
+    renderDialog({ onOpenChange: onClose, open: true, closeOnEsc: true });
 
-    fireEvent.keyDown(screen.getByRole('dialog'), {
-      key: "Escape",
-      code: "Escape",
-      keyCode: 27,
-      charCode: 27
-    });
+    await event.keyboard('[Escape]');
     expect(onClose).toBeCalled();
   });
 
-  it('closeModal is called on pressing Escape Key when "closeOnEsc is disabled', () => {
+  it('onOpenChange is called on pressing Escape Key when "closeOnEsc is disabled', async () => {
     const onClose = vi.fn();
-    renderModal({ closeModal: onClose, show: true, closeOnEsc: false });
+    renderDialog({ onOpenChange: onClose, open: true, closeOnEsc: false });
 
-    fireEvent.keyDown(screen.getByRole('dialog'), {
-      key: "Escape",
-      code: "Escape",
-      keyCode: 27,
-      charCode: 27
-    });
+    await event.keyboard('[Escape]');
     expect(onClose).not.toBeCalled();
   });
 });
 
-function renderModal(props: Props) {
-  render(
-    <Modal {...props}>
-      <Box>Modal Content here</Box>
-    </Modal>,
-  );
+function renderDialog(props: Props) {
+  render(<Modal timeout={0} {...props}><p>Dialog Content here</p></Modal>);
 }

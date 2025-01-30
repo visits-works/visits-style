@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
 
-import '../src/lib.css';
+import './preview.css';
 
 export default {
   decorators: [(Story) => (

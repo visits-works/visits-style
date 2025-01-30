@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { render } from '@testing-library/react';
 import theme from '../../theme';
 
-import { Field, Checkbox, Radio, Select, Switch, Textarea, TextInput } from '..';
+import { Field, Checkbox, Radio, Select, Switch, Textarea, Input } from '..';
 
 describe('Form Field', () => {
   it('field with Checkbox', () => {

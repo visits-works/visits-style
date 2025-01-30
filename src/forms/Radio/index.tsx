@@ -1,105 +1,41 @@
-import React, { useMemo, InputHTMLAttributes, forwardRef } from 'react';
-import { transparentize } from 'polished';
-import { styled } from 'styled-components';
+import { useMemo, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import clsx from 'clsx';
 
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  value: string | number;
-  children?: any;
+export interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange' | 'type' | 'role'> {
+  children?: ReactNode;
   checked?: boolean;
+  /** idが未指定の場合、nameが代わりに使われます */
+  name?: string;
+  onChange?: (checked: boolean) => void;
 }
 
-const Radio = forwardRef<HTMLInputElement, Props>(({
-  className, style, children, ...rest
-}, ref) => {
-  const id = `radio_${rest.name}_${rest.value}`;
-  const innerClass = useMemo(() => {
-    const arr = [];
-    if (rest.checked) arr.push('checked');
-    if (rest.disabled) arr.push('disabled');
-    return arr.join(' ');
-  }, [rest.checked, rest.disabled]);
+export default function Radio({ checked, className, id, name, onChange, ...rest }: Props) {
+  const innerClass = useMemo(() => clsx(
+    'inline-flex justify-center items-center border border-input w-4.5 h-4.5 rounded-full',
+    'cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed not-disabled:hover:border-input-fore',
+    checked ? '[&_i]:bg-primary disabled:[&_i]:bg-text disabled:border-input' : '',
+    className,
+  ), [className, checked]);
+
+  const handleChange = () => {
+    if (rest.disabled) return;
+    onChange?.(!checked);
+  };
 
   return (
-    <Wrapper className={className} style={style}>
-      <label htmlFor={id}>
-        <Shape className={innerClass}>
-          <i />
-        </Shape>
-        {children}
-      </label>
-      <input id={id} type="radio" {...rest} ref={ref} />
-    </Wrapper>
+    <button
+      type="button"
+      role="radio"
+      id={id || name}
+      className={innerClass}
+      onClick={handleChange}
+      aria-checked={checked}
+      {...rest}
+    >
+      <i
+        className="block w-2 h-2 rounded-full transition-transform"
+        style={{ transform: checked ? '' : 'scale(0.8)', opacity: checked ? 1 : 0 }}
+      />
+    </button>
   );
-});
-Radio.displayName = 'Radio';
-
-export default Radio;
-
-const Shape = styled.div`
-  display: inline-flex;
-  margin: 0.5rem;
-  width: 1.25em;
-  height: 1.25em;
-  background: transparent;
-  border: 0.1em solid ${({ theme }) => theme.border};
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-
-  will-change: background-color, border-color;
-  transition-property: background-color, border-color;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
-
-  &.checked {
-    border-color: ${({ theme }) => theme.primary};
-    & > i {
-      transform: scale(1);
-    }
-
-    &.disabled > i {
-      background-color: ${({ theme }) => transparentize(0.15, theme.textDark)};
-    }
-  }
-
-  &.disabled {
-    background: ${({ theme }) => transparentize(0.55, theme.border)};
-    border-color: ${({ theme }) => theme.border};
-  }
-
-  & > i {
-    display: block;
-    width: 0.5em;
-    height: 0.5em;
-    background: ${({ theme }) => theme.primary};
-    border: none;
-    transform: scale(0);
-    border-radius: 50%;
-
-    will-change: transform;
-    transition: transform 150ms ease-out;
-  }
-`;
-
-const Wrapper = styled.span`
-  display: block;
-  width: auto;
-
-  label {
-    cursor: pointer;
-    max-width: 100%;
-    width: 100%;
-    line-height: 1.25;
-    margin-right: 0.625rem;
-    display: flex;
-    align-items: center;
-
-    &:hover > div:not(.checked):not(.disabled) {
-      border-color: ${({ theme }) => theme.borderHover};
-    }
-  }
-
-  input {
-    display: none;
-  }
-`;
+}

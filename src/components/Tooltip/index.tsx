@@ -1,28 +1,26 @@
-import React, { Children, cloneElement, useImperativeHandle, useState, forwardRef, MutableRefObject } from 'react';
-import { styled } from 'styled-components';
+import { Children, cloneElement, useImperativeHandle, useState, forwardRef, useMemo } from 'react';
+import type { ReactNode, ReactElement, RefObject, HTMLAttributes } from 'react';
 import {
-  useFloating, useInteractions, useHover, useClientPoint,
+  useFloating, useInteractions, useHover, useClientPoint, useTransitionStyles,
   shift, offset as offsetUi, flip, useId, autoUpdate,
 } from '@floating-ui/react';
 import type { Placement, ReferenceElement } from '@floating-ui/core';
+import clsx from 'clsx';
 
 import Portal from '../Portal';
-import { ColorType } from '../../types';
 
 export interface TooltipRef {
-  floating: MutableRefObject<HTMLElement | null>;
-  reference: MutableRefObject<ReferenceElement | null>;
+  floating: RefObject<HTMLElement | null>;
+  reference: RefObject<ReferenceElement | null>;
   open: () => void;
   close: () => void;
 }
 
 export interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
-  label: React.ReactNode;
+  label: ReactNode;
   /** マウスオーバーの対象になるelement */
-  children: React.ReactElement;
-  /** 吹き出しの背景色の指定 */
-  color?: ColorType;
+  children: ReactElement;
   /**
    * 表示される場所
    * @default 'bottom'
@@ -34,6 +32,13 @@ export interface TooltipProps {
    * @default '{ x: 0, y: 6 }'
    */
   offset?: { x: number; y: number; };
+
+  /**
+   * ツールチップの表示・非表示のアニメーション速度
+   * @default 150
+   */
+  timeout?: number;
+
   /** 吹き出し表示座標を対象のElementではなくマウスカーソルにする */
   clientPoint?: boolean;
   /** 吹き出しを出さない */
@@ -43,8 +48,7 @@ export interface TooltipProps {
 }
 
 const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
-  children, position = 'bottom',
-  label, color, className = '',
+  children, position = 'bottom', label, className, timeout = 150,
   offset = { x: 0, y: 6 }, clientPoint = false, disabled,
 }, ref) => {
   const [open, setOpen] = useState(false);
@@ -67,6 +71,11 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
     useClientPoint(context, { enabled: clientPoint }),
   ]);
 
+  const { isMounted, styles } = useTransitionStyles(context, {
+    duration: timeout,
+    initial: { opacity: 0, transform: 'scale(0.8)' },
+  });
+
   useImperativeHandle(ref, () => ({
     floating: refs.floating,
     reference: refs.reference,
@@ -82,39 +91,29 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
         ref: refs.setReference,
         ...getReferenceProps(),
       })}
-      <Portal>
-        {open && !disabled ? (
-          <TooltipWrapper
-            className={className}
-            ref={refs.setFloating}
-            role="tooltip"
-            $color={color}
-            style={floatingStyles}
-            {...getFloatingProps()}
-          >
+      <Portal disabled={disabled || !isMounted}>
+        <div role="tooltip" ref={refs.setFloating} {...getFloatingProps({ style: floatingStyles })}>
+          <TooltipContent className={className} style={styles}>
             {label}
-          </TooltipWrapper>
-        ) : null}
+          </TooltipContent>
+        </div>
       </Portal>
     </>
   );
 });
-
 export default Tooltip;
 
-const TooltipWrapper = styled.div<{ $color: TooltipProps['color']; }>`
-  position: relative;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  z-index: 9999;
-  padding: 0.375rem 0.625rem;
-  cursor: default;
-  white-space: pre;
-  font-size: 0.85rem;
-  z-index: 9999;
+interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
+  custom?: boolean;
+}
 
-  background-color: ${({ $color, theme }) => ($color ? (theme[$color] || theme.background) : theme.background)};
-
-  &:focus {
-    outline: none;
-  }
-`;
+export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>((
+  { className, custom, ...rest }, ref,
+) => {
+  const tooltipName = useMemo(() => clsx(
+    'relative z-[9999] w-auto h-auto outline-none transition-transform ease-in-out whitespace-pre',
+    custom ? null : 'border border-accent rounded shadow-md px-3 py-1 bg-background',
+    className,
+  ), [className, custom]);
+  return <div ref={ref} className={tooltipName} {...rest} />;
+});

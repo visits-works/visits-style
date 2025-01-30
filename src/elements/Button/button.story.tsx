@@ -27,6 +27,7 @@ const meta = {
       disabled: [true, false],
     },
   },
+  argTypes: { children: { control: false } },
 } satisfies Meta<ButtonProps>;
 
 export default meta;
@@ -40,9 +41,8 @@ export const base: Story = {
 };
 
 export const icon: Story = {
-  render: (args) => <Button {...args}><Approved /></Button>,
   args: {
-    children: 'Hello wolrd',
+    children: <Approved />,
     variant: 'outline',
     size: 'icon',
   },

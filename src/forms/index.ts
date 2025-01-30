@@ -1,6 +1,6 @@
 export { default as Field, type Props as FieldProps } from './Field';
 
-export { default as TextInput, type Props as TextInputProps } from './TextInput';
+export { default as Input, type Props as InputProps } from './Input';
 export { default as Textarea, type Props as TextareaProps } from './Textarea';
 export { default as Checkbox, type Props as CheckboxProps } from './Checkbox';
 export { default as Select, type Props as SelectProps } from './Select';

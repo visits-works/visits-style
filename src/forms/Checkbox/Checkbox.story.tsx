@@ -1,7 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import Field from '../Field';
+import Field from '../Field/FormField';
 import Checkbox, { Props } from '.';
 
 const noop = () => {};
@@ -10,6 +8,7 @@ const meta = {
   title: 'forms/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
+  argTypes: { children: { control: false }, onChange: { control: false } },
 } satisfies Meta<Props>;
 
 export default meta;
@@ -18,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
   args: {
-    name: 'test1', value: 1, onChange: noop, checked: false, disabled: false,
+    name: 'test1', onChange: noop, checked: false, disabled: false,
   },
 };
 
@@ -29,6 +28,6 @@ export const withField: Story = {
     </Field>
   ),
   args: {
-    name: 'test1', value: 1, onChange: noop, checked: false, disabled: false,
+    name: 'test1', onChange: noop, checked: false, disabled: false,
   },
 };

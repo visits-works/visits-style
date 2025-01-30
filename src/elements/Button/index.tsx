@@ -1,9 +1,9 @@
-import { useMemo, createElement, type ButtonHTMLAttributes } from 'react';
+import { useMemo, createElement, type ButtonHTMLAttributes, ReactElement } from 'react';
 import clsx from 'clsx';
 
 interface InnerButtonProps {
   variant?: 'primary' | 'link' | 'outline' | 'ghost' | 'danger';
-  size?: 'icon';
+  size?: 'icon' | 'none';
 }
 
 export type ButtonProps = InnerButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -23,6 +23,7 @@ export function varientButton({ variant, size }: InnerButtonProps) {
     {
       'px-2 py-1': !size,
       'p-2': size === 'icon',
+      '': size === 'none',
     },
   );
 }

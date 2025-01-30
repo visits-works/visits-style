@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Dialog, { DialogFooter, DialogHeader, DialogContent } from '.';
 import Button from '../../elements/Button';
-import TextInput from '../../forms/TextInput';
+import TextInput from '../../forms/Input';
 
 const meta = {
   title: 'components/Dialog',
@@ -28,7 +28,7 @@ export const base: Story = {
     const toggle = () => setShow((prev) => !prev);
     return (
       <>
-        <Button variant="ghost" onClick={toggle}>show modal</Button>
+        <Button variant="outline" onClick={toggle}>show modal</Button>
         <Dialog {...rest} size="small" open={showDialog} onOpenChange={toggle}>
           <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
           <p>Dialog body text goes here.</p>
@@ -49,7 +49,7 @@ export const onScroll: Story = {
     const toggle = () => setShow((prev) => !prev);
     return (
       <>
-        <Button variant="ghost" onClick={toggle}>show modal</Button>
+        <Button variant="outline" onClick={toggle}>show modal</Button>
         <Dialog {...args} size="small" open={showDialog} onOpenChange={toggle}>
           <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
           <section>

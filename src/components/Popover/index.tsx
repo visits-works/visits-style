@@ -1,19 +1,17 @@
 /* eslint-disable no-param-reassign, no-unused-expressions */
 import React, {
   Children, cloneElement, useState, HTMLAttributes, useEffect, useRef,
-  forwardRef, useImperativeHandle, useCallback,
-  RefObject,
+  forwardRef, useImperativeHandle, useCallback, useMemo,
+  CSSProperties,
 } from 'react';
-import { styled } from 'styled-components';
 import {
-  useFloating, useInteractions, useClick, useId,
-  shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate,
-  type ReferenceType,
+  useFloating, useInteractions, useClick, useId, useTransitionStyles,
+  shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate, type ReferenceType,
 } from '@floating-ui/react';
 import type { Placement } from '@floating-ui/core';
+import clsx from 'clsx';
 
 import Portal from '../Portal';
-import Box from '../../elements/Box';
 import stopPropagation from '../../utils/stopPropagation';
 
 export interface PopoverRef {
@@ -32,10 +30,16 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   position?: Placement;
 
   /**
-   * ツールチップが表示される間隔
+   * Popoverが表示される間隔
    * @default '{ x: 0, y: 6 }'
    */
   offset?: { x: number; y: number; };
+
+  /**
+   * Popoverの表示・非表示のアニメーション速度
+   * @default 150
+   */
+  timeout?: number;
 
   /** 閉じた場合のコールバック */
   onClose?: (ref?: ReferenceType | null, float?: HTMLElement | null) => void;
@@ -50,11 +54,13 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 9996
   */
   zIndex?: number;
+  /** デフォルトスタイルを外し、cssクラスを適用します */
+  custom?: boolean;
 }
 
 const Popover = forwardRef<PopoverRef, Props>(({
   position, label, children, color = 'background', disabled, offset = { x: 0, y: 6 },
-  onOpen, onClose, onManualClose, zIndex = 9996, ...rest
+  onOpen, onClose, onManualClose, timeout = 150, custom, zIndex = 9996, ...rest
 }, ref) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
@@ -79,6 +85,11 @@ const Popover = forwardRef<PopoverRef, Props>(({
       setOpen(value);
     },
     whileElementsMounted: autoUpdate,
+  });
+
+  const { isMounted, styles } = useTransitionStyles(context, {
+    duration: timeout,
+    initial: { opacity: 0, transform: 'scale(0.8)' },
   });
 
   const handleBlur = useCallback((e?: React.MouseEvent<HTMLElement>) => {
@@ -122,33 +133,34 @@ const Popover = forwardRef<PopoverRef, Props>(({
         disabled,
         onClick: stopPropagation,
       }))}
-      <Portal disabled={disabled}>
-        {open ? (
-          <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }}>
-            <div
-              role="tooltip"
-              ref={refs.setFloating}
-              style={floatingStyles}
-              {...getFloatingProps({ ...rest, onClick: stopPropagation })}
-            >
+      <Portal disabled={disabled || !isMounted}>
+        <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }}>
+          <div role="tooltip" ref={refs.setFloating} style={floatingStyles}>
+            <PopoverContent custom={custom} styles={styles} {...getFloatingProps({ ...rest, onClick: stopPropagation })}>
               {children}
-            </div>
-          </FloatingOverlay>
-        ) : null}
+            </PopoverContent>
+          </div>
+        </FloatingOverlay>
       </Portal>
     </>
   );
 });
 Popover.displayName = 'Popover';
-
 export default Popover;
 
-const Tooltip = styled(Box)`
-  display: flex;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  padding: 0.5rem 0;
-  width: auto;
-  height: auto;
-  cursor: auto;
-  z-index: 20;
-`;
+interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
+  styles: CSSProperties;
+  custom?: boolean;
+}
+
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>((
+  { className, custom, styles, style = {}, ...rest }, ref,
+) => {
+  const popoverName = useMemo(() => clsx(
+    'z-20 w-auto h-auto outline-none transition-transform ease-in-out',
+    custom ? null : 'border border-accent rounded-md shadow-lg p-2 bg-background',
+    className,
+  ), [className, custom]);
+  return <div ref={ref} className={popoverName} style={{ ...styles, ...style }} {...rest} />;
+});
+PopoverContent.displayName = 'PopoverContent';

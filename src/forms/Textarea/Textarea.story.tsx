@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
-  args: { name: 'test1', value: 'hello world' },
+  args: { name: 'test1', placeholder: 'placeholder...', disabled: false, error: false },
 };

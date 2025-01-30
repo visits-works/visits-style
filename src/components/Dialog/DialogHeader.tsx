@@ -16,7 +16,7 @@ export default function DialogHeader({ className, onClose, children, ...rest }: 
     <header className={headerName} {...rest}>
       {children}
       {onClose ? (
-        <Button className="absolute top-0 right-0 w-6 h-6 p-1.5" variant="ghost" size="icon" onClick={onClose}>
+        <Button className="absolute top-0 right-0 w-6 h-6 p-1.5" variant="ghost" size="none" onClick={onClose}>
           <CloseIcon />
         </Button>
       ) : null}
