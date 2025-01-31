@@ -70,7 +70,7 @@ export default function Select<T = any>({
 
   const btnLabelClass = useMemo(() => clsx(
     'overflow-hidden overflow-ellipsis',
-    isEmpty ? 'text-placeholder' : 'text-text',
+    isEmpty ? 'text-muted' : 'text-text',
   ), [isEmpty]);
 
   return (
@@ -94,7 +94,7 @@ export default function Select<T = any>({
                 <IconClose />
               </a>
             ) : null}
-            <IconArrowDown className="text-placeholder size-3" />
+            <IconArrowDown className="text-muted size-3" />
           </div>
         </button>
       )}

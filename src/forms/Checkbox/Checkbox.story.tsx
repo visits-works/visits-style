@@ -36,11 +36,44 @@ export const base: Story = {
 };
 
 export const withMessage: Story = {
-  render: (args) => (
-    <FormField label="test-label" required>
-      <Checkbox {...args} />
-    </FormField>
-  ),
+  render: (args) => {
+    const [value, setValue] = useState(false);
+    return (
+      <div className="flex items-top space-x-2">
+        <Checkbox id="terms" checked={value} onChange={setValue} {...args} />
+        <div className="grid gap-1.5 leading-none pt-0.5">
+          <FormLabel htmlFor="terms" className="text-sm font-medium">
+            check label requires some description
+          </FormLabel>
+          <p className="text-sm text-muted">
+            some description here.
+          </p>
+        </div>
+      </div>
+    );
+  },
+  args: {
+    name: 'test1', disabled: false,
+  },
+};
+
+
+export const withForm: Story = {
+  render: (args) => {
+    const [value, setValue] = useState(false);
+    return (
+      <FormField
+        innerClass="flex items-center space-x-2"
+        label="Some Check Field"
+        required
+      >
+        <Checkbox id="terms" checked={value} onChange={setValue} {...args} />
+        <FormLabel htmlFor="terms" className="text-sm">
+          Some toggle value
+        </FormLabel>
+      </FormField>
+    );
+  },
   args: {
     name: 'test1', onChange: noop, checked: false, disabled: false,
   },
