@@ -1,6 +1,7 @@
 export { default as IconApproved } from './Approved';
 export { default as IconAlert } from './Alert';
 export { default as IconCaution } from './Caution';
+export { default as IconCheck } from './Check';
 export { default as IconChevronLeftRound } from './ChevronLeftRound';
 export { default as IconFileRound } from './FileRound';
 export { default as IconPencil } from './Pencil';

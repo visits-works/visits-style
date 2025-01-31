@@ -174,7 +174,7 @@ export const manualClose: Story = {
 
 // @ts-expect-error
 export const autoWidth: Story = {
-  name: 'auth width',
+  name: 'auto width',
   render: (args) => {
     const [width, setWidth] = useState(100);
     return (

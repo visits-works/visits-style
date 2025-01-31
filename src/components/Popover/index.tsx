@@ -37,9 +37,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * Popoverの表示・非表示のアニメーション速度
-   * @default 150
+   * @default { open: 150, close: 75 }
    */
-  timeout?: number;
+  timeout?: number | { open: number; close: number; };
 
   /** 閉じた場合のコールバック */
   onClose?: (ref?: ReferenceType | null, float?: HTMLElement | null) => void;
@@ -55,12 +55,13 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   */
   zIndex?: number;
   /** デフォルトスタイルを外し、cssクラスを適用します */
-  custom?: boolean;
+  unstyled?: boolean;
 }
+const defaultTimeout = { open: 150, close: 75 };
 
 const Popover = forwardRef<PopoverRef, Props>(({
   position, label, children, color = 'background', disabled, offset = { x: 0, y: 6 },
-  onOpen, onClose, onManualClose, timeout = 150, custom, zIndex = 9996, ...rest
+  onOpen, onClose, onManualClose, timeout = defaultTimeout, unstyled, zIndex = 9996, ...rest
 }, ref) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
@@ -89,7 +90,19 @@ const Popover = forwardRef<PopoverRef, Props>(({
 
   const { isMounted, styles } = useTransitionStyles(context, {
     duration: timeout,
-    initial: { opacity: 0, transform: 'scale(0.8)' },
+    initial({ side }) {
+      let transform = '';
+      if (side === 'top') {
+        transform = 'translateY(5%) scale(0.95)';
+      } else if (side === 'bottom') {
+        transform = 'translateY(-5%) scale(0.95)';
+      } else if (side === 'left') {
+        transform = 'translateX(5%) scale(0.95)';
+      } else {
+        transform = 'translateX(-5%) scale(0.95)';
+      }
+      return { opacity: 0, transform };
+    },
   });
 
   const handleBlur = useCallback((e?: React.MouseEvent<HTMLElement>) => {
@@ -134,9 +147,13 @@ const Popover = forwardRef<PopoverRef, Props>(({
         onClick: stopPropagation,
       }))}
       <Portal disabled={disabled || !isMounted}>
-        <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }}>
+        <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }} autoFocus>
           <div role="tooltip" ref={refs.setFloating} style={floatingStyles}>
-            <PopoverContent custom={custom} styles={styles} {...getFloatingProps({ ...rest, onClick: stopPropagation })}>
+            <PopoverContent
+              unstyled={unstyled}
+              styles={styles}
+              {...getFloatingProps({ ...rest, onClick: stopPropagation })}
+            >
               {children}
             </PopoverContent>
           </div>
@@ -150,17 +167,17 @@ export default Popover;
 
 interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
   styles: CSSProperties;
-  custom?: boolean;
+  unstyled?: boolean;
 }
 
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>((
-  { className, custom, styles, style = {}, ...rest }, ref,
+  { className, unstyled, styles, style = {}, ...rest }, ref,
 ) => {
   const popoverName = useMemo(() => clsx(
     'z-20 w-auto h-auto outline-none transition-transform ease-in-out',
-    custom ? null : 'border border-accent rounded-md shadow-lg p-2 bg-background',
+    unstyled ? null : 'border border-accent rounded-md shadow-lg p-1 bg-background',
     className,
-  ), [className, custom]);
+  ), [className, unstyled]);
   return <div ref={ref} className={popoverName} style={{ ...styles, ...style }} {...rest} />;
 });
 PopoverContent.displayName = 'PopoverContent';

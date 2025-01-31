@@ -18,6 +18,7 @@
   /* text */
   --color-text: #4A4A4A;
   --color-inverted: #FAFAFA;
+  --color-placeholder: #808080;
 
   --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
 }

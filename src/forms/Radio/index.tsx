@@ -9,9 +9,9 @@ export interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'on
   onChange?: (checked: boolean) => void;
 }
 
-export default function Radio({ checked, className, id, name, onChange, ...rest }: Props) {
+export default function Radio({ checked, className, id, name, onChange, value, ...rest }: Props) {
   const innerClass = useMemo(() => clsx(
-    'inline-flex justify-center items-center border border-input w-4.5 h-4.5 rounded-full',
+    'relative inline-flex justify-center items-center border border-input w-4.5 h-4.5 rounded-full',
     'cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed not-disabled:hover:border-input-fore',
     checked ? '[&_i]:bg-primary disabled:[&_i]:bg-text disabled:border-input' : '',
     className,
@@ -33,8 +33,18 @@ export default function Radio({ checked, className, id, name, onChange, ...rest 
       {...rest}
     >
       <i
-        className="block w-2 h-2 rounded-full transition-transform"
+        className="block w-2.5 h-2.5 rounded-full transition-transform"
         style={{ transform: checked ? '' : 'scale(0.8)', opacity: checked ? 1 : 0 }}
+      />
+      <input
+        type="radio"
+        aria-hidden="true"
+        name={name}
+        checked={checked}
+        value={value}
+        onChange={handleChange}
+        disabled={rest.disabled}
+        style={{ position: 'absolute', pointerEvents: 'none', top: 0, left: 0, width: 1, height: 1, opacity: 0 }}
       />
     </button>
   );

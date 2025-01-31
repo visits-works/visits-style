@@ -41,8 +41,6 @@ export interface ToasterProps {
    * @default '16px'
    */
   margin?: number;
-  /** スクロールしても固定として表示する */
-  fixed?: boolean;
   /** 並ばずに、Toastが積み上げます */
   stack?: boolean;
   /**

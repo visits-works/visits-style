@@ -1,6 +1,8 @@
-import type { ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
+import clsx from 'clsx';
 
 import Radio from '.';
+import FormLabel from '../Field/FormLabel';
 
 interface Props<T> {
   className?: string;
@@ -24,7 +26,7 @@ export default function RadioGroup<T = unknown>({ name, className, value, option
               onChange={() => onChange(node.id)}
               disabled={disabled}
             />
-            <label htmlFor={id}>{node.label}</label>
+            <FormLabel htmlFor={id}>{node.label}</FormLabel>
           </div>
         );
       })}

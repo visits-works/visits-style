@@ -11,7 +11,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、内容を開きます */
   show: boolean;
   /**
-   * アニメーションの時間
+   * アニメーションの時間\
+   * 0に設定すると、即時に反応します
    * @default 300
    */
   timeout?: number;
