@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Select, { Props } from '.';
+import NativeSelect from './native';
 
 const options = [
   { value: 1, label: 'options1' },
@@ -71,6 +72,29 @@ export const withClear: Story = {
     const handleClear = () => setValue(null);
     return (
       <Select {...args} options={options} value={value} onChange={setValue} onClear={handleClear} />
+    );
+  },
+  // @ts-expect-error
+  args: {
+    options,
+    className: 'max-w-[370px]',
+    placeholder: 'select multiple values...',
+  },
+};
+
+export const native: Story = {
+  render: ({ className, placeholder, error }) => {
+    const [value, setValue] = useState<string>('');
+    return (
+      <NativeSelect
+        className={className}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder={placeholder}
+        error={error}
+      >
+        <option value="1">option1</option>
+      </NativeSelect>
     );
   },
   // @ts-expect-error

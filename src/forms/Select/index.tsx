@@ -1,6 +1,7 @@
 import { type ButtonHTMLAttributes, type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 
+import merge from '../../utils/merge';
 import Popover, { PopoverRef } from '../../components/Popover';
 import IconArrowDown from '../../elements/Icons/ArrowDown';
 import IconCheck from '../../elements/Icons/Check';
@@ -24,12 +25,11 @@ export default function Select<T = any>({
 }: Props<T>) {
   const ref = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
-  const btnName = useMemo(() => (unstyled ? className : clsx(
+  const btnName = useMemo(() => (unstyled ? className : merge(clsx(
     'flex items-center justify-between rounded-md border bg-background px-3 py-2 w-full overflow-hidden cursor-pointer',
     'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
     error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
-    className,
-  )), [className, error, unstyled]);
+  ), className)), [className, error, unstyled]);
 
   const isMultiple = useMemo(() => Array.isArray(value), []);
 
