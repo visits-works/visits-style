@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
-  args: { value: 20, max: 100 },
+  args: { value: 20, max: 100, className: 'w-[250px] h-4' },
 };
