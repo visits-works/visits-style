@@ -21,7 +21,7 @@ export default function Field({
   label, children, required, htmlFor, error, help, helpBefore, className, ...rest
 }: Props) {
   const labelName = useMemo(() => merge(
-    'text-semibold', required ? 'after:content-["*"] after:text-danger after:text-sm after:pl-0.5' : ''
+    'font-medium', required ? 'after:content-["*"] after:text-danger after:text-sm after:pl-0.5' : ''
   ), [required]);
   const wrapperName = useMemo(() => merge('flex flex-col space-y-2', className), [className]);
   return (

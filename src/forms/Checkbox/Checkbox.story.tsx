@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import Field from '../Field/FormField';
+
 import Checkbox, { Props } from '.';
+import FormField from '../Field/FormField';
+import FormLabel from '../Field/FormLabel';
 
 const noop = () => {};
 
@@ -16,16 +19,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
+  render: (args) => {
+    const [value, setValue] = useState(false);
+    return (
+      <div className="flex items-center space-x-2">
+        <Checkbox id="terms" checked={value} onChange={setValue} {...args} />
+        <FormLabel htmlFor="terms" className="text-sm font-medium">
+          Accept terms and conditions
+        </FormLabel>
+      </div>
+    );
+  },
   args: {
-    name: 'test1', onChange: noop, checked: false, disabled: false,
+    name: 'test1', disabled: false,
   },
 };
 
-export const withField: Story = {
+export const withMessage: Story = {
   render: (args) => (
-    <Field label="test-label" required>
+    <FormField label="test-label" required>
       <Checkbox {...args} />
-    </Field>
+    </FormField>
   ),
   args: {
     name: 'test1', onChange: noop, checked: false, disabled: false,
