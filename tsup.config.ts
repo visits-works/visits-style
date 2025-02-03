@@ -1,16 +1,22 @@
 import { writeFileSync, readFileSync } from 'fs';
 import { resolve } from 'path';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  splitting: true,
+  format: ['cjs', 'esm'],
+  treeshake: true,
   sourcemap: true,
   dts: true,
   clean: true,
+  outExtension({ format }) {
+    return { js: `.${format}.js` }
+  },
   onSuccess: async () => {
+    const css = readFileSync(resolve(__dirname, './src/lib.css'), 'utf8');
+    writeFileSync(resolve(__dirname, './dist/lib.css'), css);
+
     // eslint-disable-next-line no-console
     if (!process.env.CI) return console.log('skip modify package.json');
 

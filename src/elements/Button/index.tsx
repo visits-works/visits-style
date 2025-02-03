@@ -1,4 +1,4 @@
-import { useMemo, createElement, type ButtonHTMLAttributes, ReactElement } from 'react';
+import { useMemo, createElement, type ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
 interface InnerButtonProps {
