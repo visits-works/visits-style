@@ -5,7 +5,7 @@ import AlertIcon from '../../elements/Icons/Alert';
 import CautionIcon from '../../elements/Icons/Caution';
 import Spinner from '../../elements/Spinner';
 
-export default function ToastItem({ id, type, label, message }: ToastItemProps) {
+export default function ToastItem({ type, label, message }: ToastItemProps) {
   return (
     <div className="flex items-center px-4 py-3 w-80 text-sm bg-background border border-input rounded-lg shadow-md m-2">
       {type ? (

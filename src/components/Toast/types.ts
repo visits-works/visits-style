@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, FunctionComponent } from 'react';
 
 export type ToastType = 'info' | 'success' | 'error' | 'warn' | 'loading';
 
@@ -41,11 +41,15 @@ export interface ToasterProps {
    * @default '16px'
    */
   margin?: number;
-  /** 並ばずに、Toastが積み上げます */
+  /**
+   * 並ばずに、Toastが積み上げます\
+   * (まだ開発中です)
+  */
   stack?: boolean;
   /**
    * 表示する最大Toast数を指定します
    * @default 3
   */
   max?: number;
+  ListItem?: FunctionComponent<ToastItemProps>;
 }

@@ -47,7 +47,7 @@ function ToastControl() {
   const addLoading = useCallback(async () => {
     const id = observer.add('Loading...', { duration: null, type: 'loading' });
     await new Promise((done) => { window.setTimeout(done, 2000); });
-    observer.update(id, { label: 'Process has been done', type: 'success', duration });
+    observer.update(id, { label: 'Process Successed!', type: 'success', duration });
   }, [duration]);
 
   const onDurationChange = useCallback(({ target }: any) => {

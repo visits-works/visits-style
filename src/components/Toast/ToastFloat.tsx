@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import observer from './observer';
 import type { ToastConfig } from './types';
 
-interface ToastContainerProps extends Pick<ToastConfig, 'id' | 'duration' | 'className'> {
+interface ToastContainerProps extends Pick<ToastConfig, 'id' | 'duration' | 'className' | 'type'> {
   index: number;
   children: ReactNode;
   inverted?: boolean;
@@ -14,7 +14,7 @@ interface ToastContainerProps extends Pick<ToastConfig, 'id' | 'duration' | 'cla
 }
 
 export default function ToastContainer({
-  id, index, duration, className, children, inverted, timeout = 250, max = 3,
+  id, type, index, duration, className, children, inverted, timeout = 250, max = 3,
 }: ToastContainerProps) {
   const isPrevMountedRef = useRef(false);
   const [open, setOpen] = useState(false);
@@ -43,12 +43,13 @@ export default function ToastContainer({
     return () => window.clearTimeout(timeout);
   }, [duration, id]);
 
-  const handleClickToast = useCallback(() => {
+  const handleClose = useCallback(() => {
+    if (type === 'loading') return;
     setOpen(false);
-  }, []);
+  }, [type]);
 
   const name = useMemo(() => clsx(
-    'relative flex w-fit transition-transform ease-in-out',
+    'relative flex w-fit transition-transform ease-in-out cursor-pointer',
     className,
   ), [className]);
 
@@ -59,7 +60,7 @@ export default function ToastContainer({
       role="log"
       className={name}
       style={styles}
-      onClick={handleClickToast}
+      onClick={handleClose}
     >
       {children}
     </li>

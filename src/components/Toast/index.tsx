@@ -1,4 +1,4 @@
-import { type CSSProperties, useMemo, useState, startTransition, useRef } from 'react';
+import { type CSSProperties, useMemo, useState, startTransition, useRef, createElement } from 'react';
 import clsx from 'clsx';
 
 import useIsomorphicLayoutEffect from 'hooks/useIsomorphicLayoutEffect';
@@ -11,7 +11,7 @@ import Portal from '../Portal';
 import observer from './observer';
 
 export default function Toast({
-  className, margin = 16, position = 'top-left', stack, max,
+  className, margin = 16, position = 'top-left', stack, max, ListItem = ToastItem,
 }: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
     const base = { position: 'fixed' } as CSSProperties;
@@ -52,13 +52,13 @@ export default function Toast({
         data.current.set(payload.id, payload.config);
         setOrder((prev) => [...prev, payload.id]);
       } else if (payload.type === 'remove') {
-        data.current.delete(payload.id);
+        const isDeleted = data.current.delete(payload.id);
+        if (!isDeleted) return;
         setOrder((prev) => {
-          const idx = prev.indexOf(payload.id);
-          if (idx === -1) return prev;
-          const next = [...prev];
-          next.splice(idx, 1);
-          return next;
+          const next = new Set(prev);
+          if (!next.has(payload.id)) return prev;
+          next.delete(payload.id);
+          return Array.from(next);
         });
       } else if (payload.type === 'update') {
         const d = data.current.get(payload.id);
@@ -88,7 +88,7 @@ export default function Toast({
               inverted={isInvertedOrder}
               max={max}
             >
-              <ToastItem id={id} {...props} />
+              {createElement(ListItem, props)}
             </ToastFloat>
           );
         })}
