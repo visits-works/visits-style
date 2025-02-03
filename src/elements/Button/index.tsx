@@ -2,7 +2,7 @@ import { useMemo, createElement, type ButtonHTMLAttributes, ReactElement } from 
 import clsx from 'clsx';
 
 interface InnerButtonProps {
-  variant?: 'primary' | 'link' | 'outline' | 'ghost' | 'danger';
+  variant?: 'primary' | 'info' | 'warn' | 'link' | 'outline' | 'ghost' | 'danger';
   size?: 'icon' | 'none';
 }
 
@@ -15,6 +15,8 @@ export function varientButton({ variant, size }: InnerButtonProps) {
     'disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-auto',
     {
       'bg-primary text-inverted hover:bg-primary-fore': !variant || variant === 'primary',
+      'bg-info text-inverted hover:bg-info-fore': variant === 'info',
+      'bg-warn text-inverted hover:bg-warn-fore': variant === 'warn',
       'bg-danger text-inverted hover:bg-danger-fore': variant === 'danger',
       'hover:bg-accent': variant === 'ghost',
       'hover:underline': variant === 'link',

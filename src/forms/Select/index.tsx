@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import { type ButtonHTMLAttributes, ReactElement, type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import merge from '../../utils/merge';
@@ -14,14 +14,15 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   options: Array<{ value: T; label: string; category?: string; }>;
   onChange?: (value: T) => void;
   onClear?: () => void;
+  arrow?: ReactNode;
   maxHeight?: number;
   error?: boolean;
   unstyled?: boolean;
 }
 
 export default function Select<T = any>({
-  className, placeholder = '', options, error, unstyled, disabled, value,
-  maxHeight = 408, onChange, onClear, ...rest
+  className, placeholder = '', options = [], error, unstyled, disabled, value,
+  maxHeight = 408, arrow, onChange, onClear, ...rest
 }: Props<T>) {
   const ref = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
@@ -69,9 +70,14 @@ export default function Select<T = any>({
   const isEmpty = selectedLabel === placeholder;
 
   const btnLabelClass = useMemo(() => clsx(
-    'overflow-hidden overflow-ellipsis',
+    'overflow-hidden overflow-ellipsis whitespace-nowrap',
     isEmpty ? 'text-muted' : 'text-text',
   ), [isEmpty]);
+
+  const Arrow = useMemo(() => {
+    if (arrow) return arrow;
+    return <IconArrowDown className="absolute right-0 text-muted size-5" />
+  }, [arrow]);
 
   return (
     <Popover
@@ -80,7 +86,7 @@ export default function Select<T = any>({
           <span className={btnLabelClass}>
             {selectedLabel}
           </span>
-          <div className="flex items-center pl-2 pr-1 space-x-2">
+          <div className="relative flex items-center pl-6 pr-1 space-x-2">
             {onClear && !isEmpty ? (
               <a
                 type="button"
@@ -94,7 +100,7 @@ export default function Select<T = any>({
                 <IconClose />
               </a>
             ) : null}
-            <IconArrowDown className="text-muted size-3" />
+            {Arrow}
           </div>
         </button>
       )}
@@ -119,11 +125,6 @@ export default function Select<T = any>({
   );
 }
 
-function isOverflow(target: number, elem: HTMLElement | null) {
-  if (!elem) return false;
-  return target < (elem.scrollWidth + 32);
-}
-
 interface SelectItemProps<T> {
   className?: string;
   value: T;
@@ -144,7 +145,7 @@ export function SelectItem<T>({ className, value, label, selected, onChange }: S
       aria-selected={selected}
       onClick={() => onChange?.(value)}
     >
-      {selected ? <IconCheck className="w-5 h-5 mr-1" /> : <i className="w-5 h-1 mr-1" />}
+      {selected ? <IconCheck className="w-5 h-5 mr-1" /> : <div className="w-5 h-1 mr-1" />}
       {label}
     </button>
   );

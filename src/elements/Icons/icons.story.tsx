@@ -20,7 +20,7 @@ export const base: Story = {
         const Icon = Icons[name];
         return (
           <li key={name} className="flex justify-center items-center flex-col">
-            <Icon width={24} height={24} />
+            <Icon width={24} height={24} className="rounded border border-input" />
             <small className="mt-2">{name}</small>
           </li>
         );

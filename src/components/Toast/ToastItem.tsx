@@ -3,7 +3,7 @@ import type { ToastItemProps } from './types';
 import ApprovedIcon from '../../elements/Icons/Approved';
 import AlertIcon from '../../elements/Icons/Alert';
 import CautionIcon from '../../elements/Icons/Caution';
-import Spinner from '../Spinner';
+import Spinner from '../../elements/Spinner';
 
 export default function ToastItem({ id, type, label, message }: ToastItemProps) {
   return (
@@ -11,9 +11,9 @@ export default function ToastItem({ id, type, label, message }: ToastItemProps) 
       {type ? (
         <figure className="mr-2">
           {type === 'success' ? <ApprovedIcon className="text-primary size-5" /> : null}
-          {type === 'info' ? <AlertIcon className="text-primary size-5" /> : null}
+          {type === 'info' ? <AlertIcon className="text-info size-5" /> : null}
           {type === 'error' ? <AlertIcon className="text-danger size-5" /> : null}
-          {type === 'warn' ? <CautionIcon className="text-danger size-5" /> : null}
+          {type === 'warn' ? <CautionIcon className="text-warn size-5" /> : null}
           {type === 'loading' ? <Spinner size={20} /> : null}
         </figure>
       ) : null}

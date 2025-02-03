@@ -1,9 +1,12 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
 import * as Icons from '.';
 
 describe('Icons', () => {
+  it('IconAlert', () => {
+    render(<Icons.IconAlert />);
+  });
+
   it('IconApproved', () => {
     render(<Icons.IconApproved />);
   });
@@ -12,12 +15,16 @@ describe('Icons', () => {
     render(<Icons.IconArrowDown />);
   });
 
-  it('IconChevronLeftRound', () => {
-    render(<Icons.IconChevronLeftRound />);
+  it('IconChevronRound', () => {
+    render(<Icons.IconChevronRound />);
   });
 
-  it('IconChevronRightRound', () => {
-    render(<Icons.IconChevronRightRound />);
+  it('IconCaution', () => {
+    render(<Icons.IconCaution />);
+  });
+
+  it('IconCheck', () => {
+    render(<Icons.IconCheck />);
   });
 
   it('IconClose', () => {
@@ -30,10 +37,6 @@ describe('Icons', () => {
 
   it('IconPencil', () => {
     render(<Icons.IconPencil />);
-  });
-
-  it('IconPencilSimple', () => {
-    render(<Icons.IconPencilSimple />);
   });
 
   it('IconPlus', () => {

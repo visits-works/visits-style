@@ -3,8 +3,6 @@ import { HTMLAttributes } from 'react';
 export interface Props extends HTMLAttributes<HTMLDivElement>{
   /** サイズ */
   size?: number;
-  /** spinnerの太さ */
-  borderSize?: number;
   label?: string;
 }
 

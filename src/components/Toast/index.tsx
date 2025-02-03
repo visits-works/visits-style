@@ -1,20 +1,20 @@
-import { type CSSProperties, useMemo, useState, startTransition } from 'react';
+import { type CSSProperties, useMemo, useState, startTransition, useRef } from 'react';
 import clsx from 'clsx';
 
 import useIsomorphicLayoutEffect from 'hooks/useIsomorphicLayoutEffect';
 
 import ToastItem from './ToastItem';
 import ToastFloat from './ToastFloat';
-import type { ToastConfig, ToasterProps } from './types';
+import type { ToasterProps } from './types';
 
 import Portal from '../Portal';
 import observer from './observer';
 
 export default function Toast({
-  className, fixed, margin = 16, position = 'top-left', stack, max,
+  className, margin = 16, position = 'top-left', stack, max,
 }: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
-    const base = { position: fixed ? 'fixed' : 'absolute' } as CSSProperties;
+    const base = { position: 'fixed' } as CSSProperties;
     if (position.indexOf('top') > -1) {
       base.top = margin;
     } else if (position.indexOf('bottom') > -1) {
@@ -33,7 +33,7 @@ export default function Toast({
       base.transform = 'translateX(-50%)';
     }
     return base;
-  }, [fixed, margin, position]);
+  }, [margin, position]);
 
   const name = useMemo(() => clsx(
     'flex flex-col z-40 overflow-hidden',
@@ -42,29 +42,56 @@ export default function Toast({
 
   const isInvertedOrder = useMemo(() => position?.startsWith('bottom') || false, [position]);
 
-  const [toasts, setToast] = useState<ToastConfig[]>([]);
-  useIsomorphicLayoutEffect(() => observer.subscribe(() => {
-    startTransition(() => setToast(observer.getSnapShot()));
+  const data = useRef(new Map());
+  const [order, setOrder] = useState<string[]>([]);
+  const [_, update] = useState(0);
+
+  useIsomorphicLayoutEffect(() => observer.subscribe((payload) => {
+    startTransition(() => {
+      if (payload.type === 'add') {
+        data.current.set(payload.id, payload.config);
+        setOrder((prev) => [...prev, payload.id]);
+      } else if (payload.type === 'remove') {
+        data.current.delete(payload.id);
+        setOrder((prev) => {
+          const idx = prev.indexOf(payload.id);
+          if (idx === -1) return prev;
+          const next = [...prev];
+          next.splice(idx, 1);
+          return next;
+        });
+      } else if (payload.type === 'update') {
+        const d = data.current.get(payload.id);
+        if (!d) return;
+        data.current.set(payload.id, { ...d, ...payload.config });
+        update((prev) => prev + 1);
+      }
+    });
   }), []);
 
-  const size = toasts.length;
+  const size = order.length;
 
   return (
     <Portal>
       <ol className={name} style={style} aria-live="polite">
-        {toasts.map(({ id, className, duration, ...props }, i) => (
-          <ToastFloat
-            key={id}
-            id={id}
-            index={size - i}
-            className={className}
-            duration={duration}
-            inverted={isInvertedOrder}
-            max={max}
-          >
-            <ToastItem id={id} {...props} />
-          </ToastFloat>
-        ))}
+        {order.map((id, i) => {
+          const item = data.current.get(id);
+          if (!item) return null;
+          const { className, duration, ...props } = item;
+          return (
+            <ToastFloat
+              key={id}
+              id={id}
+              index={size - i}
+              className={className}
+              duration={duration}
+              inverted={isInvertedOrder}
+              max={max}
+            >
+              <ToastItem id={id} {...props} />
+            </ToastFloat>
+          );
+        })}
       </ol>
     </Portal>
   );

@@ -1,4 +1,4 @@
-import { useImperativeHandle, useMemo, type HTMLAttributes } from 'react';
+import { useMemo, type HTMLAttributes } from 'react';
 import { useFloating, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
 import clsx from 'clsx';
 
@@ -10,7 +10,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   open?: boolean;
   /**
    * モーダルの表示・非表示のアニメーション速度
-   * @default { open: 250, close: 150 }
+   * @default '{ open: 250, close: 150 }'
    */
   timeout?: number | { open: number; close: number; };
   /** モーダルのtransition exitが完了した時に発火されるcallback */

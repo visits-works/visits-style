@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Radio, { Props } from '.';
 import RadioGroup from './RadioGroup';
 import FormField from '../Field/FormField';
+import { FormLabel } from 'components';
 
 const meta = {
   title: 'forms/Radio',
@@ -16,6 +17,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
+  render: (args) => (
+    <div className="flex items-center space-x-2">
+      <Radio id="radio" {...args} />
+      <FormLabel htmlFor="radio">Radio Label</FormLabel>
+    </div>
+  ),
   args: {
     name: 'test1', value: 1, checked: false, disabled: false,
   },

@@ -28,7 +28,7 @@ describe('Toast', () => {
   it('onClear called automatically after duration time', async () => {
     render(<Toast />);
 
-    observer.add('test1');
+    observer.add('test1', { duration: 5000 });
     await screen.findByRole('log');
 
     await act(() => vi.advanceTimersByTime(5000));

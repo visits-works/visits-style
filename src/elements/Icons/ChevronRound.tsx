@@ -1,7 +1,7 @@
 /* tslint:disable max-line-length */
 import React, { SVGAttributes } from 'react';
 
-export default function ChevronLeftRound(props: SVGAttributes<SVGSVGElement>) {
+export default function IconChevronRound(props: SVGAttributes<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" {...props}>
       <g fill="none">

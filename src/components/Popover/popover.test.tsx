@@ -1,40 +1,30 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React, { useRef, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { render, fireEvent, cleanup, screen } from '@testing-library/react';
-import theme from '../../theme';
-import Popover, { PopoverRef } from './index';
+import { useRef, useState } from 'react';
+import { render, fireEvent, cleanup, screen, waitFor } from '@testing-library/react';
+
+import Popover, { type PopoverRef } from '.';
 
 describe('Popover', () => {
   beforeEach(cleanup);
 
   it('render', () => {
     render(
-      <ThemeProvider theme={theme}>
-        <Popover
-          label={<button type="button">show</button>}
-        >
-          Popover Content
-        </Popover>
-      </ThemeProvider>,
+      <Popover label={<button type="button">show</button>}>
+        Popover Content
+      </Popover>
     );
     fireEvent.click(screen.getByText('show'));
     screen.getByText('Popover Content');
   });
 
-  it('close on click outer', () => {
+  it('close on click outer', async () => {
     render(
-      <ThemeProvider theme={theme}>
-        <Popover
-          label={<button type="button">show</button>}
-        >
-          Popover Content
-        </Popover>
-      </ThemeProvider>,
+      <Popover label={<button type="button">show</button>}>
+        Popover Content
+      </Popover>
     );
     fireEvent.click(screen.getByText('show'));
-    fireEvent.click(screen.getByTestId('visits-style-shadow'));
-    expect(screen.queryByText('Popover Content')).toBeNull();
+    fireEvent.click(screen.getByTestId('vs-popover-shadow'));
+    await waitFor(() => expect(screen.queryByRole('tooltip')).toBeNull());
   });
 
   it('close on disabled', () => {
@@ -42,22 +32,20 @@ describe('Popover', () => {
     function Test() {
       const [disable, setDisable] = useState(false);
       return (
-        <ThemeProvider theme={theme}>
-          <Popover
-            label={<button type="button">show</button>}
-            disabled={disable}
-            onClose={close}
+        <Popover
+          label={<button type="button">show</button>}
+          disabled={disable}
+          onClose={close}
+        >
+          Popover Content
+          <button
+            type="button"
+            data-testid="disable"
+            onClick={() => setDisable(true)}
           >
-            Popover Content
-            <button
-              type="button"
-              data-testid="disable"
-              onClick={() => setDisable(true)}
-            >
-              disable
-            </button>
-          </Popover>
-        </ThemeProvider>
+            disable
+          </button>
+        </Popover>
       );
     }
     render(<Test />);
@@ -71,15 +59,13 @@ describe('Popover', () => {
     const open = vi.fn();
     const close = vi.fn();
     render(
-      <ThemeProvider theme={theme}>
-        <Popover
-          label={<button type="button">show</button>}
-          onOpen={open}
-          onClose={close}
-        >
-          Popover Content
-        </Popover>
-      </ThemeProvider>,
+      <Popover
+        label={<button type="button">show</button>}
+        onOpen={open}
+        onClose={close}
+      >
+        Popover Content
+      </Popover>
     );
     expect(open).not.toHaveBeenCalled();
 
@@ -87,7 +73,7 @@ describe('Popover', () => {
     expect(open).toHaveBeenCalled();
     expect(close).not.toHaveBeenCalled();
 
-    fireEvent.click(screen.getByTestId('visits-style-shadow'));
+    fireEvent.click(screen.getByTestId('vs-popover-shadow'));
     expect(close).toHaveBeenCalled();
 
     expect(open).toHaveBeenCalledTimes(1);
@@ -101,7 +87,7 @@ describe('Popover', () => {
     function Manual() {
       const ref = useRef<PopoverRef>(null);
       return (
-        <ThemeProvider theme={theme}>
+        <>
           <Popover
             ref={ref}
             label={<button type="button">show</button>}
@@ -112,7 +98,7 @@ describe('Popover', () => {
             <button onClick={() => ref.current?.close()}>close</button>
           </Popover>
           <button onClick={() => ref.current?.open()}>manual open</button>
-        </ThemeProvider>
+        </>
       );
     }
     render(<Manual />);

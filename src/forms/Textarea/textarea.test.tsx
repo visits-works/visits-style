@@ -1,7 +1,4 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { render } from '@testing-library/react';
-import theme from '../../theme';
 
 import Textarea, { Props } from '.';
 
@@ -12,10 +9,6 @@ describe('Textarea', () => {
 });
 
 function renderInput(props: Props) {
-  render(
-    <ThemeProvider theme={theme}>
-      <Textarea {...props} />
-    </ThemeProvider>
-  );
+  render(<Textarea {...props} />);
 }
 

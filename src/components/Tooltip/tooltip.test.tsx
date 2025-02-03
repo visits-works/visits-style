@@ -1,37 +1,29 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { render, fireEvent, screen } from '@testing-library/react';
 
-import theme from '../../theme';
-import Tooltip from './index';
+import Tooltip from '.';
 
 describe('Tooltip', () => {
   it('render', () => {
     render(
-      <ThemeProvider theme={theme}>
-        <Tooltip label="Tooltip Content">
-          <span>show</span>
-        </Tooltip>
-      </ThemeProvider>
+      <Tooltip label="Tooltip Content">
+        <span>show</span>
+      </Tooltip>
     );
-
-    expect(screen.queryByText('Tooltip Content')).toBeNull();
+    expect(screen.queryByRole('tooltip')).toBeNull();
 
     fireEvent.mouseEnter(screen.getByText('show'));
-    screen.getByText('Tooltip Content');
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip Content');
   });
 
   it('tooltip does not show on disabled', () => {
     render(
-      <ThemeProvider theme={theme}>
-        <Tooltip label="Tooltip Content" disabled>
-          <span>show</span>
-        </Tooltip>
-      </ThemeProvider>
+      <Tooltip label="Tooltip Content" disabled>
+        <span>show</span>
+      </Tooltip>
     );
-    expect(screen.queryByText('Tooltip Content')).toBeNull();
+    expect(screen.queryByRole('tooltip')).toBeNull();
 
     fireEvent.mouseEnter(screen.getByText('show'));
-    expect(screen.queryByText('Tooltip Content')).toBeNull();
+    expect(screen.queryByRole('tooltip')).toBeNull();
   });
 });

@@ -15,7 +15,7 @@ const colorList = [
 ];
 
 const meta = {
-  title: 'components/Spinner',
+  title: 'elements/Spinner',
   component: Spinner,
   tags: ['autodocs'],
 } satisfies Meta<Props>;
@@ -25,7 +25,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
-  args: { color: 'primary', size: '5rem' },
+  args: { size: 36 },
   parameters: {
     color: { values: colorList },
   },

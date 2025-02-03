@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import Switch, { Props } from '.';
 
@@ -15,5 +13,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
-  args: { name: 'test1', value: '1', type: 'background' },
+  args: { name: 'test1', value: '1' },
 };
