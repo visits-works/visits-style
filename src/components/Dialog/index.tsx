@@ -18,7 +18,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * モーダルの表示・非表示のアニメーション速度
    * @default 150
    */
-  timeout?: number;
+  timeout?: number | { open: number; close: number; };
   /**
    * モーダルのデフォルトデザインを適用し、サイズを指定します。\
    * 未指定の場合は、スタイルを全部外した状態で表示されます
@@ -79,7 +79,7 @@ export default function Dialog({
 
   exitRef.current = onExited;
 
-  const overlayClass = useMemo(() => clsx('grid bg-black/60 z-40 justify-items-center', {
+  const overlayClass = useMemo(() => clsx('grid bg-backdrop z-40 justify-items-center', {
     'place-items-start items-start': verticalAlign === 'start',
     'place-items-end': verticalAlign === 'end',
     'place-items-center': verticalAlign === 'center' || !verticalAlign,
@@ -88,26 +88,24 @@ export default function Dialog({
   const dialogClass = useMemo(() => clsx('transition ease-in-out', className), [size, className]);
 
   return (
-    <Portal>
-      {isMounted ? (
-        <FloatingOverlay
-          className={overlayClass}
-          data-testid="vs-dialog-overlay"
-          onClick={handleOverlayClose}
-          style={{ padding }}
-          lockScroll
+    <Portal disabled={!isMounted}>
+      <FloatingOverlay
+        className={overlayClass}
+        data-testid="vs-dialog-overlay"
+        onClick={handleOverlayClose}
+        style={{ padding, opacity: styles.opacity }}
+        lockScroll
+      >
+        <DialogContent
+          ref={refs.setFloating}
+          className={dialogClass}
+          role="dialog"
+          size={size}
+          {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}
         >
-          <DialogContent
-            ref={refs.setFloating}
-            className={dialogClass}
-            role="dialog"
-            size={size}
-            {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}
-          >
-            {children}
-          </DialogContent>
-        </FloatingOverlay>
-      ) : null}
+          {children}
+        </DialogContent>
+      </FloatingOverlay>
     </Portal>
   );
 }

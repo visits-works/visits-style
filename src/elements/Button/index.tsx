@@ -22,8 +22,7 @@ export function varientButton({ variant, size }: InnerButtonProps) {
     },
     {
       'px-2 py-1': !size,
-      'p-2': size === 'icon',
-      '': size === 'none',
+      'p-1.5': size === 'icon',
     },
   );
 }
