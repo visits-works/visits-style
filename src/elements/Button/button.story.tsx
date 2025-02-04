@@ -49,11 +49,11 @@ export const icon: Story = {
 };
 
 export const buttonGroup: Story = {
-  render: () => (
+  render: (args) => (
     <ButtonGroup>
-      <Button>button 1</Button>
-      <Button>ボタン 2</Button>
-      <Button>BUTTON 3</Button>
+      <Button {...args}>button 1</Button>
+      <Button {...args}>ボタン 2</Button>
+      <Button {...args}>BUTTON 3</Button>
     </ButtonGroup>
   ),
 };
