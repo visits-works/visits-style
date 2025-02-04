@@ -1,4 +1,5 @@
 import { type HTMLAttributes, type ReactElement, useMemo, cloneElement, Children } from 'react';
+import clsx from 'clsx';
 
 import Label from './FormLabel';
 import merge from '../../utils/merge';
@@ -21,8 +22,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 export default function Field({
   label, children, required, htmlFor, error, help, helpBefore, className, innerClass, ...rest
 }: Props) {
-  const labelName = useMemo(() => merge(
-    'font-medium', required ? 'after:content-["*"] after:text-danger after:text-sm after:pl-0.5' : ''
+  const labelName = useMemo(() => clsx(
+    'font-medium',
+    required ? 'after:content-["*"] after:text-danger after:text-sm after:pl-0.5' : '',
   ), [required]);
   const wrapperName = useMemo(() => merge('flex flex-col space-y-2', className), [className]);
 
@@ -42,11 +44,10 @@ function cloneChildren(children: Props['children'], error: boolean) {
   if (!len) return null;
   if (len === 1) {
     // @ts-expect-error
-    return cloneElement(children, { error })
+    return cloneElement(children, { error });
   }
   const arr = Children.toArray(children);
   // @ts-expect-error
   arr[0] = cloneElement(arr[0], { error });
   return arr;
 }
-

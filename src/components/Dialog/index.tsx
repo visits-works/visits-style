@@ -1,6 +1,9 @@
-import React, { type HTMLAttributes, useEffect, useRef, useMemo, forwardRef, useCallback } from 'react';
+import { useEffect, useRef, useMemo, forwardRef, useCallback } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { useFloating, useDismiss, useInteractions, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
 import clsx from 'clsx';
+
+import merge from 'utils/merge';
 
 import Portal from '../Portal';
 import stopPropagation from '../../utils/stopPropagation';
@@ -9,7 +12,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
   open?: boolean;
   /** モーダルのbodyに入れる内容 */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** オーバーレイのクリックでモーダルクローズ */
   closeOnOverlay?: boolean;
   /** escボタンでクローズ */
@@ -85,7 +88,7 @@ export default function Dialog({
     'place-items-center': verticalAlign === 'center' || !verticalAlign,
   }), [verticalAlign]);
 
-  const dialogClass = useMemo(() => clsx('transition ease-in-out', className), [size, className]);
+  const dialogClass = useMemo(() => merge('transition ease-in-out', className), [className]);
 
   return (
     <Portal disabled={!isMounted}>
@@ -116,7 +119,9 @@ interface DialogContentProps extends HTMLAttributes<HTMLElement> {
   size?: Props['size'];
 }
 
-export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(({ size, className, ...rest }, ref) => {
+export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(({
+  size, className, ...rest
+}, ref) => {
   const dialogClass = useMemo(() => clsx(
     size ? 'flex flex-col bg-background shadow-lg p-5 rounded' : null,
     {

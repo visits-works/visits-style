@@ -4,10 +4,6 @@
     "react-app"
   ],
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
   "settings": {
     "import/resolver": {
         "node": {

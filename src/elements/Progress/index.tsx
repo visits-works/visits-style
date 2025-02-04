@@ -15,7 +15,7 @@ export default function Progress({ value, max, className, ...rest }: ProgressPro
   const percent = useMemo(() => (value ? Math.round((value / max) * 100) : 0), [value, max]);
   const name = useMemo(() => merge('relative overflow-hidden rounded-full bg-primary', className), [className]);
   return (
-    <div role="progressbar" className={name} aria-valuemax={max} aria-valuemin={0}  {...rest}>
+    <div role="progressbar" className={name} aria-valuemax={max} aria-valuemin={0} {...rest}>
       <div
         className="h-full w-full flex-1 bg-input transition-all origin-right"
         style={{ transform: `translateX(${percent > 100 ? 100 : percent}%)` }}

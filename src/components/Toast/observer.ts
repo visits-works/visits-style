@@ -13,6 +13,7 @@ type PublishArgs = (
 class ToastObserver {
   /** システムで１つしか存在しない前提とする */
   notify: (args: PublishArgs) => void = noop;
+
   lastId = 0;
 
   /** internal use only */
@@ -28,20 +29,20 @@ class ToastObserver {
     const id = `${this.lastId}`;
     this.notify({ id, type: 'add', config: { id, label, ...config } });
     return id;
-  }
+  };
 
   /** 表示中のtoastを修正します。promiseのロード状態を表示することなどに使います */
   update = (id: string, config: Partial<Omit<ToastConfig, 'id'>>) => {
     this.notify({ id, type: 'update', config });
-  }
+  };
 
   remove = (id: string) => {
     this.notify({ id, type: 'remove' });
-  }
+  };
 
   clear = () => {
     this.lastId = 0;
-  }
+  };
 }
 
 const observer = new ToastObserver();

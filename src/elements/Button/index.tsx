@@ -1,4 +1,4 @@
-import { useMemo, createElement, type ButtonHTMLAttributes } from 'react';
+import { useMemo, type ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
 interface InnerButtonProps {
@@ -33,5 +33,5 @@ export default function Button({ size, variant, className, ...rest }: ButtonProp
   const buttonClass = useMemo(() => (
     clsx(varientButton({ size, variant }), className)
   ), [size, variant, className]);
-  return createElement('button', { className: buttonClass, ...rest });
+  return <button className={buttonClass} type="button" {...rest} />;
 }

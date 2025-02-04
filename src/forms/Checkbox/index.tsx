@@ -21,7 +21,9 @@ function Indeterminate() {
   );
 }
 
-export default function Checkbox({ checked, indeterminate, className, id, name, onChange, value, ...rest }: Props) {
+export default function Checkbox({
+  checked, indeterminate, className, id, name, onChange, value, ...rest
+}: Props) {
   const innerClass = useMemo(() => merge(clsx(
     'inline-flex justify-center items-center border w-4.5 h-4.5 rounded',
     'cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed',

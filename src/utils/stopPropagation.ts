@@ -1,6 +1,6 @@
-import React from 'react';
+import type { MouseEvent } from 'react';
 
-export default function stopPropagation(e?: React.MouseEvent<Element>) {
+export default function stopPropagation(e?: MouseEvent<Element>) {
   if (!e) return;
   e.stopPropagation();
   e.preventDefault();

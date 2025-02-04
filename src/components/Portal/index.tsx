@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
 export interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   container?: HTMLElement;
   disabled?: boolean;
 }

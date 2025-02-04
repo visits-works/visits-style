@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, ReactElement, type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import { type ButtonHTMLAttributes, type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import merge from '../../utils/merge';
@@ -32,10 +32,11 @@ export default function Select<T = any>({
     error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
   ), className)), [className, error, unstyled]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const isMultiple = useMemo(() => Array.isArray(value), []);
 
-  const handleChange = useCallback((value: T) => {
-    onChange?.(value);
+  const handleChange = useCallback((val: T) => {
+    onChange?.(val);
     if (!isMultiple) ref.current?.close();
   }, [onChange, isMultiple]);
 
@@ -76,7 +77,7 @@ export default function Select<T = any>({
 
   const Arrow = useMemo(() => {
     if (arrow) return arrow;
-    return <IconArrowDown className="absolute right-0 text-muted size-5" />
+    return <IconArrowDown className="absolute right-0 text-muted size-5" />;
   }, [arrow]);
 
   return (
@@ -88,24 +89,29 @@ export default function Select<T = any>({
           </span>
           <div className="relative flex items-center pl-6 pr-1 space-x-2">
             {onClear && !isEmpty ? (
-              <a
-                type="button"
+              <div
+                tabIndex={-1}
+                role="button"
                 className="size-6 p-1.5 rounded hover:bg-accent"
                 aria-label="clear selected values"
+                onKeyDown={(e) => {
+                  if (e.key !== 'Enter' && e.key !== 'Space') return;
+                  onClear();
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   onClear();
                 }}
               >
                 <IconClose />
-              </a>
+              </div>
             ) : null}
             {Arrow}
           </div>
         </button>
       )}
       ref={ref}
-      onOpen={(ref) => setWidth(ref?.getBoundingClientRect().width || 0)}
+      onOpen={(elem) => setWidth(elem?.getBoundingClientRect().width || 0)}
       disabled={disabled}
     >
       <ul
@@ -128,7 +134,7 @@ export default function Select<T = any>({
 interface SelectItemProps<T> {
   className?: string;
   value: T;
-  label: ReactNode;
+  label: string;
   onChange?: (value: T) => void;
   selected?: boolean;
 }
@@ -141,6 +147,7 @@ export function SelectItem<T>({ className, value, label, selected, onChange }: S
   return (
     <button
       type="button"
+      role="option"
       className={name}
       aria-selected={selected}
       onClick={() => onChange?.(value)}

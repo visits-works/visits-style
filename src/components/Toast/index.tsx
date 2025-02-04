@@ -11,7 +11,7 @@ import Portal from '../Portal';
 import observer from './observer';
 
 export default function Toast({
-  className, margin = 16, position = 'top-left', stack, max, ListItem = ToastItem,
+  className, margin = 16, position = 'top-left', max, ListItem = ToastItem,
 }: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
     const base = { position: 'fixed' } as CSSProperties;
@@ -38,13 +38,13 @@ export default function Toast({
   const name = useMemo(() => clsx(
     'flex flex-col z-40 overflow-hidden',
     className,
-  ), [className, stack]);
+  ), [className]);
 
   const isInvertedOrder = useMemo(() => position?.startsWith('bottom') || false, [position]);
 
   const data = useRef(new Map());
   const [order, setOrder] = useState<string[]>([]);
-  const [_, update] = useState(0);
+  const update = useState(0)[1];
 
   useIsomorphicLayoutEffect(() => observer.subscribe((payload) => {
     startTransition(() => {
@@ -77,13 +77,13 @@ export default function Toast({
         {order.map((id, i) => {
           const item = data.current.get(id);
           if (!item) return null;
-          const { className, duration, ...props } = item;
+          const { className: innerClass, duration, ...props } = item;
           return (
             <ToastFloat
               key={id}
               id={id}
               index={size - i}
-              className={className}
+              className={innerClass}
               duration={duration}
               inverted={isInvertedOrder}
               max={max}

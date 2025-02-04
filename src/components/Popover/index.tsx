@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign, no-unused-expressions */
-import React, {
-  Children, cloneElement, useState, HTMLAttributes, useEffect, useRef,
+import {
+  Children, cloneElement, useState, useEffect, useRef,
   forwardRef, useImperativeHandle, useCallback, useMemo,
-  CSSProperties,
 } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactElement, ReactNode, MouseEvent } from 'react';
 import {
   useFloating, useInteractions, useClick, useId, useTransitionStyles,
   shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate, type ReferenceType,
@@ -20,9 +20,9 @@ export interface PopoverRef {
 }
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
-  label: React.ReactElement;
+  label: ReactElement;
   /** 内容のリスト */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /**
    * 表示される場所
    * @default 'bottom-end'
@@ -105,7 +105,7 @@ const Popover = forwardRef<PopoverRef, Props>(({
     },
   });
 
-  const handleBlur = useCallback((e?: React.MouseEvent<HTMLElement>) => {
+  const handleBlur = useCallback((e?: MouseEvent<HTMLElement>) => {
     stopPropagation(e);
     if (onManualClose) return onManualClose();
 
@@ -170,9 +170,9 @@ interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
   unstyled?: boolean;
 }
 
-export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>((
-  { className, unstyled, styles, style = {}, ...rest }, ref,
-) => {
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(({
+  className, unstyled, styles, style = {}, ...rest
+}, ref) => {
   const popoverName = useMemo(() => clsx(
     'z-20 w-auto h-auto outline-none transition-transform ease-in-out',
     unstyled ? null : 'border border-accent rounded-md shadow-lg p-1 bg-background',

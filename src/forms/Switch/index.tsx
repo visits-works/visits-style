@@ -20,7 +20,7 @@ const Switch = forwardRef<HTMLInputElement, Props>(({
   const pointerName = useMemo(() => merge(
     'pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform',
     className,
-  ), [className, checked]);
+  ), [className]);
 
   const handleChange = () => {
     if (rest.disabled) return;

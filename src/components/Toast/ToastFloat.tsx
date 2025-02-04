@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useFloating, useTransitionStyles } from '@floating-ui/react';
 import clsx from 'clsx';
@@ -39,8 +41,8 @@ export default function ToastContainer({
 
   useEffect(() => {
     if (!duration) return;
-    const timeout = window.setTimeout(() => setOpen(false), duration);
-    return () => window.clearTimeout(timeout);
+    const tId = window.setTimeout(() => setOpen(false), duration);
+    return () => window.clearTimeout(tId);
   }, [duration, id]);
 
   const handleClose = useCallback(() => {
@@ -56,8 +58,9 @@ export default function ToastContainer({
   if (!isMounted) return null;
   return (
     <li
-      ref={refs.setFloating}
       role="log"
+      tabIndex={-1}
+      ref={refs.setFloating}
       className={name}
       style={styles}
       onClick={handleClose}

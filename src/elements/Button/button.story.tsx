@@ -48,16 +48,6 @@ export const icon: Story = {
   },
 };
 
-export const multiple: Story = {
-  render: () => (
-    <div>
-      <Button>button 1</Button>
-      <Button>ボタン 2</Button>
-      <Button>BUTTON 3</Button>
-    </div>
-  ),
-};
-
 export const buttonGroup: Story = {
   render: () => (
     <ButtonGroup>

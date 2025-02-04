@@ -9,7 +9,9 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   unstyled?: boolean;
 }
 
-const Input = forwardRef<HTMLInputElement, Props>(({ className, type, error, unstyled, ...rest }, ref) => {
+const Input = forwardRef<HTMLInputElement, Props>(({
+  className, type, error, unstyled, ...rest
+}, ref) => {
   const name = useMemo(() => (unstyled ? className : merge(clsx(
     'flex rounded-md border bg-background px-3 py-2 w-full placeholder:text-muted',
     'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',

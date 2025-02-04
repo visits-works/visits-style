@@ -107,9 +107,9 @@ interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
   custom?: boolean;
 }
 
-export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>((
-  { className, custom, ...rest }, ref,
-) => {
+export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(({
+  className, custom, ...rest
+}, ref) => {
   const tooltipName = useMemo(() => clsx(
     'relative z-[9999] w-auto h-auto outline-none transition-transform ease-in-out whitespace-pre',
     custom ? null : 'border border-accent rounded shadow-md px-3 py-1 bg-background',
