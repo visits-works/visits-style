@@ -15,5 +15,6 @@ const testConfig = {
 
 export default defineConfig({
   plugins: [react(), tailwind(), viteTsconfigPaths()],
+  // @ts-expect-error
   test: process.env.NODE_ENV === 'test' ? testConfig : undefined,
 });

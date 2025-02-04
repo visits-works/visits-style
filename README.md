@@ -1,48 +1,42 @@
 <h1 align="center">visits-style</h1>
 
-![release](https://badgen.net/npm/v/visits-style)
-![license](https://badgen.net/npm/license/visits-style)
-![bundle size](https://badgen.net/bundlephobia/minzip/visits-style)
+![release](https://badgen.net/npm/v/@visits/style)
+![license](https://badgen.net/npm/license/@visits/style)
+![bundle size](https://badgen.net/bundlephobia/minzip/@visits/style)
 
 
 VISITS Technologiesのreactデザインコンポーネント
 
+## Dependencies
+- React, React-dom(>=18)
+- tailwindcss(>=4)
+
+## Install
+
+```
+npm install --save react react-dom @visits/style
+npm install --save-dev tailwindcss
+```
+
+[bun](https://bun.sh)でもできます
+
+```
+bun add react react-dom @visits/style
+bun add -D tailwindcss
+```
+
 ## Getting Started
 
+```css
+@import "tailwindcss"
+@import "@visits/style/lib.css"
+
+/** カスタムグロバールcss定義 */
 ```
-npm install --save react react-dom styled-components visits-style
-```
-
-[yarn](https://yarnpkg.com/ja/)でもできます
-
-```
-yarn add react react-dom styled-components visits-style
-```
-
-## Dependencies
-- React, React-dom(^18.2.0)
-- styled-components(^6.0.2)
-
-## Example
-
-```ts
-// index.tsx
-import * as React from 'react';
-import * as reactDOM from 'react-DOM';
-import { ThemeProvider } from 'styled-components';
-import { Button, defaultTheme } from 'visits-style';
-
-function App() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Button>Hello World!</Button>
-    </ThemeProvider>
-  )
+```tsx
+export default function TestComponent() {
+  return <div className="bg-primary" />;
 }
-
-const rootElement = document.getElementById('root')!;
-const root = reactDOM.createRoot(rootElement);
-root.render(<App />);
 ```
 
 ## Docs
