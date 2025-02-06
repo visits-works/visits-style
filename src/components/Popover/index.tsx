@@ -61,7 +61,7 @@ const defaultTimeout = { open: 150, close: 75 };
 
 const Popover = forwardRef<PopoverRef, Props>(({
   position, label, children, color = 'background', disabled, offset = { x: 0, y: 6 },
-  onOpen, onClose, onManualClose, timeout = defaultTimeout, unstyled, zIndex = 9996, ...rest
+  onOpen, onClose, onManualClose, timeout = defaultTimeout, unstyled, zIndex = 9996, role, ...rest
 }, ref) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
@@ -148,7 +148,7 @@ const Popover = forwardRef<PopoverRef, Props>(({
       }))}
       <Portal disabled={disabled || !isMounted}>
         <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }} autoFocus>
-          <div role="tooltip" ref={refs.setFloating} style={floatingStyles}>
+          <div role={role || 'tooltip'} ref={refs.setFloating} style={floatingStyles}>
             <PopoverContent
               unstyled={unstyled}
               styles={styles}
