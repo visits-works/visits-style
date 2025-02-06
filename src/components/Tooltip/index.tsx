@@ -92,7 +92,7 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
         ...getReferenceProps(),
       })}
       <Portal disabled={disabled || !isMounted}>
-        <div role="tooltip" ref={refs.setFloating} {...getFloatingProps({ style: floatingStyles })}>
+        <div role="tooltip" className="z-[9999]" ref={refs.setFloating} {...getFloatingProps({ style: floatingStyles })}>
           <TooltipContent className={className} style={styles}>
             {label}
           </TooltipContent>
@@ -111,7 +111,7 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(({
   className, custom, ...rest
 }, ref) => {
   const tooltipName = useMemo(() => clsx(
-    'relative z-[9999] w-auto h-auto outline-none transition-transform ease-in-out whitespace-pre',
+    'relative w-auto h-auto outline-none transition-transform ease-in-out whitespace-pre',
     custom ? null : 'border border-accent rounded shadow-md px-3 py-1 bg-background',
     className,
   ), [className, custom]);

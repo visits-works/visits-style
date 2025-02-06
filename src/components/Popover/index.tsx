@@ -143,12 +143,13 @@ const Popover = forwardRef<PopoverRef, Props>(({
         ref: refs.setReference,
         tabIndex: 0,
         role: 'button',
+        'aria-expanded': open,
         disabled,
         onClick: stopPropagation,
       }))}
       <Portal disabled={disabled || !isMounted}>
         <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }} autoFocus>
-          <div role={role || 'tooltip'} ref={refs.setFloating} style={floatingStyles}>
+          <div role={role || 'region'} ref={refs.setFloating} style={floatingStyles}>
             <PopoverContent
               unstyled={unstyled}
               styles={styles}
