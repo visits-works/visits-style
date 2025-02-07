@@ -29,7 +29,7 @@ bun add -D tailwindcss
 
 ```css
 @import "tailwindcss"
-@import "visits-style/lib.css"
+@import "visits-style/dist/lib.css"
 
 /** カスタムグロバールcss定義 */
 ```
