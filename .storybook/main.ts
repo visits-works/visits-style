@@ -9,7 +9,11 @@ export default {
   ],
   framework: {
     name: "@storybook/react-vite",
-    options: {},
+    options: {
+      builder: {
+        viteConfigPath: './.storybook/vite.config.ts',
+      },
+    },
   },
   docs: {
     autodocs: "tag",
