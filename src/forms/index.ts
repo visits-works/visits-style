@@ -1,5 +1,6 @@
 export { default as FormField, type Props as FormFieldProps } from './Field/FormField';
 export { default as FormLabel } from './Field/FormLabel';
+export { default as InputField, type Props as InputFieldProps } from './Field/InputField';
 
 export { default as Input, type Props as InputProps } from './Input';
 export { default as Textarea, type Props as TextareaProps } from './Textarea';

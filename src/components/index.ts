@@ -11,4 +11,6 @@ export { default as Dialog, type Props as DialogProps } from './Dialog';
 export { default as Sheet, type Props as SheetProps } from './Sheet';
 
 export { default as Toast } from './Toast';
+export { default as ToastItem } from './Toast/ToastItem';
+export { default as toast } from './Toast/observer';
 export type * from './Toast/types';
