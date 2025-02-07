@@ -1,73 +1,26 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { styled } from 'styled-components';
-import { useFloating, useTransitionStyles } from '@floating-ui/react';
-
 import type { ToastItemProps } from './types';
 
-export default function ToastItem({
-  className, message, duration = 5000, clear, id, clearOnClick,
-}: ToastItemProps) {
-  const clearRef = useRef(clear);
-  const isPrevMountedRef = useRef(false);
+import ApprovedIcon from '../../elements/Icons/Approved';
+import AlertIcon from '../../elements/Icons/Alert';
+import CautionIcon from '../../elements/Icons/Caution';
+import Spinner from '../../elements/Spinner';
 
-  const [open, setOpen] = useState(false);
-  const { context, refs } = useFloating({
-    open,
-    onOpenChange: setOpen,
-    nodeId: id,
-  });
-
-  const { isMounted, styles } = useTransitionStyles(context, {
-    duration: 250,
-    initial: {
-      opacity: 0,
-      transform: 'scale(0.8)',
-    },
-  });
-
-  useEffect(() => setOpen(true), [id]);
-
-  useEffect(() => {
-    if (isPrevMountedRef.current === isMounted) return;
-    if (!isMounted) {
-      clearRef.current?.(id);
-    }
-    isPrevMountedRef.current = isMounted;
-  }, [isMounted, id]);
-
-  useEffect(() => {
-    if (!duration) return;
-    const timeout = setTimeout(() => setOpen(false), duration);
-    return () => clearTimeout(timeout);
-  }, [duration]);
-
-  const handleClickToast = useCallback(() => {
-    if (!clearOnClick) return;
-    setOpen(false);
-  }, [clearOnClick]);
-
-  clearRef.current = clear;
-
-  if (!isMounted) return null;
+export default function ToastItem({ type, label, message }: ToastItemProps) {
   return (
-    <Item
-      ref={refs.setFloating}
-      role="status"
-      data-testid="vs-toast-item"
-      className={className}
-      style={styles}
-      onClick={handleClickToast}
-    >
-      {message}
-    </Item>
+    <div className="flex items-center px-4 py-3 w-80 text-sm bg-background border border-input rounded-lg shadow-md m-2">
+      {type ? (
+        <figure className="mr-2">
+          {type === 'success' ? <ApprovedIcon className="text-primary size-5" /> : null}
+          {type === 'info' ? <AlertIcon className="text-info size-5" /> : null}
+          {type === 'error' ? <AlertIcon className="text-danger size-5" /> : null}
+          {type === 'warn' ? <CautionIcon className="text-warn size-5" /> : null}
+          {type === 'loading' ? <Spinner size={20} /> : null}
+        </figure>
+      ) : null}
+      <div className="space-y-2">
+        <p className="font-medium leading-none">{label}</p>
+        {message ? <p>{message}</p> : null}
+      </div>
+    </div>
   );
 }
-
-const Item = styled.li`
-  position: relative;
-  display: flex;
-  width: fit-content;
-  padding: 0.375em 0.75em;
-  max-width: 100%;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-`;

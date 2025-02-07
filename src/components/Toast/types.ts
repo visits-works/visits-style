@@ -1,46 +1,55 @@
-export interface ToastType {
+import type { ReactNode, FunctionComponent } from 'react';
+
+export type ToastType = 'info' | 'success' | 'error' | 'warn' | 'loading';
+
+export interface ToastConfig {
   /** 認識ID */
   id: string;
-  /** 表示する内容 */
-  message?: React.ReactNode;
+  label: ReactNode;
+
+  type?: ToastType;
+
+  /** ラベル以外に表示する内容 */
+  message?: ReactNode;
+
   /**
    * 表示される時間 nullの場合は自動で閉じられません
    * @default 5000
    */
   duration?: number | null;
   className?: string;
-  /** 押したら閉じられる */
-  clearOnClick?: boolean;
 }
 
-export interface ToastItemProps extends ToastType {
-  clear: (id: string) => void;
-}
+export type ToastItemProps = Omit<ToastConfig, 'duration' | 'className'>;
+export type ToasterPosition = 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left';
 
-export type ToastContainerPositionType = 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left';
+export interface ToasterProps {
+  className?: string;
 
-export interface ToastContainerProps {
-  /** 表示するToastのリスト */
-  toasts: ToastType[];
-  /** toastを消すタイミングのコールバック */
-  clear: (id: string) => void;
+  /** レンダリング対象のコンポーネント */
+  // ToastComponent?: ReactElement<ToastItemProps>;
+
   /**
    * toastの表示される場所の指定
    * \
    * top, top-right, top-left, bottom, bottom-right, bottom-left
    * @default 'top-left'
    */
-  position?: ToastContainerPositionType;
+  position?: ToasterPosition;
   /**
    * margin 単位はpx
    * @default '16px'
    */
-  margin?: string;
+  margin?: number;
   /**
-   * toast間の間隔
-   * @default '16px'
-   */
-  space?: string;
-  /** スクロールしても固定として表示する */
-  fixed?: boolean;
+   * 並ばずに、Toastが積み上げます\
+   * (まだ開発中です)
+  */
+  stack?: boolean;
+  /**
+   * 表示する最大Toast数を指定します
+   * @default 3
+  */
+  max?: number;
+  ListItem?: FunctionComponent<ToastItemProps>;
 }

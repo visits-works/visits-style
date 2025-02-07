@@ -1,26 +1,14 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { render } from '@testing-library/react';
-import theme from '../../theme';
+import { render, screen } from '@testing-library/react';
 
 import Progress from '.';
 
 describe('Progress', () => {
   it('rendered without error', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Progress value={10} max={100} />
-      </ThemeProvider>
-    );
+    render(<Progress value={10} max={100} />);
   });
 
   it('progressBar should have 0 length when max/value both zero', () => {
-    const { getByLabelText } = render(
-      <ThemeProvider theme={theme}>
-        <Progress value={0} max={0} />
-      </ThemeProvider>
-    );
-    // @ts-ignore
-    expect(getByLabelText('progress')).toHaveStyle({ width: '0%' });
+    render(<Progress value={0} max={0} />);
+    expect(screen.getByRole('progressbar').firstChild).toHaveStyle({ transform: 'translateX(0%)' });
   });
 });

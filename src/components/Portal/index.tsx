@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
 
 export interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   container?: HTMLElement;
   disabled?: boolean;
 }
 
-const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) => {
+export default function Portal({ children, container, disabled }: Props) {
   const [mountNode, setMountNode] = useState<Element | null>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (disabled) {
-      setMountNode(null);
-      return;
-    }
     if (!container) {
       let dom = document.getElementById('visits-style-portals');
       if (!dom) {
@@ -24,14 +20,11 @@ const Portal = React.forwardRef(({ children, container, disabled }: Props, ref) 
         dom.id = 'visits-style-portals';
         document.body.appendChild(dom);
       }
-      setMountNode(dom);
-      return;
+      return setMountNode(dom);
     }
     setMountNode(container);
-  }, [container, disabled]);
+  }, [container]);
 
-  return mountNode ? createPortal(children, mountNode) : null;
-});
-Portal.displayName = 'Portal';
-
-export default Portal;
+  if (disabled || !mountNode) return null;
+  return createPortal(children, mountNode);
+}

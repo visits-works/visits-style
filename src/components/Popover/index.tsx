@@ -1,30 +1,28 @@
 /* eslint-disable no-param-reassign, no-unused-expressions */
-import React, {
-  Children, cloneElement, useState, HTMLAttributes, useEffect, useRef,
-  forwardRef, useImperativeHandle, useCallback,
-} from 'react';
-import { styled } from 'styled-components';
 import {
-  useFloating, useInteractions, useClick, useId,
-  shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate,
-  type ReferenceType,
+  Children, cloneElement, useState, useEffect, useRef,
+  forwardRef, useImperativeHandle, useCallback, useMemo,
+} from 'react';
+import type { CSSProperties, HTMLAttributes, ReactElement, ReactNode, MouseEvent } from 'react';
+import {
+  useFloating, useInteractions, useClick, useId, useTransitionStyles,
+  shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate, type ReferenceType,
 } from '@floating-ui/react';
 import type { Placement } from '@floating-ui/core';
+import clsx from 'clsx';
 
 import Portal from '../Portal';
-import Box from '../../elements/Box';
 import stopPropagation from '../../utils/stopPropagation';
 
+export interface PopoverRef {
+  open: () => void;
+  close: () => void;
+}
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** ボタンの内容 */
-  label: React.ReactElement;
+  label: ReactElement;
   /** 内容のリスト */
-  children?: React.ReactNode;
-  /**
-   * 吹き出しの背景色
-   * @default 'background'
-   */
-  color?: string;
+  children?: ReactNode;
   /**
    * 表示される場所
    * @default 'bottom-end'
@@ -32,10 +30,16 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   position?: Placement;
 
   /**
-   * ツールチップが表示される間隔
+   * Popoverが表示される間隔
    * @default '{ x: 0, y: 6 }'
    */
   offset?: { x: number; y: number; };
+
+  /**
+   * Popoverの表示・非表示のアニメーション速度
+   * @default { open: 150, close: 75 }
+   */
+  timeout?: number | { open: number; close: number; };
 
   /** 閉じた場合のコールバック */
   onClose?: (ref?: ReferenceType | null, float?: HTMLElement | null) => void;
@@ -50,18 +54,15 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 9996
   */
   zIndex?: number;
+  /** デフォルトスタイルを外し、cssクラスを適用します */
+  unstyled?: boolean;
 }
+const defaultTimeout = { open: 150, close: 75 };
 
-export interface PopoverRef {
-  open: () => void;
-  close: () => void;
-}
-
-const Popover = forwardRef(({
-  position, label, children, color = 'background',
-  onOpen, onClose, disabled, offset = { x: 0, y: 6 }, onManualClose,
-  zIndex = 9996, ...rest
-}: Props, ref: React.Ref<PopoverRef>) => {
+const Popover = forwardRef<PopoverRef, Props>(({
+  position, label, children, color = 'background', disabled, offset = { x: 0, y: 6 },
+  onOpen, onClose, onManualClose, timeout = defaultTimeout, unstyled, zIndex = 9996, role, ...rest
+}, ref) => {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
   const openRef = useRef(onOpen);
@@ -87,7 +88,24 @@ const Popover = forwardRef(({
     whileElementsMounted: autoUpdate,
   });
 
-  const handleBlur = useCallback((e?: React.MouseEvent<HTMLElement>) => {
+  const { isMounted, styles } = useTransitionStyles(context, {
+    duration: timeout,
+    initial({ side }) {
+      let transform = '';
+      if (side === 'top') {
+        transform = 'translateY(5%) scale(0.95)';
+      } else if (side === 'bottom') {
+        transform = 'translateY(-5%) scale(0.95)';
+      } else if (side === 'left') {
+        transform = 'translateX(5%) scale(0.95)';
+      } else {
+        transform = 'translateX(-5%) scale(0.95)';
+      }
+      return { opacity: 0, transform };
+    },
+  });
+
+  const handleBlur = useCallback((e?: MouseEvent<HTMLElement>) => {
     stopPropagation(e);
     if (onManualClose) return onManualClose();
 
@@ -97,9 +115,7 @@ const Popover = forwardRef(({
   }, [onManualClose]);
 
   useEffect(() => {
-    if (disabled && open) {
-      setOpen(false);
-    }
+    if (disabled && open) return setOpen(false);
   }, [disabled, open]);
 
   useImperativeHandle(ref, () => ({
@@ -127,37 +143,42 @@ const Popover = forwardRef(({
         ref: refs.setReference,
         tabIndex: 0,
         role: 'button',
+        'aria-expanded': open,
         disabled,
         onClick: stopPropagation,
       }))}
-      <Portal>
-        {open && !disabled ? (
-          <FloatingOverlay data-testid="visits-style-shadow" onClick={handleBlur} style={{ zIndex }}>
-            <Tooltip
-              role="tooltip"
-              ref={refs.setFloating}
-              color={color}
-              style={floatingStyles}
+      <Portal disabled={disabled || !isMounted}>
+        <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }} autoFocus>
+          <div role={role || 'region'} ref={refs.setFloating} style={floatingStyles}>
+            <PopoverContent
+              unstyled={unstyled}
+              styles={styles}
               {...getFloatingProps({ ...rest, onClick: stopPropagation })}
             >
               {children}
-            </Tooltip>
-          </FloatingOverlay>
-        ) : null}
+            </PopoverContent>
+          </div>
+        </FloatingOverlay>
       </Portal>
     </>
   );
 });
 Popover.displayName = 'Popover';
-
 export default Popover;
 
-const Tooltip = styled(Box)`
-  display: flex;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  padding: 0.5rem 0;
-  width: auto;
-  height: auto;
-  cursor: auto;
-  z-index: 20;
-`;
+interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
+  styles: CSSProperties;
+  unstyled?: boolean;
+}
+
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(({
+  className, unstyled, styles, style = {}, ...rest
+}, ref) => {
+  const popoverName = useMemo(() => clsx(
+    'z-20 w-auto h-auto outline-none transition-transform ease-in-out',
+    unstyled ? null : 'border border-accent rounded-md shadow-lg p-1 bg-background',
+    className,
+  ), [className, unstyled]);
+  return <div ref={ref} className={popoverName} style={{ ...styles, ...style }} {...rest} />;
+});
+PopoverContent.displayName = 'PopoverContent';

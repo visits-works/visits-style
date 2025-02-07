@@ -4,10 +4,6 @@
     "react-app"
   ],
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
   "settings": {
     "import/resolver": {
         "node": {
@@ -29,6 +25,7 @@
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "react/react-in-jsx-scope": "off",
     "prettier/prettier": "off",
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
