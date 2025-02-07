@@ -29,13 +29,20 @@ bun add -D tailwindcss
 
 ```css
 @import "tailwindcss"
-@import "visits-style/dist/lib.css"
+@import "visits-style/lib.css";
+@source "../node_modules/visits-style";
 
 /** カスタムグロバールcss定義 */
 ```
 ```tsx
+import { Button } from 'visits-style';
 export default function TestComponent() {
-  return <div className="bg-primary" />;
+  return (
+    <div role="alert" className="bg-warn-fore px-2 py-1 flex justify-between items-center">
+      <p>Warning message!</p>
+      <Button variant="ghost">Dismiss</Button>
+    </div>
+  );
 }
 ```
 
