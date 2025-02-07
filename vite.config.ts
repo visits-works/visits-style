@@ -24,7 +24,7 @@ export default defineConfig({
     react(),
     viteTsconfigPaths(),
     externalizeDeps(),
-    dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'] }),
+    dts({ exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'], rollupTypes: true }),
   ],
   build: {
     target: 'esnext',
