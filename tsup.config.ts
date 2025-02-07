@@ -11,7 +11,7 @@ export default defineConfig({
   dts: true,
   clean: true,
   outExtension({ format }) {
-    return { js: `.${format}.js` }
+    return { js: `.${format}.js` };
   },
   onSuccess: async () => {
     const css = readFileSync(resolve(__dirname, './src/lib.css'), 'utf8');
@@ -21,11 +21,11 @@ export default defineConfig({
     if (!process.env.CI) return console.log('skip modify package.json');
 
     const pkg = readFileSync(resolve(__dirname, './package.json'), 'utf8');
-    const publishPkg = JSON.parse(JSON.stringify(pkg));
+    const publishPkg = JSON.parse(pkg);
     delete publishPkg.devDependencies;
     delete publishPkg.resolutions;
     delete publishPkg.scripts;
 
-    writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
+    writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg));
   },
 });
