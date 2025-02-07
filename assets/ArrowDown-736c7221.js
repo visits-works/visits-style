@@ -1,2 +1,0 @@
-import{j as o}from"./jsx-runtime-94f6e698.js";function e(r){return o.jsx("svg",{width:"12",height:"8",viewBox:"0 0 12 8",fill:"none",xmlns:"http://www.w3.org/2000/svg",...r,children:o.jsx("path",{d:"M10.6 0L6 4.6 1.4 0 0 1.4l6 6 6-6L10.6 0z",fill:"currentColor"})})}try{ArrowDown.displayName="ArrowDown",ArrowDown.__docgenInfo={description:"",displayName:"ArrowDown",props:{}}}catch{}export{e as C};
-//# sourceMappingURL=ArrowDown-736c7221.js.map

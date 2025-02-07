@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-CLpGMVip.js";const s={decorators:[t=>e.jsx("div",{style:{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",minHeight:"65vh"},children:e.jsx(t,{})})]};export{s as default};
