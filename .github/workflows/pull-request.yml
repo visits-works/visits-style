@@ -15,12 +15,6 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles(format('{0}{1}', github.workspace, '/bun.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
       - run: bun install
       - run: bun run lint
       - run: bun run test
