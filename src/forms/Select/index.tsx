@@ -18,11 +18,11 @@ interface OptionRenderConfig {
 export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children'> {
   /** 配列の値の入力の場合、複数選択モードに切り替えます */
   value: T | T[];
-  placeholder: string;
   options: OptionType<T>[];
   onChange?: (value: T) => void;
   onClear?: () => void;
-  renderItem?: (item: OptionType<T>, config: OptionRenderConfig) => ReactElement,
+  renderItem?: (item: OptionType<T>, config: OptionRenderConfig) => ReactElement;
+  placeholder?: string;
   arrow?: ReactNode;
   maxHeight?: number;
   error?: boolean;
