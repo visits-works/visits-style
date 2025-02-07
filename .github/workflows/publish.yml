@@ -28,19 +28,19 @@ jobs:
       - run: bun run build
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > .npmrc
       - run: bun publish
-  # document:
-  #   name: deploy document
-  #   runs-on: ubuntu-latest
-  #   needs: test
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '16'
-  #     - run: yarn install
-  #     - run: yarn storybook:build
-  #     - name: Deploy
-  #       uses: peaceiris/actions-gh-pages@v3
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         publish_dir: ./.out
+  document:
+    name: deploy document
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun run storybook:build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.out
