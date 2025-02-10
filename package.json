@@ -2,7 +2,7 @@
   "name": "visits-style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
