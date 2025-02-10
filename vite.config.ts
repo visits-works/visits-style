@@ -27,10 +27,6 @@ export default defineConfig({
     dts({
       exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'],
       rollupTypes: true,
-      beforeWriteFile(filePath, content) {
-        const next = content.replaceAll('export declare', 'export');
-        return { filePath, content: next };
-      },
     }),
   ],
   build: {
