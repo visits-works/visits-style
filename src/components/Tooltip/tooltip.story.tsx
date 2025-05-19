@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import Tooltip from '.';
 
@@ -47,16 +47,19 @@ export const absolute: Story = {
 };
 
 export const multiple: Story = {
-  render: () => {
-    return (
-      <div>
-        <Tooltip label="tooltip1111">
-          <button>button 1</button>
-        </Tooltip>
-        <Tooltip label="tooltip2222">
-          <button>button 2</button>
-        </Tooltip>
-      </div>
-    );
-  },
+  render: () => <Multiple />,
 };
+
+function Multiple() {
+  const [num, setNum] = useState(0);
+  return (
+    <div>
+      <Tooltip label="tooltip1111" disabled={num <= 0}>
+        <button onClick={() => setNum(num - 1)} disabled={num <= 0}>button 1</button>
+      </Tooltip>
+      <Tooltip label="tooltip2222">
+        <button onClick={() => setNum(num + 1)} disabled={num > 5}>button 2</button>
+      </Tooltip>
+    </div>
+  );
+}

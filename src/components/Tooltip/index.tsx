@@ -1,4 +1,5 @@
-import React, { Children, cloneElement, useImperativeHandle, useState, forwardRef, MutableRefObject } from 'react';
+import React, { Children, cloneElement, useImperativeHandle, useState, forwardRef, useEffect } from 'react';
+import type { MutableRefObject } from 'react';
 import { styled } from 'styled-components';
 import {
   useFloating, useInteractions, useHover, useClientPoint,
@@ -48,8 +49,9 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
   offset = { x: 0, y: 6 }, clientPoint = false, disabled,
 }, ref) => {
   const [open, setOpen] = useState(false);
+  const nodeId = useId();
   const { refs, floatingStyles, context } = useFloating({
-    nodeId: 'vs-tooltip-node',
+    nodeId,
     open,
     placement: position,
     middleware: [
@@ -72,6 +74,12 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
     open: () => setOpen(true),
     close: () => setOpen(false),
   }));
+
+  // disabledされた時にもstate的にはtrueのままになる可能性があるため、falseに設定しておく
+  useEffect(() => {
+    if (!disabled) return;
+    setOpen(false);
+  }, [disabled]);
 
   const child = typeof children === 'string' ? <span>{children}</span> : children;
 
