@@ -48,9 +48,8 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
   offset = { x: 0, y: 6 }, clientPoint = false, disabled,
 }, ref) => {
   const [open, setOpen] = useState(false);
-  const nodeId = useId();
   const { refs, floatingStyles, context } = useFloating({
-    nodeId,
+    nodeId: 'vs-tooltip-node',
     open,
     placement: position,
     middleware: [

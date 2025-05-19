@@ -45,3 +45,18 @@ export const absolute: Story = {
     );
   },
 };
+
+export const multiple: Story = {
+  render: () => {
+    return (
+      <div>
+        <Tooltip label="tooltip1111">
+          <button>button 1</button>
+        </Tooltip>
+        <Tooltip label="tooltip2222">
+          <button>button 2</button>
+        </Tooltip>
+      </div>
+    );
+  },
+};
