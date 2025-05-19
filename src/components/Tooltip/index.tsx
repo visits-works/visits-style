@@ -1,4 +1,4 @@
-import { Children, cloneElement, useImperativeHandle, useState, forwardRef, useMemo } from 'react';
+import { Children, cloneElement, useImperativeHandle, useState, forwardRef, useMemo, useEffect } from 'react';
 import type { ReactNode, ReactElement, RefObject, HTMLAttributes } from 'react';
 import {
   useFloating, useInteractions, useHover, useClientPoint, useTransitionStyles,
@@ -82,6 +82,12 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
     open: () => setOpen(true),
     close: () => setOpen(false),
   }));
+
+  // disabledされた時にもstate的にはtrueのままになる可能性があるため、falseに設定しておく
+  useEffect(() => {
+    if (!disabled) return;
+    setOpen(false);
+  }, [disabled]);
 
   const child = typeof children === 'string' ? <span>{children}</span> : children;
 
