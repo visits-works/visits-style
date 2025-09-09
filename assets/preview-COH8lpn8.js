@@ -1,1 +1,0 @@
-import{j as e}from"./jsx-runtime-D_zvdyIk.js";const s={decorators:[t=>e.jsx("div",{style:{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",minHeight:"65vh"},children:e.jsx(t,{})})]};export{s as default};
