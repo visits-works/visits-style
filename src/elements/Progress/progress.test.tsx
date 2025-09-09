@@ -9,6 +9,7 @@ describe('Progress', () => {
 
   it('progressBar should have 0 length when max/value both zero', () => {
     render(<Progress value={0} max={0} />);
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByRole('progressbar').firstChild).toHaveStyle({ transform: 'translateX(0%)' });
   });
 });

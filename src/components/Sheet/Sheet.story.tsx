@@ -31,7 +31,6 @@ function IconClose(props: SVGAttributes<SVGSVGElement>) {
 
 type Story = StoryObj<typeof meta>;
 
-// @ts-ignore
 export const base: Story = {
   render: ({ open, ...rest }) => {
     const [showDialog, setShow] = useState(open);

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import event from '@testing-library/user-event';
 
 import Modal, { Props } from '.';

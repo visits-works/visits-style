@@ -1,8 +1,0 @@
-node_modules/*
-*.js
-**/__test__/**
-*.story.tsx
-*.test.tsx
-setupTest.ts
-build/*
-dist/*

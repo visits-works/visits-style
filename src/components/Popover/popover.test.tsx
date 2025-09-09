@@ -1,11 +1,9 @@
 import { useRef, useState } from 'react';
-import { render, fireEvent, cleanup, screen, waitFor } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 
 import Popover, { type PopoverRef } from '.';
 
 describe('Popover', () => {
-  beforeEach(cleanup);
-
   it('render', () => {
     render(
       <Popover label={<button type="button">show</button>}>

@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import Accordion from '.';
 
@@ -7,7 +6,7 @@ describe('Accordion', () => {
   it('rendered without error', () => {
     render(
       <Accordion
-        header={<button role="button">click</button>}
+        header={<button>click</button>}
         show={false}
       >
         Accordion Content
@@ -19,7 +18,7 @@ describe('Accordion', () => {
 
   it('element shows on show', async () => {
     render(
-      <Accordion header={<button role="button">click</button>} show>
+      <Accordion header={<button>click</button>} show>
         Accordion Content
       </Accordion>
     );

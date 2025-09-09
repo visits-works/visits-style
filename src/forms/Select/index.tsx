@@ -40,7 +40,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   clearLabelText?: string;
 }
 
-export default function Select<T = any>({
+export default function Select<T = unknown>({
   className, placeholder = '', options = [], error, unstyled, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
   sectionLabelStyle, buttonAreaStyle, clearLabelText, optionStyle, ...rest

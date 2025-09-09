@@ -107,6 +107,7 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
     </>
   );
 });
+Tooltip.displayName = 'Tooltip';
 export default Tooltip;
 
 interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
@@ -123,3 +124,4 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(({
   ), [className, custom]);
   return <div ref={ref} className={tooltipName} {...rest} />;
 });
+TooltipContent.displayName = 'TooltipContent';

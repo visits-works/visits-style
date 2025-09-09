@@ -132,12 +132,12 @@ export const case5: Story = {
     const [clicked, setClicked] = useState(false);
     return (
       <>
-        <a className="hover:underline" onClick={() => setClicked(!clicked)}>
+        <button className="hover:underline" onClick={() => setClicked(!clicked)}>
           <span>parent button contents</span><br />
           <Popover {...args} label={Label}>
             <p>hello world</p>
           </Popover>
-        </a>
+        </button>
         {clicked ? <div>oh no! your parent click event is triggered!</div> : null}
       </>
     );

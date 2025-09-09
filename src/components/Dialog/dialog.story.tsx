@@ -33,7 +33,6 @@ function IconClose(props: SVGAttributes<SVGSVGElement>) {
 
 type Story = StoryObj<typeof meta>;
 
-// @ts-ignore
 export const base: Story = {
   render: ({ open, ...rest }) => {
     const [showDialog, setShow] = useState(open);
@@ -54,7 +53,6 @@ export const base: Story = {
   },
 };
 
-// @ts-ignore
 export const onScroll: Story = {
   render: (args) => {
     const [showDialog, setShow] = useState(false);
@@ -79,7 +77,6 @@ export const onScroll: Story = {
   },
 };
 
-// @ts-ignore
 export const nested: Story = {
   render: (args) => {
     const [parent, showParent] = useState(false);
@@ -112,7 +109,6 @@ export const nested: Story = {
   },
 };
 
-// @ts-ignore
 export const input: Story = {
   render: ({ open, ...rest }) => {
     const [showDialog, setShow] = useState(open);
@@ -136,7 +132,6 @@ export const input: Story = {
   },
 };
 
-// @ts-ignore
 export const external: Story = {
   render: (args) => {
     const [showDialog, setShow] = useState(false);
@@ -193,6 +188,5 @@ export const onExit: Story = {
       </>
     );
   },
-  // @ts-ignore
   args: { timeout: 500 },
 };

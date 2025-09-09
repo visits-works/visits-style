@@ -157,6 +157,7 @@ export const withCustom: Story = {
               <button
                 key={item.value}
                 type="button"
+                role="option"
                 className="w-full text-left hover:bg-accent px-2 py-1 rounded cursor-pointer"
                 aria-selected={config.selected}
                 onClick={config.onChange}

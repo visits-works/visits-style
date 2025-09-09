@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign, no-unused-expressions */
 import {
   Children, cloneElement, useState, useEffect, useRef,
   forwardRef, useImperativeHandle, useCallback, useMemo,
@@ -60,7 +59,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 const defaultTimeout = { open: 150, close: 75 };
 
 const Popover = forwardRef<PopoverRef, Props>(({
-  position, label, children, color = 'background', disabled, offset = { x: 0, y: 6 },
+  position, label, children, disabled, offset = { x: 0, y: 6 },
   onOpen, onClose, onManualClose, timeout = defaultTimeout, unstyled, zIndex = 9996, role, ...rest
 }, ref) => {
   const [open, setOpen] = useState(false);
@@ -148,7 +147,13 @@ const Popover = forwardRef<PopoverRef, Props>(({
         onClick: stopPropagation,
       }))}
       <Portal disabled={disabled || !isMounted}>
-        <FloatingOverlay data-testid="vs-popover-shadow" onClick={handleBlur} style={{ zIndex }} autoFocus>
+        <FloatingOverlay
+          data-testid="vs-popover-shadow"
+          onClick={handleBlur}
+          style={{ zIndex }}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus
+        >
           <div role={role || 'region'} ref={refs.setFloating} style={floatingStyles}>
             <PopoverContent
               unstyled={unstyled}

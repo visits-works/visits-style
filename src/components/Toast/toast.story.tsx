@@ -118,7 +118,7 @@ export const base: Story = {
       <Toast icons={icons} {...args} />
     </>
   ),
-  // @ts-ignore
+  // @ts-expect-error
   args: { fixed: true, position: 'top-left' },
   parameters: {
     controls: {

@@ -7,7 +7,7 @@ describe('Form FormField', () => {
     const onChange = vi.fn();
     render(
       <FormField label="test label">
-        <Checkbox name="test" checked onChange={onChange} />
+        <Checkbox name="test" checked onChange={onChange} checkIcon={<figure />} />
       </FormField>
     );
   });
