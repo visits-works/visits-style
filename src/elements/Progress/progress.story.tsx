@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies *//* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Progress, { ProgressProps } from '.';
 
 const meta = {

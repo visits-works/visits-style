@@ -104,7 +104,9 @@ export default function Dialog({
           className={dialogClass}
           role="dialog"
           size={size}
-          {...getFloatingProps({ ...rest, style: styles, onClick: stopPropagation })}
+          style={styles}
+          onClick={stopPropagation}
+          {...getFloatingProps({ ...rest })}
         >
           {children}
         </DialogContent>
@@ -125,9 +127,9 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(({
   const dialogClass = useMemo(() => clsx(
     size ? 'flex flex-col bg-background shadow-lg p-5 rounded' : null,
     {
-      'w-full max-w-sm': size === 'small',
-      'w-full max-w-lg': size === 'medium',
-      'w-full max-w-2xl': size === 'large',
+      'w-full max-w-dialog-sm': size === 'small',
+      'w-full max-w-dialog-md': size === 'medium',
+      'w-full max-w-dialog-lg': size === 'large',
     },
     className,
   ), [size, className]);

@@ -4,9 +4,6 @@ import clsx from 'clsx';
 
 import merge from '../../utils/merge';
 import Popover, { PopoverRef } from '../../components/Popover';
-import IconArrowDown from '../../elements/Icons/ArrowDown';
-import IconCheck from '../../elements/Icons/Check';
-import IconClose from '../../elements/Icons/Close';
 
 type OptionType<T> = { value: T; label: string; } | string;
 interface OptionRenderConfig {
@@ -23,15 +20,30 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   onClear?: () => void;
   renderItem?: (item: OptionType<T>, config: OptionRenderConfig) => ReactElement;
   placeholder?: string;
-  arrow?: ReactNode;
+  arrowIcon?: ReactNode;
+  closeIcon?: ReactNode;
+  checkIcon?: ReactNode;
+  /**
+   * select選択肢の最大高さ
+   * @default 408
+  */
   maxHeight?: number;
   error?: boolean;
   unstyled?: boolean;
+  /** クリアボタン、矢印アイコンの領域のdivのスタイルのカスタム指定 */
+  buttonAreaStyle?: string;
+  /** section(stringのみで区域を区切った場合)を使うときのスタイルのカスタム指定 */
+  sectionLabelStyle?: string;
+  /** 各選択肢のスタイルのカスタム指定 */
+  optionStyle?: string;
+  /** 選択を取り消すボタンのaria-label */
+  clearLabelText?: string;
 }
 
 export default function Select<T = any>({
   className, placeholder = '', options = [], error, unstyled, disabled, value,
-  maxHeight = 408, arrow, onChange, onClear, renderItem, ...rest
+  maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
+  sectionLabelStyle, buttonAreaStyle, clearLabelText, optionStyle, ...rest
 }: Props<T>) {
   const ref = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
@@ -85,11 +97,6 @@ export default function Select<T = any>({
     isEmpty ? 'text-muted' : 'text-text',
   ), [isEmpty]);
 
-  const Arrow = useMemo(() => {
-    if (arrow) return arrow;
-    return <IconArrowDown className="absolute right-0 text-muted size-5" />;
-  }, [arrow]);
-
   const handleRender = useCallback((item: OptionType<T>, index: number) => {
     if (renderItem) {
       if (typeof item === 'string') {
@@ -102,17 +109,31 @@ export default function Select<T = any>({
       });
     }
     if (typeof item === 'string') {
-      return <h5 className="font-medium py-1 px-2 text-muted" key={`optionheader-${index}`}>{item}</h5>;
+      return (
+        <h5
+          className={clsx('font-normal py-1 px-2 text-muted', sectionLabelStyle)}
+          key={`optionheader-${index}`}
+        >
+          {item}
+        </h5>
+      );
     }
     return (
       <SelectItem<T>
         key={item.label}
         selected={isSelected(item.value)}
         onChange={handleChange}
+        checkIcon={checkIcon}
+        className={optionStyle}
         {...item}
       />
     );
-  }, [renderItem, handleChange, isSelected]);
+  }, [renderItem, handleChange, isSelected, sectionLabelStyle, optionStyle, checkIcon]);
+
+  const buttonWrapperStyle = useMemo(() => clsx(
+    'relative flex items-center pr-4 space-x-2',
+    buttonAreaStyle,
+  ), [buttonAreaStyle]);
 
   return (
     <Popover
@@ -121,13 +142,13 @@ export default function Select<T = any>({
           <span className={btnLabelClass}>
             {selectedLabel}
           </span>
-          <div className="relative flex items-center pl-8 pr-3 space-x-2">
+          <div className={buttonWrapperStyle}>
             {onClear && !isEmpty ? (
               <div
                 tabIndex={-1}
                 role="button"
-                className="size-6 p-1.5 rounded hover:bg-accent"
-                aria-label="clear selected values"
+                className="size-6 p-1.5 rounded hover:bg-accent cursor-pointer"
+                aria-label={clearLabelText}
                 onKeyDown={(e) => {
                   if (e.key !== 'Enter' && e.key !== 'Space') return;
                   onClear();
@@ -137,10 +158,10 @@ export default function Select<T = any>({
                   onClear();
                 }}
               >
-                <IconClose />
+                {closeIcon}
               </div>
             ) : null}
-            {Arrow}
+            {arrowIcon}
           </div>
         </button>
       )}
@@ -164,12 +185,15 @@ interface SelectItemProps<T> {
   value: T;
   label: string;
   onChange?: (value: T) => void;
+  checkIcon?: ReactNode;
   selected?: boolean;
 }
 
-export function SelectItem<T>({ className, value, label, selected, onChange }: SelectItemProps<T>) {
+export function SelectItem<T>({
+  className, value, label, selected, checkIcon, onChange,
+}: SelectItemProps<T>) {
   const name = useMemo(() => clsx(
-    'flex items-center w-full hover:bg-accent rounded p-1',
+    'flex items-center w-full hover:bg-accent rounded p-1 cursor-pointer',
     className,
   ), [className]);
   return (
@@ -180,7 +204,7 @@ export function SelectItem<T>({ className, value, label, selected, onChange }: S
       aria-selected={selected}
       onClick={() => onChange?.(value)}
     >
-      {selected ? <IconCheck className="w-5 h-5 mr-1" /> : <div className="w-5 h-1 mr-1" />}
+      {selected && checkIcon ? checkIcon : <div className="w-5 h-1 mr-1" />}
       {label}
     </button>
   );

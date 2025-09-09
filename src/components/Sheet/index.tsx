@@ -1,4 +1,4 @@
-import { useMemo, type HTMLAttributes } from 'react';
+import { useEffect, useMemo, useRef, type HTMLAttributes } from 'react';
 import { useFloating, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
 import clsx from 'clsx';
 
@@ -26,10 +26,15 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   unstyled?: boolean;
 }
 
-const defaultTimeout = { open: 300, close: 150 };
+const defaultTimeout = { open: 250, close: 150 };
 
-export default function Sheet({ open, timeout = defaultTimeout, onOpenChange, position = 'right', overlay, ...rest }: Props) {
+export default function Sheet({
+  open, timeout = defaultTimeout, onOpenChange, position = 'right', overlay, onExited, ...rest
+}: Props) {
   const nodeId = useId();
+  const isTransMountedRef = useRef(false);
+  const exitRef = useRef(onExited);
+
   const { refs, context } = useFloating({ open, onOpenChange, nodeId });
   const { isMounted, styles } = useTransitionStyles(context, {
     duration: timeout,
@@ -46,6 +51,14 @@ export default function Sheet({ open, timeout = defaultTimeout, onOpenChange, po
     },
   });
 
+  useEffect(() => {
+    if (isTransMountedRef.current === isMounted) return;
+    isTransMountedRef.current = isMounted;
+    if (isMounted) return;
+
+    exitRef.current?.();
+  }, [isMounted]);
+
   const name = useMemo(() => clsx(
     'fixed transition-transform z-30',
     {
@@ -55,6 +68,8 @@ export default function Sheet({ open, timeout = defaultTimeout, onOpenChange, po
       'bottom-0 left-0 right-0 w-full max-w-screen': position === 'bottom',
     },
   ), [position]);
+
+  exitRef.current = onExited;
 
   return (
     <Portal disabled={!isMounted}>

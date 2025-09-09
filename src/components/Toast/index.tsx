@@ -1,17 +1,22 @@
-import { type CSSProperties, useMemo, useState, startTransition, useRef, createElement } from 'react';
+import { type CSSProperties, useMemo, useState, startTransition, useRef, createElement, createContext, useContext } from 'react';
 import clsx from 'clsx';
 
 import useIsomorphicLayoutEffect from 'hooks/useIsomorphicLayoutEffect';
 
 import ToastItem from './ToastItem';
 import ToastFloat from './ToastFloat';
-import type { ToasterProps } from './types';
+import type { ToasterProps, ToastContextType } from './types';
 
 import Portal from '../Portal';
 import observer from './observer';
 
+const toastContext = createContext<ToastContextType>({});
+export function useToastContext() {
+  return useContext(toastContext);
+}
+
 export default function Toast({
-  className, margin = 16, position = 'top-left', max, ListItem = ToastItem,
+  className, margin = 16, position = 'top-left', max, ListItem = ToastItem, icons,
 }: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
     const base = { position: 'fixed' } as CSSProperties;
@@ -69,29 +74,33 @@ export default function Toast({
     });
   }), []);
 
+  const context = useMemo<ToastContextType>(() => ({ icons }), [icons]);
+
   const size = order.length;
 
   return (
     <Portal>
       <ol className={name} style={style} aria-live="polite">
-        {order.map((id, i) => {
-          const item = data.current.get(id);
-          if (!item) return null;
-          const { className: innerClass, duration, ...props } = item;
-          return (
-            <ToastFloat
-              key={id}
-              id={id}
-              index={size - i}
-              className={innerClass}
-              duration={duration}
-              inverted={isInvertedOrder}
-              max={max}
-            >
-              {createElement(ListItem, props)}
-            </ToastFloat>
-          );
-        })}
+        <toastContext.Provider value={context}>
+          {order.map((id, i) => {
+            const item = data.current.get(id);
+            if (!item) return null;
+            const { className: innerClass, duration, ...props } = item;
+            return (
+              <ToastFloat
+                key={id}
+                id={id}
+                index={size - i}
+                className={innerClass}
+                duration={duration}
+                inverted={isInvertedOrder}
+                max={max}
+              >
+                {createElement(ListItem, props)}
+              </ToastFloat>
+            );
+          })}
+        </toastContext.Provider>
       </ol>
     </Portal>
   );

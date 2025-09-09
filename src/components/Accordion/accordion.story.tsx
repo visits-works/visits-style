@@ -1,8 +1,16 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import { useState, type SVGAttributes } from "react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import Accordion from ".";
-import ArrowDownIcon from "../../elements/Icons/ArrowDown";
+
+function IconArrow(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M11.7 14.8 7 9.8a.5.5 0 0 1 0-.7c.2-.2.5-.2.7 0l4.5 5c.2.2.2.6 0 .8-.1.2-.4.2-.6 0Z" fill="currentColor" />
+      <path d="m16.9 9.9-4.6 5c-.2.2-.4.2-.6 0a.5.5 0 0 1 0-.8l4.5-5c.2-.2.5-.2.7 0 .1.2.1.6 0 .8Z" fill="currentColor" />
+    </svg>
+  );
+}
 
 function Test({ show, timeout, length, onClick }: any) {
   return (
@@ -15,7 +23,7 @@ function Test({ show, timeout, length, onClick }: any) {
           onClick={onClick}
         >
           {`accordion header-${length}`}
-          <ArrowDownIcon
+          <IconArrow
             className="transition-transform ease-in-out"
             style={{ transform: show ? 'rotate(180deg)' : '' }}
           />

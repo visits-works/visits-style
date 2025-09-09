@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import { useState, type SVGAttributes } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Checkbox, { Props } from '.';
 import FormField from '../Field/FormField';
@@ -16,6 +16,14 @@ const meta = {
 
 export default meta;
 
+function IconCheck(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" {...props}>
+      <path d="M11.5 18.5l-3.9-4L6 16l5.6 5.6 11.6-11.5-1.7-1.6z" fill="currentColor" />
+    </svg>
+  );
+}
+
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
@@ -31,7 +39,7 @@ export const base: Story = {
     );
   },
   args: {
-    name: 'test1', disabled: false,
+    name: 'test1', disabled: false, checkIcon: <IconCheck />,
   },
 };
 
@@ -53,7 +61,7 @@ export const withMessage: Story = {
     );
   },
   args: {
-    name: 'test1', disabled: false,
+    name: 'test1', disabled: false, checkIcon: <IconCheck />,
   },
 };
 
@@ -75,6 +83,6 @@ export const withForm: Story = {
     );
   },
   args: {
-    name: 'test1', onChange: noop, checked: false, disabled: false,
+    name: 'test1', onChange: noop, checked: false, disabled: false, checkIcon: <IconCheck />,
   },
 };

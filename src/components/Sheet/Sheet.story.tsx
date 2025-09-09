@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import { useState, type SVGAttributes } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Sheet from '.';
 import Button from '../../elements/Button';
-import IconClose from '../../elements/Icons/Close';
 
 const meta = {
   title: 'components/Sheet',
@@ -18,6 +17,17 @@ const meta = {
 } satisfies Meta<typeof Sheet>;
 
 export default meta;
+
+function IconClose(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" {...props}>
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M26 26l-12.5-12.5L26 1" />
+        <path d="M1 26l12.5-12.5L1 1" />
+      </g>
+    </svg>
+  );
+}
 
 type Story = StoryObj<typeof meta>;
 

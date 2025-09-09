@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Textarea, { Props } from '.';
 import FormField from '../Field/FormField';
 

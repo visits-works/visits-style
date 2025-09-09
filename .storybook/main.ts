@@ -2,11 +2,8 @@ import type { StorybookConfig } from "@storybook/react-vite";
 
 export default {
   stories: ["../src/**/*.story.@(ts|tsx)"],
-  addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-  ],
+  addons: ["@storybook/addon-links", "@storybook/addon-docs"],
+
   framework: {
     name: "@storybook/react-vite",
     options: {
@@ -14,8 +11,5 @@ export default {
         viteConfigPath: './.storybook/vite.config.ts',
       },
     },
-  },
-  docs: {
-    autodocs: "tag",
-  },
+  }
 } as StorybookConfig;

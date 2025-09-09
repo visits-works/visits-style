@@ -23,4 +23,8 @@
   --color-muted: #808080;
 
   --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  --container-dialog-sm: 24rem;
+  --container-dialog-md: 36rem;
+  --container-dialog-lg: 48rem; 
 }

@@ -1,19 +1,19 @@
 import type { ToastItemProps } from './types';
 
-import ApprovedIcon from '../../elements/Icons/Approved';
-import AlertIcon from '../../elements/Icons/Alert';
-import CautionIcon from '../../elements/Icons/Caution';
 import Spinner from '../../elements/Spinner';
+import { useToastContext } from '.';
 
 export default function ToastItem({ type, label, message }: ToastItemProps) {
+  const { icons } = useToastContext();
+
   return (
     <div className="flex items-center px-4 py-3 w-80 text-sm bg-background border border-input rounded-lg shadow-md m-2">
       {type ? (
         <figure className="mr-2">
-          {type === 'success' ? <ApprovedIcon className="text-primary size-5" /> : null}
-          {type === 'info' ? <AlertIcon className="text-info size-5" /> : null}
-          {type === 'error' ? <AlertIcon className="text-danger size-5" /> : null}
-          {type === 'warn' ? <CautionIcon className="text-warn size-5" /> : null}
+          {type === 'success' && icons?.success ? icons.success : null}
+          {type === 'info' && icons?.info ? icons.info : null}
+          {type === 'error' && icons?.error ? icons.error : null}
+          {type === 'warn' && icons?.warn ? icons.warn : null}
           {type === 'loading' ? <Spinner size={20} /> : null}
         </figure>
       ) : null}

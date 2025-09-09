@@ -1,7 +1,6 @@
 import { useMemo, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import clsx from 'clsx';
 
-import IconCheck from '../../elements/Icons/Check';
 import merge from '../../utils/merge';
 
 export interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange' | 'type' | 'role'> {
@@ -10,6 +9,8 @@ export interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'on
   indeterminate?: boolean;
   /** idが未指定の場合、nameが代わりに使われます */
   name?: string;
+  /** チェック状態のアイコンを指定する */
+  checkIcon: ReactNode;
   onChange?: (checked: boolean) => void;
 }
 
@@ -22,7 +23,7 @@ function Indeterminate() {
 }
 
 export default function Checkbox({
-  checked, indeterminate, className, id, name, onChange, value, ...rest
+  checked, indeterminate, className, id, name, onChange, value, checkIcon, ...rest
 }: Props) {
   const innerClass = useMemo(() => merge(clsx(
     'inline-flex justify-center items-center border w-4.5 h-4.5 rounded',
@@ -47,7 +48,7 @@ export default function Checkbox({
       aria-checked={checked}
       {...rest}
     >
-      {checked ? <IconCheck /> : null}
+      {checked ? checkIcon : null}
       {indeterminate && !checked ? <Indeterminate /> : null}
       <input
         type="checkbox"

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import { useState, type SVGAttributes } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Dialog, { DialogFooter, DialogHeader, DialogContent } from '.';
 import Button from '../../elements/Button';
@@ -19,6 +19,18 @@ const meta = {
 
 export default meta;
 
+function IconClose(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" {...props}>
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M26 26l-12.5-12.5L26 1" />
+        <path d="M1 26l12.5-12.5L1 1" />
+      </g>
+    </svg>
+  );
+}
+
+
 type Story = StoryObj<typeof meta>;
 
 // @ts-ignore
@@ -30,7 +42,7 @@ export const base: Story = {
       <>
         <Button variant="outline" onClick={toggle}>show modal</Button>
         <Dialog {...rest} size="small" open={showDialog} onOpenChange={toggle}>
-          <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
+          <DialogHeader onClose={toggle} closeIcon={<IconClose />}><h3>Dialog Title</h3></DialogHeader>
           <p>Dialog body text goes here.</p>
           <DialogFooter>
             <Button variant="outline" onClick={toggle}>Close</Button>
@@ -51,7 +63,7 @@ export const onScroll: Story = {
       <>
         <Button variant="outline" onClick={toggle}>show modal</Button>
         <Dialog {...args} size="small" open={showDialog} onOpenChange={toggle}>
-          <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
+          <DialogHeader onClose={toggle} closeIcon={<IconClose />}><h3>Dialog Title</h3></DialogHeader>
           <section>
             {Array.from({ length: 100 }).map((_, i) => (
               <p key={i}>Dialog body text goes here.</p>
@@ -78,7 +90,7 @@ export const nested: Story = {
       <div>
         <Button onClick={toggleParent}>show modal</Button>
         <Dialog {...args} size="medium" open={parent} onOpenChange={toggleParent}>
-          <DialogHeader onClose={toggleParent}><h3>Parent Title</h3></DialogHeader>
+          <DialogHeader onClose={toggleParent} closeIcon={<IconClose />}><h3>Parent Title</h3></DialogHeader>
           <p>Dialog body text goes here.</p>
           <DialogFooter>
             <Button variant="outline" onClick={toggleParent}>Close</Button>
@@ -86,7 +98,7 @@ export const nested: Story = {
           </DialogFooter>
         </Dialog>
         <Dialog {...args} size="small" open={child} onOpenChange={toggleChild}>
-          <DialogHeader onClose={toggleChild}><h3>Child Title</h3></DialogHeader>
+          <DialogHeader onClose={toggleChild} closeIcon={<IconClose />}><h3>Child Title</h3></DialogHeader>
           <section>
             <p>Nested Dialog body text goes here.</p>
             <div style={{ height: '95vh', color: 'blue', width: '50px' }} />
@@ -109,7 +121,7 @@ export const input: Story = {
       <>
         <Button onClick={toggle}>show modal</Button>
         <Dialog {...rest} size="large" open={showDialog} onOpenChange={toggle}>
-          <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
+          <DialogHeader onClose={toggle} closeIcon={<IconClose />}><h3>Dialog Title</h3></DialogHeader>
           <section>
             <p>Dialog body text goes here.</p>
             <TextInput />
@@ -139,7 +151,7 @@ export const external: Story = {
         <Button onClick={toggle}>show modal</Button>
         <Dialog {...args} open={showDialog} onOpenChange={toggle}>
           <DialogContent size="medium">
-            <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
+            <DialogHeader onClose={toggle} closeIcon={<IconClose />}><h3>Dialog Title</h3></DialogHeader>
             <p>Dialog body text goes here.</p>
             <DialogFooter>
               <Button variant="outline" onClick={toggle}>Close</Button>
@@ -171,7 +183,7 @@ export const onExit: Story = {
           <Button variant="outline" onClick={toggle}>{text}</Button>
         </div>
         <Dialog {...args} open={showDialog} size="small" onOpenChange={toggle} onExited={() => setText('モーダルを開く')}>
-          <DialogHeader onClose={toggle}><h3>Dialog Title</h3></DialogHeader>
+          <DialogHeader onClose={toggle} closeIcon={<IconClose />}><h3>Dialog Title</h3></DialogHeader>
           <p>Dialog body text goes here.</p>
           <DialogFooter>
             <Button variant="outline" onClick={toggle}>Close</Button>

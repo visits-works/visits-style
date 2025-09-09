@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import { useState, type SVGAttributes } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Select, { Props } from '.';
 import NativeSelect from './native';
@@ -13,6 +13,34 @@ const options = [
   { value: 5, label: 'options5' },
   { value: 6, label: 'options6' },
 ];
+
+function IconCheck(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" {...props}>
+      <path d="M11.5 18.5l-3.9-4L6 16l5.6 5.6 11.6-11.5-1.7-1.6z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function IconArrow(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M11.7 14.8 7 9.8a.5.5 0 0 1 0-.7c.2-.2.5-.2.7 0l4.5 5c.2.2.2.6 0 .8-.1.2-.4.2-.6 0Z" fill="currentColor" />
+      <path d="m16.9 9.9-4.6 5c-.2.2-.4.2-.6 0a.5.5 0 0 1 0-.8l4.5-5c.2-.2.5-.2.7 0 .1.2.1.6 0 .8Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function IconClose(props: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" {...props}>
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M26 26l-12.5-12.5L26 1" />
+        <path d="M1 26l12.5-12.5L1 1" />
+      </g>
+    </svg>
+  );
+}
 
 const meta = {
   title: 'forms/Select',
@@ -28,17 +56,22 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const defaultProps = {
+    options,
+    className: 'max-w-[370px]',
+    placeholder: 'select value...',
+    arrowIcon: <IconArrow />,
+    checkIcon: <IconCheck className="size-5 mr-1" />,
+    closeIcon: <IconClose />,
+};
+
 export const base: Story = {
   render: (args) => {
     const [value, setValue] = useState(0);
     return <Select {...args} options={options} value={value} onChange={setValue} />;
   },
   // @ts-expect-error
-  args: {
-    options,
-    className: 'max-w-[370px]',
-    placeholder: 'select value...',
-  },
+  args: { ...defaultProps },
 };
 
 export const multiple: Story = {
@@ -60,8 +93,7 @@ export const multiple: Story = {
   },
   // @ts-expect-error
   args: {
-    options,
-    className: 'max-w-[370px]',
+    ...defaultProps,
     placeholder: 'select multiple values...',
   },
 };
@@ -76,8 +108,7 @@ export const withClear: Story = {
   },
   // @ts-expect-error
   args: {
-    options,
-    className: 'max-w-[370px]',
+    ...defaultProps,
     placeholder: 'select multiple values...',
   },
 };
@@ -105,8 +136,7 @@ export const withSection: Story = {
   },
   // @ts-expect-error
   args: {
-    options,
-    className: 'max-w-[370px]',
+    ...defaultProps,
     placeholder: 'select multiple values...',
   },
 };
@@ -127,7 +157,7 @@ export const withCustom: Story = {
               <button
                 key={item.value}
                 type="button"
-                className="w-full text-left hover:bg-accent px-2 py-1 rounded"
+                className="w-full text-left hover:bg-accent px-2 py-1 rounded cursor-pointer"
                 aria-selected={config.selected}
                 onClick={config.onChange}
               >
@@ -142,8 +172,7 @@ export const withCustom: Story = {
   },
   // @ts-expect-error
   args: {
-    options,
-    className: 'max-w-[370px]',
+    ...defaultProps,
     placeholder: 'select multiple values...',
   },
 };
@@ -168,5 +197,6 @@ export const native: Story = {
     options,
     className: 'max-w-[370px]',
     placeholder: 'select multiple values...',
+    arrowIcon: <IconArrow />,
   },
 };

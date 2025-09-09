@@ -1,17 +1,17 @@
-import { forwardRef, useMemo, type SelectHTMLAttributes } from 'react';
+import { forwardRef, ReactNode, useMemo, type SelectHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
 import merge from '../../utils/merge';
-import IconArrowDown from '../../elements/Icons/ArrowDown';
 
 export interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
   error?: boolean;
   unstyled?: boolean;
+  arrowIcon?: ReactNode;
 }
 
 const NativeSelect = forwardRef<HTMLSelectElement, Props>(({
-  className, error, unstyled, placeholder, children, ...rest
+  className, error, unstyled, placeholder, children, arrowIcon, ...rest
 }, ref) => {
   const styleName = useMemo(() => (unstyled ? className : merge(clsx(
     'flex items-center justify-between rounded-md border bg-background px-3 py-2 pr-8 w-full',
@@ -26,7 +26,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, Props>(({
         {placeholder ? <option value="" disabled selected>{placeholder}</option> : null}
         {children}
       </select>
-      <IconArrowDown className="absolute top-4.5 right-3 text-muted" />
+      {arrowIcon}
     </div>
   );
 });

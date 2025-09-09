@@ -83,6 +83,11 @@ export default function TestComponent() {
 --color-inverted: #FAFAFA;
 // 無効、placeholder時に使うテキスト色
 --color-muted: #808080;
+
+// モーダルの幅サイズの設定
+--container-dialog-sm: 24rem;
+--container-dialog-md: 36rem;
+--container-dialog-lg: 48rem; 
 ```
 
 ## Docs
