@@ -16,7 +16,7 @@ interface ToastContainerProps extends Pick<ToastConfig, 'id' | 'duration' | 'cla
 }
 
 export default function ToastContainer({
-  id, type, index, duration, className, children, inverted, timeout = 250, max = 3,
+  id, type, index, duration = 5000, className, children, inverted, timeout = 250, max = 3,
 }: ToastContainerProps) {
   const isPrevMountedRef = useRef(false);
   const [open, setOpen] = useState(false);
@@ -33,9 +33,7 @@ export default function ToastContainer({
 
   useEffect(() => {
     if (isPrevMountedRef.current === isMounted) return;
-    if (!isMounted) {
-      observer.remove(id);
-    }
+    if (!isMounted) observer.remove(id);
     isPrevMountedRef.current = isMounted;
   }, [isMounted, id]);
 
