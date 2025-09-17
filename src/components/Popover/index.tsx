@@ -12,6 +12,7 @@ import clsx from 'clsx';
 
 import Portal from '../Portal';
 import stopPropagation from '../../utils/stopPropagation';
+import merge from '../../utils/merge';
 
 export interface PopoverRef {
   open: () => void;
@@ -179,11 +180,10 @@ interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(({
   className, unstyled, styles, style = {}, ...rest
 }, ref) => {
-  const popoverName = useMemo(() => clsx(
+  const popoverName = useMemo(() => merge(clsx(
     'z-20 w-auto h-auto outline-none transition-transform ease-in-out',
     unstyled ? null : 'border border-accent rounded-md shadow-lg p-1 bg-background',
-    className,
-  ), [className, unstyled]);
+  ), className), [className, unstyled]);
   return <div ref={ref} className={popoverName} style={{ ...styles, ...style }} {...rest} />;
 });
 PopoverContent.displayName = 'PopoverContent';

@@ -1,5 +1,5 @@
 // common
-export { default as Placeholder } from './Skeleton';
+export { default as Skeleton } from './Skeleton';
 
 export { default as Button, type ButtonProps, varientButton } from './Button';
 export { default as ButtonGroup } from './Button/ButtonGroup';

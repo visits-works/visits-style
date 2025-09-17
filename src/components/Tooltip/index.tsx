@@ -8,6 +8,7 @@ import type { Placement, ReferenceElement } from '@floating-ui/core';
 import clsx from 'clsx';
 
 import Portal from '../Portal';
+import merge from '../../utils/merge';
 
 export interface TooltipRef {
   floating: RefObject<HTMLElement | null>;
@@ -117,11 +118,10 @@ interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
 export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(({
   className, custom, ...rest
 }, ref) => {
-  const tooltipName = useMemo(() => clsx(
+  const tooltipName = useMemo(() => merge(clsx(
     'relative w-auto h-auto outline-none transition-transform ease-in-out whitespace-pre',
     custom ? null : 'border border-accent rounded shadow-md px-3 py-1 bg-background',
-    className,
-  ), [className, custom]);
+  ), className), [className, custom]);
   return <div ref={ref} className={tooltipName} {...rest} />;
 });
 TooltipContent.displayName = 'TooltipContent';

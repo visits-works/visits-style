@@ -7,5 +7,5 @@ export default function Skeleton({ className, ...props }: HTMLAttributes<HTMLDiv
     'inline-block animate-pulse rounded-md bg-accent',
     className,
   ), [className]);
-  return <span className={name} {...props} />;
+  return <div className={name} {...props} />;
 }
