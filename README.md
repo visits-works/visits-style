@@ -8,7 +8,7 @@
 VISITS Technologiesのreactデザインコンポーネント
 
 ## Dependencies
-- React, React-dom(>=18)
+- React, React-dom(>=19)
 - tailwindcss(>=4)
 
 ## Install
