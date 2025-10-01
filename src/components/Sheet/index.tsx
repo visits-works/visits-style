@@ -13,8 +13,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default '{ open: 250, close: 150 }'
    */
   timeout?: number | { open: number; close: number; };
-  /** モーダルのtransition exitが完了した時に発火されるcallback */
   onOpenChange?: (open: boolean) => void;
+  /** 開けた場合のコールバック */
+  onOpen?: () => void;
   /** モーダルのtransition exitが完了した時に発火されるcallback */
   onExited?: () => void;
   overlay?: boolean;
@@ -29,10 +30,11 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 const defaultTimeout = { open: 250, close: 150 };
 
 export default function Sheet({
-  open, timeout = defaultTimeout, onOpenChange, position = 'right', overlay, onExited, ...rest
+  open, timeout = defaultTimeout, onOpenChange, position = 'right', overlay, onExited, onOpen, ...rest
 }: Props) {
   const nodeId = useId();
   const isTransMountedRef = useRef(false);
+  const openRef = useRef(onOpen);
   const exitRef = useRef(onExited);
 
   const { refs, context } = useFloating({ open, onOpenChange, nodeId });
@@ -54,7 +56,10 @@ export default function Sheet({
   useEffect(() => {
     if (isTransMountedRef.current === isMounted) return;
     isTransMountedRef.current = isMounted;
-    if (isMounted) return;
+    if (isMounted) {
+      openRef.current?.();
+      return;
+    }
 
     exitRef.current?.();
   }, [isMounted]);
@@ -70,6 +75,7 @@ export default function Sheet({
   ), [position]);
 
   exitRef.current = onExited;
+  openRef.current = onOpen;
 
   return (
     <Portal disabled={!isMounted}>
