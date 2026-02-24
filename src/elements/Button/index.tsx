@@ -1,5 +1,6 @@
 import { useMemo, type ButtonHTMLAttributes } from 'react';
-import clsx from 'clsx';
+
+import { cn, merge } from 'utils/merge';
 
 interface InnerButtonProps {
   variant?: 'primary' | 'info' | 'warn' | 'link' | 'outline' | 'ghost' | 'danger';
@@ -9,7 +10,7 @@ interface InnerButtonProps {
 export type ButtonProps = InnerButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function varientButton({ variant, size }: InnerButtonProps) {
-  return clsx(
+  return cn(
     'inline-flex items-center justify-center whitespace-nowrap transition-colors rounded-md cursor-pointer',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
     'disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-auto',
@@ -31,7 +32,7 @@ export function varientButton({ variant, size }: InnerButtonProps) {
 
 export default function Button({ size, variant, className, ...rest }: ButtonProps) {
   const buttonClass = useMemo(() => (
-    clsx(varientButton({ size, variant }), className)
+    merge(varientButton({ size, variant }), className)
   ), [size, variant, className]);
   return <button className={buttonClass} type="button" {...rest} />;
 }

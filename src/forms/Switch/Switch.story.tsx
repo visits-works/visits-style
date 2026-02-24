@@ -5,7 +5,6 @@ const meta = {
   title: 'forms/Switch',
   component: Switch,
   tags: ['autodocs'],
-  argTypes: {},
 } satisfies Meta<Props>;
 
 export default meta;
@@ -13,5 +12,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
-  args: { name: 'test1', value: '1' },
+  args: { name: 'test1', value: '1', disabled: false, error: false },
 };

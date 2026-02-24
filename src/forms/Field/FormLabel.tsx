@@ -1,8 +1,7 @@
-import { type LabelHTMLAttributes, useMemo } from 'react';
-import clsx from 'clsx';
+import type { LabelHTMLAttributes } from 'react';
 
-export default function FormLabel({ className, ...rest }: LabelHTMLAttributes<HTMLLabelElement>) {
-  const name = useMemo(() => clsx('leading-none peer-disabled:opacity-70', className), [className]);
-  // eslint-disable-next-line jsx-a11y/label-has-associated-control
-  return <label className={name} {...rest} />;
+import Base from '../../elements/Base';
+
+export default function FormLabel(props: LabelHTMLAttributes<HTMLLabelElement>) {
+  return <Base as="label" classList={['leading-none peer-disabled:opacity-70']} {...props} />;
 }

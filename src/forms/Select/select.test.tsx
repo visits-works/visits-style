@@ -20,9 +20,9 @@ describe('Select', () => {
     );
     await events.click(screen.getByRole('button', { name: 'placeholder' }));
 
-    const select = await screen.findByRole('listbox');
-    expect(select.childNodes[0]).toHaveTextContent('value 1');
-    expect(select.childNodes[1]).toHaveTextContent('value 2');
+    const options = await screen.findAllByRole('option');
+    expect(options[0]).toHaveTextContent('value 1');
+    expect(options[1]).toHaveTextContent('value 2');
   });
 
   it('render with section header', async () => {
@@ -43,10 +43,12 @@ describe('Select', () => {
     );
     await events.click(screen.getByRole('button', { name: 'value 1' }));
 
-    const select = await screen.findByRole('listbox');
-    expect(select.childNodes[0]).toHaveTextContent('header1');
-    expect(select.childNodes[1]).toHaveTextContent('value 1');
-    expect(select.childNodes[2]).toHaveTextContent('header2');
-    expect(select.childNodes[3]).toHaveTextContent('value 2');
+    const options = await screen.findAllByRole('option');
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(options[0].previousElementSibling!).toHaveTextContent('header1');
+    expect(options[0]).toHaveTextContent('value 1');
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(options[1].previousElementSibling!).toHaveTextContent('header2');
+    expect(options[1]).toHaveTextContent('value 2');
   });
 });

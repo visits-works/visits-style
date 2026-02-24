@@ -164,9 +164,9 @@ export const manualClose: Story = {
     return (
       <Popover ref={ref} {...args} label={Label} onManualClose={noop}>
         <p>hello world</p>
-        <button type="button" onClick={() => ref.current?.close()}>
+        <Button type="button" onClick={() => ref.current?.close()}>
           close!
-        </button>
+        </Button>
       </Popover>
     );
   },

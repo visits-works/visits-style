@@ -1,5 +1,4 @@
-export { default as clsx } from 'clsx';
-export { default as merge } from './utils/merge';
+export * from './utils/merge';
 
 export * from './components';
 export * from './elements';

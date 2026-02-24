@@ -1,8 +1,8 @@
 import { type HTMLAttributes, type ReactElement, useMemo, cloneElement, Children } from 'react';
-import clsx from 'clsx';
 
 import Label from './FormLabel';
-import merge from '../../utils/merge';
+import { cn } from '../../utils/merge';
+import Base from '../../elements/Base';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   label?: string;
@@ -20,22 +20,20 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Field({
-  label, children, required, htmlFor, error, help, helpBefore, className, innerClass, ...rest
+  label, children, required, htmlFor, error, help, helpBefore, innerClass, ...rest
 }: Props) {
-  const labelName = useMemo(() => clsx(
+  const labelName = useMemo(() => cn(
     'font-medium',
     required ? 'after:content-["*"] after:text-danger after:text-sm after:pl-0.5' : '',
   ), [required]);
-  const wrapperName = useMemo(() => merge('flex flex-col space-y-2', className), [className]);
-
   return (
-    <div className={wrapperName} {...rest}>
+    <Base classList="flex flex-col space-y-2" {...rest}>
       {label ? <Label className={labelName} htmlFor={htmlFor}>{label}</Label> : null}
       {help && helpBefore ? <p className="text-xs text-muted pb-2">{help}</p> : null}
       <div className={innerClass}>{cloneChildren(children, !!error)}</div>
       {help && !helpBefore && !error ? <p className="text-xs text-muted">{help}</p> : null}
       {error ? <p className="text-xs text-danger">{error}</p> : null}
-    </div>
+    </Base>
   );
 }
 

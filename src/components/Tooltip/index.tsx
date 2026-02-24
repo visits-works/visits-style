@@ -5,10 +5,9 @@ import {
   shift, offset as offsetUi, flip, useId, autoUpdate,
 } from '@floating-ui/react';
 import type { Placement, ReferenceElement } from '@floating-ui/core';
-import clsx from 'clsx';
 
 import Portal from '../Portal';
-import merge from '../../utils/merge';
+import { merge, cn } from '../../utils/merge';
 
 export interface TooltipRef {
   floating: RefObject<HTMLElement | null>;
@@ -99,7 +98,7 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
         ...getReferenceProps(),
       })}
       <Portal disabled={disabled || !isMounted}>
-        <div role="tooltip" className="z-[9999]" ref={refs.setFloating} {...getFloatingProps({ style: floatingStyles })}>
+        <div role="tooltip" className="z-9999" ref={refs.setFloating} {...getFloatingProps({ style: floatingStyles })}>
           <TooltipContent className={className} style={styles}>
             {label}
           </TooltipContent>
@@ -118,7 +117,7 @@ interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
 export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(({
   className, custom, ...rest
 }, ref) => {
-  const tooltipName = useMemo(() => merge(clsx(
+  const tooltipName = useMemo(() => merge(cn(
     'relative w-auto h-auto outline-none transition-transform ease-in-out whitespace-pre',
     custom ? null : 'border border-accent rounded shadow-md px-3 py-1 bg-background',
   ), className), [className, custom]);

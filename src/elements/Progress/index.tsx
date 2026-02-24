@@ -1,5 +1,6 @@
-import { HTMLAttributes, useMemo } from 'react';
-import merge from 'utils/merge';
+import { useMemo } from 'react';
+
+import Base, { type HTMLAttributes } from '../Base';
 
 export interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   /** 現状の進捗 */
@@ -11,15 +12,20 @@ export interface ProgressProps extends HTMLAttributes<HTMLDivElement>{
   max: number;
 }
 
-export default function Progress({ value, max, className, ...rest }: ProgressProps) {
-  const percent = useMemo(() => (value ? Math.round((value / max) * 100) : 0), [value, max]);
-  const name = useMemo(() => merge('relative overflow-hidden rounded-full bg-primary', className), [className]);
+export default function Progress({ value, max, ...rest }: ProgressProps) {
+  const percent = useMemo(() => (value ? Math.min(100, Math.round((value / max) * 100)) : 0), [value, max]);
   return (
-    <div role="progressbar" className={name} aria-valuemax={max} aria-valuemin={0} {...rest}>
-      <div
+    <Base
+      role="progressbar"
+      classList="relative overflow-hidden rounded-full bg-primary"
+      aria-valuemax={max}
+      aria-valuemin={0}
+      {...rest}
+    >
+      <Base
         className="h-full w-full flex-1 bg-input transition-all origin-right"
-        style={{ transform: `translateX(${percent > 100 ? 100 : percent}%)` }}
+        style={{ transform: `translateX(${percent}%)` }}
       />
-    </div>
+    </Base>
   );
 }

@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useRef, type HTMLAttributes } from 'react';
 import { useFloating, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
-import clsx from 'clsx';
 
 import Portal from '../Portal';
-import merge from '../../utils/merge';
+import { merge, cn } from '../../utils/merge';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
@@ -24,7 +23,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @defaut 'right'
   */
   position?: 'left' | 'right' | 'top' | 'bottom';
-  unstyled?: boolean;
+  customStyle?: boolean;
 }
 
 const defaultTimeout = { open: 250, close: 150 };
@@ -64,7 +63,7 @@ export default function Sheet({
     exitRef.current?.();
   }, [isMounted]);
 
-  const name = useMemo(() => clsx(
+  const name = useMemo(() => cn(
     'fixed transition-transform z-30',
     {
       'top-0 right-0 h-full max-h-screen': position === 'right',
@@ -99,12 +98,12 @@ export default function Sheet({
 }
 
 interface SheetContentProps extends HTMLAttributes<HTMLDivElement> {
-  unstyled?: boolean;
+  customStyle?: boolean;
 }
 
-export function SheetContent({ className, unstyled, ...rest }: SheetContentProps) {
-  const name = useMemo(() => (unstyled ? className : merge(clsx(
+export function SheetContent({ className, customStyle, ...rest }: SheetContentProps) {
+  const name = useMemo(() => (customStyle ? className : merge(cn(
     'relative bg-background min-w-full min-h-full border border-input shadow-lg',
-  ), className)), [unstyled, className]);
+  ), className)), [customStyle, className]);
   return <div className={name} {...rest} />;
 }

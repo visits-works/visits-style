@@ -1,9 +1,8 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react';
-import clsx from 'clsx';
 
-import merge from '../../utils/merge';
 import Popover, { PopoverRef } from '../../components/Popover';
+import Base from '../../elements/Base';
 
 type OptionType<T> = { value: T; label: string; } | string;
 interface OptionRenderConfig {
@@ -29,7 +28,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   */
   maxHeight?: number;
   error?: boolean;
-  unstyled?: boolean;
+  customStyle?: boolean;
   /** クリアボタン、矢印アイコンの領域のdivのスタイルのカスタム指定 */
   buttonAreaStyle?: string;
   /** section(stringのみで区域を区切った場合)を使うときのスタイルのカスタム指定 */
@@ -41,17 +40,12 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 }
 
 export default function Select<T = unknown>({
-  className, placeholder = '', options = [], error, unstyled, disabled, value,
+  className, placeholder = '', options = [], error, customStyle, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
   sectionLabelStyle, buttonAreaStyle, clearLabelText, optionStyle, ...rest
 }: Props<T>) {
   const ref = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
-  const btnName = useMemo(() => (unstyled ? className : merge(clsx(
-    'flex items-center justify-between rounded-md border bg-background px-3 py-2 w-full overflow-hidden cursor-pointer',
-    'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
-    error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
-  ), className)), [className, error, unstyled]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const isMultiple = useMemo(() => Array.isArray(value), []);
@@ -90,12 +84,11 @@ export default function Select<T = unknown>({
     return optionMap[`${value}`] || placeholder;
   }, [placeholder, value, optionMap]);
 
-  const isEmpty = selectedLabel === placeholder;
-
-  const btnLabelClass = useMemo(() => clsx(
-    'overflow-hidden overflow-ellipsis whitespace-nowrap',
-    isEmpty ? 'text-muted' : 'text-text',
-  ), [isEmpty]);
+  const isEmpty = useMemo(() => {
+    if (value === undefined || value === null) return true;
+    if (Array.isArray(value)) return !value.length;
+    return false;
+  }, [value]);
 
   const handleRender = useCallback((item: OptionType<T>, index: number) => {
     if (renderItem) {
@@ -110,12 +103,14 @@ export default function Select<T = unknown>({
     }
     if (typeof item === 'string') {
       return (
-        <h5
-          className={clsx('font-normal py-1 px-2 text-muted', sectionLabelStyle)}
+        <Base
+          as="h5"
+          classList={['font-normal py-1 px-2 text-muted']}
+          className={sectionLabelStyle}
           key={`optionheader-${index}`}
         >
           {item}
-        </h5>
+        </Base>
       );
     }
     return (
@@ -130,19 +125,31 @@ export default function Select<T = unknown>({
     );
   }, [renderItem, handleChange, isSelected, sectionLabelStyle, optionStyle, checkIcon]);
 
-  const buttonWrapperStyle = useMemo(() => clsx(
-    'relative flex items-center pr-4 space-x-2',
-    buttonAreaStyle,
-  ), [buttonAreaStyle]);
-
   return (
     <Popover
       label={(
-        <button type="button" className={btnName} disabled={disabled} {...rest}>
-          <span className={btnLabelClass}>
+        <Base<ButtonHTMLAttributes<HTMLButtonElement>>
+          as="button"
+          type="button"
+          classList={customStyle ? undefined : [
+            'flex items-center justify-between rounded-md border bg-background px-3 py-2 w-full overflow-hidden cursor-pointer',
+            'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+            error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
+          ]}
+          className={className}
+          disabled={disabled}
+          {...rest}
+        >
+          <Base
+            as="span"
+            classList={[
+              'overflow-hidden overflow-ellipsis whitespace-nowrap',
+              isEmpty ? 'text-muted' : 'text-text',
+            ]}
+          >
             {selectedLabel}
-          </span>
-          <div className={buttonWrapperStyle}>
+          </Base>
+          <Base classList="relative flex items-center space-x-2" className={buttonAreaStyle}>
             {onClear && !isEmpty ? (
               <div
                 tabIndex={-1}
@@ -162,8 +169,8 @@ export default function Select<T = unknown>({
               </div>
             ) : null}
             {arrowIcon}
-          </div>
-        </button>
+          </Base>
+        </Base>
       )}
       ref={ref}
       onOpen={(elem) => setWidth(elem?.getBoundingClientRect().width || 0)}
@@ -192,20 +199,18 @@ interface SelectItemProps<T> {
 export function SelectItem<T>({
   className, value, label, selected, checkIcon, onChange,
 }: SelectItemProps<T>) {
-  const name = useMemo(() => clsx(
-    'flex items-center w-full hover:bg-accent rounded p-1 cursor-pointer',
-    className,
-  ), [className]);
   return (
-    <button
+    <Base<ButtonHTMLAttributes<HTMLButtonElement>>
+      as="button"
       type="button"
       role="option"
-      className={name}
+      classList="flex items-center w-full hover:bg-accent rounded p-1 cursor-pointer"
+      className={className}
       aria-selected={selected}
       onClick={() => onChange?.(value)}
     >
       {selected && checkIcon ? checkIcon : <div className="w-5 h-1 mr-1" />}
       {label}
-    </button>
+    </Base>
   );
 }

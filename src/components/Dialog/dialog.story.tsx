@@ -168,7 +168,7 @@ export const onExit: Story = {
     const [text, setText] = useState('モーダルを開く');
 
     const toggle = () => {
-      setText(showDialog ? '閉じる中...' : '表示中...')
+      setText(showDialog ? '閉じる中...' : '表示中...');
       setShow((prev) => !prev);
     };
 

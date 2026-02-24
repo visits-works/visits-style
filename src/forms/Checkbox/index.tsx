@@ -1,9 +1,9 @@
-import { useMemo, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import clsx from 'clsx';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-import merge from '../../utils/merge';
+import Base from '../../elements/Base';
 
 export interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'onChange' | 'type' | 'role'> {
+  error?: boolean;
   children?: ReactNode;
   checked?: boolean;
   indeterminate?: boolean;
@@ -23,27 +23,28 @@ function Indeterminate() {
 }
 
 export default function Checkbox({
-  checked, indeterminate, className, id, name, onChange, value, checkIcon, ...rest
+  checked, indeterminate, id, name, onChange, value, checkIcon, error, ...rest
 }: Props) {
-  const innerClass = useMemo(() => merge(clsx(
-    'inline-flex justify-center items-center border w-4.5 h-4.5 rounded',
-    'cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed',
-    checked || indeterminate ? (
-      'bg-primary text-inverted disabled:text-text disabled:bg-input disabled:border-input'
-    ) : 'border-input not-disabled:hover:border-input-fore',
-  ), className), [checked, indeterminate, className]);
-
   const handleChange = () => {
     if (rest.disabled) return;
     onChange?.(!checked);
   };
 
   return (
-    <button
+    <Base<ButtonHTMLAttributes<HTMLButtonElement>>
+      as="button"
       type="button"
       role="checkbox"
       id={id || name}
-      className={innerClass}
+      classList={[
+        'inline-flex justify-center items-center border w-4.5 h-4.5 rounded',
+        'cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed',
+        {
+          'border-danger hover:border-danger-fore': error,
+          'bg-primary text-inverted disabled:text-text disabled:bg-input disabled:border-input': !error && checked,
+          'border-input not-disabled:hover:border-input-fore': !error && !checked,
+        },
+      ]}
       onClick={handleChange}
       aria-checked={checked}
       {...rest}
@@ -60,6 +61,6 @@ export default function Checkbox({
         disabled={rest.disabled}
         style={{ position: 'absolute', pointerEvents: 'none', top: 0, left: 0, width: 1, height: 1, opacity: 0 }}
       />
-    </button>
+    </Base>
   );
 }

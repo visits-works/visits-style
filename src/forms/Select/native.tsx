@@ -1,34 +1,35 @@
-import { forwardRef, ReactNode, useMemo, type SelectHTMLAttributes } from 'react';
-import clsx from 'clsx';
+import type { ReactNode, Ref, SelectHTMLAttributes } from 'react';
 
-import merge from '../../utils/merge';
+import Base from '../../elements/Base';
 
 export interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
+  ref?: Ref<HTMLSelectElement>;
   placeholder?: string;
   error?: boolean;
-  unstyled?: boolean;
+  customStyle?: boolean;
   arrowIcon?: ReactNode;
+  wrapperStyle?: string;
 }
 
-const NativeSelect = forwardRef<HTMLSelectElement, Props>(({
-  className, error, unstyled, placeholder, children, arrowIcon, ...rest
-}, ref) => {
-  const styleName = useMemo(() => (unstyled ? className : merge(clsx(
-    'flex items-center justify-between rounded-md border bg-background px-3 py-2 pr-8 w-full',
-    'overflow-hidden cursor-pointer appearance-none overflow-ellipsis',
-    'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
-    error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
-  ), className)), [className, error, unstyled]);
-
+export default function NativeSelect({
+  error, customStyle, placeholder, children, arrowIcon, wrapperStyle, ...rest
+}: Props) {
   return (
-    <div className="relative w-max">
-      <select ref={ref} className={styleName} {...rest}>
+    <Base classList="relative w-max" className={wrapperStyle}>
+      <Base<SelectHTMLAttributes<HTMLSelectElement>>
+        as="select"
+        classList={customStyle ? undefined : [
+          'flex items-center justify-between rounded-md border bg-background px-3 py-2 pr-8 w-full',
+          'overflow-hidden cursor-pointer appearance-none overflow-ellipsis',
+          'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+          error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
+        ]}
+        {...rest}
+      >
         {placeholder ? <option value="" disabled selected>{placeholder}</option> : null}
         {children}
-      </select>
+      </Base>
       {arrowIcon}
-    </div>
+    </Base>
   );
-});
-NativeSelect.displayName = 'NativeSelect';
-export default NativeSelect;
+}

@@ -90,7 +90,7 @@ function ToastControl() {
     <div>
       <FormField label="Duration">
         <InputField className="flex items-center">
-          <Input value={duration || ''} onChange={onDurationChange} unstyled />
+          <Input value={duration || ''} onChange={onDurationChange} customStyle />
           <span className="text-sm text-muted">ms</span>
         </InputField>
       </FormField>

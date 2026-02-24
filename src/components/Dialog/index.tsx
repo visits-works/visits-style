@@ -1,12 +1,14 @@
-import { useEffect, useRef, useMemo, forwardRef, useCallback } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
-import { useFloating, useDismiss, useInteractions, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
-import clsx from 'clsx';
+import { useEffect, useRef, useMemo, useCallback } from 'react';
+import type { HTMLAttributes, ReactNode, Ref } from 'react';
+import {
+  useFloating, useDismiss, useInteractions, useTransitionStyles, FloatingOverlay, useId,
+} from '@floating-ui/react';
 
-import merge from 'utils/merge';
+import { cn } from 'utils/merge';
 
 import Portal from '../Portal';
 import stopPropagation from '../../utils/stopPropagation';
+import BaseElement from '../../elements/Base';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
@@ -43,8 +45,10 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   verticalAlign?: 'start' | 'center' | 'end';
 }
 
+const defaultTimeout = { open: 150, close: 75 };
+
 export default function Dialog({
-  open, children, timeout = 150, padding = '0.85rem', verticalAlign = 'center',
+  open, children, timeout = defaultTimeout, padding = '0.85rem', verticalAlign = 'center',
   closeOnOverlay, closeOnEsc, onExited, className, onOpenChange, size,
   ...rest
 }: Props) {
@@ -82,13 +86,11 @@ export default function Dialog({
 
   exitRef.current = onExited;
 
-  const overlayClass = useMemo(() => clsx('grid bg-backdrop z-40 justify-items-center', {
+  const overlayClass = useMemo(() => cn('grid bg-backdrop z-40 justify-items-center transition ease-in-out', {
     'place-items-start items-start': verticalAlign === 'start',
     'place-items-end': verticalAlign === 'end',
     'place-items-center': verticalAlign === 'center' || !verticalAlign,
   }), [verticalAlign]);
-
-  const dialogClass = useMemo(() => merge('transition ease-in-out', className), [className]);
 
   return (
     <Portal disabled={!isMounted}>
@@ -101,12 +103,11 @@ export default function Dialog({
       >
         <DialogContent
           ref={refs.setFloating}
-          className={dialogClass}
+          className={className}
           role="dialog"
           size={size}
-          style={styles}
           onClick={stopPropagation}
-          {...getFloatingProps({ ...rest })}
+          {...getFloatingProps({ ...rest, style: styles })}
         >
           {children}
         </DialogContent>
@@ -118,38 +119,43 @@ export default function Dialog({
 export { default as DialogHeader } from './DialogHeader';
 
 interface DialogContentProps extends HTMLAttributes<HTMLElement> {
+  ref?: Ref<HTMLElement>;
   size?: Props['size'];
 }
 
-export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(({
-  size, className, ...rest
-}, ref) => {
-  const dialogClass = useMemo(() => clsx(
-    size ? 'flex flex-col bg-background shadow-lg p-5 rounded' : null,
-    {
-      'w-full max-w-dialog-sm': size === 'small',
-      'w-full max-w-dialog-md': size === 'medium',
-      'w-full max-w-dialog-lg': size === 'large',
-    },
-    className,
-  ), [size, className]);
-  return <div ref={ref} className={dialogClass} {...rest} />;
-});
-DialogContent.displayName = 'DialogContent';
+export function DialogContent({ size, ...rest }: DialogContentProps) {
+  return (
+    <BaseElement
+      classList={[
+        size ? 'flex flex-col bg-background shadow-lg p-5 rounded' : null,
+        {
+          'w-full max-w-dialog-sm': size === 'small',
+          'w-full max-w-dialog-md': size === 'medium',
+          'w-full max-w-dialog-lg': size === 'large',
+        },
+      ]}
+      {...rest}
+    />
+  );
+}
 
 interface DialogFooterProps extends HTMLAttributes<HTMLElement> {
   /** @default 'right' */
   align?: 'center' | 'left' | 'right';
 }
-export function DialogFooter({ className, align, ...rest }: DialogFooterProps) {
-  const footerName = useMemo(() => clsx(
-    'flex flex-col-reverse space-y-2 mt-4 sm:space-y-0 sm:flex-row sm:space-x-2',
-    {
-      'sm:justify-end': !align || align === 'right',
-      'sm:justify-start': align === 'left',
-      'sm:justify-center': align === 'center',
-    },
-    className,
-  ), [className, align]);
-  return <footer className={footerName} {...rest} />;
+export function DialogFooter({ align, ...rest }: DialogFooterProps) {
+  return (
+    <BaseElement
+      as="footer"
+      classList={[
+        'flex flex-col-reverse space-y-2 mt-4 sm:space-y-0 sm:flex-row sm:space-x-2',
+        {
+          'sm:justify-end': !align || align === 'right',
+          'sm:justify-start': align === 'left',
+          'sm:justify-center': align === 'center',
+        },
+      ]}
+      {...rest}
+    />
+  );
 }

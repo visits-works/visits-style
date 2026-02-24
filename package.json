@@ -29,7 +29,7 @@
   "peerDependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.0"
+    "tailwindcss": "^4.2.1"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.18",
@@ -45,11 +45,12 @@
     "storybook:deploy": "bun storybook:build && gh-pages -d .out"
   },
   "devDependencies": {
-    "@storybook/addon-docs": "10.2.10",
-    "@storybook/addon-links": "10.2.10",
-    "@storybook/react-vite": "10.2.10",
+    "@happy-dom/global-registrator": "^20.7.0",
+    "@storybook/addon-docs": "10.2.11",
+    "@storybook/addon-links": "10.2.11",
+    "@storybook/react-vite": "10.2.11",
     "@storybook/testing-library": "^0.2.2",
-    "@tailwindcss/vite": "^4.2.0",
+    "@tailwindcss/vite": "^4.2.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
@@ -63,13 +64,13 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-testing-library": "^7.16.0",
     "gh-pages": "^6.3.0",
-    "happy-dom": "^20.6.3",
+    "happy-dom": "^20.7.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "storybook": "10.2.10",
-    "tailwindcss": "^4.2.0",
+    "storybook": "10.2.11",
+    "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.0",
+    "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.10.0",
