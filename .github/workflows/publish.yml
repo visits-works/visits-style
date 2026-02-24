@@ -28,10 +28,9 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bunx npm login
       - run: bun install
       - run: bun run build
-      - run: bun publish
+      - run: npm publish
   document:
     name: deploy document
     runs-on: ubuntu-latest
