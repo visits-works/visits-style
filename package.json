@@ -1,6 +1,9 @@
 {
   "name": "visits-style",
-  "repository": "https://github.com/visits-works/visits-style",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visits-works/visits-style.git"
+  },
   "homepage": "https://github.com/visits-works/visits-style",
   "version": "2.2.0",
   "description": "VISITS Technologiesのreactデザインコンポーネント",
