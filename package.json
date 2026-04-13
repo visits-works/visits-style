@@ -2,15 +2,21 @@
   "name": "visits-style",
   "repository": "https://github.com/visits-works/visits-style",
   "homepage": "https://github.com/visits-works/visits-style",
-  "version": "1.4.17",
+  "version": "1.4.18",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.es.js"
+      },
+      "default": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs.js"
+      }
     }
   },
   "license": "Apache-2.0",
@@ -24,7 +30,7 @@
     "styled-components": ">=6.0.5"
   },
   "dependencies": {
-    "@floating-ui/react": "^0.27.8",
+    "@floating-ui/react": "^0.27.19",
     "polished": "^4.3.1"
   },
   "scripts": {
