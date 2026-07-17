@@ -52,7 +52,7 @@ export default function ToastItem({
   return (
     <Item
       ref={refs.setFloating}
-      role="status"
+      role="log"
       data-testid="vs-toast-item"
       className={className}
       style={styles}
