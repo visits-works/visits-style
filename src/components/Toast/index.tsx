@@ -6,20 +6,25 @@ import type { ToastContainerProps } from './types';
 
 import Portal from '../Portal';
 
-export default function Toast({ toasts, clear, fixed, margin = '16px', position = 'top-left', space = '16px' }: ToastContainerProps) {
+export default function Toast({ toasts, clear, fixed, offset = {}, position = 'top-left', space = '16px' }: ToastContainerProps) {
   const style = useMemo<CSSProperties>(() => {
-    const base = { position: fixed ? 'fixed' : 'absolute' } as CSSProperties;
-    if (position.indexOf('top') > -1) {
-      base.top = margin;
-    } else if (position.indexOf('bottom') > -1) {
-      base.bottom = margin;
+    const base = { position: fixed ? 'fixed' : 'absolute', ...offset } as CSSProperties;
+    if (!Object.keys(offset).length) {
+      if (position.indexOf('top') > -1) {
+        base.top = '16px';
+      } else if (position.indexOf('bottom') > -1) {
+        base.bottom = '16px';
+      }
+      if (position.indexOf('left') > -1) {
+        base.left = '16px';
+      } else if (position.indexOf('right') > -1) {
+        base.right = '16px';
+      }
     }
 
     if (position.indexOf('left') > -1) {
-      base.left = margin;
       base.alignItems = 'flex-start';
     } else if (position.indexOf('right') > -1) {
-      base.right = margin;
       base.alignItems = 'flex-end';
     } else {
       base.left = '50%';
@@ -28,7 +33,7 @@ export default function Toast({ toasts, clear, fixed, margin = '16px', position 
     }
 
     return base;
-  }, [fixed, margin, position]);
+  }, [fixed, offset, position]);
 
   return (
     <Portal>

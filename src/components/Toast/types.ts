@@ -32,10 +32,10 @@ export interface ToastContainerProps {
    */
   position?: ToastContainerPositionType;
   /**
-   * margin 単位はpx
-   * @default '16px'
+   * offset 単位はpx
+   * @default positionによって16px自動反映
    */
-  margin?: string;
+  offset?: Partial<{ top: string; left: string; right: string; bottom: string; }>;
   /**
    * toast間の間隔
    * @default '16px'
