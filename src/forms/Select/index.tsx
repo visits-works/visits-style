@@ -28,7 +28,8 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   */
   maxHeight?: number;
   error?: boolean;
-  customStyle?: boolean;
+  /** 基本スタイルを全部外し、classNameの定義のみ使います */
+  override?: boolean;
   /** クリアボタン、矢印アイコンの領域のdivのスタイルのカスタム指定 */
   buttonAreaStyle?: string;
   /** section(stringのみで区域を区切った場合)を使うときのスタイルのカスタム指定 */
@@ -40,7 +41,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 }
 
 export default function Select<T = unknown>({
-  className, placeholder = '', options = [], error, customStyle, disabled, value,
+  className, placeholder = '', options = [], error, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
   sectionLabelStyle, buttonAreaStyle, clearLabelText, optionStyle, ...rest
 }: Props<T>) {
@@ -131,7 +132,7 @@ export default function Select<T = unknown>({
         <Base<ButtonHTMLAttributes<HTMLButtonElement>>
           as="button"
           type="button"
-          classList={customStyle ? undefined : [
+          classList={[
             'flex items-center justify-between rounded-md border bg-background px-3 py-2 w-full overflow-hidden cursor-pointer',
             'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
             error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
@@ -143,7 +144,7 @@ export default function Select<T = unknown>({
           <Base
             as="span"
             classList={[
-              'overflow-hidden overflow-ellipsis whitespace-nowrap',
+              'overflow-hidden text-ellipsis whitespace-nowrap',
               isEmpty ? 'text-muted' : 'text-text',
             ]}
           >

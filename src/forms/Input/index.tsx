@@ -1,19 +1,20 @@
-import type { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes, Ref } from 'react';
 
 import Base from '../../elements/Base';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  ref?: Ref<HTMLInputElement>;
   error?: boolean;
-  /** 基本スタイルを全部外し、完全にclassNameの定義によせます */
-  customStyle?: boolean;
+  /** 基本スタイルを全部外し、classNameの定義のみ使います */
+  override?: boolean;
 }
 
-export default function Input({ type, error, customStyle, ...rest }: Props) {
+export default function Input({ type, error, ...rest }: Props) {
   return (
-    <Base<Omit<Props, 'error' | 'customStyle'>>
+    <Base<Omit<Props, 'error' | 'override'>>
       as="input"
       type={type}
-      classList={customStyle ? undefined : [
+      classList={[
         'flex rounded-md border bg-background px-3 py-2 w-full placeholder:text-muted',
         'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2',
         error ? 'border-danger hover:border-danger-fore focus-visible:ring-danger' : 'border-input not-disabled:hover:border-input-fore focus-visible:ring-ring',

@@ -1,38 +1,34 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /// <reference types="vitest" />
 import { writeFileSync, readFileSync } from 'fs';
 import { resolve } from 'path';
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import type { UserConfig } from 'vitest/node';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
+import type { TestUserConfig } from 'vitest/node';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
 import dts from 'vite-plugin-dts';
 
-import pkg from './package.json';
+import pkg from './package.json' with { type: 'json' };
 
 const testConfig = {
   globals: true,
   environment: 'happy-dom',
   include: ['./src/**/**.test.{ts,tsx}'],
   setupFiles: ['./setupTest.ts'],
-} as UserConfig;
+} as TestUserConfig;
 
 export default defineConfig({
   plugins: [
     react(),
-    viteTsconfigPaths(),
     externalizeDeps(),
     dts({
       exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'],
-      rollupTypes: true,
     }),
   ],
   build: {
     target: 'esnext',
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(import.meta.dirname, 'src/index.ts'),
       name: pkg.name,
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format}.js`,
@@ -44,8 +40,8 @@ export default defineConfig({
         {
           name: 'postbuild-shrink-package-json',
           closeBundle: () => {
-            const css = readFileSync(resolve(__dirname, './src/lib.css'), 'utf8');
-            writeFileSync(resolve(__dirname, './dist/lib.css'), css);
+            const css = readFileSync(resolve(import.meta.dirname, './src/lib.css'), 'utf8');
+            writeFileSync(resolve(import.meta.dirname, './dist/lib.css'), css);
 
             // eslint-disable-next-line no-console
             if (!process.env.CI) return console.log('skip modify package.json');
@@ -55,12 +51,12 @@ export default defineConfig({
             delete publishPkg.resolutions;
             delete publishPkg.scripts;
 
-            writeFileSync(resolve(__dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
+            writeFileSync(resolve(import.meta.dirname, './package.json'), JSON.stringify(publishPkg, null, 2));
           },
         },
       ],
     },
   },
-  // @ts-expect-error
+  // @ts-expect-error test環境のみ有効にする
   test: process.env.NODE_ENV === 'test' ? testConfig : undefined,
 });

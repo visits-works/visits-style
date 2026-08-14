@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef, type HTMLAttributes } from 'react';
+import { useEffect, useRef, type HTMLAttributes } from 'react';
 import { useFloating, useTransitionStyles, FloatingOverlay, useId } from '@floating-ui/react';
 
+import { Base } from 'elements';
+
 import Portal from '../Portal';
-import { merge, cn } from '../../utils/merge';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /** trueの場合、モーダルを表示します。 */
@@ -23,7 +24,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @defaut 'right'
   */
   position?: 'left' | 'right' | 'top' | 'bottom';
-  customStyle?: boolean;
+  /** 基本スタイルを全部外し、classNameの定義のみ使います */
+  override?: boolean;
 }
 
 const defaultTimeout = { open: 250, close: 150 };
@@ -63,16 +65,6 @@ export default function Sheet({
     exitRef.current?.();
   }, [isMounted]);
 
-  const name = useMemo(() => cn(
-    'fixed transition-transform z-30',
-    {
-      'top-0 right-0 h-full max-h-screen': position === 'right',
-      'top-0 left-0 h-full max-h-screen': position === 'left',
-      'top-0 left-0 right-0 w-full max-w-screen': position === 'top',
-      'bottom-0 left-0 right-0 w-full max-w-screen': position === 'bottom',
-    },
-  ), [position]);
-
   exitRef.current = onExited;
   openRef.current = onOpen;
 
@@ -85,25 +77,31 @@ export default function Sheet({
           onClick={() => onOpenChange?.(false)}
         />
       ) : null}
-      <div
+      <Base
         ref={refs.setFloating}
-        className={name}
         role="dialog"
+        classList={[
+          'fixed transition-transform z-30',
+          {
+            'top-0 right-0 h-full max-h-screen': position === 'right',
+            'top-0 left-0 h-full max-h-screen': position === 'left',
+            'top-0 left-0 right-0 w-full max-w-screen': position === 'top',
+            'bottom-0 left-0 right-0 w-full max-w-screen': position === 'bottom',
+          },
+        ]}
         style={styles}
       >
         <SheetContent {...rest} />
-      </div>
+      </Base>
     </Portal>
   );
 }
 
 interface SheetContentProps extends HTMLAttributes<HTMLDivElement> {
-  customStyle?: boolean;
+  /** 基本スタイルを全部外し、classNameの定義のみ使います */
+  override?: boolean;
 }
 
-export function SheetContent({ className, customStyle, ...rest }: SheetContentProps) {
-  const name = useMemo(() => (customStyle ? className : merge(cn(
-    'relative bg-background min-w-full min-h-full border border-input shadow-lg',
-  ), className)), [customStyle, className]);
-  return <div className={name} {...rest} />;
+export function SheetContent(props: SheetContentProps) {
+  return <Base classList="relative bg-background min-w-full min-h-full border border-input shadow-lg" {...props} />;
 }

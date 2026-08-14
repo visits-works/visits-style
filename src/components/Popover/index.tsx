@@ -54,14 +54,14 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 9996
   */
   zIndex?: number;
-  /** デフォルトスタイルを外し、cssクラスを適用します */
-  customStyle?: boolean;
+  /** 基本スタイルを全部外し、classNameの定義のみ使います */
+  override?: boolean;
 }
 const defaultTimeout = { open: 150, close: 75 };
 
 export default function Popover({
   ref, position, label, children, disabled, offset = { x: 0, y: 6 },
-  onOpen, onClose, onManualClose, timeout = defaultTimeout, customStyle, zIndex = 9996, role, ...rest
+  onOpen, onClose, onManualClose, timeout = defaultTimeout, override, zIndex = 9996, role, ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
   const nodeId = useId();
@@ -157,7 +157,7 @@ export default function Popover({
         >
           <div role={role || 'region'} ref={refs.setFloating} style={floatingStyles}>
             <PopoverContent
-              customStyle={customStyle}
+              override={override}
               styles={styles}
               {...getFloatingProps({ ...rest, onClick: stopPropagation })}
             >
@@ -172,15 +172,16 @@ export default function Popover({
 
 interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
   styles: CSSProperties;
-  customStyle?: boolean;
+  /** 基本スタイルを全部外し、classNameの定義のみ使います */
+  override?: boolean;
 }
 
-export function PopoverContent({ customStyle, styles, style = {}, ...rest }: PopoverContentProps) {
+export function PopoverContent({ override, styles, style = {}, ...rest }: PopoverContentProps) {
   return (
     <Base
       classList={[
         'z-20 w-auto h-auto outline-none transition-transform ease-in-out',
-        customStyle ? null : 'border border-accent rounded-md shadow-lg p-1 bg-background',
+        override ? null : 'border border-accent rounded-md shadow-lg p-1 bg-background',
       ]}
       style={{ ...styles, ...style }}
       {...rest}
