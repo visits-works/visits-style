@@ -37,10 +37,10 @@ export interface ToasterProps {
    */
   position?: ToasterPosition;
   /**
-   * margin 単位はpx
-   * @default '16px'
+   * offset 単位はpx
+   * @default positionによって16px自動反映
    */
-  margin?: number;
+  offset?: Partial<{ top: string; left: string; right: string; bottom: string; }>;
   /**
    * 並ばずに、Toastが積み上げます\
    * (まだ開発中です)

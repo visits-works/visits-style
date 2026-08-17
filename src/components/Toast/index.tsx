@@ -16,21 +16,26 @@ export function useToastContext() {
 }
 
 export default function Toast({
-  className, margin = 16, position = 'top-left', max, ListItem = ToastItem, icons,
+  className, offset = {}, position = 'top-left', max, ListItem = ToastItem, icons,
 }: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
-    const base = { position: 'fixed' } as CSSProperties;
-    if (position.indexOf('top') > -1) {
-      base.top = margin;
-    } else if (position.indexOf('bottom') > -1) {
-      base.bottom = margin;
+    const base = { position: 'fixed', ...offset } as CSSProperties;
+    if (!Object.keys(offset).length) {
+      if (position.indexOf('top') > -1) {
+        base.top = '16px';
+      } else if (position.indexOf('bottom') > -1) {
+        base.bottom = '16px';
+      }
+      if (position.indexOf('left') > -1) {
+        base.left = '16px';
+      } else if (position.indexOf('right') > -1) {
+        base.right = '16px';
+      }
     }
 
     if (position.indexOf('left') > -1) {
-      base.left = margin;
       base.alignItems = 'flex-start';
     } else if (position.indexOf('right') > -1) {
-      base.right = margin;
       base.alignItems = 'flex-end';
     } else {
       base.left = '50%';
@@ -38,7 +43,7 @@ export default function Toast({
       base.transform = 'translateX(-50%)';
     }
     return base;
-  }, [margin, position]);
+  }, [offset, position]);
 
   const name = useMemo(() => clsx(
     'flex flex-col z-40 overflow-hidden',
