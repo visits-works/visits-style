@@ -1,0 +1,23 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./react-BZJXY1be.js";import{t as n}from"./jsx-runtime-DeHZSEgm.js";import{n as r,t as i}from"./useIsomorphicLayoutEffect-CtFCsytF.js";function a({header:e,show:t,children:n,timeout:i=300,...a}){let c=(0,o.useRef)(null),l=(0,o.useRef)(0),u=(0,o.useRef)(0),d=(0,o.useRef)(!0);return(0,o.useEffect)(()=>{u.current=i},[i]),r(()=>{if(!c.current)return;if(c.current.style.overflow=`hidden`,c.current.style.opacity=`1`,d.current){d.current=!1,c.current.style.height=t?`auto`:`0px`,t?window.requestAnimationFrame(()=>{c.current&&(l.current=c.current.offsetHeight)}):(window.requestAnimationFrame(()=>{c.current&&(c.current.style.height=`auto`,l.current=c.current.offsetHeight,c.current.style.height=`0px`)}),c.current.style.opacity=`0`);return}t||(c.current.style.height=`${l.current}px`);let e=[];e[0]=window.requestAnimationFrame(()=>{e[1]=window.requestAnimationFrame(()=>{c.current&&(c.current.style.height=`${t?l.current:0}px`,c.current.style.opacity=t?`1`:`0`)})});let n,r=()=>{c.current&&(t?(c.current.style.height=`auto`,c.current.style.overflow=``,c.current.style.opacity=``,window.requestAnimationFrame(()=>{c.current&&(l.current=c.current.offsetHeight)})):c.current.style.height=`0px`)};return u.current===0?r():n=window.setTimeout(r,u.current),()=>{e.forEach(window.cancelAnimationFrame),n&&window.clearTimeout(n)}},[t]),(0,s.jsxs)(`div`,{...a,children:[e,(0,s.jsx)(`div`,{className:`transition-all ease-in-out overflow-hidden`,role:`region`,"aria-hidden":!t,ref:c,style:{transitionDuration:`${i}ms`},children:n})]})}var o,s;function c(){return(c=e((()=>{o=t(),i(),s=n(),a.__docgenInfo={description:``,methods:[],displayName:`Accordion`,props:{header:{required:!0,tsType:{name:`ReactNode`},description:`ボタンなどの表示するラベル\\
+showを変更するロジックのイベントが必要となります`},show:{required:!0,tsType:{name:`boolean`},description:`trueの場合、内容を開きます`},timeout:{required:!1,tsType:{name:`number`},description:`アニメーションの時間\\
+0に設定すると、即時に反応します
+@default 300`,defaultValue:{value:`300`,computed:!1}}},composes:[`HTMLAttributes`]}})))()}function l(e){return(0,p.jsxs)(`svg`,{width:`24`,height:`24`,viewBox:`0 0 24 24`,fill:`none`,xmlns:`http://www.w3.org/2000/svg`,...e,children:[(0,p.jsx)(`path`,{d:`M11.7 14.8 7 9.8a.5.5 0 0 1 0-.7c.2-.2.5-.2.7 0l4.5 5c.2.2.2.6 0 .8-.1.2-.4.2-.6 0Z`,fill:`currentColor`}),(0,p.jsx)(`path`,{d:`m16.9 9.9-4.6 5c-.2.2-.4.2-.6 0a.5.5 0 0 1 0-.8l4.5-5c.2-.2.5-.2.7 0 .1.2.1.6 0 .8Z`,fill:`currentColor`})]})}function u({show:e,timeout:t,length:n,onClick:r}){return(0,p.jsx)(a,{className:`border-b border-input`,header:(0,p.jsxs)(`button`,{className:`flex justify-between items-center w-full hover:underline px-1 py-2 cursor-pointer`,type:`button`,onClick:r,children:[`accordion header-${n}`,(0,p.jsx)(l,{className:`transition-transform ease-in-out`,style:{transform:e?`rotate(180deg)`:``}})]}),show:e,timeout:t,style:{width:`100%`},children:(0,p.jsx)(`div`,{className:`pb-2 pt-1`,children:Array.from({length:n}).map((e,t)=>(0,p.jsx)(`p`,{children:`Hello world!`},t))})})}function d({length:e=6,timeout:t}){let[n,r]=(0,f.useState)(!1);return(0,p.jsx)(u,{show:n,timeout:t,length:e,onClick:()=>r(e=>!e)})}var f,p,m,h,g;function _(){return(_=e((()=>{f=t(),c(),p=n(),m={title:`components/Accordion`,component:a,tags:[`autodocs`],args:{timeout:300},argTypes:{show:{control:!1},header:{control:!1}}},h={render:({timeout:e})=>{let[t,n]=(0,f.useState)(0);return(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(u,{show:t===1,timeout:e,length:6,onClick:()=>n(t===1?0:1)}),(0,p.jsx)(u,{show:t===2,timeout:e,length:20,onClick:()=>n(t===2?0:2)}),(0,p.jsx)(u,{show:t===3,timeout:e,length:4,onClick:()=>n(t===3?0:3)})]})}},g={render:({timeout:e})=>(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(d,{timeout:e}),(0,p.jsx)(d,{timeout:e,length:20}),(0,p.jsx)(d,{timeout:e,length:4})]})},h.parameters={...h.parameters,docs:{...h.parameters?.docs,source:{originalSource:`{
+  render: ({
+    timeout
+  }) => {
+    const [show, setShow] = useState(0);
+    return <>
+        <Test show={show === 1} timeout={timeout} length={6} onClick={() => setShow(show === 1 ? 0 : 1)} />
+        <Test show={show === 2} timeout={timeout} length={20} onClick={() => setShow(show === 2 ? 0 : 2)} />
+        <Test show={show === 3} timeout={timeout} length={4} onClick={() => setShow(show === 3 ? 0 : 3)} />
+      </>;
+  }
+}`,...h.parameters?.docs?.source}}},g.parameters={...g.parameters,docs:{...g.parameters?.docs,source:{originalSource:`{
+  render: ({
+    timeout
+  }) => <>
+      <Fancy timeout={timeout} />
+      <Fancy timeout={timeout} length={20} />
+      <Fancy timeout={timeout} length={4} />
+    </>
+}`,...g.parameters?.docs?.source}}}})))()}_();export{m as default,g as multiple,h as single};
