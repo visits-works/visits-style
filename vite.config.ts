@@ -25,6 +25,7 @@ export default defineConfig({
       exclude: ['src/**/*.test.(ts|tsx)', 'src/**/*.story.tsx', 'src/setupTest.ts'],
     }),
   ],
+  resolve: { tsconfigPaths: true },
   build: {
     target: 'esnext',
     lib: {
