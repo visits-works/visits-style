@@ -1,5 +1,5 @@
 // common
-export { default as Base } from './Base';
+export { default as Base, element, type BaseProps } from './Base';
 export { default as Skeleton } from './Skeleton';
 
 export { default as Button, type ButtonProps, varientButton } from './Button';
