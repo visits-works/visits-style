@@ -53,16 +53,14 @@ export interface ToasterProps {
   max?: number;
   ListItem?: FunctionComponent<ToastItemProps>;
   /**
-   * 表示するToastのタイプに使うアイコンを指定(未指定の場合はアイコンは表示されません)\
-   * ただし、loading状態はspinnerを表示します
+   * 表示するToastのタイプに使うアイコンを指定(未指定の場合はアイコンは表示されません)
   */
-  icons?: Record<Exclude<ToastType, 'loading'>, ReactNode>;
+  icons?: Record<ToastType, ReactNode>;
 }
 
 export interface ToastContextType {
   /**
-   * 表示するToastのタイプに使うアイコンを指定(未指定の場合はアイコンは表示されません)\
-   * ただし、loading状態はspinnerを表示します
+   * 表示するToastのタイプに使うアイコンを指定(未指定の場合はアイコンは表示されません)
   */
-  icons?: Record<Exclude<ToastType, 'loading'>, ReactNode>;
+  icons?: Record<ToastType, ReactNode>;
 }

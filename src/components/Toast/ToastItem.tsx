@@ -1,6 +1,4 @@
 import type { ToastItemProps } from './types';
-
-import Spinner from '../../elements/Spinner';
 import { useToastContext } from '.';
 
 export default function ToastItem({ type, label, message }: ToastItemProps) {
@@ -14,7 +12,7 @@ export default function ToastItem({ type, label, message }: ToastItemProps) {
           {type === 'info' && icons?.info ? icons.info : null}
           {type === 'error' && icons?.error ? icons.error : null}
           {type === 'warn' && icons?.warn ? icons.warn : null}
-          {type === 'loading' ? <Spinner size={20} /> : null}
+          {type === 'loading' ? icons?.loading : null}
         </figure>
       ) : null}
       <div className="space-y-2">
