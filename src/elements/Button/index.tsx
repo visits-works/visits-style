@@ -24,7 +24,7 @@ export function varientButton({ variant, size }: InnerButtonProps) {
       'border border-input hover:bg-accent': variant === 'outline',
     },
     {
-      'px-2 py-1': !size,
+      'px-2 py-1': size !== 'icon',
       'p-1.5': size === 'icon',
     },
   );

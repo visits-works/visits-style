@@ -23,8 +23,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const base: Story = {
-  args: { size: 36 },
-  parameters: {
-    color: { values: colorList },
-  },
+  args: { className: "" },
+  parameters: { className: { values: colorList } },
 };

@@ -29,9 +29,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * 未指定の場合は、スタイルを全部外した状態で表示されます
    * */
   size?: 'small' | 'medium' | 'large';
-  /** モーダルのtransition exitが完了した時に発火されるcallback */
+  /** openの値を実際に変更するコールバック */
   onOpenChange?: (open: boolean) => void;
-  /** モーダルのtransition exitが完了した時に発火されるcallback */
+  /** モーダルのtransition exitが完了した時に発火されるコールバック */
   onExited?: () => void;
   /**
    * モーダルの背景からのpaddingを指定します。

@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react';
 
-import Popover, { PopoverRef } from '../../components/Popover';
+import Popover, { PopoverRef, Props as PopoverProps } from '../../components/Popover';
 import Base from '../../elements/Base';
 
 type OptionType<T> = { value: T; label: string; } | string;
@@ -32,18 +32,25 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   override?: boolean;
   /** クリアボタン、矢印アイコンの領域のdivのスタイルのカスタム指定 */
   buttonAreaStyle?: string;
+  /** ボタンの文字のスタイルのカスタム指定 */
+  labelStyle?: string;
   /** section(stringのみで区域を区切った場合)を使うときのスタイルのカスタム指定 */
   sectionLabelStyle?: string;
   /** 各選択肢のスタイルのカスタム指定 */
   optionStyle?: string;
+  /** Popoverのスタイルのカスタム指定 */
+  popoverStyle?: string;
   /** 選択を取り消すボタンのaria-label */
   clearLabelText?: string;
+  /** Popoverの表示位置 */
+  popoverPosition?: PopoverProps['position'];
 }
 
 export default function Select<T = unknown>({
   className, placeholder = '', options = [], error, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
-  sectionLabelStyle, buttonAreaStyle, clearLabelText, optionStyle, ...rest
+  sectionLabelStyle, buttonAreaStyle, clearLabelText,
+  optionStyle, popoverStyle, popoverPosition, labelStyle, ...rest
 }: Props<T>) {
   const ref = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
@@ -147,6 +154,7 @@ export default function Select<T = unknown>({
               'overflow-hidden text-ellipsis whitespace-nowrap',
               isEmpty ? 'text-muted' : 'text-text',
             ]}
+            className={labelStyle}
           >
             {selectedLabel}
           </Base>
@@ -175,6 +183,8 @@ export default function Select<T = unknown>({
       )}
       ref={ref}
       onOpen={(elem) => setWidth(elem?.getBoundingClientRect().width || 0)}
+      className={popoverStyle}
+      position={popoverPosition}
       disabled={disabled}
     >
       <ul
@@ -210,7 +220,7 @@ export function SelectItem<T>({
       aria-selected={selected}
       onClick={() => onChange?.(value)}
     >
-      {selected && checkIcon ? checkIcon : <div className="w-5 h-1 mr-1" />}
+      {selected && (checkIcon || checkIcon === null) ? checkIcon : <div className="w-5 h-1 mr-1" />}
       {label}
     </Base>
   );
