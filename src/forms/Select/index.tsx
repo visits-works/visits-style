@@ -13,7 +13,7 @@ interface OptionRenderConfig {
 
 export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children'> {
   /** 配列の値の入力の場合、複数選択モードに切り替えます */
-  value: T | T[];
+  value: T | T[] | null;
   options: OptionType<T>[];
   onChange?: (value: T) => void;
   onClear?: () => void;
@@ -220,7 +220,7 @@ export function SelectItem<T>({
       aria-selected={selected}
       onClick={() => onChange?.(value)}
     >
-      {selected && (checkIcon || checkIcon === null) ? checkIcon : <div className="w-5 h-1 mr-1" />}
+      {checkIcon === null || (selected && checkIcon) ? checkIcon : <div className="w-5 h-1 mr-1" />}
       {label}
     </Base>
   );
