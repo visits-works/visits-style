@@ -187,13 +187,13 @@ export default function Select<T = unknown>({
       position={popoverPosition}
       disabled={disabled}
     >
-      <ul
+      <div
         className="overflow-y-auto flex flex-col"
         role="listbox"
         style={{ minWidth: width, maxWidth: 'calc(100vw - 3rem)', maxHeight }}
       >
         {options.map(handleRender)}
-      </ul>
+      </div>
     </Popover>
   );
 }

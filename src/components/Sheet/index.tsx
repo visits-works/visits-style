@@ -18,7 +18,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   onOpen?: () => void;
   /** モーダルのtransition exitが完了した時に発火されるcallback */
   onExited?: () => void;
-  overlay?: boolean;
+  overlay?: 'transparent' | boolean;
   /**
    * sheetが表示されれう場所
    * @defaut 'right'
@@ -72,7 +72,7 @@ export default function Sheet({
     <Portal disabled={!isMounted}>
       {overlay ? (
         <FloatingOverlay
-          className="bg-backdrop"
+          className={overlay === 'transparent' ? '' : 'bg-backdrop'}
           style={{ opacity: styles.opacity }}
           onClick={() => onOpenChange?.(false)}
         />
@@ -81,7 +81,7 @@ export default function Sheet({
         ref={refs.setFloating}
         role="dialog"
         classList={[
-          'fixed transition-transform z-30',
+          'fixed transition-transform z-1',
           {
             'top-0 right-0 h-full max-h-screen': position === 'right',
             'top-0 left-0 h-full max-h-screen': position === 'left',
