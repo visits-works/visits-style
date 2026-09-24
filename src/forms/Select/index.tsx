@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
-import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react';
+import { useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import type { ButtonHTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 
-import Popover, { PopoverRef, Props as PopoverProps } from '../../components/Popover';
+import Popover, { type PopoverRef, type Props as PopoverProps } from '../../components/Popover';
 import Base from '../../elements/Base';
 
 type OptionType<T> = { value: T; label: string; } | string;
@@ -12,6 +12,7 @@ interface OptionRenderConfig {
 }
 
 export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children'> {
+  ref?: Ref<PopoverRef>;
   /** 配列の値の入力の場合、複数選択モードに切り替えます */
   value: T | T[] | null;
   options: OptionType<T>[];
@@ -47,12 +48,12 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 }
 
 export default function Select<T = unknown>({
-  className, placeholder = '', options = [], error, disabled, value,
+  ref, className, placeholder = '', options = [], error, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
   sectionLabelStyle, buttonAreaStyle, clearLabelText,
   optionStyle, popoverStyle, popoverPosition, labelStyle, ...rest
 }: Props<T>) {
-  const ref = useRef<PopoverRef>(null);
+  const innerRef = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +61,7 @@ export default function Select<T = unknown>({
 
   const handleChange = useCallback((val: T) => {
     onChange?.(val);
-    if (!isMultiple) ref.current?.close();
+    if (!isMultiple) innerRef.current?.close();
   }, [onChange, isMultiple]);
 
   const isSelected = useCallback((item: T) => {
@@ -133,6 +134,8 @@ export default function Select<T = unknown>({
     );
   }, [renderItem, handleChange, isSelected, sectionLabelStyle, optionStyle, checkIcon]);
 
+  useImperativeHandle(ref, () => innerRef.current!, []);
+
   return (
     <Popover
       label={(
@@ -181,7 +184,7 @@ export default function Select<T = unknown>({
           </Base>
         </Base>
       )}
-      ref={ref}
+      ref={innerRef}
       onOpen={(elem) => setWidth(elem?.getBoundingClientRect().width || 0)}
       className={popoverStyle}
       position={popoverPosition}
