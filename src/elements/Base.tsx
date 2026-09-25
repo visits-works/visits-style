@@ -24,11 +24,11 @@ export default function Base<T extends HTMLAttributes<HTMLElement>>({
 
 export function element<T extends ElementType>(
   tag: T,
-  classList: ClassValue | ClassValue[],
+  classList: string,
   defaultProps: Partial<ComponentPropsWithRef<T>> = {},
 ) {
   const Component = ({ className, ...props }: ComponentPropsWithRef<T>) => {
-    const names = useMemo(() => merge(cn(classList), className), [className]);
+    const names = useMemo(() => merge(classList, className), [className]);
     return createElement(tag, { className: names, ...defaultProps, ...props });
   };
   Component.displayName = `Styled${typeof tag === 'string' ? tag : 'Component'}`;
