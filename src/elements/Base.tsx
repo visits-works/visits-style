@@ -23,8 +23,8 @@ export default function Base<T extends HTMLAttributes<HTMLElement>>({
 }
 
 export function element<T extends ElementType>(
-  tag: T,
   classList: ClassValue | ClassValue[],
+  tag: T,
   defaultProps: Partial<ComponentPropsWithRef<T>> = {},
 ) {
   const Component = ({ className, ...props }: ComponentPropsWithRef<T>) => {
