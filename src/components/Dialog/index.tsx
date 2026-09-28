@@ -106,8 +106,7 @@ export default function Dialog({
           className={className}
           role="dialog"
           size={size}
-          onClick={stopPropagation}
-          {...getFloatingProps({ ...rest, style: styles })}
+          {...getFloatingProps({ ...rest, style: styles, onClick: (e) => e?.stopPropagation() })}
         >
           {children}
         </DialogContent>

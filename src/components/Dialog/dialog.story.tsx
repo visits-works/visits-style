@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import Dialog, { DialogFooter, DialogHeader, DialogContent } from '.';
 import Button from '../../elements/Button';
 import TextInput from '../../forms/Input';
+import FormField from '../../forms/Field/FormField';
 
 const meta = {
   title: 'components/Dialog',
@@ -110,27 +111,48 @@ export const nested: Story = {
 };
 
 export const input: Story = {
-  render: ({ open, ...rest }) => {
-    const [showDialog, setShow] = useState(open);
+  render: (args) => {
+    const [showDialog, setShow] = useState(false);
+    const [text, setText] = useState('');
+
     const toggle = () => setShow((prev) => !prev);
+
+    const handleSubmit = (e: any) => {
+      e.preventDefault();
+      const data = new FormData(e.currentTarget);
+      setText(data.get('text') ? `input: ${data.get('text') || '-'}` : '');
+      setShow(false);
+    };
+
     return (
       <>
-        <Button onClick={toggle}>show modal</Button>
-        <Dialog {...rest} size="large" open={showDialog} onOpenChange={toggle}>
+        <div className="text-center pb-15">
+          {text ? <p>{text}</p> : null}
+          <Button variant="outline" onClick={toggle}>Open</Button>
+        </div>
+        <Dialog {...args} open={showDialog} size="small" onOpenChange={toggle}>
           <DialogHeader onClose={toggle} closeIcon={<IconClose />}><h3>Dialog Title</h3></DialogHeader>
-          <section>
-            <p>Dialog body text goes here.</p>
-            <TextInput />
-          </section>
-          <DialogFooter>
-            <Button variant="outline" onClick={toggle}>Close</Button>
-            <Button>Save changes</Button>
-          </DialogFooter>
+          <p className="pb-2">Dialog body text goes here.</p>
+          <form onSubmit={handleSubmit}>
+            <FormField
+              htmlFor="test-input"
+              label="Username"
+              help="This is your public display name"
+            >
+              <TextInput id="test-input" name="text" />
+            </FormField>
+            <DialogFooter>
+              <Button variant="outline" type="button" onClick={toggle}>Close</Button>
+              <Button type="submit">Save changes</Button>
+            </DialogFooter>
+          </form>
         </Dialog>
       </>
     );
   },
+  args: { timeout: 500 },
 };
+
 
 export const external: Story = {
   render: (args) => {
