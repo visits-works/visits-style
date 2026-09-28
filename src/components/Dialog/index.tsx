@@ -7,7 +7,6 @@ import {
 import { cn } from 'utils/merge';
 
 import Portal from '../Portal';
-import stopPropagation from '../../utils/stopPropagation';
 import BaseElement from '../../elements/Base';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
