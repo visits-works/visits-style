@@ -79,7 +79,7 @@ export default function Sheet({
       ) : null}
       <Base
         ref={refs.setFloating}
-        role="dialog"
+        role="complementary"
         classList={[
           'fixed transition-transform z-1',
           {
