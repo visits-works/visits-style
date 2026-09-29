@@ -5,10 +5,10 @@ import Popover, { type PopoverRef, type Props as PopoverProps } from '../../comp
 import Base from '../../elements/Base';
 
 type OptionType<T> = { value: T; label: string; };
-interface OptionRenderConfig<T> {
+interface OptionRenderConfig {
   index: number;
   selected: boolean;
-  onChange: (value: T, item: OptionType<T>) => void;
+  onChange: () => void;
 }
 
 export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children'> {
@@ -18,7 +18,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   options: Array<OptionType<T> | string>;
   onChange?: (value: T, item: OptionType<T>) => void;
   onClear?: () => void;
-  renderItem?: (item: OptionType<T> | string, config: OptionRenderConfig<T>) => ReactElement;
+  renderItem?: (item: OptionType<T> | string, config: OptionRenderConfig) => ReactElement;
   placeholder?: string;
   arrowIcon?: ReactNode;
   closeIcon?: ReactNode;
