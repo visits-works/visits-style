@@ -4,21 +4,21 @@ import type { ButtonHTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 import Popover, { type PopoverRef, type Props as PopoverProps } from '../../components/Popover';
 import Base from '../../elements/Base';
 
-type OptionType<T> = { value: T; label: string; } | string;
-interface OptionRenderConfig {
+type OptionType<T> = { value: T; label: string; };
+interface OptionRenderConfig<T> {
   index: number;
   selected: boolean;
-  onChange: () => void;
+  onChange: (value: T, item: OptionType<T>) => void;
 }
 
 export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children'> {
   ref?: Ref<PopoverRef>;
   /** 配列の値の入力の場合、複数選択モードに切り替えます */
   value: T | T[] | null;
-  options: OptionType<T>[];
-  onChange?: (value: T) => void;
+  options: Array<OptionType<T> | string>;
+  onChange?: (value: T, item: OptionType<T>) => void;
   onClear?: () => void;
-  renderItem?: (item: OptionType<T>, config: OptionRenderConfig) => ReactElement;
+  renderItem?: (item: OptionType<T> | string, config: OptionRenderConfig<T>) => ReactElement;
   placeholder?: string;
   arrowIcon?: ReactNode;
   closeIcon?: ReactNode;
@@ -59,8 +59,8 @@ export default function Select<T = unknown>({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const isMultiple = useMemo(() => Array.isArray(value), []);
 
-  const handleChange = useCallback((val: T) => {
-    onChange?.(val);
+  const handleChange = useCallback((val: T, item: OptionType<T>) => {
+    onChange?.(val, item);
     if (!isMultiple) innerRef.current?.close();
   }, [onChange, isMultiple]);
 
@@ -99,7 +99,7 @@ export default function Select<T = unknown>({
     return false;
   }, [value]);
 
-  const handleRender = useCallback((item: OptionType<T>, index: number) => {
+  const handleRender = useCallback((item: OptionType<T> | string, index: number) => {
     if (renderItem) {
       if (typeof item === 'string') {
         return renderItem(item, { index, selected: false, onChange: () => {} });
@@ -107,7 +107,7 @@ export default function Select<T = unknown>({
       return renderItem(item, {
         index,
         selected: isSelected(item.value),
-        onChange: () => handleChange(item.value),
+        onChange: () => handleChange(item.value, item),
       });
     }
     if (typeof item === 'string') {
@@ -129,7 +129,7 @@ export default function Select<T = unknown>({
         onChange={handleChange}
         checkIcon={checkIcon}
         className={optionStyle}
-        {...item}
+        data={item}
       />
     );
   }, [renderItem, handleChange, isSelected, sectionLabelStyle, optionStyle, checkIcon]);
@@ -203,15 +203,14 @@ export default function Select<T = unknown>({
 
 interface SelectItemProps<T> {
   className?: string;
-  value: T;
-  label: string;
-  onChange?: (value: T) => void;
+  data: OptionType<T>;
+  onChange?: (value: T, data: OptionType<T>) => void;
   checkIcon?: ReactNode;
   selected?: boolean;
 }
 
 export function SelectItem<T>({
-  className, value, label, selected, checkIcon, onChange,
+  className, data, selected, checkIcon, onChange,
 }: SelectItemProps<T>) {
   return (
     <Base<ButtonHTMLAttributes<HTMLButtonElement>>
@@ -221,10 +220,10 @@ export function SelectItem<T>({
       classList="flex items-center w-full hover:bg-accent rounded p-1 cursor-pointer"
       className={className}
       aria-selected={selected}
-      onClick={() => onChange?.(value)}
+      onClick={() => onChange?.(data.value, data)}
     >
       {checkIcon === null || (selected && checkIcon) ? checkIcon : <div className="w-5 h-1 mr-1" />}
-      {label}
+      {data.label}
     </Base>
   );
 }
