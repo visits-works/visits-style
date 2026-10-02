@@ -88,12 +88,15 @@ function ToastControl() {
 
   return (
     <div>
-      <FormField label="Duration">
-        <InputField className="flex items-center">
-          <Input value={duration || ''} onChange={onDurationChange} override />
-          <span className="text-sm text-muted">ms</span>
-        </InputField>
-      </FormField>
+      <FormField
+        label="Duration"
+        render={() => (
+          <InputField className="flex items-center">
+            <Input value={duration || ''} onChange={onDurationChange} override />
+            <span className="text-sm text-muted">ms</span>
+          </InputField>
+        )}
+      />
       <br />
       <footer className="grid gap-2">
         <Button variant="outline" onClick={addDefault}>Default</Button>

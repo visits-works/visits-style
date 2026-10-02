@@ -1,5 +1,5 @@
-import { Children, cloneElement, useImperativeHandle, useState, forwardRef, useMemo, useEffect } from 'react';
-import type { ReactNode, ReactElement, RefObject, HTMLAttributes } from 'react';
+import { useImperativeHandle, useState, forwardRef, useMemo, useEffect } from 'react';
+import type { ReactNode, RefObject, HTMLAttributes } from 'react';
 import {
   useFloating, useInteractions, useHover, useClientPoint, useTransitionStyles,
   shift, offset as offsetUi, flip, useId, autoUpdate,
@@ -20,7 +20,7 @@ export interface TooltipProps {
   /** 吹き出しとして表示したい内容 */
   label: ReactNode;
   /** マウスオーバーの対象になるelement */
-  children: ReactElement;
+  render: (props: Record<string, unknown>) => ReactNode;
   /**
    * 表示される場所
    * @default 'bottom'
@@ -48,7 +48,7 @@ export interface TooltipProps {
 }
 
 const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
-  children, position = 'bottom', label, className, timeout = 150,
+  render, position = 'bottom', label, className, timeout = 150,
   offset = { x: 0, y: 6 }, clientPoint = false, disabled,
 }, ref) => {
   const [open, setOpen] = useState(false);
@@ -89,14 +89,9 @@ const Tooltip = forwardRef<TooltipRef, TooltipProps>(({
     setOpen(false);
   }, [disabled]);
 
-  const child = typeof children === 'string' ? <span>{children}</span> : children;
-
   return (
     <>
-      {cloneElement(Children.only(child), {
-        ref: refs.setReference,
-        ...getReferenceProps(),
-      })}
+      {render({ ref: refs.setReference, ...getReferenceProps() })}
       <Portal disabled={disabled || !isMounted}>
         <div role="tooltip" className="z-9999" ref={refs.setFloating} {...getFloatingProps({ style: floatingStyles })}>
           <TooltipContent className={className} style={styles}>

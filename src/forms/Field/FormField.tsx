@@ -1,10 +1,10 @@
-import { type HTMLAttributes, type ReactElement, useMemo, cloneElement, Children } from 'react';
+import { type HTMLAttributes, type ReactNode, useMemo } from 'react';
 
 import Label from './FormLabel';
 import { cn } from '../../utils/merge';
 import Base from '../../elements/Base';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   label?: string;
   htmlFor?: string;
   error?: string;
@@ -15,12 +15,12 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * 未指定の場合、後に表示し、errorがあると、エラーの表示を優先して入れ替えます
   */
   helpBefore?: boolean;
-  children: ReactElement | ReactElement[];
+  render: (error: boolean) => ReactNode;
   required?: boolean;
 }
 
 export default function Field({
-  label, children, required, htmlFor, error, help, helpBefore, innerClass, ...rest
+  label, render, required, htmlFor, error, help, helpBefore, innerClass, ...rest
 }: Props) {
   const labelName = useMemo(() => cn(
     'font-medium',
@@ -30,22 +30,9 @@ export default function Field({
     <Base classList="flex flex-col space-y-2" {...rest}>
       {label ? <Label className={labelName} htmlFor={htmlFor}>{label}</Label> : null}
       {help && helpBefore ? <p className="text-xs text-muted pb-2">{help}</p> : null}
-      <div className={innerClass}>{cloneChildren(children, !!error)}</div>
+      <div className={innerClass}>{render(!!error)}</div>
       {help && !helpBefore && !error ? <p className="text-xs text-muted">{help}</p> : null}
       {error ? <p className="text-xs text-danger">{error}</p> : null}
     </Base>
   );
-}
-
-function cloneChildren(children: Props['children'], error: boolean) {
-  const len = Children.count(children);
-  if (!len) return null;
-  if (len === 1) {
-    // @ts-expect-error
-    return cloneElement(children, { error });
-  }
-  const arr = Children.toArray(children);
-  // @ts-expect-error
-  arr[0] = cloneElement(arr[0], { error });
-  return arr;
 }

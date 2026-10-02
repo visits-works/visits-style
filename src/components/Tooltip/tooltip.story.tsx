@@ -10,11 +10,10 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     clientPoint: { defaultValue: false },
-    children: { control: false },
   },
   args: {
     label: 'Hello!!!',
-    children: <span>Hello world</span>,
+    render: (props) => <span {...props}>Hello world</span>,
     clientPoint: false,
     offset: { x: 0, y: 6 },
     disabled: false,
@@ -28,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 export const tooltip: Story = {
   args: {
     label: 'Hello!!!',
-    children: <span>Hello world</span>,
+    render: (props) => <span {...props}>Hello world</span>,
     clientPoint: false,
     offset: { x: 0, y: 6 },
     disabled: false,
@@ -39,9 +38,10 @@ export const absolute: Story = {
   render: () => {
     return (
       <div style={{ height: '120vh' }}>
-        <Tooltip label="Hello!!!">
-          <Button style={{ position: 'fixed', top: '50px' }}>Hello world</Button>
-        </Tooltip>
+        <Tooltip
+          label="Hello!!!"
+          render={(props) => <Button {...props} style={{ position: 'fixed', top: '50px' }}>Hello world</Button>}
+        />
       </div>
     );
   },
@@ -54,12 +54,15 @@ function Multiple() {
   const [num, setNum] = useState(0);
   return (
     <div>
-      <Tooltip label="tooltip1111" disabled={num <= 0}>
-        <Button onClick={() => setNum(num - 1)} disabled={num <= 0}>button 1</Button>
-      </Tooltip>
-      <Tooltip label="tooltip2222">
-        <Button onClick={() => setNum(num + 1)} disabled={num > 5}>button 2</Button>
-      </Tooltip>
+      <Tooltip
+        label="tooltip1111"
+        render={(props) => <Button {...props} onClick={() => setNum(num - 1)} disabled={num <= 0}>button 1</Button>}
+        disabled={num <= 0}
+      />
+      <Tooltip
+        label="tooltip2222"
+        render={(props) => <Button {...props} onClick={() => setNum(num + 1)} disabled={num > 5}>button 2</Button>}
+      />
     </div>
   );
 }

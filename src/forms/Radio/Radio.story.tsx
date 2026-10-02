@@ -32,20 +32,25 @@ export const radioGroup: Story = {
   render: (args) => {
     const [value, setValue] = useState<string | null>('1');
     return (
-      <FormField label="Radio Group Example" help="Here is example for Radio group" helpBefore>
-        <RadioGroup
-          name={args.name}
-          disabled={args.disabled}
-          className="space-y-2"
-          value={value}
-          onChange={setValue}
-          options={[
-            { id: '1', label: 'Radio1' },
-            { id: '2', label: 'Radio2' },
-            { id: '3', label: 'Radio3' },
-          ]}
-        />
-      </FormField>
+      <FormField
+        label="Radio Group Example"
+        help="Here is example for Radio group"
+        render={() => (
+          <RadioGroup
+            name={args.name}
+            disabled={args.disabled}
+            className="space-y-2"
+            value={value}
+            onChange={setValue}
+            options={[
+              { id: '1', label: 'Radio1' },
+              { id: '2', label: 'Radio2' },
+              { id: '3', label: 'Radio3' },
+            ]}
+          />
+        )}
+        helpBefore
+      />
     );
   },
   args: { name: 'test1', disabled: false },

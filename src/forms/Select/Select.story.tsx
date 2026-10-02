@@ -153,19 +153,24 @@ export const withCustom: Story = {
         renderItem={(item, config) => {
           if (typeof item === 'string') return <h5>{item}</h5>;
           return (
-            <Tooltip label={`label-${item.label}`} position="left">
-              <button
-                key={item.value}
-                type="button"
-                role="option"
-                className="w-full text-left hover:bg-accent px-2 py-1 rounded cursor-pointer"
-                aria-selected={config.selected}
-                onClick={config.onChange}
-              >
-                <span className="mr-1">{config.selected ? 'X' : '-'}</span>
-                {item.label}
-              </button>
-            </Tooltip>
+            <Tooltip
+              key={item.value}
+              label={`label-${item.label}`}
+              position="left"
+              render={(props) => (
+                <button
+                  type="button"
+                  role="option"
+                  className="w-full text-left hover:bg-accent px-2 py-1 rounded cursor-pointer"
+                  aria-selected={config.selected}
+                  onClick={config.onChange}
+                  {...props}
+                >
+                  <span className="mr-1">{config.selected ? 'X' : '-'}</span>
+                  {item.label}
+                </button>
+              )}
+            />
           );
         }}
       />

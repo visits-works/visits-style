@@ -138,7 +138,7 @@ export default function Select<T = unknown>({
 
   return (
     <Popover
-      label={(
+      render={(props) => (
         <Base<ButtonHTMLAttributes<HTMLButtonElement>>
           as="button"
           type="button"
@@ -149,6 +149,7 @@ export default function Select<T = unknown>({
           ]}
           className={className}
           disabled={disabled}
+          {...props}
           {...rest}
         >
           <Base

@@ -38,9 +38,13 @@ export const withField: Story = {
   name: 'With FormField',
   decorators: [decorator],
   render: (args) => (
-    <FormField htmlFor="test-input" label="Username" help="This is your public display name" required>
-      <Input id="test-input" {...args} />
-    </FormField>
+    <FormField
+      htmlFor="test-input"
+      label="Username"
+      help="This is your public display name"
+      render={() => <Input id="test-input" {...args} />}
+      required
+    />
   ),
   args: { name: 'test1', placeholder: 'Your name here..', disabled: false },
 };
@@ -53,10 +57,9 @@ export const withFieldError: Story = {
       htmlFor="test-input"
       label="Username"
       help="This is your public display name"
+      render={(err) => <Input id="test-input" error={err} {...args} />}
       error="invalid username"
-    >
-      <Input id="test-input" {...args} />
-    </FormField>
+    />
   ),
   args: { name: 'test1', placeholder: 'Your name here..', disabled: false },
 };

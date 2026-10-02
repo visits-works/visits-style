@@ -1,8 +1,7 @@
 import {
-  Children, cloneElement, useState, useEffect, useRef,
-  useImperativeHandle, useCallback,
+  useState, useEffect, useRef, useImperativeHandle, useCallback,
 } from 'react';
-import type { CSSProperties, HTMLAttributes, ReactElement, ReactNode, MouseEvent, Ref } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode, MouseEvent, Ref } from 'react';
 import {
   useFloating, useInteractions, useClick, useId, useTransitionStyles,
   shift, offset as offsetUi, flip, FloatingOverlay, autoUpdate, type ReferenceType,
@@ -20,7 +19,7 @@ export interface PopoverRef {
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<PopoverRef>;
   /** ボタンの内容 */
-  label: ReactElement;
+  render: (props: Record<string, unknown>) => ReactNode;
   /** 内容のリスト */
   children?: ReactNode;
   /**
@@ -60,7 +59,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 const defaultTimeout = { open: 150, close: 75 };
 
 export default function Popover({
-  ref, position, label, children, disabled, offset = { x: 0, y: 6 },
+  ref, position, render, children, disabled, offset = { x: 0, y: 6 },
   onOpen, onClose, onManualClose, timeout = defaultTimeout, override, zIndex = 9996, role, ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
@@ -139,12 +138,11 @@ export default function Popover({
 
   return (
     <>
-      {cloneElement(Children.only(label), getReferenceProps({
+      {render(getReferenceProps({
         ref: refs.setReference,
         tabIndex: 0,
-        role: 'button',
         'aria-expanded': open,
-        disabled,
+        'aria-disabled': disabled,
         onClick: stopPropagation,
       }))}
       <Portal disabled={disabled || !isMounted}>

@@ -73,13 +73,16 @@ export const withForm: Story = {
       <FormField
         innerClass="flex items-center space-x-2"
         label="Some Check Field"
+        render={() => (
+          <>
+            <Checkbox id="terms" checked={value} onChange={setValue} {...args} />
+            <FormLabel htmlFor="terms" className="text-sm">
+              Some toggle value
+            </FormLabel>
+          </>
+        )}
         required
-      >
-        <Checkbox id="terms" checked={value} onChange={setValue} {...args} />
-        <FormLabel htmlFor="terms" className="text-sm">
-          Some toggle value
-        </FormLabel>
-      </FormField>
+      />
     );
   },
   args: {

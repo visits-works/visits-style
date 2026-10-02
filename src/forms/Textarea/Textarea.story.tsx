@@ -28,9 +28,13 @@ export const withField: Story = {
   name: 'With FormField',
   decorators: [decorator],
   render: (args) => (
-    <FormField htmlFor="test-input" label="Username" help="This is your public display name" required>
-      <Textarea id="test-input" {...args} />
-    </FormField>
+    <FormField
+      htmlFor="test-input"
+      label="Username"
+      help="This is your public display name"
+      render={() => <Textarea id="test-input" {...args} />}
+      required
+    />
   ),
   args: { name: 'test1', placeholder: 'Your name here..', disabled: false },
 };

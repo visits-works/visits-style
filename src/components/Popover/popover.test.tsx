@@ -6,7 +6,7 @@ import Popover, { type PopoverRef } from '.';
 describe('Popover', () => {
   it('render', () => {
     render(
-      <Popover label={<button type="button">show</button>}>
+      <Popover render={(props) => <button {...props}>show</button>}>
         Popover Content
       </Popover>
     );
@@ -16,7 +16,7 @@ describe('Popover', () => {
 
   it('close on click outer', async () => {
     render(
-      <Popover label={<button type="button">show</button>}>
+      <Popover render={(props) => <button {...props}>show</button>}>
         Popover Content
       </Popover>
     );
@@ -31,7 +31,7 @@ describe('Popover', () => {
       const [disable, setDisable] = useState(false);
       return (
         <Popover
-          label={<button type="button">show</button>}
+          render={(props) => <button {...props}>show</button>}
           disabled={disable}
           onClose={close}
         >
@@ -58,7 +58,7 @@ describe('Popover', () => {
     const close = vi.fn();
     render(
       <Popover
-        label={<button type="button">show</button>}
+        render={(props) => <button {...props}>show</button>}
         onOpen={open}
         onClose={close}
       >
@@ -88,7 +88,7 @@ describe('Popover', () => {
         <>
           <Popover
             ref={ref}
-            label={<button type="button">show</button>}
+            render={(props) => <button {...props}>show</button>}
             onOpen={open}
             onClose={close}
           >

@@ -25,7 +25,6 @@ const meta = {
   component: Popover,
   tags: ['autodocs'],
   argTypes: {
-    label: { control: false },
     children: { control: false },
     offset: { defaultValue: { x: 0, y: 6 } },
   },
@@ -40,13 +39,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const Label = <Button variant="outline" type="button">show</Button>;
+function Label(props: any) {
+  return <Button variant="outline" type="button" {...props}>show</Button>;
+}
 
 // @ts-expect-error
 export const base: Story = {
   render: (args) => (
     <div style={{ textAlign: 'center' }}>
-      <Popover {...args} label={Label}>
+      <Popover {...args} render={Label}>
         <Button type="button" onClick={() => { alert('world!'); }}>hello</Button>
         <p>hello world</p>
       </Popover>
@@ -61,7 +62,7 @@ export const autoPlacement: Story = {
     <>
       <div style={{ width: '50px', height: '80vh' }} />
       <div style={{ textAlign: 'center' }}>
-        <Popover {...args} style={{ padding: 50 }} label={Label}>
+        <Popover {...args} style={{ padding: 50 }} render={Label}>
           <button type="button" onClick={() => { alert('world!'); }}>hello</button>
           <p>hello world</p>
         </Popover>
@@ -77,7 +78,7 @@ export const withInput: Story = {
     const [txt, setText] = useState('');
     const onChange = (e: any) => setText(e.target.value);
     return (
-      <Popover {...args} label={Label}>
+      <Popover {...args} render={Label}>
         <TextInput value={txt} onChange={onChange} />
       </Popover>
     );
@@ -113,7 +114,7 @@ export const program: Story = {
         <Popover
           {...args}
           ref={ref}
-          label={<span>show</span>}
+          render={(props) => <span {...props}>show</span>}
         >
           <p>hello world!</p>
           <Button variant="link" type="button" onClick={() => ref.current?.close()}>
@@ -134,7 +135,7 @@ export const case5: Story = {
       <>
         <button className="hover:underline" onClick={() => setClicked(!clicked)}>
           <span>parent button contents</span><br />
-          <Popover {...args} label={Label}>
+          <Popover {...args} render={Label}>
             <p>hello world</p>
           </Popover>
         </button>
@@ -148,10 +149,8 @@ export const case5: Story = {
 export const tooltip: Story = {
   name: 'popover with tooltip',
   render: (args) => (
-    <Popover {...args} label={Label}>
-      <Tooltip label="tooltip!">
-        <p>hello world</p>
-      </Tooltip>
+    <Popover {...args} render={Label}>
+      <Tooltip label="tooltip!" render={(props) => <p {...props}>Hello world!</p>} />
     </Popover>
   ),
 };
@@ -162,7 +161,7 @@ export const manualClose: Story = {
   render: (args) => {
     const ref = useRef<PopoverRef>(null);
     return (
-      <Popover ref={ref} {...args} label={Label} onManualClose={noop}>
+      <Popover ref={ref} {...args} render={Label} onManualClose={noop}>
         <p>hello world</p>
         <Button type="button" onClick={() => ref.current?.close()}>
           close!
@@ -180,7 +179,7 @@ export const autoWidth: Story = {
     return (
       <Popover
         {...args}
-        label={<Button variant="outline" style={{ width: '250px' }}>click me</Button>}
+        render={(props) => <Button variant="outline" style={{ width: '250px' }} {...props}>click me</Button>}
         onOpen={(e) => {
           if (!e) return;
           setWidth(e.getBoundingClientRect().width);
@@ -202,7 +201,7 @@ function Test(props: any) {
     >
       {show && (
         <div style={{ position: 'absolute', right: 4, top: 0, transform: 'translateY(100%)', zIndex: 10 }}>
-          <Popover {...props} label={<Button variant="ghost" type="button">button!</Button>}>
+          <Popover {...props} render={(props) => <Button variant="ghost" type="button" {...props}>button!</Button>}>
             hello world!
           </Popover>
         </div>

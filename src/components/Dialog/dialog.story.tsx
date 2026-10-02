@@ -138,9 +138,8 @@ export const input: Story = {
               htmlFor="test-input"
               label="Username"
               help="This is your public display name"
-            >
-              <TextInput id="test-input" name="text" />
-            </FormField>
+              render={(error) => <TextInput id="test-input" name="text" error={error} />}
+            />
             <DialogFooter>
               <Button variant="outline" type="button" onClick={toggle}>Close</Button>
               <Button type="submit">Save changes</Button>

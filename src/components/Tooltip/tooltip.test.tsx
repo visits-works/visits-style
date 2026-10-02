@@ -5,9 +5,7 @@ import Tooltip from '.';
 describe('Tooltip', () => {
   it('render', () => {
     render(
-      <Tooltip label="Tooltip Content">
-        <span>show</span>
-      </Tooltip>
+      <Tooltip label="Tooltip Content" render={(props) => <span {...props}>show</span>} />
     );
     expect(screen.queryByRole('tooltip')).toBeNull();
 
@@ -17,9 +15,7 @@ describe('Tooltip', () => {
 
   it('tooltip does not show on disabled', () => {
     render(
-      <Tooltip label="Tooltip Content" disabled>
-        <span>show</span>
-      </Tooltip>
+      <Tooltip label="Tooltip Content" render={(props) => <span {...props}>show</span>} disabled />
     );
     expect(screen.queryByRole('tooltip')).toBeNull();
 
