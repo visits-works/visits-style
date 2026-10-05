@@ -45,7 +45,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 
   buttonRef?: Ref<HTMLButtonElement>;
 
-  popover?: Omit<PopoverProps, 'render' | 'onOpen' | 'ref'>;
+  popover?: Partial<Omit<PopoverProps, 'render' | 'onOpen' | 'ref'>>;
 }
 
 export default function Select<T = unknown>({
