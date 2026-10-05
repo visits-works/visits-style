@@ -3,6 +3,7 @@ import type { ButtonHTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
 
 import Popover, { type PopoverRef, type Props as PopoverProps } from '../../components/Popover';
 import Base from '../../elements/Base';
+import { cn, merge } from 'utils/merge';
 
 type OptionType<T> = { value: T; label: string; };
 interface OptionRenderConfig {
@@ -11,7 +12,7 @@ interface OptionRenderConfig {
   onChange: () => void;
 }
 
-export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children'> {
+export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick' | 'type' | 'value' | 'children' | 'popover'> {
   ref?: Ref<PopoverRef>;
   /** 配列の値の入力の場合、複数選択モードに切り替えます */
   value: T | T[] | null;
@@ -39,19 +40,19 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   sectionLabelStyle?: string;
   /** 各選択肢のスタイルのカスタム指定 */
   optionStyle?: string;
-  /** Popoverのスタイルのカスタム指定 */
-  popoverStyle?: string;
   /** 選択を取り消すボタンのaria-label */
   clearLabelText?: string;
-  /** Popoverの表示位置 */
-  popoverPosition?: PopoverProps['position'];
+
+  buttonRef?: Ref<HTMLButtonElement>;
+
+  popover?: Omit<PopoverProps, 'render' | 'onOpen' | 'ref'>;
 }
 
 export default function Select<T = unknown>({
   ref, className, placeholder = '', options = [], error, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
   sectionLabelStyle, buttonAreaStyle, clearLabelText,
-  optionStyle, popoverStyle, popoverPosition, labelStyle, ...rest
+  optionStyle, popover = {}, buttonRef, labelStyle, ...rest
 }: Props<T>) {
   const innerRef = useRef<PopoverRef>(null);
   const [width, setWidth] = useState(0);
@@ -139,17 +140,20 @@ export default function Select<T = unknown>({
   return (
     <Popover
       render={(props) => (
-        <Base<ButtonHTMLAttributes<HTMLButtonElement>>
-          as="button"
+        <button
           type="button"
-          classList={[
+          className={merge(cn(
             'flex items-center justify-between rounded-md border bg-background px-3 py-2 w-full overflow-hidden cursor-pointer',
             'disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
             error ? 'border-danger hover:border-danger-fore' : 'border-input not-disabled:hover:border-input-fore',
-          ]}
-          className={className}
+          ), className)}
           disabled={disabled}
           {...props}
+          ref={(ref: HTMLButtonElement | null) => {
+            // @ts-expect-error
+            props.ref?.(ref);
+            if (typeof buttonRef === 'function') buttonRef?.(ref);
+          }}
           {...rest}
         >
           <Base
@@ -183,13 +187,12 @@ export default function Select<T = unknown>({
             ) : null}
             {arrowIcon}
           </Base>
-        </Base>
+        </button>
       )}
       ref={innerRef}
       onOpen={(elem) => setWidth(elem?.getBoundingClientRect().width || 0)}
-      className={popoverStyle}
-      position={popoverPosition}
       disabled={disabled}
+      {...popover}
     >
       <div
         className="overflow-y-auto flex flex-col"
