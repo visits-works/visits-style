@@ -136,14 +136,18 @@ export default function Popover({
   openRef.current = onOpen;
   closeRef.current = onClose;
 
+  const popoverId = `vs_${nodeId || 'tmp'}`;
+
   return (
     <>
       {render(getReferenceProps({
         ref: refs.setReference,
         tabIndex: 0,
-        'aria-expanded': open,
-        'aria-disabled': disabled,
         onClick: stopPropagation,
+        'aria-controls': popoverId,
+        'aria-expanded': open,
+        'aria-disabled': disabled || undefined,
+        disabled,
       }))}
       <Portal disabled={disabled || !isMounted}>
         <FloatingOverlay
@@ -153,7 +157,7 @@ export default function Popover({
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
         >
-          <div role={role || 'region'} ref={refs.setFloating} style={floatingStyles}>
+          <div id={popoverId} role={role || 'region'} ref={refs.setFloating} style={floatingStyles}>
             <PopoverContent
               override={override}
               styles={styles}
