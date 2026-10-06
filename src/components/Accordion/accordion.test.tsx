@@ -12,7 +12,7 @@ describe('Accordion', () => {
         Accordion Content
       </Accordion>
     );
-    expect(screen.queryByRole('region')).toBeNull();
+    expect(screen.queryByRole('group')).toBeNull();
     expect(screen.queryByText('Accordion Content')).toHaveAttribute('aria-hidden', 'true');
   });
 
@@ -22,7 +22,7 @@ describe('Accordion', () => {
         Accordion Content
       </Accordion>
     );
-    expect(screen.getByRole('region')).toHaveAttribute('aria-hidden', 'false');
-    expect(screen.getByRole('region')).toHaveTextContent('Accordion Content');
+    expect(screen.getByRole('group')).toHaveAttribute('aria-hidden', 'false');
+    expect(screen.getByRole('group')).toHaveTextContent('Accordion Content');
   });
 });

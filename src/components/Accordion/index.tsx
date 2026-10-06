@@ -1,6 +1,7 @@
 import { type HTMLAttributes, useRef, useEffect, type ReactNode } from 'react';
 
 import useIsomorphicLayoutEffect from '../../hooks/useIsomorphicLayoutEffect';
+import { Base } from 'elements';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -16,9 +17,10 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @default 300
    */
   timeout?: number;
+  groupStyle?: string;
 }
 
-export default function Accordion({ header, show, children, timeout = 300, ...rest }: Props) {
+export default function Accordion({ header, show, children, groupStyle, timeout = 300, ...rest }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
   const prevHeight = useRef<number>(0);
   const timeoutRef = useRef<number>(0);
@@ -100,14 +102,16 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
   return (
     <div {...rest}>
       {header}
-      <div
-        className="transition-all ease-in-out overflow-hidden"
+      <Base
+        classList="transition-all ease-in-out overflow-hidden"
+        className={groupStyle}
+        role="group"
         aria-hidden={!show}
         ref={ref}
         style={{ transitionDuration: `${timeout}ms` }}
       >
         {children}
-      </div>
+      </Base>
     </div>
   );
 }
