@@ -102,7 +102,6 @@ export default function Accordion({ header, show, children, timeout = 300, ...re
       {header}
       <div
         className="transition-all ease-in-out overflow-hidden"
-        role="region"
         aria-hidden={!show}
         ref={ref}
         style={{ transitionDuration: `${timeout}ms` }}
