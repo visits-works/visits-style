@@ -7,17 +7,17 @@ import clsx from 'clsx';
 import observer from './observer';
 import type { ToastConfig } from './types';
 
-interface ToastContainerProps extends Pick<ToastConfig, 'id' | 'duration' | 'className' | 'type'> {
+interface ToastFloatProps extends Pick<ToastConfig, 'id' | 'duration' | 'className' | 'type'> {
   index: number;
   children: ReactNode;
   inverted?: boolean;
-  timeout?: number;
+  timeout?: number | { open?: number; close?: number; };
   max?: number;
 }
 
-export default function ToastContainer({
+export default function ToastFloat({
   id, type, index, duration = 5000, className, children, inverted, timeout = 250, max = 3,
-}: ToastContainerProps) {
+}: ToastFloatProps) {
   const isPrevMountedRef = useRef(false);
   const [open, setOpen] = useState(false);
 

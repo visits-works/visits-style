@@ -16,7 +16,7 @@ export function useToastContext() {
 }
 
 export default function Toast({
-  className, offset = {}, position = 'top-left', max, ListItem = ToastItem, icons,
+  className, offset = {}, position = 'top-left', max, ListItem = ToastItem, icons, timeout,
 }: ToasterProps) {
   const style = useMemo<CSSProperties>(() => {
     const base = { position: 'fixed', ...offset } as CSSProperties;
@@ -99,6 +99,7 @@ export default function Toast({
                 className={innerClass}
                 duration={duration}
                 inverted={isInvertedOrder}
+                timeout={timeout}
                 max={max}
               >
                 {createElement(ListItem, props)}

@@ -56,6 +56,11 @@ export interface ToasterProps {
    * 表示するToastのタイプに使うアイコンを指定(未指定の場合はアイコンは表示されません)
   */
   icons?: Record<ToastType, ReactNode>;
+  /**
+   * Toastのアニメーションの表示時間を設定
+   * @default 250
+  */
+  timeout?: number | { open?: number; close?: number; };
 }
 
 export interface ToastContextType {
