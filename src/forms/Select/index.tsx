@@ -81,7 +81,7 @@ export default function Select<T = unknown>({
   }, [options]);
 
   const selectedLabel = useMemo(() => {
-    if (!value) return placeholder;
+    if (value === null || value === undefined || value === '') return placeholder;
     if (Array.isArray(value)) {
       if (!value.length) return placeholder;
       const sorted = [...value].sort();
