@@ -24,6 +24,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
    * @defaut 'right'
   */
   position?: 'left' | 'right' | 'top' | 'bottom';
+  containerStyle?: string;
   /** 基本スタイルを全部外し、classNameの定義のみ使います */
   override?: boolean;
 }
@@ -31,7 +32,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 const defaultTimeout = { open: 250, close: 150 };
 
 export default function Sheet({
-  open, timeout = defaultTimeout, onOpenChange, position = 'right', overlay, onExited, onOpen, ...rest
+  open, timeout = defaultTimeout, onOpenChange, position = 'right', overlay, onExited, onOpen, containerStyle, ...rest
 }: Props) {
   const nodeId = useId();
   const isTransMountedRef = useRef(false);
@@ -89,6 +90,7 @@ export default function Sheet({
             'bottom-0 left-0 right-0 w-full max-w-screen': position === 'bottom',
           },
         ]}
+        className={containerStyle}
         style={styles}
       >
         <SheetContent {...rest} />
