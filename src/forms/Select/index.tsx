@@ -20,6 +20,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   onChange?: (value: T, item: OptionType<T>) => void;
   onClear?: () => void;
   renderItem?: (item: OptionType<T> | string, config: OptionRenderConfig) => ReactElement;
+  renderLabel?: (selectedLabel: string, isEmpty: boolean) => ReactNode;
   placeholder?: string;
   arrowIcon?: ReactNode;
   closeIcon?: ReactNode;
@@ -50,7 +51,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 
 export default function Select<T = unknown>({
   ref, className, placeholder = '', options = [], error, disabled, value,
-  maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem,
+  maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem, renderLabel,
   sectionLabelStyle, buttonAreaStyle, clearLabelText,
   optionStyle, popover = {}, buttonRef, labelStyle, ...rest
 }: Props<T>) {
@@ -156,16 +157,18 @@ export default function Select<T = unknown>({
           }}
           {...rest}
         >
-          <Base
-            as="span"
-            classList={[
-              'overflow-hidden text-ellipsis whitespace-nowrap',
-              isEmpty ? 'text-muted' : 'text-text',
-            ]}
-            className={labelStyle}
-          >
-            {selectedLabel}
-          </Base>
+          {renderLabel ? renderLabel(selectedLabel, isEmpty) : (
+            <Base
+              as="span"
+              classList={[
+                'overflow-hidden text-ellipsis whitespace-nowrap',
+                isEmpty ? 'text-muted' : 'text-text',
+              ]}
+              className={labelStyle}
+            >
+              {selectedLabel}
+            </Base>
+          )}
           <Base classList="relative flex items-center space-x-2" className={buttonAreaStyle}>
             {onClear && !isEmpty ? (
               <div
