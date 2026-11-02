@@ -25,6 +25,10 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   arrowIcon?: ReactNode;
   closeIcon?: ReactNode;
   checkIcon?: ReactNode;
+  /** Select中の固定Headerを追加したい場合 */
+  listHeader?: ReactNode;
+  /** Select中の固定Footerを追加したい場合 */
+  listFooter?: ReactNode;
   /**
    * select選択肢の最大高さ
    * @default 408
@@ -52,7 +56,7 @@ export interface Props<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 export default function Select<T = unknown>({
   ref, className, placeholder = '', options = [], error, disabled, value,
   maxHeight = 408, arrowIcon, closeIcon, checkIcon, onChange, onClear, renderItem, renderLabel,
-  sectionLabelStyle, buttonAreaStyle, clearLabelText,
+  sectionLabelStyle, buttonAreaStyle, clearLabelText, listHeader, listFooter,
   optionStyle, popover = {}, buttonRef, labelStyle, ...rest
 }: Props<T>) {
   const innerRef = useRef<PopoverRef>(null);
@@ -202,7 +206,9 @@ export default function Select<T = unknown>({
         role="listbox"
         style={{ minWidth: width, maxWidth: 'calc(100vw - 3rem)', maxHeight }}
       >
+        {listHeader}
         {options.map(handleRender)}
+        {listFooter}
       </div>
     </Popover>
   );
