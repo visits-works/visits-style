@@ -1,9 +1,9 @@
 import { useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import type { ButtonHTMLAttributes, ReactElement, ReactNode, Ref } from 'react';
+import { cn, merge } from 'utils/merge';
 
 import Popover, { type PopoverRef, type Props as PopoverProps } from '../../components/Popover';
 import Base from '../../elements/Base';
-import { cn, merge } from 'utils/merge';
 
 type OptionType<T> = { value: T; label: string; };
 interface OptionRenderConfig {
@@ -201,15 +201,15 @@ export default function Select<T = unknown>({
       disabled={disabled}
       {...popover}
     >
+      {listHeader}
       <div
         className="overflow-y-auto flex flex-col"
         role="listbox"
         style={{ minWidth: width, maxWidth: 'calc(100vw - 3rem)', maxHeight }}
       >
-        {listHeader}
         {options.map(handleRender)}
-        {listFooter}
       </div>
+      {listFooter}
     </Popover>
   );
 }
